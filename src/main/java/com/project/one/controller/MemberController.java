@@ -112,5 +112,12 @@ public class MemberController {
 		session.invalidate();
 		return "redirect:index.jsp";
 	}
+	
+	//회원가입
+	@RequestMapping("/registform.do")
+	public String registForm() {
+		
+		return "signup";
+	}
 
 }
