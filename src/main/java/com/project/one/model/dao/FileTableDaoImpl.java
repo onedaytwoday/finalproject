@@ -7,17 +7,17 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.project.one.model.dto.FileDto;
+import com.project.one.model.dto.FileTableDto;
 
 @Repository
-public class FileDaoImpl implements FileDao {
+public class FileTableDaoImpl implements FileTableDao {
 
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
 	@Override
-	public List<FileDto> selectList() {
-		List<FileDto> list = new ArrayList<FileDto>();
+	public List<FileTableDto> selectList() {
+		List<FileTableDto> list = new ArrayList<FileTableDto>();
 		
 		try {
 			list = sqlSession.selectList(NAMESPACE + "selectList");
@@ -30,8 +30,8 @@ public class FileDaoImpl implements FileDao {
 	}
 
 	@Override
-	public FileDto selectOne(int file_num) {
-		FileDto dto = null;
+	public FileTableDto selectOne(int file_num) {
+		FileTableDto dto = null;
 	
 		try {
 			dto = sqlSession.selectOne(NAMESPACE + "selectOne", file_num);
@@ -44,7 +44,7 @@ public class FileDaoImpl implements FileDao {
 	}
 
 	@Override
-	public int insert(FileDto dto) {
+	public int insert(FileTableDto dto) {
 		int res = 0;
 		
 		try {
@@ -58,7 +58,7 @@ public class FileDaoImpl implements FileDao {
 	}
 
 	@Override
-	public int update(FileDto dto) {
+	public int update(FileTableDto dto) {
 		int res = 0;
 		
 		try {
