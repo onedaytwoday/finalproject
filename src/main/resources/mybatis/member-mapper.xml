@@ -2,4 +2,30 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="member">
 
+	<select id="selectList" resultType="MemberDto">
+		SELECT MEMBER_ID, MEMBER_PW, MEMBER_NAME, MEMBER_NICNAME, MEMBER_EMAIL, MEMBER_PHONE,
+		MEMBER_ADDR , MEMEBER_IP, MEMBER_GRADE , MEMBER_JOIN , MEMBER_NOTIFY, MEMBER_FACE, MEMBER_AUTO
+		FROM MEMBER
+		ORDER BY MEMBER_ID
+	</select>
+	
+	<select id="selectOne" parameterType="String" resultType="MemberDto">
+		SELECT MEMBER_ID, MEMBER_PW, MEMBER_NAME, MEMBER_NICNAME, MEMBER_EMAIL, MEMBER_PHONE,
+		MEMBER_ADDR , MEMEBER_IP, MEMBER_GRADE , MEMBER_JOIN , MEMBER_NOTIFY, MEMBER_FACE, MEMBER_AUTO
+		FROM MEMBER
+		WHERE MEMBER_ID = #{member_id}
+	</select>
+	
+	<insert id="insert" parameterType="MemberDto">
+		INSERT INTO MEMBER
+		VALUES(#{member_id},#{member_pw},#{member_name},#{member_nicname},#{member_email},#{member_phone},#{member_addr},
+		#{member_ip},#{member_grade},#{member_join},#{member_notify},#{member_face},#{member_auto})
+	
+	</insert>
+	
+	<delete id="delete" parameterType="String">
+		UPDATE MEMBER 
+		SET MEMBER_JOIN = 'N' 
+		WHERE MEMBER_ID = #{member_id}
+	</delete>
 </mapper>

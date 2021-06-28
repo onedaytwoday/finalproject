@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="member">
-
+<mapper namespace="class">
 	<select id="selectList" resultType="MemberDto">
 		SELECT MEMBER_ID, MEMBER_PW, MEMBER_NAME, MEMBER_NICNAME, MEMBER_EMAIL, MEMBER_PHONE,
 		MEMBER_ADDR , MEMEBER_IP, MEMBER_GRADE , MEMBER_JOIN , MEMBER_NOTIFY, MEMBER_FACE, MEMBER_AUTO
