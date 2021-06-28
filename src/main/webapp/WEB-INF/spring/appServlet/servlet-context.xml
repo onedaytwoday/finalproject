@@ -22,7 +22,10 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.project.one" />
-	
+	<!-- NaverLoginBO -->
+	<beans:bean id="naverLogin" class="com.project.one.controller.NaverLogin" />
+
+
 	
 	
 </beans:beans>
