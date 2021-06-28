@@ -51,7 +51,7 @@
 	<!-- logFilter -->
 	<filter>
 		<filter-name>logFilter</filter-name>
-		<filter-class>com.mvc.upgrade.common.filter.LogFilter</filter-class>
+		<filter-class>com.project.one.common.filter.LogFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>logFilter</filter-name>
