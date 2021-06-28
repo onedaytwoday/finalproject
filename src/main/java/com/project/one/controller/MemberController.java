@@ -16,17 +16,6 @@ public class MemberController {
 	@Autowired
 	private MemberBiz biz;
 	
-	@RequestMapping("/regist.do")
-	public String registForm() {
-		
-		return "";
-	}
-	@RequestMapping("/signup.do")
-	public String signUpres(MemberDto dto) {
-		if(biz.register(dto) > 0) {
-			return "redirect:login.do";
-		}
-		return "redirect:signup.do";
-	}
+	
 	
 }
