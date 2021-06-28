@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="2.5" xmlns="http://Java.sun.com/xml/ns/javaee"
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
@@ -51,7 +51,7 @@
 	<!-- logFilter -->
 	<filter>
 		<filter-name>logFilter</filter-name>
-		<filter-class>com.mvc.upgrade.common.filter.LogFilter</filter-class>
+		<filter-class>com.project.one.common.filter.LogFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>logFilter</filter-name>
