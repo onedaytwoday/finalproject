@@ -45,6 +45,24 @@ $(document).ready(function(){
 
 </script>
 <style type="text/css">
+header{
+	border: 1px solid skyblue;
+	width: 100%;
+	height: 100px;
+}
+
+main{
+	border: 1px solid red;
+	width: 100%;
+	height: 1000px;
+}
+
+footer{
+	border: 1px solid yellow;
+	width: 100%;
+	height: 100px;
+}
+
 
 
 ul {
