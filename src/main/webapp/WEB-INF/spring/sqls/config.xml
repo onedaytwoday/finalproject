@@ -3,10 +3,21 @@
 <configuration>
 	<typeAliases>
 	<typeAlias type="com.project.one.model.dto.MemberDto" alias="memberDto" />
+	<typeAlias type="com.project.one.model.dto.ClassDto" alias="classDto" />
+	<typeAlias type="com.project.one.model.dto.ProductDto" alias="productDto" />
+	<typeAlias type="com.project.one.model.dto.BoardDto" alias="boardDto" />
+	<typeAlias type="com.project.one.model.dto.FileTableDto" alias="fileTableDto" />
+	<typeAlias type="com.project.one.model.dto.PaymentDto" alias="paymentDto" />
+	<typeAlias type="com.project.one.model.dto.BasketDto" alias="basketDto" />
+	<typeAlias type="com.project.one.model.dto.EventDto" alias="eventDto" />
+	<typeAlias type="com.project.one.model.dto.ReviewDto" alias="reviewDto" />
+	<typeAlias type="com.project.one.model.dto.ChattingDto" alias="chattingDto" />
+	<typeAlias type="com.project.one.model.dto.ChattingDto" alias="chattingDto" />
 	</typeAliases>
 	
 	<!-- resources : src/main/resources와 연결됨 -->
 	<mappers>
 		<mapper resource="/mybatis/member-mapper.xml" />
+		<mapper resource="/mybatis/board-mapper.xml" />
 	</mappers>
 </configuration>
