@@ -175,6 +175,7 @@ public class MemberController {
 		kbirthday = kakao_account.path("birthday").asText();
 		kage = kakao_account.path("age").asText();
 		kimage = properties.path("profile_image").asText();
+		
 		session.setAttribute("kemail", kemail);
 		session.setAttribute("kname",kname);
 		session.setAttribute("kgender",kgender);
