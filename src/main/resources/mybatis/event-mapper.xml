@@ -18,7 +18,7 @@
 	<insert id="insert" parameterType="MemberDto">
 		INSERT INTO EVENT
 		VALUES(#{event_no},#{event_title},#{event_desc},#{event_start},#{event_end},#{event_noti},#{member_id},
-		#{class_no},#{product_no},#{},#{},#{},#{})
+		#{class_no},#{product_no})
 	</insert>
 	
 	<delete id="delete" parameterType="String">

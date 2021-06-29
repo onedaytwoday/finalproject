@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="file_table">
+<mapper namespace="detail">
 	<select id="detail" resultType="MemberDto">
 		SELECT DETAIL_NO, DETAIL_DATE, DETAIL_MEMBER_NUM, CLASS_NO
 		FROM DETAIL

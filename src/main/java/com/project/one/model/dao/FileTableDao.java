@@ -6,7 +6,7 @@ import com.project.one.model.dto.FileTableDto;
 
 public interface FileTableDao {
 	
-	String NAMESPACE = "file.";
+	String NAMESPACE = "fileTable.";
 	
 	public List<FileTableDto> selectList();
 	
