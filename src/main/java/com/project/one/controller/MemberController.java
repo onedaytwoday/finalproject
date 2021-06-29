@@ -5,6 +5,8 @@ import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.project.one.model.biz.MemberBiz;
 import com.project.one.model.dto.MemberDto;
@@ -66,12 +69,15 @@ public class MemberController {
 	
 	//네이버로그인
 	//로그인 첫 화면 요청 메소드
-	@RequestMapping(value = "/login", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/loginform.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String login(Model model, HttpSession session) {
 		// 네이버아이디로 인증 URL을 생성
 		String naverAuthUrl = naverLogin.getAuthorizationUrl(session);
+		String kakaoUrl = KakaoController.getAuthorizationUrl(session);
+		
 		System.out.println("네이버:" + naverAuthUrl);
-		model.addAttribute("url", naverAuthUrl);
+		model.addAttribute("naverUrl", naverAuthUrl);
+		model.addAttribute("kakaoUrl",kakaoUrl);
 		return "login";
 	}
 	//네이버 로그인 성공시 callback호출 메소드
@@ -105,6 +111,40 @@ public class MemberController {
 		
 		return "login";
 	}
+	
+	//카카오
+	@RequestMapping(value = "/loginform.do",produces = "application/json", method = { RequestMethod.GET, RequestMethod.POST })
+	public String kakaoLogin(Model model, @RequestParam("code") String code, HttpServletRequest request,
+			HttpServletResponse response, HttpSession session) {
+		
+		JsonNode node = KakaoController.getAccessToken(code);
+		JsonNode accessToken = node.get("access_token");
+		//사용자정보
+		JsonNode userInfo = KakaoController.getKakaoUserInfo(accessToken);
+		String kemail = null;
+		String kname = null;
+		String kgender = null;
+		String kbirthday = null;
+		String kage = null;
+		String kimage = null;
+		//사용자정보 카카오에서 가져오기
+		JsonNode properties = userInfo.path("properties");
+		JsonNode kakao_account = userInfo.path("kakao_account");
+		kemail = kakao_account.path("email").asText();
+		kname = properties.path("nickname").asText();
+		kgender = kakao_account.path("gender").asText();
+		kbirthday = kakao_account.path("birthday").asText();
+		kage = kakao_account.path("age").asText();
+		kimage = properties.path("profile_image").asText();
+		session.setAttribute("kemail", kemail);
+		session.setAttribute("kname",kname);
+		session.setAttribute("kgender",kgender);
+		session.setAttribute("kbirthday",kbirthday);
+		session.setAttribute("kage",kage);
+		session.setAttribute("kimage",kimage);
+		return "loginpost";
+	}
+	
 	//로그아웃
 	@RequestMapping(value = "/logout", method = { RequestMethod.GET, RequestMethod.POST })
 	public String logout(HttpSession session)throws IOException {

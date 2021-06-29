@@ -76,8 +76,8 @@
 			  <input type="button" value="register" onclick="location.href='registform.do'" />
 			</div>
 			<div class="text-center">
-		 	  <a href="${url}"><img width="300" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png" alt="Naver Login" /></a>
-		 	  <a href="${ google_url }"><img width="300" src="" alt="Google Login" /></a>
+		 	  <a href="${naverUrl}"><img width="150" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png" /></a>
+		 	  <a href="${kakaoUrl}"><img width="150" src="" />카카오로그인</a>
 			</div>
 		</c:otherwise>
 	</c:choose>
