@@ -15,8 +15,8 @@ public class BoardBizImpl implements BoardBiz {
 	private BoardDao dao;
 	
 	@Override
-	public List<BoardDto> selectList() {
-		return dao.selectList();
+	public List<BoardDto> selectList(String board_category) {
+		return dao.selectList(board_category);
 	}
 
 	@Override

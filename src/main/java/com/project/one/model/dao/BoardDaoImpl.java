@@ -16,11 +16,11 @@ public class BoardDaoImpl implements BoardDao {
 	private SqlSessionTemplate sqlSession;
 	
 	@Override
-	public List<BoardDto> selectList() {
+	public List<BoardDto> selectList(String board_category) {
 		List<BoardDto> list = new ArrayList<BoardDto>();
 		
 		try {
-			list = sqlSession.selectList(NAMESPACE + "selectList");
+			list = sqlSession.selectList(NAMESPACE + "selectList", board_category);
 			
 		} catch (Exception e) {
 			e.printStackTrace();

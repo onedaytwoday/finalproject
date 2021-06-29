@@ -30,7 +30,7 @@ li {
 		<ul class="headernav">
 			<li><a href="#">로고</a></li>
 			<li><a href="#">Home</a></li>
-			<li><a href="#">공지사항</a></li>
+			<li><a href="board_notice.do?board_category=N">공지사항</a></li>
 			<li>
 				<select name="class">
 						<option value="">클래스</option>
@@ -47,7 +47,7 @@ li {
 						<option value="cate03">카테고리3</option>
 				</select>
 			</li>
-			<li><a href="#">상품문의</a></li>
+			<li><a href="board_qna.do?board_category=Q">상품문의</a></li>
 			<li><a href="#">수강후기포토</a></li>
 		</ul>
 
