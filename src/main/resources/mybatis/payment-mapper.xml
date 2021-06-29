@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="paymeny">
+	<select id="selectList" resultType="MemberDto">
+		SELECT PAYMENT_NO, PAYMENT_NUM, PAYMENT_PRICE, PAYMENT_DATE, PAYMENT_DEL, MEMBER_ID,
+		PRODUCT_NO, BASKET_NO, CLASS_NO
+		FROM PAYMENT
+		ORDER BY PAYMENT_NO
+	</select>
+	
+	<select id="selectOne" parameterType="String" resultType="MemberDto">
+		SELECT PAYMENT_NO, PAYMENT_NUM, PAYMENT_PRICE, PAYMENT_DATE, PAYMENT_DEL, MEMBER_ID,
+		PRODUCT_NO, BASKET_NO, CLASS_NO
+		FROM PAYMENT
+		WHERE PAYMENT_NO = #{payment_no}
+	</select>
+	
+	<insert id="insert" parameterType="MemberDto">
+		INSERT INTO PAYMENT
+		VALUES(#{payment_no},#{payment_num},#{payment_price},#{payment_date},#{payment_del},#{member_id},#{product_no},
+		#{basket_no},#{class_no})	
+	</insert>
+	
+	<delete id="delete" parameterType="String">
+		DELETE FROM PAYMENT 
+		WHERE PAYMENT_NO = #{payment_no}
+	</delete>
+</mapper>
