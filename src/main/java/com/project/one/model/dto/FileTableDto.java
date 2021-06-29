@@ -2,7 +2,7 @@ package com.project.one.model.dto;
 
 import java.util.Date;
 
-public class FileDto {
+public class FileTableDto {
 	private int file_num;
 	private String file_path;
 	private String file_ori_name;
@@ -16,10 +16,10 @@ public class FileDto {
 	private int review_no;
 	private int event_no;
 
-	public FileDto() {
+	public FileTableDto() {
 	}
 
-	public FileDto(int file_num, String file_path, String file_ori_name, String file_new_name, String file_type,
+	public FileTableDto(int file_num, String file_path, String file_ori_name, String file_new_name, String file_type,
 			Date file_date, String file_size, String member_id, int product_no, int class_no, int review_no,
 			int event_no) {
 		super();
