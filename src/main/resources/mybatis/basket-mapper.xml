@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="basket">
-	<select id="selectList" resultType="MemberDto">
+	<select id="selectList" resultType="basketDto">
 		SELECT BASKET_NO, BASKET_NUM, BASKET_PRICE, PRODUCT_NO, MEMBER_ID
 		FROM BASKET
 		ORDER BY BASKET_NO
 	</select>
 	
-	<select id="selectOne" parameterType="String" resultType="MemberDto">
+	<select id="selectOne" parameterType="int" resultType="basketDto">
 		SELECT BASKET_NO, BASKET_NUM, BASKET_PRICE, PRODUCT_NO, MEMBER_ID
 		FROM BASKET
 		WHERE BASKET_NO = #{basket_no}
 	</select>
 	
-	<insert id="insert" parameterType="MemberDto">
+	<insert id="insert" parameterType="basketDto">
 		INSERT INTO BASKET
 		VALUES(#{basket_no},#{basket_num},#{basket_price},#{product_no},#{member_id})
 	</insert>
 	
-	<delete id="delete" parameterType="String">
+	<delete id="delete" parameterType="int">
 		DELETE FROM BASKET 
 		WHERE BASKET_NO = #{basket_no}
 	</delete>

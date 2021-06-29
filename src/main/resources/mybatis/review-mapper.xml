@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="review">
-	<select id="selectList" resultType="MemberDto">
+	<select id="review" resultType="reviewDto">
 		SELECT REVIEW_NO, REVIEW_TITLE, REVIEW_RATE, REVIEW_DATE, REVIEW_CONTENT, PRODUCT_NO, CLASS_NO, MEMBER_ID
 		FROM REVIEW
 		ORDER BY REVIEW_NO
 	</select>
 	
-	<select id="selectOne" parameterType="String" resultType="MemberDto">
+	<select id="selectOne" parameterType="int" resultType="reviewDto">
 		SELECT REVIEW_NO, REVIEW_TITLE, REVIEW_RATE, REVIEW_DATE, REVIEW_CONTENT, PRODUCT_NO, CLASS_NO, MEMBER_ID
 		FROM REVIEW
 		WHERE REVIEW_NO = #{review_no}
 	</select>
 	
-	<insert id="insert" parameterType="MemberDto">
+	<insert id="insert" parameterType="reviewDto">
 		INSERT INTO REVIEW
 		VALUES(#{review_no},#{review_title},#{review_rate},#{review_date},#{review_content},#{product_no},#{class_no},
 		#{member_id})
 	</insert>
 	
-	<delete id="delete" parameterType="String">
+	<delete id="delete" parameterType="int">
 		DELETE FROM REVIEW 
 		WHERE REVIEW_NO = #{review_no}
 	</delete>
