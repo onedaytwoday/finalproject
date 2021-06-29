@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="file_table">
+	<select id="selectList" resultType="MemberDto">
+		SELECT FILE_NUM, FILE_PATH, FILE_ORI_NAME, FILE_NEW_NAME, FILE_TYPE, FILE_DATE, FILE_SIZE,
+		MEMBER_ID, PRODUCT_NO, CLASS_NO, REVIEW_NO, EVENT_NO
+		FROM FILE_TABLE
+		ORDER BY FILE_NUM
+	</select>
+	
+	<select id="selectOne" parameterType="String" resultType="MemberDto">
+		SELECT FILE_NUM, FILE_PATH, FILE_ORI_NAME, FILE_NEW_NAME, FILE_TYPE, FILE_DATE, FILE_SIZE,
+		MEMBER_ID, PRODUCT_NO, CLASS_NO, REVIEW_NO, EVENT_NO
+		FROM FILE_TABLE
+		WHERE FILE_NUM = #{file_num}
+	</select>
+	
+	<insert id="insert" parameterType="MemberDto">
+		INSERT INTO FILE_TABLE
+		VALUES(#{file_num},#{file_path},#{file_ori_name},#{file_new_name},#{file_type},#{file_date},#{file_size},
+		#{member_id},#{product_no},#{class_no},#{review_no},#{event_no})	
+	</insert>
+	
+	<delete id="delete" parameterType="String">
+		DELETE FROM PRODUCT 
+		WHERE PRODUCT_NO = #{product_no}
+	</delete>
+</mapper>
