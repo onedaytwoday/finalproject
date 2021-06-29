@@ -9,18 +9,19 @@ public class MemberDto {
 	private String member_phone;
 	private String member_addr;
 	private String member_ip;
-	private Boolean member_grade;
-	private Boolean member_notify;
-	private Boolean member_face;
-	private Boolean member_auto;
+	private String member_grade;
+	private String member_join;
+	private String member_notify;
+	private String member_face;
+	private String member_auto;
 	
 	public MemberDto() {
 
 	}
 
 	public MemberDto(String member_id, String member_pw, String member_name, String member_nicname, String member_email,
-			String member_phone, String member_addr, String member_ip, Boolean member_grade, Boolean member_notify,
-			Boolean member_face, Boolean member_auto) {
+			String member_phone, String member_addr, String member_ip, String member_grade, String member_join,
+			String member_notify, String member_face, String member_auto) {
 		super();
 		this.member_id = member_id;
 		this.member_pw = member_pw;
@@ -31,6 +32,7 @@ public class MemberDto {
 		this.member_addr = member_addr;
 		this.member_ip = member_ip;
 		this.member_grade = member_grade;
+		this.member_join = member_join;
 		this.member_notify = member_notify;
 		this.member_face = member_face;
 		this.member_auto = member_auto;
@@ -100,37 +102,44 @@ public class MemberDto {
 		this.member_ip = member_ip;
 	}
 
-	public Boolean getMember_grade() {
+	public String getMember_grade() {
 		return member_grade;
 	}
 
-	public void setMember_grade(Boolean member_grade) {
+	public void setMember_grade(String member_grade) {
 		this.member_grade = member_grade;
 	}
 
-	public Boolean getMember_notify() {
+	public String getMember_join() {
+		return member_join;
+	}
+
+	public void setMember_join(String member_join) {
+		this.member_join = member_join;
+	}
+
+	public String getMember_notify() {
 		return member_notify;
 	}
 
-	public void setMember_notify(Boolean member_notify) {
+	public void setMember_notify(String member_notify) {
 		this.member_notify = member_notify;
 	}
 
-	public Boolean getMember_face() {
+	public String getMember_face() {
 		return member_face;
 	}
 
-	public void setMember_face(Boolean member_face) {
+	public void setMember_face(String member_face) {
 		this.member_face = member_face;
 	}
 
-	public Boolean getMember_auto() {
+	public String getMember_auto() {
 		return member_auto;
 	}
 
-	public void setMember_auto(Boolean member_auto) {
+	public void setMember_auto(String member_auto) {
 		this.member_auto = member_auto;
 	}
-	
 	
 }
