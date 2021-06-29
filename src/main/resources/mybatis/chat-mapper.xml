@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="chat">
-	<select id="selectList" resultType="MemberDto">
+	<select id="selectList" resultType="chatDto">
 		SELECT CHAT_NO, MEMBER_ID, CONSULT_ID, CHAT_CONTENT, CHAT_DATE
 		FROM CHAT
 		ORDER BY CHAT_NO
 	</select>
 	
-	<select id="selectOne" parameterType="String" resultType="MemberDto">
+	<select id="selectOne" parameterType="Integer" resultType="chatDto">
 		SELECT CHAT_NO, MEMBER_ID, CONSULT_ID, CHAT_CONTENT, CHAT_DATE
 		FROM CHAT
 		WHERE CHAT_NO = #{chat_no}
 	</select>
 	
-	<insert id="insert" parameterType="MemberDto">
+	<insert id="insert" parameterType="chatDto">
 		INSERT INTO CHAT
 		VALUES(#{chat_no},#{member_id},#{consult_id},#{chat_content},#{chat_date})		
 	</insert>
 	
-	<delete id="delete" parameterType="String">
+	<delete id="delete" parameterType="Integer">
 		DELETE FROM CHAT 
 		WHERE CHAT_NO = #{chat_no}
 	</delete>

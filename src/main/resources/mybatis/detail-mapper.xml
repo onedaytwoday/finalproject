@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="file_table">
-	<select id="detail" resultType="MemberDto">
+	<select id="detail" resultType="detailDto">
 		SELECT DETAIL_NO, DETAIL_DATE, DETAIL_MEMBER_NUM, CLASS_NO
 		FROM DETAIL
 		ORDER BY DETAIL_NO
 	</select>
 	
-	<select id="selectOne" parameterType="String" resultType="MemberDto">
+	<select id="selectOne" parameterType="Integer" resultType="detailDto">
 		SELECT DETAIL_NO, DETAIL_DATE, DETAIL_MEMBER_NUM, CLASS_NO
 		FROM DETAIL
 		WHERE DETAIL_NO = #{detail_no}
 	</select>
 	
-	<insert id="insert" parameterType="MemberDto">
+	<insert id="insert" parameterType="detailDto">
 		INSERT INTO DETAIL
 		VALUES(#{detail_no},#{detail_date},#{detail_member_num},#{class_no})
 	</insert>
 	
-	<delete id="delete" parameterType="String">
+	<delete id="delete" parameterType="Integer">
 		DELETE FROM DETAIL 
 		WHERE DETAIL_NO = #{detail_no}
 	</delete>

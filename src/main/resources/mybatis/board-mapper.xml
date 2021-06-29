@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="board">
-	<select id="selectList" resultType="MemberDto">
+	<select id="selectList" resultType="boardDto">
 		SELECT BOARD_NO, BOARD_NOTICE_NO, BOARD_QNA_NO, BOARD_TITLE, BOARD_CONTENT, BOARD_DATE, BOARD_READCOUNT,
 		BOARD_GROUPNO, BOARD_GROUPSEQ, BOARD_TITLETAB, BOARD_DELFLAG, BOARD_CATEGORY, BOARD_PW, MEMBER_ID
 		FROM BOARD
 		ORDER BY BOARD_NO
 	</select>
 	
-	<select id="selectOne" parameterType="String" resultType="MemberDto">
+	<select id="selectOne" parameterType="Integer" resultType="boardDto">
 		SELECT BOARD_NO, BOARD_NOTICE_NO, BOARD_QNA_NO, BOARD_TITLE, BOARD_CONTENT, BOARD_DATE, BOARD_READCOUNT,
 		BOARD_GROUPNO, BOARD_GROUPSEQ, BOARD_TITLETAB, BOARD_DELFLAG, BOARD_CATEGORY, BOARD_PW, MEMBER_ID
 		FROM BOARD
 		WHERE BOARD_NO = #{board_no}
 	</select>
 	
-	<insert id="insert" parameterType="MemberDto">
+	<insert id="insert" parameterType="boardDto">
 		INSERT INTO BOARD
 		VALUES(#{board_no},#{board_notice_no},#{board_qna_no},#{board_title},#{board_content},#{board_date},#{board_readcount},
 		#{board_groupno},#{board_groupseq},#{board_titletab},#{board_delflag},#{board_category},#{board_pw},#{member_id})
 	
 	</insert>
 	
-	<delete id="delete" parameterType="String">
+	<delete id="delete" parameterType="Integer">
 		UPDATE BOARD 
 		SET MEMBER_JOIN = 'Y' 
 		WHERE BOARD_NO = #{board_no}
