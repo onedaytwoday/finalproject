@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<jsp:forward page="WEB-INF/views/main.jsp"></jsp:forward>
-	
+	<h2>카카오로그인 성공</h2>
+
 </body>
 </html>
