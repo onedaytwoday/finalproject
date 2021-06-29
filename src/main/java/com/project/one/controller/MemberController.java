@@ -113,7 +113,7 @@ public class MemberController {
 	}
 	
 	//카카오
-	@RequestMapping(value = "/loginform.do",produces = "application/json", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/",produces = "application/json", method = { RequestMethod.GET, RequestMethod.POST })
 	public String kakaoLogin(Model model, @RequestParam("code") String code, HttpServletRequest request,
 			HttpServletResponse response, HttpSession session) {
 		
