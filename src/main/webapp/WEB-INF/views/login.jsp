@@ -73,7 +73,7 @@
 			</div> 
 			<div class="box-footer">
 			  <input type="button" value="login" onclick="login();" />
-			  <input type="button" value="register" onclick="location.href='registform.do'" />
+			  <input type="button" value="register" onclick="location.href='signup.do'" />
 			</div>
 			<div class="text-center">
 		 	  <a href="${ naver_url }"><img width="300" src="" alt="Naver Login" /></a>

@@ -44,7 +44,6 @@ public class MemberController {
 	//20210628 로그인
 	@RequestMapping("/loginform.do")
 	public String loginForm() {
-				
 		return "login";
 	}
 	
@@ -62,6 +61,46 @@ public class MemberController {
 		map.put("chk", chk);
 		return map;
 		
+	}	
+	
+	//회원가입
+	@RequestMapping("/signup.do")
+	public String signupForm() {
+		return "signup";
+	}
+	
+	@RequestMapping("/general_signup.do")
+	public String general_signupForm() {
+		return "general_signup";
+	}
+	
+	@RequestMapping("/teacher_signup.do")
+	public String teacher_signupForm() {
+		return "teacher_signup";
+	}
+	
+	@RequestMapping("/idcheck.do")
+	public String idCheck(Model model, String member_id) {
+		
+		MemberDto dto = biz.selectOne(member_id);
+		boolean idnotused = true;
+		
+		if(dto != null) {
+			idnotused = false;
+		}
+		
+		model.addAttribute("idnotused", idnotused);
+		
+		return "idchk";
+	}
+	
+	@RequestMapping("/signupRes.do")
+	public String signupRes(MemberDto dto) {
+		if(biz.register(dto) > 0) {
+			return "redirect:loginform.do";
+		}
+		
+		return "redirect:general_signup.do";
 	}
 	
 	//네이버로그인
@@ -111,13 +150,6 @@ public class MemberController {
 		
 		session.invalidate();
 		return "redirect:index.jsp";
-	}
-	
-	//회원가입
-	@RequestMapping("/registform.do")
-	public String registForm() {
-		
-		return "signup";
 	}
 
 }
