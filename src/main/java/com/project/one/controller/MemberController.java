@@ -47,6 +47,22 @@ public class MemberController {
 		return "login";
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="/ajaxlogin.do",method=RequestMethod.POST)
+	public Map<String, Boolean> ajaxLogin(@RequestBody MemberDto dto, HttpSession session){
+		//logger.info("[Controller] ajaxlogin.do");
+		MemberDto res = biz.login(dto);
+		boolean chk = false;
+		if(res != null) {
+			chk = true;
+			session.setAttribute("login", res);
+		}
+		Map<String, Boolean> map = new HashMap<String, Boolean>();
+		map.put("chk", chk);
+		return map;
+		
+	}	
+	
 	//회원가입
 	@RequestMapping("/signup.do")
 	public String signupForm() {
@@ -63,6 +79,21 @@ public class MemberController {
 		return "teacher_signup";
 	}
 	
+	@RequestMapping("/idcheck.do")
+	public String idCheck(Model model, String member_id) {
+		
+		MemberDto dto = biz.selectOne(member_id);
+		boolean idnotused = true;
+		
+		if(dto != null) {
+			idnotused = false;
+		}
+		
+		model.addAttribute("idnotused", idnotused);
+		
+		return "idchk";
+	}
+	
 	@RequestMapping("/signupRes.do")
 	public String signupRes(MemberDto dto) {
 		if(biz.register(dto) > 0) {
@@ -70,22 +101,6 @@ public class MemberController {
 		}
 		
 		return "redirect:general_signup.do";
-	}
-	
-	@ResponseBody
-	@RequestMapping(value="/ajaxlogin.do",method=RequestMethod.POST)
-	public Map<String, Boolean> ajaxLogin(@RequestBody MemberDto dto, HttpSession session){
-		//logger.info("[Controller] ajaxlogin.do");
-		MemberDto res = biz.login(dto);
-		boolean chk = false;
-		if(res != null) {
-			chk = true;
-			session.setAttribute("login", res);
-		}
-		Map<String, Boolean> map = new HashMap<String, Boolean>();
-		map.put("chk", chk);
-		return map;
-		
 	}
 	
 	//네이버로그인
@@ -135,13 +150,6 @@ public class MemberController {
 		
 		session.invalidate();
 		return "redirect:index.jsp";
-	}
-	
-	//회원가입
-	@RequestMapping("/registform.do")
-	public String registForm() {
-		
-		return "signup";
 	}
 
 }
