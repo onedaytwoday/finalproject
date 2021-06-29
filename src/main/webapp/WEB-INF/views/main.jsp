@@ -21,12 +21,16 @@ li {
 </head>
 <body>
 	<header>
-	<%if(session.getAttribute("login")!=null){ %>
-	<%=session.getAttribute("login") %>
-	<%} %>
+	<%if(session.getAttribute("login") != null){
+	%>
+		<h1>${login }</h1>
+	<%
+	}
+	%>
 		<ul class="login">
 			<li><a href="loginform.do">로그인</a></li>
 			<li><a href="signup.do">회원가입</a></li>
+			<li><a href="logout.do">로그아웃</a>
 		</ul>
 		<br>
 

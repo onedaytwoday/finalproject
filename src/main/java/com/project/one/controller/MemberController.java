@@ -181,15 +181,15 @@ public class MemberController {
 		session.setAttribute("kbirthday",kbirthday);
 		session.setAttribute("kage",kage);
 		session.setAttribute("kimage",kimage);
-		return "loginpost";
+		return "main";
 	}
 	
 	//로그아웃
-	@RequestMapping(value = "/logout", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/logout.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String logout(HttpSession session)throws IOException {
 		
 		session.invalidate();
-		return "redirect:index.jsp";
+		return "redirect:main.do";
 	}
 	@RequestMapping("/main.do")
 	public String main() {
