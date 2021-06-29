@@ -28,7 +28,7 @@ import com.project.one.model.dto.MemberDto;
 public class MemberController {
 	
 	private Logger logger = LoggerFactory.getLogger(MemberController.class);
-	//네이버로그인
+	//�꽕�씠踰꾨줈洹몄씤
 	private NaverLogin naverLogin;
 	private String apiResult = null;
 	
@@ -41,7 +41,7 @@ public class MemberController {
 	@Autowired
 	private MemberBiz biz;	
 	
-	//20210628 로그인
+	//20210628 濡쒓렇�씤
 	@RequestMapping("/loginform.do")
 	public String loginForm() {
 				
@@ -64,40 +64,40 @@ public class MemberController {
 		
 	}
 	
-	//네이버로그인
-	//로그인 첫 화면 요청 메소드
+	//�꽕�씠踰꾨줈洹몄씤
+	//濡쒓렇�씤 泥� �솕硫� �슂泥� 硫붿냼�뱶
 	@RequestMapping(value = "/login", method = { RequestMethod.GET, RequestMethod.POST })
 	public String login(Model model, HttpSession session) {
-		// 네이버아이디로 인증 URL을 생성
+		// �꽕�씠踰꾩븘�씠�뵒濡� �씤利� URL�쓣 �깮�꽦
 		String naverAuthUrl = naverLogin.getAuthorizationUrl(session);
-		System.out.println("네이버:" + naverAuthUrl);
+		System.out.println("�꽕�씠踰�:" + naverAuthUrl);
 		model.addAttribute("url", naverAuthUrl);
 		return "login";
 	}
-	//네이버 로그인 성공시 callback호출 메소드
+	//�꽕�씠踰� 濡쒓렇�씤 �꽦怨듭떆 callback�샇異� 硫붿냼�뱶
 	@RequestMapping(value = "/callback", method = { RequestMethod.GET, RequestMethod.POST })
 	public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session) throws IOException, ParseException {
-		System.out.println("여기는 callback");
+		System.out.println("�뿬湲곕뒗 callback");
 		OAuth2AccessToken oauthToken;
 		oauthToken = naverLogin.getAccessToken(session, code, state);
-		//1. 로그인 사용자 정보를 읽어온다.
-		apiResult = naverLogin.getUserProfile(oauthToken); //String형식의 json데이터
+		//1. 濡쒓렇�씤 �궗�슜�옄 �젙蹂대�� �씫�뼱�삩�떎.
+		apiResult = naverLogin.getUserProfile(oauthToken); //String�삎�떇�쓽 json�뜲�씠�꽣
 
-		//2. String형식인 apiResult를 json형태로 바꿈
+		//2. String�삎�떇�씤 apiResult瑜� json�삎�깭濡� 諛붽퓞
 		JSONParser parser = new JSONParser();
 		Object obj;
 		try {
 			obj = parser.parse(apiResult);
 			JSONObject jsonObj = (JSONObject) obj;
 
-			//3. 데이터 파싱
-			//Top레벨 단계 _response 파싱
+			//3. �뜲�씠�꽣 �뙆�떛
+			//Top�젅踰� �떒怨� _response �뙆�떛
 			JSONObject response_obj = (JSONObject)jsonObj.get("response");
-			//response의 nickname값 파싱
+			//response�쓽 nickname媛� �뙆�떛
 			String nickname = (String)response_obj.get("nickname");
 			System.out.println(nickname);
-			//4.파싱 닉네임 세션으로 저장
-			session.setAttribute("sessionId",nickname); //세션 생성
+			//4.�뙆�떛 �땳�꽕�엫 �꽭�뀡�쑝濡� ���옣
+			session.setAttribute("sessionId",nickname); //�꽭�뀡 �깮�꽦
 			model.addAttribute("result", apiResult);
 		} catch (org.json.simple.parser.ParseException e) {
 			e.printStackTrace();
@@ -105,12 +105,33 @@ public class MemberController {
 		
 		return "login";
 	}
-	//로그아웃
+	//濡쒓렇�븘�썐
 	@RequestMapping(value = "/logout", method = { RequestMethod.GET, RequestMethod.POST })
 	public String logout(HttpSession session)throws IOException {
 		
 		session.invalidate();
 		return "redirect:index.jsp";
 	}
-
+	
+	
+	//회원가입
+	@RequestMapping("/signup.do")
+	public String SignForm() {
+				
+		return "signup";
+	}
+	
+	@RequestMapping("/general_signup.do")
+	public String general_signup() {
+		
+		return "general_signup";
+		
+	}
+	
+	@RequestMapping("/teacher_signup.do")
+	public String teacher_signup() {
+		
+		return "teacher_signup";
+		
+	}
 }

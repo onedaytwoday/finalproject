@@ -99,7 +99,7 @@ li {
 	<header>
 		<ul class="login">
 			<li><a href="login.do">로그인</a></li>
-			<li><a href="#">회원가입</a></li>
+			<li><a href="signup.do">회원가입</a></li>
 		</ul>
 		<br>
 

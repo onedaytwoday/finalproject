@@ -52,7 +52,7 @@
 			</tr>
 			<tr>
 				<td colspan="2" align="right">
-					<input type="submit" value="회원가입" onclick="" />
+					<input type="submit" value="회원가입" />
 					<input type="button" value="취소" onclick="" />
 				</td>
 			</tr>
