@@ -44,8 +44,32 @@ public class MemberController {
 	//20210628 로그인
 	@RequestMapping("/loginform.do")
 	public String loginForm() {
-				
 		return "login";
+	}
+	
+	//회원가입
+	@RequestMapping("/signup.do")
+	public String signupForm() {
+		return "signup";
+	}
+	
+	@RequestMapping("/general_signup.do")
+	public String general_signupForm() {
+		return "general_signup";
+	}
+	
+	@RequestMapping("/teacher_signup.do")
+	public String teacher_signupForm() {
+		return "teacher_signup";
+	}
+	
+	@RequestMapping("/signupRes.do")
+	public String signupRes(MemberDto dto) {
+		if(biz.register(dto) > 0) {
+			return "redirect:loginform.do";
+		}
+		
+		return "redirect:general_signup.do";
 	}
 	
 	@ResponseBody

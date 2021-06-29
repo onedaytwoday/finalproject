@@ -10,7 +10,7 @@
 
 	<h1>강사회원가입</h1>
 
-	<form action="signup.do" method="post">
+	<form action="signupRes.do" method="post">
 		<input type="hidden" name="member_grade" value="강사회원">
 		<input type="hidden" name="member_ip" value="192.108.10.1" />
 		<input type="hidden" name="member_join" value="Y" />
