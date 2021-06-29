@@ -14,15 +14,15 @@
 	});
 	
 	function login(){
-		var memberid = $("#memberid").val().trim();
-		var memberpw = $("#memberpw").val().trim();
+		var member_id = $("#member_id").val().trim();
+		var member_pw = $("#member_pw").val().trim();
 		
 		var loginVal = {
-				"memberid":memberid,
-				"memberpw":memberpw
+				"member_id":member_id,
+				"member_pw":member_pw
 		}
 		
-		if(memberid == null || memberid ==""||memberpw == null || memberpw == "" ){
+		if(member_id == null || member_id ==""||member_pw == null || member_pw == "" ){
 			alert("아이디 혹은 패스워드를 확인해주세요.")
 		}else{
 			$.ajax({
@@ -34,13 +34,12 @@
 				success: function(msg){
 					if(msg.chk == true){
 						//추후 수정
-						location.href="main.do"
+						location.href="main.do";
 					}else{
 						alert("아이디 혹은 패스워드를 확인해주세요.")
 					}
-					
 				},
-				error: function(){
+				error: function(){	
 					alert("통신실패");
 				}
 			});
@@ -63,11 +62,11 @@
 
 			<div class="box-body">
 				<div class="form-group">
-					<input type="text" id="memberid" 
+					<input type="text" id="member_id" 
 						class="form-control" placeholder="아이디를 입력해주세요" />
 				</div>
 				<div class="form-group">
-					<input type="password" id="memberpw" 
+					<input type="password" id="member_pw" 
 						class="form-control" placeholder="패스워드를 입력해주세요"/>
 				</div>
 			</div> 

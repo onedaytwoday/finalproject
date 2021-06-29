@@ -2,21 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="member">
 
-	<select id="selectList" resultType="MemberDto">
+	<select id="selectList" resultType="memberDto">
 		SELECT MEMBER_ID, MEMBER_PW, MEMBER_NAME, MEMBER_NICNAME, MEMBER_EMAIL, MEMBER_PHONE,
 		MEMBER_ADDR , MEMBER_IP, MEMBER_GRADE , MEMBER_JOIN , MEMBER_NOTIFY, MEMBER_FACE, MEMBER_AUTO
 		FROM MEMBER
 		ORDER BY MEMBER_ID
 	</select>
-	
-	<select id="selectOne" parameterType="String" resultType="MemberDto">
+	<select id="login" parameterType="memberDto" resultType="memberDto">
+		SELECT MEMBER_ID, MEMBER_PW, MEMBER_NAME, MEMBER_NICNAME, MEMBER_EMAIL, MEMBER_PHONE,
+		MEMBER_ADDR , MEMBER_IP, MEMBER_GRADE , MEMBER_JOIN , MEMBER_NOTIFY, MEMBER_FACE, MEMBER_AUTO
+		FROM MEMBER
+		WHERE MEMBER_ID = #{member_id}
+		AND MEMBER_PW = #{member_pw} 
+	</select>
+	<select id="selectOne" parameterType="String" resultType="memberDto">
 		SELECT MEMBER_ID, MEMBER_PW, MEMBER_NAME, MEMBER_NICNAME, MEMBER_EMAIL, MEMBER_PHONE,
 		MEMBER_ADDR , MEMBER_IP, MEMBER_GRADE , MEMBER_JOIN , MEMBER_NOTIFY, MEMBER_FACE, MEMBER_AUTO
 		FROM MEMBER
 		WHERE MEMBER_ID = #{member_id}
 	</select>
 	
-	<insert id="insert" parameterType="MemberDto">
+	<insert id="insert" parameterType="memberDto">
 		INSERT INTO MEMBER
 		VALUES(#{member_id},#{member_pw},#{member_name},#{member_nicname},#{member_email},#{member_phone},#{member_addr},
 		#{member_ip},#{member_grade},#{member_join},#{member_notify},#{member_face},#{member_auto})

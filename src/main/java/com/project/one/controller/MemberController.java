@@ -151,5 +151,9 @@ public class MemberController {
 		session.invalidate();
 		return "redirect:index.jsp";
 	}
+	@RequestMapping("/main.do")
+	public String main() {
+		return "main";
+	}
 
 }
