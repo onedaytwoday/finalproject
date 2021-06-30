@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="product">
+	<select id="selectList" resultType="productDto">
+		SELECT PRODUCT_NO, PRODUCT_NAME, PRODUCT_CATEGORY, PRODUCT_PRICE, PRODUCT_DESC, PRODUCT_LOC,
+		PRODUCT_DEL, PRODUCT_SALE
+		FROM PRODUCT
+		ORDER BY PRODUCT_NO
+	</select>
+	
+	<select id="selectOne" parameterType="int" resultType="productDto">
+		SELECT PRODUCT_NO, PRODUCT_NAME, PRODUCT_CATEGORY, PRODUCT_PRICE, PRODUCT_DESC, PRODUCT_LOC,
+		PRODUCT_DEL, PRODUCT_SALE
+		FROM PRODUCT
+		WHERE PRODUCT_NO = #{product_no}
+	</select>
+	
+	<insert id="insert" parameterType="productDto">
+		INSERT INTO PRODUCT
+		VALUES(#{product_no},#{product_name},#{product_category},#{product_price},#{product_desc},#{product_loc},#{product_del},
+		#{product_sale})
+	
+	</insert>
+	
+	<delete id="delete" parameterType="int">
+		DELETE FROM PRODUCT 
+		WHERE PRODUCT_NO = #{product_no}
+	</delete>
+</mapper>

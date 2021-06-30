@@ -7,7 +7,7 @@ import com.project.one.model.dto.BoardDto;
 public interface BoardDao {
 	String NAMESPACE = "board.";
 	
-	public List<BoardDto> selectList();
+	public List<BoardDto> selectList(String board_category);
 	
 	public BoardDto selectOne(int board_no);
 	

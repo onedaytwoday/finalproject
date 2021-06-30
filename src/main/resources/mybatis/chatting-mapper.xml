@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="catting">
+	<select id="chatting" resultType="chattingDto">
+		SELECT CHATTING_NO, CHATTING_CONTENT, CHATTING_DATE, CHAT_NO
+		FROM CHATTING
+		ORDER BY CHATTING_NO
+	</select>
+	
+	<select id="selectOne" parameterType="int" resultType="chattingDto">
+		SELECT CHATTING_NO, CHATTING_CONTENT, CHATTING_DATE, CHAT_NO
+		FROM CHATTING
+		WHERE CHATTING_NO = #{chatting_no}
+	</select>
+	
+	<insert id="insert" parameterType="chattingDto">
+		INSERT INTO CHATTING
+		VALUES(#{chatting_no},#{chatting_content},#{chatting_date},#{chat_no})
+	</insert>
+	
+	<delete id="delete" parameterType="int">
+		DELETE FROM CHATTING 
+		WHERE CHATTING_NO = #{chatting_no}
+	</delete>
+</mapper>

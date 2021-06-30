@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
@@ -8,7 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>공지사항</h1>
+	<h1>상품문의</h1>
 
 	<table border="1">
 		<col width="50" />
@@ -45,7 +46,7 @@
 		</c:choose>
 		<tr>
 			<td colspan="5" align="right">
-				<input type="button" value="글작성" onclick="location.href='board_insertform.do?board_category=N'" />
+				<input type="button" value="글작성" onclick="location.href='board_insertform.do?board_category=Q'" />
 			</td>
 		</tr>
 	</table>

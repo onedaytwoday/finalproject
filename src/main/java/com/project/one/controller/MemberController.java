@@ -54,11 +54,11 @@ public class MemberController {
 	@RequestMapping(value="/ajaxlogin.do",method=RequestMethod.POST)
 	public Map<String, Boolean> ajaxLogin(@RequestBody MemberDto dto, HttpSession session){
 		//logger.info("[Controller] ajaxlogin.do");
-		MemberDto res = biz.login(dto);
+		MemberDto mDto = biz.login(dto);
 		boolean chk = false;
-		if(res != null) {
+		if(mDto != null) {
 			chk = true;
-			session.setAttribute("login", res);
+			session.setAttribute("mDto", mDto);
 		}
 		Map<String, Boolean> map = new HashMap<String, Boolean>();
 		map.put("chk", chk);
@@ -68,19 +68,16 @@ public class MemberController {
 	
 	//회원가입
 	@RequestMapping("/signup.do")
-	public String signupForm() {
+	public String signupForm(MemberDto dto, HttpSession session) {
+		System.out.println(dto.getMember_id());
+		MemberDto mDto = biz.selectOne(dto.getMember_id());
+		if(mDto!=null) {
+			session.setAttribute("mDto", mDto);
+			return "main";
+		}
 		return "signup";
 	}
 	
-	@RequestMapping("/general_signup.do")
-	public String general_signupForm() {
-		return "general_signup";
-	}
-	
-	@RequestMapping("/teacher_signup.do")
-	public String teacher_signupForm() {
-		return "teacher_signup";
-	}
 	
 	@RequestMapping("/idcheck.do")
 	public String idCheck(Model model, String member_id) {
@@ -103,9 +100,17 @@ public class MemberController {
 			return "redirect:loginform.do";
 		}
 		
-		return "redirect:general_signup.do";
+		return "redirect:signup.do?mDto="+dto;
 	}
-	
+	@RequestMapping("/sns_signupRes.do")
+	public String sns_signupRes(MemberDto mDto, HttpSession session) {
+		if(biz.register(mDto) > 0) {
+			session.setAttribute("mdto", mDto);
+			return "main";
+		}
+		
+		return "redirect:signup.do?mDto="+mDto;
+	}
 	//네이버로그인
 	//로그인 첫 화면 요청 메소드
 	@RequestMapping(value = "/loginform.do", method = { RequestMethod.GET, RequestMethod.POST })
@@ -122,7 +127,6 @@ public class MemberController {
 	//네이버 로그인 성공시 callback호출 메소드
 	@RequestMapping(value = "/callback.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session) throws IOException, ParseException {
-		System.out.println("여기는 callback");
 		OAuth2AccessToken oauthToken;
 		oauthToken = naverLogin.getAccessToken(session, code, state);
 		//1. 로그인 사용자 정보를 읽어온다.
@@ -139,7 +143,6 @@ public class MemberController {
 			//Top레벨 단계 _response 파싱
 			JSONObject response_obj = (JSONObject)jsonObj.get("response");
 			
-			
 			String member_id = (String)response_obj.get("id");
 			String member_name = (String)response_obj.get("username");
 			String member_nickname = (String)response_obj.get("nickname");
@@ -147,21 +150,23 @@ public class MemberController {
 			String member_phone = (String)response_obj.get("mobile");
 			
 			MemberDto mDto = new MemberDto();
-			
 			mDto.setMember_id(member_id);
 			mDto.setMember_name(member_name);
 			mDto.setMember_nicname(member_nickname);
 			mDto.setMember_email(member_email);
 			mDto.setMember_phone(member_phone);
-			System.out.println(member_id);
 			
+			MemberDto res = biz.selectOne(member_id);
+			if(res != null) {
+				session.setAttribute("mDto", res);
+				return "main";
+			}
 			model.addAttribute("mDto",mDto);
-			model.addAttribute("result", apiResult);
 		} catch (org.json.simple.parser.ParseException e) {
 			e.printStackTrace();
 		}
 		
-		return "login";
+		return "signup";
 	}
 	
 	//카카오
@@ -175,30 +180,37 @@ public class MemberController {
 		JsonNode accessToken = node.get("access_token");
 		//사용자정보
 		JsonNode userInfo = KakaoController.getKakaoUserInfo(accessToken);
-		String member_email = null;
-		String member_name = null;
-	
+		String kemail = null;
+		String kname = null;
+		String kid = null;
 		//사용자정보 카카오에서 가져오기
 		JsonNode properties = userInfo.path("properties");
 		JsonNode kakao_account = userInfo.path("kakao_account");
-		
-		member_email = kakao_account.path("email").asText();
-		member_name = properties.path("nickname").asText();
-		
+		JsonNode id = userInfo.path("id");
+		kid = id.asText();
+		kemail = kakao_account.path("email").asText();
+		kname = properties.path("nickname").asText();
 		MemberDto mDto = new MemberDto();
-		mDto.setMember_name(member_name);
-		mDto.setMember_email(member_email);
-	
+		mDto.setMember_id(kid);
+		mDto.setMember_email(kemail);
+		mDto.setMember_name(kname);
 		
-		return "login";
+		MemberDto res = biz.selectOne(kid);
+		if(res != null) {
+			session.setAttribute("mDto", res);
+			return "main";
+		}
+		
+		model.addAttribute("mDto" , mDto);
+		return "signup";
 	}
 	
 	//로그아웃
-	@RequestMapping(value = "/logout", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/logout.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String logout(HttpSession session)throws IOException {
 		
 		session.invalidate();
-		return "redirect:index.jsp";
+		return "main";
 	}
 	@RequestMapping("/main.do")
 	public String main() {
