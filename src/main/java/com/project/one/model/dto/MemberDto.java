@@ -141,5 +141,14 @@ public class MemberDto {
 	public void setMember_auto(String member_auto) {
 		this.member_auto = member_auto;
 	}
+
+	@Override
+	public String toString() {
+		return "MemberDto [member_id=" + member_id + ", member_pw=" + member_pw + ", member_name=" + member_name
+				+ ", member_nicname=" + member_nicname + ", member_email=" + member_email + ", member_phone="
+				+ member_phone + ", member_addr=" + member_addr + ", member_ip=" + member_ip + ", member_grade="
+				+ member_grade + ", member_join=" + member_join + ", member_notify=" + member_notify + ", member_face="
+				+ member_face + ", member_auto=" + member_auto + "]";
+	}
 	
 }

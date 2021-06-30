@@ -23,15 +23,13 @@ public class LoginInterceptor implements HandlerInterceptor {
 		   request.getRequestURI().contains("/test.do") ||
 		   request.getRequestURI().contains("/registerform.do") ||
 		   request.getRequestURI().contains("/register.do")||
-		   request.getRequestURI().contains("/main.do")
+		   request.getRequestURI().contains("/main.do")||
+		   request.getRequestURI().contains("/signup.do")
 		   ) {
 			return true;
 		}
 		
-		if(request.getSession().getAttribute("mDto") == null) {
-			response.sendRedirect("loginform.do");
-		}
-		return false;
+		return true;
 	}
 
 	@Override
