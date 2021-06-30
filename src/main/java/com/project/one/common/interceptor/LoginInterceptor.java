@@ -19,15 +19,16 @@ public class LoginInterceptor implements HandlerInterceptor {
 		
 		if(request.getRequestURI().contains("/loginform.do") ||
 		   request.getRequestURI().contains("/ajaxlogin.do") ||
-		   request.getSession().getAttribute("login") != null ||
+		   request.getSession().getAttribute("mDto") != null ||
 		   request.getRequestURI().contains("/test.do") ||
 		   request.getRequestURI().contains("/registerform.do") ||
-		   request.getRequestURI().contains("/register.do")
+		   request.getRequestURI().contains("/register.do")||
+		   request.getRequestURI().contains("/main.do")
 		   ) {
 			return true;
 		}
 		
-		if(request.getSession().getAttribute("login") == null) {
+		if(request.getSession().getAttribute("mDto") == null) {
 			response.sendRedirect("loginform.do");
 		}
 		return false;
