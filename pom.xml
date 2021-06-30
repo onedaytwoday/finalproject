@@ -9,7 +9,7 @@
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
 		<java-version>1.6</java-version>
-		<org.springframework-version>3.1.1.RELEASE</org.springframework-version>
+		<org.springframework-version>5.0.7.RELEASE</org.springframework-version>
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
@@ -113,7 +113,7 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.7</version>
+			<version>4.10</version>
 			<scope>test</scope>
 		</dependency>        
 		
@@ -172,13 +172,13 @@
 			<artifactId>jackson-mapper-asl</artifactId>
 			<version>1.9.13</version>
 		</dependency>
-		
-		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-web -->
+		<!-- web socket -->
 		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-web</artifactId>
-			<version>${org.springframework-version}</version>
+    		<groupId>org.springframework</groupId>
+   			<artifactId>spring-websocket</artifactId>
+    		<version>${org.springframework-version}</version>
 		</dependency>
+		
 		<!-- 로그인 -->
 		<!-- naver -->
 		<dependency>
@@ -202,21 +202,15 @@
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpcore</artifactId>
-            <version>4.4.6</version>
+            <version>4.4</version>
         </dependency>
         <!-- httpclient(카카오) -->
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
-            <version>4.5.2</version>
+            <version>4.4</version>
         </dependency>
-		<!--  양방향 암호화/복호화를 위한 설정 --> 
-		<!-- https://mvnrepository.com/artifact/commons-codec/commons-codec --> 
-		<dependency> 
-			<groupId>commons-codec</groupId> 
-			<artifactId>commons-codec</artifactId> 
-			<version>1.10</version> 
-		</dependency>
+
 	</dependencies>
     <build>
         <plugins>
