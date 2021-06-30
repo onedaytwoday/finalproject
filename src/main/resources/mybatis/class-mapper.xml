@@ -2,29 +2,30 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="class">
 	<select id="selectList" resultType="classDto">
-		SELECT MEMBER_ID, MEMBER_PW, MEMBER_NAME, MEMBER_NICNAME, MEMBER_EMAIL, MEMBER_PHONE,
-		MEMBER_ADDR , MEMEBER_IP, MEMBER_GRADE , MEMBER_JOIN , MEMBER_NOTIFY, MEMBER_FACE, MEMBER_AUTO
-		FROM MEMBER
-		ORDER BY MEMBER_ID
+		SELECT CLASS_NO, CLASS_TITLE, CLASS_DESC, CLASS_LOC, CLASS_CATEGORY, CLASS_MEMBER_NUM, CLASS_PRICE, CLASS_SALE, MEMBER_ID
+		FROM CLASS
+		ORDER BY CLASS_NO DESC
 	</select>
 	
-	<select id="selectOne" parameterType="String" resultType="classDto">
-		SELECT MEMBER_ID, MEMBER_PW, MEMBER_NAME, MEMBER_NICNAME, MEMBER_EMAIL, MEMBER_PHONE,
-		MEMBER_ADDR , MEMEBER_IP, MEMBER_GRADE , MEMBER_JOIN , MEMBER_NOTIFY, MEMBER_FACE, MEMBER_AUTO
-		FROM MEMBER
-		WHERE MEMBER_ID = #{member_id}
+	<select id="selectOne" resultType="classDto">
+		SELECT CLASS_NO, CLASS_TITLE, CLASS_DESC, CLASS_LOC, CLASS_CATEGORY, CLASS_MEMBER_NUM, CLASS_PRICE, CLASS_SALE, MEMBER_ID
+		FROM CLASS
+		WHERE CLASS_NO = #{class_no}
 	</select>
 	
 	<insert id="insert" parameterType="classDto">
-		INSERT INTO MEMBER
-		VALUES(#{member_id},#{member_pw},#{member_name},#{member_nicname},#{member_email},#{member_phone},#{member_addr},
-		#{member_ip},#{member_grade},#{member_join},#{member_notify},#{member_face},#{member_auto})
-	
+		INSERT INTO CLASS
+		VALUES(CLASS_NO_SEQ.NEXTVAL, #{class_title}, #{class_desc}, #{class_loc}, #{class_category}, #{class_member_num}, #{class_price}, #{class_sale}, #{member_id})
 	</insert>
 	
-	<delete id="delete" parameterType="String">
-		UPDATE MEMBER 
-		SET MEMBER_JOIN = 'N' 
-		WHERE MEMBER_ID = #{member_id}
+	<update id="update" parameterType="classDto">
+		UPDATE CLASS
+		SET CLASS_TITLE = #{class_title}, CLASS_DESC = #{class_desc}, CLASS_LOC = #{class_loc}, CLASS_MEMBER_NUM = #{class_member_num}, CLASS_PRICE = #{class_price}, CLASS_SALE = #{class_sale} 
+		WHERE CLASS_NO = #{class_no}
+	</update>
+	
+	<delete id="delete">
+		DELETE FROM CLASS
+		WHERE CLASS_NO = #{class_no}
 	</delete>
 </mapper>
