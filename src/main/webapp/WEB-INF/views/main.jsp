@@ -131,10 +131,11 @@ li {
 						<option value="cate03">카테고리3</option>
 				</select>
 			</li>
+			<li><a href="classInsert.do">클래스 등록</a></li>
+			<li><a href="classList.do">클래스</a></li>
 			<li><a href="#">상품문의</a></li>
 			<li><a href="#">수강후기포토</a></li>
 		</ul>
-
 
 	</header>
 
