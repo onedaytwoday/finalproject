@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -151,5 +151,13 @@ li {
 	
 	
 	
+=======
+<title>Insert title here</title>
+</head>
+<body>
+
+<jsp:forward page="WEB-INF/views/main.jsp"></jsp:forward>
+
+>>>>>>> 45a453ab2d4e8f021458ef64b0d18cd0e39ec499
 </body>
 </html>

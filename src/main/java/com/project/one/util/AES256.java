@@ -16,8 +16,8 @@ public class AES256 {
 	 * @autowired
 	 * AES256 aes;
 	 * 
-	 * ¾ÏÈ£È­ : aes.encrypt(¹®ÀÚ¿­);
-	 * º¹È£È­ : aes.decrypt(¹®ÀÚ¿­);
+	 * ì•”í˜¸í™” : aes.encrypt(ë¬¸ìì—´);
+	 * ë³µí˜¸í™” : aes.decrypt(ë¬¸ìì—´);
 	 */
 	
 	
@@ -26,9 +26,9 @@ public class AES256 {
 	
 	
 	/*
-	 * 18ÀÚ¸® Å°°ªÀ» À§ÇØ¼­ °´Ã¼ »ı¼º
-	 * @param key ¾Ï/º¹È£È­¸¦ À§ÇØ¼­ ÇÊ¿ä
-	 * @throws UnsupportedEncodingException Å°°ªÀÌ 18ÀÌÇÏ ÀÏ¶§ ¹ß»ı
+	 * 16ìë¦¬ì˜ í‚¤ê°’ì„ ì…ë ¥í•˜ì—¬ ê°ì²´ë¥¼ ìƒì„±í•œë‹¤.
+	 * @param key ì•”/ë³µí˜¸í™”ë¥¼ ìœ„í•œ í‚¤ê°’
+	 * @throws UnsupportedEncodingException í‚¤ê°’ì˜ ê¸¸ì´ê°€ 16ì´í•˜ì¼ ê²½ìš° ë°œìƒ
 	 */
 	public AES256() throws UnsupportedEncodingException {
 		this.iv = iv.substring(0,16);
@@ -46,8 +46,8 @@ public class AES256 {
 	}
 	
 	/*
-	 * AES 256 ¾ÏÈ£È­
-	 *  str : ¾ÏÈ£È­ÇÒ ¹®ÀÚ¿­
+	 * AES 256 ì•”í˜¸í™”
+	 *  str : ì•”í˜¸í™” ì‹œí‚¬ ë¬¸ìì—´
 	 */
 	
 	public String encrypt(String str) throws NoSuchAlgorithmException, GeneralSecurityException, UnsupportedEncodingException {
@@ -62,8 +62,8 @@ public class AES256 {
 	
 	
 	/*
-	 * AES 256 º¹È£È­
-	 *  str : º¹È£È­ÇÒ ¹®ÀÚ¿­
+	 * AES 256 ë³µí˜¸í™”
+	 *  str : ë³µí˜¸í™” ì‹œí‚¬ ë¬¸ìì—´
 	 */
 	public String decrypt(String str) throws NoSuchAlgorithmException, GeneralSecurityException, UnsupportedEncodingException {
 		Cipher c = Cipher.getInstance("AES/CBC/PKCS5Padding");

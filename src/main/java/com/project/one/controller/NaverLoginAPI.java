@@ -8,10 +8,10 @@ public class NaverLoginAPI extends DefaultApi20 {
 	protected NaverLoginAPI(){
 	}
 	private static class InstanceHolder{
-	private static final NaverLoginAPI INSTANCE = new NaverLoginAPI();
+		private static final NaverLoginAPI INSTANCE = new NaverLoginAPI();
 	}
 	public static NaverLoginAPI instance(){
-	return InstanceHolder.INSTANCE;
+		return InstanceHolder.INSTANCE;
 	}
 
 

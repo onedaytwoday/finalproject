@@ -12,12 +12,23 @@
 	<typeAlias type="com.project.one.model.dto.EventDto" alias="eventDto" />
 	<typeAlias type="com.project.one.model.dto.ReviewDto" alias="reviewDto" />
 	<typeAlias type="com.project.one.model.dto.ChattingDto" alias="chattingDto" />
-	<typeAlias type="com.project.one.model.dto.ChattingDto" alias="chattingDto" />
+	<typeAlias type="com.project.one.model.dto.ChatDto" alias="chatDto" />
+	<typeAlias type="com.project.one.model.dto.DetailDto" alias="detailDto" />
 	</typeAliases>
 	
 	<!-- resources : src/main/resources와 연결됨 -->
 	<mappers>
 		<mapper resource="/mybatis/member-mapper.xml" />
+		<mapper resource="/mybatis/class-mapper.xml" />
+		<mapper resource="/mybatis/product-mapper.xml" />
 		<mapper resource="/mybatis/board-mapper.xml" />
+		<mapper resource="/mybatis/fileTable-mapper.xml" />
+		<mapper resource="/mybatis/payment-mapper.xml" />
+		<mapper resource="/mybatis/basket-mapper.xml" />
+		<mapper resource="/mybatis/event-mapper.xml" />
+		<mapper resource="/mybatis/review-mapper.xml" />
+		<mapper resource="/mybatis/chatting-mapper.xml" />
+		<mapper resource="/mybatis/chat-mapper.xml" />
+		<mapper resource="/mybatis/detail-mapper.xml" />
 	</mappers>
 </configuration>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="event">
+	<select id="selectList" resultType="eventDto">
+		SELECT EVENT_NO, EVENT_TITLE, EVENT_DESC, EVENT_START, EVNET_END, EVENT_NOTI, MEMBER_ID, CLASS_NO,
+		PRODUCT_NO
+		FROM EVENT
+		ORDER BY EVENT_NO
+	</select>
+	
+	<select id="selectOne" parameterType="int" resultType="eventDto">
+		SELECT EVENT_NO, EVENT_TITLE, EVENT_DESC, EVENT_START, EVNET_END, EVENT_NOTI, MEMBER_ID, CLASS_NO,
+		PRODUCT_NO
+		FROM EVENT
+		WHERE EVENT_NO = #{event_no}
+	</select>
+	
+	<insert id="insert" parameterType="eventDto">
+		INSERT INTO EVENT
+		VALUES(#{event_no},#{event_title},#{event_desc},#{event_start},#{event_end},#{event_noti},#{member_id},
+		#{class_no},#{product_no})
+	</insert>
+	
+	<delete id="delete" parameterType="int">
+		DELETE FROM EVENT 
+		WHERE EVENT_NO = #{event_no}
+	</delete>
+</mapper>
