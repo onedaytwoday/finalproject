@@ -15,8 +15,8 @@ import com.github.scribejava.core.model.Verb;
 import com.github.scribejava.core.oauth.OAuth20Service;
 
 public class NaverLogin {
-	private final static String CLIENT_ID = "ImebAAntmH0615Tk4bM6";
-	private final static String CLIENT_SECRET = "ufpC_sMsy0";
+	private final static String CLIENT_ID = "1HwE4P1SJqwMazPokdbn";
+	private final static String CLIENT_SECRET = "AuCgz5bYg9";
 	/*콜백URL 추후 수정*/
 	private final static String REDIRECT_URI = "http://localhost:8787/one/callback.do";
 	private final static String SESSION_STATE = "oauth_state";

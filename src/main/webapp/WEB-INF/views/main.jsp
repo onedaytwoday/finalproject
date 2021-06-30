@@ -24,14 +24,17 @@ li {
 	<%if(session.getAttribute("mDto") != null){
 	%>
 		<h1>${mDto.member_id }님 환영합니다.</h1>
+		<ul class="login">
+			<li><a href="logout.do">로그아웃</a>
+		</ul>
 	<%
-	}
+	}else{
 	%>
 		<ul class="login">
 			<li><a href="loginform.do">로그인</a></li>
 			<li><a href="signup.do">회원가입</a></li>
-			<li><a href="logout.do">로그아웃</a>
 		</ul>
+	<%} %>
 		<br>
 
 		<ul class="headernav">

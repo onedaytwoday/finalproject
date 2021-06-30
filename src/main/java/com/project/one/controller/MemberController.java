@@ -68,19 +68,16 @@ public class MemberController {
 	
 	//회원가입
 	@RequestMapping("/signup.do")
-	public String signupForm() {
+	public String signupForm(MemberDto dto, HttpSession session) {
+		System.out.println(dto.getMember_id());
+		MemberDto mDto = biz.selectOne(dto.getMember_id());
+		if(mDto!=null) {
+			session.setAttribute("mDto", mDto);
+			return "main";
+		}
 		return "signup";
 	}
 	
-	@RequestMapping("/general_signup.do")
-	public String general_signupForm() {
-		return "general_signup";
-	}
-	
-	@RequestMapping("/teacher_signup.do")
-	public String teacher_signupForm() {
-		return "teacher_signup";
-	}
 	
 	@RequestMapping("/idcheck.do")
 	public String idCheck(Model model, String member_id) {
@@ -103,9 +100,17 @@ public class MemberController {
 			return "redirect:loginform.do";
 		}
 		
-		return "redirect:general_signup.do";
+		return "redirect:signup.do?mDto="+dto;
 	}
-	
+	@RequestMapping("/sns_signupRes.do")
+	public String sns_signupRes(MemberDto mDto, HttpSession session) {
+		if(biz.register(mDto) > 0) {
+			session.setAttribute("mdto", mDto);
+			return "main";
+		}
+		
+		return "redirect:signup.do?mDto="+mDto;
+	}
 	//네이버로그인
 	//로그인 첫 화면 요청 메소드
 	@RequestMapping(value = "/loginform.do", method = { RequestMethod.GET, RequestMethod.POST })
@@ -151,6 +156,11 @@ public class MemberController {
 			mDto.setMember_email(member_email);
 			mDto.setMember_phone(member_phone);
 			
+			MemberDto res = biz.selectOne(member_id);
+			if(res != null) {
+				session.setAttribute("mDto", res);
+				return "main";
+			}
 			model.addAttribute("mDto",mDto);
 		} catch (org.json.simple.parser.ParseException e) {
 			e.printStackTrace();
@@ -184,6 +194,12 @@ public class MemberController {
 		mDto.setMember_id(kid);
 		mDto.setMember_email(kemail);
 		mDto.setMember_name(kname);
+		
+		MemberDto res = biz.selectOne(kid);
+		if(res != null) {
+			session.setAttribute("mDto", res);
+			return "main";
+		}
 		
 		model.addAttribute("mDto" , mDto);
 		return "signup";
