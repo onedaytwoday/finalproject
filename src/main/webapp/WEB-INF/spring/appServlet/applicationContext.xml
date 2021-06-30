@@ -27,7 +27,13 @@
 		<property name="configLocation" value="WEB-INF/spring/sqls/config.xml" />
 	</bean>
 	
+	<!-- mybatis template -->
 	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg ref="sqlSession" />
 	</bean>
+	
+	<!-- transaction -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>	
 </beans>

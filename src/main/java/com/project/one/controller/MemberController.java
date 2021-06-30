@@ -54,11 +54,11 @@ public class MemberController {
 	@RequestMapping(value="/ajaxlogin.do",method=RequestMethod.POST)
 	public Map<String, Boolean> ajaxLogin(@RequestBody MemberDto dto, HttpSession session){
 		//logger.info("[Controller] ajaxlogin.do");
-		MemberDto res = biz.login(dto);
+		MemberDto mDto = biz.login(dto);
 		boolean chk = false;
-		if(res != null) {
+		if(mDto != null) {
 			chk = true;
-			session.setAttribute("login", res);
+			session.setAttribute("mDto", mDto);
 		}
 		Map<String, Boolean> map = new HashMap<String, Boolean>();
 		map.put("chk", chk);
@@ -190,7 +190,7 @@ public class MemberController {
 	public String logout(HttpSession session)throws IOException {
 		
 		session.invalidate();
-		return "redirect:main.do";
+		return "main";
 	}
 	@RequestMapping("/main.do")
 	public String main() {
