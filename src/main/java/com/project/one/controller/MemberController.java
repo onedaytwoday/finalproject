@@ -120,9 +120,8 @@ public class MemberController {
 		return "login";
 	}
 	//네이버 로그인 성공시 callback호출 메소드
-	@RequestMapping(value = "/callback", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/callback.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session) throws IOException, ParseException {
-		System.out.println("여기는 callback");
 		OAuth2AccessToken oauthToken;
 		oauthToken = naverLogin.getAccessToken(session, code, state);
 		//1. 로그인 사용자 정보를 읽어온다.
@@ -138,21 +137,32 @@ public class MemberController {
 			//3. 데이터 파싱
 			//Top레벨 단계 _response 파싱
 			JSONObject response_obj = (JSONObject)jsonObj.get("response");
-			//response의 nickname값 파싱
-			String nickname = (String)response_obj.get("nickname");
-			System.out.println(nickname);
-			//4.파싱 닉네임 세션으로 저장
-			session.setAttribute("sessionId",nickname); //세션 생성
-			model.addAttribute("result", apiResult);
+			
+			String member_id = (String)response_obj.get("id");
+			String member_name = (String)response_obj.get("username");
+			String member_nickname = (String)response_obj.get("nickname");
+			String member_email = (String)response_obj.get("email");
+			String member_phone = (String)response_obj.get("mobile");
+			
+			MemberDto mDto = new MemberDto();
+			mDto.setMember_id(member_id);
+			mDto.setMember_name(member_name);
+			mDto.setMember_nicname(member_nickname);
+			mDto.setMember_email(member_email);
+			mDto.setMember_phone(member_phone);
+			
+			model.addAttribute("mDto",mDto);
 		} catch (org.json.simple.parser.ParseException e) {
 			e.printStackTrace();
 		}
 		
-		return "login";
+		return "signup";
 	}
 	
 	//카카오
+
 	@RequestMapping(value = "/kakaologin.do",produces = "application/json", method = { RequestMethod.GET, RequestMethod.POST })
+
 	public String kakaoLogin(Model model, @RequestParam("code") String code, HttpServletRequest request,
 			HttpServletResponse response, HttpSession session) {
 		
