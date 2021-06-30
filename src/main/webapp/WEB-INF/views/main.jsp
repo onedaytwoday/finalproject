@@ -21,9 +21,9 @@ li {
 </head>
 <body>
 	<header>
-	<%if(session.getAttribute("login") != null){
+	<%if(session.getAttribute("mDto") != null){
 	%>
-		<h1>${login }</h1>
+		<h1>${mDto.member_id }님 환영합니다.</h1>
 	<%
 	}
 	%>
