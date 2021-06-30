@@ -152,12 +152,17 @@ li {
 	
 	
 =======
+=======
+>>>>>>> f93b785312bbf0cb32bf18538844fdb79b8c7d65
 <title>Insert title here</title>
 </head>
 <body>
 
 <jsp:forward page="WEB-INF/views/main.jsp"></jsp:forward>
 
+<<<<<<< HEAD
 >>>>>>> 45a453ab2d4e8f021458ef64b0d18cd0e39ec499
+=======
+>>>>>>> f93b785312bbf0cb32bf18538844fdb79b8c7d65
 </body>
 </html>

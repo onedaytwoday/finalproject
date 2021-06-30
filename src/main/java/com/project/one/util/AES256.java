@@ -24,12 +24,14 @@ public class AES256 {
 	private String iv = "00000000000000001";
 	private Key keySpec;
 	
-	
+
 	/*
 	 * 16자리의 키값을 입력하여 객체를 생성한다.
 	 * @param key 암/복호화를 위한 키값
 	 * @throws UnsupportedEncodingException 키값의 길이가 16이하일 경우 발생
 	 */
+	
+	
 	public AES256() throws UnsupportedEncodingException {
 		this.iv = iv.substring(0,16);
 		byte[] keyBytes = new byte[16];
@@ -45,10 +47,12 @@ public class AES256 {
 		this.keySpec = keySpec;
 	}
 	
+
 	/*
 	 * AES 256 암호화
 	 *  str : 암호화 시킬 문자열
 	 */
+
 	
 	public String encrypt(String str) throws NoSuchAlgorithmException, GeneralSecurityException, UnsupportedEncodingException {
 		Cipher c = Cipher.getInstance("AES/CBC/PKCS5Padding");
@@ -61,10 +65,12 @@ public class AES256 {
 	}
 	
 	
+
 	/*
 	 * AES 256 복호화
 	 *  str : 복호화 시킬 문자열
 	 */
+
 	public String decrypt(String str) throws NoSuchAlgorithmException, GeneralSecurityException, UnsupportedEncodingException {
 		Cipher c = Cipher.getInstance("AES/CBC/PKCS5Padding");
 		c.init(Cipher.DECRYPT_MODE, keySpec, new IvParameterSpec(iv.getBytes()));

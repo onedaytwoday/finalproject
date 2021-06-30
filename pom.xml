@@ -193,14 +193,6 @@
 			<version>1.1.1</version>
 		</dependency>
 		
-		<!--  양방향 암호화/복호화를 위한 설정 --> 
-		<!-- https://mvnrepository.com/artifact/commons-codec/commons-codec --> 
-		<dependency> 
-			<groupId>commons-codec</groupId> 
-			<artifactId>commons-codec</artifactId> 
-			<version>1.10</version> 
-		</dependency>
-		
 		<!-- 잭슨 -->
 		<dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -219,7 +211,14 @@
             <artifactId>httpclient</artifactId>
             <version>4.5.2</version>
         </dependency>
-
+        
+		<!--  양방향 암호화/복호화를 위한 설정 --> 
+		<!-- https://mvnrepository.com/artifact/commons-codec/commons-codec --> 
+		<dependency> 
+			<groupId>commons-codec</groupId> 
+			<artifactId>commons-codec</artifactId> 
+			<version>1.10</version> 
+		</dependency>
 	</dependencies>
     <build>
         <plugins>
