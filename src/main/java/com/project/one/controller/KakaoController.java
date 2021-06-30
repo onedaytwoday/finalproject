@@ -21,7 +21,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class KakaoController {
 	
-	private final static String K_CLIENT_ID = "0704a24e218cc486b2613072fabc7239";
+	private final static String K_CLIENT_ID = "9cc9f0eb6b4882395ace985a6f26f163";
 	private final static String K_REDIRECT_URI = "http://localhost:8787/one/kakaologin.do";
 	
 	public static String getAuthorizationUrl(HttpSession session) {
@@ -41,7 +41,7 @@ public class KakaoController {
  
         postParams.add(new BasicNameValuePair("grant_type", "authorization_code"));
  
-        postParams.add(new BasicNameValuePair("client_id", "0704a24e218cc486b2613072fabc7239"));
+        postParams.add(new BasicNameValuePair("client_id", "9cc9f0eb6b4882395ace985a6f26f163"));
  
         postParams.add(new BasicNameValuePair("redirect_uri", "http://localhost:8787/one/kakaologin.do"));
  

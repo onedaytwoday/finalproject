@@ -18,7 +18,7 @@ public class NaverLogin {
 	private final static String CLIENT_ID = "ImebAAntmH0615Tk4bM6";
 	private final static String CLIENT_SECRET = "ufpC_sMsy0";
 	/*콜백URL 추후 수정*/
-	private final static String REDIRECT_URI = "http://localhost:8787/one/";
+	private final static String REDIRECT_URI = "http://localhost:8787/one/callback.do";
 	private final static String SESSION_STATE = "oauth_state";
 	/* 프로필 조회 API URL */
 	private final static String PROFILE_API_URL = "https://openapi.naver.com/v1/nid/me";

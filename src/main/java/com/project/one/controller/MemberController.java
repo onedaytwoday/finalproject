@@ -120,7 +120,7 @@ public class MemberController {
 		return "login";
 	}
 	//네이버 로그인 성공시 callback호출 메소드
-	@RequestMapping(value = "/callback", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/callback.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session) throws IOException, ParseException {
 		System.out.println("여기는 callback");
 		OAuth2AccessToken oauthToken;
@@ -138,11 +138,24 @@ public class MemberController {
 			//3. 데이터 파싱
 			//Top레벨 단계 _response 파싱
 			JSONObject response_obj = (JSONObject)jsonObj.get("response");
-			//response의 nickname값 파싱
-			String nickname = (String)response_obj.get("nickname");
-			System.out.println(nickname);
-			//4.파싱 닉네임 세션으로 저장
-			session.setAttribute("sessionId",nickname); //세션 생성
+			
+			
+			String member_id = (String)response_obj.get("id");
+			String member_name = (String)response_obj.get("username");
+			String member_nickname = (String)response_obj.get("nickname");
+			String member_email = (String)response_obj.get("email");
+			String member_phone = (String)response_obj.get("mobile");
+			
+			MemberDto mDto = new MemberDto();
+			
+			mDto.setMember_id(member_id);
+			mDto.setMember_name(member_name);
+			mDto.setMember_nicname(member_nickname);
+			mDto.setMember_email(member_email);
+			mDto.setMember_phone(member_phone);
+			System.out.println(member_id);
+			
+			model.addAttribute("mDto",mDto);
 			model.addAttribute("result", apiResult);
 		} catch (org.json.simple.parser.ParseException e) {
 			e.printStackTrace();
@@ -162,28 +175,22 @@ public class MemberController {
 		JsonNode accessToken = node.get("access_token");
 		//사용자정보
 		JsonNode userInfo = KakaoController.getKakaoUserInfo(accessToken);
-		String kemail = null;
-		String kname = null;
-		String kgender = null;
-		String kbirthday = null;
-		String kage = null;
-		String kimage = null;
+		String member_email = null;
+		String member_name = null;
+	
 		//사용자정보 카카오에서 가져오기
 		JsonNode properties = userInfo.path("properties");
 		JsonNode kakao_account = userInfo.path("kakao_account");
-		kemail = kakao_account.path("email").asText();
-		kname = properties.path("nickname").asText();
-		kgender = kakao_account.path("gender").asText();
-		kbirthday = kakao_account.path("birthday").asText();
-		kage = kakao_account.path("age").asText();
-		kimage = properties.path("profile_image").asText();
-		session.setAttribute("kemail", kemail);
-		session.setAttribute("kname",kname);
-		session.setAttribute("kgender",kgender);
-		session.setAttribute("kbirthday",kbirthday);
-		session.setAttribute("kage",kage);
-		session.setAttribute("kimage",kimage);
-		return "loginpost";
+		
+		member_email = kakao_account.path("email").asText();
+		member_name = properties.path("nickname").asText();
+		
+		MemberDto mDto = new MemberDto();
+		mDto.setMember_name(member_name);
+		mDto.setMember_email(member_email);
+	
+		
+		return "login";
 	}
 	
 	//로그아웃
