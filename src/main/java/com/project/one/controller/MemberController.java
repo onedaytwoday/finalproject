@@ -162,27 +162,21 @@ public class MemberController {
 		JsonNode userInfo = KakaoController.getKakaoUserInfo(accessToken);
 		String kemail = null;
 		String kname = null;
-		String kgender = null;
-		String kbirthday = null;
-		String kage = null;
-		String kimage = null;
+		String kid = null;
 		//사용자정보 카카오에서 가져오기
 		JsonNode properties = userInfo.path("properties");
 		JsonNode kakao_account = userInfo.path("kakao_account");
+		JsonNode id = userInfo.path("id");
+		kid = id.asText();
 		kemail = kakao_account.path("email").asText();
 		kname = properties.path("nickname").asText();
-		kgender = kakao_account.path("gender").asText();
-		kbirthday = kakao_account.path("birthday").asText();
-		kage = kakao_account.path("age").asText();
-		kimage = properties.path("profile_image").asText();
+		MemberDto mDto = new MemberDto();
+		mDto.setMember_id(kid);
+		mDto.setMember_email(kemail);
+		mDto.setMember_name(kname);
 		
-		session.setAttribute("kemail", kemail);
-		session.setAttribute("kname",kname);
-		session.setAttribute("kgender",kgender);
-		session.setAttribute("kbirthday",kbirthday);
-		session.setAttribute("kage",kage);
-		session.setAttribute("kimage",kimage);
-		return "main";
+		model.addAttribute("mDto" , mDto);
+		return "signup";
 	}
 	
 	//로그아웃
