@@ -114,7 +114,7 @@ li {
 		<ul class="headernav">
 			<li><a href="main.do"><img src="logo.png"></a></li>
 			<li><a href="main.do">Home</a></li>
-			<li><a href="#">공지사항</a></li>
+			<li><a href="board_list.do?board_category=N">공지사항</a></li>
 			<li>
 				<select name="class">
 						<option value="">클래스</option>
@@ -133,7 +133,7 @@ li {
 			</li>
 			<li><a href="classInsert.do">클래스 등록</a></li>
 			<li><a href="classList.do">클래스</a></li>
-			<li><a href="#">상품문의</a></li>
+			<li><a href="board_list.do?board_category=Q">상품문의</a></li>
 			<li><a href="#">수강후기포토</a></li>
 		</ul>
 

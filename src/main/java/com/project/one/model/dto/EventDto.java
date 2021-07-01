@@ -8,7 +8,7 @@ public class EventDto {
 	private String event_desc;
 	private Date event_start;
 	private Date event_end;
-	private boolean event_noti;
+	private String event_noti;
 	private String member_id;
 	private int class_no;
 	private int product_no;
@@ -17,7 +17,7 @@ public class EventDto {
 	}
 
 	public EventDto(int event_no, String event_title, String event_desc, Date event_start, Date event_end,
-			boolean event_noti, String member_id, int class_no, int product_no) {
+			String event_noti, String member_id, int class_no, int product_no) {
 		super();
 		this.event_no = event_no;
 		this.event_title = event_title;
@@ -70,11 +70,11 @@ public class EventDto {
 		this.event_end = event_end;
 	}
 
-	public boolean isEvent_noti() {
+	public String getEvent_noti() {
 		return event_noti;
 	}
 
-	public void setEvent_noti(boolean event_noti) {
+	public void setEvent_noti(String event_noti) {
 		this.event_noti = event_noti;
 	}
 
@@ -101,4 +101,5 @@ public class EventDto {
 	public void setProduct_no(int product_no) {
 		this.product_no = product_no;
 	}
+
 }
