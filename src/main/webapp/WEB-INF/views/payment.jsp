@@ -27,6 +27,7 @@
                 m_redirect_url : 'http://localhost:8787/one_war/orderCompleteMobile'
             }, function (rsp) {
                 if(rsp.success){
+                	console.log("rsp : ", rsp);
                 	alert("결제 성공");
                 	location.href="paymentSuccess.do";
                 }

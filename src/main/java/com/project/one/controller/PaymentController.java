@@ -10,6 +10,7 @@ import com.project.one.model.biz.PaymentBiz;
 import com.project.one.model.dto.ClassDto;
 import com.project.one.model.dto.MemberDto;
 import com.project.one.model.dto.PaymentDto;
+import com.project.one.util.Payment;
 
 @Controller
 public class PaymentController {
@@ -48,4 +49,11 @@ public class PaymentController {
 		
 		return "redirect:main.do";
 	}
+	
+	@RequestMapping("/paymentCancel.do")
+	public void payment_cancel() {
+		Payment p = new Payment();
+		p.post();
+	}
+	
 }

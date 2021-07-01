@@ -74,7 +74,7 @@
 			</c:when>
 			
 			<c:when test="${mDto.member_id != null && checkPaid == true}">
-				<button class="btn btn-warning">결제 취소</button>
+				<button onclick="location.href='paymentCancel.do'" class="btn btn-warning">결제 취소</button>
 			</c:when>
 		</c:choose>
 		
