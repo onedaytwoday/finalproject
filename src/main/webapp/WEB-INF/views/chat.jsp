@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 
 <script src="https://cdn.jsdelivr.net/sockjs/1/sockjs.min.js"></script>
-
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 	
 
@@ -21,7 +21,7 @@
 	
 	$(function(){
 		$("#sendBtn").click(function(){
-			cosole.log('메세지를 보냅니다...');
+			alert("메세지를 보냅니다.");
 			sendMessage();
 		});
 	});
@@ -29,7 +29,7 @@
 	function sendMessage(){
 		//웹소켓으로 메세지 보낼때
 		sock.send($("#message").val());
-		
+		onMessage($("#message"));
 	}
 	//evt : 웹소켓이 보내준 데이터
 	function onMessage(evt){
@@ -38,7 +38,7 @@
 		var message = null;
 		
 		var strArray = data.split('|');
-		for(var i = 0; i <strArray.length i++){
+		for(var i = 0; i <strArray.length; i++){
 			conosle.log('str['+i+']: '+ strArray[i]);
 		}
 		//현재 sessionid
@@ -78,7 +78,7 @@
 </head>
 <body>
 
-	<h1>Chat (id: ${member_id})</h1>
+	<h1>Chat (id: ${mDto.member_id})</h1>
 
 	<div>
 		<div>
@@ -88,7 +88,7 @@
     	<br>
     	<div class="well" id="chatdata">
     		
-    		<input type="hidden" value='${member_id}' id="sessionuserid">
+    		<input type="hidden" value='${mDto.member_id}' id="sessionuserid">
     	</div>
 	</div>
 

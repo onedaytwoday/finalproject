@@ -57,7 +57,10 @@ li {
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
-	
+		$('.iconImg').click(function(){
+    		window.open('http://localhost:8787/one/chat.do','채팅', 'width=300px,height=500px,scrollbars=yes');
+    	});
+    	
 	    $('#class').on('change', function() {
 			//클래스 카테고리 선택시에 이동할 경로 수정
 			//카테고리 value는 추후 controller에 맞춰서 수정
@@ -135,12 +138,13 @@ li {
 			<li><a href="classList.do">클래스</a></li>
 			<li><a href="board_list.do?board_category=Q">상품문의</a></li>
 			<li><a href="#">수강후기포토</a></li>
+			<li><a href="chat.do">채팅</a>
 		</ul>
 
 	</header>
 	<div class="chatIcon">
         <img width="50" src="https://previews.123rf.com/images/nikolae/nikolae1601/nikolae160100031/51288418-%ED%9D%B0%EC%83%89-%EB%B0%B0%EA%B2%BD%EC%97%90-%EA%B3%A0%EB%A6%BD-%EC%B1%84%ED%8C%85-%EC%95%84%EC%9D%B4%EC%BD%98.jpg" class="iconImg">
     </div>
-
+    
 </body>
 </html>
