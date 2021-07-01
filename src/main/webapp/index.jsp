@@ -30,7 +30,8 @@ $(document).ready(function(){
 		var cate = this.value;
 		
 		if(cate == "cate01"){
-			 alert("카테고리 01"); 
+			alert("카테고리 01");
+			 //location.href = 'store.do'; 
 		}else if(cate == "cate02"){
 			alert("카테고리 02"); 
 		}else if(cate == "cate03"){
@@ -149,20 +150,8 @@ li {
 	</footer>
 	<!-- 하단 끝 -->
 	
-	
-	
-=======
-=======
->>>>>>> f93b785312bbf0cb32bf18538844fdb79b8c7d65
-<title>Insert title here</title>
-</head>
-<body>
 
 <jsp:forward page="WEB-INF/views/main.jsp"></jsp:forward>
 
-<<<<<<< HEAD
->>>>>>> 45a453ab2d4e8f021458ef64b0d18cd0e39ec499
-=======
->>>>>>> f93b785312bbf0cb32bf18538844fdb79b8c7d65
 </body>
 </html>

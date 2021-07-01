@@ -79,7 +79,7 @@ li {
 			var cate = this.value;
 			
 			if(cate == "cate01"){
-				 alert("카테고리 01"); 
+				location.href = 'store.do';
 			}else if(cate == "cate02"){
 				alert("카테고리 02"); 
 			}else if(cate == "cate03"){
@@ -116,7 +116,7 @@ li {
 			<li><a href="main.do">Home</a></li>
 			<li><a href="#">공지사항</a></li>
 			<li>
-				<select name="class">
+				<select id="class">
 						<option value="">클래스</option>
 						<option value="cate01">카테고리1</option>
 						<option value="cate02">카테고리2</option>
@@ -124,7 +124,7 @@ li {
 				</select>
 			</li>
 			<li>
-				<select name="shop">
+				<select id="shop">
 						<option value="">쇼핑</option>
 						<option value="cate01">카테고리1</option>
 						<option value="cate02">카테고리2</option>
