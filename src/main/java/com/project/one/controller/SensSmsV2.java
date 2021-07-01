@@ -24,7 +24,7 @@ public class SensSmsV2 {
 		String requestUrlType = "/messages";						// 요청 URL
 		String accessKey = "jbrtaEOGdQ09E1GmSqsM";										// 네이버클라우드플랫폼 API인증
 		String SecretKey = "cxbotWR85UrgDDlPU6078L0Ka5xzQPwGaODRZxCb";										// 2차인증용 Secret Key 
-		String serviceId ="";										// 프로젝트에 할당된 SMS서비스 ID???
+		String serviceId ="ncp:sms:kr:269263696443:onedaytwoday";										// 프로젝트에 할당된 SMS서비스 ID???
 		String method = "POST";										// 요청 method
 		String timestamp = Long.toString(System.currentTimeMillis());
 		requestUrl += serviceId + requestUrlType;
@@ -39,14 +39,14 @@ public class SensSmsV2 {
 		JSONArray toArr = new JSONArray();
 		
 		toJson.put("subject", "");			//메시지 내용 * LMS Type에서만 사용 가능
-		toJson.put("content", "");			//메시지 내용 * Type별 최대 byte제한이 다름. * SMS:80/LMS: 2000
-		toJson.put("to", "");				//수신번호 목록
+		toJson.put("content", "이건 테스트 메시지");			//메시지 내용 * Type별 최대 byte제한이 다름. * SMS:80/LMS: 2000
+		toJson.put("to", "01093986630");				//수신번호 목록
 		toArr.add(toJson);				
 		
-		bodyJson.put("type", "");			//메시지 타입 (sms|lms)
-		bodyJson.put("contentType", "");	//메시지내용타입(AD|COMM) *AD: 광고용/COMM: 일반용
+		bodyJson.put("type", "sms");			//메시지 타입 (sms|lms)
+		bodyJson.put("contentType", "COMM");	//메시지내용타입(AD|COMM) *AD: 광고용/COMM: 일반용
 		bodyJson.put("countryCode", "82");	//국가 전화번호
-		bodyJson.put("from", "");			//발신번호*사전에인증,등록된 번호만 사용가능
+		bodyJson.put("from", "01093986630");			//발신번호*사전에인증,등록된 번호만 사용가능
 		bodyJson.put("subject", "");		//메시지 제목 * LMS Type에서만 사용 가능
 		bodyJson.put("content", "");		//메시지 내용 * Type별 최대 byte제한이 다름. * SMS:80/LMS: 2000
 		bodyJson.put("messages", toArr);
