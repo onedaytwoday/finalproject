@@ -83,4 +83,19 @@ public class PaymentDaoImpl implements PaymentDao {
 		return res;
 	}
 
+	@Override
+	public PaymentDto checkPaid(PaymentDto dto) {
+		PaymentDto paid = null;
+		
+		try {
+			paid = sqlSession.selectOne(NAMESPACE + "checkPaid", dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return paid;
+	}
+	
+	
+
 }

@@ -15,4 +15,6 @@ public interface PaymentBiz {
 	public int update(PaymentDto dto);
 
 	public int delete(int payment_no);
+	
+	public PaymentDto checkPaid(PaymentDto dto);
 }

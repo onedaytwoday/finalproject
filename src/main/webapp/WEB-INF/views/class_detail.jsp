@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
@@ -15,7 +17,7 @@
 <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"
-    />
+    />    
 </head>
 <body>
 
@@ -52,8 +54,30 @@
 			<c:if test="${dto.member_id eq mDto.member_id }">
 				<button onclick="location.href='classUpdate.do?class_no=${dto.class_no}'" type="button" class="btn btn-warning">수정</button>								
 			</c:if>
-		
 		</div>
+		
+		<!-- TODO: Calendar 추가 / 날짜 & 시간대 선택할 수 있어야 함 -->
+		
+		
+		
+		<!-- 결제하기 -->
+		<c:choose>
+			<c:when test="${mDto.member_id != null && checkPaid == false}">
+				<form class="mt-3" action="payment.do" method="post">
+					<input type="hidden" name="member_id" value="${mDto.member_id }" />
+					<input type="hidden" name="class_no" value="${dto.class_no }" />
+					<input type="hidden" name="class_title" value="${dto.class_title }" />
+					<input type="hidden" name="class_price" value="${dto.class_price }" />
+					
+					<button type="submit" class="btn btn-primary">결제하기</button>
+				</form>
+			</c:when>
+			
+			<c:when test="${mDto.member_id != null && checkPaid == true}">
+				<button class="btn btn-warning">결제 취소</button>
+			</c:when>
+		</c:choose>
+		
 	</div>
 
 	
