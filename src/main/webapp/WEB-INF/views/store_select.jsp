@@ -46,7 +46,7 @@
 			<td colspan="2" align="right">
 				<input type="button" value="수정" onclick="location.href='store_updateform.do?product_no=${dto.product_no}'"/>
 				<input type="button" value="삭제" onclick="location.href='store_delete.do?product_no=${dto.product_no}'"/>
-				<input type="button" value="목록" onclick=""/>
+				<input type="button" value="목록" onclick="location.href='store.do'"/>
 			</td>
 		</tr>
 	</table>

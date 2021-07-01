@@ -1,4 +1,4 @@
-<%@page import="com.project.one.model.dto.MemberDto"%>
+<%@ page import="com.project.one.model.dto.MemberDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -6,25 +6,58 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script type="text/javascript">
+	function address() {
+		new daum.Postcode(
+				{
+					oncomplete : function(data) {
+						var roadAddr = data.roadAddress;
+						var extraRoadAddr = '';
 
-	<script type="text/javascript">
-		function idCheckConfirm() {
-			var chk = document.getElementsByName("member_id")[0].title;
-			if (chk == "n") {
-				alert("id 중복체크를 먼저 해주세요.");
-				document.getElementsByName("memberid")[0].focus();
-			}
+						if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
+							extraRoadAddr += data.bname;
+						}
+
+						if (data.buildingName !== '' && data.apartment === 'Y') {
+							extraRoadAddr += (extraRoadAddr !== '' ? ', '
+									+ data.buildingName : data.buildingName);
+						}
+
+						if (extraRoadAddr !== '') {
+							extraRoadAddr = ' (' + extraRoadAddr + ')';
+						}
+
+						document.getElementById('postcode').value = data.zonecode;
+						document.getElementById("addr_1").value = roadAddr;
+						document.getElementById("addr_1").value = data.jibunAddress;
+
+						if (data.autoRoadAddress) {
+							document.getElementById("addr_1").value = roadAddr;
+						} else if (data.autoJibunAddress) {
+							document.getElementById("addr_1").value = data.jibunAddress;
+						} else {
+						}
+					}
+				}).open();
+	}
+	function idCheckConfirm() {
+		var chk = document.getElementsByName("member_id")[0].title;
+		if (chk == "n") {
+			alert("id 중복체크를 먼저 해주세요.");
+			document.getElementsByName("memberid")[0].focus();
 		}
+	}
 		
-		function idCheck() {
-			var doc = document.getElementsByName("member_id")[0];
-			if (doc.value.trim() == "" || doc.value == null) {
-				alert("id를 입력해 주세요");
-			} else {
-				open("idcheck.do?member_id="+doc.value, "", "width=200, height=200");
-			}
+	function idCheck() {
+		var doc = document.getElementsByName("member_id")[0];
+		if (doc.value.trim() == "" || doc.value == null) {
+			alert("id를 입력해 주세요");
+		} else {
+			open("idcheck.do?member_id="+doc.value, "", "width=200, height=200");
 		}
-	</script>
+	}
+</script>
 
 </head>
 <body>
@@ -78,7 +111,14 @@
 			</tr>
 			<tr>
 				<th>주소</th>
-				<td><input type="text" name="member_addr" required="required" onclick="idCheckConfirm();"></td>
+				<td>
+				<input type="hidden" name="member_addr" value="">
+				<input type="text" id="postcode" placeholder="우편번호" readonly="readonly">
+				<input type="button" onclick="address();" value="우편번호 찾기">
+				<br>
+				<input type="text" name="member_addr_1" id="addr_1" placeholder="기본주소" readonly="readonly">
+				<input type="text" name="member_addr" id="addr_2" placeholder="상세주소" required="required" onclick="idCheckConfirm();">
+				</td>
 			</tr>
 			<tr>
 				<td colspan="2" align="right">

@@ -10,13 +10,12 @@ public class ClassDto {
 	private double class_price;
 	private int class_sale;
 	private String member_id;
-	
+
 	public ClassDto() {
 	}
 
 	public ClassDto(int class_no, String class_title, String class_desc, String class_loc, String class_category,
 			int class_member_num, double class_price, int class_sale, String member_id) {
-		super();
 		this.class_no = class_no;
 		this.class_title = class_title;
 		this.class_desc = class_desc;
@@ -28,7 +27,7 @@ public class ClassDto {
 		this.member_id = member_id;
 	}
 
-	public long getClass_no() {
+	public int getClass_no() {
 		return class_no;
 	}
 
@@ -99,5 +98,13 @@ public class ClassDto {
 	public void setMember_id(String member_id) {
 		this.member_id = member_id;
 	}
-		
+
+	@Override
+	public String toString() {
+		return "ClassDto [class_no=" + class_no + ", class_title=" + class_title + ", class_desc=" + class_desc
+				+ ", class_loc=" + class_loc + ", class_category=" + class_category + ", class_member_num="
+				+ class_member_num + ", class_price=" + class_price + ", class_sale=" + class_sale + ", member_id="
+				+ member_id + "]";
+	}
+
 }

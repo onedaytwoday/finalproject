@@ -34,7 +34,7 @@
 					<tr>
 						<td>${dto.board_notice_no }</td>
 						<td>${dto.member_id }</td>
-						<td><a href="#">${dto.board_title }</a></td>
+						<td><a href="board_detail.do?board_no=${dto.board_no }">${dto.board_title }</a></td>
 						<td>${dto.board_readcount }</td>
 						<td>
 							<fmt:formatDate value="${dto.board_date }" pattern="yyyy-MM-dd" />

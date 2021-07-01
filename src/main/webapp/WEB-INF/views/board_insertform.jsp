@@ -11,29 +11,30 @@
 
 	<h1>INSERT</h1>
 
-	<form action="insertres.do" method="post">
-		카테고리 : <select>
+	<form action="board_insertRes.do" method="post">
+		카테고리 : <select name="board_category">
 			<c:choose>
 				<c:when test="${board_category eq 'N' }">
-					<option value="N" selected="selected">공지사항</option>
+					<option  value="N" selected="selected">공지사항</option>
 				</c:when>
 				<c:when test="${board_category eq 'Q' }">
 					<option value="Q" selected="selected">상품문의</option>
 				</c:when>
 			</c:choose>
 		</select>
+		<input type="hidden" name="member_id" value="${mDto.member_id }" />
 		<table border="1">
 			<tr>
-				<th>작성자</th>
-				<td><input type="text" name="myname" /></td>
-			</tr>
-			<tr>
 				<th>제목</th>
-				<td><input type="text" name="mytitle" /></td>
+				<td><input type="text" name="board_title" /></td>
 			</tr>
 			<tr>
 				<th>내용</th>
-				<td><textarea rows="10" cols="60" name="mycontent"></textarea></td>
+				<td><textarea rows="10" cols="60" name="board_content"></textarea></td>
+			</tr>
+			<tr>
+				<th>비밀번호</th>
+				<td><input type="text" size="4" name="board_pw" /></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="right">

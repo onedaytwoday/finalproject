@@ -35,7 +35,7 @@ public class ProductController {
 	@RequestMapping("/store_insertform.do")
 	public String Product_insertForm() {
 
-		return "store_insert";
+		return "store_insertform";
 	}
 
 	@RequestMapping("/store_insertres.do")
@@ -52,7 +52,7 @@ public class ProductController {
 	public String Product_updateForm(Model model,int product_no) {
 		model.addAttribute("dto",biz.selectOne(product_no));
 
-		return "store_update";
+		return "store_updateform";
 	}
 	
 	@RequestMapping("/store_updateres.do")

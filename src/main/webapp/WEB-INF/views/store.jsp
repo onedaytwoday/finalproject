@@ -39,7 +39,7 @@
 				<c:forEach items="${list }" var="dto">
 					<tr>
 						<td>${dto.product_no }</td>
-						<td><a href="product_select.do?product_no=${dto.product_no }">상품 사진</a></td>
+						<td><a href="store_select.do?product_no=${dto.product_no }">상품 사진</a></td>
 						<td>${dto.product_del }</td>
 						<td>${dto.product_category }</td>
 						<td>${dto.product_name }</td>
@@ -50,7 +50,7 @@
 			</c:otherwise>
 		</c:choose>
 		<tr>
-			<td colspan="7" align="right"><input type="button" value="상품 작성" onclick="location.href='product_insertform.do'"/></td>
+			<td colspan="7" align="right"><input type="button" value="상품 작성" onclick="location.href='store_insertform.do'"/></td>
 		</tr>
 		
 	</table>

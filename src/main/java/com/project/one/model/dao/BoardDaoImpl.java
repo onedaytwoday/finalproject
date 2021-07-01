@@ -56,6 +56,34 @@ public class BoardDaoImpl implements BoardDao {
 		
 		return res;
 	}
+	
+	@Override
+	public int qna_insert(BoardDto dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.insert(NAMESPACE + "qna_insert", dto);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+
+	@Override
+	public int notice_insert(BoardDto dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.insert(NAMESPACE + "notice_insert", dto);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
 
 	@Override
 	public int update(BoardDto dto) {
@@ -85,4 +113,5 @@ public class BoardDaoImpl implements BoardDao {
 		return res;
 	}
 
+	
 }
