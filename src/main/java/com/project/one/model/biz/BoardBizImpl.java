@@ -28,7 +28,16 @@ public class BoardBizImpl implements BoardBiz {
 	public int insert(BoardDto dto) {
 		return dao.insert(dto);
 	}
+	
+	@Override
+	public int qna_insert(BoardDto dto) {
+		return dao.qna_insert(dto);
+	}
 
+	@Override
+	public int notice_insert(BoardDto dto) {
+		return dao.notice_insert(dto);
+	}
 	@Override
 	public int update(BoardDto dto) {
 		return dao.update(dto);
@@ -38,5 +47,7 @@ public class BoardBizImpl implements BoardBiz {
 	public int delete(int board_no) {
 		return dao.delete(board_no);
 	}
+
+
 
 }
