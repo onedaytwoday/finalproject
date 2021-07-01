@@ -17,12 +17,18 @@
 	
 	<insert id="insert" parameterType="paymentDto">
 		INSERT INTO PAYMENT
-		VALUES(#{payment_no},#{payment_num},#{payment_price},#{payment_date},#{payment_del},#{member_id},#{product_no},
-		#{basket_no},#{class_no})	
+		VALUES(PAYMENT_NO_SEQ.NEXTVAL, #{payment_num}, #{payment_price}, SYSDATE, #{payment_del}, #{member_id}, NULL, NULL, #{class_no})	
 	</insert>
 	
 	<delete id="delete" parameterType="int">
 		DELETE FROM PAYMENT 
 		WHERE PAYMENT_NO = #{payment_no}
 	</delete>
+	
+	<select id="checkPaid" resultType="paymentDto">
+		SELECT PAYMENT_NO, PAYMENT_NUM, PAYMENT_PRICE, PAYMENT_DATE, PAYMENT_DEL, MEMBER_ID,
+		PRODUCT_NO, BASKET_NO, CLASS_NO
+		FROM PAYMENT
+		WHERE MEMBER_ID = #{member_id} AND CLASS_NO = #{class_no}
+	</select>
 </mapper>
