@@ -14,7 +14,7 @@ public class BoardDto {
 	private int board_groupSeq;
 	private int board_titleTab;
 	private boolean board_delFlag;
-	private boolean board_category;
+	private String board_category;
 	private String board_pw;
 	private String member_id;
 	
@@ -23,7 +23,7 @@ public class BoardDto {
 
 	public BoardDto(int board_no, int board_notice_no, int board_qna_no, String board_title, String board_content,
 			Date board_date, int board_readCount, int board_groupNo, int board_groupSeq, int board_titleTab,
-			boolean board_delFlag, boolean board_category, String board_pw, String member_id) {
+			boolean board_delFlag, String board_category, String board_pw, String member_id) {
 		super();
 		this.board_no = board_no;
 		this.board_notice_no = board_notice_no;
@@ -129,11 +129,11 @@ public class BoardDto {
 		this.board_delFlag = board_delFlag;
 	}
 
-	public boolean isBoard_category() {
+	public String isBoard_category() {
 		return board_category;
 	}
 
-	public void setBoard_category(boolean board_category) {
+	public void setBoard_category(String board_category) {
 		this.board_category = board_category;
 	}
 

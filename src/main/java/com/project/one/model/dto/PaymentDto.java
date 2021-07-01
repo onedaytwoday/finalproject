@@ -101,5 +101,13 @@ public class PaymentDto {
 	public void setClass_no(int class_no) {
 		this.class_no = class_no;
 	}
+
+	@Override
+	public String toString() {
+		return "PaymentDto [payment_no=" + payment_no + ", payment_num=" + payment_num + ", payment_price="
+				+ payment_price + ", payment_date=" + payment_date + ", payment_del=" + payment_del + ", member_id="
+				+ member_id + ", product_no=" + product_no + ", basket_no=" + basket_no + ", class_no=" + class_no
+				+ "]";
+	}
 	
 }

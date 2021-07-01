@@ -39,4 +39,9 @@ public class PaymentBizImpl implements PaymentBiz {
 		return dao.delete(payment_no);
 	}
 
+	@Override
+	public PaymentDto checkPaid(PaymentDto dto) {
+		return dao.checkPaid(dto);
+	}
+
 }
