@@ -9,11 +9,11 @@ public class BoardDto {
 	private String board_title;
 	private String board_content;
 	private Date board_date;
-	private int board_readCount;
+	private int board_readcount;
 	private int board_groupNo;
 	private int board_groupSeq;
 	private int board_titleTab;
-	private boolean board_delFlag;
+	private String board_delFlag;
 	private String board_category;
 	private String board_pw;
 	private String member_id;
@@ -22,8 +22,8 @@ public class BoardDto {
 	}
 
 	public BoardDto(int board_no, int board_notice_no, int board_qna_no, String board_title, String board_content,
-			Date board_date, int board_readCount, int board_groupNo, int board_groupSeq, int board_titleTab,
-			boolean board_delFlag, String board_category, String board_pw, String member_id) {
+			Date board_date, int board_readcount, int board_groupNo, int board_groupSeq, int board_titleTab,
+			String board_delFlag, String board_category, String board_pw, String member_id) {
 		super();
 		this.board_no = board_no;
 		this.board_notice_no = board_notice_no;
@@ -31,7 +31,7 @@ public class BoardDto {
 		this.board_title = board_title;
 		this.board_content = board_content;
 		this.board_date = board_date;
-		this.board_readCount = board_readCount;
+		this.board_readcount = board_readcount;
 		this.board_groupNo = board_groupNo;
 		this.board_groupSeq = board_groupSeq;
 		this.board_titleTab = board_titleTab;
@@ -89,12 +89,12 @@ public class BoardDto {
 		this.board_date = board_date;
 	}
 
-	public int getBoard_readCount() {
-		return board_readCount;
+	public int getBoard_readcount() {
+		return board_readcount;
 	}
 
-	public void setBoard_readCount(int board_readCount) {
-		this.board_readCount = board_readCount;
+	public void setBoard_readCount(int board_readcount) {
+		this.board_readcount = board_readcount;
 	}
 
 	public int getBoard_groupNo() {
@@ -121,15 +121,15 @@ public class BoardDto {
 		this.board_titleTab = board_titleTab;
 	}
 
-	public boolean isBoard_delFlag() {
+	public String getBoard_delFlag() {
 		return board_delFlag;
 	}
 
-	public void setBoard_delFlag(boolean board_delFlag) {
+	public void setBoard_delFlag(String board_delFlag) {
 		this.board_delFlag = board_delFlag;
 	}
 
-	public String isBoard_category() {
+	public String getBoard_category() {
 		return board_category;
 	}
 
@@ -153,6 +153,4 @@ public class BoardDto {
 		this.member_id = member_id;
 	}
 
-	
-	
 }

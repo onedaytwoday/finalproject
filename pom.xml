@@ -97,6 +97,7 @@
 			<version>2.5</version>
 			<scope>provided</scope>
 		</dependency>
+		
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
 			<artifactId>jsp-api</artifactId>
@@ -172,7 +173,7 @@
 			<artifactId>jackson-mapper-asl</artifactId>
 			<version>1.9.13</version>
 		</dependency>
-		<!-- web socket -->
+
 		<dependency>
     		<groupId>org.springframework</groupId>
    			<artifactId>spring-websocket</artifactId>
