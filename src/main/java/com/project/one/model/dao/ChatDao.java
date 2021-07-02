@@ -22,4 +22,6 @@ public interface ChatDao {
 	public int update(ChatDto dto);
 	
 	public int delete(int chat_no);
+	
+	public ChatDto isRoom(String member_id, String consult_id);
 }
