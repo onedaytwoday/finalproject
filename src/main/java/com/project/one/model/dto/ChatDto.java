@@ -2,6 +2,8 @@ package com.project.one.model.dto;
 
 import java.util.Date;
 
+import com.google.gson.Gson;
+
 public class ChatDto {
 	private int chat_no;
 	private String member_id;
@@ -60,4 +62,12 @@ public class ChatDto {
 	public void setChat_date(Date chat_date) {
 		this.chat_date = chat_date;
 	}
+	
+	public static ChatDto convertMessage(String source) {
+		ChatDto message = new ChatDto();
+		Gson gson = new Gson();
+		message = gson.fromJson(source,  ChatDto.class);
+		return message;
+	}
+	
 }

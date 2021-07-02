@@ -1,7 +1,9 @@
 package com.project.one.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -111,6 +113,20 @@ public class ChatDaoImpl implements ChatDao {
 		}
 
 		return res;
+	}
+
+	@Override
+	public ChatDto isRoom(String member_id, String consult_id) {
+		ChatDto dto = null;
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("member_id", member_id);
+		map.put("consult_id", consult_id);
+		try {
+			dto = sqlSession.selectOne(NAMESPACE + "isRoom",map );
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return dto;
 	}
 
 }
