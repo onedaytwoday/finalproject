@@ -71,11 +71,11 @@ public class PaymentDaoImpl implements PaymentDao {
 	}
 
 	@Override
-	public int delete(int payment_no) {
+	public int delete(PaymentDto dto) {
 		int res = 0;
 		
 		try {
-			res = sqlSession.delete(NAMESPACE + "delete", payment_no);
+			res = sqlSession.delete(NAMESPACE + "delete", dto);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
