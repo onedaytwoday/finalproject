@@ -6,12 +6,13 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
-@Controller
+@RequestMapping("/chat")
 public class HandlerChats extends TextWebSocketHandler {
 	private Logger logger = LoggerFactory.getLogger(HandlerChats.class);
 
