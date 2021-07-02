@@ -19,20 +19,23 @@ import java.io.BufferedReader;
 
 public class SensSmsV2 {
 	public static void main(String[] args) {
-		String hostNameUrl = "https://sens.apigw.ntruss.com";		// 호스트 URL
-		String requestUrl = "sms/v2/services";						// 요청 URL
+		String hostNameUrl = "https://sens.apigw.ntruss.com/sms/v2";		// 호스트 URL
+		String requestUrl = "/sms/v2/services/";						// 요청 URL
 		String requestUrlType = "/messages";						// 요청 URL
-		String accessKey = "jbrtaEOGdQ09E1GmSqsM";										// 네이버클라우드플랫폼 API인증
-		String SecretKey = "cxbotWR85UrgDDlPU6078L0Ka5xzQPwGaODRZxCb";										// 2차인증용 Secret Key 
-		String serviceId ="ncp:sms:kr:269263696443:onedaytwoday";										// 프로젝트에 할당된 SMS서비스 ID???
+		String accessKey = "jbrtaEOGdQ09E1GmSqsM";							// 네이버클라우드플랫폼 API인증
+		String SecretKey = "cxbotWR85UrgDDlPU6078L0Ka5xzQPwGaODRZxCb";		// 2차인증용 Secret Key 
+		String serviceId ="ncp:sms:kr:269263696443:onedaytwoday";			// 프로젝트에 할당된 SMS서비스 ID???
 		String method = "POST";										// 요청 method
 		String timestamp = Long.toString(System.currentTimeMillis());
 		requestUrl += serviceId + requestUrlType;
 		
 		String apiUrl = hostNameUrl+requestUrl;
+		System.out.println("아래 url");
+		System.out.println(apiUrl);
+		System.out.println("-----------");	//여기까진 정상인거 같음....
+		
 		
 		//JSON 을 활용한 body data 생성
-		
 		JSONObject bodyJson = new JSONObject();
 		JSONObject toJson = new JSONObject();
 		
@@ -64,9 +67,9 @@ public class SensSmsV2 {
 			con.setDoOutput(true);
 			con.setDoInput(true);
 			con.setRequestProperty("content-type", "application/json");
-			con.setRequestProperty("x-ncp-apigw-timestamp", "timestamp");
-			con.setRequestProperty("x-ncp-iam-access-key", "accessKey");
-			con.setRequestProperty("x-ncp-apigw-signatrue-v2", makeSignature(requestUrl, timestamp, method, accessKey, SecretKey));
+			con.setRequestProperty("x-ncp-apigw-timestamp", timestamp);
+			con.setRequestProperty("x-ncp-iam-access-key", accessKey);
+			con.setRequestProperty("x-ncp-apigw-signature-v2", makeSignature(requestUrl, timestamp, method, accessKey, SecretKey));
 			con.setRequestMethod(method);
 			con.setDoOutput(true);
 			DataOutputStream wr = new DataOutputStream(con.getOutputStream());
@@ -129,14 +132,6 @@ public class SensSmsV2 {
 		}
 		return encodeBase64String;
 		
-		
-		
 	}
-	
-	
-	
-	
-		
-	
 	
 }
