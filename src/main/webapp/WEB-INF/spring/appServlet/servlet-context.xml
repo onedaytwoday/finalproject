@@ -43,8 +43,11 @@
 	<tx:annotation-driven />
 	<!-- websocket -->
 	<websocket:handlers>
-		<websocket:mapping handler="echoHandler" path="/echo"/>
-		<websocket:sockjs/>
+		<websocket:mapping handler="handlerChat" path="/chat"/>
+		    <websocket:handshake-interceptors>
+  				<beans:bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/>
+  			</websocket:handshake-interceptors>
+			<websocket:sockjs/>
 	</websocket:handlers>
-	<beans:bean id="echoHandler" class="com.project.one.util.EchoHandler"/>
+	<beans:bean id="handlerChat" class="com.project.one.util.HandlerChats"/>
 </beans:beans>
