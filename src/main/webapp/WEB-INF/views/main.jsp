@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -146,8 +147,10 @@ li {
 			<li><a href="#">수강후기포토</a></li>
 			<li><a href="chat.do">채팅</a></li>
 			
-			<!-- 관리자만 가능 -->
-			<li><a href="eventInsert.do">이벤트 등록</a></li>
+			<c:if test="${mDto.member_grade == '관리자' }">
+				<!-- 관리자만 가능 -->
+				<li><a href="eventInsert.do">이벤트 등록</a></li>				
+			</c:if>
 		</ul>
 
 	</header>
