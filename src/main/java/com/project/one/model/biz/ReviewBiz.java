@@ -18,4 +18,6 @@ public interface ReviewBiz {
 	public int update(ReviewDto dto);
 
 	public int delete(int review_no);
+
+	List<ReviewDto> avgList(int product_no);
 }

@@ -36,6 +36,8 @@
 				<tr><th colspan="4">-----------------상품이 없습니다-------------</th></tr>
 			</c:when>
 			<c:otherwise>
+				<c:set var="sum" value="0" />
+				<c:set var="cnt" value="0" />
 				<c:forEach items="${list }" var="dto">
 					<tr>
 						<td>${dto.product_no }</td>
@@ -44,7 +46,25 @@
 						<td>${dto.product_category }</td>
 						<td>${dto.product_name }</td>
 						<td>${dto.product_price } 원</td>
-						<td>평점</td>
+						<td>
+							<c:choose>
+								<c:when test="${empty rlist}">
+									리뷰없음
+								</c:when>
+								<c:otherwise>
+									<c:forEach items="${rlist }" var="rdto">
+										<c:set var="product_no" value="${dto.product_no }" />
+										<c:set var="review_no" value="${rdto.product_no }" />
+										<c:set var="rate" value="${rdto.review_rate }" />
+										<c:if test="${product_no eq review_no}">
+											<c:set var="sum" value="${sum + rate }" />
+											<c:set var="cnt" value="${cnt + 1 }" />
+										</c:if>
+									</c:forEach>
+									${sum/cnt }
+								</c:otherwise>
+							</c:choose>
+						</td>
 					</tr>
 				</c:forEach>
 			</c:otherwise>
