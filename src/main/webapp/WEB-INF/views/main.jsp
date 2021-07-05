@@ -144,7 +144,10 @@ li {
 			<li><a href="classList.do">클래스</a></li>
 			<li><a href="board_list.do?board_category=Q">상품문의</a></li>
 			<li><a href="#">수강후기포토</a></li>
-			<li><a href="chat.do">채팅</a>
+			<li><a href="chat.do">채팅</a></li>
+			
+			<!-- 관리자만 가능 -->
+			<li><a href="eventInsert.do">이벤트 등록</a></li>
 		</ul>
 
 	</header>

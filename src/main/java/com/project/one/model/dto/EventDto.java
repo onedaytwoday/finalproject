@@ -102,4 +102,11 @@ public class EventDto {
 		this.product_no = product_no;
 	}
 
+	@Override
+	public String toString() {
+		return "EventDto [event_no=" + event_no + ", event_title=" + event_title + ", event_desc=" + event_desc
+				+ ", event_start=" + event_start + ", event_end=" + event_end + ", event_noti=" + event_noti
+				+ ", member_id=" + member_id + ", class_no=" + class_no + ", product_no=" + product_no + "]";
+	}
+
 }
