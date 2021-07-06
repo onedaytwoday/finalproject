@@ -52,6 +52,7 @@
 			
 			$("#msgArea").append(str);
 		}
+	}
 		//채팅창에서 나간 경우
 		function onClose(evt){
 			var user = '${member_id}';
@@ -67,7 +68,7 @@
 		}
 		
 		
-	}
+	
 </script>
 </head>
 <body>

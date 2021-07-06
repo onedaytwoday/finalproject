@@ -28,16 +28,14 @@ public class ChatController {
 
 	
 	@RequestMapping(value="/chat.do", method = RequestMethod.GET)
-	public ModelAndView chat(ModelAndView mv , WebSocketSession session) {
-		mv.addObject("userid",session.getPrincipal().getName()); 
-		//로그인된 사용자?
-		return mv;
-	}
 	public String chat(Model model,String member_id, HttpServletRequest request, HttpServletResponse response,HttpSession session) {
-		
 		
 		return "view_chat";
 	
+	}
+	@RequestMapping("/tts.do")
+	public String tts() {
+		return "tts";
 	}
 
 	

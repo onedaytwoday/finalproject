@@ -17,12 +17,20 @@ public class ReviewBizImpl implements ReviewBiz {
 	@Override
 	public List<ReviewDto> selectList() {
 		return dao.selectList();
+	
+	}
+	
+	@Override
+	public List<ReviewDto> avgList(int product_no){
+		return dao.avgList(product_no);
 	}
 
 	@Override
 	public List<ReviewDto> selectListByUser(String member_id) {
 		return dao.selectListByUser(member_id);
 	}
+	
+	
 
 	@Override
 	public ReviewDto selectOne(int review_no) {
