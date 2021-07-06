@@ -19,7 +19,6 @@
         height: 300,
         lang: 'ko-KR',
         toolbar: [
-            // [groupName, [list of button]]
             ['Font Style', ['fontname']],
             ['style', ['bold', 'italic', 'underline']],
             ['font', ['strikethrough']],
@@ -56,7 +55,7 @@
 			</tr>
 			<tr>
 				<th>내용</th>
-				<td><div id="summernote"></div></td>
+				<td><textarea id="summernote" name="board_content"></textarea></td>
 			</tr>
 			
 			<tr>
