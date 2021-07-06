@@ -15,7 +15,7 @@ public interface PaymentDao {
 	
 	public int update(PaymentDto dto);
 	
-	public int delete(int payment_no);
+	public int delete(PaymentDto dto);
 	
 	public PaymentDto checkPaid(PaymentDto dto);
 }

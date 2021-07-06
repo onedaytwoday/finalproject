@@ -115,6 +115,7 @@ li {
 		<br>
 
 		<ul class="headernav">
+			<li><a href="send.do">send</a>
 			<li><a href="main.do"><img src="logo.png"></a></li>
 			<li><a href="main.do">Home</a></li>
 			<li><a href="board_list.do?board_category=N">공지사항</a></li>
