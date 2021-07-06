@@ -25,8 +25,13 @@ public class EventBizImpl implements EventBiz {
 	}
 
 	@Override
-	public int insert(EventDto dto) {
-		return dao.insert(dto);
+	public int insertEventClass(EventDto dto) {
+		return dao.insertEventClass(dto);
+	}
+	
+	@Override
+	public int insertEventProduct(EventDto dto) {
+		return dao.insertEventProduct(dto);
 	}
 
 	@Override
@@ -38,5 +43,6 @@ public class EventBizImpl implements EventBiz {
 	public int delete(int event_no) {
 		return dao.delete(event_no);
 	}
+
 
 }

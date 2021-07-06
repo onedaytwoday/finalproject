@@ -23,6 +23,11 @@ public class ClassBizImpl implements ClassBiz {
 	public ClassDto selectOne(int class_no) {
 		return dao.selectOne(class_no);
 	}
+	
+	@Override
+	public ClassDto selectOneByTitle(String class_title) {
+		return dao.selectOneByTitle(class_title);
+	}
 
 	@Override
 	public int insert(ClassDto dto) {

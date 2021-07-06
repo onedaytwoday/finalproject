@@ -15,10 +15,16 @@
 		WHERE EVENT_NO = #{event_no}
 	</select>
 	
-	<insert id="insert" parameterType="eventDto">
+	<insert id="insertEventClass" parameterType="eventDto">
 		INSERT INTO EVENT
-		VALUES(#{event_no},#{event_title},#{event_desc},#{event_start},#{event_end},#{event_noti},#{member_id},
-		#{class_no},#{product_no})
+		VALUES(EVENT_NO_SEQ.NEXTVAL, #{event_title}, #{event_desc}, #{event_start}, #{event_end}, #{event_noti},#{member_id},
+		#{class_no}, NULL)
+	</insert>
+	
+	<insert id="insertEventProduct" parameterType="eventDto">
+		INSERT INTO EVENT
+		VALUES(EVENT_NO_SEQ.NEXTVAL, #{event_title}, #{event_desc}, #{event_start}, #{event_end}, #{event_noti},#{member_id},
+		NULL, #{product_no})
 	</insert>
 	
 	<delete id="delete" parameterType="int">

@@ -22,4 +22,5 @@
 		DELETE FROM CHATTING 
 		WHERE CHATTING_NO = #{chatting_no}
 	</delete>
+
 </mapper>

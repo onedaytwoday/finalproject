@@ -12,6 +12,8 @@ public interface ClassDao {
 	
 	public ClassDto selectOne(int class_no);
 	
+	public ClassDto selectOneByTitle(String class_title);
+	
 	public int insert(ClassDto dto);
 	
 	public int update(ClassDto dto);

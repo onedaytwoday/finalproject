@@ -42,13 +42,27 @@ public class EventDaoImpl implements EventDao {
 
 		return dto;
 	}
-
+	
 	@Override
-	public int insert(EventDto dto) {
+	public int insertEventClass(EventDto dto) {
 		int res = 0;
 
 		try {
-			res = sqlSession.insert(NAMESPACE + "insert", dto);
+			res = sqlSession.insert(NAMESPACE + "insertEventClass", dto);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return res;
+	}
+
+	@Override
+	public int insertEventProduct(EventDto dto) {
+		int res = 0;
+
+		try {
+			res = sqlSession.insert(NAMESPACE + "insertEventProduct", dto);
 
 		} catch (Exception e) {
 			e.printStackTrace();

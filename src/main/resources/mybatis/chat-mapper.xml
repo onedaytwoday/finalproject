@@ -22,4 +22,9 @@
 		DELETE FROM CHAT 
 		WHERE CHAT_NO = #{chat_no}
 	</delete>
+	<select id="isRoom" parameterType="hashMap" resultType="chatDto">
+		SELECT CHAT_NO, MEMBER_ID, CONSULT_ID, CHAT_CONTENT, CHAT_DATE
+		FROM CHAT
+		WHERE MEMBER_ID = #{member_id} AND CONSULT_ID = #{consult_id}
+	</select>
 </mapper>

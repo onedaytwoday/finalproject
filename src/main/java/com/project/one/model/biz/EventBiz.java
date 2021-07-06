@@ -9,7 +9,9 @@ public interface EventBiz {
 
 	public EventDto selectOne(int event_no);
 
-	public int insert(EventDto dto);
+	public int insertEventClass(EventDto dto);
+	
+	public int insertEventProduct(EventDto dto);
 
 	public int update(EventDto dto);
 

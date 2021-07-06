@@ -7,7 +7,7 @@ public class ClassDto {
 	private String class_loc;
 	private String class_category;
 	private int class_member_num;
-	private double class_price;
+	private int class_price;
 	private int class_sale;
 	private String member_id;
 
@@ -15,7 +15,7 @@ public class ClassDto {
 	}
 
 	public ClassDto(int class_no, String class_title, String class_desc, String class_loc, String class_category,
-			int class_member_num, double class_price, int class_sale, String member_id) {
+			int class_member_num, int class_price, int class_sale, String member_id) {
 		this.class_no = class_no;
 		this.class_title = class_title;
 		this.class_desc = class_desc;
@@ -75,11 +75,11 @@ public class ClassDto {
 		this.class_member_num = class_member_num;
 	}
 
-	public double getClass_price() {
+	public int getClass_price() {
 		return class_price;
 	}
 
-	public void setClass_price(double class_price) {
+	public void setClass_price(int class_price) {
 		this.class_price = class_price;
 	}
 
