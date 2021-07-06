@@ -1,0 +1,72 @@
+@charset "UTF-8";
+
+.find {
+	position: absolute;
+	width: 50%;
+	height: 50%;
+	left: 25%;
+	top: 10%;
+}
+
+h2 {
+	text-align: center;
+	margin-top: 20px;
+}
+
+#error {
+	text-align: center;
+	margin-top: 10px;
+}
+
+.findIdPw {
+	display: flex;
+	flex-direction: column;
+	margin-top: 30px;
+	margin-bottom: 20px;
+	width: 50%;
+	margin-left: auto;
+	margin-right: auto;
+	border-radius: 10px;
+	border: 1px solid lightgray;
+}
+
+span {
+	padding: 10px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+}
+
+input {
+	font-size: 16px;
+	margin: 15px;
+	width: 50%;
+	height: 30px;
+	border-radius: 10px;
+	padding-left: 10px;
+	border: 1px solid lightgray;
+	outline: none;
+}
+
+.row {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+button {
+	width: 30%;
+	margin-left: 20px;
+	font-size: 12px;
+	height: 30px;
+	border: 1px solid lightgray;
+	border-radius: 10px;
+}
+
+#msg, #msg_pw{
+	padding-left: 15px;
+	padding-bottom: 10px;
+}
+
+#changePw {
+	display: none;
+}
