@@ -33,6 +33,10 @@ public class ChatController {
 		return "view_chat";
 	
 	}
+	@RequestMapping("/tts.do")
+	public String tts() {
+		return "tts";
+	}
 
 	
 }
