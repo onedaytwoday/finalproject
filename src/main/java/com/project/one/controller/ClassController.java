@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.project.one.model.biz.ClassBiz;
 import com.project.one.model.biz.PaymentBiz;
+import com.project.one.model.biz.ReviewBiz;
 import com.project.one.model.dto.ClassDto;
 import com.project.one.model.dto.MemberDto;
 import com.project.one.model.dto.PaymentDto;
@@ -21,6 +22,9 @@ public class ClassController {
 	
 	@Autowired
 	private PaymentBiz pBiz;
+	
+	@Autowired
+	private ReviewBiz rbiz;
 	
 	@RequestMapping("/classList.do")
 	public String class_list(Model model) {
@@ -50,8 +54,8 @@ public class ClassController {
 		
 		
 		model.addAttribute("dto", cBiz.selectOne(class_no));
+		model.addAttribute("rdto",rbiz.avgList(class_no));
 		
-				
 		return "class_detail";
 	}
 	
