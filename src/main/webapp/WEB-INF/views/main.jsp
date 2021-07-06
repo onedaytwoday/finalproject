@@ -159,6 +159,10 @@ li {
     <div class="tts">
     	<a href="tts.do">tts</a>
     </div>
+    
+    <div>
+    	<a href="notification.do">notification</a>
+    </div>
 <!-- 채널톡 -->
 <script>
   (function() {
