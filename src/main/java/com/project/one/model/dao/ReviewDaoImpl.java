@@ -28,6 +28,21 @@ public class ReviewDaoImpl implements ReviewDao {
 
 		return list;
 	}
+	
+	@Override
+	public List<ReviewDto> avgList(int product_no) {
+		List<ReviewDto> list = new ArrayList<ReviewDto>();
+
+		try {
+			list = sqlSession.selectList(NAMESPACE + "avgList",product_no);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return list;
+	}
+	
 
 	@Override
 	public List<ReviewDto> selectListByUser(String member_id) {
