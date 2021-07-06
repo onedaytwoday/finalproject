@@ -111,6 +111,53 @@ public class MemberController {
 		
 		return "redirect:signup.do?mDto="+mDto;
 	}
+	
+	
+	// 아이디 / 비밀번호 찾기
+	@RequestMapping("/findIdPwForm.do")
+	public String find_id_pw_form() {
+		return "find_id_pw";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/findIdPw.do", method=RequestMethod.POST)
+	public  Map<String, String> find_id(@RequestBody MemberDto dto) {
+		if(dto.getMember_id() != null) {
+			dto.setMember_name("");
+		} else {
+			dto.setMember_id("");
+		}
+
+		MemberDto checkUser = biz.findIdPw(dto);
+		Map<String, String> map = new HashMap<>();
+
+		if(checkUser != null) {
+			//TODO: 문자 인증번호 보내기 기능 추가 필요
+			map.put("msg", "1111");
+			map.put("member_id", checkUser.getMember_id());
+			
+		} else {
+			map.put("msg", "존재하지 않는 회원입니다");
+		}
+				
+		return map;
+	}
+	
+	@RequestMapping("/updatePw.do")
+	public String update_pw(MemberDto dto) {
+		if(biz.updatePw(dto) > 0) {
+			// TODO: 비밀번호 암호화 필요
+			
+			return "redirect:loginform.do";
+		}
+		
+		
+		return "redirect:findIdPwForm.do";
+	}
+	
+	
+	
+	
 	//네이버로그인
 	//로그인 첫 화면 요청 메소드
 	@RequestMapping(value = "/loginform.do", method = { RequestMethod.GET, RequestMethod.POST })

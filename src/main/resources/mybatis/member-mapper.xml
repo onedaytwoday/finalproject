@@ -22,12 +22,25 @@
 		WHERE MEMBER_ID = #{member_id}
 	</select>
 	
+	<select id="findIdPw" resultType="memberDto">
+		SELECT MEMBER_ID, MEMBER_PW, MEMBER_NAME, MEMBER_NICNAME, MEMBER_EMAIL, MEMBER_PHONE,
+		MEMBER_ADDR , MEMBER_IP, MEMBER_GRADE , MEMBER_JOIN , MEMBER_NOTIFY, MEMBER_FACE, MEMBER_AUTO
+		FROM MEMBER
+		WHERE (MEMBER_PHONE = #{member_phone} AND MEMBER_NAME = #{member_name}) OR (MEMBER_PHONE = #{member_phone} AND MEMBER_ID = #{member_id})
+	</select>
+	
 	<insert id="insert" parameterType="memberDto">
 		INSERT INTO MEMBER
 		VALUES(#{member_id},#{member_pw},#{member_name},#{member_nicname},#{member_email},#{member_phone},#{member_addr},
 		#{member_ip},#{member_grade},#{member_join},#{member_notify},#{member_face},#{member_auto})
 	
 	</insert>
+	
+	<update id="updatePw" parameterType="memberDto">
+		UPDATE MEMBER
+		SET MEMBER_PW = #{member_pw}
+		WHERE MEMBER_ID = #{member_id} AND MEMBER_PHONE = #{member_phone}
+	</update>
 	
 	<delete id="delete" parameterType="String">
 		UPDATE MEMBER 

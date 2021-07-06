@@ -74,6 +74,11 @@
 			  <input type="button" value="login" onclick="login();" />
 			  <input type="button" value="register" onclick="location.href='signup.do'" />
 			</div>
+			
+			<div>
+				<a href="findIdPwForm.do">아이디/비밀번호 찾기</a>
+			</div>
+			
 			<div class="text-center">
 		 	  <a href="${naverUrl}"><img width="150" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png" /></a>
 		 	  <a href="${kakaoUrl}"><img width="150" src="" />카카오로그인</a>

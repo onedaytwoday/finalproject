@@ -48,6 +48,11 @@ public class MemberBizImpl implements MemberBiz {
 	public int update(MemberDto dto) {
 		return dao.update(dto);
 	}
+	
+	@Override
+	public int updatePw(MemberDto dto) {
+		return dao.updatePw(dto);
+	}
 
 	@Override
 	public int delete(String member_id) {
