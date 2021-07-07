@@ -54,14 +54,23 @@ public class MemberController {
 	@RequestMapping(value="/ajaxlogin.do",method=RequestMethod.POST)
 	public Map<String, Boolean> ajaxLogin(@RequestBody MemberDto dto, HttpSession session){
 		//logger.info("[Controller] ajaxlogin.do");
+		
 		MemberDto mDto = biz.login(dto);
 		boolean chk = false;
+		boolean ip_chk = false;
+		
 		if(mDto != null) {
 			chk = true;
 			session.setAttribute("mDto", mDto);
+			
+			if(mDto.getMember_notify().equals("N") || dto.getMember_ip().equals(mDto.getMember_ip())) {
+				ip_chk = true;
+			}
 		}
 		Map<String, Boolean> map = new HashMap<String, Boolean>();
 		map.put("chk", chk);
+		map.put("ip_chk", ip_chk);
+		
 		return map;
 		
 	}	
@@ -101,7 +110,7 @@ public class MemberController {
 			return "redirect:loginform.do";
 		}
 		
-		return "redirect:signup.do?mDto="+dto;
+		return "redirect:signup.do";
 	}
 	@RequestMapping("/sns_signupRes.do")
 	public String sns_signupRes(MemberDto mDto, HttpSession session) {
