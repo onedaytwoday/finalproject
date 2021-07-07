@@ -145,6 +145,7 @@ li {
 			<li><a href="board_qna_list.do?nowPage=1">상품문의</a></li>
 			<li><a href="#">수강후기포토</a></li>
 			<li><a href="chat.do">채팅</a></li>
+			<li><a href="map.do">지도</a>
 			
 			<c:if test="${mDto.member_grade == '관리자' }">
 				<!-- 관리자만 가능 -->
