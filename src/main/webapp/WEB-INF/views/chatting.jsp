@@ -63,7 +63,7 @@ vertical-align: text-bottom;
 
 </head>
 <body>
-
+<!-- 모르는 부분1 : 참고블로그에선 memberController에 sessionattributes 어노테이션을 써서 loginMember라는 걸로 아이디 비교하는데 우리 프로젝트에 어떻게 적용해야할지? -->
 <div id="chat-containerK" class="border border-secondary">
 
 	<div class="chatWrap">
@@ -146,7 +146,7 @@ function moveDown(){
 	$('#alertK').css('display','none');
 	
 }
-
+// 모르는 부분2 : 중간에 vo를 어디서 가져오는 건지? 
 $(document).ready(function() {
 	//시작할때 스크롤 내리기
 	$(".chatcontent").scrollTop($(".chatcontent")[0].scrollHeight);
