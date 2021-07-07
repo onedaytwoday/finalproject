@@ -1,13 +1,14 @@
 package com.project.one.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.project.one.model.dto.ChatDto;
 
 public interface ChatDao {
 	String NAMESPACE = "chat.";
 	
-	public List<ChatDto> selectList();
+	public List<ChatDto> selectList(Map<String, Object> map);
 	
 	// 회원별 채팅방 목록 조회
 	public List<ChatDto> selectListByUser(String member_id);
