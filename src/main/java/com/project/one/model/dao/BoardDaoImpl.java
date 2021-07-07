@@ -113,5 +113,33 @@ public class BoardDaoImpl implements BoardDao {
 		return res;
 	}
 
+	@Override
+	public int qna_count() {
+		int res = 0;
+		
+		try {
+			res = sqlSession.delete(NAMESPACE + "qna_count");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+
+	@Override
+	public int notice_count() {
+		int res = 0;
+		
+		try {
+			res = sqlSession.delete(NAMESPACE + "notice_count");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+
 	
 }

@@ -48,6 +48,16 @@ public class BoardBizImpl implements BoardBiz {
 		return dao.delete(board_no);
 	}
 
+	@Override
+	public int qna_count() {
+		return dao.qna_count();
+	}
+
+	@Override
+	public int notice_count() {
+		return dao.notice_count();
+	}
+
 
 
 }

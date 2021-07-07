@@ -18,5 +18,8 @@ public interface BoardBiz {
 	public int update(BoardDto dto);
 
 	public int delete(int board_no);
-
+	
+	public int qna_count();
+	
+	public int notice_count();
 }

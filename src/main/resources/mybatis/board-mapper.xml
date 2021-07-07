@@ -52,4 +52,10 @@
 		DELETE FROM BOARD
 		WHERE BOARD_NO = #{board_no}
 	</delete>
+	<select id="qna_count" resultType="int">
+		SELECT COUNT(*) FROM BOARD WHERE BOARD_CATEGORY = 'Q'
+	</select>
+	<select id="notice_count" resultType="int">
+		SELECT COUNT(*) FROM BOARD WHERE BOARD_CATEGORY = 'N'
+	</select>
 </mapper>

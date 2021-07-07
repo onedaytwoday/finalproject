@@ -21,9 +21,13 @@ public class BoardController {
 	@RequestMapping("/board_list.do")
 	public String board_notice_list(Model model, String board_category) {
 		if(board_category.equals("N")) {
+			int count = biz.notice_count();
+			System.out.println(count);
 			model.addAttribute("list", biz.selectList(board_category));
 			return "board_notice";
 		}else {
+			int count = biz.qna_count();
+			System.out.println(count);
 			model.addAttribute("list",biz.selectList(board_category));
 			return "board_qna";
 		}
