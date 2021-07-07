@@ -96,61 +96,6 @@ li {
 </head>
 <body>
 
-	<!-- 헤더 시작 -->
-	<header>
-		<ul class="login">
-			<li><a href="login.do">로그인</a></li>
-			<li><a href="signup.do">회원가입</a></li>
-		</ul>
-		<br>
-
-		<ul class="headernav">
-			<li id="logo"><a href="index.jsp"><img src="logo.png"></a></li>
-			<li><a href="index.jsp">Home</a></li>
-			<li><a href="#">공지사항</a></li>
-			<li>
-				<select id="class">
-						<option value="">클래스</option>
-						<option value="cate01">카테고리1</option>
-						<option value="cate02">카테고리2</option>
-						<option value="cate03">카테고리3</option>
-				</select>
-			</li>
-			<li>
-				<select id="shop">
-						<option value="">쇼핑</option>
-						<option value="cate01">카테고리1</option>
-						<option value="cate02">카테고리2</option>
-						<option value="cate03">카테고리3</option>
-				</select>
-			</li>
-			<li><a href="#">상품문의</a></li>
-			<li><a href="#">수강후기포토</a></li>
-		</ul>
-	</header>
-	<!-- 헤더 끝 -->
-	
-	
-	
-	<!-- 메인 바디 시작 -->
-	<main>
-	
-	
-	
-	</main>
-	<!-- 메인 바디 끝 -->
-	
-	
-	
-	
-	<!-- 하단 시작 -->
-	<footer>
-	
-	
-	</footer>
-	<!-- 하단 끝 -->
-	
-
 <jsp:forward page="WEB-INF/views/main.jsp"></jsp:forward>
 
 </body>

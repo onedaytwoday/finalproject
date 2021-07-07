@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.project.one.model.dto.BoardDto;
+import com.project.one.model.dto.PagingDto;
 
 @Repository
 public class BoardDaoImpl implements BoardDao {
@@ -16,11 +17,11 @@ public class BoardDaoImpl implements BoardDao {
 	private SqlSessionTemplate sqlSession;
 	
 	@Override
-	public List<BoardDto> selectList(String board_category) {
+	public List<BoardDto> board_notice_list(PagingDto Pdto) {
 		List<BoardDto> list = new ArrayList<BoardDto>();
 		
 		try {
-			list = sqlSession.selectList(NAMESPACE + "selectList", board_category);
+			list = sqlSession.selectList(NAMESPACE + "board_notice_list", Pdto);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -29,6 +30,19 @@ public class BoardDaoImpl implements BoardDao {
 		return list;
 	}
 
+	@Override
+	public List<BoardDto> board_qna_list(PagingDto Pdto) {
+		List<BoardDto> list = new ArrayList<BoardDto>();
+		
+		try {
+			list = sqlSession.selectList(NAMESPACE + "board_qna_list", Pdto);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
 	@Override
 	public BoardDto selectOne(int board_no) {
 		BoardDto dto = null;
@@ -118,7 +132,7 @@ public class BoardDaoImpl implements BoardDao {
 		int res = 0;
 		
 		try {
-			res = sqlSession.delete(NAMESPACE + "qna_count");
+			res = sqlSession.selectOne(NAMESPACE + "qna_count");
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -132,7 +146,7 @@ public class BoardDaoImpl implements BoardDao {
 		int res = 0;
 		
 		try {
-			res = sqlSession.delete(NAMESPACE + "notice_count");
+			res = sqlSession.selectOne(NAMESPACE + "notice_count");
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -140,6 +154,8 @@ public class BoardDaoImpl implements BoardDao {
 		
 		return res;
 	}
+
+	
 
 	
 }

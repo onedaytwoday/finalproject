@@ -69,11 +69,12 @@ public class MemberController {
 	//회원가입
 	@RequestMapping("/signup.do")
 	public String signupForm(MemberDto dto, HttpSession session) {
-		System.out.println(dto.getMember_id());
-		MemberDto mDto = biz.selectOne(dto.getMember_id());
-		if(mDto!=null) {
-			session.setAttribute("mDto", mDto);
-			return "main";
+		if(dto.getMember_id()!=null) {
+			MemberDto mDto = biz.selectOne(dto.getMember_id());
+			if(mDto!=null) {
+				session.setAttribute("mDto", mDto);
+				return "main";
+			}	
 		}
 		return "signup";
 	}

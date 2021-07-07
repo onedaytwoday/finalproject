@@ -50,5 +50,16 @@
 			</td>
 		</tr>
 	</table>
+	
+					<jsp:include page="board_paging.jsp">
+						<jsp:param value="Q" name="board_category" />
+						<jsp:param value="${Pdto.nowBlock}" name="nowBlock" />
+						<jsp:param value="${Pdto.blockBegin }" name="blockBegin" />
+						<jsp:param value="${Pdto.blockEnd }" name="blockEnd" />
+						<jsp:param value="${Pdto.nowPage}" name="nowPage" />
+						<jsp:param value="${Pdto.blockBegin}" name="blockBegin" />
+						<jsp:param value="${Pdto.blockEnd}" name="blockEnd" />
+						<jsp:param value="${Pdto.totalBlock}" name="totalBlock" />
+					</jsp:include>
 </body>
 </html>

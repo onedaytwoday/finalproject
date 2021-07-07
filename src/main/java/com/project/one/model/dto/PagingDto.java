@@ -1,6 +1,6 @@
-package com.project.one.util;
+package com.project.one.model.dto;
 
-public class Paging {
+public class PagingDto {
 	// 한 페이지에 출력할 게시글 수
 	public static final int DISPLAY_BOARD = 10;
 	// 한 블록에 출력할 페이지 수
@@ -22,11 +22,11 @@ public class Paging {
 	private int blockBegin; // 현재 블록의 시작 페이지 번호
 	private int blockEnd; // 현재 블록의 마지막 페이지 번호
 
-	public Paging() {
+	public PagingDto() {
 	}
 
 	// 생성자
-	public Paging(int count, int nowPage) {
+	public PagingDto(int count, int nowPage) {
 		nowBlock = 1; // 현재 페이지 블록
 		this.nowPage = nowPage; // 현재 페이지
 		setTotalPage(count); // 전체 페이지 수 구하기
