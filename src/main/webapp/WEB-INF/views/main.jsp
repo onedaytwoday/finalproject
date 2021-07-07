@@ -56,8 +56,9 @@ li {
 </style>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <script type="text/javascript">
-	$(document).ready(function(){
+	$(document).ready(function(){		
 		$('.iconImg').click(function(){
     		window.open('http://localhost:8787/one/chat.do','채팅', 'width=300px,height=500px,scrollbars=yes');
     	});
@@ -160,9 +161,6 @@ li {
     	<a href="tts.do">tts</a>
     </div>
     
-    <div>
-    	<a href="notification.do">notification</a>
-    </div>
 <!-- 채널톡 -->
 <script>
   (function() {
