@@ -1,6 +1,7 @@
 package com.project.one.model.biz;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,8 +16,9 @@ public class ChatBizImpl implements ChatBiz {
 	private ChatDao dao;
 	
 	@Override
-	public List<ChatDto> selectList() {
-		return dao.selectList();
+	public List<ChatDto> selectList(Map<String, Object> map) {
+		List<ChatDto> list = dao.selectList(map);
+		return list;
 	}
 
 	@Override

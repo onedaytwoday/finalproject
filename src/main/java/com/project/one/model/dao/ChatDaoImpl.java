@@ -18,17 +18,9 @@ public class ChatDaoImpl implements ChatDao {
 	private SqlSessionTemplate sqlSession;
 
 	@Override
-	public List<ChatDto> selectList() {
-		List<ChatDto> list = new ArrayList<ChatDto>();
-
-		try {
-			list = sqlSession.selectList(NAMESPACE + "selectList");
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return list;
+	public List<ChatDto> selectList(Map<String, Object> map) {
+	
+		return sqlSession.selectList(NAMESPACE+"chatlist", map);
 	}
 
 	@Override
