@@ -60,7 +60,7 @@ function checkUserId(){
 			data: JSON.stringify(checkUser), 
 			contentType: "application/json",
 			success: function(result) {
-				$("#msg_pw").text("인증번호 ", result.msg);				
+				$("#msg_pw").text(`인증번호 : ${result.msg}`);				
 				confirm_num = result.msg;
 			},
 			error: function(msg) {
