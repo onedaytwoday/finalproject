@@ -4,7 +4,7 @@ public class ProductDto {
 	private int product_no;
 	private String product_name;
 	private String product_category;
-	private double product_price;
+	private int product_price;
 	private String product_desc;
 	private String product_loc;
 	private String product_del;
@@ -13,7 +13,7 @@ public class ProductDto {
 	public ProductDto() {
 	}
 
-	public ProductDto(int product_no, String product_name, String product_category, double product_price,
+	public ProductDto(int product_no, String product_name, String product_category, int product_price,
 			String product_desc, String product_loc, String product_del, int product_sale) {
 		super();
 		this.product_no = product_no;
@@ -26,7 +26,7 @@ public class ProductDto {
 		this.product_sale = product_sale;
 	}
 
-	public long getProduct_no() {
+	public int getProduct_no() {
 		return product_no;
 	}
 
@@ -50,11 +50,11 @@ public class ProductDto {
 		this.product_category = product_category;
 	}
 
-	public double getProduct_price() {
+	public int getProduct_price() {
 		return product_price;
 	}
 
-	public void setProduct_price(double product_price) {
+	public void setProduct_price(int product_price) {
 		this.product_price = product_price;
 	}
 
@@ -88,6 +88,14 @@ public class ProductDto {
 
 	public void setProduct_sale(int product_sale) {
 		this.product_sale = product_sale;
+	}
+
+	@Override
+	public String toString() {
+		return "ProductDto [product_no=" + product_no + ", product_name=" + product_name + ", product_category="
+				+ product_category + ", product_price=" + product_price + ", product_desc=" + product_desc
+				+ ", product_loc=" + product_loc + ", product_del=" + product_del + ", product_sale=" + product_sale
+				+ "]";
 	}
 	
 }

@@ -14,6 +14,7 @@
 	<typeAlias type="com.project.one.model.dto.ChattingDto" alias="chattingDto" />
 	<typeAlias type="com.project.one.model.dto.ChatDto" alias="chatDto" />
 	<typeAlias type="com.project.one.model.dto.DetailDto" alias="detailDto" />
+	<typeAlias type="com.project.one.model.dto.PagingDto" alias="pagingDto" />
 	</typeAliases>
 	
 	<!-- resources : src/main/resources와 연결됨 -->

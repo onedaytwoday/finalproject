@@ -6,6 +6,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<!-- Boostrap Icon -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
 <style type="text/css">
 header{
 	border: 1px solid skyblue;
@@ -109,6 +113,7 @@ li {
 	%>
 		<h1>${mDto.member_id }님 환영합니다.</h1>
 		<ul class="login">
+			<li><a href="basket.do"><i class="bi bi-basket" style="font-size: 2rem; cursor:pointer;"></i></a></li>
 			<li><a href="logout.do">로그아웃</a>
 		</ul>
 	<%
@@ -124,7 +129,7 @@ li {
 		<ul class="headernav">
 			<li><a href="main.do"><img src="logo.png"></a></li>
 			<li><a href="main.do">Home</a></li>
-			<li><a href="board_list.do?board_category=N">공지사항</a></li>
+			<li><a href="board_notice_list.do?nowPage=1">공지사항</a></li>
 			<li>
 				<select id="class">
 						<option value="">클래스</option>
@@ -143,9 +148,10 @@ li {
 			</li>
 			<li><a href="classInsert.do">클래스 등록</a></li>
 			<li><a href="classList.do">클래스</a></li>
-			<li><a href="board_list.do?board_category=Q">상품문의</a></li>
+			<li><a href="board_qna_list.do?nowPage=1">상품문의</a></li>
 			<li><a href="#">수강후기포토</a></li>
 			<li><a href="chat.do">채팅</a></li>
+			<li><a href="map.do">지도</a>
 			
 			<c:if test="${mDto.member_grade == '관리자' }">
 				<!-- 관리자만 가능 -->

@@ -13,8 +13,8 @@ public class BasketBizImpl implements BasketBiz {
 	private BasketDao dao;
 	
 	@Override
-	public BasketDto selectOne(int basket_no) {
-		return dao.selectOne(basket_no);
+	public BasketDto selectOne(BasketDto dto) {
+		return dao.selectOne(dto);
 	}
 
 	@Override

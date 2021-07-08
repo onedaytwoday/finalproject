@@ -13,17 +13,17 @@ public class BasketDaoImpl implements BasketDao {
 	private SqlSessionTemplate sqlSession;
 	
 	@Override
-	public BasketDto selectOne(int basket_no) {
-		BasketDto dto = null;
+	public BasketDto selectOne(BasketDto dto) {
+		BasketDto bDto = null;
 		
 		try {
-			dto = sqlSession.selectOne(NAMESPACE + "selectOne", basket_no);
+			bDto = sqlSession.selectOne(NAMESPACE + "selectOne", dto);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		return dto;
+		return bDto;
 	}
 
 	@Override

@@ -3,7 +3,7 @@ package com.project.one.model.biz;
 import com.project.one.model.dto.BasketDto;
 
 public interface BasketBiz {
-	public BasketDto selectOne(int basket_no);
+	public BasketDto selectOne(BasketDto dto);
 
 	public int insert(BasketDto dto);
 
