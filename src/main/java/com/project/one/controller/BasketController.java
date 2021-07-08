@@ -1,18 +1,22 @@
 package com.project.one.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.one.model.biz.BasketBiz;
+import com.project.one.model.biz.ProductBiz;
 import com.project.one.model.dto.BasketDto;
 import com.project.one.model.dto.MemberDto;
 import com.project.one.model.dto.ProductDto;
@@ -23,10 +27,24 @@ public class BasketController {
 	private static MemberDto mDto;
 	
 	@Autowired
-	private BasketBiz biz;
+	private BasketBiz bBiz;
+	
+	@Autowired
+	private ProductBiz pBiz;
 	
 	@RequestMapping("/basket.do")
-	public String cart() {
+	public String basket(Model model, HttpSession session) {
+		mDto = (MemberDto) session.getAttribute("mDto");
+		List<BasketDto> bList = bBiz.selectList(mDto.getMember_id());
+		List<ProductDto> pList = new ArrayList<>();
+		
+		for(BasketDto bDto : bList) {
+			ProductDto pDto = pBiz.selectOne(bDto.getProduct_no());
+			pList.add(pDto);
+			
+		}
+		model.addAttribute("bList", bList);
+		model.addAttribute("pList", pList);
 		
 		return "basket";
 	}
@@ -41,13 +59,13 @@ public class BasketController {
 		bDto.setProduct_no(pDto.getProduct_no());
 		bDto.setMember_id(mDto.getMember_id());
 		
-		BasketDto inBDto = biz.selectOne(bDto);
+		BasketDto inBDto = bBiz.selectOne(bDto);
 		
 		// 이미 장바구니에 있는 상품일 경우
 		if(inBDto != null) {
 			bDto = new BasketDto(inBDto.getBasket_no(), (inBDto.getBasket_num() + 1), (inBDto.getBasket_price() + pDto.getProduct_price()), pDto.getProduct_no(), mDto.getMember_id());
 			
-			if(biz.update(bDto) > 0) {
+			if(bBiz.update(bDto) > 0) {
 				map.put("result", "성공");
 			} else {
 				map.put("result", "실패");
@@ -57,7 +75,7 @@ public class BasketController {
 			// 장바구니에 없는 상품일 경우			
 			bDto = new BasketDto(0, 1, pDto.getProduct_price(), pDto.getProduct_no(), mDto.getMember_id());
 			
-			if(biz.insert(bDto) > 0) {
+			if(bBiz.insert(bDto) > 0) {
 				map.put("result", "성공");		
 			} else {
 				map.put("result", "실패");
@@ -65,6 +83,34 @@ public class BasketController {
 		}
 		
 		return map;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/updateBasket.do", method=RequestMethod.POST)
+	public Map<String, String> updateBasket(@RequestBody BasketDto dto, HttpSession session) {
+		mDto = (MemberDto) session.getAttribute("mDto");
+		dto.setMember_id(mDto.getMember_id());
+
+		Map<String, String> map = new HashMap<String, String>();
+		
+		if(bBiz.update(dto) > 0) {
+			map.put("result", "성공");
+		} else {
+			map.put("result", "실패");
+		}
+		
+		return map;
+	}
+	
+	@RequestMapping("/deleteBasket.do")
+	public String deleteBasket(BasketDto dto, HttpSession session) {
+		mDto = (MemberDto) session.getAttribute("mDto");
+		dto.setMember_id(mDto.getMember_id());
+		System.out.println(dto);
+		
+		bBiz.delete(dto);
+		
+		return "redirect:basket.do";
 	}
 	
 }

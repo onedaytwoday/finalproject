@@ -49,7 +49,7 @@
 			</tr>
 			<tr>
 				<th>상품 상세 설명</th>
-				<td><textarea name="product_desc" rows="10" cols="60" readonly="readonly"></textarea></td>
+				<td><textarea name="product_desc" rows="10" cols="60"></textarea></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="right">
