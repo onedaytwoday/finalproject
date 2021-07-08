@@ -15,10 +15,10 @@
 		WHERE FILE_NUM = #{file_num}
 	</select>
 	
-	<insert id="insert" parameterType="fileTableDto">
+	<insert id="class_insert" parameterType="fileTableDto">
 		INSERT INTO FILE_TABLE
-		VALUES(#{file_num},#{file_path},#{file_ori_name},#{file_new_name},#{file_type},#{file_date},#{file_size},
-		#{member_id},#{product_no},#{class_no},#{review_no},#{event_no})	
+		VALUES(FILE_NUM_SEQ.NEXTVAL,#{file_path},#{file_ori_name},#{file_new_name},#{file_type},SYSDATE,#{file_size},
+		null,null,#{class_no},null,null)	
 	</insert>
 	
 	<delete id="delete" parameterType="int">

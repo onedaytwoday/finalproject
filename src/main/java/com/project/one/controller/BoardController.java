@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.project.one.model.biz.BoardBiz;
 import com.project.one.model.dto.BoardDto;
+import com.project.one.model.dto.PagingDto;
 
 @Controller
 public class BoardController {
@@ -18,19 +19,21 @@ public class BoardController {
 	@Autowired
 	private BoardBiz biz;
 	
-	@RequestMapping("/board_list.do")
-	public String board_notice_list(Model model, String board_category) {
-		if(board_category.equals("N")) {
-			int count = biz.notice_count();
-			System.out.println(count);
-			model.addAttribute("list", biz.selectList(board_category));
-			return "board_notice";
-		}else {
-			int count = biz.qna_count();
-			System.out.println(count);
-			model.addAttribute("list",biz.selectList(board_category));
-			return "board_qna";
-		}
+	@RequestMapping("/board_notice_list.do")
+	public String board_notice_list(Model model, int nowPage) {
+		int count = biz.notice_count();
+		PagingDto Pdto = new PagingDto(count, nowPage);
+		model.addAttribute("list", biz.board_notice_list(Pdto));
+		model.addAttribute("Pdto", Pdto);
+		return "board_notice";
+	}
+	@RequestMapping("/board_qna_list.do")
+	public String board_qna_list(Model model, int nowPage) {
+		int count = biz.qna_count();
+		PagingDto Pdto = new PagingDto(count, nowPage);
+		model.addAttribute("list", biz.board_qna_list(Pdto));
+		model.addAttribute("Pdto", Pdto);
+		return "board_qna";
 	}
 	
 	@RequestMapping("/board_insertform.do")

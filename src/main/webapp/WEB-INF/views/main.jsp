@@ -56,8 +56,9 @@ li {
 </style>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <script type="text/javascript">
-	$(document).ready(function(){
+	$(document).ready(function(){		
 		$('.iconImg').click(function(){
     		window.open('http://localhost:8787/one/chat.do','채팅', 'width=300px,height=500px,scrollbars=yes');
     	});
@@ -123,7 +124,7 @@ li {
 		<ul class="headernav">
 			<li><a href="main.do"><img src="logo.png"></a></li>
 			<li><a href="main.do">Home</a></li>
-			<li><a href="board_list.do?board_category=N">공지사항</a></li>
+			<li><a href="board_notice_list.do?nowPage=1">공지사항</a></li>
 			<li>
 				<select id="class">
 						<option value="">클래스</option>
@@ -142,9 +143,10 @@ li {
 			</li>
 			<li><a href="classInsert.do">클래스 등록</a></li>
 			<li><a href="classList.do">클래스</a></li>
-			<li><a href="board_list.do?board_category=Q">상품문의</a></li>
+			<li><a href="board_qna_list.do?nowPage=1">상품문의</a></li>
 			<li><a href="#">수강후기포토</a></li>
-			<li><a href="chat.do">채팅</a></li>
+			<li><a href="chatList.do">채팅</a></li>
+			<li><a href="map.do">지도</a>
 			
 			<c:if test="${mDto.member_grade == '관리자' }">
 				<!-- 관리자만 가능 -->
@@ -159,6 +161,7 @@ li {
     <div class="tts">
     	<a href="tts.do">tts</a>
     </div>
+    
 <!-- 채널톡 -->
 <script>
   (function() {

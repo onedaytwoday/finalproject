@@ -23,9 +23,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 
-import com.project.one.model.dto.ChatDto;
+import com.project.one.model.dto.RoomDto;
 
-import com.project.one.model.biz.ChatBiz;
+
+import com.project.one.model.biz.RoomBiz;
+import com.project.one.model.biz.MemberBiz;
 
 
 
@@ -36,17 +38,17 @@ public class ChatController {
 	private Logger logger = LoggerFactory.getLogger(ChatController.class);
 
 	@Autowired
-	private ChatBiz cBiz;
+	private RoomBiz cBiz;
 	
 	//채팅창(회원번호, 채팅방번호)
 	@RequestMapping("/chat.do")
     public String enterChat(@RequestParam int chat_no,ModelAndView model,HttpSession session) {
 		String member_id = (String)session.getAttribute("member_id");
-		ChatDto cDto = cBiz.selectOne(chat_no);
+		RoomDto cDto = cBiz.selectOne(chat_no);
 		model.addObject("chat_no",chat_no);
 		model.addObject("member_id",member_id);
 		model.addObject("cDto",cDto);
-    	return "chatting";
+    	return "chat";
     }
 
 	//회원별 채팅방목록
@@ -54,21 +56,21 @@ public class ChatController {
 	@ResponseBody
 	public String selectChatList(ModelAndView model, HttpSession session) {
 		String member_id = (String)session.getAttribute("member_id");
-		List<ChatDto> list = cBiz.selectListByUser(member_id);
+		List<RoomDto> list = cBiz.selectListByUser(member_id);
 		model.addObject("list",list);
 		
-		return "chatlist";
+		return "chat";
 	}
 	// 채팅 메세지 전달
     @MessageMapping("/hello/{chat_no}")
     @SendTo("/subscribe/chat/{chat_no}")
-    public ChatDto broadcasting(ChatDto cDto) {
+    public RoomDto broadcasting(RoomDto cDto) {
 
     	logger.debug("받아온 data={}",cDto);
     	Map<String,Object> map = new HashMap<>();
     	map.put("cDto", cDto);
     	
-        cDto.setChat_date(new Date());
+        cDto.setRoom_date(new Date());
         int result = cBiz.insert(cDto);
         logger.info("selectkey 사용 = {}",cDto);
         return cDto;
