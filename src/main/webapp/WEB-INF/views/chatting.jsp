@@ -123,7 +123,7 @@ function insertChat(){
 		type : "POST",
 		data :
 			{
-				memberId : "${loginMember.memberId}",
+				memberId : "${loginMember.member_id}",
 				srNo : "${roomNo}",
 				chatContent : $("#msgi").val()
 						

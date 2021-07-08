@@ -26,7 +26,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.project.one.model.dto.ChatDto;
 
 import com.project.one.model.biz.ChatBiz;
-import com.project.one.model.biz.MemberBiz;
+
 
 
 
