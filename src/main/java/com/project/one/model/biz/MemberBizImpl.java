@@ -86,28 +86,17 @@ public class MemberBizImpl implements MemberBiz {
 
 	@Override
 	public MemberDto findIdPw(MemberDto dto) {
+		System.out.println(dto.getMember_name());
 		
 		//암호화
-		try {
-			dto.setMember_pw(aes.encrypt(dto.getMember_pw()));
+		 try {
+			dto.setMember_name(aes.encrypt(dto.getMember_name()));
 		} catch (UnsupportedEncodingException | GeneralSecurityException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		MemberDto user = dao.findIdPw(dto);
-		
-		//복호화
-		try {
-			user.setMember_pw(aes.decrypt(user.getMember_pw()));
-			user.setMember_name(aes.decrypt(user.getMember_name()));
-			user.setMember_email(aes.decrypt(user.getMember_email()));
-			user.setMember_addr(aes.decrypt(user.getMember_addr()));
-			user.setMember_ip(aes.decrypt(user.getMember_ip()));
-		} catch (UnsupportedEncodingException | GeneralSecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 
 		return user;
 	}
