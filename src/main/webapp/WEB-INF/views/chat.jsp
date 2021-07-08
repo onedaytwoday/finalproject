@@ -46,7 +46,7 @@
 	</div>
 	<!-- 채팅 내용 -->
 	<div class="col-12">
-		<div class="col-11"
+		<div class="col-11"	
 			style="margin: 0 auto; border: 1px solid #01D1FE; height: 400px; border-radius: 10px; overflow:scroll" id = "chatArea">
 
 			<div id="chatMessageArea" style = "margin-top : 10px; margin-left:10px;"></div>

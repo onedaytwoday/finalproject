@@ -12,7 +12,7 @@
 	<typeAlias type="com.project.one.model.dto.EventDto" alias="eventDto" />
 	<typeAlias type="com.project.one.model.dto.ReviewDto" alias="reviewDto" />
 	<typeAlias type="com.project.one.model.dto.ChattingDto" alias="chattingDto" />
-	<typeAlias type="com.project.one.model.dto.ChatDto" alias="chatDto" />
+	<typeAlias type="com.project.one.model.dto.RoomDto" alias="roomDto" />
 	<typeAlias type="com.project.one.model.dto.DetailDto" alias="detailDto" />
 	<typeAlias type="com.project.one.model.dto.PagingDto" alias="pagingDto" />
 	</typeAliases>
@@ -29,7 +29,7 @@
 		<mapper resource="/mybatis/event-mapper.xml" />
 		<mapper resource="/mybatis/review-mapper.xml" />
 		<mapper resource="/mybatis/chatting-mapper.xml" />
-		<mapper resource="/mybatis/chat-mapper.xml" />
+		<mapper resource="/mybatis/room-mapper.xml" />
 		<mapper resource="/mybatis/detail-mapper.xml" />
 	</mappers>
 </configuration>

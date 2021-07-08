@@ -16,9 +16,9 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import com.google.gson.Gson;
 
-import com.project.one.model.dao.ChatDao;
+import com.project.one.model.dao.RoomDao;
 import com.project.one.model.dao.ChattingDao;
-import com.project.one.model.dto.ChatDto;
+import com.project.one.model.dto.RoomDto;
 import com.project.one.model.dto.ChattingDto;
 import com.project.one.model.dto.MemberDto;
 
@@ -27,7 +27,7 @@ public class HandlerChat extends TextWebSocketHandler {
 	private Logger logger = LoggerFactory.getLogger(HandlerChat.class);
 	
 	@Autowired
-	private ChatDao cDao;
+	private RoomDao cDao;
 	@Autowired
 	private ChattingDao roomDao;
 
@@ -64,7 +64,7 @@ public class HandlerChat extends TextWebSocketHandler {
 
 		  Map<String, Object> map = null;
 		  //채팅
-	      ChatDto cDto = ChatDto.convertMessage(message.getPayload());
+	      RoomDto cDto = RoomDto.convertMessage(message.getPayload());
 	      //채팅방
 	      ChattingDto roomDto  = new ChattingDto();
 	      roomDto.setChat_no(cDto.getChat_no()); //방번호
