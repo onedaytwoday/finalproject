@@ -23,7 +23,7 @@
 			});
 		});
 		
-		var sock = new SockJS("/echo");
+		var sock = new SockJS("${pageContext.request.contextPath}/echo");
 		sock.onmessage = function(e){
 			console.log(e);
 			$("#chat").append(e.data + "<br/>");

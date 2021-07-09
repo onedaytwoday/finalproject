@@ -26,6 +26,10 @@ public class ClassController {
 	@Autowired
 	private ReviewBiz rbiz;
 	
+	@RequestMapping("/ex.do")
+	public String ex() {
+		return "ex";
+	}
 	@RequestMapping("/classList.do")
 	public String class_list(Model model) {
 		model.addAttribute("list", cBiz.selectList());
@@ -66,9 +70,9 @@ public class ClassController {
 	@RequestMapping("/classInsertRes.do")
 	public String class_insert_res(ClassDto dto, MultipartFile file) {		
 		if(cBiz.insert(dto) > 0) {
-			System.out.println(file.getName());
+			System.out.println(file.getOriginalFilename());
 			return "redirect:classList.do";
-		}
+		}	
 		
 		return "redirect:classInsert.do";
 	}
