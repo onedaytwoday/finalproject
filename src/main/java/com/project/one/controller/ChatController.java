@@ -27,6 +27,7 @@ import com.project.one.model.dto.RoomDto;
 
 
 import com.project.one.model.biz.RoomBiz;
+import com.project.one.model.biz.ChattingBiz;
 import com.project.one.model.biz.MemberBiz;
 
 
@@ -38,44 +39,16 @@ public class ChatController {
 	private Logger logger = LoggerFactory.getLogger(ChatController.class);
 
 	@Autowired
-	private RoomBiz cBiz;
+	private RoomBiz rBiz;
 	
-	//채팅창(회원번호, 채팅방번호)
+	@Autowired
+	private ChattingBiz cBiz;
+	
 	@RequestMapping("/chat.do")
-    public String enterChat(@RequestParam int chat_no,ModelAndView model,HttpSession session) {
-		String member_id = (String)session.getAttribute("member_id");
-		RoomDto cDto = cBiz.selectOne(chat_no);
-		model.addObject("chat_no",chat_no);
-		model.addObject("member_id",member_id);
-		model.addObject("cDto",cDto);
-    	return "chat";
-    }
-
-	//회원별 채팅방목록
-	@RequestMapping("/chatList.do")
-	@ResponseBody
-	public String selectChatList(ModelAndView model, HttpSession session) {
-		String member_id = (String)session.getAttribute("member_id");
-		List<RoomDto> list = cBiz.selectListByUser(member_id);
-		model.addObject("list",list);
-		
+	public String chat() {
 		return "chat";
 	}
-	// 채팅 메세지 전달
-    @MessageMapping("/hello/{chat_no}")
-    @SendTo("/subscribe/chat/{chat_no}")
-    public RoomDto broadcasting(RoomDto cDto) {
 
-    	logger.debug("받아온 data={}",cDto);
-    	Map<String,Object> map = new HashMap<>();
-    	map.put("cDto", cDto);
-    	
-        cDto.setRoom_date(new Date());
-        int result = cBiz.insert(cDto);
-        logger.info("selectkey 사용 = {}",cDto);
-        return cDto;
-    }
-	
 	@RequestMapping("/tts.do")
 	public String tts() {
 		return "tts";

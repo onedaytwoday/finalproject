@@ -42,6 +42,21 @@ public class ProductDaoImpl implements ProductDao {
 		
 		return dto;
 	}
+	
+	@Override
+	public ProductDto selectOneByName(String product_name) {
+		ProductDto dto = null;
+		
+		try {
+			dto = sqlSession.selectOne(NAMESPACE + "selectOneByName", product_name);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return dto;
+	}
+
 
 	@Override
 	public int insert(ProductDto dto) {
@@ -84,5 +99,4 @@ public class ProductDaoImpl implements ProductDao {
 		
 		return res;
 	}
-
 }

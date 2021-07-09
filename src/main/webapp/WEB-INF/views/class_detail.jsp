@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html>
@@ -29,11 +30,48 @@
 			
 			<div class="my-2">
 				<span>
-					<i class="bi bi-star-fill"></i>
-					<i class="bi bi-star-fill"></i>
-					<i class="bi bi-star-fill"></i>
-					<i class="bi bi-star-fill"></i>
-					<i class="bi bi-star-fill"></i>
+					<c:set var="sum" value="0" />
+					<c:set var="cnt" value="0" />
+					<c:choose>
+						<c:when test="${empty list}">
+							리뷰없음
+						</c:when>
+						<c:otherwise>
+							<c:forEach items="${list }" var="rdto">
+								<c:set var="rate" value="${rdto.review_rate }" />
+								<c:set var="sum" value="${sum + rate }" />
+								<c:set var="cnt" value="${cnt + 1 }" />
+							</c:forEach>
+							<fmt:parseNumber var="avg" integerOnly="true" value="${sum/rate }"/>
+							<c:choose>
+								 <c:when test="${avg eq 1 }">
+								  	<i class="bi bi-star-fill"></i>
+								 </c:when> 
+								 <c:when test="${avg > 1 }">
+								 	<i class="bi bi-star-fill"></i>
+								 	<i class="bi bi-star-fill"></i>
+								 </c:when>
+								 <c:when test="${avg > 2 }">
+								  	<i class="bi bi-star-fill"></i>
+								  	<i class="bi bi-star-fill"></i>
+								  	<i class="bi bi-star-fill"></i>
+								 </c:when>
+								 <c:when test="${avg > 3 }">
+								  	<i class="bi bi-star-fill"></i>
+								  	<i class="bi bi-star-fill"></i>
+								  	<i class="bi bi-star-fill"></i>
+								  	<i class="bi bi-star-fill"></i>
+								 </c:when>
+								 <c:otherwise>
+								  	<i class="bi bi-star-fill"></i>
+								  	<i class="bi bi-star-fill"></i>
+								  	<i class="bi bi-star-fill"></i>
+								  	<i class="bi bi-star-fill"></i>
+								  	<i class="bi bi-star-fill"></i>
+								 </c:otherwise>
+							</c:choose>
+						</c:otherwise>
+					</c:choose>
 				</span>
 			</div>
 			
@@ -63,11 +101,11 @@
 		<!-- 결제하기 -->
 		<c:choose>
 			<c:when test="${mDto.member_id != null && checkPaid == false}">
-				<form class="mt-3" action="payment.do" method="post">
-					<input type="hidden" name="member_id" value="${mDto.member_id }" />
+				<form class="mt-3" action="payment.do" method="post">					
 					<input type="hidden" name="class_no" value="${dto.class_no }" />
-					<input type="hidden" name="class_title" value="${dto.class_title }" />
-					<input type="hidden" name="class_price" value="${dto.class_price }" />
+					<input type="hidden" name="payment_price" value="${dto.class_price }" />
+					<input type="hidden" name="name" value="${dto.class_title }" />
+					<input type="hidden" name="type" value="class" />
 					
 					<button type="submit" class="btn btn-primary">결제하기</button>
 				</form>

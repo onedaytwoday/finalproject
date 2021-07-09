@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,7 +40,14 @@
 			<td colspan="3" align="right">
 				<input type="button" value="수정" onclick="location.href='board_updateform.do?board_no=${dto.board_no}'" />
 				<input type="button" value="삭제" onclick="location.href='board_delete.do?board_no=${dto.board_no}&board_category=${board_category}'" />
-				<input type="button" value="목록" onclick="location.href='board_list.do?board_category=${dto.board_category}'" />
+				<c:choose>
+				<c:when test="${dto.board_category eq 'N' }">
+				<input type="button" value="목록" onclick="location.href='board_notice_list.do?nowPage=1'" />
+				</c:when>
+				<c:when test="${dto.board_category eq 'Q' }">
+				<input type="button" value="목록" onclick="location.href='board_qna_list.do?nowPage=1'" />
+				</c:when>
+				</c:choose>
 			</td>
 		</tr>
 	</table>

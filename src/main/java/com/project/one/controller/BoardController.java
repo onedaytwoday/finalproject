@@ -21,6 +21,7 @@ public class BoardController {
 	
 	@RequestMapping("/board_notice_list.do")
 	public String board_notice_list(Model model, int nowPage) {
+		
 		int count = biz.notice_count();
 		PagingDto Pdto = new PagingDto(count, nowPage);
 		model.addAttribute("list", biz.board_notice_list(Pdto));
@@ -46,13 +47,13 @@ public class BoardController {
 	public String board_insertRes(BoardDto dto) {
 		if(dto.getBoard_category().equals("N")) {
 			if(biz.notice_insert(dto)>0) {
-				return "redirect:board_list.do?board_category="+dto.getBoard_category();
+				return "redirect:board_notice_list.do?nowPage=1";
 			}else {
 				return "redirect:board_insertform.do?board_category="+dto.getBoard_category();
 			}
 		}else {
 			if(biz.qna_insert(dto)>0) {
-				return "redirect:board_list.do?board_category="+dto.getBoard_category();
+				return "redirect:board_qna_list.do?nowPage=1";
 			}else {
 				return "redirect:board_insertform.do?board_category="+dto.getBoard_category();
 			}
@@ -82,9 +83,10 @@ public class BoardController {
 	@RequestMapping("/board_delete.do")
 	public String board_delete(int board_no, String board_category) {
 		String category = board_category;
-		if(biz.delete(board_no) > 0) {
-			return "redirect:board_list.do?board_category="+category;
-		}
-		return "redirect:board_list.do?board_category="+category;
+		biz.delete(board_no);
+			if(category.equals("N")) {
+				return "redirect:board_notice_list.do?nowPage=1";
+			}
+			return "redirect:board_qna_list.do?nowPage=1";
 	}
 }

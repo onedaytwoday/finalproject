@@ -23,6 +23,11 @@ public class ProductBizImpl implements ProductBiz {
 	public ProductDto selectOne(int product_no) {
 		return dao.selectOne(product_no);
 	}
+	
+	@Override
+	public ProductDto selectOneByName(String product_name) {
+		return dao.selectOneByName(product_name);
+	}
 
 	@Override
 	public int insert(ProductDto dto) {

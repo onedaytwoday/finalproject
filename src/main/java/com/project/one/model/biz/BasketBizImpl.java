@@ -1,5 +1,7 @@
 package com.project.one.model.biz;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,8 +15,13 @@ public class BasketBizImpl implements BasketBiz {
 	private BasketDao dao;
 	
 	@Override
-	public BasketDto selectOne(int basket_no) {
-		return dao.selectOne(basket_no);
+	public List<BasketDto> selectList(String member_id) {
+		return dao.selectList(member_id);
+	}
+	
+	@Override
+	public BasketDto selectOne(BasketDto dto) {
+		return dao.selectOne(dto);
 	}
 
 	@Override
@@ -28,8 +35,7 @@ public class BasketBizImpl implements BasketBiz {
 	}
 
 	@Override
-	public int delete(int basket_no) {
-		return dao.delete(basket_no);
+	public int delete(BasketDto dto) {
+		return dao.delete(dto);
 	}
-
 }

@@ -3,6 +3,7 @@ package com.project.one.controller;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,7 +25,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.github.scribejava.core.model.OAuth2AccessToken;
+import com.project.one.model.biz.BasketBiz;
 import com.project.one.model.biz.MemberBiz;
+import com.project.one.model.dto.BasketDto;
 import com.project.one.model.dto.MemberDto;
 
 @Controller
@@ -43,6 +46,9 @@ public class MemberController {
 	
 	@Autowired
 	private MemberBiz biz;	
+	
+	@Autowired
+	private BasketBiz bBiz;
 	
 	//20210628 로그인
 	@RequestMapping("/loginform.do")
@@ -270,7 +276,11 @@ public class MemberController {
 		return "main";
 	}
 	@RequestMapping("/main.do")
-	public String main() {
+	public String main(Model model, HttpSession session) {
+		MemberDto mDto = (MemberDto)session.getAttribute("mDto");
+		List<BasketDto> bList = bBiz.selectList(mDto.getMember_id());
+		model.addAttribute("basket_num", bList.size());
+		
 		return "main";
 	}
 

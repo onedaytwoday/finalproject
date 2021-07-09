@@ -4,22 +4,29 @@
 	<select id="selectList" resultType="basketDto">
 		SELECT BASKET_NO, BASKET_NUM, BASKET_PRICE, PRODUCT_NO, MEMBER_ID
 		FROM BASKET
-		ORDER BY BASKET_NO
+		WHERE MEMBER_ID = #{member_id}
+		ORDER BY PRODUCT_NO
 	</select>
 	
-	<select id="selectOne" parameterType="int" resultType="basketDto">
+	<select id="selectOne" resultType="basketDto">
 		SELECT BASKET_NO, BASKET_NUM, BASKET_PRICE, PRODUCT_NO, MEMBER_ID
 		FROM BASKET
-		WHERE BASKET_NO = #{basket_no}
+		WHERE PRODUCT_NO = #{product_no} AND MEMBER_ID = #{member_id}
 	</select>
 	
 	<insert id="insert" parameterType="basketDto">
 		INSERT INTO BASKET
-		VALUES(#{basket_no},#{basket_num},#{basket_price},#{product_no},#{member_id})
+		VALUES(BASKET_NO_SEQ.NEXTVAL, #{basket_num}, #{basket_price}, #{product_no}, #{member_id})
 	</insert>
 	
-	<delete id="delete" parameterType="int">
+	<update id="update" parameterType="basketDto">
+		UPDATE BASKET
+		SET BASKET_NUM = #{basket_num}, BASKET_PRICE = #{basket_price}
+		WHERE BASKET_NO = #{basket_no} AND MEMBER_ID = #{member_id}
+	</update>
+	
+	<delete id="delete" parameterType="basketDto">
 		DELETE FROM BASKET 
-		WHERE BASKET_NO = #{basket_no}
+		WHERE BASKET_NO = #{basket_no} AND MEMBER_ID = #{member_id}
 	</delete>
 </mapper>
