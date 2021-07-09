@@ -1,5 +1,8 @@
 package com.project.one.model.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -13,17 +16,32 @@ public class BasketDaoImpl implements BasketDao {
 	private SqlSessionTemplate sqlSession;
 	
 	@Override
-	public BasketDto selectOne(int basket_no) {
-		BasketDto dto = null;
+	public List<BasketDto> selectList(String member_id) {
+		List<BasketDto> list = new ArrayList<>();
 		
 		try {
-			dto = sqlSession.selectOne(NAMESPACE + "selectOne", basket_no);
+			list = sqlSession.selectList(NAMESPACE + "selectList", member_id);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		return dto;
+		return list;
+	}
+
+	
+	@Override
+	public BasketDto selectOne(BasketDto dto) {
+		BasketDto bDto = null;
+		
+		try {
+			bDto = sqlSession.selectOne(NAMESPACE + "selectOne", dto);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return bDto;
 	}
 
 	@Override
@@ -55,11 +73,11 @@ public class BasketDaoImpl implements BasketDao {
 	}
 
 	@Override
-	public int delete(int basket_no) {
+	public int delete(BasketDto dto) {
 		int res = 0;
 		
 		try {
-			res = sqlSession.delete(NAMESPACE + "delete", basket_no);
+			res = sqlSession.delete(NAMESPACE + "delete", dto);
 			
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -6,6 +6,41 @@
 <head>
 <meta charset="UTF-8">
 <title>상품 상세페이지</title>
+
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+	<script type="text/javascript">
+		function addToBasket(){
+			let productVal = {
+					"product_no" : "${dto.product_no}",
+					"product_name" : "${dto.product_name}",
+					"product_price" : "${dto.product_price}"
+			}
+		
+			$.ajax({
+				type: "post",
+				url: "addToBasket.do",
+				data: JSON.stringify(productVal),
+				contentType: "application/json",
+				dataType: "json",
+				success: function(msg) {
+					console.log(msg.result);
+					
+					if(msg.result == "성공") {
+						let redirect = confirm("장바구니에 넣었습니다. 장바구니로 이동하시겠습니까?");
+						
+						if(redirect) {
+							location.href='basket.do';
+						}
+					}
+				},
+				error: function() {
+					alert("통신 실패!");
+				}
+			});
+		}
+	</script>
+
 </head>
 <body>
 
@@ -47,8 +82,10 @@
 			</td>
 		</tr>
 		<tr>
-			<td colspan="2" align="center"><input type="button" value="장바구니"
-				onclick="" /> <input type="button" value="구매" onclick="" /></td>
+			<td colspan="2" align="center">
+				<input type="button" value="장바구니" onclick="addToBasket()" /> 
+				<input type="button" value="구매" onclick="" />
+			</td>
 		</tr>
 
 		<tr>

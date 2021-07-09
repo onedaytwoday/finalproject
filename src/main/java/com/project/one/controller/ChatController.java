@@ -44,7 +44,6 @@ public class ChatController {
 	
 	@RequestMapping("/chat.do")
 	public String chat() {
-		System.out.println("요기?");
 		return "chat";
 	}
 	@RequestMapping("/tts.do")

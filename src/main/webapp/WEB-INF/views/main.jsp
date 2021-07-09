@@ -6,6 +6,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<!-- Boostrap Icon -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
 <style type="text/css">
 header{
 	border: 1px solid skyblue;
@@ -109,6 +113,16 @@ li {
 	%>
 		<h1>${mDto.member_id }님 환영합니다.</h1>
 		<ul class="login">
+			<li>
+				<a href="basket.do" style="position: relative; text-decoration-line:none;">
+					<i class="bi bi-cart4" style="font-size: 3rem; cursor:pointer;"></i>
+					<span 
+						style="position: absolute; left: 1.5rem; bottom: 25px; border-radius: 50%; padding: 5px 10px; background-color: red; color: white;">
+							${basket_num }
+					</span>
+				</a>
+			</li>
+			
 			<li><a href="logout.do">로그아웃</a>
 		</ul>
 	<%
