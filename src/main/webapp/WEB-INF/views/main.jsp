@@ -113,7 +113,16 @@ li {
 	%>
 		<h1>${mDto.member_id }님 환영합니다.</h1>
 		<ul class="login">
-			<li><a href="basket.do"><i class="bi bi-basket" style="font-size: 2rem; cursor:pointer;"></i></a></li>
+			<li>
+				<a href="basket.do" style="position: relative; text-decoration-line:none;">
+					<i class="bi bi-cart4" style="font-size: 3rem; cursor:pointer;"></i>
+					<span 
+						style="position: absolute; left: 1.5rem; bottom: 25px; border-radius: 50%; padding: 5px 10px; background-color: red; color: white;">
+							${basket_num }
+					</span>
+				</a>
+			</li>
+			
 			<li><a href="logout.do">로그아웃</a>
 		</ul>
 	<%
@@ -150,7 +159,7 @@ li {
 			<li><a href="classList.do">클래스</a></li>
 			<li><a href="board_qna_list.do?nowPage=1">상품문의</a></li>
 			<li><a href="#">수강후기포토</a></li>
-			<li><a href="chat.do">채팅</a></li>
+			<li><a href="chatList.do">채팅</a></li>
 			<li><a href="map.do">지도</a>
 			
 			<c:if test="${mDto.member_grade == '관리자' }">

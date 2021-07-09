@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="room">
+	<select id="selectList" resultType="roomDto">
+		SELECT ROOM_NO, MEMBER_ID, CONSULT_ID, ROOM_CONTENT, ROOM_DATE
+		FROM ROOM
+		ORDER BY ROOM_NO
+	</select>
+	
+	<select id="selectOne" parameterType="int" resultType="roomDto">
+		SELECT ROOM_NO, MEMBER_ID, CONSULT_ID, ROOM_CONTENT, ROOM_DATE
+		FROM ROOM
+		WHERE ROOM_NO = #{room_no}
+	</select>
+	
+	<insert id="insert" parameterType="roomDto">
+		INSERT INTO ROOM
+		VALUES(#{room_no},#{member_id},#{consult_id},#{room_content},#{room_date})		
+	</insert>
+	
+	<delete id="delete" parameterType="int">
+		DELETE FROM ROOM
+		WHERE ROOM_NO = #{room_no}
+	</delete>
+	<select id="isRoom" parameterType="hashMap" resultType="roomDto">
+		SELECT ROOM_NO, MEMBER_ID, CONSULT_ID, ROOM_CONTENT, ROOM_DATE
+		FROM ROOM
+		WHERE MEMBER_ID = #{member_id} AND CONSULT_ID = #{consult_id}
+	</select>
+</mapper>

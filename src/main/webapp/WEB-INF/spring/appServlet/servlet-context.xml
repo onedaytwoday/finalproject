@@ -41,7 +41,7 @@
 	
 	<!-- transaction -->
 	<tx:annotation-driven />
-	<!-- websocket -->
+	<!-- websocket 
 	<websocket:handlers>
 		<websocket:mapping handler="handlerChat" path="/chat"/>
 		    <websocket:handshake-interceptors>
@@ -50,4 +50,5 @@
 			<websocket:sockjs/>
 	</websocket:handlers>
 	<beans:bean id="handlerChat" class="com.project.one.util.HandlerChats"/>
+	-->
 </beans:beans>
