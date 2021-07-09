@@ -14,11 +14,13 @@ public class EchoHandler extends TextWebSocketHandler {
 	
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
+		System.out.println("1");
 		sessionList.add(session);
 	}
 	
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
+		System.out.println("2");
 		for(WebSocketSession sess: sessionList) {
 			sess.sendMessage(new TextMessage(session.getId()+": "+message.getPayload()));
 		}
@@ -26,6 +28,7 @@ public class EchoHandler extends TextWebSocketHandler {
 	
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
+		System.out.println("3");
 		sessionList.remove(session);
 	}
 }

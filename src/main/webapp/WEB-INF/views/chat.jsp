@@ -23,7 +23,7 @@
 			});
 		});
 		
-		var sock = new SockJS("/echo.do");
+		var sock = new SockJS("/echo");
 		sock.onmessage = function(e){
 			console.log(e);
 			$("#chat").append(e.data + "<br/>");
