@@ -147,14 +147,7 @@ li {
 						<option value="cate03">카테고리3</option>
 				</select>
 			</li>
-			<li>
-				<select id="shop">
-						<option value="">쇼핑</option>
-						<option value="cate01">카테고리1</option>
-						<option value="cate02">카테고리2</option>
-						<option value="cate03">카테고리3</option>
-				</select>
-			</li>
+			<li><a href="store.do">쇼핑</a></li>
 			<li><a href="classInsert.do">클래스 등록</a></li>
 			<li><a href="classList.do">클래스</a></li>
 			<li><a href="board_qna_list.do?nowPage=1">상품문의</a></li>
