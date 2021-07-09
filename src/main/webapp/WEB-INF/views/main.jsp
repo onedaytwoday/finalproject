@@ -145,6 +145,8 @@ li {
 			<li><a href="board_list.do?board_category=Q">상품문의</a></li>
 			<li><a href="#">수강후기포토</a></li>
 			<li><a href="chat.do">채팅</a></li>
+			<li><a href="map.do">지도</a></li>
+			<%-- <li><a href="map.do" onclick="window.open('map.do', '지도', 'width=500px, height=400px');return false">지도</a></li>--%>
 			
 			<c:if test="${mDto.member_grade == '관리자' }">
 				<!-- 관리자만 가능 -->
