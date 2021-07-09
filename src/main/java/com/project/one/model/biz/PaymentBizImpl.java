@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.project.one.model.dao.PaymentDao;
+import com.project.one.model.dto.ClassDto;
 import com.project.one.model.dto.PaymentDto;
+import com.project.one.model.dto.ProductDto;
 import com.project.one.util.Payment;
 
 @Service
@@ -15,6 +17,15 @@ public class PaymentBizImpl implements PaymentBiz {
 
 	@Autowired
 	private PaymentDao dao;
+	
+	@Autowired
+	private ProductBiz proBiz;
+	
+	@Autowired
+	private ClassBiz cBiz;
+	
+	@Autowired
+	private BasketBiz bBiz;
 	
 	@Override
 	public List<PaymentDto> selectList() {
@@ -27,8 +38,22 @@ public class PaymentBizImpl implements PaymentBiz {
 	}
 
 	@Override
-	public int insert(PaymentDto dto) {
-		return dao.insert(dto);
+	public int insert(PaymentDto dto, String type, String title) {
+		
+		switch(type) {
+		case "product" :
+			ProductDto proDto = proBiz.selectOneByName(title);
+			dto.setProduct_no(proDto.getProduct_no());
+			break;
+			
+		case "class" :
+			ClassDto cDto = cBiz.selectOneByTitle(title);
+			dto.setClass_no(cDto.getClass_no());
+			break;
+		}
+		
+		
+		return dao.insert(dto, type);
 	}
 
 	@Override

@@ -44,14 +44,21 @@ public class PaymentDaoImpl implements PaymentDao {
 	}
 
 	@Override
-	public int insert(PaymentDto dto) {
+	public int insert(PaymentDto dto, String type) {
 		int res = 0;
 		
-		try {
-			res = sqlSession.insert(NAMESPACE + "insert", dto);
+		switch(type) {
+		case "product":
+			res = sqlSession.insert(NAMESPACE + "insertProduct", dto);
+			break;
 			
-		} catch (Exception e) {
-			e.printStackTrace();
+		case "class":
+			res = sqlSession.insert(NAMESPACE + "insertClass", dto);
+			break;
+			
+		case "basket":
+			res = sqlSession.insert(NAMESPACE + "insertBasket", dto);
+			break;
 		}
 		
 		return res;
