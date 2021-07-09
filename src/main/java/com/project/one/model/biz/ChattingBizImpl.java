@@ -39,4 +39,6 @@ public class ChattingBizImpl implements ChattingBiz {
 		return dao.delete(chatting_no);
 	}
 
+
+
 }

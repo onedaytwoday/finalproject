@@ -14,11 +14,13 @@ public interface RoomBiz {
 	// 상담자별 채팅방 목록 조회
 	public List<RoomDto> selectListByConsult(String consult_id);
 
-	public RoomDto selectOne(int chat_no);
+	public RoomDto selectOne(int room_no);
 
 	public int insert(RoomDto dto);
 
 	public int update(RoomDto dto);
 
 	public int delete(int chat_no);
+	
+
 }

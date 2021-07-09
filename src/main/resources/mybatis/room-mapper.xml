@@ -22,9 +22,5 @@
 		DELETE FROM ROOM
 		WHERE ROOM_NO = #{room_no}
 	</delete>
-	<select id="isRoom" parameterType="hashMap" resultType="roomDto">
-		SELECT ROOM_NO, MEMBER_ID, CONSULT_ID, ROOM_CONTENT, ROOM_DATE
-		FROM ROOM
-		WHERE MEMBER_ID = #{member_id} AND CONSULT_ID = #{consult_id}
-	</select>
+
 </mapper>
