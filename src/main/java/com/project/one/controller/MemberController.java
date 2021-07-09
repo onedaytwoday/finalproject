@@ -3,6 +3,7 @@ package com.project.one.controller;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,7 +25,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.github.scribejava.core.model.OAuth2AccessToken;
+import com.project.one.model.biz.BasketBiz;
 import com.project.one.model.biz.MemberBiz;
+import com.project.one.model.dto.BasketDto;
 import com.project.one.model.dto.MemberDto;
 
 @Controller
@@ -44,6 +47,9 @@ public class MemberController {
 	@Autowired
 	private MemberBiz biz;	
 	
+	@Autowired
+	private BasketBiz bBiz;
+	
 	//20210628 로그인
 	@RequestMapping("/loginform.do")
 	public String loginForm() {
@@ -54,14 +60,23 @@ public class MemberController {
 	@RequestMapping(value="/ajaxlogin.do",method=RequestMethod.POST)
 	public Map<String, Boolean> ajaxLogin(@RequestBody MemberDto dto, HttpSession session){
 		//logger.info("[Controller] ajaxlogin.do");
+		
 		MemberDto mDto = biz.login(dto);
 		boolean chk = false;
+		boolean ip_chk = false;
+		
 		if(mDto != null) {
 			chk = true;
 			session.setAttribute("mDto", mDto);
+			
+			if(mDto.getMember_notify().equals("N") || dto.getMember_ip().equals(mDto.getMember_ip())) {
+				ip_chk = true;
+			}
 		}
 		Map<String, Boolean> map = new HashMap<String, Boolean>();
 		map.put("chk", chk);
+		map.put("ip_chk", ip_chk);
+		
 		return map;
 		
 	}	
@@ -69,11 +84,12 @@ public class MemberController {
 	//회원가입
 	@RequestMapping("/signup.do")
 	public String signupForm(MemberDto dto, HttpSession session) {
-		System.out.println(dto.getMember_id());
-		MemberDto mDto = biz.selectOne(dto.getMember_id());
-		if(mDto!=null) {
-			session.setAttribute("mDto", mDto);
-			return "main";
+		if(dto.getMember_id()!=null) {
+			MemberDto mDto = biz.selectOne(dto.getMember_id());
+			if(mDto!=null) {
+				session.setAttribute("mDto", mDto);
+				return "main";
+			}	
 		}
 		return "signup";
 	}
@@ -100,7 +116,7 @@ public class MemberController {
 			return "redirect:loginform.do";
 		}
 		
-		return "redirect:signup.do?mDto="+dto;
+		return "redirect:signup.do";
 	}
 	@RequestMapping("/sns_signupRes.do")
 	public String sns_signupRes(MemberDto mDto, HttpSession session) {
@@ -111,6 +127,53 @@ public class MemberController {
 		
 		return "redirect:signup.do?mDto="+mDto;
 	}
+	
+	
+	// 아이디 / 비밀번호 찾기
+	@RequestMapping("/findIdPwForm.do")
+	public String find_id_pw_form() {
+		return "find_id_pw";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/findIdPw.do", method=RequestMethod.POST)
+	public  Map<String, String> find_id(@RequestBody MemberDto dto) {
+		if(dto.getMember_id() != null) {
+			dto.setMember_name("");
+		} else {
+			dto.setMember_id("");
+		}
+
+		MemberDto checkUser = biz.findIdPw(dto);
+		Map<String, String> map = new HashMap<>();
+
+		if(checkUser != null) {
+			//TODO: 문자 인증번호 보내기 기능 추가 필요
+			map.put("msg", "1111");
+			map.put("member_id", checkUser.getMember_id());
+			
+		} else {
+			map.put("msg", "존재하지 않는 회원입니다");
+		}
+				
+		return map;
+	}
+	
+	@RequestMapping("/updatePw.do")
+	public String update_pw(MemberDto dto) {
+		if(biz.updatePw(dto) > 0) {
+			// TODO: 비밀번호 암호화 필요
+			
+			return "redirect:loginform.do";
+		}
+		
+		
+		return "redirect:findIdPwForm.do";
+	}
+	
+	
+	
+	
 	//네이버로그인
 	//로그인 첫 화면 요청 메소드
 	@RequestMapping(value = "/loginform.do", method = { RequestMethod.GET, RequestMethod.POST })
@@ -213,7 +276,11 @@ public class MemberController {
 		return "main";
 	}
 	@RequestMapping("/main.do")
-	public String main() {
+	public String main(Model model, HttpSession session) {
+		MemberDto mDto = (MemberDto)session.getAttribute("mDto");
+		List<BasketDto> bList = bBiz.selectList(mDto.getMember_id());
+		model.addAttribute("basket_num", bList.size());
+		
 		return "main";
 	}
 

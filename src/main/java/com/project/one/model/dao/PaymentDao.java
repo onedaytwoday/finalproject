@@ -11,7 +11,7 @@ public interface PaymentDao {
 	
 	public PaymentDto selectOne(int payment_no);
 	
-	public int insert(PaymentDto dto);
+	public int insert(PaymentDto dto, String type);
 	
 	public int update(PaymentDto dto);
 	

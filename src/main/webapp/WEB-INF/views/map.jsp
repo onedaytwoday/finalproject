@@ -49,6 +49,7 @@
 </head>
 <body>
 
+<<<<<<< HEAD
 <div class="map_wrap">
     <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
 
@@ -68,6 +69,10 @@
 </div>
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b09278ee8c0d306e4d38397589fed58d"></script>
+=======
+	<div id="map" style="width: 500px; height: 400px;"></div>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b09278ee8c0d306e4d38397589fed58d"></script>
+>>>>>>> a72bf8ba7b6adada3514ffb289557c8e1759fb94
 	<script>
 	// 마커를 담을 배열입니다
 	var markers = [];

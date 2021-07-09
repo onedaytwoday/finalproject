@@ -21,8 +21,8 @@ public class AES256 {
 	 */
 	
 	
-	private String iv = "00000000000000001";
-	private Key keySpec;
+	private static String iv = "00000000000000001";
+	private static Key keySpec;
 	
 
 	/*
@@ -33,7 +33,7 @@ public class AES256 {
 	
 	
 	public AES256() throws UnsupportedEncodingException {
-		this.iv = iv.substring(0,16);
+		AES256.iv = iv.substring(0,16);
 		byte[] keyBytes = new byte[16];
 		byte[] b = iv.getBytes("UTF-8");
 		int len = b.length;
@@ -44,7 +44,7 @@ public class AES256 {
 		
 		System.arraycopy(b, 0, keyBytes, 0, len);
 		SecretKeySpec keySpec = new SecretKeySpec(keyBytes, "AES");
-		this.keySpec = keySpec;
+		AES256.keySpec = keySpec;
 	}
 	
 
@@ -54,7 +54,7 @@ public class AES256 {
 	 */
 
 	
-	public String encrypt(String str) throws NoSuchAlgorithmException, GeneralSecurityException, UnsupportedEncodingException {
+	public static String encrypt(String str) throws NoSuchAlgorithmException, GeneralSecurityException, UnsupportedEncodingException {
 		Cipher c = Cipher.getInstance("AES/CBC/PKCS5Padding");
 		c.init(Cipher.ENCRYPT_MODE, keySpec, new IvParameterSpec(iv.getBytes()));
 		byte[] encrypted = c.doFinal(str.getBytes("UTF-8"));
@@ -71,7 +71,7 @@ public class AES256 {
 	 *  str : 복호화 시킬 문자열
 	 */
 
-	public String decrypt(String str) throws NoSuchAlgorithmException, GeneralSecurityException, UnsupportedEncodingException {
+	public static String decrypt(String str) throws NoSuchAlgorithmException, GeneralSecurityException, UnsupportedEncodingException {
 		Cipher c = Cipher.getInstance("AES/CBC/PKCS5Padding");
 		c.init(Cipher.DECRYPT_MODE, keySpec, new IvParameterSpec(iv.getBytes()));
 		byte[] byteStr = Base64.decodeBase64(str.getBytes()); 

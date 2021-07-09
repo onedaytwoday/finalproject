@@ -44,7 +44,6 @@ public class LogFilter implements Filter {
 		  .append("* agent : " + agent);
 		
 		logger.info("LOG FILTER\n" + sb);
-		
 		chain.doFilter(request, response);
 	}
 

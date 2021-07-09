@@ -25,6 +25,8 @@ public interface MemberBiz {
 
 	// 회원 정보 수정
 	public int update(MemberDto dto);
+	
+	public int updatePw(MemberDto dto);
 
 	// 회원 탈퇴
 	public int delete(String member_id);

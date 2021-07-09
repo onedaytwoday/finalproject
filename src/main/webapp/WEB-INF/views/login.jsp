@@ -8,6 +8,14 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- IP주소 얻기 -->
+<script type="text/javascript" src="http://jsgetip.appspot.com"></script>
+
+<!-- Kakao Link 보내기 -->
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script type="text/javascript" src="resources/js/kakaoLink.js"></script>
+
 <script type="text/javascript">
 	$(function(){
 		$("#loginChk").hide();
@@ -19,7 +27,8 @@
 		
 		var loginVal = {
 				"member_id":member_id,
-				"member_pw":member_pw
+				"member_pw":member_pw,
+				"member_ip": ip()
 		}
 		
 		if(member_id == null || member_id ==""||member_pw == null || member_pw == "" ){
@@ -33,8 +42,15 @@
 				dataType: "json",
 				success: function(msg){
 					if(msg.chk == true){
-						//추후 수정
-						location.href="main.do";
+						if(msg.ip_chk == false) {
+							checkIP();
+						}
+						
+						setTimeout(function(){
+							//추후 수정
+							location.href="main.do";
+						}, 2000);
+						
 					}else{
 						alert("아이디 혹은 패스워드를 확인해주세요.")
 					}
@@ -74,6 +90,11 @@
 			  <input type="button" value="login" onclick="login();" />
 			  <input type="button" value="register" onclick="location.href='signup.do'" />
 			</div>
+			
+			<div>
+				<a href="findIdPwForm.do">아이디/비밀번호 찾기</a>
+			</div>
+			
 			<div class="text-center">
 		 	  <a href="${naverUrl}"><img width="150" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png" /></a>
 		 	  <a href="${kakaoUrl}"><img width="150" src="" />카카오로그인</a>

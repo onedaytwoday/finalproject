@@ -48,7 +48,7 @@ public class FileTableDaoImpl implements FileTableDao {
 		int res = 0;
 		
 		try {
-			res = sqlSession.insert(NAMESPACE + "insert", dto);
+			res = sqlSession.insert(NAMESPACE + "class_insert", dto);
 			
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -14,6 +14,7 @@ public class MemberDaoImpl implements MemberDao {
 
 	@Autowired
 	private SqlSessionTemplate sqlSession;
+
 	
 	@Override
 	public int register(MemberDto dto) {
@@ -46,10 +47,9 @@ public class MemberDaoImpl implements MemberDao {
 	@Override
 	public MemberDto login(MemberDto dto) {
 		MemberDto user = null;
-		
-		try {
-			user = sqlSession.selectOne(NAMESPACE + "login", dto);
+		try {		
 			
+			user = sqlSession.selectOne(NAMESPACE + "login", dto);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -62,7 +62,9 @@ public class MemberDaoImpl implements MemberDao {
 		MemberDto user = null;
 		
 		try {
+			
 			user = sqlSession.selectOne(NAMESPACE + "findIdPw", dto);
+			
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -105,8 +107,22 @@ public class MemberDaoImpl implements MemberDao {
 	public int update(MemberDto dto) {
 		int res = 0;
 		
-		try {
+		try {			
 			res = sqlSession.update(NAMESPACE + "update", dto);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+	
+	@Override
+	public int updatePw(MemberDto dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.update(NAMESPACE + "updatePw", dto);
 			
 		} catch (Exception e) {
 			e.printStackTrace();

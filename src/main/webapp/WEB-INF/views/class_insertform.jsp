@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="classInsertRes.do" method="post">
+	<form action="classInsertRes.do" method="post" enctype="multipart/form-data">
 		<table border="1">
 			<tr>
 				<th>계정 ID</th>
@@ -43,13 +43,16 @@
 				<th>클래스 가격</th>
 				<td><input type="text" name="class_price" /></td>
 			</tr>
-			
+			<tr>
+				<td><input multiple="multiple" type="file" name="file"></td>
+			</tr>
 			<tr>
 				<td colspan="2" align="right">
 					<input type="submit" value="등록하기" />
 					<input type="button" value="취소" onclick="location.href='main.do'" />
 				</td>
 			</tr>
+			
 		</table>
 	</form>
 </body>

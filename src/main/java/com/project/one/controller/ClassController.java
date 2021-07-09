@@ -6,13 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.project.one.model.biz.ClassBiz;
 import com.project.one.model.biz.PaymentBiz;
+import com.project.one.model.biz.ReviewBiz;
 import com.project.one.model.dto.ClassDto;
 import com.project.one.model.dto.MemberDto;
 import com.project.one.model.dto.PaymentDto;
-
 @Controller
 public class ClassController {
 	
@@ -22,10 +23,12 @@ public class ClassController {
 	@Autowired
 	private PaymentBiz pBiz;
 	
+	@Autowired
+	private ReviewBiz rbiz;
+	
 	@RequestMapping("/classList.do")
 	public String class_list(Model model) {
 		model.addAttribute("list", cBiz.selectList());
-		
 		return "class_list";
 	}
 	
@@ -50,8 +53,8 @@ public class ClassController {
 		
 		
 		model.addAttribute("dto", cBiz.selectOne(class_no));
+		model.addAttribute("rdto",rbiz.avgList(class_no));
 		
-				
 		return "class_detail";
 	}
 	
@@ -61,8 +64,9 @@ public class ClassController {
 	}
 	
 	@RequestMapping("/classInsertRes.do")
-	public String class_insert_res(ClassDto dto) {		
+	public String class_insert_res(ClassDto dto, MultipartFile file) {		
 		if(cBiz.insert(dto) > 0) {
+			System.out.println(file.getName());
 			return "redirect:classList.do";
 		}
 		

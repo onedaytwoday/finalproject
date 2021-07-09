@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.project.one.model.biz.BoardBiz;
 import com.project.one.model.dto.BoardDto;
+import com.project.one.model.dto.PagingDto;
 
 @Controller
 public class BoardController {
@@ -18,15 +19,22 @@ public class BoardController {
 	@Autowired
 	private BoardBiz biz;
 	
-	@RequestMapping("/board_list.do")
-	public String board_notice_list(Model model, String board_category) {
-		if(board_category.equals("N")) {
-			model.addAttribute("list", biz.selectList(board_category));
-			return "board_notice";
-		}else {
-			model.addAttribute("list",biz.selectList(board_category));
-			return "board_qna";
-		}
+	@RequestMapping("/board_notice_list.do")
+	public String board_notice_list(Model model, int nowPage) {
+		
+		int count = biz.notice_count();
+		PagingDto Pdto = new PagingDto(count, nowPage);
+		model.addAttribute("list", biz.board_notice_list(Pdto));
+		model.addAttribute("Pdto", Pdto);
+		return "board_notice";
+	}
+	@RequestMapping("/board_qna_list.do")
+	public String board_qna_list(Model model, int nowPage) {
+		int count = biz.qna_count();
+		PagingDto Pdto = new PagingDto(count, nowPage);
+		model.addAttribute("list", biz.board_qna_list(Pdto));
+		model.addAttribute("Pdto", Pdto);
+		return "board_qna";
 	}
 	
 	@RequestMapping("/board_insertform.do")
@@ -39,13 +47,13 @@ public class BoardController {
 	public String board_insertRes(BoardDto dto) {
 		if(dto.getBoard_category().equals("N")) {
 			if(biz.notice_insert(dto)>0) {
-				return "redirect:board_list.do?board_category="+dto.getBoard_category();
+				return "redirect:board_notice_list.do?nowPage=1";
 			}else {
 				return "redirect:board_insertform.do?board_category="+dto.getBoard_category();
 			}
 		}else {
 			if(biz.qna_insert(dto)>0) {
-				return "redirect:board_list.do?board_category="+dto.getBoard_category();
+				return "redirect:board_qna_list.do?nowPage=1";
 			}else {
 				return "redirect:board_insertform.do?board_category="+dto.getBoard_category();
 			}
@@ -75,9 +83,10 @@ public class BoardController {
 	@RequestMapping("/board_delete.do")
 	public String board_delete(int board_no, String board_category) {
 		String category = board_category;
-		if(biz.delete(board_no) > 0) {
-			return "redirect:board_list.do?board_category="+category;
-		}
-		return "redirect:board_list.do?board_category="+category;
+		biz.delete(board_no);
+			if(category.equals("N")) {
+				return "redirect:board_notice_list.do?nowPage=1";
+			}
+			return "redirect:board_qna_list.do?nowPage=1";
 	}
 }

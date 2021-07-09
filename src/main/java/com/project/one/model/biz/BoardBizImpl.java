@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.project.one.model.dao.BoardDao;
 import com.project.one.model.dto.BoardDto;
+import com.project.one.model.dto.PagingDto;
 
 @Service
 public class BoardBizImpl implements BoardBiz {
@@ -15,8 +16,13 @@ public class BoardBizImpl implements BoardBiz {
 	private BoardDao dao;
 	
 	@Override
-	public List<BoardDto> selectList(String board_category) {
-		return dao.selectList(board_category);
+	public List<BoardDto> board_notice_list(PagingDto Pdto) {
+		return dao.board_notice_list(Pdto);
+	}
+
+	@Override
+	public List<BoardDto> board_qna_list(PagingDto Pdto) {
+		return dao.board_qna_list(Pdto);
 	}
 
 	@Override
@@ -47,6 +53,18 @@ public class BoardBizImpl implements BoardBiz {
 	public int delete(int board_no) {
 		return dao.delete(board_no);
 	}
+
+	@Override
+	public int qna_count() {
+		return dao.qna_count();
+	}
+
+	@Override
+	public int notice_count() {
+		return dao.notice_count();
+	}
+
+	
 
 
 

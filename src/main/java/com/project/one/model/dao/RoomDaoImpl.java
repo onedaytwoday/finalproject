@@ -9,31 +9,23 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.project.one.model.dto.ChatDto;
+import com.project.one.model.dto.RoomDto;
 
 @Repository
-public class ChatDaoImpl implements ChatDao {
+public class RoomDaoImpl implements RoomDao {
 
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
 	@Override
-	public List<ChatDto> selectList() {
-		List<ChatDto> list = new ArrayList<ChatDto>();
-
-		try {
-			list = sqlSession.selectList(NAMESPACE + "selectList");
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return list;
+	public List<RoomDto> selectList(Map<String, Object> map) {
+	
+		return sqlSession.selectList(NAMESPACE+"selectList", map);
 	}
 
 	@Override
-	public List<ChatDto> selectListByUser(String member_id) {
-		List<ChatDto> list = new ArrayList<ChatDto>();
+	public List<RoomDto> selectListByUser(String member_id) {
+		List<RoomDto> list = new ArrayList<RoomDto>();
 
 		try {
 			list = sqlSession.selectList(NAMESPACE + "selectListByUser", member_id);
@@ -46,8 +38,8 @@ public class ChatDaoImpl implements ChatDao {
 	}
 
 	@Override
-	public List<ChatDto> selectListByConsult(String consult_id) {
-		List<ChatDto> list = new ArrayList<ChatDto>();
+	public List<RoomDto> selectListByConsult(String consult_id) {
+		List<RoomDto> list = new ArrayList<RoomDto>();
 
 		try {
 			list = sqlSession.selectList(NAMESPACE + "selectListByConsult", consult_id);
@@ -60,8 +52,8 @@ public class ChatDaoImpl implements ChatDao {
 	}
 
 	@Override
-	public ChatDto selectOne(int chat_no) {
-		ChatDto dto = null;
+	public RoomDto selectOne(int chat_no) {
+		RoomDto dto = null;
 
 		try {
 			dto = sqlSession.selectOne(NAMESPACE + "selectOne", chat_no);
@@ -74,7 +66,7 @@ public class ChatDaoImpl implements ChatDao {
 	}
 
 	@Override
-	public int insert(ChatDto dto) {
+	public int insert(RoomDto dto) {
 		int res = 0;
 
 		try {
@@ -88,7 +80,7 @@ public class ChatDaoImpl implements ChatDao {
 	}
 
 	@Override
-	public int update(ChatDto dto) {
+	public int update(RoomDto dto) {
 		int res = 0;
 
 		try {
@@ -116,8 +108,8 @@ public class ChatDaoImpl implements ChatDao {
 	}
 
 	@Override
-	public ChatDto isRoom(String member_id, String consult_id) {
-		ChatDto dto = null;
+	public RoomDto isRoom(String member_id, String consult_id) {
+		RoomDto dto = null;
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("member_id", member_id);
 		map.put("consult_id", consult_id);
