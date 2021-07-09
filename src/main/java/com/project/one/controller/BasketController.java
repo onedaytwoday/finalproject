@@ -43,6 +43,7 @@ public class BasketController {
 			pList.add(pDto);
 			
 		}
+		
 		model.addAttribute("bList", bList);
 		model.addAttribute("pList", pList);
 		
@@ -111,6 +112,26 @@ public class BasketController {
 		bBiz.delete(dto);
 		
 		return "redirect:basket.do";
+	}
+	
+	@ResponseBody
+	@RequestMapping("/getTotalBasket.do")
+	public Map<String, Integer> getTotalBasket(HttpSession session) {
+		int total_num = 0;
+		int total_price = 0;
+		mDto = (MemberDto) session.getAttribute("mDto");
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		
+		List<BasketDto> bList = bBiz.selectList(mDto.getMember_id());
+		for(BasketDto bDto : bList) {
+			total_num += bDto.getBasket_num();
+			total_price += bDto.getBasket_price();
+		}
+		
+		map.put("total_num", total_num);
+		map.put("total_price", total_price);
+		
+		return map;
 	}
 	
 }
