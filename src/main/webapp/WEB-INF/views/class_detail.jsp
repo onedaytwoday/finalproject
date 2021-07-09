@@ -63,11 +63,11 @@
 		<!-- 결제하기 -->
 		<c:choose>
 			<c:when test="${mDto.member_id != null && checkPaid == false}">
-				<form class="mt-3" action="payment.do" method="post">
-					<input type="hidden" name="member_id" value="${mDto.member_id }" />
+				<form class="mt-3" action="payment.do" method="post">					
 					<input type="hidden" name="class_no" value="${dto.class_no }" />
-					<input type="hidden" name="class_title" value="${dto.class_title }" />
-					<input type="hidden" name="class_price" value="${dto.class_price }" />
+					<input type="hidden" name="payment_price" value="${dto.class_price }" />
+					<input type="hidden" name="name" value="${dto.class_title }" />
+					<input type="hidden" name="type" value="class" />
 					
 					<button type="submit" class="btn btn-primary">결제하기</button>
 				</form>

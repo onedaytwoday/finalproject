@@ -10,7 +10,7 @@ public interface PaymentBiz {
 
 	public PaymentDto selectOne(int payment_no);
 
-	public int insert(PaymentDto dto);
+	public int insert(PaymentDto dto, String type, String title);
 
 	public int update(PaymentDto dto);
 
