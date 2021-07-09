@@ -73,7 +73,7 @@ li {
 			var cate = this.value;
 			
 			if(cate == "cate01"){
-				 alert("카테고리 01"); 
+				location.href = 'classList.do'; 
 			}else if(cate == "cate02"){
 				alert("카테고리 02"); 
 			}else if(cate == "cate03"){
