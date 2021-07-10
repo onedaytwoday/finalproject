@@ -56,9 +56,13 @@
 		<div style="border: 1px solid lightgray; width: fit-content; margin-top: 2rem; padding: 2rem;">
 			<h3>Total</h3>
 			
-			<form style="display:flex; flex-direction:column;">
-				<p style="margin-bottom: 1rem;">총 수량 : <span id="total_num"></span></p> 
-				<p style="margin-bottom: 1rem;">총 가격 : <span id="total_price"></span>원</p>
+			<form action="payment.do" method="post" style="display:flex; flex-direction:column;">
+				<p style="margin-bottom: 1rem;">총 수량 : <input type="text" id="total_num" name="payment_num" readonly /></p> 
+				<p style="margin-bottom: 1rem;">총 가격 : <input type="text" id="total_price" name="payment_price" readonly />원</p>
+				
+				<input type="hidden" name="basket_group" value="${basket_group }" />
+				<input type="hidden" name="name" value="장바구니에서 구매" />
+				<input type="hidden" name="type" value="basket" />
 				
 				<input type="submit" value="결제 하기" />
 			</form>

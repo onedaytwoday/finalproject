@@ -38,14 +38,20 @@ public class ClassController {
 	
 	@RequestMapping("/classDetail.do")
 	public String class_detail(Model model, int class_no, HttpSession session) {
-		
 		MemberDto mDto = (MemberDto) session.getAttribute("mDto");
+		
+		System.out.println("mDto : " + mDto);
+		System.out.println("class_no : " + class_no);
+		
 		if(mDto != null) {
 			PaymentDto pDto = new PaymentDto();
 			pDto.setMember_id(mDto.getMember_id());
 			pDto.setClass_no(class_no);
 			
+			System.out.println("pDto : " + pDto);
+			
 			PaymentDto paid = pBiz.checkPaid(pDto);
+			System.out.println(paid);
 			boolean checkPaid = false;
 			
 			if(paid != null) {

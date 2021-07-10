@@ -19,6 +19,13 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"
     />    
+<script type="text/javascript">
+	function cancelPayment(){
+		if(confirm("결제를 취소하시겠습니까?")) {
+			location.href='paymentCancel.do?member_id=${mDto.member_id }&class_no=${dto.class_no}';
+		}
+	}
+</script>
 </head>
 <body>
 
@@ -103,6 +110,7 @@
 			<c:when test="${mDto.member_id != null && checkPaid == false}">
 				<form class="mt-3" action="payment.do" method="post">					
 					<input type="hidden" name="class_no" value="${dto.class_no }" />
+					<input type="hidden" name="payment_num" value="1" />
 					<input type="hidden" name="payment_price" value="${dto.class_price }" />
 					<input type="hidden" name="name" value="${dto.class_title }" />
 					<input type="hidden" name="type" value="class" />
@@ -112,7 +120,7 @@
 			</c:when>
 			
 			<c:when test="${mDto.member_id != null && checkPaid == true}">
-				<button onclick="location.href='paymentCancel.do?member_id=${mDto.member_id }&class_no=${dto.class_no}'" class="btn btn-warning">결제 취소</button>
+				<button onclick="cancelPayment();" class="btn btn-warning mt-3">결제 취소</button>
 			</c:when>
 		</c:choose>
 		

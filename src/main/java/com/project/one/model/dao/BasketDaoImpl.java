@@ -86,4 +86,19 @@ public class BasketDaoImpl implements BasketDao {
 		return res;
 	}
 
+
+	@Override
+	public int deleteAll(String member_id) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.delete(NAMESPACE + "deleteAll", member_id);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+
 }

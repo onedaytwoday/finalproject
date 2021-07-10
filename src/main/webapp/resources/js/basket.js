@@ -8,8 +8,8 @@ function getTotalBasket(){
 			url: "getTotalBasket.do",
 			dataType: "json",
 			success: function(res) {
-				$("#total_num").text(String(res.total_num));
-				$("#total_price").text(String(res.total_price));
+				$("#total_num").val(String(res.total_num));
+				$("#total_price").val(String(res.total_price));
 			},
 			error: function() {
 				alert("통신 실패!");
