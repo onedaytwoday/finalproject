@@ -65,11 +65,11 @@ public class PaymentDaoImpl implements PaymentDao {
 	}
 
 	@Override
-	public int update(PaymentDto dto) {
+	public int updateStatus(PaymentDto dto) {
 		int res = 0;
 		
 		try {
-			res = sqlSession.update(NAMESPACE + "update", dto);
+			res = sqlSession.update(NAMESPACE + "updateStatus", dto);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

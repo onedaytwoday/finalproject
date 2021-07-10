@@ -158,7 +158,8 @@ li {
 			
 			<c:if test="${mDto.member_grade == '관리자' }">
 				<!-- 관리자만 가능 -->
-				<li><a href="eventInsert.do">이벤트 등록</a></li>					
+				<li><a href="eventInsert.do">이벤트 등록</a></li>
+				<li><a href="adminMain.do">관리자 페이지</a></li>					
 			</c:if>
 		</ul>
 

@@ -32,11 +32,12 @@ public class PaymentBizImpl implements PaymentBiz {
 	public List<PaymentDto> selectList() {
 		return dao.selectList();
 	}
-
+	
 	@Override
 	public PaymentDto selectOne(int payment_no) {
 		return dao.selectOne(payment_no);
 	}
+
 
 	@Override
 	public int insert(PaymentDto dto, String type, String title, int basket_group) {
@@ -65,10 +66,10 @@ public class PaymentBizImpl implements PaymentBiz {
 		
 		return dao.insert(dto, type);
 	}
-
+	
 	@Override
-	public int update(PaymentDto dto) {
-		return dao.update(dto);
+	public int updateStatus(PaymentDto dto) {
+		return dao.updateStatus(dto);
 	}
 
 	@Transactional
