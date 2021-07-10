@@ -43,7 +43,7 @@ public class AdminController {
 
 	@RequestMapping("/adminMain.do")
 	public String admin_main() {
-		return "adminMain";
+		return "admin_main";
 	}
 	
 	@RequestMapping("/adminMember.do")
@@ -51,7 +51,7 @@ public class AdminController {
 		List<MemberDto> mList = mBiz.selectList();
 		model.addAttribute("mList", mList);
 		
-		return "adminMember";
+		return "admin_member";
 	}
 	
 	@RequestMapping("/adminProClass.do")
@@ -62,13 +62,13 @@ public class AdminController {
 		model.addAttribute("proList", proList);
 		model.addAttribute("cList", cList);
 		
-		return "adminProClass";
+		return "admin_proclass";
 	}
 	
 	@RequestMapping("/adminBoard.do")
 	public String admin_board(Model model) {
 		
-		return "adminBoard";
+		return "admin_board";
 	}
 	
 	@RequestMapping("/adminPayment.do")
@@ -76,7 +76,7 @@ public class AdminController {
 		List<PaymentDto> pList = pBiz.selectList();
 		model.addAttribute("pList", pList);
 		
-		return "adminPayment";
+		return "admin_payment";
 	}
 	
 	@ResponseBody

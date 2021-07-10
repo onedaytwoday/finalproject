@@ -35,7 +35,7 @@
 <body>
 	<div style="height: 100vh; display: flex">
       <!-- Side Menu -->
-      <jsp:include page="adminMenu.jsp"></jsp:include>
+      <jsp:include page="admin_menu.jsp"></jsp:include>
 
       <!-- Content -->
       <div style="margin: 5rem 0; width: 80%">
