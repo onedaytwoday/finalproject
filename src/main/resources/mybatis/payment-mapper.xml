@@ -3,14 +3,14 @@
 <mapper namespace="payment">
 	<select id="selectList" resultType="paymentDto">
 		SELECT PAYMENT_NO, PAYMENT_NUM, PAYMENT_PRICE, PAYMENT_DATE, PAYMENT_DEL, PAYMENT_UID, MEMBER_ID,
-		PRODUCT_NO, BASKET_NO, CLASS_NO
+		PRODUCT_NO, BASKET_GROUP, CLASS_NO
 		FROM PAYMENT
 		ORDER BY PAYMENT_NO
 	</select>
 	
 	<select id="selectOne" parameterType="int" resultType="paymentDto">
 		SELECT PAYMENT_NO, PAYMENT_NUM, PAYMENT_PRICE, PAYMENT_DATE, PAYMENT_DEL, PAYMENT_UID, MEMBER_ID,
-		PRODUCT_NO, BASKET_NO, CLASS_NO
+		PRODUCT_NO, BASKET_GROUP, CLASS_NO
 		FROM PAYMENT
 		WHERE PAYMENT_NO = #{payment_no} AND MEMBER_ID = #{member_id}
 	</select>
@@ -27,7 +27,7 @@
 	
 	<insert id="insertBasket" parameterType="paymentDto">
 		INSERT INTO PAYMENT
-		VALUES(PAYMENT_NO_SEQ.NEXTVAL, #{payment_num}, #{payment_price}, SYSDATE, #{payment_del}, #{payment_uid}, #{member_id}, NULL, #{basket_no}, NULL)		
+		VALUES(PAYMENT_NO_SEQ.NEXTVAL, #{payment_num}, #{payment_price}, SYSDATE, #{payment_del}, #{payment_uid}, #{member_id}, NULL, #{basket_group}, NULL)		
 	</insert>
 	
 	<delete id="delete" parameterType="paymentDto">
@@ -37,7 +37,7 @@
 	
 	<select id="checkPaid" resultType="paymentDto">
 		SELECT PAYMENT_NO, PAYMENT_NUM, PAYMENT_PRICE, PAYMENT_DATE, PAYMENT_DEL, PAYMENT_UID, MEMBER_ID,
-		PRODUCT_NO, BASKET_NO, CLASS_NO
+		PRODUCT_NO, BASKET_GROUP, CLASS_NO
 		FROM PAYMENT
 		WHERE MEMBER_ID = #{member_id} AND CLASS_NO = #{class_no}
 	</select>

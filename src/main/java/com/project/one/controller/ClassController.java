@@ -48,12 +48,15 @@ public class ClassController {
 	public String class_detail(Model model, int class_no, HttpSession session) {
 
 		MemberDto mDto = (MemberDto) session.getAttribute("mDto");
-		if (mDto != null) {
+		if(mDto != null) {
 			PaymentDto pDto = new PaymentDto();
 			pDto.setMember_id(mDto.getMember_id());
 			pDto.setClass_no(class_no);
-
+			
+			System.out.println("pDto : " + pDto);
+			
 			PaymentDto paid = pBiz.checkPaid(pDto);
+			System.out.println(paid);
 			boolean checkPaid = false;
 
 			if (paid != null) {

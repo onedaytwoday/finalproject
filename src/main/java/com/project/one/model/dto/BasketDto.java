@@ -4,17 +4,19 @@ public class BasketDto {
 	private int basket_no;
 	private int basket_num;
 	private int basket_price;
+	private int basket_group;
 	private int product_no;
 	private String member_id;
 	
 	public BasketDto() {
 	}
 
-	public BasketDto(int basket_no, int basket_num, int basket_price, int product_no, String member_id) {
+	public BasketDto(int basket_no, int basket_num, int basket_price, int basket_group, int product_no, String member_id) {
 		super();
 		this.basket_no = basket_no;
 		this.basket_num = basket_num;
 		this.basket_price = basket_price;
+		this.basket_group = basket_group;
 		this.product_no = product_no;
 		this.member_id = member_id;
 	}
@@ -43,6 +45,14 @@ public class BasketDto {
 		this.basket_price = basket_price;
 	}
 
+	public int getBasket_group() {
+		return basket_group;
+	}
+
+	public void setBasket_group(int basket_group) {
+		this.basket_group = basket_group;
+	}
+
 	public int getProduct_no() {
 		return product_no;
 	}
@@ -62,7 +72,7 @@ public class BasketDto {
 	@Override
 	public String toString() {
 		return "BasketDto [basket_no=" + basket_no + ", basket_num=" + basket_num + ", basket_price=" + basket_price
-				+ ", product_no=" + product_no + ", member_id=" + member_id + "]";
+				+ ", basket_group=" + basket_group + ", product_no=" + product_no + ", member_id=" + member_id + "]";
 	}
 	
 }

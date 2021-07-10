@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.project.one.model.dao.PaymentDao;
+import com.project.one.model.dto.BasketDto;
 import com.project.one.model.dto.ClassDto;
 import com.project.one.model.dto.PaymentDto;
 import com.project.one.model.dto.ProductDto;
@@ -38,17 +39,26 @@ public class PaymentBizImpl implements PaymentBiz {
 	}
 
 	@Override
-	public int insert(PaymentDto dto, String type, String title) {
+	public int insert(PaymentDto dto, String type, String title, int basket_group) {
 		
 		switch(type) {
 		case "product" :
 			ProductDto proDto = proBiz.selectOneByName(title);
 			dto.setProduct_no(proDto.getProduct_no());
+			dto.setPayment_num(1);
 			break;
 			
 		case "class" :
 			ClassDto cDto = cBiz.selectOneByTitle(title);
 			dto.setClass_no(cDto.getClass_no());
+			dto.setPayment_num(1);
+			break;
+			
+		case "basket" :
+			if(basket_group != 0) {
+				dto.setBasket_group(basket_group);			
+			}
+			
 			break;
 		}
 		

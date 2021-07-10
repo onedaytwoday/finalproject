@@ -28,6 +28,7 @@ public class PaymentController {
 
 	private static String TYPE="";
 	private static String TITLE="";
+	private static int BASKET_GROUP=0;
 	
 	@Autowired
 	private PaymentBiz pBiz;
@@ -36,6 +37,7 @@ public class PaymentController {
 	public String payment(Model model, PaymentDto pDto, String name, String type, HttpSession session) {
 		TYPE = type;
 		TITLE = name;
+		BASKET_GROUP = pDto.getBasket_group();
 		
 		MemberDto mDto = (MemberDto)session.getAttribute("mDto");
 		
@@ -49,11 +51,14 @@ public class PaymentController {
 	@ResponseBody
 	@RequestMapping("/paymentComplete.do")
 	public Map<String, String> payment_complete(@RequestBody PaymentDto dto) {
-		Map<String, String> map = new HashMap<>();	
-
+		Map<String, String> map = new HashMap<>();
 		
-		if(pBiz.insert(dto, TYPE, TITLE) > 0) {
+		if(pBiz.insert(dto, TYPE, TITLE, BASKET_GROUP) > 0) {
 			map.put("msg", "성공");
+			
+			if(TYPE.equals("basket")) {
+				map.put("basket", "basket");
+			}
 		} else {
 			map.put("msg", "실패");
 		}
