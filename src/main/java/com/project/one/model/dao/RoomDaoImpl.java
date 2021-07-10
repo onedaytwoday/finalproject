@@ -1,7 +1,7 @@
 package com.project.one.model.dao;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
 
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.project.one.model.dto.RoomDto;
 
 @Repository
-public class RoomDaoImpl implements RoomDao {
+public abstract class RoomDaoImpl implements RoomDao {
 
 	@Autowired
 	private SqlSessionTemplate sqlSession;
@@ -52,11 +52,11 @@ public class RoomDaoImpl implements RoomDao {
 	}
 
 	@Override
-	public RoomDto selectOne(int chat_no) {
+	public RoomDto selectOne(int room_no) {
 		RoomDto dto = null;
 
 		try {
-			dto = sqlSession.selectOne(NAMESPACE + "selectOne", chat_no);
+			dto = sqlSession.selectOne(NAMESPACE + "selectOne", room_no);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -106,17 +106,12 @@ public class RoomDaoImpl implements RoomDao {
 
 		return res;
 	}
-
-	@Override
-	public RoomDto isRoom(String member_id, String consult_id) {
+	public RoomDto isRoom(RoomDto roomDto) {
 		RoomDto dto = null;
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("member_id", member_id);
-		map.put("consult_id", consult_id);
 		try {
-			dto = sqlSession.selectOne(NAMESPACE + "isRoom",map );
+			dto = sqlSession.selectOne(NAMESPACE+"isRoom", roomDto);
 		} catch (Exception e) {
-			e.printStackTrace();
+			
 		}
 		return dto;
 	}

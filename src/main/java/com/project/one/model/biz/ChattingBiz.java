@@ -14,4 +14,8 @@ public interface ChattingBiz {
 	public int update(ChattingDto dto);
 
 	public int delete(int chatting_no);
+	
+	public List<ChattingDto> selectListByRoom(int room_no);
+	
+	
 }
