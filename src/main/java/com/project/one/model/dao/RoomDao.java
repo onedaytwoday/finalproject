@@ -23,6 +23,8 @@ public interface RoomDao {
 	public int update(RoomDto dto);
 	
 	public int delete(int chat_no);
+	//두 멤버 들어간 방 있는지
+	public RoomDto isRoom(RoomDto roomDto);
 	
 
 }

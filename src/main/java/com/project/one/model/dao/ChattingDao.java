@@ -17,5 +17,6 @@ public interface ChattingDao {
 	
 	public int delete(int chatting_no);
 
+	public List<ChattingDto> selectListByRoom(int room_no);
 	
 }

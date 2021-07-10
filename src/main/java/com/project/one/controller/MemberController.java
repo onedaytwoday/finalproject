@@ -28,6 +28,7 @@ import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.project.one.model.biz.BasketBiz;
 import com.project.one.model.biz.MemberBiz;
 import com.project.one.model.dto.BasketDto;
+import com.project.one.model.dto.ChatSession;
 import com.project.one.model.dto.MemberDto;
 
 @Controller
@@ -42,7 +43,9 @@ public class MemberController {
 	private void setNaverLogin(NaverLogin naverLogin) {
 		this.naverLogin = naverLogin;
 	}
-
+	
+	@Autowired
+	private ChatSession chatSession;
 	
 	@Autowired
 	private MemberBiz biz;	
@@ -273,6 +276,7 @@ public class MemberController {
 	public String logout(HttpSession session)throws IOException {
 		
 		session.invalidate();
+
 		return "main";
 	}
 	@RequestMapping("/main.do")
@@ -280,7 +284,7 @@ public class MemberController {
 		MemberDto mDto = (MemberDto)session.getAttribute("mDto");
 		List<BasketDto> bList = bBiz.selectList(mDto.getMember_id());
 		model.addAttribute("basket_num", bList.size());
-		
+
 		return "main";
 	}
 

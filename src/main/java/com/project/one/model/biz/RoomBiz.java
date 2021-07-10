@@ -22,5 +22,6 @@ public interface RoomBiz {
 
 	public int delete(int chat_no);
 	
+	public RoomDto isRoom(RoomDto roomDto);
 
 }

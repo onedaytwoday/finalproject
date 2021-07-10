@@ -51,6 +51,12 @@ public class RoomBizImpl implements RoomBiz {
 		return dao.delete(chat_no);
 	}
 
+	@Override
+	public RoomDto isRoom(RoomDto roomDto) {
+		
+		return dao.isRoom(roomDto);
+	}
+
 
 
 

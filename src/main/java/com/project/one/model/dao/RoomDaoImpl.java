@@ -106,6 +106,14 @@ public abstract class RoomDaoImpl implements RoomDao {
 
 		return res;
 	}
-
+	public RoomDto isRoom(RoomDto roomDto) {
+		RoomDto dto = null;
+		try {
+			dto = sqlSession.selectOne(NAMESPACE+"isRoom", roomDto);
+		} catch (Exception e) {
+			
+		}
+		return dto;
+	}
 
 }

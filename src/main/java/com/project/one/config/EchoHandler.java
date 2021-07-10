@@ -1,7 +1,7 @@
 package com.project.one.config;
 
 import java.util.ArrayList;
-import java.util.List;
+
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -90,9 +90,12 @@ public class EchoHandler extends TextWebSocketHandler {
         // 채팅 메세지 입력 시
         else if(RoomList.get(Integer.toString(chatMessage.getRoom_no())) != null && !chatMessage.getChatting_content().equals("ENTER-CHAT") && chatRoom != null) {
             
-            // 메세지에 멤버아이디, 내용을 담는다.-> 채팅 컬럼에 멤버아이디 필요
+            // 메세지에 멤버아이디, 내용을 담는다.
             TextMessage textMessage = new TextMessage(chatMessage.getMember_id() + "," + chatMessage.getChatting_content());
-            
+            //채팅방 세션에 뿌려준다.
+            for(WebSocketSession sess : RoomList.get(Integer.toString(chatMessage.getRoom_no()))) {
+            	sess.sendMessage(textMessage);
+            }
 
             // DB에 저장한다.
             int insertRes = chatBiz.insert(chatMessage);

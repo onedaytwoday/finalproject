@@ -22,5 +22,8 @@
 		DELETE FROM ROOM
 		WHERE ROOM_NO = #{room_no}
 	</delete>
-
+	<select id ="isRoom" resultType = "roomDto">
+	SELECT * FROM ROOM
+	WHERE MEMBER_ID = #{member_id} AND CONSULT_ID = #{consult_id} 
+	</select>
 </mapper>
