@@ -45,6 +45,9 @@
 	
 	<websocket:handlers>
 		<websocket:mapping handler="echoHandler" path="/echo"/>
+        <websocket:handshake-interceptors>
+        	<beans:bean class="com.project.one.common.interceptor.ChatInterceptor"/>
+        </websocket:handshake-interceptors>
 		<websocket:sockjs/>
 	</websocket:handlers>
 

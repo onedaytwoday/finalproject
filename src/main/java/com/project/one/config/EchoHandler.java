@@ -39,10 +39,13 @@ public class EchoHandler extends TextWebSocketHandler {
 	     */
 	
 	
+			  
+	
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		  i++;
 	      System.out.println(session.getId() + " 연결 성공 => 총 접속 인원 : " + i + "명");
+	   
 	}
 
     @Override
