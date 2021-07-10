@@ -33,7 +33,7 @@
 		<h1 class="my-5">클래스 상세 페이지 </h1>
 		
 		<div>
-			<img class="w-50 h-50" src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" alt="pic" />
+			<img class="w-50 h-50" src="resources/upload/f02d2a5d-4165-483f-9904-01d679d6fde3.png" alt="pic" />
 			
 			<div class="my-2">
 				<span>
