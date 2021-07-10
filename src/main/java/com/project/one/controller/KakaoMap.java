@@ -2,8 +2,7 @@ package com.project.one.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-//REST API가 뭐지...
-//이거 값을 받아서 뭘 어째야 하는거지....ㅠㅠ
+
 @Controller
 public class KakaoMap {
 	
@@ -13,8 +12,33 @@ public class KakaoMap {
 		return "map";
 	}
 	
+	//등록된 클래스의 위치..클래스컨트롤러로 옮기는게 나은가...
 	@RequestMapping("/classmap.do")
 	public String classMap() {
+		
+		
+		
+		/*아래 코드는 예제 코드입니다.
+		 * 
+		 * 			PrintWriter out = response.getWriter();
+			
+			List<BusinessDto> list = biz.bookableMap();
+			JSONObject obj = new JSONObject();
+			JSONArray jsonArray = new JSONArray();
+			for(int i = 0; i<list.size(); i++) {
+				
+				
+				obj.put("business_addr",list.get(i).getBusiness_addr());
+			    obj.put("business_name", list.get(i).getBusiness_name());
+				
+				jsonArray.add(obj);
+			
+			}
+						
+			out.print(jsonArray);
+			out.flush();
+		 */
+		
 		return null;
 	}
 	

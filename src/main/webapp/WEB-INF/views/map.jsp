@@ -49,7 +49,6 @@
 </head>
 <body>
 
-<<<<<<< HEAD
 <div class="map_wrap">
     <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
 
@@ -58,7 +57,7 @@
             <div>
                 <form onsubmit="searchPlaces(); return false;">
                     키워드 : <input type="text" value="검색어 입력해주세요" id="keyword" size="15"> 
-                    <button type="submit">검색하기</button> 
+                    <button type="submit" onclick="classMap();">검색하기</button> 
                 </form>
             </div>
         </div>
@@ -66,13 +65,14 @@
         <ul id="placesList"></ul>
         <div id="pagination"></div>
     </div>
+    <p class="classMap">
+    	<input class="searchButton" type="button" value="Click" onclick="classMap();"/>
+    </p>
 </div>
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b09278ee8c0d306e4d38397589fed58d"></script>
-=======
 	<div id="map" style="width: 500px; height: 400px;"></div>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b09278ee8c0d306e4d38397589fed58d"></script>
->>>>>>> a72bf8ba7b6adada3514ffb289557c8e1759fb94
 	<script>
 	// 마커를 담을 배열입니다
 	var markers = [];
@@ -292,8 +292,9 @@
 	}
 	 //------------여기서부터 가져온 코드
 	 
-	 //db에서 주소,이름 가져오기 
-    function bookableMap(){
+	 //db에서 주소,이름 가져오기 	db연결
+	 //검색어를 어떻게 컨트롤러로 보낼 것인가?
+    function classMap(){
 		$.ajax({
 			url : "../classmap.do",
 			type: "POST",
@@ -311,15 +312,15 @@
 					//list[i] = "["+ '"'+  data[i].business_addr +'"' + "," + '"'+ data[i].business_name +'"'+ "]";
 					
 						list[i] = new Array();
-						list[i][0] = data[i].business_addr;
-						list[i][1] = data[i].business_name;
+						list[i][0] = data[i].class_loc;
+						list[i][1] = data[i].class_title;
 					
 					
 					
 				}
  				//var listData = "["+list+"]";
 				
-			    //-> [["도로명주소","가게명"],["도로명주소","가게명"],,,]
+			    //-> [["class_loc","class_title"],["class_loc","class_title"],,,]
 				
 				
 				//주소로 위도,경도 변환해줄 객체

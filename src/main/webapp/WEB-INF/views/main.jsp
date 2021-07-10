@@ -153,12 +153,9 @@ li {
 			<li><a href="board_qna_list.do?nowPage=1">상품문의</a></li>
 			<li><a href="#">수강후기포토</a></li>
 			<li><a href="chat.do">채팅</a></li>
-<<<<<<< HEAD
 			<li><a href="map.do">지도</a></li>
 			<%-- <li><a href="map.do" onclick="window.open('map.do', '지도', 'width=500px, height=400px');return false">지도</a></li>--%>
-=======
-			<li><a href="map.do">지도</a>
->>>>>>> a72bf8ba7b6adada3514ffb289557c8e1759fb94
+
 			
 			<c:if test="${mDto.member_grade == '관리자' }">
 				<!-- 관리자만 가능 -->
