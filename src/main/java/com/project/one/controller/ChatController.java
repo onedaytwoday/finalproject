@@ -20,7 +20,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
 import com.project.one.model.biz.ChattingBiz;
-
+import com.project.one.model.biz.MemberBiz;
 import com.project.one.model.biz.RoomBiz;
 import com.project.one.model.dto.ChatSession;
 import com.project.one.model.dto.ChattingDto;
@@ -41,6 +41,17 @@ public class ChatController {
 
 	@Autowired
 	private ChatSession chatSession;
+	
+	@Autowired
+	private MemberBiz mBiz;
+	
+	//강사회원 리스트
+	@RequestMapping("/consultList.do")
+	public String consultList(Model model, String member_grade) {
+		model.addAttribute("list",mBiz.selectListConsult(member_grade));
+		
+		return "consultList";
+	}
 	
 	//채팅방목록
 	@RequestMapping("/chatRoomList.do")

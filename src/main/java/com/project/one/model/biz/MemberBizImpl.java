@@ -176,4 +176,10 @@ public class MemberBizImpl implements MemberBiz {
 		return dao.delete(member_id);
 	}
 
+	@Override
+	public List<MemberDto> selectListConsult(String member_grade) {
+		
+		return dao.selectListConsult(member_grade);
+	}
+
 }

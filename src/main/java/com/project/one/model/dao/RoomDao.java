@@ -6,7 +6,7 @@ import java.util.Map;
 import com.project.one.model.dto.RoomDto;
 
 public interface RoomDao {
-	String NAMESPACE = "chat.";
+	String NAMESPACE = "room.";
 	
 	public List<RoomDto> selectList(Map<String, Object> map);
 	

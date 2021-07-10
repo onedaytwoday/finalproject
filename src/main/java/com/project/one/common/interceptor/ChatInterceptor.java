@@ -19,7 +19,7 @@ public class ChatInterceptor implements HandshakeInterceptor {
 	@Override
 	public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler,
 			Map<String, Object> attributes) throws Exception {
-		MemberDto mDto = (MemberDto)session.getAttribute("mDto");
+		//MemberDto mDto = (MemberDto)session.getAttribute("mDto");
 		return false;
 	}
 
