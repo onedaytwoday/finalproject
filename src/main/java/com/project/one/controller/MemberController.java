@@ -283,5 +283,15 @@ public class MemberController {
 		
 		return "main";
 	}
+	
+	@RequestMapping("/mypage.do")
+	public String mypage(Model model, String member_id) {
+		MemberDto dto = biz.selectOne(member_id);
+		
+		model.addAttribute("dto",dto);
+		
+		return "mypage";
+		
+	}
 
 }
