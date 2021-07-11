@@ -2,7 +2,9 @@ package com.project.one.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -12,7 +14,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -25,6 +29,7 @@ import com.project.one.model.biz.RoomBiz;
 import com.project.one.model.dto.ChatSession;
 import com.project.one.model.dto.ChattingDto;
 import com.project.one.model.dto.MemberDto;
+import com.project.one.model.dto.PaymentDto;
 import com.project.one.model.dto.RoomDto;
 
 
@@ -110,6 +115,7 @@ public class ChatController {
         else{
             System.out.println("방이 있다!!");
             mav.setViewName("existRoom");
+            mav.addObject("Room_no", exist.getRoom_no());
             return mav;
         }
     }
@@ -126,6 +132,19 @@ public class ChatController {
         gson.toJson(chatSessionList,response.getWriter());
     }
     
+    @ResponseBody
+	@RequestMapping(value="/chat_insert.do", method=RequestMethod.POST)
+	public Map<String, String> update_status(@RequestBody ChattingDto dto) {
+		Map<String, String> map = new HashMap<>();
+		
+		if(chatBiz.insert(dto) > 0) {
+			map.put("msg", "성공");
+		}else {
+			map.put("msg", "실패");
+		}
+		
+		return map;
+	}
 	@RequestMapping("/tts.do")
 	public String tts() {
 		return "tts";

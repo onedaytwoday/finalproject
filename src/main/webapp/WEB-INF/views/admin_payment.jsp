@@ -38,7 +38,7 @@
 					<tr>
 						<th colspan="5">------------결제 목록이 존재하지 않습니다.------------</th>
 					</tr>
-				</c:when>
+				</c:when>d
 				<c:otherwise>
 					<c:forEach items="${pList }" var="dto">
 						<tr>

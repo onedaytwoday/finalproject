@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="catting">
+<mapper namespace="chatting">
 	<select id="chatting" resultType="chattingDto">
 		SELECT CHATTING_NO, CHATTING_CONTENT, CHATTING_DATE, ROOM_NO,MEMBER_ID
 		FROM CHATTING
@@ -15,7 +15,7 @@
 	
 	<insert id="insert" parameterType="chattingDto">
 		INSERT INTO CHATTING
-		VALUES(#{chatting_no},#{chatting_content},#{chatting_date},#{room_no},#{member_id})
+		VALUES(CHATTING_NO_SEQ.NEXTVAL,#{chatting_content},SYSDATE,#{room_no},#{member_id})
 	</insert>
 	
 	<delete id="delete" parameterType="int">
