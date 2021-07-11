@@ -137,7 +137,6 @@ li {
 		<br>
 
 		<ul class="headernav">
-			<li><a href="ex.do">ex</a></li>
 			<li><a href="main.do"><img src="logo.png"></a></li>
 			<li><a href="main.do">Home</a></li>
 			<li><a href="board_notice_list.do?nowPage=1">공지사항</a></li>
@@ -154,7 +153,6 @@ li {
 			<li><a href="classList.do">클래스</a></li>
 			<li><a href="board_qna_list.do?nowPage=1">상품문의</a></li>
 			<li><a href="#">수강후기포토</a></li>
-			<li><a href="chat.do">채팅</a></li>
 			<li><a href="map.do">지도</a></li>
 			<%-- <li><a href="map.do" onclick="window.open('map.do', '지도', 'width=500px, height=400px');return false">지도</a></li>--%>
 
@@ -169,7 +167,6 @@ li {
 	</header>
 	<div class="chatIcon">
         <img width="50"  src="https://previews.123rf.com/images/nikolae/nikolae1601/nikolae160100031/51288418-%ED%9D%B0%EC%83%89-%EB%B0%B0%EA%B2%BD%EC%97%90-%EA%B3%A0%EB%A6%BD-%EC%B1%84%ED%8C%85-%EC%95%84%EC%9D%B4%EC%BD%98.jpg" class="iconImg">
-       <img width="50"  src="https://previews.123rf.com/images/nikolae/nikolae1601/nikolae160100031/51288418-%ED%9D%B0%EC%83%89-%EB%B0%B0%EA%B2%BD%EC%97%90-%EA%B3%A0%EB%A6%BD-%EC%B1%84%ED%8C%85-%EC%95%84%EC%9D%B4%EC%BD%98.jpg" class="iconImg">
     </div>
     <div class="tts">
     	<a href="tts.do">tts</a>
