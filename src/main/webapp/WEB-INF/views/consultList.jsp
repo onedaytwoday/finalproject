@@ -8,13 +8,13 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<h2>강사 ID를 클릭하여 채팅을 시작해보세요</h2>
 	<table border="1">
-		<col width="50"/>
+		<col width="100"/>
 		<col width="70"/>
 		<tr>
-			<th>강사아이디</th>
-			<th>강사이름</th>
-
+			<th>강사 ID</th>
+			<th>강사명</th>
 		</tr>
 		<c:choose>
 			<c:when test="${empty list }">
@@ -23,7 +23,7 @@
 			<c:otherwise>
 				<c:forEach items="${list }" var="dto">
 					<tr>
-						<td><a href="creatChat.do?member_id=${dto.member_id }"></a></td>
+						<td><a href="creatChat.do?member_id=${dto.member_id}">${dto.member_id}</a></td>
 						<td>${dto.member_name}</td>	
 					</tr>
 				</c:forEach>
