@@ -34,15 +34,15 @@
 		UPDATE PAYMENT
 
 			<choose>
-			    <when test="payment_del != null and 'payment_del.equal(결제완료)'">
+			    <when test="payment_del != null and payment_del.equals('결제완료')">
 			      set payment_del = '배송준비중'
 			    </when>
 			    
-			    <when test="payment_del != null and 'payment_del.equal(배송준비중)'">
+			    <when test="payment_del != null and payment_del.equals('배송준비중')">
 			      set payment_del = '배송중'
 			    </when>
 			    
-			    <when test="payment_del != null and 'payment_del.equal(배송중)'">
+			    <when test="payment_del != null and payment_del.equals('배송중')">
 			      set payment_del = '배송완료'
 			    </when>
 		  	</choose>
