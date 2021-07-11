@@ -26,7 +26,7 @@
 	
 	<insert id="insert" parameterType="roomDto">
 		INSERT INTO ROOM
-		VALUES(#{room_no},#{member_id},#{consult_id},#{room_content},#{room_date})		
+		VALUES(ROOM_NO_SEQ.NEXTVAL,#{member_id},#{consult_id},NULL,SYSDATE)		
 	</insert>
 	
 	<delete id="delete" parameterType="int">

@@ -64,7 +64,7 @@ li {
 <script type="text/javascript">
 	$(document).ready(function(){		
 		$('.iconImg').click(function(){
-    		window.open('http://localhost:8787/one/chatRoomList.do','채팅', 'width=300px,height=500px,scrollbars=yes');
+    		window.open('http://localhost:8787/one/consultList.do','채팅', 'width=300px,height=500px,scrollbars=yes');
     	});
     	
 	    $('#class').on('change', function() {
@@ -96,11 +96,11 @@ li {
 			}
 	
 	    });
-	   
+	   /*
 		$('.iconImg').click(function(){
 	        window.open('http://localhost:8787/one/consultList.do', 'width=300px,height=500px,scrollbars=yes');
 	    });
-		
+		*/
 	    
 	    
 	});
