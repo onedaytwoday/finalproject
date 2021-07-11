@@ -3,31 +3,16 @@ package com.project.one.config;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
-import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.project.one.model.biz.ChattingBiz;
-import com.project.one.model.biz.RoomBiz;
-import com.project.one.model.dto.ChattingDto;
 import com.project.one.model.dto.MemberDto;
-import com.project.one.model.dto.RoomDto;
 
 public class EchoHandler extends TextWebSocketHandler {
-
-	@Autowired
-	private RoomBiz roomBiz;
-
-	@Autowired
-	private ChattingBiz chatBiz;
 
 	private List<WebSocketSession> sessionList = new ArrayList<WebSocketSession>();
 

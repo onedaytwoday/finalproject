@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.project.one.model.dao.PaymentDao;
-import com.project.one.model.dto.BasketDto;
 import com.project.one.model.dto.ClassDto;
 import com.project.one.model.dto.PaymentDto;
 import com.project.one.model.dto.ProductDto;

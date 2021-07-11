@@ -10,7 +10,7 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <!-- IP주소 얻기 -->
-<script type="text/javascript" src="http://jsgetip.appspot.com"></script>
+<script defer type="text/javascript" src="http://jsgetip.appspot.com"></script>
 
 <!-- Kakao Link 보내기 -->
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>

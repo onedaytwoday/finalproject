@@ -24,7 +24,7 @@
 	
 	<insert id="insert" parameterType="productDto">
 		INSERT INTO PRODUCT
-		VALUES(#{product_no},#{product_name},#{product_category},#{product_price},#{product_desc},#{product_loc},#{product_del},
+		VALUES(PRODUCT_NO_SEQ.NEXTVAL, #{product_name}, #{product_category}, #{product_price}, #{product_desc}, #{product_loc}, #{product_del},
 		#{product_sale})
 	
 	</insert>

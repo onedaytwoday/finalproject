@@ -47,16 +47,7 @@
 							<td>${dto.member_nicname }</td>
 							<td>${dto.member_email }</td>
 							<td>${dto.member_grade }</td>
-							
-							<c:choose>
-								<c:when test="${dto.member_join == 'Y' }">
-									<td><input type="button" onclick="manageMember('lock', '${dto.member_id}');" value="계정 잠그기" /></td>
-								</c:when>
-								
-								<c:otherwise>
-									<td><input type="button" onclick="manageMember('unlock', '${dto.member_id}');" value="계정 풀기" /></td>
-								</c:otherwise>
-							</c:choose>
+							<td><input id="${dto.member_id }" type="button" onclick="manageMember('${dto.member_id}');" value="${dto.member_join == 'Y' ? '계정 잠그기' : '계정 풀기' }" /></td>
 						</tr>
 					</c:forEach>
 				</c:otherwise>
