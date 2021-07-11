@@ -158,7 +158,8 @@ public class ClassController {
 						break;
 					}
 				}
-					File thumbnailFile = new File(contextRoot + "resources/upload/" + class_no + "s_" + Random(5) + extensions.get(0));	
+					fileRoot = contextRoot + "resources/upload/";
+					File thumbnailFile = new File(fileRoot + class_no + "s_" + Random(5) + extensions.get(0));	
 					BufferedImage bo_image = ImageIO.read(files.get(0));
 					//비율 
 					double ratio = 3;
@@ -169,6 +170,16 @@ public class ClassController {
 					Thumbnails.of(files.get(0))
 					.size(width, height)
 					.toFile(thumbnailFile);
+					
+					String size = Long.toString(thumbnailFile.length());
+					FileTableDto fdto = new FileTableDto(0,fileRoot,"thumbnail",
+							thumbnailFile.getName(),extensions.get(0),null,size,dto.getMember_id(),0,class_no,0,0);
+					if(fbiz.class_insert(fdto) > 0) {
+						System.out.println("썸네일 file db 넣기 성공");
+					}else {
+						System.out.println("썸네일 file db 넣기 실패");
+					}
+					
 				strResult = "{ \"result\":\"OK\" }";
 			}
 			// (업로드 없이 등록하는경우)

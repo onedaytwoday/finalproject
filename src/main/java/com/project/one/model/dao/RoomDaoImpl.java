@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.project.one.model.dto.RoomDto;
 
 @Repository
-public abstract class RoomDaoImpl implements RoomDao {
+public class RoomDaoImpl implements RoomDao {
 
 	@Autowired
 	private SqlSessionTemplate sqlSession;
