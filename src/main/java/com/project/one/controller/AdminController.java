@@ -80,16 +80,30 @@ public class AdminController {
 	}
 	
 	@ResponseBody
+	@RequestMapping(value="/manageMember.do", method=RequestMethod.POST)
+	public Map<String, String> manage_member(@RequestBody MemberDto dto, String type) {
+		Map<String, String> map = new HashMap<>();
+		
+		System.out.println(type);
+
+//		if(mBiz.delete(dto.getMember_id()) > 0) {
+//			map.put("msg", "성공");
+//		} else {
+//			map.put("msg", "실패");
+//		}
+		
+		return map;
+	}
+	
+	@ResponseBody
 	@RequestMapping(value="/updateStatus.do", method=RequestMethod.POST)
 	public Map<String, String> update_status(@RequestBody PaymentDto dto) {
 		Map<String, String> map = new HashMap<>();
 		
-		System.out.println("status : " + dto.getPayment_del());
-
+		dto = pBiz.selectOne(dto.getPayment_no());
+		
 		if(pBiz.updateStatus(dto) > 0) {
 			PaymentDto pDto = pBiz.selectOne(dto.getPayment_no());
-			System.out.print(pDto);
-			
 			map.put("msg", "성공");
 			map.put("status", pDto.getPayment_del());
 			
