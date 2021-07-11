@@ -1,8 +1,5 @@
 package com.project.one.controller;
 
-
-
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,9 +25,6 @@ import com.project.one.model.dto.ChatSession;
 import com.project.one.model.dto.ChattingDto;
 import com.project.one.model.dto.MemberDto;
 import com.project.one.model.dto.RoomDto;
-
-
-
 
 
 @Controller
@@ -86,13 +81,12 @@ public class ChatController {
     
     //채팅방 생성
     @ResponseBody
-    @RequestMapping("createChat.do")
+    @RequestMapping("/createChat.do")
     public String createChat(String member_id, HttpSession session, Model model){   
     	
     	MemberDto mDto = (MemberDto)session.getAttribute("mDto");
     	RoomDto rDto = new RoomDto();
     	if(mDto != null) {
-    	
     		//로그인한 회원
     	    rDto.setMember_id(mDto.getMember_id());
     	    //강사 회원

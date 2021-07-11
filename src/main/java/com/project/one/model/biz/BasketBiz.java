@@ -14,4 +14,6 @@ public interface BasketBiz {
 	public int update(BasketDto dto);
 
 	public int delete(BasketDto dto);
+	
+	public int deleteAll(String member_id);
 }

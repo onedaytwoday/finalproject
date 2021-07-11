@@ -71,7 +71,7 @@ public class MemberController {
 		if(mDto != null) {
 			chk = true;
 			session.setAttribute("mDto", mDto);
-			
+			session.setMaxInactiveInterval(60*60);
 			if(mDto.getMember_notify().equals("N") || dto.getMember_ip().equals(mDto.getMember_ip())) {
 				ip_chk = true;
 			}
@@ -91,6 +91,7 @@ public class MemberController {
 			MemberDto mDto = biz.selectOne(dto.getMember_id());
 			if(mDto!=null) {
 				session.setAttribute("mDto", mDto);
+				session.setMaxInactiveInterval(60*60);
 				return "main";
 			}	
 		}
@@ -125,6 +126,7 @@ public class MemberController {
 	public String sns_signupRes(MemberDto mDto, HttpSession session) {
 		if(biz.register(mDto) > 0) {
 			session.setAttribute("mdto", mDto);
+			session.setMaxInactiveInterval(60*60);
 			return "main";
 		}
 		
@@ -225,6 +227,7 @@ public class MemberController {
 			MemberDto res = biz.selectOne(member_id);
 			if(res != null) {
 				session.setAttribute("mDto", res);
+				session.setMaxInactiveInterval(60*60);
 				return "main";
 			}
 			model.addAttribute("mDto",mDto);
@@ -264,6 +267,7 @@ public class MemberController {
 		MemberDto res = biz.selectOne(kid);
 		if(res != null) {
 			session.setAttribute("mDto", res);
+			session.setMaxInactiveInterval(60*60);
 			return "main";
 		}
 		
@@ -286,6 +290,16 @@ public class MemberController {
 		model.addAttribute("basket_num", bList.size());
 
 		return "main";
+	}
+	
+	@RequestMapping("/mypage.do")
+	public String mypage(Model model, String member_id) {
+		MemberDto dto = biz.selectOne(member_id);
+		
+		model.addAttribute("dto",dto);
+		
+		return "mypage";
+		
 	}
 
 }

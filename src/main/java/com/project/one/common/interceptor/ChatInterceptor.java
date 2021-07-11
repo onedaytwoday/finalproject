@@ -19,6 +19,7 @@ public class ChatInterceptor implements HandshakeInterceptor {
 	@Override
 	public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler,
 			Map<String, Object> attributes) throws Exception {
+			System.out.println("chat before 인터셉터");
 		//MemberDto mDto = (MemberDto)session.getAttribute("mDto");
 		return false;
 	}
@@ -26,7 +27,7 @@ public class ChatInterceptor implements HandshakeInterceptor {
 	@Override
 	public void afterHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler,
 			Exception exception) {
-		// TODO Auto-generated method stub
+		System.out.println("chat after 인터셉터");
 
 	}
 

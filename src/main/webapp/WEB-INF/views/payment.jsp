@@ -31,7 +31,7 @@
 				
 				let paymentVal = {
 						payment_del : '결제완료',
-						payment_num : 1,
+						payment_num : '${pDto.payment_num}',
 						payment_price: rsp.paid_amount,
 						member_id: rsp.buyer_name,
 						title: rsp.name,
@@ -46,7 +46,13 @@
 					dataType: "json",
 					success: function(res){
 						alert("결제 " + res.msg);
-						location.href="main.do";
+						
+						if(res.msg == '성공' && res.basket == 'basket') {
+							location.href="deleteAll.do";
+						} else {
+							location.href="main.do";						
+						}
+						
 					},
 					error: function(err){
 						alert("통신 실패!");

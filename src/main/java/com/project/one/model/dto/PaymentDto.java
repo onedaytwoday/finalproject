@@ -5,20 +5,20 @@ import java.util.Date;
 public class PaymentDto {
 	private int payment_no;
 	private int payment_num;
-	private double payment_price;
+	private int payment_price;
 	private Date payment_date;
 	private String payment_del;
 	private String payment_uid;
 	private String member_id;
 	private int product_no;
-	private int basket_no;
+	private int basket_group;
 	private int class_no;
 	
 	public PaymentDto() {
 	}
 
-	public PaymentDto(int payment_no, int payment_num, double payment_price, Date payment_date, String payment_del,
-			String payment_uid, String member_id, int product_no, int basket_no, int class_no) {
+	public PaymentDto(int payment_no, int payment_num, int payment_price, Date payment_date, String payment_del,
+			String payment_uid, String member_id, int product_no, int basket_group, int class_no) {
 		super();
 		this.payment_no = payment_no;
 		this.payment_num = payment_num;
@@ -28,7 +28,7 @@ public class PaymentDto {
 		this.payment_uid = payment_uid;
 		this.member_id = member_id;
 		this.product_no = product_no;
-		this.basket_no = basket_no;
+		this.basket_group = basket_group;
 		this.class_no = class_no;
 	}
 
@@ -48,11 +48,11 @@ public class PaymentDto {
 		this.payment_num = payment_num;
 	}
 
-	public double getPayment_price() {
+	public int getPayment_price() {
 		return payment_price;
 	}
 
-	public void setPayment_price(double payment_price) {
+	public void setPayment_price(int payment_price) {
 		this.payment_price = payment_price;
 	}
 
@@ -96,12 +96,12 @@ public class PaymentDto {
 		this.product_no = product_no;
 	}
 
-	public int getBasket_no() {
-		return basket_no;
+	public int getBasket_group() {
+		return basket_group;
 	}
 
-	public void setBasket_no(int basket_no) {
-		this.basket_no = basket_no;
+	public void setBasket_group(int basket_group) {
+		this.basket_group = basket_group;
 	}
 
 	public int getClass_no() {
@@ -116,8 +116,8 @@ public class PaymentDto {
 	public String toString() {
 		return "PaymentDto [payment_no=" + payment_no + ", payment_num=" + payment_num + ", payment_price="
 				+ payment_price + ", payment_date=" + payment_date + ", payment_del=" + payment_del + ", payment_uid="
-				+ payment_uid + ", member_id=" + member_id + ", product_no=" + product_no + ", basket_no=" + basket_no
-				+ ", class_no=" + class_no + "]";
+				+ payment_uid + ", member_id=" + member_id + ", product_no=" + product_no + ", basket_group="
+				+ basket_group + ", class_no=" + class_no + "]";
 	}
 	
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="review">
-	<select id="review" resultType="reviewDto">
+	<select id="selectList" resultType="reviewDto">
 		SELECT REVIEW_NO, REVIEW_TITLE, REVIEW_RATE, REVIEW_DATE, REVIEW_CONTENT, PRODUCT_NO, CLASS_NO, MEMBER_ID
 		FROM REVIEW
 		ORDER BY REVIEW_NO
@@ -12,6 +12,13 @@
 		FROM REVIEW
 		WHERE REVIEW_NO = #{review_no}
 	</select>
+	
+	<select id="avgList" parameterType="int" resultType="reviewDto">
+		SELECT REVIEW_NO, REVIEW_TITLE, REVIEW_RATE, REVIEW_DATE, REVIEW_CONTENT, PRODUCT_NO, CLASS_NO, MEMBER_ID
+		FROM REVIEW
+		WHERE PRODUCT_NO = #{product_no}
+	</select>
+	
 	
 	<insert id="insert" parameterType="reviewDto">
 		INSERT INTO REVIEW

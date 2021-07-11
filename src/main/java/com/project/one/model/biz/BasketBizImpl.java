@@ -38,4 +38,9 @@ public class BasketBizImpl implements BasketBiz {
 	public int delete(BasketDto dto) {
 		return dao.delete(dto);
 	}
+
+	@Override
+	public int deleteAll(String member_id) {
+		return dao.deleteAll(member_id);
+	}
 }

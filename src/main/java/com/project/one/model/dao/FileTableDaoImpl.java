@@ -44,7 +44,7 @@ public class FileTableDaoImpl implements FileTableDao {
 	}
 
 	@Override
-	public int insert(FileTableDto dto) {
+	public int class_insert(FileTableDto dto) {
 		int res = 0;
 		
 		try {
