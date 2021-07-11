@@ -12,7 +12,7 @@ public interface PaymentBiz {
 
 	public int insert(PaymentDto dto, String type, String title, int basket_group);
 
-	public int update(PaymentDto dto);
+	public int updateStatus(PaymentDto dto);
 
 	public int delete(PaymentDto dto);
 	

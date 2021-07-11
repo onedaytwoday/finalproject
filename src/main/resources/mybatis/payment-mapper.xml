@@ -8,11 +8,11 @@
 		ORDER BY PAYMENT_NO
 	</select>
 	
-	<select id="selectOne" parameterType="int" resultType="paymentDto">
+	<select id="selectOne" resultType="paymentDto">
 		SELECT PAYMENT_NO, PAYMENT_NUM, PAYMENT_PRICE, PAYMENT_DATE, PAYMENT_DEL, PAYMENT_UID, MEMBER_ID,
 		PRODUCT_NO, BASKET_GROUP, CLASS_NO
 		FROM PAYMENT
-		WHERE PAYMENT_NO = #{payment_no} AND MEMBER_ID = #{member_id}
+		WHERE PAYMENT_NO = #{payment_no}
 	</select>
 	
 	<insert id="insertProduct" parameterType="paymentDto">
@@ -29,6 +29,26 @@
 		INSERT INTO PAYMENT
 		VALUES(PAYMENT_NO_SEQ.NEXTVAL, #{payment_num}, #{payment_price}, SYSDATE, #{payment_del}, #{payment_uid}, #{member_id}, NULL, #{basket_group}, NULL)		
 	</insert>
+	
+	<update id="updateStatus" parameterType="paymentDto">
+		UPDATE PAYMENT
+
+			<choose>
+			    <when test="payment_del != null and 'payment_del.equal(결제완료)'">
+			      set payment_del = '배송준비중'
+			    </when>
+			    
+			    <when test="payment_del != null and 'payment_del.equal(배송준비중)'">
+			      set payment_del = '배송중'
+			    </when>
+			    
+			    <when test="payment_del != null and 'payment_del.equal(배송중)'">
+			      set payment_del = '배송완료'
+			    </when>
+		  	</choose>
+	
+		WHERE PAYMENT_NO = #{payment_no}
+	</update>
 	
 	<delete id="delete" parameterType="paymentDto">
 		DELETE FROM PAYMENT 
