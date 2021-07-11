@@ -43,6 +43,12 @@
 		WHERE MEMBER_ID = #{member_id} AND MEMBER_PHONE = #{member_phone}
 	</update>
 	
+	<update id="manageMember" parameterType="memberDto">
+		UPDATE MEMBER 
+		SET MEMBER_JOIN = #{member_join}		
+		WHERE MEMBER_ID = #{member_id}
+	</update>
+	
 	<delete id="delete" parameterType="String">
 		UPDATE MEMBER 
 		SET MEMBER_JOIN = 'N' 

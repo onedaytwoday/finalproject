@@ -1,7 +1,22 @@
-function manageMember(type, member_id){
+// 상품/클래스 관리
+let product_list = new Array();
+let class_list = new Array();
+
+$(function() {
+	$('input[name=chk_product]').click(function() {
+		product_list.push($(this).val());
+	});
+	
+	$('input[name=chk_class]').click(function() {
+		class_list.push($(this).val());
+	});
+	
+});
+
+// 회원 관리
+function manageMember(member_id) {
 	let member = {
 		"member_id": member_id,
-		"type": type
 	}
 
 	$.ajax({
@@ -12,6 +27,7 @@ function manageMember(type, member_id){
 		dataType: "json",
 		success: function(result) {
 			console.log(result.msg);
+			$("#" + member_id).val(result.msg);
 		},
 		error: function() {
 			alert("통신 실패!");
@@ -19,6 +35,44 @@ function manageMember(type, member_id){
 	});
 };
 
+// 상품/클래스 관리
+function allCheck(bool, type) {
+	if (type == 'product') {
+		$('input[name=chk_product]').each(function() {
+			$(this).prop('checked', bool);
+		});
+	} else {
+		$('input[name=chk_class]').each(function() {
+			$(this).prop('checked', bool);
+		});
+	}
+}
+
+// 상품/클래스 관리
+function deleteChecked() {
+	
+	let listVal = {
+		"product_list": product_list,
+		"class_list": class_list
+	};
+	
+	$.ajax({
+		type: "post",
+		url: "deleteChecked.do",
+		data: JSON.stringify(listVal),
+		contentType: "application/json",
+		dataType: "json",
+		success: function(result) {
+			alert(result.msg);
+			location.href = 'adminProClass.do';
+		},
+		error: function() {
+			alert("통신 실패!");
+		}
+	})
+}
+
+// 결제 관리
 function updateStatus(payment_no) {
 	let updateStatus = {
 		"payment_no": Number(payment_no)
@@ -32,7 +86,6 @@ function updateStatus(payment_no) {
 		dataType: "json",
 		success: function(result) {
 			if (result.msg == '성공') {
-				console.log(result.status);
 				$("#" + payment_no).text(result.status);
 			}
 		},

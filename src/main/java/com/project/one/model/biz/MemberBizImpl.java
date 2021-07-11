@@ -161,6 +161,14 @@ public class MemberBizImpl implements MemberBiz {
 		
 		return dao.updatePw(dto);
 	}
+	
+	@Override
+	public int manageMember(MemberDto dto) {
+		dto = dao.selectOne(dto.getMember_id());
+		dto.setMember_join((dto.getMember_join().equals("Y") ? "N" : "Y"));
+
+		return dao.manageMember(dto);
+	}
 
 	@Override
 	public int delete(String member_id) {
