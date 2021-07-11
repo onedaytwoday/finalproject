@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -82,8 +83,8 @@ public class ChatController {
     //채팅방 생성
     @ResponseBody
     @RequestMapping("/createChat.do")
-    public String createChat(String member_id, HttpSession session, Model model){   
-    	
+    public ModelAndView createChat(String member_id, HttpSession session){   
+    	ModelAndView mav = new ModelAndView();
     	MemberDto mDto = (MemberDto)session.getAttribute("mDto");
     	RoomDto rDto = new RoomDto();
     	if(mDto != null) {
@@ -94,20 +95,22 @@ public class ChatController {
     	}
             
         RoomDto exist  = roomBiz.isRoom(rDto);
-        
+        mav.addObject("rDto", rDto);
         // DB에 방이 없을 때 생성
         if(exist == null) {
             System.out.println("방이 없다!!");
             int result = roomBiz.insert(rDto);
             if(result == 1) 
                 System.out.println("방 만들었다!!");
-                return "newRoom";
+            	mav.setViewName("newRoom");
+                return mav;
 
         }
         // DB에 방이 있을 때 가져옴
         else{
             System.out.println("방이 있다!!");
-            return "existRoom";
+            mav.setViewName("existRoom");
+            return mav;
         }
     }
     
