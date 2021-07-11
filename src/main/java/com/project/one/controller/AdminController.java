@@ -85,9 +85,11 @@ public class AdminController {
 		Map<String, String> map = new HashMap<>();
 		
 		System.out.println("status : " + dto.getPayment_del());
-		
+
 		if(pBiz.updateStatus(dto) > 0) {
 			PaymentDto pDto = pBiz.selectOne(dto.getPayment_no());
+			System.out.print(pDto);
+			
 			map.put("msg", "성공");
 			map.put("status", pDto.getPayment_del());
 			

@@ -32,19 +32,21 @@
 	
 	<update id="updateStatus" parameterType="paymentDto">
 		UPDATE PAYMENT
-		<set>
+
 			<choose>
 			    <when test="payment_del != null and 'payment_del.equal(결제완료)'">
-			      payment_del = '배송준비중'
+			      set payment_del = '배송준비중'
 			    </when>
+			    
 			    <when test="payment_del != null and 'payment_del.equal(배송준비중)'">
-			      payment_del = '배송중'
+			      set payment_del = '배송중'
 			    </when>
+			    
 			    <when test="payment_del != null and 'payment_del.equal(배송중)'">
-			      AND featured = 1
+			      set payment_del = '배송완료'
 			    </when>
 		  	</choose>
-		</set>
+	
 		WHERE PAYMENT_NO = #{payment_no}
 	</update>
 	
