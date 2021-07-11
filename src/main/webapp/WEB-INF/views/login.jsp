@@ -41,7 +41,10 @@
 				contentType: "application/json",
 				dataType: "json",
 				success: function(msg){
-					if(msg.chk == true){
+					if(msg.lock == true){
+						alert("계정이 잠겨있습니다. 관리자에게 문의하세요.");
+						
+					} else if(msg.chk == true){
 						if(msg.ip_chk == false) {
 							checkIP();
 						}

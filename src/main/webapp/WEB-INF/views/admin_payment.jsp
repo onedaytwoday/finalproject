@@ -7,30 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script type="text/javascript">
-	function updateStatus(status, payment_no){
-		let updateStatus = {
-			"payment_del" : status,
-			"payment_no" : Number(payment_no)
-		}
-
-		$.ajax({
-			type: "post",
-			url: "updateStatus.do",
-			data: JSON.stringify(updateStatus),
-			contentType: "application/json",
-			dataType: "json",
-			success: function(result) {
-				if(result.msg == '성공') {
-					$("#" + payment_no).text(result.status);
-				}
-			},
-			error: function() {
-				alert("통신 실패!");
-			}
-		});
-	}
-</script>
+<script type="text/javascript" src="resources/js/admin.js"></script>
 </head>
 <body>
 	<div style="height: 100vh; display: flex">
@@ -72,7 +49,7 @@
 							<td><span id="${dto.payment_no }">${dto.payment_del }</span></td>
 							
 							<c:if test="${dto.class_no == 0 }">
-								<td><input onclick="updateStatus('${dto.payment_del}', ${dto.payment_no})" type="button" value="업데이트" /></td>						
+								<td><input onclick="updateStatus(${dto.payment_no})" type="button" value="업데이트" /></td>						
 							</c:if>
 						</tr>
 					</c:forEach>

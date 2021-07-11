@@ -14,7 +14,7 @@
 		MEMBER_ADDR , MEMBER_IP, MEMBER_GRADE , MEMBER_JOIN , MEMBER_NOTIFY, MEMBER_FACE, MEMBER_AUTO
 		FROM MEMBER
 		WHERE MEMBER_ID = #{member_id}
-		AND MEMBER_PW = #{member_pw} 
+		AND MEMBER_PW = #{member_pw}
 	</select>
 	<select id="selectOne" parameterType="String" resultType="memberDto">
 		SELECT MEMBER_ID, MEMBER_PW, MEMBER_NAME, MEMBER_NICNAME, MEMBER_EMAIL, MEMBER_PHONE,

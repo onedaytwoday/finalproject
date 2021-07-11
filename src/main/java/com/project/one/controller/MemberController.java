@@ -60,20 +60,28 @@ public class MemberController {
 	@RequestMapping(value="/ajaxlogin.do",method=RequestMethod.POST)
 	public Map<String, Boolean> ajaxLogin(@RequestBody MemberDto dto, HttpSession session){
 		//logger.info("[Controller] ajaxlogin.do");
+		Map<String, Boolean> map = new HashMap<String, Boolean>();
 		
 		MemberDto mDto = biz.login(dto);
 		boolean chk = false;
 		boolean ip_chk = false;
 		
 		if(mDto != null) {
-			chk = true;
-			session.setAttribute("mDto", mDto);
-			
-			if(mDto.getMember_notify().equals("N") || dto.getMember_ip().equals(mDto.getMember_ip())) {
-				ip_chk = true;
+			if(mDto.getMember_join().equals("N")) {
+				map.put("lock", true);
+				
+			} else {
+				chk = true;
+				session.setAttribute("mDto", mDto);
+				
+				if(mDto.getMember_notify().equals("N") || dto.getMember_ip().equals(mDto.getMember_ip())) {
+					ip_chk = true;
+				
+				} 
 			}
+			
 		}
-		Map<String, Boolean> map = new HashMap<String, Boolean>();
+		
 		map.put("chk", chk);
 		map.put("ip_chk", ip_chk);
 		
