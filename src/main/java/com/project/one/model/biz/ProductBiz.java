@@ -2,10 +2,13 @@ package com.project.one.model.biz;
 
 import java.util.List;
 
+import com.project.one.model.dto.PagingDto;
 import com.project.one.model.dto.ProductDto;
 
 public interface ProductBiz {
 	public List<ProductDto> selectList();
+	
+	public List<ProductDto> productList(PagingDto pDto);
 
 	public ProductDto selectOne(int product_no);
 	
@@ -16,4 +19,6 @@ public interface ProductBiz {
 	public int update(ProductDto dto);
 
 	public int delete(int product_no);
+	
+	public int productCount();
 }

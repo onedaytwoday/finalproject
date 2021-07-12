@@ -15,12 +15,16 @@
 				<c:url var="action" value="board_notice_list.do" />
 			</c:when>
 			
+			<c:when test="${param.board_category eq 'Q' && param.from == null}">
+				<c:url var="action" value="board_qna_list.do" />
+			</c:when>
+			
 			<c:when test="${param.board_category eq 'Q' && param.from eq 'admin' }">
 				<c:url var="action" value="adminBoard.do" />
 			</c:when>
 
 			<c:otherwise>
-				<c:url var="action" value="board_qna_list.do" />
+				<c:url var="action" value="admin${param.board_category }.do" />
 			</c:otherwise>
 		</c:choose>
 

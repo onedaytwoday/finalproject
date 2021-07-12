@@ -3,9 +3,12 @@ package com.project.one.model.biz;
 import java.util.List;
 
 import com.project.one.model.dto.ClassDto;
+import com.project.one.model.dto.PagingDto;
 
 public interface ClassBiz {
 	public List<ClassDto> selectList();
+	
+	public List<ClassDto> classList(PagingDto pDto);
 
 	public ClassDto selectOne(int class_no);
 	
@@ -16,4 +19,6 @@ public interface ClassBiz {
 	public int update(ClassDto dto);
 
 	public int delete(int class_no);
+	
+	public int classCount();
 }

@@ -56,7 +56,7 @@
 			</c:choose>
 			<tr>
 				<td colspan="6" align="right">
-					<input type="button" value="삭제" onclick="deleteQna()" />
+					<input type="button" value="삭제" onclick="deleteChecked('qna')" />
 				</td>
 			</tr>
 		</table>
@@ -64,13 +64,13 @@
 					<jsp:include page="board_paging.jsp">
 						<jsp:param value="Q" name="board_category" />
 						<jsp:param value="admin" name="from" />
-						<jsp:param value="${Pdto.nowBlock}" name="nowBlock" />
-						<jsp:param value="${Pdto.blockBegin }" name="blockBegin" />
-						<jsp:param value="${Pdto.blockEnd }" name="blockEnd" />
-						<jsp:param value="${Pdto.nowPage}" name="nowPage" />
-						<jsp:param value="${Pdto.blockBegin}" name="blockBegin" />
-						<jsp:param value="${Pdto.blockEnd}" name="blockEnd" />
-						<jsp:param value="${Pdto.totalBlock}" name="totalBlock" />
+						<jsp:param value="${pDto.nowBlock}" name="nowBlock" />
+						<jsp:param value="${pDto.blockBegin }" name="blockBegin" />
+						<jsp:param value="${pDto.blockEnd }" name="blockEnd" />
+						<jsp:param value="${pDto.nowPage}" name="nowPage" />
+						<jsp:param value="${pDto.blockBegin}" name="blockBegin" />
+						<jsp:param value="${pDto.blockEnd}" name="blockEnd" />
+						<jsp:param value="${pDto.totalBlock}" name="totalBlock" />
 					</jsp:include>
       </div>
     </div>
