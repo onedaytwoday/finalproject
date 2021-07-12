@@ -19,7 +19,7 @@
 <body>
 <table>
 <tr><td><input type="button" name="member_update" value="개인정보수정" onclick="location.href='mypage_update.do?member_id=${member_id}'"></td></tr>
-<tr><td><input type="button" name="member_payment" value="전체 주문 내역" onclick="location.href='mypage_paymen.dot?member_id=${member_id}'"></td></tr>
+<tr><td><input type="button" name="member_payment" value="전체 주문 내역" onclick="location.href='mypage_paymen.do?member_id=${member_id}'"></td></tr>
 <tr><td><input type="button" name="member_board" value="내가 쓴글" onclick="location.href='mypage_board.do?member_id=${member_id}'"></td></tr>
 <tr><td><input type="button" name="member_class" value="수강 클래스 내역" onclick="location.href='mypage_class.do?member_id=${member_id}'"></td></tr>
 </table>
@@ -40,6 +40,7 @@
 			<th>강사</th>
 		</tr>
 		
+		<c:set var="cnt" value="1"/>
 		<c:choose>
 			<c:when test="${empty list }">
 				<tr><th colspan="6">-----------------등록하신 강의가 없습니다-------------</th></tr>
@@ -47,13 +48,14 @@
 			<c:otherwise>
 				<c:forEach items="${list }" var="dto">
 					<tr>
-						<td>${dto.class_no }</td>
+						<td>${cnt }</td>
 						<td><a href="store_select.do?product_no=${dto.class_no }">${dto.class_title }</a></td>
 						<td>${dto.class_category }</td>
 						<td>${dto.class_member_num }</td>
 						<td>${dto.class_price } 원</td>
 						<td>${dto.member_id }</td>
 					</tr>
+					<c:set var="cnt" value="cnt+1"/>
 				</c:forEach>
 			</c:otherwise>
 		</c:choose>

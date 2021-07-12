@@ -19,36 +19,47 @@
 			pg : 'kakaopay',
 			pay_method : 'card',
 			merchant_uid : 'merchant_' + new Date().getTime(),
-			name : '${dto.class_title}', //결제창에서 보여질 이름
-			amount : '${dto.class_price}', //실제 결제되는 가격
-			buyer_email : '${member.member_email}',
-			buyer_name : '${dto.member_id}',
-			buyer_tel : '${member.member_phone}',
-			buyer_addr : '${member.member_addr}',
-			buyer_postcode : '123-456',
+			name : '${name}', //결제창에서 보여질 이름
+			amount : '${pDto.payment_price}', //실제 결제되는 가격
+			buyer_email : '${mDto.member_email}',
+			buyer_name : '${mDto.member_id}',
+			buyer_tel : '${mDto.member_phone}',
+			buyer_addr : '${mDto.member_addr}',
 		}, function(rsp) {
+			console.log("rsp : ", rsp);
 			if (rsp.success) {
-				console.log("rsp : ", rsp);
-
+				
+				let paymentVal = {
+						payment_del : '결제완료',
+						payment_num : '${pDto.payment_num}',
+						payment_price: rsp.paid_amount,
+						member_id: rsp.buyer_name,
+						title: rsp.name,
+						payment_uid: rsp.imp_uid
+				}
+				
 				$.ajax({
 					url : 'paymentComplete.do',
 					method : 'POST',
-					data : {
-						payment_num : 1,
-						payment_price: rsp.paid_amount,
-						member_id: rsp.buyer_name,
-						class_title: rsp.name,
-						payment_uid: rsp.imp_uid
-					},
+					data: JSON.stringify(paymentVal),
+					contentType: "application/json",
+					dataType: "json",
 					success: function(res){
-						alert("결제 성공!");
-						location.href="main.do";
+						alert("결제 " + res.msg);
+						
+						if(res.msg == '성공' && res.basket == 'basket') {
+							location.href="deleteAll.do";
+						} else {
+							location.href="main.do";						
+						}
+						
 					},
 					error: function(err){
-						alert("결제 실패!");
-						location.href="classDetail.do?class_no=${dto.class_no}";
+						alert("통신 실패!");
+						location.href="main.do";
 					}
 				})
+				
 			}
 		});
 

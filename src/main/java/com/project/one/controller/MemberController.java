@@ -28,6 +28,7 @@ import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.project.one.model.biz.BasketBiz;
 import com.project.one.model.biz.MemberBiz;
 import com.project.one.model.dto.BasketDto;
+import com.project.one.model.dto.ChatSession;
 import com.project.one.model.dto.MemberDto;
 
 @Controller
@@ -42,7 +43,9 @@ public class MemberController {
 	private void setNaverLogin(NaverLogin naverLogin) {
 		this.naverLogin = naverLogin;
 	}
-
+	
+	@Autowired
+	private ChatSession chatSession;
 	
 	@Autowired
 	private MemberBiz biz;	
@@ -60,20 +63,28 @@ public class MemberController {
 	@RequestMapping(value="/ajaxlogin.do",method=RequestMethod.POST)
 	public Map<String, Boolean> ajaxLogin(@RequestBody MemberDto dto, HttpSession session){
 		//logger.info("[Controller] ajaxlogin.do");
+		Map<String, Boolean> map = new HashMap<String, Boolean>();
 		
 		MemberDto mDto = biz.login(dto);
 		boolean chk = false;
 		boolean ip_chk = false;
 		
 		if(mDto != null) {
-			chk = true;
-			session.setAttribute("mDto", mDto);
-			
-			if(mDto.getMember_notify().equals("N") || dto.getMember_ip().equals(mDto.getMember_ip())) {
-				ip_chk = true;
+			if(mDto.getMember_join().equals("N")) {
+				map.put("lock", true);
+				
+			} else {
+				chk = true;
+				session.setAttribute("mDto", mDto);
+				
+				if(mDto.getMember_notify().equals("N") || dto.getMember_ip().equals(mDto.getMember_ip())) {
+					ip_chk = true;
+				
+				} 
 			}
+			
 		}
-		Map<String, Boolean> map = new HashMap<String, Boolean>();
+		
 		map.put("chk", chk);
 		map.put("ip_chk", ip_chk);
 		
@@ -88,6 +99,7 @@ public class MemberController {
 			MemberDto mDto = biz.selectOne(dto.getMember_id());
 			if(mDto!=null) {
 				session.setAttribute("mDto", mDto);
+				session.setMaxInactiveInterval(60*60);
 				return "main";
 			}	
 		}
@@ -122,6 +134,7 @@ public class MemberController {
 	public String sns_signupRes(MemberDto mDto, HttpSession session) {
 		if(biz.register(mDto) > 0) {
 			session.setAttribute("mdto", mDto);
+			session.setMaxInactiveInterval(60*60);
 			return "main";
 		}
 		
@@ -222,6 +235,7 @@ public class MemberController {
 			MemberDto res = biz.selectOne(member_id);
 			if(res != null) {
 				session.setAttribute("mDto", res);
+				session.setMaxInactiveInterval(60*60);
 				return "main";
 			}
 			model.addAttribute("mDto",mDto);
@@ -261,6 +275,7 @@ public class MemberController {
 		MemberDto res = biz.selectOne(kid);
 		if(res != null) {
 			session.setAttribute("mDto", res);
+			session.setMaxInactiveInterval(60*60);
 			return "main";
 		}
 		
@@ -273,6 +288,7 @@ public class MemberController {
 	public String logout(HttpSession session)throws IOException {
 		
 		session.invalidate();
+
 		return "main";
 	}
 	@RequestMapping("/main.do")
@@ -280,7 +296,7 @@ public class MemberController {
 		MemberDto mDto = (MemberDto)session.getAttribute("mDto");
 		List<BasketDto> bList = bBiz.selectList(mDto.getMember_id());
 		model.addAttribute("basket_num", bList.size());
-		
+
 		return "main";
 	}
 	

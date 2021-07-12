@@ -31,7 +31,13 @@ public interface MemberDao {
 	// 비밀번호 변경
 	public int updatePw(MemberDto dto);
 	
+	// 회원 관리
+	public int manageMember(MemberDto dto);
+	
 	// 회원 탈퇴
 	public int delete(String member_id);
+	
+	//강사회원목록
+	public List<MemberDto> selectListConsult(String member_grade);
 	
 }

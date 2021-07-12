@@ -85,12 +85,29 @@
 				</c:choose>
 			</td>
 		</tr>
-		<tr>
-			<td colspan="2" align="center">
-				<input type="button" value="장바구니" onclick="addToBasket()" /> 
-				<input type="button" value="구매" onclick="" />
-			</td>
-		</tr>
+		
+		<c:if test="${mDto.member_id != null }">
+			<tr>
+				<td colspan="2" align="center">
+					<div style="display:flex; justify-content:space-evenly;">
+						<input type="button" value="장바구니" onclick="addToBasket()" />
+					
+					
+						<form action="payment.do" method="post">
+							<input type="hidden" name="product_no" value="${dto.product_no }" />
+							<input type="hidden" name="payment_num" value="1" />
+							<input type="hidden" name="payment_price" value="${dto.product_price }" />
+							<input type="hidden" name="name" value="${dto.product_name }" />
+							<input type="hidden" name="type" value="product" />
+							
+							<input type="submit" value="바로 구매" />
+						</form> 
+					</div>
+					
+				</td>
+			</tr>
+		</c:if>
+		
 
 		<tr>
 			<th>상품 상세 설명</th>

@@ -2,21 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="basket">
 	<select id="selectList" resultType="basketDto">
-		SELECT BASKET_NO, BASKET_NUM, BASKET_PRICE, PRODUCT_NO, MEMBER_ID
+		SELECT BASKET_NO, BASKET_NUM, BASKET_PRICE, BASKET_GROUP, PRODUCT_NO, MEMBER_ID
 		FROM BASKET
 		WHERE MEMBER_ID = #{member_id}
 		ORDER BY PRODUCT_NO
 	</select>
 	
 	<select id="selectOne" resultType="basketDto">
-		SELECT BASKET_NO, BASKET_NUM, BASKET_PRICE, PRODUCT_NO, MEMBER_ID
+		SELECT BASKET_NO, BASKET_NUM, BASKET_PRICE, BASKET_GROUP, PRODUCT_NO, MEMBER_ID
 		FROM BASKET
 		WHERE PRODUCT_NO = #{product_no} AND MEMBER_ID = #{member_id}
 	</select>
 	
 	<insert id="insert" parameterType="basketDto">
 		INSERT INTO BASKET
-		VALUES(BASKET_NO_SEQ.NEXTVAL, #{basket_num}, #{basket_price}, #{product_no}, #{member_id})
+		VALUES(BASKET_NO_SEQ.NEXTVAL, #{basket_num}, #{basket_price}, #{basket_group}, #{product_no}, #{member_id})
 	</insert>
 	
 	<update id="update" parameterType="basketDto">
@@ -28,5 +28,10 @@
 	<delete id="delete" parameterType="basketDto">
 		DELETE FROM BASKET 
 		WHERE BASKET_NO = #{basket_no} AND MEMBER_ID = #{member_id}
+	</delete>
+	
+	<delete id="deleteAll" parameterType="String">
+		DELETE FROM BASKET 
+		WHERE MEMBER_ID = #{member_id}
 	</delete>
 </mapper>

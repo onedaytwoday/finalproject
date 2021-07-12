@@ -19,6 +19,13 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"
     />    
+<script type="text/javascript">
+	function cancelPayment(){
+		if(confirm("결제를 취소하시겠습니까?")) {
+			location.href='paymentCancel.do?member_id=${mDto.member_id }&class_no=${dto.class_no}';
+		}
+	}
+</script>
 </head>
 <body>
 
@@ -26,7 +33,7 @@
 		<h1 class="my-5">클래스 상세 페이지 </h1>
 		
 		<div>
-			<img class="w-50 h-50" src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" alt="pic" />
+			<img class="w-50 h-50" src="resources/upload/f02d2a5d-4165-483f-9904-01d679d6fde3.png" alt="pic" />
 			
 			<div class="my-2">
 				<span>
@@ -101,18 +108,19 @@
 		<!-- 결제하기 -->
 		<c:choose>
 			<c:when test="${mDto.member_id != null && checkPaid == false}">
-				<form class="mt-3" action="payment.do" method="post">
-					<input type="hidden" name="member_id" value="${mDto.member_id }" />
+				<form class="mt-3" action="payment.do" method="post">					
 					<input type="hidden" name="class_no" value="${dto.class_no }" />
-					<input type="hidden" name="class_title" value="${dto.class_title }" />
-					<input type="hidden" name="class_price" value="${dto.class_price }" />
+					<input type="hidden" name="payment_num" value="1" />
+					<input type="hidden" name="payment_price" value="${dto.class_price }" />
+					<input type="hidden" name="name" value="${dto.class_title }" />
+					<input type="hidden" name="type" value="class" />
 					
 					<button type="submit" class="btn btn-primary">결제하기</button>
 				</form>
 			</c:when>
 			
 			<c:when test="${mDto.member_id != null && checkPaid == true}">
-				<button onclick="location.href='paymentCancel.do?member_id=${mDto.member_id }&class_no=${dto.class_no}'" class="btn btn-warning">결제 취소</button>
+				<button onclick="cancelPayment();" class="btn btn-warning mt-3">결제 취소</button>
 			</c:when>
 		</c:choose>
 		

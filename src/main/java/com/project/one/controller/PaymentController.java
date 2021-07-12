@@ -1,52 +1,69 @@
 package com.project.one.controller;
 
 
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.project.one.model.biz.BasketBiz;
 import com.project.one.model.biz.ClassBiz;
 import com.project.one.model.biz.MemberBiz;
 import com.project.one.model.biz.PaymentBiz;
+import com.project.one.model.biz.ProductBiz;
 import com.project.one.model.dto.ClassDto;
 import com.project.one.model.dto.MemberDto;
 import com.project.one.model.dto.PaymentDto;
+import com.project.one.model.dto.ProductDto;
 
 @Controller
 public class PaymentController {
 
-	@Autowired
-	private MemberBiz mBiz;
-
+	private static String TYPE="";
+	private static String TITLE="";
+	private static int BASKET_GROUP=0;
+	
 	@Autowired
 	private PaymentBiz pBiz;
-
-	@Autowired
-	private ClassBiz cBiz;
-
+	
 	@RequestMapping("/payment.do")
-	public String payment(Model model, ClassDto dto) {
-		MemberDto mDto = mBiz.selectOne(dto.getMember_id());
-
-		model.addAttribute("member", mDto);
-		model.addAttribute("dto", dto);
-
+	public String payment(Model model, PaymentDto pDto, String name, String type, HttpSession session) {
+		TYPE = type;
+		TITLE = name;
+		BASKET_GROUP = pDto.getBasket_group();
+		
+		MemberDto mDto = (MemberDto)session.getAttribute("mDto");
+		
+		model.addAttribute("mDto", mDto);
+		model.addAttribute("pDto", pDto);
+		model.addAttribute("name", name);
+	
 		return "payment";
 	}
 
+	@ResponseBody
 	@RequestMapping("/paymentComplete.do")
-	public String payment_complete(PaymentDto dto, String class_title) {
-		ClassDto cDto = cBiz.selectOneByTitle(class_title);
-
-		dto.setPayment_del("결제완료");
-		dto.setClass_no(cDto.getClass_no());
-
-		if(pBiz.insert(dto) > 0){
-			return "redirect:main.do";
+	public Map<String, String> payment_complete(@RequestBody PaymentDto dto) {
+		Map<String, String> map = new HashMap<>();
+		
+		if(pBiz.insert(dto, TYPE, TITLE, BASKET_GROUP) > 0) {
+			map.put("msg", "성공");
+			
+			if(TYPE.equals("basket")) {
+				map.put("basket", "basket");
+			}
+		} else {
+			map.put("msg", "실패");
 		}
 		
-		return "redirect:classDetail.do?class_no"+dto.getClass_no();
+		return map;
 	}
 
 	@RequestMapping("paymentCancel.do")
@@ -58,6 +75,14 @@ public class PaymentController {
 		}
 
 		return "redirect:classDetail.do?class_no="+dto.getClass_no();
+	}
+	
+	@RequestMapping("mypage_payment.do")
+	public String mypage_list(Model model , String member_id) {
+		model.addAttribute("list",pBiz.mypage_list(member_id));
+		model.addAttribute("member_id",member_id);
+		
+		return "mypage_payment";
 	}
 
 }

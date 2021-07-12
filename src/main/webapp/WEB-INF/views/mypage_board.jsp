@@ -19,7 +19,7 @@
 <body>
 <table>
 <tr><td><input type="button" name="member_update" value="개인정보수정" onclick="location.href='mypage_update.do?member_id=${member_id}'"></td></tr>
-<tr><td><input type="button" name="member_payment" value="전체 주문 내역" onclick="location.href='mypage_paymen.dot?member_id=${member_id}'"></td></tr>
+<tr><td><input type="button" name="member_payment" value="전체 주문 내역" onclick="location.href='mypage_paymen.do?member_id=${member_id}'"></td></tr>
 <tr><td><input type="button" name="member_board" value="내가 쓴글" onclick="location.href='mypage_board.do?member_id=${member_id}'"></td></tr>
 <tr><td><input type="button" name="member_class" value="수강 클래스 내역" onclick="location.href='mypage_class.do?member_id=${member_id}'"></td></tr>
 </table>

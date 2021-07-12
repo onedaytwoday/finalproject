@@ -9,9 +9,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-<input id="code_html" type="text" value="텍스트 음성번역기능" autocomplete="off" readonly="">
+<input id="code_html" type="text" value="텍스트 음성번역기능" autocomplete="off" >
 <input type="button" value="말하기"/>
-<input id="code_direct" type="text" value="채팅" autocomplete="off" readonly="">
+<input id="code_direct" type="text" value="채팅" autocomplete="off" >
 <input type="button" value="말하기"/>
 
 <script>

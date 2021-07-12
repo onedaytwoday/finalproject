@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.project.one.model.dao.PaymentDao;
+import com.project.one.model.dto.ClassDto;
 import com.project.one.model.dto.PaymentDto;
+import com.project.one.model.dto.ProductDto;
 import com.project.one.util.Payment;
 
 @Service
@@ -16,24 +18,57 @@ public class PaymentBizImpl implements PaymentBiz {
 	@Autowired
 	private PaymentDao dao;
 	
+	@Autowired
+	private ProductBiz proBiz;
+	
+	@Autowired
+	private ClassBiz cBiz;
+	
+	@Autowired
+	private BasketBiz bBiz;
+	
 	@Override
 	public List<PaymentDto> selectList() {
 		return dao.selectList();
 	}
-
+	
 	@Override
 	public PaymentDto selectOne(int payment_no) {
 		return dao.selectOne(payment_no);
 	}
 
-	@Override
-	public int insert(PaymentDto dto) {
-		return dao.insert(dto);
-	}
 
 	@Override
-	public int update(PaymentDto dto) {
-		return dao.update(dto);
+	public int insert(PaymentDto dto, String type, String title, int basket_group) {
+		
+		switch(type) {
+		case "product" :
+			ProductDto proDto = proBiz.selectOneByName(title);
+			dto.setProduct_no(proDto.getProduct_no());
+			dto.setPayment_num(1);
+			break;
+			
+		case "class" :
+			ClassDto cDto = cBiz.selectOneByTitle(title);
+			dto.setClass_no(cDto.getClass_no());
+			dto.setPayment_num(1);
+			break;
+			
+		case "basket" :
+			if(basket_group != 0) {
+				dto.setBasket_group(basket_group);			
+			}
+			
+			break;
+		}
+		
+		
+		return dao.insert(dto, type);
+	}
+	
+	@Override
+	public int updateStatus(PaymentDto dto) {
+		return dao.updateStatus(dto);
 	}
 
 	@Transactional
@@ -51,6 +86,11 @@ public class PaymentBizImpl implements PaymentBiz {
 	@Override
 	public PaymentDto checkPaid(PaymentDto dto) {
 		return dao.checkPaid(dto);
+	}
+
+	@Override
+	public List<PaymentDto> mypage_list(String member_id) {
+		return dao.mypage_list(member_id);
 	}
 
 }

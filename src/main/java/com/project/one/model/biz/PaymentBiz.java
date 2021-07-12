@@ -10,11 +10,13 @@ public interface PaymentBiz {
 
 	public PaymentDto selectOne(int payment_no);
 
-	public int insert(PaymentDto dto);
+	public int insert(PaymentDto dto, String type, String title, int basket_group);
 
-	public int update(PaymentDto dto);
+	public int updateStatus(PaymentDto dto);
 
 	public int delete(PaymentDto dto);
 	
 	public PaymentDto checkPaid(PaymentDto dto);
+	
+	public List<PaymentDto> mypage_list(String member_id);
 }

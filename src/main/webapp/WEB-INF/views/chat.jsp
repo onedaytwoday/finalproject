@@ -5,7 +5,7 @@
 	<title>title</title>
 	<meta charset="UTF-8"/>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="resources/sockjs.min.js"></script>
+	<script src="resources/js/sockjs.min.js"></script>
 </head>
 <body>
 	<form id="chatForm">
@@ -23,7 +23,7 @@
 			});
 		});
 		
-		var sock = new SockJS("/echo.do");
+		var sock = new SockJS("${pageContext.request.contextPath}/echo");
 		sock.onmessage = function(e){
 			console.log(e);
 			$("#chat").append(e.data + "<br/>");

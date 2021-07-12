@@ -64,7 +64,7 @@ li {
 <script type="text/javascript">
 	$(document).ready(function(){		
 		$('.iconImg').click(function(){
-    		window.open('http://localhost:8787/one/chat.do','채팅', 'width=300px,height=500px,scrollbars=yes');
+    		window.open('http://localhost:8787/one/consultList.do','채팅', 'width=300px,height=500px,scrollbars=yes');
     	});
     	
 	    $('#class').on('change', function() {
@@ -96,9 +96,9 @@ li {
 			}
 	
 	    });
-	    /*
+	   /*
 		$('.iconImg').click(function(){
-	        window.open('http://localhost:8787/one/chat.do', 'width=300px,height=500px,scrollbars=yes');
+	        window.open('http://localhost:8787/one/consultList.do', 'width=300px,height=500px,scrollbars=yes');
 	    });
 		*/
 	    
@@ -148,30 +148,26 @@ li {
 						<option value="cate03">카테고리3</option>
 				</select>
 			</li>
-			<li>
-				<select id="shop">
-						<option value="">쇼핑</option>
-						<option value="cate01">카테고리1</option>
-						<option value="cate02">카테고리2</option>
-						<option value="cate03">카테고리3</option>
-				</select>
-			</li>
+			<li><a href="store.do">쇼핑</a></li>
 			<li><a href="classInsert.do">클래스 등록</a></li>
 			<li><a href="classList.do">클래스</a></li>
 			<li><a href="board_qna_list.do?nowPage=1">상품문의</a></li>
 			<li><a href="#">수강후기포토</a></li>
+			<li><a href="map.do">지도</a></li>
 			<li><a href="chat.do">채팅</a></li>
-			<li><a href="map.do">지도</a>
+			<%-- <li><a href="map.do" onclick="window.open('map.do', '지도', 'width=500px, height=400px');return false">지도</a></li>--%>
+
 			
 			<c:if test="${mDto.member_grade == '관리자' }">
 				<!-- 관리자만 가능 -->
-				<li><a href="eventInsert.do">이벤트 등록</a></li>					
+				<li><a href="eventInsert.do">이벤트 등록</a></li>
+				<li><a href="adminMain.do">관리자 페이지</a></li>					
 			</c:if>
 		</ul>
 
 	</header>
 	<div class="chatIcon">
-        <a href="chat.do"><img width="50"  src="https://previews.123rf.com/images/nikolae/nikolae1601/nikolae160100031/51288418-%ED%9D%B0%EC%83%89-%EB%B0%B0%EA%B2%BD%EC%97%90-%EA%B3%A0%EB%A6%BD-%EC%B1%84%ED%8C%85-%EC%95%84%EC%9D%B4%EC%BD%98.jpg" class="iconImg"></a>
+        <img width="50"  src="https://previews.123rf.com/images/nikolae/nikolae1601/nikolae160100031/51288418-%ED%9D%B0%EC%83%89-%EB%B0%B0%EA%B2%BD%EC%97%90-%EA%B3%A0%EB%A6%BD-%EC%B1%84%ED%8C%85-%EC%95%84%EC%9D%B4%EC%BD%98.jpg" class="iconImg">
     </div>
     <div class="tts">
     	<a href="tts.do">tts</a>
