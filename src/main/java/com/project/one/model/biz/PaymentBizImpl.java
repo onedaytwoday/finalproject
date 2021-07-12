@@ -95,12 +95,11 @@ public class PaymentBizImpl implements PaymentBiz {
 	}
 
 	@Override
-	public int paymentCount() {
-		return dao.paymentCount();
-	}
-	
 	public List<PaymentDto> mypage_list(String member_id) {
 		return dao.mypage_list(member_id);
+	}
+	public int paymentCount() {
+		return dao.paymentCount();
 	}
 
 }

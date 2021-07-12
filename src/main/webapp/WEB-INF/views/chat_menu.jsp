@@ -25,8 +25,8 @@ ul li:hover {
 <body>
 	<div>
 		<ul style="list-style-type: none">
-			<li onclick="location.href='chat_newlist.do'">새 채팅</li>
 			<li onclick="location.href='chat_main.do?member_id=${mDto.member_id }'">기존 채팅</li>
+			<li onclick="location.href='chat_newlist.do'">새 채팅</li>
 		</ul>
 	</div>
 </body>

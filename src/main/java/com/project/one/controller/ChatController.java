@@ -42,15 +42,18 @@ public class ChatController {
 	private ChattingBiz chatBiz;
 
 	@Autowired
-	private ChatSession chatSession;
-	
-	@Autowired
 	private MemberBiz mBiz;
 	
 	
 	@RequestMapping("/chat_main.do")
 	public String chat_main(Model model,String member_id, HttpSession session) {
 		MemberDto mDto = (MemberDto)session.getAttribute("mDto");
+		if(mDto.getMember_grade().equals("강사회원")) {
+			List<RoomDto> roomlist = roomBiz.selectListByConsult(member_id);
+			model.addAttribute("roomlist",roomlist);
+			model.addAttribute("mDto",mDto);
+			return "chat_consult";
+		}
 		List<RoomDto> roomlist = roomBiz.selectListByUser(member_id);
 		model.addAttribute("roomlist",roomlist);
 		model.addAttribute("mDto",mDto);
@@ -64,24 +67,30 @@ public class ChatController {
 		return "chat_newlist";
 	}
 	
-	//해당 방 메세지들
-    @RequestMapping(value="{room_no}.do")
-    public void messageList(@PathVariable int room_no, String member_id, Model model, HttpServletResponse response) throws JsonIOException, IOException {
-        
-    	List<ChattingDto> chatList = chatBiz.selectListByRoom(room_no);
-        response.setContentType("application/json; charset=utf-8");
-
-        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-        gson.toJson(chatList,response.getWriter());
-    }
-    
-    //채팅방 생성
+	// 채팅방 있으면 채팅방 없으면 만들어서 채팅방
     @ResponseBody
-    @RequestMapping("/createChat.do")
+    @RequestMapping("/chat_room.do")
     public ModelAndView createChat(String member_id, HttpSession session){   
     	ModelAndView mav = new ModelAndView();
     	MemberDto mDto = (MemberDto)session.getAttribute("mDto");
     	RoomDto rDto = new RoomDto();
+    	if(mDto.getMember_grade().equals("강사회원")) {
+    		RoomDto dto = new RoomDto();
+    		dto.setMember_id(member_id);
+    		dto.setConsult_id(mDto.getMember_id());
+    		RoomDto exist  = roomBiz.isRoom(dto);
+    		if(exist!=null) {
+    			System.out.println("방이 있다!!");
+                List<ChattingDto> chatlist = chatBiz.selectList(exist.getRoom_no());
+                rDto.setConsult_id(member_id);
+                rDto.setMember_id(mDto.getMember_id());
+                mav.addObject("rDto", rDto);
+                mav.addObject("Room_no", exist.getRoom_no());
+                mav.addObject("chatlist",chatlist);
+                mav.setViewName("chat_room");
+                return mav;
+    		}
+    	}
     	if(mDto != null) {
     		//로그인한 회원
     	    rDto.setMember_id(mDto.getMember_id());
@@ -97,30 +106,35 @@ public class ChatController {
             int result = roomBiz.insert(rDto);
             if(result == 1) 
                 System.out.println("방 만들었다!!");
-            	mav.setViewName("newRoom");
+            	mav.setViewName("chat_room");
                 return mav;
 
         }
         // DB에 방이 있을 때 가져옴
         else{
             System.out.println("방이 있다!!");
-            mav.setViewName("existRoom");
+            List<ChattingDto> chatlist = chatBiz.selectList(exist.getRoom_no());
             mav.addObject("Room_no", exist.getRoom_no());
+            mav.addObject("chatlist",chatlist);
+            mav.setViewName("chat_room");
             return mav;
         }
     }
     
-    //handlerInterceptor로?
-    @RequestMapping("chatSession.do")
-    public void chatSession( HttpServletResponse response) throws JsonIOException, IOException{
-        
-        ArrayList<String> chatSessionList = chatSession.getLoginUser();
-        
-        response.setContentType("application/json; charset=utf-8");
- 
-        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-        gson.toJson(chatSessionList,response.getWriter());
-    }
+    // websocket 종료 room 마지막 시간, 내용 update
+    @ResponseBody
+    @RequestMapping(value="/room_update.do", method=RequestMethod.POST)
+    public Map<String, String> update_status(@RequestBody RoomDto dto) {
+		Map<String, String> map = new HashMap<>();
+		
+		if(roomBiz.update(dto) > 0) {
+			map.put("msg", "성공");
+		}else {
+			map.put("msg", "실패");
+		}
+		
+		return map;
+	}
     
     @ResponseBody
 	@RequestMapping(value="/chat_insert.do", method=RequestMethod.POST)

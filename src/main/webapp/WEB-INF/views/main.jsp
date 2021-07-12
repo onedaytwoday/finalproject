@@ -64,7 +64,7 @@ li {
 <script type="text/javascript">
 	$(document).ready(function(){		
 		$('.iconImg').click(function(){
-    		window.open('http://localhost:8787/one/chat_main.do?member_id=' + ${mDto.member_id },'채팅', 'width=400px,height=500px,scrollbars=yes');
+    		window.open('http://localhost:8787/one/chat_main.do?member_id=${mDto.member_id }' ,'채팅', 'width=400px,height=500px,scrollbars=yes');
     	});
     	
 	    $('#class').on('change', function() {
@@ -137,7 +137,7 @@ li {
 		<br>
 
 		<ul class="headernav">
-			<li><a href="main.do"><img src="logo.png"></a></li>
+			<li><a href="main.do"><img src="resources/images/logo.png"></a></li>
 			<li><a href="main.do">Home</a></li>
 			<li><a href="board_notice_list.do?nowPage=1">공지사항</a></li>
 			<li>
@@ -153,7 +153,6 @@ li {
 			<li><a href="classList.do">클래스</a></li>
 			<li><a href="board_qna_list.do?nowPage=1">상품문의</a></li>
 			<li><a href="#">수강후기포토</a></li>
-			<li><a href="map.do">지도</a></li>
 			<li><a href="chat.do">채팅</a></li>
 			<li><a href="map.do" onclick="window.open('map.do', '지도', 'width=500px, height=400px');return false">지도</a></li>
 

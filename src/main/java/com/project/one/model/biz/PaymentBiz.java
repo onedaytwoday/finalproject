@@ -21,8 +21,7 @@ public interface PaymentBiz {
 	
 	public PaymentDto checkPaid(PaymentDto dto);
 	
-	public int paymentCount();
-
 	public List<PaymentDto> mypage_list(String member_id);
-
+	
+	public int paymentCount();
 }

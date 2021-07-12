@@ -29,7 +29,7 @@ public class ClassDaoImpl implements ClassDao {
 
 		return list;
 	}
-
+	
 	@Override
 	public List<ClassDto> classList(PagingDto pDto) {
 		List<ClassDto> list = new ArrayList<ClassDto>();
@@ -111,6 +111,20 @@ public class ClassDaoImpl implements ClassDao {
 
 		return res;
 	}
+	
+	//마이페이지 
+	@Override
+	public List<ClassDto> userClass(String member_id) {
+		List<ClassDto> list = new ArrayList<ClassDto>();
+
+		try {
+			list = sqlSession.selectList(NAMESPACE + "userClass", member_id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+			
+			return list;
+		}
 
 	@Override
 	public int classCount() {
@@ -123,20 +137,5 @@ public class ClassDaoImpl implements ClassDao {
 		}
 
 		return res;
-	}
-
-	// 마이페이지
-	@Override
-	public List<ClassDto> userClass(String member_id) {
-		List<ClassDto> list = new ArrayList<ClassDto>();
-
-		try {
-			list = sqlSession.selectList(NAMESPACE + "userClass", member_id);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return list;
 	}
 }

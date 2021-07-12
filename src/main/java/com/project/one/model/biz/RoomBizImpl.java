@@ -1,5 +1,6 @@
 package com.project.one.model.biz;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -8,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.project.one.model.dao.RoomDao;
 import com.project.one.model.dto.RoomDto;
-
+import com.project.one.util.DateConvert;
 @Service
 public class RoomBizImpl implements RoomBiz {
 
@@ -23,12 +24,33 @@ public class RoomBizImpl implements RoomBiz {
 
 	@Override
 	public List<RoomDto> selectListByUser(String member_id) {
-		return dao.selectListByUser(member_id);
+		// Date 타입 -> String 결과값으로 변환 util에 calculateTime 메서드 사용
+		List<RoomDto> list = dao.selectListByUser(member_id);
+		List<RoomDto> res = new ArrayList<RoomDto>();
+		
+		for(int i=0;i<list.size();i++) {
+			String convert = DateConvert.calculateTime(list.get(i).getRoom_date());
+			RoomDto dto = new RoomDto(list.get(i).getRoom_no(), list.get(i).getMember_id(), 
+							list.get(i).getConsult_id(), list.get(i).getRoom_content(), convert);
+			res.add(dto);
+		}
+		
+		return res;
 	}
 	
 	@Override
 	public List<RoomDto> selectListByConsult(String consult_id) {
-		return dao.selectListByConsult(consult_id);
+		List<RoomDto> list = dao.selectListByConsult(consult_id);
+		List<RoomDto> res = new ArrayList<RoomDto>();
+		
+		for(int i=0;i<list.size();i++) {
+			String convert = DateConvert.calculateTime(list.get(i).getRoom_date());
+			RoomDto dto = new RoomDto(list.get(i).getRoom_no(), list.get(i).getMember_id(), 
+							list.get(i).getConsult_id(), list.get(i).getRoom_content(), convert);
+			res.add(dto);
+		}
+		
+		return res;
 	}
 
 	@Override

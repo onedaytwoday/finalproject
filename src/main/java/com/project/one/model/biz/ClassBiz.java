@@ -20,8 +20,7 @@ public interface ClassBiz {
 
 	public int delete(int class_no);
 
-	public int classCount();
-
 	public List<ClassDto> userClass(String member_id);
-
+	
+	public int classCount();
 }

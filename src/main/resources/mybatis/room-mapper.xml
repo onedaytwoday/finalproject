@@ -28,7 +28,11 @@
 		INSERT INTO ROOM
 		VALUES(ROOM_NO_SEQ.NEXTVAL,#{member_id},#{consult_id},NULL,SYSDATE)		
 	</insert>
-	
+	<update id="update" parameterType="roomDto">
+		UPDATE ROOM
+		SET ROOM_DATE = SYSDATE , ROOM_CONTENT = #{room_content}
+		WHERE ROOM_NO = #{room_no}
+	</update>
 	<delete id="delete" parameterType="int">
 		DELETE FROM ROOM
 		WHERE ROOM_NO = #{room_no}
