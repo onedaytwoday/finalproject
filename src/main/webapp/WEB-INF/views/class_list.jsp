@@ -12,10 +12,9 @@
 	rel="stylesheet"
 	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
 	crossorigin="anonymous">
-
 </head>
 <body>
-
+<jsp:include page="header.jsp"></jsp:include>
 	<div class="container">
 		<h1 class="my-5">클래스 목록</h1>
 		
@@ -55,6 +54,6 @@
 		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
 		crossorigin="anonymous"></script>
 		
-
+<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

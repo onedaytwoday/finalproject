@@ -75,6 +75,12 @@
 		WHERE MEMBER_ID = #{member_id}
 	</update>
 	
+	<update id="update" parameterType="memberDto">
+		UPDATE MEMBER
+		SET MEMBER_PW = #{member_pw} , MEMBER_ADDR = #{member_addr} , MEMBER_EMAIL = #{member_email}
+		WHERE MEMBER_ID = #{member_id}
+	</update>
+	
 	<delete id="delete" parameterType="String">
 		UPDATE MEMBER 
 		SET MEMBER_JOIN = 'N' 

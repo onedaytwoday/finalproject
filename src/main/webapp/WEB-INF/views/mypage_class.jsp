@@ -49,7 +49,7 @@
 				<c:forEach items="${list }" var="dto">
 					<tr>
 						<td>${cnt }</td>
-						<td><a href="store_select.do?product_no=${dto.class_no }">${dto.class_title }</a></td>
+						<td><a href="classDetail.do?class_no=${dto.class_no }">${dto.class_title }</a></td>
 						<td>${dto.class_category }</td>
 						<td>${dto.class_member_num }</td>
 						<td>${dto.class_price } 원</td>

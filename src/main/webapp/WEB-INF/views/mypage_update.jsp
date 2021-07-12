@@ -22,7 +22,7 @@
 <tr><td><input type="button" name="member_class" value="수강 클래스 내역" onclick="location.href='mypage_class.do?member_id=${dto.member_id}'"></td></tr>
 </table>
 <h1>개인정보수정</h1>
-<form action="" method="post">
+<form action="mypage_updateres.do" method="post">
 	<table>
 	<tr><td>아이디 <input type="text" name="member_id" value="${dto.member_id }" readonly="readonly"><tr><td>
 	<tr><td>닉네임 <input type="text" name="member_nicname" value="${dto.member_nicname }" readonly="readonly"><tr><td>
