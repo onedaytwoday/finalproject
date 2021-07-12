@@ -7,16 +7,18 @@ public class ChattingDto {
 	private String chatting_content;
 	private Date chatting_date;
 	private int room_no;
+	private String member_id;
 	
 	public ChattingDto() {
 	}
 
-	public ChattingDto(int chatting_no, String chatting_content, Date chatting_date, int room_no) {
+	public ChattingDto(int chatting_no, String chatting_content, Date chatting_date, int room_no, String member_id) {
 		super();
 		this.chatting_no = chatting_no;
 		this.chatting_content = chatting_content;
 		this.chatting_date = chatting_date;
 		this.room_no = room_no;
+		this.member_id = member_id;
 	}
 
 	public int getChatting_no() {
@@ -49,6 +51,14 @@ public class ChattingDto {
 
 	public void setRoom_no(int room_no) {
 		this.room_no = room_no;
+	}
+
+	public String getMember_id() {
+		return member_id;
+	}
+
+	public void setMember_id(String member_id) {
+		this.member_id = member_id;
 	}
 
 }

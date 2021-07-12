@@ -48,7 +48,6 @@
 						if(msg.ip_chk == false) {
 							checkIP();
 						}
-						
 						setTimeout(function(){
 							//추후 수정
 							location.href="main.do";

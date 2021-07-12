@@ -107,6 +107,16 @@ public class MemberBizImpl implements MemberBiz {
 		
 		MemberDto user = dao.selectOne(member_id);
 		
+		try {
+			user.setMember_pw(aes.decrypt(user.getMember_pw()));
+			user.setMember_name(aes.decrypt(user.getMember_name()));
+			user.setMember_email(aes.decrypt(user.getMember_email()));
+			user.setMember_addr(aes.decrypt(user.getMember_addr()));
+			user.setMember_ip(aes.decrypt(user.getMember_ip()));
+		} catch (UnsupportedEncodingException | GeneralSecurityException e) {
+			e.printStackTrace();
+		}
+		
 
 		return user;
 	}
@@ -182,6 +192,12 @@ public class MemberBizImpl implements MemberBiz {
 		
 		
 		return dao.delete(member_id);
+	}
+
+	@Override
+	public List<MemberDto> selectListConsult(String member_grade) {
+		
+		return dao.selectListConsult(member_grade);
 	}
 
 }

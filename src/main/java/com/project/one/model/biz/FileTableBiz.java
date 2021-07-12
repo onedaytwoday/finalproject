@@ -9,7 +9,7 @@ public interface FileTableBiz {
 
 	public FileTableDto selectOne(int file_num);
 
-	public int insert(FileTableDto dto);
+	public int class_insert(FileTableDto dto);
 
 	public int update(FileTableDto dto);
 

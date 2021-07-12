@@ -85,5 +85,18 @@ public class ChattingDaoImpl implements ChattingDao {
 		return res;
 	}
 
+	@Override
+	public List<ChattingDto> selectListByRoom(int room_no) {
+		List<ChattingDto> chatList = new ArrayList<ChattingDto>();
+		try {
+			chatList = sqlSession.selectList(NAMESPACE+"selectListByRoom", room_no);
+		} catch (Exception e) {
+			
+		}
+		return chatList;
+	}
+
+
+
 
 }

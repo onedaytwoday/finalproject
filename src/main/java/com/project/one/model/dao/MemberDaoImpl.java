@@ -158,4 +158,18 @@ public class MemberDaoImpl implements MemberDao {
 		
 		return res;
 	}
+
+	@Override
+	public List<MemberDto> selectListConsult(String member_grade) {
+		List<MemberDto> list = new ArrayList<MemberDto>();
+		
+		try {
+			list = sqlSession.selectList(NAMESPACE+"selectListConsult", member_grade);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
 }

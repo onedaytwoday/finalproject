@@ -33,4 +33,6 @@ public interface MemberBiz {
 
 	// 회원 탈퇴
 	public int delete(String member_id);
+	
+	public List<MemberDto> selectListConsult(String member_grade);
 }

@@ -5,10 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 </head>
 <body>
 	<form method="post">
@@ -41,12 +39,12 @@
 
 			<tr>
 				<th>모집인원</th>
-				<td><input type="text" name="class_member_num" /></td>
+				<td><input type="text" name="class_member_num"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/></td>
 			</tr>
 
 			<tr>
 				<th>클래스 가격</th>
-				<td><input type="text" name="class_price" /></td>
+				<td><input type="text" name="class_price"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/></td>
 			</tr>
 		</table>
 		<button id="btn-upload" type="button"
@@ -161,6 +159,7 @@ function fileDelete(fileNum){
    	      contentType: false,
    	      success: function (data) {
    	    	if(JSON.parse(data)['result'] == "OK"){
+   	    		alert("파일업로드 성공");
    	    		$(location).attr('href',"classList.do");
 			} else
 				alert("서버내 오류로 처리가 지연되고있습니다. 잠시 후 다시 시도해주세요");
@@ -174,5 +173,6 @@ function fileDelete(fileNum){
    	    return false;
 	}
 </script>
+
 </body>
 </html>

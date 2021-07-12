@@ -132,6 +132,13 @@ public class FileTableDto {
 	public void setEvent_no(int event_no) {
 		this.event_no = event_no;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "FileTableDto [file_num=" + file_num + ", file_path=" + file_path + ", file_ori_name=" + file_ori_name
+				+ ", file_new_name=" + file_new_name + ", file_type=" + file_type + ", file_date=" + file_date
+				+ ", file_size=" + file_size + ", member_id=" + member_id + ", product_no=" + product_no + ", class_no="
+				+ class_no + ", review_no=" + review_no + ", event_no=" + event_no + "]";
+	}
 	
 }

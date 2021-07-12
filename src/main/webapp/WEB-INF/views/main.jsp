@@ -64,7 +64,7 @@ li {
 <script type="text/javascript">
 	$(document).ready(function(){		
 		$('.iconImg').click(function(){
-    		window.open('http://localhost:8787/one/chat.do','채팅', 'width=300px,height=500px,scrollbars=yes');
+    		window.open('http://localhost:8787/one/consultList.do','채팅', 'width=300px,height=500px,scrollbars=yes');
     	});
     	
 	    $('#class').on('change', function() {
@@ -96,9 +96,9 @@ li {
 			}
 	
 	    });
-	    /*
+	   /*
 		$('.iconImg').click(function(){
-	        window.open('http://localhost:8787/one/chat.do', 'width=300px,height=500px,scrollbars=yes');
+	        window.open('http://localhost:8787/one/consultList.do', 'width=300px,height=500px,scrollbars=yes');
 	    });
 		*/
 	    
@@ -121,6 +121,7 @@ li {
 							${basket_num }
 					</span>
 				</a>
+				<a href="mypage.do?member_id=${mDto.member_id }">마이페이지</a>
 			</li>
 			
 			<li><a href="logout.do">로그아웃</a>
@@ -136,7 +137,6 @@ li {
 		<br>
 
 		<ul class="headernav">
-			<li><a href="ex.do">ex</a></li>
 			<li><a href="main.do"><img src="logo.png"></a></li>
 			<li><a href="main.do">Home</a></li>
 			<li><a href="board_notice_list.do?nowPage=1">공지사항</a></li>
@@ -153,8 +153,9 @@ li {
 			<li><a href="classList.do">클래스</a></li>
 			<li><a href="board_qna_list.do?nowPage=1">상품문의</a></li>
 			<li><a href="#">수강후기포토</a></li>
-			<li><a href="chat.do">채팅</a></li>
-			<li><a href="map.do">지도</a>
+			<li><a href="map.do">지도</a></li>
+			<%-- <li><a href="map.do" onclick="window.open('map.do', '지도', 'width=500px, height=400px');return false">지도</a></li>--%>
+
 			
 			<c:if test="${mDto.member_grade == '관리자' }">
 				<!-- 관리자만 가능 -->

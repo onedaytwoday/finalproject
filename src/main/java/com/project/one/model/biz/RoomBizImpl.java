@@ -32,8 +32,8 @@ public class RoomBizImpl implements RoomBiz {
 	}
 
 	@Override
-	public RoomDto selectOne(int chat_no) {
-		return dao.selectOne(chat_no);
+	public RoomDto selectOne(int room_no) {
+		return dao.selectOne(room_no);
 	}
 
 	@Override
@@ -50,5 +50,15 @@ public class RoomBizImpl implements RoomBiz {
 	public int delete(int chat_no) {
 		return dao.delete(chat_no);
 	}
+
+	@Override
+	public RoomDto isRoom(RoomDto roomDto) {
+		
+		return dao.isRoom(roomDto);
+	}
+
+
+
+
 
 }

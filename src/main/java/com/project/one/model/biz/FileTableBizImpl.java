@@ -25,8 +25,8 @@ public class FileTableBizImpl implements FileTableBiz {
 	}
 
 	@Override
-	public int insert(FileTableDto dto) {
-		return dao.insert(dto);
+	public int class_insert(FileTableDto dto) {
+		return dao.class_insert(dto);
 	}
 
 	@Override
