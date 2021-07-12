@@ -292,11 +292,7 @@ public class MemberController {
 		return "main";
 	}
 	@RequestMapping("/main.do")
-	public String main(Model model, HttpSession session) {
-		MemberDto mDto = (MemberDto)session.getAttribute("mDto");
-		List<BasketDto> bList = bBiz.selectList(mDto.getMember_id());
-		model.addAttribute("basket_num", bList.size());
-
+	public String main(Model model) {
 		return "main";
 	}
 	
