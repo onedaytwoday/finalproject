@@ -70,5 +70,13 @@ public class PaymentController {
 
 		return "redirect:classDetail.do?class_no="+dto.getClass_no();
 	}
+	
+	@RequestMapping("mypage_payment.do")
+	public String mypage_list(Model model , String member_id) {
+		model.addAttribute("list",pBiz.mypage_list(member_id));
+		model.addAttribute("member_id",member_id);
+		
+		return "mypage_payment";
+	}
 
 }

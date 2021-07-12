@@ -14,6 +14,7 @@
 	<form id="chatForm">
 		<input type="text" id="message"/>
 		<button>send</button>
+		<input type="button" value="나가기" onclick="exit()">
 	</form>
 	<div id="chat"></div>
 	<script>
@@ -27,6 +28,7 @@
 		});
 		
 		var sock = new SockJS("${pageContext.request.contextPath}/echo");
+		var room_content = null;
 		sock.onmessage = function(e){
 			console.log(e);
 			$("#chat").append(e.data + "<br/>");
@@ -34,7 +36,8 @@
 			var member_id = $.trim(tmp[0]);
 			var chatting_content = $.trim(tmp[1]);
 			var room_no = ${Room_no}; 
-			let chatStatus = {
+			room_content = chatting_content;
+			let insertStatus = {
 					"member_id": member_id,
 					"chatting_content": chatting_content,
 					"room_no": room_no
@@ -42,7 +45,7 @@
 			$.ajax({
 				type: "post",
 				url: "chat_insert.do",
-				data: JSON.stringify(chatStatus),
+				data: JSON.stringify(insertStatus),
 				contentType: "application/json",
 				dataType: "json",
 				success: function(result) {
@@ -56,10 +59,20 @@
 			});
 		}
 		
-		sock.onclose = function(e){
-			console.log(e);
+		function exit(){
 			$("#chat").append("연결 종료");
 		}
+			sock.onclose = function(e){
+				console.log(e);
+				var room_no = ${Room_no}; 
+				let updateStatus = {
+						"room_content": room_content,
+						"room_no": room_no
+					}
+				alert(updateStatus);
+				
+				$("#chat").append("연결 종료");
+			}
 		
 	</script>	
 </body>

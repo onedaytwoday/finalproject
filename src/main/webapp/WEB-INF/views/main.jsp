@@ -64,7 +64,7 @@ li {
 <script type="text/javascript">
 	$(document).ready(function(){		
 		$('.iconImg').click(function(){
-    		window.open('http://localhost:8787/one/consultList.do','채팅', 'width=300px,height=500px,scrollbars=yes');
+    		window.open('http://localhost:8787/one/chat_main.do?member_id=' + ${mDto.member_id },'채팅', 'width=400px,height=500px,scrollbars=yes');
     	});
     	
 	    $('#class').on('change', function() {
@@ -121,7 +121,7 @@ li {
 							${basket_num }
 					</span>
 				</a>
-				<a href="mypage.do?member_id=${mDto.member_id }">마이페이지</a>
+				<a href="mypage_update.do?member_id=${mDto.member_id }">마이페이지</a>
 			</li>
 			
 			<li><a href="logout.do">로그아웃</a>
@@ -155,7 +155,7 @@ li {
 			<li><a href="#">수강후기포토</a></li>
 			<li><a href="map.do">지도</a></li>
 			<li><a href="chat.do">채팅</a></li>
-			<%-- <li><a href="map.do" onclick="window.open('map.do', '지도', 'width=500px, height=400px');return false">지도</a></li>--%>
+			<li><a href="map.do" onclick="window.open('map.do', '지도', 'width=500px, height=400px');return false">지도</a></li>
 
 			
 			<c:if test="${mDto.member_grade == '관리자' }">

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,32 +47,23 @@ public class ChatController {
 	@Autowired
 	private MemberBiz mBiz;
 	
+	
+	@RequestMapping("/chat_main.do")
+	public String chat_main(Model model,String member_id, HttpSession session) {
+		MemberDto mDto = (MemberDto)session.getAttribute("mDto");
+		List<RoomDto> roomlist = roomBiz.selectListByUser(member_id);
+		model.addAttribute("roomlist",roomlist);
+		model.addAttribute("mDto",mDto);
+		return "chat_main";
+	}
 	//강사회원 리스트
-	@RequestMapping("/consultList.do")
+	@RequestMapping("/chat_newlist.do")
 	public String consultList(Model model, String member_grade) {
 		model.addAttribute("list",mBiz.selectListConsult(member_grade));
 		
-		return "consultList";
+		return "chat_newlist";
 	}
 	
-	
-	//채팅방목록
-	@RequestMapping("/chatRoomList.do")
-	public void chatRoomList(RoomDto roomDto, ChattingDto chatDto,String member_id, HttpServletResponse response) throws JsonIOException, IOException{
-        
-		 List<RoomDto> roomList = roomBiz.selectListByUser(member_id);
-		 for(int i = 0; i < roomList.size(); i++) {
-			 chatDto.setRoom_no(roomList.get(i).getRoom_no());
-			 chatDto.setMember_id(roomList.get(i).getMember_id());
-
-	        }
-	        
-	        response.setContentType("application/json; charset=utf-8");
-	 
-	        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-	        gson.toJson(roomList,response.getWriter());
-
-	}
 	//해당 방 메세지들
     @RequestMapping(value="{room_no}.do")
     public void messageList(@PathVariable int room_no, String member_id, Model model, HttpServletResponse response) throws JsonIOException, IOException {

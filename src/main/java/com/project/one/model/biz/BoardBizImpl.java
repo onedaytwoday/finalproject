@@ -64,6 +64,12 @@ public class BoardBizImpl implements BoardBiz {
 		return dao.notice_count();
 	}
 
+	@Override
+	public List<BoardDto> mypage_list(String member_id) {
+		
+		return dao.mypage_list(member_id);
+	}
+
 	
 
 

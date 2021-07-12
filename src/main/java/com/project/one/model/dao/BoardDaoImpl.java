@@ -155,7 +155,19 @@ public class BoardDaoImpl implements BoardDao {
 		return res;
 	}
 
-	
+	@Override
+	public List<BoardDto> mypage_list(String member_id) {
+		List<BoardDto> list = new ArrayList<BoardDto>();
+		
+		try {
+			list = sqlSession.selectList(NAMESPACE + "mypage_list", member_id);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
 
 	
 }

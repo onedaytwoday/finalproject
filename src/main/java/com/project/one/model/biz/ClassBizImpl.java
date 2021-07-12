@@ -54,5 +54,9 @@ public class ClassBizImpl implements ClassBiz {
 	public int classCount() {
 		return dao.classCount();
 	}
-
+	
+	@Override
+	public List<ClassDto> userClass(String member_id) {
+		return dao.userClass(member_id);
+	}
 }
