@@ -129,11 +129,9 @@ public class MemberBizImpl implements MemberBiz {
 
 		try {
 			dto.setMember_pw(AES256.encrypt(dto.getMember_pw()));
-			dto.setMember_name(AES256.encrypt(dto.getMember_name()));
 			dto.setMember_email(AES256.encrypt(dto.getMember_email()));
 			dto.setMember_addr(AES256.encrypt(dto.getMember_addr()));
-			dto.setMember_ip(AES256.encrypt(dto.getMember_ip()));
-
+			
 		} catch (UnsupportedEncodingException | GeneralSecurityException e) {
 			e.printStackTrace();
 		}

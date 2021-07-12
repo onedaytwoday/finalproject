@@ -311,5 +311,16 @@ public class MemberController {
 		return "mypage_update";
 		
 	}
+	
+	@RequestMapping("/mypage_updateres.do")
+	public String update(MemberDto dto) {
+		if(biz.update(dto) > 0) {
+			
+			return "redirect:mypage_update.do?member_id="+dto.getMember_id();
+		}
+		
+		
+		return "redirect:mypage_update.do?member_id="+dto.getMember_id();
+	}
 
 }
