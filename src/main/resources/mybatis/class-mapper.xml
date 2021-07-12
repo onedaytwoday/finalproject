@@ -19,6 +19,13 @@
 		WHERE CLASS_TITLE = #{class_title}
 	</select>
 	
+	<select id="userClass" resultType="classDto">
+		SELECT C.CLASS_NO, C.CLASS_TITLE, C.CLASS_DESC, C.CLASS_LOC, C.CLASS_CATEGORY, C.CLASS_MEMBER_NUM, 
+		C.CLASS_PRICE, C.CLASS_SALE, C.MEMBER_ID
+		FROM CLASS C, PAYMENT P
+		WHERE C.CLASS_NO = P.CLASS_NO AND P.MEMBER_ID = #{member_id}
+	</select>
+	
 	<insert id="insert" parameterType="classDto">
 		INSERT INTO CLASS
 		VALUES(CLASS_NO_SEQ.NEXTVAL, #{class_title}, #{class_desc}, #{class_loc}, #{class_category}, #{class_member_num}, #{class_price}, #{class_sale}, #{member_id})
@@ -37,4 +44,5 @@
 		DELETE FROM CLASS
 		WHERE CLASS_NO = #{class_no}
 	</delete>
+
 </mapper>

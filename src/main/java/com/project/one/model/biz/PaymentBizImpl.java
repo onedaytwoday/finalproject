@@ -88,4 +88,9 @@ public class PaymentBizImpl implements PaymentBiz {
 		return dao.checkPaid(dto);
 	}
 
+	@Override
+	public List<PaymentDto> mypage_list(String member_id) {
+		return dao.mypage_list(member_id);
+	}
+
 }

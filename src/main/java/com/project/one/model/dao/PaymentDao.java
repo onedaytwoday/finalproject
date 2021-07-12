@@ -18,4 +18,6 @@ public interface PaymentDao {
 	public int delete(PaymentDto dto);
 	
 	public PaymentDto checkPaid(PaymentDto dto);
+
+	public List<PaymentDto> mypage_list(String member_id);
 }

@@ -89,4 +89,13 @@ public class BoardController {
 			}
 			return "redirect:board_qna_list.do?nowPage=1";
 	}
+	
+	//마이페이지
+	@RequestMapping("mypage_board.do")
+	public String mypage_list(Model model,String member_id) {
+		model.addAttribute("list",biz.mypage_list(member_id));
+		model.addAttribute("member_id",member_id);
+		
+		return "mypage_board";
+	}
 }

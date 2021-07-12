@@ -13,6 +13,7 @@ public class PaymentDto {
 	private int product_no;
 	private int basket_group;
 	private int class_no;
+	private String product_name;
 	
 	public PaymentDto() {
 	}
@@ -30,6 +31,22 @@ public class PaymentDto {
 		this.product_no = product_no;
 		this.basket_group = basket_group;
 		this.class_no = class_no;
+	}
+	
+	public PaymentDto(int payment_no, int payment_num, int payment_price, Date payment_date, String payment_del,
+			String payment_uid, String member_id, int product_no, int basket_group, int class_no,String product_name) {
+		super();
+		this.payment_no = payment_no;
+		this.payment_num = payment_num;
+		this.payment_price = payment_price;
+		this.payment_date = payment_date;
+		this.payment_del = payment_del;
+		this.payment_uid = payment_uid;
+		this.member_id = member_id;
+		this.product_no = product_no;
+		this.basket_group = basket_group;
+		this.class_no = class_no;
+		this.setProduct_name(product_name);
 	}
 
 	public int getPayment_no() {
@@ -111,6 +128,15 @@ public class PaymentDto {
 	public void setClass_no(int class_no) {
 		this.class_no = class_no;
 	}
+	
+	public String getProduct_name() {
+		return product_name;
+	}
+
+	public void setProduct_name(String product_name) {
+		this.product_name = product_name;
+	}
+
 
 	@Override
 	public String toString() {
@@ -119,5 +145,7 @@ public class PaymentDto {
 				+ payment_uid + ", member_id=" + member_id + ", product_no=" + product_no + ", basket_group="
 				+ basket_group + ", class_no=" + class_no + "]";
 	}
+
+
 	
 }

@@ -158,6 +158,16 @@ CREATE TABLE  PAYMENT  (
 	 
 );
 
+select p.payment_no,p.payment_num,p.payment_price,p.payment_date,p.payment_del,p.payment_uid,p.member_id,p.product_no,
+p.basket_group,p.class_no,b.class_title
+from payment p,class b
+where p.class_no = b.class_no;
+
+select c.class_title, c.class_category, c.CLASS_MEMBER_NUM, c.class_price
+from PAYMENT p , CLASS c
+where p.class_no = c.class_no and p.member_id = 'test1234';
+
+
 CREATE TABLE  BASKET  (
 	 BASKET_NO 	NUMBER	PRIMARY KEY,
 	 BASKET_NUM 	NUMBER	NOT NULL,

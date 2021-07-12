@@ -103,6 +103,20 @@ public class PaymentDaoImpl implements PaymentDao {
 		return paid;
 	}
 	
+	@Override
+	public List<PaymentDto> mypage_list(String member_id) {
+		List<PaymentDto> list = new ArrayList<PaymentDto>();
+		
+		try {
+			list = sqlSession.selectList(NAMESPACE + "mypage_list",member_id);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
 	
 
 }

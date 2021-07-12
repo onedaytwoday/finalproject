@@ -121,7 +121,7 @@ li {
 							${basket_num }
 					</span>
 				</a>
-				<a href="mypage.do?member_id=${mDto.member_id }">마이페이지</a>
+				<a href="mypage_update.do?member_id=${mDto.member_id }">마이페이지</a>
 			</li>
 			
 			<li><a href="logout.do">로그아웃</a>

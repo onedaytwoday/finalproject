@@ -61,4 +61,11 @@
 		FROM PAYMENT
 		WHERE MEMBER_ID = #{member_id} AND CLASS_NO = #{class_no}
 	</select>
+	
+	<select id="mypage_list" resultType="paymentDto">
+		SELECT P.PAYMENT_NO, P.PAYMENT_NUM, P.PAYMENT_PRICE, P.PAYMENT_DATE, P.PAYMENT_DEL, P.PAYMENT_UID, P.MEMBER_ID,
+		P.PRODUCT_NO, P.BASKET_GROUP, P.CLASS_NO,B.PRODUCT_NAME
+		FROM PAYMENT P , PRODUCT B
+		WHERE P.PRODUCT_NO = B.PRODUCT_NO AND P.MEMBER_ID = #{member_id}
+	</select>
 </mapper>

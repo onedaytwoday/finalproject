@@ -96,4 +96,20 @@ public class ClassDaoImpl implements ClassDao {
 
 		return res;
 	}
+	
+	//마이페이지 
+	@Override
+	public List<ClassDto> userClass(String member_id) {
+		List<ClassDto> list = new ArrayList<ClassDto>();
+
+		try {
+			list = sqlSession.selectList(NAMESPACE + "userClass", member_id);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return list;
+	}
+	
 }
