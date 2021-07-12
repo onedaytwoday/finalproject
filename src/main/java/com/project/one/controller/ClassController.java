@@ -98,4 +98,13 @@ public class ClassController {
 		
 		return "redirect:classList.do";
 	}
+	
+	@RequestMapping("/mypage_class.do")
+	public String class_selectOne(Model model,String member_id) {
+		
+		model.addAttribute("list",cBiz.userClass(member_id));
+		model.addAttribute("member_id",member_id);
+		
+		return "mypage_class";
+	}
 }

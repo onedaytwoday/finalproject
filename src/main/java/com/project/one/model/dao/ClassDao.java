@@ -19,4 +19,6 @@ public interface ClassDao {
 	public int update(ClassDto dto);
 	
 	public int delete(int class_no);
+
+	public List<ClassDto> userClass(String member_id);
 }

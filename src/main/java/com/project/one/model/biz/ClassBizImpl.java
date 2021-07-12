@@ -43,5 +43,9 @@ public class ClassBizImpl implements ClassBiz {
 	public int delete(int class_no) {
 		return dao.delete(class_no);
 	}
-
+	
+	@Override
+	public List<ClassDto> userClass(String member_id) {
+		return dao.userClass(member_id);
+	}
 }

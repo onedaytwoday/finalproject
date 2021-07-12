@@ -284,13 +284,15 @@ public class MemberController {
 		return "main";
 	}
 	
-	@RequestMapping("/mypage.do")
+	
+	//마이 페이지
+	@RequestMapping("/mypage_update.do")
 	public String mypage(Model model, String member_id) {
 		MemberDto dto = biz.selectOne(member_id);
 		
 		model.addAttribute("dto",dto);
 		
-		return "mypage";
+		return "mypage_update";
 		
 	}
 
