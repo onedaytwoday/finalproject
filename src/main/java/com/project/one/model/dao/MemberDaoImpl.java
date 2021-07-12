@@ -158,7 +158,7 @@ public class MemberDaoImpl implements MemberDao {
 		
 		return res;
 	}
-	
+
 	@Override
 	public List<MemberDto> selectListConsult(String member_grade) {
 		List<MemberDto> list = new ArrayList<MemberDto>();

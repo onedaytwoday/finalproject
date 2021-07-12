@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -30,7 +29,6 @@ import com.project.one.model.biz.RoomBiz;
 import com.project.one.model.dto.ChatSession;
 import com.project.one.model.dto.ChattingDto;
 import com.project.one.model.dto.MemberDto;
-import com.project.one.model.dto.PaymentDto;
 import com.project.one.model.dto.RoomDto;
 
 

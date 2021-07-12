@@ -16,11 +16,9 @@ import com.project.one.model.biz.ClassBiz;
 import com.project.one.model.biz.MemberBiz;
 import com.project.one.model.biz.PaymentBiz;
 import com.project.one.model.biz.ProductBiz;
-import com.project.one.model.dto.BoardDto;
-import com.project.one.model.dto.ClassDto;
 import com.project.one.model.dto.MemberDto;
+import com.project.one.model.dto.PagingDto;
 import com.project.one.model.dto.PaymentDto;
-import com.project.one.model.dto.ProductDto;
 
 @Controller
 public class AdminController {
@@ -61,8 +59,12 @@ public class AdminController {
 	}
 
 	@RequestMapping("/adminBoard.do")
-	public String admin_board(Model model) {
-
+	public String admin_board(Model model, int nowPage) {
+		int count = bBiz.qna_count();
+		PagingDto Pdto = new PagingDto(count, nowPage);
+		model.addAttribute("qnaList", bBiz.board_qna_list(Pdto));
+		model.addAttribute("Pdto", Pdto);
+		
 		return "admin_board";
 	}
 
@@ -96,8 +98,6 @@ public class AdminController {
 		Integer[] product_list = lists.get("product_list");
 
 		int res = 0;
-
-		System.out.println(class_list.length);
 		
 		if (class_list.length == 0) {
 			for (int i : product_list) {
@@ -119,6 +119,22 @@ public class AdminController {
 
 		map.put("msg", res > 0 ? "성공" : "실패");
 
+		return map;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/deleteQna.do", method = RequestMethod.POST)
+	public Map<String, String> delete_qna(@RequestBody Map<String, Integer[]> qna_list) {
+		Map<String, String> map = new HashMap<>();
+		Integer[] qna_nos = qna_list.get("qna_list");
+		int res = 0;
+		
+		for(int i : qna_nos) {
+			res += bBiz.delete(i);
+		}
+		
+		map.put("msg", res > 0 ? "성공" : "실패");
+		
 		return map;
 	}
 
