@@ -173,8 +173,19 @@ public class MemberBizImpl implements MemberBiz {
 
 	@Override
 	public List<MemberDto> selectListConsult(String member_grade) {
-
-		return dao.selectListConsult(member_grade);
+		List<MemberDto> list = dao.selectListConsult(member_grade);
+		for (MemberDto dto : list) {
+			try {
+				dto.setMember_pw(AES256.decrypt(dto.getMember_pw()));
+				dto.setMember_name(AES256.decrypt(dto.getMember_name()));
+				dto.setMember_email(AES256.decrypt(dto.getMember_email()));
+				dto.setMember_addr(AES256.decrypt(dto.getMember_addr()));
+				dto.setMember_ip(AES256.decrypt(dto.getMember_ip()));
+			} catch (UnsupportedEncodingException | GeneralSecurityException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
 	}
 
 }
