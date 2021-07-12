@@ -25,7 +25,7 @@
 			<c:otherwise>
 				<c:forEach items="${list }" var="dto">
 					<tr>
-						<td><a href="createChat.do?member_id=${dto.member_id}">${dto.member_id}</a></td>
+						<td><a href="chat_room.do?member_id=${dto.member_id}">${dto.member_id}</a></td>
 						<td>${dto.member_name}</td>	
 					</tr>
 				</c:forEach>

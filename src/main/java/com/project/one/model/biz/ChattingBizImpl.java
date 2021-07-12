@@ -15,8 +15,8 @@ public class ChattingBizImpl implements ChattingBiz {
 	private ChattingDao dao;
 	
 	@Override
-	public List<ChattingDto> selectList() {
-		return dao.selectList();
+	public List<ChattingDto> selectList(int room_no) {
+		return dao.selectList(room_no);
 	}
 
 	@Override

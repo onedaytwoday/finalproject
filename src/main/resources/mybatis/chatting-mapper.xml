@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="chatting">
-	<select id="chatting" resultType="chattingDto">
+	<select id="selectList" resultType="chattingDto" parameterType="int">
 		SELECT CHATTING_NO, CHATTING_CONTENT, CHATTING_DATE, ROOM_NO,MEMBER_ID
 		FROM CHATTING
-		ORDER BY CHATTING_NO
+		WHERE ROOM_NO = #{ROOM_NO}
+		ORDER BY CHATTING_DATE
 	</select>
 	
 	<select id="selectOne" parameterType="int" resultType="chattingDto">

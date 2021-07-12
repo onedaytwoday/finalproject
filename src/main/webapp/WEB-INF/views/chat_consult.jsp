@@ -1,14 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<!DOCTYPE html>
 <html>
 <head>
-<title>title</title>
-<meta charset="UTF-8" />
+<meta charset="UTF-8">
+<title>Insert title here</title>
 </head>
 <body>
-	<jsp:include page="chat_menu.jsp"></jsp:include>
-	
 	<table border="1">
 		<col width="10"/>
 		<col width="100"/>
@@ -29,8 +29,8 @@
 			<c:otherwise>
 				<c:forEach items="${roomlist }" var="dto">
 					<tr>
-						<td><a href="chat_room.do?member_id=${dto.consult_id }">${dto.room_no }</a></td>
-						<td>${dto.consult_id }</td>
+						<td><a href="chat_room.do?member_id=${dto.member_id }">${dto.room_no }</a></td>
+						<td>${dto.member_id }</td>
 						<td>${dto.room_content }</td>
 						<td>${dto.room_con_date }</td>	
 					</tr>

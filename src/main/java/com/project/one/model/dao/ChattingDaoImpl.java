@@ -16,11 +16,11 @@ public class ChattingDaoImpl implements ChattingDao {
 	private SqlSessionTemplate sqlSession;
 
 	@Override
-	public List<ChattingDto> selectList() {
+	public List<ChattingDto> selectList(int room_no) {
 		List<ChattingDto> list = new ArrayList<ChattingDto>();
 
 		try {
-			list = sqlSession.selectList(NAMESPACE + "selectList");
+			list = sqlSession.selectList(NAMESPACE + "selectList", room_no);
 
 		} catch (Exception e) {
 			e.printStackTrace();
