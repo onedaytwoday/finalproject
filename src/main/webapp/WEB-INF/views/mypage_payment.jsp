@@ -47,7 +47,7 @@
 				<c:forEach items="${list }" var="dto">
 					<tr>
 						<td>${cnt }</td>
-						<td><a href="#">${dto.product_name }</a></td>
+						<td><a href="store_select.do?product_no=${dto.product_no }">${dto.product_name }</a></td>
 						<td>${dto.payment_num }</td>
 						<td>${dto.payment_price }</td>
 						<td>${dto.payment_del }</td>
