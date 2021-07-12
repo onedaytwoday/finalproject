@@ -160,11 +160,6 @@ public class MemberBizImpl implements MemberBiz {
 
 	@Override
 	public int delete(String member_id) {
-		try {
-			member_id = AES256.encrypt(member_id);
-		} catch (UnsupportedEncodingException | GeneralSecurityException e) {
-			e.printStackTrace();
-		}
 
 		return dao.delete(member_id);
 	}

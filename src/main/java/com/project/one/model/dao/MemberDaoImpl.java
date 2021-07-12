@@ -150,7 +150,7 @@ public class MemberDaoImpl implements MemberDao {
 		int res = 0;
 		
 		try {
-			res = sqlSession.delete(NAMESPACE + "delete", member_id);
+			res = sqlSession.update(NAMESPACE + "delete", member_id);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
