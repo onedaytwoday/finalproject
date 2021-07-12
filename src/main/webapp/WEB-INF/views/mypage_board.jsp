@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,7 +37,7 @@
 			<th>조회수</th>
 			<th>작성일</th>
 		</tr>
-		
+		<c:set var="cnt" value="1"/>
 		<c:choose>
 			<c:when test="${empty list }">
 				<tr><th colspan="5">-----------------작성하신 글이 없습니다-------------</th></tr>
@@ -45,12 +45,13 @@
 			<c:otherwise>
 				<c:forEach items="${list }" var="dto">
 					<tr>
-						<td>${dto.board_no }</td>
+						<td>${cnt }</td>
 						<td>${dto.board_category }</td>
-						<td><a href="#">${dto.board_no }</a>${dto.board_title }</td>
+						<td><a href="board_detail.do?board_no=${dto.board_no }">${dto.board_title }</a></td>
 						<td>${dto.board_readcount }</td>
-						<td>${dto.board_date }</td>
+						<td><fmt:formatDate value="${dto.board_date }" pattern="yyyy-MM-dd" /></td>
 					</tr>
+					<c:set var="cnt" value="cnt+1"/>
 				</c:forEach>
 			</c:otherwise>
 		</c:choose>
