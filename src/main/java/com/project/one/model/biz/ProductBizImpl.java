@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.one.model.dao.ProductDao;
+import com.project.one.model.dto.PagingDto;
 import com.project.one.model.dto.ProductDto;
 
 @Service
@@ -17,6 +18,11 @@ public class ProductBizImpl implements ProductBiz {
 	@Override
 	public List<ProductDto> selectList() {
 		return dao.selectList();
+	}
+	
+	@Override
+	public List<ProductDto> productList(PagingDto pDto) {
+		return dao.productList(pDto);
 	}
 
 	@Override
@@ -42,6 +48,11 @@ public class ProductBizImpl implements ProductBiz {
 	@Override
 	public int delete(int product_no) {
 		return dao.delete(product_no);
+	}
+
+	@Override
+	public int productCount() {
+		return dao.productCount();
 	}
 
 }

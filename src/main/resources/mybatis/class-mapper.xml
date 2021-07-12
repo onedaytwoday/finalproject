@@ -7,6 +7,25 @@
 		ORDER BY CLASS_NO DESC
 	</select>
 	
+	<select id="classList" parameterType="PagingDto" resultType="classDto">
+		SELECT X.rnum,
+		X.CLASS_NO, X.CLASS_TITLE, X.CLASS_DESC, X.CLASS_LOC, X.CLASS_CATEGORY, X.CLASS_MEMBER_NUM, X.CLASS_PRICE, X.CLASS_SALE, X.MEMBER_ID
+		FROM (
+		SELECT ROWNUM AS rnum,
+		A.CLASS_NO, A.CLASS_TITLE, A.CLASS_DESC, A.CLASS_LOC, A.CLASS_CATEGORY, A.CLASS_MEMBER_NUM, A.CLASS_PRICE, A.CLASS_SALE, A.MEMBER_ID
+		FROM (
+		SELECT
+		C.CLASS_NO, C.CLASS_TITLE, C.CLASS_DESC, C.CLASS_LOC, C.CLASS_CATEGORY, C.CLASS_MEMBER_NUM, C.CLASS_PRICE, C.CLASS_SALE, C.MEMBER_ID
+		FROM CLASS c
+		ORDER BY CLASS_NO DESC
+		) A
+		WHERE ROWNUM <![CDATA[ <= ]]>
+		#{pageEnd}
+		) X
+		WHERE X.rnum <![CDATA[ >= ]]>
+		#{pageBegin}
+	</select>
+	
 	<select id="selectOne" resultType="classDto">
 		SELECT CLASS_NO, CLASS_TITLE, CLASS_DESC, CLASS_LOC, CLASS_CATEGORY, CLASS_MEMBER_NUM, CLASS_PRICE, CLASS_SALE, MEMBER_ID
 		FROM CLASS
@@ -44,5 +63,9 @@
 		DELETE FROM CLASS
 		WHERE CLASS_NO = #{class_no}
 	</delete>
-
+	
+	<select id="classCount" resultType="int">
+		SELECT COUNT(CLASS_NO)
+		FROM CLASS
+	</select>
 </mapper>

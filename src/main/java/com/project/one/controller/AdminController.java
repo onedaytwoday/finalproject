@@ -39,38 +39,60 @@ public class AdminController {
 	private PaymentBiz pBiz;
 
 	@RequestMapping("/adminMain.do")
-	public String admin_main() {
+	public String admin_main(Model model) {
+		model.addAttribute("mCount", mBiz.memberCount());
+		model.addAttribute("proCount", proBiz.productCount());
+		model.addAttribute("cCount", cBiz.classCount());
+		
 		return "admin_main";
 	}
 
 	@RequestMapping("/adminMember.do")
-	public String admin_member(Model model) {
-		model.addAttribute("mList", mBiz.selectList());
-
+	public String admin_member(Model model, int nowPage) {
+		int count = mBiz.memberCount();
+		PagingDto pDto = new PagingDto(count, nowPage);
+		model.addAttribute("mList", mBiz.memberList(pDto));
+		model.addAttribute("pDto", pDto);
+		
 		return "admin_member";
 	}
 
-	@RequestMapping("/adminProClass.do")
-	public String admin_product_Class(Model model) {
-		model.addAttribute("proList", proBiz.selectList());
-		model.addAttribute("cList", cBiz.selectList());
+	@RequestMapping("/adminProduct.do")
+	public String admin_product(Model model, int nowPage) {
+		int count = proBiz.productCount();
+		PagingDto pDto = new PagingDto(count, nowPage);
+		model.addAttribute("proList", proBiz.productList(pDto));
+		model.addAttribute("pDto", pDto);
 
-		return "admin_proclass";
+		return "admin_product";
+	}
+	
+	@RequestMapping("/adminClass.do")
+	public String admin_class(Model model, int nowPage) {
+		int count = cBiz.classCount();
+		PagingDto pDto = new PagingDto(count, nowPage);
+		model.addAttribute("cList", cBiz.classList(pDto));
+		model.addAttribute("pDto", pDto);
+
+		return "admin_class";
 	}
 
 	@RequestMapping("/adminBoard.do")
 	public String admin_board(Model model, int nowPage) {
 		int count = bBiz.qna_count();
-		PagingDto Pdto = new PagingDto(count, nowPage);
-		model.addAttribute("qnaList", bBiz.board_qna_list(Pdto));
-		model.addAttribute("Pdto", Pdto);
+		PagingDto pDto = new PagingDto(count, nowPage);
+		model.addAttribute("qnaList", bBiz.board_qna_list(pDto));
+		model.addAttribute("pDto", pDto);
 		
 		return "admin_board";
 	}
 
 	@RequestMapping("/adminPayment.do")
-	public String admin_payment(Model model) {
-		model.addAttribute("pList", pBiz.selectList());
+	public String admin_payment(Model model, int nowPage) {
+		int count = pBiz.paymentCount();
+		PagingDto pDto = new PagingDto(count, nowPage);
+		model.addAttribute("pList", pBiz.paymentList(pDto));
+		model.addAttribute("pDto", pDto);
 
 		return "admin_payment";
 	}
@@ -92,29 +114,38 @@ public class AdminController {
 
 	@ResponseBody
 	@RequestMapping(value = "/deleteChecked.do", method = RequestMethod.POST)
-	public Map<String, String> delete_checked(@RequestBody Map<String, Integer[]> lists) {
+	public Map<String, String> delete_checked(@RequestBody Map<String, String[]> checked_list) {
 		Map<String, String> map = new HashMap<>();
-		Integer[] class_list = lists.get("class_list");
-		Integer[] product_list = lists.get("product_list");
-
 		int res = 0;
 		
-		if (class_list.length == 0) {
-			for (int i : product_list) {
-				res += proBiz.delete(i);
-			}
-		} else if (product_list.length == 0) {
-			for (int i : class_list) {
-				res += cBiz.delete(i);
-			}
-		} else {
-			for (int i : product_list) {
-				res += proBiz.delete(i);
-			}
+		String[] types = checked_list.get("type");
+		String type = "";
+		
+		String[] checked = checked_list.get("checked_list");
+		
+		for(String s : types) {
+			type = s;
+		}
 
-			for (int i : class_list) {
-				res += cBiz.delete(i);
+		
+		switch(type) {
+		case "product":
+			for(String i : checked) {
+				res += proBiz.delete(Integer.parseInt(i));
 			}
+			break;
+			
+		case "class":
+			for(String i : checked) {
+				res += cBiz.delete(Integer.parseInt(i));
+			}
+			break;
+			
+		case "qna":
+			for(String i : checked) {
+				res += bBiz.delete(Integer.parseInt(i));
+			}
+			break;
 		}
 
 		map.put("msg", res > 0 ? "성공" : "실패");
@@ -122,22 +153,6 @@ public class AdminController {
 		return map;
 	}
 	
-	@ResponseBody
-	@RequestMapping(value="/deleteQna.do", method = RequestMethod.POST)
-	public Map<String, String> delete_qna(@RequestBody Map<String, Integer[]> qna_list) {
-		Map<String, String> map = new HashMap<>();
-		Integer[] qna_nos = qna_list.get("qna_list");
-		int res = 0;
-		
-		for(int i : qna_nos) {
-			res += bBiz.delete(i);
-		}
-		
-		map.put("msg", res > 0 ? "성공" : "실패");
-		
-		return map;
-	}
-
 	@ResponseBody
 	@RequestMapping(value = "/updateStatus.do", method = RequestMethod.POST)
 	public Map<String, String> update_status(@RequestBody PaymentDto dto) {

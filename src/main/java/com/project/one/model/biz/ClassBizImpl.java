@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.project.one.model.dao.ClassDao;
 import com.project.one.model.dto.ClassDto;
+import com.project.one.model.dto.PagingDto;
 
 @Service
 public class ClassBizImpl implements ClassBiz {
@@ -19,6 +20,11 @@ public class ClassBizImpl implements ClassBiz {
 		return dao.selectList();
 	}
 
+	@Override
+	public List<ClassDto> classList(PagingDto pDto) {
+		return dao.classList(pDto);
+	}
+	
 	@Override
 	public ClassDto selectOne(int class_no) {
 		return dao.selectOne(class_no);
@@ -48,4 +54,10 @@ public class ClassBizImpl implements ClassBiz {
 	public List<ClassDto> userClass(String member_id) {
 		return dao.userClass(member_id);
 	}
+
+	@Override
+	public int classCount() {
+		return dao.classCount();
+	}
+
 }

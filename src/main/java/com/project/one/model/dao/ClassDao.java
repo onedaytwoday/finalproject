@@ -3,12 +3,15 @@ package com.project.one.model.dao;
 import java.util.List;
 
 import com.project.one.model.dto.ClassDto;
+import com.project.one.model.dto.PagingDto;
 
 public interface ClassDao {
 
 	String NAMESPACE = "class.";
 	
 	public List<ClassDto> selectList();
+	
+	public List<ClassDto> classList(PagingDto pDto);
 	
 	public ClassDto selectOne(int class_no);
 	
@@ -21,4 +24,6 @@ public interface ClassDao {
 	public int delete(int class_no);
 
 	public List<ClassDto> userClass(String member_id);
+	
+	public int classCount();
 }

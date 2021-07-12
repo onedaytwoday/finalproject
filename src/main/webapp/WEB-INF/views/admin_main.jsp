@@ -13,7 +13,14 @@
 
       <!-- Content -->
       <div style="margin: 5rem 0; width: 80%">
-        <h1>Content</h1>
+        <div>
+        	<p>총 회원 수 : <span>${mCount }</span></p>
+        	
+        	<p>총 클래스 수 : <span>${cCount }</span></p>
+        	
+        	<p>총 상품 수 : <span>${proCount }</span></p>
+        	
+        </div>
       </div>
     </div>
 </body>

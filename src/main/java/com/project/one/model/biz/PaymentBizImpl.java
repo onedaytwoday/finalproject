@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.project.one.model.dao.PaymentDao;
 import com.project.one.model.dto.ClassDto;
+import com.project.one.model.dto.PagingDto;
 import com.project.one.model.dto.PaymentDto;
 import com.project.one.model.dto.ProductDto;
 import com.project.one.util.Payment;
@@ -30,6 +31,11 @@ public class PaymentBizImpl implements PaymentBiz {
 	@Override
 	public List<PaymentDto> selectList() {
 		return dao.selectList();
+	}
+	
+	@Override
+	public List<PaymentDto> paymentList(PagingDto pDto) {
+		return dao.paymentList(pDto);
 	}
 	
 	@Override
@@ -91,6 +97,9 @@ public class PaymentBizImpl implements PaymentBiz {
 	@Override
 	public List<PaymentDto> mypage_list(String member_id) {
 		return dao.mypage_list(member_id);
+	}
+	public int paymentCount() {
+		return dao.paymentCount();
 	}
 
 }
