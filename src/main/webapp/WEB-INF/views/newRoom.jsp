@@ -6,9 +6,10 @@
 <title>title</title>
 <meta charset="UTF-8"/>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="resources/sockjs.min.js"></script>
+	<script src="resources/js/sockjs.min.js"></script>
 </head>
 <body>
+	<h1>${rDto.consult_id }와의 새로운 채팅방</h1>
 	<form id="chatForm">
 		<input type="text" id="message"/>
 		<button>send</button>

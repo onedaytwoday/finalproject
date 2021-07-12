@@ -1,6 +1,7 @@
 // 상품/클래스 관리
 let product_list = new Array();
 let class_list = new Array();
+let qna_list = new Array();
 
 $(function() {
 	$('input[name=chk_product]').click(function() {
@@ -9,6 +10,10 @@ $(function() {
 	
 	$('input[name=chk_class]').click(function() {
 		class_list.push($(this).val());
+	});
+	
+	$('input[name=chk_qna]').click(function() {
+		qna_list.push($(this).val());
 	});
 	
 });
@@ -37,20 +42,14 @@ function manageMember(member_id) {
 
 // 상품/클래스 관리
 function allCheck(bool, type) {
-	if (type == 'product') {
-		$('input[name=chk_product]').each(function() {
+	$('input[name=chk_'+type+']').each(function() {
 			$(this).prop('checked', bool);
-		});
-	} else {
-		$('input[name=chk_class]').each(function() {
-			$(this).prop('checked', bool);
-		});
-	}
+	});
+	
 }
 
 // 상품/클래스 관리
 function deleteChecked() {
-	
 	let listVal = {
 		"product_list": product_list,
 		"class_list": class_list
@@ -71,6 +70,29 @@ function deleteChecked() {
 		}
 	})
 }
+
+// 게시물 관리
+function deleteQna(){
+	let qnaVal = {
+		"qna_list": qna_list
+	};
+	
+	$.ajax({
+		type: "post",
+		url: "deleteQna.do",
+		data: JSON.stringify(qnaVal),
+		contentType: "application/json",
+		dataType: "json",
+		success: function(result) {
+			alert(result.msg);
+			location.href = 'adminBoard.do?nowPage=1';
+		},
+		error: function() {
+			alert("통신 실패!");
+		}
+	})
+}
+
 
 // 결제 관리
 function updateStatus(payment_no) {

@@ -47,7 +47,6 @@
 							<td>${dto.payment_price }</td>
 							<td>${dto.payment_date }</td>
 							<td><span id="${dto.payment_no }">${dto.payment_del }</span></td>
-							
 							<c:if test="${dto.class_no == 0 }">
 								<td><input onclick="updateStatus(${dto.payment_no})" type="button" value="업데이트" /></td>						
 							</c:if>
