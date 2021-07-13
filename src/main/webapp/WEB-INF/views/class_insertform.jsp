@@ -38,15 +38,11 @@
 			</tr>
 
 			<tr>
-				<th>모집인원</th>
-				<td><input type="text" name="class_member_num"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/></td>
-			</tr>
-
-			<tr>
 				<th>클래스 가격</th>
 				<td><input type="text" name="class_price"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/></td>
 			</tr>
 		</table>
+		
 		<button id="btn-upload" type="button"
 			style="border: 1px solid #ddd; outline: none; cursor: pointer;">파일
 			추가</button>
@@ -58,7 +54,7 @@
 			<span>첨부 파일</span> <br />
 			<div id="articlefileChange"></div>
 		</div>
-		
+		<input type="button" value="다음으로" onclick="location.href='classDetailForm.do?class_no=1'"/>
 		<input type="button" value="등록하기" onclick="registerAction()"/> 
 		<input type="button" value="취소" onclick="location.href='main.do'" />
 	</form>
@@ -145,7 +141,7 @@ function fileDelete(fileNum){
 			}
 		}
 	for (var pair of formData.entries()) {
-		alert(pair[0]+ ', ' + pair[1]); 
+		//alert(pair[0]+ ', ' + pair[1]); 
 	}
    /*
    * 파일업로드 multiple ajax처리
@@ -160,7 +156,7 @@ function fileDelete(fileNum){
    	      success: function (data) {
    	    	if(JSON.parse(data)['result'] == "OK"){
    	    		alert("파일업로드 성공");
-   	    		$(location).attr('href',"classList.do");
+   	    		$(location).attr('href',"classDetailForm.do?class_no="+JSON.parse(data)['class_no']);
 			} else
 				alert("서버내 오류로 처리가 지연되고있습니다. 잠시 후 다시 시도해주세요");
    	    		return false;

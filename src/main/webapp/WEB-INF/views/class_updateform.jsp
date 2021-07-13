@@ -35,11 +35,6 @@
 			</tr>
 			
 			<tr>
-				<th>모집인원</th>
-				<td><input type="text" name="class_member_num" value="${dto.class_member_num }" /></td>
-			</tr>
-			
-			<tr>
 				<th>클래스 가격</th>
 				<td><input type="text" name="class_price" value="${dto.class_price }" /></td>
 			</tr>

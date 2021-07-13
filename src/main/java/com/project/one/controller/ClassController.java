@@ -26,6 +26,7 @@ import com.project.one.model.biz.FileTableBiz;
 import com.project.one.model.biz.PaymentBiz;
 import com.project.one.model.biz.ReviewBiz;
 import com.project.one.model.dto.ClassDto;
+import com.project.one.model.dto.DetailDto;
 import com.project.one.model.dto.FileTableDto;
 import com.project.one.model.dto.MemberDto;
 import com.project.one.model.dto.PaymentDto;
@@ -40,13 +41,13 @@ public class ClassController {
 
 	@Autowired
 	private PaymentBiz pBiz;
-	
+
 	@Autowired
 	private ReviewBiz rbiz;
-	
+
 	@Autowired
 	private FileTableBiz fbiz;
-	
+
 	@RequestMapping("/classList.do")
 	public String class_list(Model model) {
 		model.addAttribute("list", cBiz.selectList());
@@ -57,13 +58,13 @@ public class ClassController {
 	public String class_detail(Model model, int class_no, HttpSession session) {
 
 		MemberDto mDto = (MemberDto) session.getAttribute("mDto");
-		if(mDto != null) {
+		if (mDto != null) {
 			PaymentDto pDto = new PaymentDto();
 			pDto.setMember_id(mDto.getMember_id());
 			pDto.setClass_no(class_no);
-			
+
 			System.out.println("pDto : " + pDto);
-			
+
 			PaymentDto paid = pBiz.checkPaid(pDto);
 			System.out.println(paid);
 			boolean checkPaid = false;
@@ -84,6 +85,19 @@ public class ClassController {
 	@RequestMapping("/classInsert.do")
 	public String class_insertForm() {
 		return "class_insertform";
+	}
+	
+	@RequestMapping("/classDetailForm.do")
+	public String class_detailForm(Model model, int class_no) {
+		model.addAttribute("class_no", class_no);
+		return "class_detailform";
+	}
+	
+	@RequestMapping("/classDetailRes.do")
+	public String class_detail_res(DetailDto dto) {
+		
+		
+		return "";
 	}
 
 	@RequestMapping("/classUpdate.do")
@@ -112,22 +126,22 @@ public class ClassController {
 		return "redirect:classList.do";
 	}
 
-	
 	@RequestMapping("/mypage_class.do")
-	public String class_selectOne(Model model,String member_id) {
-		
-		model.addAttribute("list",cBiz.userClass(member_id));
-		model.addAttribute("member_id",member_id);
-		
+	public String class_selectOne(Model model, String member_id) {
+
+		model.addAttribute("list", cBiz.userClass(member_id));
+		model.addAttribute("member_id", member_id);
+
 		return "mypage_class";
 	}
 
 	@ResponseBody
 	@RequestMapping(value = "/classInsertRes.do", method = RequestMethod.POST)
-	public String fileUpload(@RequestParam("files") List<MultipartFile> multipartFile, ClassDto dto, HttpServletRequest request) {
-		if(cBiz.insert(dto) > 0) {
+	public String fileUpload(@RequestParam("files") List<MultipartFile> multipartFile, ClassDto dto,
+			HttpServletRequest request) {
+		if (cBiz.insert(dto) > 0) {
 			System.out.println("class insert 성공");
-		}else {
+		} else {
 			System.out.println("class insert 실패");
 		}
 		int class_no = dto.getClass_no();
@@ -146,12 +160,12 @@ public class ClassController {
 					String extension = originalFileName.substring(originalFileName.lastIndexOf(".")); // 파일 확장자
 					String savedFileName = class_no + "_" + Random(5) + extension; // 저장될 파일 명
 					String size = Long.toString(file.getSize());
-					
-					FileTableDto fdto = new FileTableDto(0,fileRoot,originalFileName,
-						savedFileName,extension,null,size,dto.getMember_id(),0,class_no,0,0);
-					if(fbiz.class_insert(fdto) > 0) {
+
+					FileTableDto fdto = new FileTableDto(0, fileRoot, originalFileName, savedFileName, extension, null,
+							size, dto.getMember_id(), 0, class_no, 0, 0);
+					if (fbiz.class_insert(fdto) > 0) {
 						System.out.println("file db 넣기 성공");
-					}else {
+					} else {
 						System.out.println("file db 넣기 실패");
 					}
 					File targetFile = new File(fileRoot + savedFileName);
@@ -167,42 +181,40 @@ public class ClassController {
 						break;
 					}
 				}
-					fileRoot = contextRoot + "resources/upload/";
-					File thumbnailFile = new File(fileRoot + class_no + "s_" + Random(5) + extensions.get(0));	
-					BufferedImage bo_image = ImageIO.read(files.get(0));
-					//비율 
-					double ratio = 3;
-					//넓이 높이
-					int width = (int) (bo_image.getWidth() / ratio);
-					int height = (int) (bo_image.getHeight() / ratio);					
-			
-					Thumbnails.of(files.get(0))
-					.size(width, height)
-					.toFile(thumbnailFile);
-					
-					String size = Long.toString(thumbnailFile.length());
-					FileTableDto fdto = new FileTableDto(0,fileRoot,"thumbnail",
-							thumbnailFile.getName(),extensions.get(0),null,size,dto.getMember_id(),0,class_no,0,0);
-					if(fbiz.class_insert(fdto) > 0) {
-						System.out.println("썸네일 file db 넣기 성공");
-					}else {
-						System.out.println("썸네일 file db 넣기 실패");
-					}
-					
-				strResult = "{ \"result\":\"OK\" }";
+				fileRoot = contextRoot + "resources/upload/";
+				File thumbnailFile = new File(fileRoot + class_no + "s_" + Random(5) + extensions.get(0));
+				BufferedImage bo_image = ImageIO.read(files.get(0));
+				// 비율
+				double ratio = 3;
+				// 넓이 높이
+				int width = (int) (bo_image.getWidth() / ratio);
+				int height = (int) (bo_image.getHeight() / ratio);
+
+				Thumbnails.of(files.get(0)).size(width, height).toFile(thumbnailFile);
+
+				String size = Long.toString(thumbnailFile.length());
+				FileTableDto fdto = new FileTableDto(0, fileRoot, "thumbnail", thumbnailFile.getName(),
+						extensions.get(0), null, size, dto.getMember_id(), 0, class_no, 0, 0);
+				if (fbiz.class_insert(fdto) > 0) {
+					System.out.println("썸네일 file db 넣기 성공");
+				} else {
+					System.out.println("썸네일 file db 넣기 실패");
+				}
+
+				strResult = "{ \"result\":\"OK\", \"class_no\":" + class_no + "}";
 			}
 			// (업로드 없이 등록하는경우)
 			else
-				strResult = "{ \"result\":\"OK\" }";
+				strResult = "{ \"result\":\"OK\", \"class_no\":" + class_no + "}";
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return strResult;
 	}
-	
+
 	public static String Random(int len) {
-		char[] charSet = new char[] { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
-				'm', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
+		char[] charSet = new char[] { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'o', 'p', 'q',
+				'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
 		int idx = 0;
 		StringBuffer sb = new StringBuffer();
 		for (int i = 0; i < len; i++) {
