@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.project.one.model.dto.PagingDto;
 import com.project.one.model.dto.PaymentDto;
 
 @Repository
@@ -21,6 +22,20 @@ public class PaymentDaoImpl implements PaymentDao {
 		
 		try {
 			list = sqlSession.selectList(NAMESPACE + "selectList");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
+	@Override
+	public List<PaymentDto> paymentList(PagingDto pDto) {
+		List<PaymentDto> list = new ArrayList<PaymentDto>();
+		
+		try {
+			list = sqlSession.selectList(NAMESPACE + "paymentList", pDto);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -103,6 +118,30 @@ public class PaymentDaoImpl implements PaymentDao {
 		return paid;
 	}
 	
-	
+	@Override
+	public List<PaymentDto> mypage_list(String member_id) {
+		List<PaymentDto> list = new ArrayList<PaymentDto>();
+		
+		try {
+			list = sqlSession.selectList(NAMESPACE + "mypage_list",member_id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+
+	@Override
+	public int paymentCount() {
+		int res = 0;
+		
+		try {
+			res = sqlSession.selectOne(NAMESPACE + "paymentCount");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
 
 }

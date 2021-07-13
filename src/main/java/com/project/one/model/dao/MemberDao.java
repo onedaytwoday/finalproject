@@ -3,6 +3,7 @@ package com.project.one.model.dao;
 import java.util.List;
 
 import com.project.one.model.dto.MemberDto;
+import com.project.one.model.dto.PagingDto;
 
 public interface MemberDao {
 	String NAMESPACE = "member.";
@@ -25,6 +26,9 @@ public interface MemberDao {
 	// 모든 회원 정보 조회
 	public List<MemberDto> selectList();
 	
+	// 페이징 처리
+	public List<MemberDto> memberList(PagingDto pDto);
+	
 	// 회원 정보 수정
 	public int update(MemberDto dto);
 	
@@ -40,4 +44,6 @@ public interface MemberDao {
 	//강사회원목록
 	public List<MemberDto> selectListConsult(String member_grade);
 	
+	// 회원 수
+	public int memberCount();
 }

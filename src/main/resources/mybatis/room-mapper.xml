@@ -9,14 +9,14 @@
 	<select id="selectListByUser" parameterType="String" resultType="roomDto">
 		SELECT ROOM_NO, MEMBER_ID, CONSULT_ID, ROOM_CONTENT, ROOM_DATE
 		FROM ROOM
-		ORDER BY ROOM_NO
 		WHERE MEMBER_ID = #{member_id}
+		ORDER BY ROOM_NO
 	</select>
 	<select id="selectListByConsult" parameterType="String" resultType="roomDto">
 		SELECT ROOM_NO, MEMBER_ID, CONSULT_ID, ROOM_CONTENT, ROOM_DATE
 		FROM ROOM
-		ORDER BY ROOM_NO
 		WHERE CONSULT_ID = #{consult_id}
+		ORDER BY ROOM_NO
 	</select>
 	<select id="selectOne" parameterType="int" resultType="roomDto">
 		SELECT ROOM_NO, MEMBER_ID, CONSULT_ID, ROOM_CONTENT, ROOM_DATE
@@ -28,7 +28,11 @@
 		INSERT INTO ROOM
 		VALUES(ROOM_NO_SEQ.NEXTVAL,#{member_id},#{consult_id},NULL,SYSDATE)		
 	</insert>
-	
+	<update id="update" parameterType="roomDto">
+		UPDATE ROOM
+		SET ROOM_DATE = SYSDATE , ROOM_CONTENT = #{room_content}
+		WHERE ROOM_NO = #{room_no}
+	</update>
 	<delete id="delete" parameterType="int">
 		DELETE FROM ROOM
 		WHERE ROOM_NO = #{room_no}

@@ -13,15 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.project.one.model.biz.BasketBiz;
-import com.project.one.model.biz.ClassBiz;
-import com.project.one.model.biz.MemberBiz;
 import com.project.one.model.biz.PaymentBiz;
-import com.project.one.model.biz.ProductBiz;
-import com.project.one.model.dto.ClassDto;
 import com.project.one.model.dto.MemberDto;
 import com.project.one.model.dto.PaymentDto;
-import com.project.one.model.dto.ProductDto;
 
 @Controller
 public class PaymentController {
@@ -75,6 +69,14 @@ public class PaymentController {
 		}
 
 		return "redirect:classDetail.do?class_no="+dto.getClass_no();
+	}
+	
+	@RequestMapping("mypage_payment.do")
+	public String mypage_list(Model model , String member_id) {
+		model.addAttribute("list",pBiz.mypage_list(member_id));
+		model.addAttribute("member_id",member_id);
+		
+		return "mypage_payment";
 	}
 
 }

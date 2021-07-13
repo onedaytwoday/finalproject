@@ -11,7 +11,7 @@ public class RoomDto {
 	private String consult_id;
 	private String room_content;
 	private Date room_date;
-	
+	private String room_con_date;
 	public RoomDto() {
 	}
 	
@@ -22,6 +22,23 @@ public class RoomDto {
 		this.consult_id = consult_id;
 		this.room_content = room_content;
 		this.room_date = room_date;
+	}
+
+	public RoomDto(int room_no, String member_id, String consult_id, String room_content, String room_con_date) {
+		super();
+		this.room_no = room_no;
+		this.member_id = member_id;
+		this.consult_id = consult_id;
+		this.room_content = room_content;
+		this.room_con_date = room_con_date;
+	}
+
+	public String getRoom_con_date() {
+		return room_con_date;
+	}
+
+	public void setRoom_con_date(String room_con_date) {
+		this.room_con_date = room_con_date;
 	}
 
 	public int getRoom_no() {

@@ -5,7 +5,7 @@ import java.util.List;
 import com.project.one.model.dto.ChattingDto;
 
 public interface ChattingBiz {
-	public List<ChattingDto> selectList();
+	public List<ChattingDto> selectList(int room_no);
 
 	public ChattingDto selectOne(int chatting_no);
 

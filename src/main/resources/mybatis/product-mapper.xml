@@ -8,6 +8,28 @@
 		ORDER BY PRODUCT_NO
 	</select>
 	
+	<select id="productList" parameterType="PagingDto" resultType="productDto">
+		SELECT X.rnum,
+		X.PRODUCT_NO, X.PRODUCT_NAME, X.PRODUCT_CATEGORY, X.PRODUCT_PRICE, X.PRODUCT_DESC, X.PRODUCT_LOC,
+		X.PRODUCT_DEL, X.PRODUCT_SALE
+		FROM (
+		SELECT ROWNUM AS rnum,
+		A.PRODUCT_NO, A.PRODUCT_NAME, A.PRODUCT_CATEGORY, A.PRODUCT_PRICE, A.PRODUCT_DESC, A.PRODUCT_LOC,
+		A.PRODUCT_DEL, A.PRODUCT_SALE
+		FROM (
+		SELECT
+		P.PRODUCT_NO, P.PRODUCT_NAME, P.PRODUCT_CATEGORY, P.PRODUCT_PRICE, P.PRODUCT_DESC, P.PRODUCT_LOC,
+		P.PRODUCT_DEL, P.PRODUCT_SALE
+		FROM PRODUCT p
+		ORDER BY PRODUCT_NO DESC
+		) A
+		WHERE ROWNUM <![CDATA[ <= ]]>
+		#{pageEnd}
+		) X
+		WHERE X.rnum <![CDATA[ >= ]]>
+		#{pageBegin}
+	</select>
+	
 	<select id="selectOne" parameterType="int" resultType="productDto">
 		SELECT PRODUCT_NO, PRODUCT_NAME, PRODUCT_CATEGORY, PRODUCT_PRICE, PRODUCT_DESC, PRODUCT_LOC,
 		PRODUCT_DEL, PRODUCT_SALE
@@ -33,4 +55,9 @@
 		DELETE FROM PRODUCT 
 		WHERE PRODUCT_NO = #{product_no}
 	</delete>
+	
+	<select id="productCount" resultType="int">
+		SELECT COUNT(PRODUCT_NO)
+		FROM PRODUCT
+	</select>
 </mapper>

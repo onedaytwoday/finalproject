@@ -9,7 +9,7 @@
 <title>상품 페이지</title>
 </head>
 <body>
-
+<jsp:include page="header.jsp"></jsp:include>
 <h1>상품 페이지</h1>
 	
 	<table border="1">
@@ -74,6 +74,6 @@
 		</tr>
 		
 	</table>
-
+<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

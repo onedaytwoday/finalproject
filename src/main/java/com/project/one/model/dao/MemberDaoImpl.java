@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.project.one.model.dto.MemberDto;
+import com.project.one.model.dto.PagingDto;
 
 @Repository
 public class MemberDaoImpl implements MemberDao {
@@ -15,14 +16,13 @@ public class MemberDaoImpl implements MemberDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
-	
 	@Override
 	public int register(MemberDto dto) {
 		int res = 0;
-		
+
 		try {
 			res = sqlSession.insert(NAMESPACE + "insert", dto);
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -32,70 +32,79 @@ public class MemberDaoImpl implements MemberDao {
 	@Override
 	public MemberDto checkId(String member_id) {
 		MemberDto dto = null;
-		
+
 		try {
-			dto = sqlSession.selectOne(NAMESPACE + "checkId", member_id); 
-			
+			dto = sqlSession.selectOne(NAMESPACE + "checkId", member_id);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		
+
 		return dto;
 	}
 
 	@Override
 	public MemberDto login(MemberDto dto) {
 		MemberDto user = null;
-		try {		
-			
+		try {
+
 			user = sqlSession.selectOne(NAMESPACE + "login", dto);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return user;
 	}
 
 	@Override
 	public MemberDto findIdPw(MemberDto dto) {
 		MemberDto user = null;
-		
+
 		try {
-			
+
 			user = sqlSession.selectOne(NAMESPACE + "findIdPw", dto);
-			
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		
+
 		return user;
 	}
 
 	@Override
 	public MemberDto selectOne(String member_id) {
 		MemberDto dto = null;
-		
+
 		try {
 			dto = sqlSession.selectOne(NAMESPACE + "selectOne", member_id);
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		
+
 		return dto;
 	}
 
 	@Override
 	public List<MemberDto> selectList() {
 		List<MemberDto> list = new ArrayList<MemberDto>();
-		
+
 		try {
 			list = sqlSession.selectList(NAMESPACE + "selectList");
-			
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return list;
+	}
+	
+	@Override
+	public List<MemberDto> memberList(PagingDto pDto) {
+		List<MemberDto> list = new ArrayList<MemberDto>();
+		
+		try {
+			list = sqlSession.selectList(NAMESPACE + "memberList", pDto);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -106,71 +115,85 @@ public class MemberDaoImpl implements MemberDao {
 	@Override
 	public int update(MemberDto dto) {
 		int res = 0;
-		
-		try {			
+
+		try {
 			res = sqlSession.update(NAMESPACE + "update", dto);
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return res;
 	}
-	
+
 	@Override
 	public int updatePw(MemberDto dto) {
 		int res = 0;
-		
+
 		try {
 			res = sqlSession.update(NAMESPACE + "updatePw", dto);
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return res;
 	}
-	
+
 	@Override
 	public int manageMember(MemberDto dto) {
 		int res = 0;
-		
+
 		try {
 			res = sqlSession.update(NAMESPACE + "manageMember", dto);
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return res;
 	}
 
 	@Override
 	public int delete(String member_id) {
 		int res = 0;
-		
+
 		try {
 			res = sqlSession.delete(NAMESPACE + "delete", member_id);
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return res;
 	}
-	
+
 	@Override
 	public List<MemberDto> selectListConsult(String member_grade) {
 		List<MemberDto> list = new ArrayList<MemberDto>();
-		
+
 		try {
-			list = sqlSession.selectList(NAMESPACE+"selectListConsult", member_grade);
-			
+			list = sqlSession.selectList(NAMESPACE + "selectListConsult", member_grade);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return list;
+	}
+
+	@Override
+	public int memberCount() {
+		int res = 0;
+
+		try {
+			res = sqlSession.selectOne(NAMESPACE + "memberCount");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return res;
 	}
 
 }

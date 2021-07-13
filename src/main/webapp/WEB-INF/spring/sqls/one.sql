@@ -41,8 +41,7 @@ CREATE SEQUENCE CHATTING_NO_SEQ;
 CREATE SEQUENCE ROOM_NO_SEQ;
 CREATE SEQUENCE DETAIL_NO_SEQ;
 
-
-select *  from member;
+select * from room;
 CREATE TABLE MEMBER (
 	MEMBER_ID	VARCHAR2(500)	PRIMARY KEY,
 	MEMBER_PW	VARCHAR2(500)	NOT NULL,
@@ -80,6 +79,7 @@ CREATE TABLE CLASS (
 	CONSTRAINT CLASS_MEMBER_ID_FK FOREIGN KEY (MEMBER_ID) REFERENCES MEMBER (MEMBER_ID) ON DELETE CASCADE
 	
 );
+select * from room;
 CREATE TABLE  PRODUCT  (
 	 PRODUCT_NO 	NUMBER	PRIMARY KEY,
 	 PRODUCT_NAME 	VARCHAR2(500)	NOT NULL,
@@ -156,6 +156,16 @@ CREATE TABLE  PAYMENT  (
 	 CONSTRAINT PAYMENT_CLASS_NO_FK FOREIGN KEY (CLASS_NO) REFERENCES CLASS (CLASS_NO) ON DELETE CASCADE
 	 
 );
+
+select p.payment_no,p.payment_num,p.payment_price,p.payment_date,p.payment_del,p.payment_uid,p.member_id,p.product_no,
+p.basket_group,p.class_no,b.class_title
+from payment p,class b
+where p.class_no = b.class_no;
+
+select c.class_title, c.class_category, c.CLASS_MEMBER_NUM, c.class_price
+from PAYMENT p , CLASS c
+where p.class_no = c.class_no and p.member_id = 'test1234';
+
 
 CREATE TABLE  BASKET  (
 	 BASKET_NO 	NUMBER	PRIMARY KEY,

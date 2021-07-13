@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.project.one.model.dao.MemberDao;
 import com.project.one.model.dto.MemberDto;
+import com.project.one.model.dto.PagingDto;
 import com.project.one.util.AES256;
 
 @Service
@@ -123,17 +124,35 @@ public class MemberBizImpl implements MemberBiz {
 
 		return list;
 	}
+	
+	@Override
+	public List<MemberDto> memberList(PagingDto pDto) {
+		List<MemberDto> list = dao.memberList(pDto);
+		
+		for (MemberDto dto : list) {
+			// 복호화
+			try {
+				dto.setMember_pw(AES256.decrypt(dto.getMember_pw()));
+				dto.setMember_name(AES256.decrypt(dto.getMember_name()));
+				dto.setMember_email(AES256.decrypt(dto.getMember_email()));
+				dto.setMember_addr(AES256.decrypt(dto.getMember_addr()));
+				dto.setMember_ip(AES256.decrypt(dto.getMember_ip()));
+			} catch (UnsupportedEncodingException | GeneralSecurityException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return list;
+	}
 
 	@Override
 	public int update(MemberDto dto) {
 
 		try {
 			dto.setMember_pw(AES256.encrypt(dto.getMember_pw()));
-			dto.setMember_name(AES256.encrypt(dto.getMember_name()));
 			dto.setMember_email(AES256.encrypt(dto.getMember_email()));
 			dto.setMember_addr(AES256.encrypt(dto.getMember_addr()));
-			dto.setMember_ip(AES256.encrypt(dto.getMember_ip()));
-
+			
 		} catch (UnsupportedEncodingException | GeneralSecurityException e) {
 			e.printStackTrace();
 		}
@@ -173,8 +192,24 @@ public class MemberBizImpl implements MemberBiz {
 
 	@Override
 	public List<MemberDto> selectListConsult(String member_grade) {
+		List<MemberDto> list = dao.selectListConsult(member_grade);
+		for (MemberDto dto : list) {
+			try {
+				dto.setMember_pw(AES256.decrypt(dto.getMember_pw()));
+				dto.setMember_name(AES256.decrypt(dto.getMember_name()));
+				dto.setMember_email(AES256.decrypt(dto.getMember_email()));
+				dto.setMember_addr(AES256.decrypt(dto.getMember_addr()));
+				dto.setMember_ip(AES256.decrypt(dto.getMember_ip()));
+			} catch (UnsupportedEncodingException | GeneralSecurityException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
 
-		return dao.selectListConsult(member_grade);
+	@Override
+	public int memberCount() {
+		return dao.memberCount();
 	}
 
 }

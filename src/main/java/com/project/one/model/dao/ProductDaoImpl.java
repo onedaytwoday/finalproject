@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.project.one.model.dto.PagingDto;
 import com.project.one.model.dto.ProductDto;
 
 @Repository
@@ -21,6 +22,20 @@ public class ProductDaoImpl implements ProductDao {
 		
 		try {
 			list = sqlSession.selectList(NAMESPACE + "selectList");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
+	@Override
+	public List<ProductDto> productList(PagingDto pDto) {
+		List<ProductDto> list = new ArrayList<ProductDto>();
+		
+		try {
+			list = sqlSession.selectList(NAMESPACE + "productList", pDto);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -92,6 +107,20 @@ public class ProductDaoImpl implements ProductDao {
 		
 		try {
 			res = sqlSession.delete(NAMESPACE + "delete", product_no);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+
+	@Override
+	public int productCount() {
+		int res = 0;
+		
+		try {
+			res = sqlSession.selectOne(NAMESPACE + "productCount");
 			
 		} catch (Exception e) {
 			e.printStackTrace();

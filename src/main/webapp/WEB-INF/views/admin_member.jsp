@@ -53,6 +53,17 @@
 				</c:otherwise>
 			</c:choose>
 		</table>
+		
+		<jsp:include page="board_paging.jsp">
+			<jsp:param value="Member" name="board_category" />
+			<jsp:param value="${pDto.nowBlock}" name="nowBlock" />
+			<jsp:param value="${pDto.blockBegin }" name="blockBegin" />
+			<jsp:param value="${pDto.blockEnd }" name="blockEnd" />
+			<jsp:param value="${pDto.nowPage}" name="nowPage" />
+			<jsp:param value="${pDto.blockBegin}" name="blockBegin" />
+			<jsp:param value="${pDto.blockEnd}" name="blockEnd" />
+			<jsp:param value="${pDto.totalBlock}" name="totalBlock" />
+		</jsp:include>
       </div>
     </div>
 </body>

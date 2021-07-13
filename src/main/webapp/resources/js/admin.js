@@ -1,14 +1,17 @@
 // 상품/클래스 관리
-let product_list = new Array();
-let class_list = new Array();
+let checked_list = new Array();
 
 $(function() {
 	$('input[name=chk_product]').click(function() {
-		product_list.push($(this).val());
+		checked_list.push($(this).val());
 	});
 	
 	$('input[name=chk_class]').click(function() {
-		class_list.push($(this).val());
+		checked_list.push($(this).val());
+	});
+	
+	$('input[name=chk_qna]').click(function() {
+		checked_list.push($(this).val());
 	});
 	
 });
@@ -26,7 +29,6 @@ function manageMember(member_id) {
 		contentType: "application/json",
 		dataType: "json",
 		success: function(result) {
-			console.log(result.msg);
 			$("#" + member_id).val(result.msg);
 		},
 		error: function() {
@@ -35,26 +37,26 @@ function manageMember(member_id) {
 	});
 };
 
-// 상품/클래스 관리
+
 function allCheck(bool, type) {
-	if (type == 'product') {
-		$('input[name=chk_product]').each(function() {
+	$('input[name=chk_'+type+']').each(function() {
 			$(this).prop('checked', bool);
-		});
-	} else {
-		$('input[name=chk_class]').each(function() {
-			$(this).prop('checked', bool);
-		});
-	}
+	});
 }
 
-// 상품/클래스 관리
-function deleteChecked() {
+// 상품 & 클래스 & 게시물 관리
+function deleteChecked(type) {
+	let Type = new Array();
+	Type.push(type);
 	
 	let listVal = {
-		"product_list": product_list,
-		"class_list": class_list
+		"type": Type,
+		"checked_list": checked_list
 	};
+	
+	let url;
+	
+	type == 'product' ? url = 'adminProduct.do?nowPage=1' : type == 'class' ? url = 'adminClass.do?nowPage=1' : url = 'adminBoard.do?nowPage=1';
 	
 	$.ajax({
 		type: "post",
@@ -64,7 +66,8 @@ function deleteChecked() {
 		dataType: "json",
 		success: function(result) {
 			alert(result.msg);
-			location.href = 'adminProClass.do';
+			
+			if(result.msg == '성공') {location.href = url};
 		},
 		error: function() {
 			alert("통신 실패!");

@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h2>강사 ID를 클릭하여 채팅을 시작해보세요</h2>
+	<jsp:include page="chat_menu.jsp"></jsp:include>
 	<table border="1">
 		<col width="100"/>
 		<col width="70"/>
@@ -18,12 +18,14 @@
 		</tr>
 		<c:choose>
 			<c:when test="${empty list }">
-				<<tr><th colspan="4">--------강사가 없습니다---------</tr>
+				<tr>
+					<th colspan="4">--------강사가 없습니다---------</th>
+				</tr>
 			</c:when>
 			<c:otherwise>
 				<c:forEach items="${list }" var="dto">
 					<tr>
-						<td><a href="createChat.do?member_id=${dto.member_id}">${dto.member_id}</a></td>
+						<td><a href="chat_room.do?member_id=${dto.member_id}">${dto.member_id}</a></td>
 						<td>${dto.member_name}</td>	
 					</tr>
 				</c:forEach>

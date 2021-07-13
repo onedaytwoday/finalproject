@@ -38,12 +38,6 @@ public class EchoHandler extends TextWebSocketHandler {
 			sess.sendMessage(new TextMessage(dto.getMember_id() + " : " + message.getPayload()));
 			System.out.println(message.getPayload().toString());
 		}
-		/*
-		 * DB에 저장한다. int insertRes = chatBiz.insert(chatMessage);
-		 * 
-		 * if(insertRes == 1) { System.out.println("메세지 전송 및 DB 저장 성공"); }else {
-		 * System.out.println("메세지 전송 실패!!! & DB 저장 실패!!"); }
-		 */
 	}
 
 	@Override

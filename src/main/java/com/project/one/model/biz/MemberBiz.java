@@ -3,6 +3,7 @@ package com.project.one.model.biz;
 import java.util.List;
 
 import com.project.one.model.dto.MemberDto;
+import com.project.one.model.dto.PagingDto;
 
 public interface MemberBiz {
 	// 회원 가입
@@ -22,17 +23,22 @@ public interface MemberBiz {
 
 	// 모든 회원 정보 조회
 	public List<MemberDto> selectList();
+	
+	public List<MemberDto> memberList(PagingDto pDto);
 
 	// 회원 정보 수정
 	public int update(MemberDto dto);
-	
+
 	public int updatePw(MemberDto dto);
-	
+
 	// 회원 관리
-    public int manageMember(MemberDto dto);
+	public int manageMember(MemberDto dto);
 
 	// 회원 탈퇴
 	public int delete(String member_id);
-	
+
 	public List<MemberDto> selectListConsult(String member_grade);
+
+	// 회원 수
+	public int memberCount();
 }

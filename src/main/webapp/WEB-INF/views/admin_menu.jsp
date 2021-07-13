@@ -23,10 +23,11 @@
 	<div style="width: fit-content; padding: 2rem; margin: 5rem 2rem">
         <ul style="list-style-type: none">
           <li onclick="location.href='main.do'"><i class="bi bi-house-fill" style="font-size: 2rem; cursor:pointer;"></i>메인으로</li>
-          <li onclick="location.href='adminMember.do'">회원 관리</li>
-          <li onclick="location.href='adminProClass.do'">상품 / 클래스 관리</li>
-          <li onclick="location.href='adminBoard.do'">게시물 관리</li>
-          <li onclick="location.href='adminPayment.do'">주문 관리</li>
+          <li onclick="location.href='adminMember.do?nowPage=1'">회원 관리</li>
+          <li onclick="location.href='adminProduct.do?nowPage=1'">상품 관리</li>
+          <li onclick="location.href='adminClass.do?nowPage=1'">클래스 관리</li>
+          <li onclick="location.href='adminBoard.do?nowPage=1'">게시물 관리</li>
+          <li onclick="location.href='adminPayment.do?nowPage=1'">주문 관리</li>
         </ul>
      </div>
 </body>

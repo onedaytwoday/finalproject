@@ -2,12 +2,15 @@ package com.project.one.model.dao;
 
 import java.util.List;
 
+import com.project.one.model.dto.PagingDto;
 import com.project.one.model.dto.ProductDto;
 
 public interface ProductDao {
 	String NAMESPACE = "product.";
 	
 	public List<ProductDto> selectList();
+	
+	public List<ProductDto> productList(PagingDto pDto);
 	
 	public ProductDto selectOne(int product_no);
 	
@@ -18,4 +21,6 @@ public interface ProductDao {
 	public int update(ProductDto dto);
 	
 	public int delete(int product_no);
+	
+	public int productCount();
 }

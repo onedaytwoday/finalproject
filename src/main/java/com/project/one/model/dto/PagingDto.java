@@ -2,7 +2,7 @@ package com.project.one.model.dto;
 
 public class PagingDto {
 	// 한 페이지에 출력할 게시글 수
-	public static final int DISPLAY_BOARD = 10;
+	public static final int DISPLAY_BOARD = 3;
 	// 한 블록에 출력할 페이지 수
 	public static final int DISPLAY_PAGE = 5;
 
@@ -165,4 +165,11 @@ public class PagingDto {
 		return DISPLAY_PAGE;
 	}
 
+	@Override
+	public String toString() {
+		return "PagingDto [nowPage=" + nowPage + ", prevPage=" + prevPage + ", nextPage=" + nextPage + ", totalPage="
+				+ totalPage + ", totalBlock=" + totalBlock + ", nowBlock=" + nowBlock + ", prevBlock=" + prevBlock
+				+ ", nextBlock=" + nextBlock + ", pageBegin=" + pageBegin + ", pageEnd=" + pageEnd + ", blockBegin="
+				+ blockBegin + ", blockEnd=" + blockEnd + "]";
+	}
 }
