@@ -1,6 +1,7 @@
 package com.project.one.config;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,7 +15,7 @@ import com.project.one.model.dto.MemberDto;
 
 public class EchoHandler extends TextWebSocketHandler {
 
-	private List<WebSocketSession> sessionList = new ArrayList<WebSocketSession>();
+	private Map<Integer,WebSocketSession> sessionList = new HashMap<Integer, WebSocketSession>();
 
 	private static int i;
 
@@ -25,18 +26,24 @@ public class EchoHandler extends TextWebSocketHandler {
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		i++;
-		sessionList.add(session);
 		MemberDto dto = getdto(session);
-		System.out.println(dto.getMember_id() + " 연결 성공 => 총 접속 인원 : " + i + "명");
+		int room_no = getNo(session);
+		sessionList.put(room_no,session);
+		System.out.println("room_no : " + room_no +"\t" + dto.getMember_id() + " 연결 성공 => 총 접속 인원 : " + i + "명");
+		System.out.println(sessionList.toString());
 	}
 
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 
 		MemberDto dto = getdto(session);
-		for (WebSocketSession sess : sessionList) {
-			sess.sendMessage(new TextMessage(dto.getMember_id() + " : " + message.getPayload()));
+		int room_no = getNo(session);
+		for (Map.Entry<Integer, WebSocketSession> entry : sessionList.entrySet()) {
+			if(entry.getKey()== room_no) {
+				System.out.println("entry.getKey: " + entry.getKey()+" id:"+ dto.getMember_id() + "entry.getvalue: "+ entry.getValue());
+			entry.getValue().sendMessage(new TextMessage(dto.getMember_id() + " : " + message.getPayload()));
 			System.out.println(message.getPayload().toString());
+			}
 		}
 	}
 
@@ -44,10 +51,11 @@ public class EchoHandler extends TextWebSocketHandler {
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
 		i--;
 		MemberDto dto = getdto(session);
+		int room_no = getNo(session);
 		System.out.println(dto.getMember_id() + " 연결 종료 => 총 접속 인원 : " + i + "명");
 		// sessionList에 session이 있다면
 		if (sessionList != null) {
-			sessionList.remove(session);
+			sessionList.remove(room_no);
 		}
 	}
 
@@ -55,5 +63,10 @@ public class EchoHandler extends TextWebSocketHandler {
 		Map<String, Object> httpSession = session.getAttributes();
 		MemberDto mDto = (MemberDto) httpSession.get("mDto");
 		return mDto;
+	}
+	private int getNo(WebSocketSession session) {
+		Map<String, Object> httpSession = session.getAttributes();
+		int room_no = (Integer) httpSession.get("room_no");
+		return room_no;
 	}
 }

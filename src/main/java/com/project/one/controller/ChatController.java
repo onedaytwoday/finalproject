@@ -82,6 +82,8 @@ public class ChatController {
     		if(exist!=null) {
     			System.out.println("방이 있다!!");
                 List<ChattingDto> chatlist = chatBiz.selectList(exist.getRoom_no());
+                RoomDto echo = new RoomDto();
+                session.setAttribute("room_no", exist.getRoom_no());
                 rDto.setConsult_id(member_id);
                 rDto.setMember_id(mDto.getMember_id());
                 mav.addObject("rDto", rDto);
@@ -114,6 +116,7 @@ public class ChatController {
         else{
             System.out.println("방이 있다!!");
             List<ChattingDto> chatlist = chatBiz.selectList(exist.getRoom_no());
+            session.setAttribute("room_no", exist.getRoom_no());
             mav.addObject("Room_no", exist.getRoom_no());
             mav.addObject("chatlist",chatlist);
             mav.setViewName("chat_room");
