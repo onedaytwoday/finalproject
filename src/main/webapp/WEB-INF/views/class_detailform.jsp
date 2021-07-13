@@ -13,7 +13,9 @@
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
-	let detail = new Array();
+	let nums = new Array();
+	let dates = new Array();
+	let times = new Array();
 	
 	$(function(){
 		let detail_member_num;
@@ -44,6 +46,10 @@
 				
 				$("#"+count).append(num, date, time, deleteBtn);
 				$("#"+count).css("border", "1px solid lightgray");
+				
+				nums.push(detail_member_num);
+				dates.push(detail_date);
+				times.push(detail_time);
 			}
 			
 			count++;
@@ -60,26 +66,31 @@
 	}
 	
 	function addToDetail(){
+		let detailVal = {
+				"nums": nums,
+				"dates": dates,
+				"times": times
+		}
 		console.log(detailVal)
 		
-		<%--
+		
 		$.ajax({
 			type: "post",
-			url: "classDetailRes.do",
-			data: JSON.stringify(basketVal),
+			url: "classDetailRes.do?class_no="+${class_no},
+			data: JSON.stringify(detailVal),
 			contentType: "application/json",
 			dataType: "json",
-			success: function(msg) {
-				if(msg.result == '성공') {
-					getTotalBasket();
+			success: function(result) {
+				if(result.msg == '성공') {
+					location.href='classList.do';
+				} else {
+					alert("저장 실패!");
 				}
 			},
 			error: function() {
 				alert("통신 실패!");
 			}
 		});
-		
-		--%>
 	}
 </script>
 
@@ -93,7 +104,7 @@
 				<label for="detail_member_num" class="col-sm-2 col-form-label">모집인원</label>
 				
 				<div class="col-sm-10">
-					<input type="text" id="detail_member_num" name="detail_member_num" class="form-control" />
+					<input type="text" id="detail_member_num" name="detail_member_num" class="form-control" />명
 				</div>
 			</div>
 			

@@ -15,7 +15,7 @@
 	
 	<insert id="insert" parameterType="detailDto">
 		INSERT INTO DETAIL
-		VALUES(#{detail_no},#{detail_date},#{detail_member_num},#{class_no})
+		VALUES(DETAIL_NO_SEQ.NEXTVAL, #{detail_date}, #{detail_member_num}, #{class_no})
 	</insert>
 	
 	<delete id="delete" parameterType="int">

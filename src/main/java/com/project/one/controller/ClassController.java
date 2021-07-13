@@ -3,8 +3,14 @@ package com.project.one.controller;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +21,7 @@ import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,6 +29,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.project.one.model.biz.ClassBiz;
+import com.project.one.model.biz.DetailBiz;
 import com.project.one.model.biz.FileTableBiz;
 import com.project.one.model.biz.PaymentBiz;
 import com.project.one.model.biz.ReviewBiz;
@@ -44,6 +52,9 @@ public class ClassController {
 
 	@Autowired
 	private ReviewBiz rbiz;
+	
+	@Autowired
+	private DetailBiz dBiz;
 
 	@Autowired
 	private FileTableBiz fbiz;
@@ -93,11 +104,38 @@ public class ClassController {
 		return "class_detailform";
 	}
 	
+	@ResponseBody
 	@RequestMapping("/classDetailRes.do")
-	public String class_detail_res(DetailDto dto) {
+	public Map<String, String> class_detail_res(int class_no, @RequestBody Map<String, String[]> details) {
+		int res = 0;
+		Map<String, String> map = new HashMap<String, String>();
+		DetailDto dto = new DetailDto();
+		dto.setClass_no(class_no);
 		
+		String[] nums = details.get("nums");
+		String[] dates = details.get("dates");
+		String[] times = details.get("times");
 		
-		return "";
+		for(int i = 0; i < nums.length; i++) {
+			
+			String date_time = dates[i] + " " + times[i];
+	        SimpleDateFormat dateParser = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+	        {
+	            try {
+	                Date date = dateParser.parse(date_time);
+	                dto.setDetail_date(date);
+	                dto.setDetail_member_num(Integer.parseInt(nums[i]));
+	
+	                res += dBiz.insert(dto);                
+	            } catch (Exception e) {
+	                e.printStackTrace();
+	            }
+	        }			
+		}
+		
+		map.put("msg", res > 0 ? "성공" : "실패");
+		
+		return map;
 	}
 
 	@RequestMapping("/classUpdate.do")
@@ -211,7 +249,7 @@ public class ClassController {
 		}
 		return strResult;
 	}
-
+	
 	public static String Random(int len) {
 		char[] charSet = new char[] { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'o', 'p', 'q',
 				'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };

@@ -15,7 +15,7 @@
 </head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
-	<div class="container">
+	<div>
 		<h1 class="my-5">클래스 목록</h1>
 
 		<section class="p-5">
@@ -29,7 +29,7 @@
 						<c:otherwise>
 							<c:forEach items="${list }" var="dto">
 
-								<div class="col-md">
+								<div class="col-md-4">
 									<div class="card bg-dark text-light">
 										<div class="card-body text-center">
 											<div class="h1 mb-3">
