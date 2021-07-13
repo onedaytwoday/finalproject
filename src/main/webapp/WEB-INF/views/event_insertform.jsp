@@ -35,6 +35,7 @@
 </script>
 </head>
 <body>
+<jsp:include page="header.jsp"></jsp:include>
 	<form action="eventInsertRes.do" method="post">
 		<input type="hidden" name="member_id" value="${mDto.member_id }" />
 		
@@ -124,5 +125,6 @@
 			</tr>
 		</table>
 	</form>
+<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

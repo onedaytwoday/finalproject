@@ -11,6 +11,7 @@
 <script type="text/javascript" src="resources/js/basket.js"></script>
 </head>
 <body>
+<jsp:include page="header.jsp"></jsp:include>
 	<div>
 		<h1>장바구니</h1>
 		
@@ -69,6 +70,6 @@
 		</div>
 	</div>
 	
-
+<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

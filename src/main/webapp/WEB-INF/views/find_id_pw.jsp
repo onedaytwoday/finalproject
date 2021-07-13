@@ -11,6 +11,7 @@
     <script type="text/javascript" src="resources/js/findIdPw.js"></script>
 </head>
 <body>
+<jsp:include page="header.jsp"></jsp:include>
 	<div class="find">
 			<h2>아이디/비밀번호 찾기</h2>
 
@@ -62,5 +63,6 @@
 				
 			</div>
 		</div>
+<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

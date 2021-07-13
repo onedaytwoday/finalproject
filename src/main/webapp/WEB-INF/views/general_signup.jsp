@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<jsp:include page="header.jsp"></jsp:include>
 	<h1>일반회원 회원가입</h1>
 	
 	<form action="signup.do" method="post">
@@ -58,5 +58,6 @@
 			</tr>
 		</table>
 	</form>
+<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

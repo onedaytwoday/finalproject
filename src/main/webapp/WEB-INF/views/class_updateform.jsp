@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<jsp:include page="header.jsp"></jsp:include>
 	<form action="classUpdateRes.do" method="post">
 		<table border="1">
 			<tr>
@@ -52,5 +53,6 @@
 			</tr>
 		</table>
 	</form>
+	<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

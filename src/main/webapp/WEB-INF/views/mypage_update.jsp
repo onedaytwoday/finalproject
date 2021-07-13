@@ -25,6 +25,7 @@
 </script>
 </head>
 <body>
+<jsp:include page="header.jsp"></jsp:include>
 <table>
 <tr><td><input type="button" name="member_update" value="개인정보수정" onclick="location.href='mypage_update.do?member_id=${dto.member_id}'"></td></tr>
 <tr><td><input type="button" name="member_payment" value="전체 주문 내역" onclick="location.href='mypage_payment.do?member_id=${dto.member_id}'"></td></tr>
@@ -48,5 +49,6 @@
 	</tr>
 	</table>
 </form>
+<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

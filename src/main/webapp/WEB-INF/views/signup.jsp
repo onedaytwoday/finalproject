@@ -74,6 +74,7 @@
 
 </head>
 <body>
+<jsp:include page="header.jsp"></jsp:include>
 	<h1>회원가입</h1>
 	
 	<form action="signupRes.do" method="post">
@@ -207,5 +208,6 @@
 	
 	<%} %>
 	</form>
+	<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>
