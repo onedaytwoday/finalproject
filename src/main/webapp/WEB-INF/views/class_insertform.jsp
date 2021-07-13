@@ -29,7 +29,7 @@
 
 			<tr>
 				<th>클래스 위치</th>
-				<td><input type="text" name="class_loc" /></td>
+				<td><input type="text" name="class_loc" /><input type="button" value="검색" onclick="window.open('mapselect.do', '지도', 'width=500px, height=400px');return false"></td>
 			</tr>
 
 			<tr>
