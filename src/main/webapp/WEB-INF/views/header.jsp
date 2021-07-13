@@ -59,26 +59,26 @@ li {
 							console.log("통신 실패!");
 						}
 					});
-
-						$('.iconImg').click(function() {
-							window.open('http://localhost:8787/one/chat_main.do?member_id=${mDto.member_id }','채팅','width=400px,height=500px,scrollbars=yes');
-						});
-
-						$('#class').on('change', function() {
-							//클래스 카테고리 선택시에 이동할 경로 수정
-							//카테고리 value는 추후 controller에 맞춰서 수정
-							var cate = this.value;
-
-							if (cate == "cate01") {
-								location.href = 'classList.do';
-							} else if (cate == "cate02") {
-								alert("카테고리 02");
-							} else if (cate == "cate03") {
-								alert("카테고리 03");
-							}
-
-						});
-					});
+	
+		$('.iconImg').click(function(){
+    		window.open('http://localhost:8787/one/chat_main.do?member_id=${mDto.member_id }' ,'채팅', 'width=400px,height=500px,scrollbars=yes');
+    	});
+    	
+	    $('#class').on('change', function() {
+			//클래스 카테고리 선택시에 이동할 경로 수정
+			//카테고리 value는 추후 controller에 맞춰서 수정
+			var cate = this.value;
+			
+			if(cate == "cate01"){
+				location.href = 'classList.do'; 
+			}else if(cate == "cate02"){
+				alert("카테고리 02"); 
+			}else if(cate == "cate03"){
+				alert("카테고리 03"); 
+			}
+	
+	    });
+	});
 </script>
 </head>
 <body>
