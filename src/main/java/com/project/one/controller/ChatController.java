@@ -83,6 +83,7 @@ public class ChatController {
     			System.out.println("방이 있다!!");
                 List<ChattingDto> chatlist = chatBiz.selectList(exist.getRoom_no());
                 RoomDto echo = new RoomDto();
+                session.setAttribute("opponent", member_id);
                 session.setAttribute("room_no", exist.getRoom_no());
                 rDto.setConsult_id(member_id);
                 rDto.setMember_id(mDto.getMember_id());
@@ -108,6 +109,7 @@ public class ChatController {
             int result = roomBiz.insert(rDto);
             if(result == 1) 
                 System.out.println("방 만들었다!!");
+            	session.setAttribute("room_no", rDto.getRoom_no());
             	mav.setViewName("chat_room");
                 return mav;
 
@@ -116,6 +118,7 @@ public class ChatController {
         else{
             System.out.println("방이 있다!!");
             List<ChattingDto> chatlist = chatBiz.selectList(exist.getRoom_no());
+            session.setAttribute("opponent", member_id);
             session.setAttribute("room_no", exist.getRoom_no());
             mav.addObject("Room_no", exist.getRoom_no());
             mav.addObject("chatlist",chatlist);

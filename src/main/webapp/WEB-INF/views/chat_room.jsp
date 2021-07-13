@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="resources/js/sockjs.min.js"></script>
 </head>
 <body>
@@ -40,36 +41,13 @@
 		
 		var sock = new SockJS("${pageContext.request.contextPath}/echo");
 		
-		// 메세지 보낼때
+		// 메세지 왔을때
 		sock.onmessage = function(e){
 			console.log(e);
 			var box = $('<p>' + e.data + '</p>').addClass('new');
 			$("#chat").append(box);
-			var tmp = e.data.split(":");
-			var member_id = $.trim(tmp[0]);
-			var chatting_content = $.trim(tmp[1]);
-			var room_no = ${Room_no}; 
-			let insertStatus = {
-					"member_id": member_id,
-					"chatting_content": chatting_content,
-					"room_no": room_no
-				}
-			$.ajax({
-				type: "post",
-				url: "chat_insert.do",
-				data: JSON.stringify(insertStatus),
-				contentType: "application/json",
-				dataType: "json",
-				success: function(result) {
-					if (result.msg == '성공') {
-						alert("성공");
-					}
-				},
-				error: function() {
-					alert("통신 실패!");
-				}
-			});
 		}
+		
 		// 나가기 버튼
 		function exit(){
 			sock.close();
@@ -78,34 +56,9 @@
 		// 연결끊기면 
 			sock.onclose = function(e){
 				console.log(e);
-				var ex = $('p').last().text();
-				var tmp = ex.split(":");
-				var room_content = $.trim(tmp[1]);
-				var room_no = ${Room_no}; 
-				let updateStatus = {
-						"room_content": room_content,
-						"room_no": room_no
-					}
-				$.ajax({
-					type: "post",
-					url: "room_update.do",
-					data: JSON.stringify(updateStatus),
-					contentType: "application/json",
-					dataType: "json",
-					success: function(result) {
-						if (result.msg == '성공') {
-							alert("성공");
-							$(location).attr('href',"chat_main.do?member_id=${rDto.member_id }");
-						}
-					},
-					error: function() {
-						alert("통신 실패!");
-					}
-				});
-				
 				$("#chat").append("연결 종료");
 			}
-		
+
 	</script>	
 </body>
 </html>
