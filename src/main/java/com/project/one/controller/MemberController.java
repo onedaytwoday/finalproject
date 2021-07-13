@@ -318,5 +318,14 @@ public class MemberController {
 		
 		return "redirect:mypage_update.do?member_id="+dto.getMember_id();
 	}
+	
+	@RequestMapping("/mypage_del.do")
+	public String delete(String member_id) {
+		if(biz.delete(member_id) > 0) {
+			return "redirect:logout.do";
+		}
+		
+		return "redirect:mypage_update.do?member_id="+member_id;
+	}
 
 }
