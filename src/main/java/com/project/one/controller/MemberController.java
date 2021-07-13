@@ -326,7 +326,7 @@ public class MemberController {
 	@RequestMapping("/mypage_del.do")
 	public String delete(String member_id) {
 		if(biz.delete(member_id) > 0) {
-			return "redirect:main.do";
+			return "redirect:logout.do";
 		}
 		
 		return "redirect:mypage_update.do?member_id="+member_id;

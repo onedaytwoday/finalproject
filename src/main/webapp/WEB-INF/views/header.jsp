@@ -122,7 +122,7 @@ li {
 		<br>
 
 		<ul class="headernav">
-			<li><a href="main.do"><img src="logo.png"></a></li>
+			<li><a href="main.do"><img src="resources/images/logo.png"></a></li>
 			<li><a href="main.do">Home</a></li>
 			<li><a href="board_notice_list.do?nowPage=1">공지사항</a></li>
 			<li>

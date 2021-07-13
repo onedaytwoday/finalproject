@@ -17,11 +17,11 @@
 </style>
 <script type="text/javascript">
 	function delOk() {
-		if (!confirm("회원탈퇴를 하시면 복구할 수 없습니다. \n 정말로 탈퇴하시겠습니까?")) {
-		    //취소
-		} else {
-			location.href = 'mypage_del.do'; 
+		if (confirm("회원탈퇴를 하시면 복구할 수 없습니다. \n 정말로 탈퇴하시겠습니까?")) {
+			location.href = "mypage_del.do?member_id=${dto.member_id}" 
 		    alert("회원탈퇴가 완료되었습니다.");
+		} else {
+			location.href = "mypage_update.do?member_id=${dto.member_id}"
 		}
 	}
 </script>
