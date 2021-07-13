@@ -35,7 +35,6 @@
 				<th>클래스 가격</th>
 				<th>카테고리</th>
 				<th>할인율</th>
-				<th>모집인원</th>
 				<th>위치</th>
 			</tr>
 			
@@ -55,7 +54,6 @@
 							<td>${dto.class_price }</td>
 							<td>${dto.class_category }</td>
 							<td>${dto.class_sale }</td>
-							<td>${dto.class_member_num }</td>
 							<td>${dto.class_loc }</td>
 						</tr>
 					</c:forEach>

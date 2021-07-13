@@ -7,22 +7,21 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
  <style>
-      ul li {
+      .admin_menu li {
         padding: 2rem 3rem;
         margin-bottom: 2rem;
         border-radius: 10px;
       }
 
-      ul li:hover {
+      .admin_menu li:hover {
         background-color: olive;
         cursor: pointer;
       }
 </style>
 </head>
 <body>
-<jsp:include page="header.jsp"></jsp:include>
 	<div style="width: fit-content; padding: 2rem; margin: 5rem 2rem">
-        <ul style="list-style-type: none">
+        <ul style="list-style-type: none" class="admin_menu">
           <li onclick="location.href='main.do'"><i class="bi bi-house-fill" style="font-size: 2rem; cursor:pointer;"></i>메인으로</li>
           <li onclick="location.href='adminMember.do?nowPage=1'">회원 관리</li>
           <li onclick="location.href='adminProduct.do?nowPage=1'">상품 관리</li>
