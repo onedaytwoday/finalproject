@@ -20,6 +20,7 @@
 </style>
 </head>
 <body>
+<jsp:include page="header.jsp"></jsp:include>
 	<div style="width: fit-content; padding: 2rem; margin: 5rem 2rem">
         <ul style="list-style-type: none">
           <li onclick="location.href='main.do'"><i class="bi bi-house-fill" style="font-size: 2rem; cursor:pointer;"></i>메인으로</li>

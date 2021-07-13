@@ -33,7 +33,7 @@
   </script>
 </head>
 <body>
-
+<jsp:include page="header.jsp"></jsp:include>
 	<h1>INSERT</h1>
 	
 	<form action="board_insertRes.do" method="post">
@@ -70,6 +70,6 @@
 			</tr>
 		</table>
 	</form>
-
+<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

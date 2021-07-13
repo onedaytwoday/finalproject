@@ -8,9 +8,13 @@
 <title>Insert title here</title>
 <style type="text/css">
 	footer{
-		border: 1px solid yellow;
-		width: 100%;
-		height: 100px;
+		width:100%;
+		height:100px;
+		position:absolute;
+		bottom:0;
+		background:#5eaeff;
+		text-align: center;
+		color: white;
 	}
 </style>
 </head>

@@ -7,7 +7,7 @@
 <title>상품 등록</title>
 </head>
 <body>
-
+<jsp:include page="header.jsp"></jsp:include>
 	<h1>상품 등록</h1>
 	<form action="store_insertres.do" method="post">
 		<table border="1">
@@ -59,6 +59,6 @@
 			</tr>
 		</table>
 	</form>
-
+<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>
