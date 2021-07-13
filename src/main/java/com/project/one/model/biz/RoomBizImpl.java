@@ -69,8 +69,8 @@ public class RoomBizImpl implements RoomBiz {
 	}
 
 	@Override
-	public int delete(int chat_no) {
-		return dao.delete(chat_no);
+	public int delete(int room_no) {
+		return dao.delete(room_no);
 	}
 
 	@Override
@@ -78,6 +78,7 @@ public class RoomBizImpl implements RoomBiz {
 		
 		return dao.isRoom(roomDto);
 	}
+
 
 
 

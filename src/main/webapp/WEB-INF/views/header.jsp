@@ -47,7 +47,7 @@ li {
 <script type="text/javascript">
 	$(document).ready(function(){		
 		$('.iconImg').click(function(){
-    		window.open('http://localhost:8787/one/consultList.do','채팅', 'width=300px,height=500px,scrollbars=yes');
+    		window.open('http://localhost:8787/one/chat_main.do?member_id=${mDto.member_id }' ,'채팅', 'width=400px,height=500px,scrollbars=yes');
     	});
     	
 	    $('#class').on('change', function() {

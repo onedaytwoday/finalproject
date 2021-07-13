@@ -28,5 +28,8 @@
 		FROM CHATTING
 		WHERE ROOM_NO = #{room_no}
 	</select>
-
+	<delete id="deleteByRoom" parameterType="int">
+		DELETE FROM CHATTING 
+		WHERE ROOM_NO = #{room_no}
+	</delete>
 </mapper>

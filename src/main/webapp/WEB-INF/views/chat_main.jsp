@@ -14,11 +14,13 @@
 		<col width="100"/>
 		<col width="100"/>
 		<col width="200"/>
+		<col width="100"/>
 		<tr>
 			<th>room번호</th>
 			<th>아이디</th>
 			<th>마지막 채팅</th>
 			<th>마지막 시간</th>
+			<th>채팅방 삭제</th>
 		</tr>
 		<c:choose>
 			<c:when test="${empty roomlist }">
@@ -33,6 +35,7 @@
 						<td>${dto.consult_id }</td>
 						<td>${dto.room_content }</td>
 						<td>${dto.room_con_date }</td>	
+						<td><a href="chat_delete.do?room_no=${dto.room_no }">나가기</a></td>	
 					</tr>
 				</c:forEach>
 			</c:otherwise>

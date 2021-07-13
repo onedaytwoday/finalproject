@@ -149,6 +149,17 @@ public class ChatController {
 		
 		return map;
 	}
+    
+    @RequestMapping("/chat_delete.do")
+    public String deleteRoom(int room_no, HttpSession session) {
+    	MemberDto mDto = (MemberDto)session.getAttribute("mDto");
+    	if(chatBiz.deleteByRoom(room_no)>0 && roomBiz.delete(room_no)>0 ) {
+    		return "redirect:chat_main.do?member_id="+mDto.getMember_id();
+    	}
+    	return "redirect:chat_main.do?member_id="+mDto.getMember_id();
+    }
+    
+    
 	@RequestMapping("/tts.do")
 	public String tts() {
 		return "tts";

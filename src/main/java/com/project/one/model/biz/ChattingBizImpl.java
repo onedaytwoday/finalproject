@@ -45,6 +45,12 @@ public class ChattingBizImpl implements ChattingBiz {
 		return dao.selectListByRoom(room_no);
 	}
 
+	@Override
+	public int deleteByRoom(int room_no) {
+		
+		return dao.deleteByRoom(room_no);
+	}
+
 
 
 }

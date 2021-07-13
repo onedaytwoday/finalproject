@@ -23,7 +23,7 @@
 			</c:when>
 			<c:otherwise>
 				<c:forEach items="${chatlist }" var="dto">
-					<p class="old">${dto.member_id} : ${dto.chatting_content }</p>
+					<p class="old">${dto.member_id} : ${dto.chatting_content } - ${dto.chatting_date }</p>
 				</c:forEach>
 			</c:otherwise>
 		</c:choose>
@@ -49,10 +49,12 @@
 			var member_id = $.trim(tmp[0]);
 			var chatting_content = $.trim(tmp[1]);
 			var room_no = ${Room_no}; 
+			var chatting_date = new Date();
 			let insertStatus = {
 					"member_id": member_id,
 					"chatting_content": chatting_content,
-					"room_no": room_no
+					"room_no": room_no,
+					"chatting_date" : chatting_date
 				}
 			$.ajax({
 				type: "post",
