@@ -107,9 +107,13 @@ public class ChatController {
         if(exist == null) {
             System.out.println("방이 없다!!");
             int result = roomBiz.insert(rDto);
+            int room_no = rDto.getRoom_no();
             if(result == 1) 
                 System.out.println("방 만들었다!!");
-            	session.setAttribute("room_no", rDto.getRoom_no());
+            	session.setAttribute("opponent", member_id);
+            	session.setAttribute("room_no", room_no);
+            	mav.addObject("rDto", rDto);
+            	mav.addObject("Room_no", room_no);
             	mav.setViewName("chat_room");
                 return mav;
 
@@ -155,6 +159,17 @@ public class ChatController {
 		
 		return map;
 	}
+    
+    @RequestMapping("/chat_delete.do")
+    public String deleteRoom(int room_no, HttpSession session) {
+    	MemberDto mDto = (MemberDto)session.getAttribute("mDto");
+    	if(chatBiz.deleteByRoom(room_no)>0 || roomBiz.delete(room_no)>0 ) {
+    		return "redirect:chat_main.do?member_id="+mDto.getMember_id();
+    	}
+    	return "redirect:chat_main.do?member_id="+mDto.getMember_id();
+    }
+    
+    
 	@RequestMapping("/tts.do")
 	public String tts() {
 		return "tts";

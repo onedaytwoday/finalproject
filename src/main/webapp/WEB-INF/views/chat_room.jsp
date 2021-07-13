@@ -57,6 +57,7 @@
 			sock.onclose = function(e){
 				console.log(e);
 				$("#chat").append("연결 종료");
+				$(location).attr('href',"chat_main.do?member_id=${rDto.member_id }");
 			}
 
 	</script>	

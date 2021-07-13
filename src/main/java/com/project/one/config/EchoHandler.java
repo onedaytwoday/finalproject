@@ -47,7 +47,9 @@ public class EchoHandler extends TextWebSocketHandler {
 		String opponent = getOpponent(session);
 		int room_no = getNo(session);
 		RoomDto rdto = roomBiz.selectOne(room_no);
-		chatting_content = rdto.getRoom_content();
+		if(rdto != null) {
+			chatting_content = rdto.getRoom_content();
+		}
 		room.put(dto.getMember_id(), room_no);
 		map.put(dto.getMember_id(), session);
 		if(room.get(opponent)!=null) {

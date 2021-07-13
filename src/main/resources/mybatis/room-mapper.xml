@@ -26,7 +26,10 @@
 	
 	<insert id="insert" parameterType="roomDto">
 		INSERT INTO ROOM
-		VALUES(ROOM_NO_SEQ.NEXTVAL,#{member_id},#{consult_id},NULL,SYSDATE)		
+		VALUES(ROOM_NO_SEQ.NEXTVAL,#{member_id},#{consult_id},NULL,SYSDATE)
+		<selectKey keyProperty="room_no" resultType="int" >
+			SELECT ROOM_NO_SEQ.CURRVAL From DUAL
+		</selectKey>		
 	</insert>
 	<update id="update" parameterType="roomDto">
 		UPDATE ROOM
