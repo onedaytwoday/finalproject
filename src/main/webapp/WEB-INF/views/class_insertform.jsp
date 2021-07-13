@@ -54,7 +54,6 @@
 			<span>첨부 파일</span> <br />
 			<div id="articlefileChange"></div>
 		</div>
-		<input type="button" value="다음으로" onclick="location.href='classDetailForm.do?class_no=1'"/>
 		<input type="button" value="등록하기" onclick="registerAction()"/> 
 		<input type="button" value="취소" onclick="location.href='main.do'" />
 	</form>
