@@ -13,6 +13,16 @@
 	}
 
 </style>
+<script type="text/javascript">
+	function delOk() {
+		if (confirm("회원탈퇴를 하시면 복구할 수 없습니다. \n 정말로 탈퇴하시겠습니까?")) {
+			location.href = "mypage_del.do?member_id=${dto.member_id}" 
+		    alert("회원탈퇴가 완료되었습니다.");
+		} else {
+			location.href = "mypage_update.do?member_id=${dto.member_id}"
+		}
+	}
+</script>
 </head>
 <body>
 <table>
@@ -20,6 +30,7 @@
 <tr><td><input type="button" name="member_payment" value="전체 주문 내역" onclick="location.href='mypage_payment.do?member_id=${dto.member_id}'"></td></tr>
 <tr><td><input type="button" name="member_board" value="내가 쓴글" onclick="location.href='mypage_board.do?member_id=${dto.member_id}'"></td></tr>
 <tr><td><input type="button" name="member_class" value="수강 클래스 내역" onclick="location.href='mypage_class.do?member_id=${dto.member_id}'"></td></tr>
+<tr><td><input type="button" name="member_class" value="회원탈퇴" onclick="delOk()"></td></tr>
 </table>
 <h1>개인정보수정</h1>
 <form action="mypage_updateres.do" method="post">

@@ -45,9 +45,26 @@ li {
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script type="text/javascript">
-	$(document).ready(function(){		
+	$(document).ready(function(){
+			$.ajax({
+				type: 'get',
+				url: 'getBasketNum.do',
+				dataType: 'json',
+				success: function(res){
+					console.log(res.basket_num);
+					$("#basket_num").text(res.basket_num);
+				},
+				error: function(err){
+					console.log("통신 실패!");
+				}
+			});
+		
+		
+		
 		$('.iconImg').click(function(){
-    		window.open('http://localhost:8787/one/chat_main.do?member_id=${mDto.member_id }' ,'채팅', 'width=400px,height=500px,scrollbars=yes');
+
+    		window.open('http://localhost:8787/one/chat_main.do?member_id=${mDto.member_id}','채팅', 'width=300px,height=500px,scrollbars=yes');
+
     	});
     	
 	    $('#class').on('change', function() {
@@ -101,7 +118,7 @@ li {
 			<li>
 				<a href="basket.do" style="position: relative; text-decoration-line:none;">
 					<i class="bi bi-cart4" style="font-size: 3rem; cursor:pointer;"></i>
-					<span 
+					<span id="basket_num"
 						style="position: absolute; left: 1.5rem; bottom: 25px; border-radius: 50%; padding: 5px 10px; background-color: red; color: white;">
 							${basket_num }
 					</span>

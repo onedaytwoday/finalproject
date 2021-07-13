@@ -292,11 +292,7 @@ public class MemberController {
 		return "main";
 	}
 	@RequestMapping("/main.do")
-	public String main(Model model, HttpSession session) {
-		MemberDto mDto = (MemberDto)session.getAttribute("mDto");
-		List<BasketDto> bList = bBiz.selectList(mDto.getMember_id());
-		model.addAttribute("basket_num", bList.size());
-
+	public String main(Model model) {
 		return "main";
 	}
 	
@@ -321,6 +317,15 @@ public class MemberController {
 		
 		
 		return "redirect:mypage_update.do?member_id="+dto.getMember_id();
+	}
+	
+	@RequestMapping("/mypage_del.do")
+	public String delete(String member_id) {
+		if(biz.delete(member_id) > 0) {
+			return "redirect:logout.do";
+		}
+		
+		return "redirect:mypage_update.do?member_id="+member_id;
 	}
 
 }
