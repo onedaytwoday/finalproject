@@ -24,7 +24,7 @@
 			</c:when>
 			<c:otherwise>
 				<c:forEach items="${chatlist }" var="dto">
-					<p class="old">${dto.member_id} : ${dto.chatting_content } - ${dto.chatting_date }</p>
+					<p class="old">${dto.member_id} : ${dto.chatting_content }</p>
 				</c:forEach>
 			</c:otherwise>
 		</c:choose>
@@ -57,6 +57,7 @@
 			sock.onclose = function(e){
 				console.log(e);
 				$("#chat").append("연결 종료");
+				$(location).attr('href',"chat_main.do?member_id=${rDto.member_id }");
 			}
 
 	</script>	

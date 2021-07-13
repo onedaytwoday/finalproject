@@ -92,8 +92,6 @@
 			
 			<p>가격 : ${dto.class_price }원</p>
 			
-			<p>모집인원 : ${dto.class_member_num }명</p>
-			
 			<button onclick="location.href='classList.do'" type="button" class="btn btn-secondary">클래스 목록 보기</button>
 			
 			<c:if test="${dto.member_id eq mDto.member_id }">

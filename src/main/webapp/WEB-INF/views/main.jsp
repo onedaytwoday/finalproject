@@ -56,20 +56,15 @@ main{
 				alert("카테고리 03"); 
 			}
 	
-	    });
-	   /*
-		$('.iconImg').click(function(){
-	        window.open('http://localhost:8787/one/consultList.do', 'width=300px,height=500px,scrollbars=yes');
-	    });
-		*/
-	    
+	    });	    
 	    
 	});
 
 </script>
 </head>
 <body>
-<jsp:include page="header.jsp"></jsp:include>
+	<jsp:include page="header.jsp"></jsp:include>
+	
 	<div class="chatIcon">
         <img width="50"  src="https://previews.123rf.com/images/nikolae/nikolae1601/nikolae160100031/51288418-%ED%9D%B0%EC%83%89-%EB%B0%B0%EA%B2%BD%EC%97%90-%EA%B3%A0%EB%A6%BD-%EC%B1%84%ED%8C%85-%EC%95%84%EC%9D%B4%EC%BD%98.jpg" class="iconImg">
     </div>

@@ -12,7 +12,6 @@ public class DetailDto {
 	}
 
 	public DetailDto(int detail_no, Date detail_date, int detail_member_num, int class_no) {
-		super();
 		this.detail_no = detail_no;
 		this.detail_date = detail_date;
 		this.detail_member_num = detail_member_num;
