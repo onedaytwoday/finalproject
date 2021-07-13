@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,7 +26,7 @@
 			</c:when>
 			<c:otherwise>
 				<c:forEach items="${chatlist }" var="dto">
-					<p class="old">${dto.member_id} : ${dto.chatting_content }</p>
+					<p class="old">${dto.member_id} : ${dto.chatting_content } _${fn:substring(dto.chatting_date,11,19) }</p>
 				</c:forEach>
 			</c:otherwise>
 		</c:choose>
