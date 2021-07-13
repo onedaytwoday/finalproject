@@ -99,7 +99,7 @@ public class MemberController {
 			MemberDto mDto = biz.selectOne(dto.getMember_id());
 			if(mDto!=null) {
 				session.setAttribute("mDto", mDto);
-				session.setMaxInactiveInterval(60*60);
+				session.setMaxInactiveInterval(-1);
 				return "main";
 			}	
 		}
@@ -134,7 +134,7 @@ public class MemberController {
 	public String sns_signupRes(MemberDto mDto, HttpSession session) {
 		if(biz.register(mDto) > 0) {
 			session.setAttribute("mdto", mDto);
-			session.setMaxInactiveInterval(60*60);
+			session.setMaxInactiveInterval(-1);
 			return "main";
 		}
 		
@@ -235,7 +235,7 @@ public class MemberController {
 			MemberDto res = biz.selectOne(member_id);
 			if(res != null) {
 				session.setAttribute("mDto", res);
-				session.setMaxInactiveInterval(60*60);
+				session.setMaxInactiveInterval(-1);
 				return "main";
 			}
 			model.addAttribute("mDto",mDto);
@@ -275,7 +275,7 @@ public class MemberController {
 		MemberDto res = biz.selectOne(kid);
 		if(res != null) {
 			session.setAttribute("mDto", res);
-			session.setMaxInactiveInterval(60*60);
+			session.setMaxInactiveInterval(-1);
 			return "main";
 		}
 		
