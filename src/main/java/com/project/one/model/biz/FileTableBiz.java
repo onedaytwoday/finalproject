@@ -15,6 +15,8 @@ public interface FileTableBiz {
 	
 	public int event_insert(FileTableDto dto);
 	
+	public int review_insert(FileTableDto dto);
+	
 	public int update(FileTableDto dto);
 
 	public int delete(int file_num);

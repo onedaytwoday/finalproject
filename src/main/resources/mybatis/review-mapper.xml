@@ -19,10 +19,12 @@
 		WHERE PRODUCT_NO = #{product_no}
 	</select>
 	
-	
 	<insert id="insert" parameterType="reviewDto">
 		INSERT INTO REVIEW
 		VALUES(REVIEW_NO_SEQ.NEXTVAL,#{review_title},#{review_rate},SYSDATE,#{review_content},NULL,#{class_no},#{member_id})
+		<selectKey keyProperty="review_no" resultType="int" >
+			SELECT REVIEW_NO_SEQ.CURRVAL From DUAL
+		</selectKey>
 	</insert>
 	
 	<delete id="delete" parameterType="int">

@@ -33,6 +33,12 @@
 		null,null,null,#{event_no})
 	</insert>
 	
+	<insert id="review_insert" parameterType="fileTableDto">
+		INSERT INTO FILE_TABLE
+		VALUES(FILE_NUM_SEQ.NEXTVAL,#{file_path},#{file_ori_name},#{file_new_name},#{file_type},SYSDATE,#{file_size},
+		null,null,#{review_no},null)
+	</insert>
+	
 	<delete id="delete" parameterType="int">
 		DELETE FROM PRODUCT 
 		WHERE PRODUCT_NO = #{product_no}

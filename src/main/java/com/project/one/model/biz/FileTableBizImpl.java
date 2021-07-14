@@ -40,6 +40,11 @@ public class FileTableBizImpl implements FileTableBiz {
 	}
 	
 	@Override
+	public int review_insert(FileTableDto dto) {
+		return dao.review_insert(dto);
+	}
+
+	@Override
 	public int update(FileTableDto dto) {
 		return dao.update(dto);
 	}
@@ -49,6 +54,7 @@ public class FileTableBizImpl implements FileTableBiz {
 		return dao.delete(file_num);
 	}
 
+	
 	
 
 	

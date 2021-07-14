@@ -86,6 +86,20 @@ public class FileTableDaoImpl implements FileTableDao {
 	}
 	
 	@Override
+	public int review_insert(FileTableDto dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.insert(NAMESPACE + "review_insert", dto);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+	
+	@Override
 	public int update(FileTableDto dto) {
 		int res = 0;
 		
