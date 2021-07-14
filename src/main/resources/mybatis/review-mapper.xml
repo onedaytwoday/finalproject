@@ -30,4 +30,11 @@
 		DELETE FROM REVIEW 
 		WHERE REVIEW_NO = #{review_no}
 	</delete>
+	
+	<select id="selectClass" resultType="reviewDto">
+		SELECT REVIEW_NO, REVIEW_TITLE, REVIEW_RATE, REVIEW_DATE, REVIEW_CONTENT, PRODUCT_NO, CLASS_NO, MEMBER_ID
+		FROM REVIEW
+		WHERE CLASS_NO IS NOT NULL
+		ORDER BY REVIEW_NO
+	</select>
 </mapper>

@@ -107,9 +107,6 @@
 			alert(input);
 			speech(input);	
 		});
-
-		
-		
 	
 	</script>	
 </body>
