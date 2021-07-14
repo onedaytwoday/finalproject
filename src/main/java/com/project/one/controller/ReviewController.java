@@ -75,7 +75,7 @@ public class ReviewController {
 	
 	
 	@ResponseBody
-	@RequestMapping(value = "/productInsertRes.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/reviewInsertRes", method = RequestMethod.POST)
 	public String fileUpload(@RequestParam("files") List<MultipartFile> multipartFile, ReviewDto rDto, String class_no_str,HttpServletRequest request) {
 		rDto.setClass_no(Integer.parseInt(class_no_str));	
 			if(rBiz.insert(rDto)>0) {
