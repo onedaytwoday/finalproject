@@ -28,6 +28,11 @@ public class FileTableBizImpl implements FileTableBiz {
 	public int class_insert(FileTableDto dto) {
 		return dao.class_insert(dto);
 	}
+	
+	@Override
+	public int product_insert(FileTableDto dto) {
+		return dao.product_insert(dto);
+	}
 
 	@Override
 	public int update(FileTableDto dto) {
@@ -39,4 +44,5 @@ public class FileTableBizImpl implements FileTableBiz {
 		return dao.delete(file_num);
 	}
 
+	
 }

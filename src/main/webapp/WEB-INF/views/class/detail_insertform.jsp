@@ -104,7 +104,7 @@
 				<label for="detail_member_num" class="col-sm-2 col-form-label">모집인원</label>
 				
 				<div class="col-sm-10">
-					<input type="text" id="detail_member_num" name="detail_member_num" class="form-control" />
+					<input type="text" id="detail_member_num" name="detail_member_num" class="form-control" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
 				</div>
 			</div>
 			

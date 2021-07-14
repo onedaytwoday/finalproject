@@ -18,7 +18,13 @@
 	<insert id="class_insert" parameterType="fileTableDto">
 		INSERT INTO FILE_TABLE
 		VALUES(FILE_NUM_SEQ.NEXTVAL,#{file_path},#{file_ori_name},#{file_new_name},#{file_type},SYSDATE,#{file_size},
-		null,null,#{class_no},null,null)	
+		null,#{class_no},null,null)	
+	</insert>
+	
+	<insert id="product_insert" parameterType="fileTableDto">
+		INSERT INTO FILE_TABLE
+		VALUES(FILE_NUM_SEQ.NEXTVAL,#{file_path},#{file_ori_name},#{file_new_name},#{file_type},SYSDATE,#{file_size},
+		#{product_no},null,null,null)
 	</insert>
 	
 	<delete id="delete" parameterType="int">

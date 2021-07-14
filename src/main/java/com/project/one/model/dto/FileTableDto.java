@@ -10,7 +10,6 @@ public class FileTableDto {
 	private String file_type;
 	private Date file_date;
 	private String file_size;
-	private String member_id;
 	private int product_no;
 	private int class_no;
 	private int review_no;
@@ -18,10 +17,8 @@ public class FileTableDto {
 
 	public FileTableDto() {
 	}
-
 	public FileTableDto(int file_num, String file_path, String file_ori_name, String file_new_name, String file_type,
-			Date file_date, String file_size, String member_id, int product_no, int class_no, int review_no,
-			int event_no) {
+			Date file_date, String file_size, int product_no, int class_no, int review_no, int event_no) {
 		super();
 		this.file_num = file_num;
 		this.file_path = file_path;
@@ -30,7 +27,6 @@ public class FileTableDto {
 		this.file_type = file_type;
 		this.file_date = file_date;
 		this.file_size = file_size;
-		this.member_id = member_id;
 		this.product_no = product_no;
 		this.class_no = class_no;
 		this.review_no = review_no;
@@ -93,14 +89,6 @@ public class FileTableDto {
 		this.file_size = file_size;
 	}
 
-	public String getMember_id() {
-		return member_id;
-	}
-
-	public void setMember_id(String member_id) {
-		this.member_id = member_id;
-	}
-
 	public int getProduct_no() {
 		return product_no;
 	}
@@ -137,7 +125,7 @@ public class FileTableDto {
 	public String toString() {
 		return "FileTableDto [file_num=" + file_num + ", file_path=" + file_path + ", file_ori_name=" + file_ori_name
 				+ ", file_new_name=" + file_new_name + ", file_type=" + file_type + ", file_date=" + file_date
-				+ ", file_size=" + file_size + ", member_id=" + member_id + ", product_no=" + product_no + ", class_no="
+				+ ", file_size=" + file_size + ", product_no=" + product_no + ", class_no="
 				+ class_no + ", review_no=" + review_no + ", event_no=" + event_no + "]";
 	}
 	
