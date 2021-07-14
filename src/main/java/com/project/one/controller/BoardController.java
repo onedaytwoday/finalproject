@@ -26,7 +26,7 @@ public class BoardController {
 		PagingDto Pdto = new PagingDto(count, nowPage);
 		model.addAttribute("list", biz.board_notice_list(Pdto));
 		model.addAttribute("Pdto", Pdto);
-		return "board_notice";
+		return "board/board_notice";
 	}
 	@RequestMapping("/board_qna_list.do")
 	public String board_qna_list(Model model, int nowPage) {
@@ -34,13 +34,13 @@ public class BoardController {
 		PagingDto Pdto = new PagingDto(count, nowPage);
 		model.addAttribute("list", biz.board_qna_list(Pdto));
 		model.addAttribute("Pdto", Pdto);
-		return "board_qna";
+		return "board/board_qna";
 	}
 	
 	@RequestMapping("/board_insertform.do")
 	public String board_insertForm(Model model, String board_category) {
 		model.addAttribute("board_category",board_category);
-		return "board_insertform";
+		return "board/board_insertform";
 	}
 	
 	@RequestMapping("/board_insertRes.do")
@@ -63,13 +63,13 @@ public class BoardController {
 	@RequestMapping("/board_detail.do")
 	public String board_detail(Model model, int board_no) {
 		model.addAttribute("dto", biz.selectOne(board_no));
-		return "board_detail";
+		return "board/board_detail";
 	}
 	
 	@RequestMapping("/board_updateform.do")
 	public String board_updateForm(Model model, int board_no) {
 		model.addAttribute("dto", biz.selectOne(board_no));
-		return "board_updateform";
+		return "board/board_updateform";
 	}
 	
 	@RequestMapping("/board_updateRes.do")
@@ -96,6 +96,6 @@ public class BoardController {
 		model.addAttribute("list",biz.mypage_list(member_id));
 		model.addAttribute("member_id",member_id);
 		
-		return "mypage_board";
+		return "mypage/mypage_board";
 	}
 }

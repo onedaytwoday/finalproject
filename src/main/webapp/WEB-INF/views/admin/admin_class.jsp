@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="resources/js/admin.js"></script>
 </head>
 <body>
@@ -15,49 +15,58 @@
       <jsp:include page="admin_menu.jsp"></jsp:include>
 
       <!-- Content -->
-      <div style="margin: 5rem 0; width: 80%">
-      	<table border="1">
+      <div style="margin: 5rem 0; width: 80%">      	
+		<table border="1">
+			<col width="50" />
+			<col width="150" />
 			<col width="150" />
 			<col width="150" />
 			<col width="150" />
 			<col width="200" />
 			<col width="150" />
-			<col width="100" />
+			<col width="150" />
+			<col width="150" />
 			
 			<tr>
-				<th>결제자</th>
-				<th>결제 수량</th>
-				<th>결제 가격</th>
-				<th>결제 날짜</th>
-				<th>상태</th>
-				<th></th>
+				<th><input type="checkbox" onclick="allCheck(this.checked, 'class')" /></th>
+				<th>클래스 사진</th>
+				<th>작성자</th>
+				<th>클래스 이름</th>
+				<th>클래스 가격</th>
+				<th>카테고리</th>
+				<th>할인율</th>
+				<th>위치</th>
 			</tr>
 			
 			<c:choose>
-				<c:when test="${empty pList }">
+				<c:when test="${empty cList }">
 					<tr>
-						<th colspan="5">------------결제 목록이 존재하지 않습니다.------------</th>
+						<th colspan="9">------------등록된 클래스가 존재하지 않습니다.------------</th>
 					</tr>
 				</c:when>
 				<c:otherwise>
-					<c:forEach items="${pList }" var="dto">
+					<c:forEach items="${cList }" var="dto">
 						<tr>
+							<td><input type="checkbox" name="chk_class" value="${dto.class_no }" /></td>
+							<td>사진</td>
 							<td>${dto.member_id }</td>
-							<td>${dto.payment_num }</td>
-							<td>${dto.payment_price }</td>
-							<td>${dto.payment_date }</td>
-							<td><span id="${dto.payment_no }">${dto.payment_del }</span></td>
-							<c:if test="${dto.class_no == 0 }">
-								<td><input onclick="updateStatus(${dto.payment_no})" type="button" value="업데이트" /></td>						
-							</c:if>
+							<td><a href="classDetail.do?class_no=${dto.class_no }">${dto.class_title }</a></td>
+							<td>${dto.class_price }</td>
+							<td>${dto.class_category }</td>
+							<td>${dto.class_sale }</td>
+							<td>${dto.class_loc }</td>
 						</tr>
 					</c:forEach>
 				</c:otherwise>
 			</c:choose>
+			<tr>
+				<td colspan="9" align="right">
+					<input type="button" value="삭제" onclick="deleteChecked('class')" />
+				</td>
+			</tr>
 		</table>
-		
-		<jsp:include page="board_paging.jsp">
-			<jsp:param value="Payment" name="board_category" />
+		<jsp:include page="/WEB-INF/views/paging.jsp">
+			<jsp:param value="Class" name="board_category" />
 			<jsp:param value="${pDto.nowBlock}" name="nowBlock" />
 			<jsp:param value="${pDto.blockBegin }" name="blockBegin" />
 			<jsp:param value="${pDto.blockEnd }" name="blockEnd" />

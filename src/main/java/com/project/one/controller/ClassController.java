@@ -65,7 +65,7 @@ public class ClassController {
 	@RequestMapping("/classList.do")
 	public String class_list(Model model) {
 		model.addAttribute("list", cBiz.selectList());
-		return "class_list";
+		return "class/class_list";
 	}
 
 	@RequestMapping("/classSelect.do")
@@ -91,7 +91,7 @@ public class ClassController {
 		model.addAttribute("dto", cBiz.selectOne(class_no));
 		model.addAttribute("rdto", rbiz.avgList(class_no));
 
-		return "class_select";
+		return "class/class_select";
 	}
 	
 	@ResponseBody
@@ -115,7 +115,7 @@ public class ClassController {
 
 	@RequestMapping("/classInsert.do")
 	public String class_insert_form() {
-		return "class_insertform";
+		return "class/class_insertform";
 	}
 	
 	@RequestMapping("/detailInsertForm.do")
@@ -125,7 +125,7 @@ public class ClassController {
 		model.addAttribute("dList", dList);
 		model.addAttribute("class_no", class_no);
 		
-		return "detail_insertform";
+		return "class/detail_insertform";
 	}
 	
 	@ResponseBody
@@ -174,7 +174,7 @@ public class ClassController {
 	public String class_updateForm(Model model, int class_no) {
 		model.addAttribute("dto", cBiz.selectOne(class_no));
 
-		return "class_updateform";
+		return "class/class_updateform";
 	}
 
 	@RequestMapping("/classUpdateRes.do")
@@ -202,7 +202,7 @@ public class ClassController {
 		model.addAttribute("list", cBiz.userClass(member_id));
 		model.addAttribute("member_id", member_id);
 
-		return "mypage_class";
+		return "mypage/mypage_class";
 	}
 
 	@ResponseBody

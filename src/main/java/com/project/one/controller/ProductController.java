@@ -25,7 +25,7 @@ public class ProductController {
 		model.addAttribute("list", biz.selectList());
 		model.addAttribute("rlist",rbiz.selectList());
 
-		return "store";
+		return "store/store";
 
 	}
 
@@ -34,13 +34,13 @@ public class ProductController {
 		model.addAttribute("dto", biz.selectOne(product_no));
 		model.addAttribute("list",rbiz.avgList(product_no));
 
-		return "store_select";
+		return "store/store_select";
 	}
 	
 	@RequestMapping("/store_insertform.do")
 	public String Product_insertForm() {
 
-		return "store_insertform";
+		return "store/store_insertform";
 	}
 
 	@RequestMapping("/store_insertres.do")
@@ -57,7 +57,7 @@ public class ProductController {
 	public String Product_updateForm(Model model,int product_no) {
 		model.addAttribute("dto",biz.selectOne(product_no));
 
-		return "store_updateform";
+		return "store/store_updateform";
 	}
 	
 	@RequestMapping("/store_updateres.do")

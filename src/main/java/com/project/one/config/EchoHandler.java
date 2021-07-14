@@ -104,13 +104,15 @@ public class EchoHandler extends TextWebSocketHandler {
 		int room_no = getNo(session);
 		System.out.println(dto.getMember_id() + " 연결 종료 => 총 접속 인원 : " + i + "명");
 		// sessionList에 session이 있다면
-		RoomDto rDto = new RoomDto();
-		rDto.setRoom_content(chatting_content);
-		rDto.setRoom_no(room_no);
-		if(roomBiz.update(rDto) > 0) {
-			System.out.println("room update 성공");
-		}else {
-			System.out.println("room update 실패");
+		if(chatting_content != null) {
+			RoomDto rDto = new RoomDto();
+			rDto.setRoom_content(chatting_content);
+			rDto.setRoom_no(room_no);
+			if(roomBiz.update(rDto) > 0) {
+				System.out.println("room update 성공");
+			}else {
+				System.out.println("room update 실패");
+			}
 		}
 		if (sessionList != null) {
 			sessionList.remove(session);

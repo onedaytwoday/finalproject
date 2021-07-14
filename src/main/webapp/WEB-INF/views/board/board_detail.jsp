@@ -20,7 +20,7 @@
   </script>
 </head>
 <body>
-<jsp:include page="header.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
 	<h1>Detail</h1>
 	
 	<table border="1">
@@ -51,6 +51,6 @@
 			</td>
 		</tr>
 	</table>
-<jsp:include page="footer.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 </body>
 </html>

@@ -61,7 +61,7 @@
 			</tr>
 		</table>
 	
-					<jsp:include page="board_paging.jsp">
+					<jsp:include page="/WEB-INF/views/paging.jsp">
 						<jsp:param value="Q" name="board_category" />
 						<jsp:param value="admin" name="from" />
 						<jsp:param value="${pDto.nowBlock}" name="nowBlock" />
