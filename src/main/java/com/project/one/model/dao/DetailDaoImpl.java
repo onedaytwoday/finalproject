@@ -58,11 +58,11 @@ public class DetailDaoImpl implements DetailDao {
 	}
 
 	@Override
-	public int update(DetailDto dto) {
+	public int update(int class_no) {
 		int res = 0;
 
 		try {
-			res = sqlSession.update(NAMESPACE + "update", dto);
+			res = sqlSession.update(NAMESPACE + "update", class_no);
 
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -19,7 +19,7 @@
 			pg : 'kakaopay',
 			pay_method : 'card',
 			merchant_uid : 'merchant_' + new Date().getTime(),
-			name : '${name}', //결제창에서 보여질 이름
+			name : '${pDto.product_name}', //결제창에서 보여질 이름
 			amount : '${pDto.payment_price}', //실제 결제되는 가격
 			buyer_email : '${mDto.member_email}',
 			buyer_name : '${mDto.member_id}',
@@ -34,8 +34,8 @@
 						payment_num : '${pDto.payment_num}',
 						payment_price: rsp.paid_amount,
 						member_id: rsp.buyer_name,
-						title: rsp.name,
-						payment_uid: rsp.imp_uid
+						payment_uid: rsp.imp_uid,
+						detail_no: '${pDto.detail_no}'
 				}
 				
 				$.ajax({

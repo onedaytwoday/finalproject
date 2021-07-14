@@ -99,29 +99,21 @@
 			</c:if>
 		</div>
 		
-		<!-- TODO: Calendar 추가 / 날짜 & 시간대 선택할 수 있어야 함 -->
 		<jsp:include page="class_calendar.jsp"></jsp:include>
 		
-		
 		<!-- 결제하기 -->
-		<c:choose>
-			<c:when test="${mDto.member_id != null && checkPaid == false}">
-				<form class="mt-3" action="payment.do" method="post">					
-					<input type="hidden" name="class_no" value="${dto.class_no }" />
-					<input type="hidden" name="payment_num" value="1" />
-					<input type="hidden" name="payment_price" value="${dto.class_price }" />
-					<input type="hidden" name="name" value="${dto.class_title }" />
-					<input type="hidden" name="type" value="class" />
+		<c:if test="${mDto.member_id != null}">
+			<form class="mt-3" action="payment.do" method="post">					
+				<input type="hidden" name="detail_no" />
+				<input type="hidden" name="payment_num" value="1" />
+				<input type="hidden" name="payment_price" value="${dto.class_price }" />
+				<input type="hidden" name="product_name" value="${dto.class_title }" />
+				<input type="hidden" name="type" value="class" />
 					
-					<button type="submit" class="btn btn-primary">결제하기</button>
-				</form>
-			</c:when>
-			
-			<c:when test="${mDto.member_id != null && checkPaid == true}">
-				<button onclick="cancelPayment();" class="btn btn-warning mt-3">결제 취소</button>
-			</c:when>
-		</c:choose>
-		
+				<input style="border:none; outline:none;" type="text" name="detail_date" readonly />
+				<button type="submit" class="btn btn-primary">결제하기</button>
+			</form>
+		</c:if>
 	</div>
 
 	

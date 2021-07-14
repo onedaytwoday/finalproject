@@ -30,8 +30,8 @@ public class DetailBizImpl implements DetailBiz {
 	}
 
 	@Override
-	public int update(DetailDto dto) {
-		return dao.update(dto);
+	public int update(int class_no) {
+		return dao.update(class_no);
 	}
 
 	@Override

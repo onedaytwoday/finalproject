@@ -28,6 +28,9 @@ public class PaymentBizImpl implements PaymentBiz {
 	@Autowired
 	private BasketBiz bBiz;
 	
+	@Autowired
+	private DetailBiz dBiz;
+	
 	@Override
 	public List<PaymentDto> selectList() {
 		return dao.selectList();
@@ -45,19 +48,18 @@ public class PaymentBizImpl implements PaymentBiz {
 
 
 	@Override
-	public int insert(PaymentDto dto, String type, String title, int basket_group) {
+	public int insert(PaymentDto dto, String type, int basket_group) {
 		
 		switch(type) {
 		case "product" :
-			ProductDto proDto = proBiz.selectOneByName(title);
+			ProductDto proDto = proBiz.selectOneByName(dto.getProduct_name());
 			dto.setProduct_no(proDto.getProduct_no());
 			dto.setPayment_num(1);
 			break;
 			
-		case "class" :
-			ClassDto cDto = cBiz.selectOneByTitle(title);
-			dto.setClass_no(cDto.getClass_no());
+		case "class" :			
 			dto.setPayment_num(1);
+			dBiz.update(dto.getDetail_no());
 			break;
 			
 		case "basket" :
@@ -88,7 +90,7 @@ public class PaymentBizImpl implements PaymentBiz {
 		
 		return res;
 	}
-
+	
 	@Override
 	public PaymentDto checkPaid(PaymentDto dto) {
 		return dao.checkPaid(dto);

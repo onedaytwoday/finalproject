@@ -104,7 +104,7 @@ public class PaymentDaoImpl implements PaymentDao {
 		
 		return res;
 	}
-
+	
 	@Override
 	public PaymentDto checkPaid(PaymentDto dto) {
 		PaymentDto paid = null;
@@ -117,7 +117,7 @@ public class PaymentDaoImpl implements PaymentDao {
 		
 		return paid;
 	}
-	
+
 	@Override
 	public List<PaymentDto> mypage_list(String member_id) {
 		List<PaymentDto> list = new ArrayList<PaymentDto>();

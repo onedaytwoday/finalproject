@@ -13,7 +13,7 @@ public interface DetailDao {
 	
 	public int insert(DetailDto dto);
 	
-	public int update(DetailDto dto);
+	public int update(int class_no);
 	
 	public int delete(int class_no);
 }

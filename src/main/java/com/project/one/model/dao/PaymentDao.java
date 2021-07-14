@@ -17,7 +17,7 @@ public interface PaymentDao {
 	public int insert(PaymentDto dto, String type);
 	
 	public int updateStatus(PaymentDto dto);
-	
+		
 	public int delete(PaymentDto dto);
 	
 	public PaymentDto checkPaid(PaymentDto dto);

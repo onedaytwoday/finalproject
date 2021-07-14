@@ -21,24 +21,21 @@ import com.project.one.model.dto.PaymentDto;
 public class PaymentController {
 
 	private static String TYPE="";
-	private static String TITLE="";
 	private static int BASKET_GROUP=0;
 	
 	@Autowired
 	private PaymentBiz pBiz;
 	
 	@RequestMapping("/payment.do")
-	public String payment(Model model, PaymentDto pDto, String name, String type, HttpSession session) {
+	public String payment(Model model, PaymentDto pDto,String type, HttpSession session) {
 		TYPE = type;
-		TITLE = name;
 		BASKET_GROUP = pDto.getBasket_group();
 		
 		MemberDto mDto = (MemberDto)session.getAttribute("mDto");
 		
 		model.addAttribute("mDto", mDto);
 		model.addAttribute("pDto", pDto);
-		model.addAttribute("name", name);
-	
+			
 		return "payment";
 	}
 
@@ -46,8 +43,8 @@ public class PaymentController {
 	@RequestMapping("/paymentComplete.do")
 	public Map<String, String> payment_complete(@RequestBody PaymentDto dto) {
 		Map<String, String> map = new HashMap<>();
-		
-		if(pBiz.insert(dto, TYPE, TITLE, BASKET_GROUP) > 0) {
+
+		if(pBiz.insert(dto, TYPE, BASKET_GROUP) > 0) {
 			map.put("msg", "성공");
 			
 			if(TYPE.equals("basket")) {
@@ -60,16 +57,16 @@ public class PaymentController {
 		return map;
 	}
 
-	@RequestMapping("paymentCancel.do")
-	public String payment_cancel(PaymentDto dto) {
-		PaymentDto pDto = pBiz.checkPaid(dto);
-
-		if (pBiz.delete(pDto) > 0) {
-			return "redirect:classList.do";
-		}
-
-		return "redirect:classDetail.do?class_no="+dto.getClass_no();
-	}
+//	@RequestMapping("paymentCancel.do")
+//	public String payment_cancel(PaymentDto dto) {
+//		PaymentDto pDto = pBiz.checkPaid(dto);
+//
+//		if (pBiz.delete(pDto) > 0) {
+//			return "redirect:classList.do";
+//		}
+//
+//		return "redirect:classDetail.do?class_no="+dto.getClass_no();
+//	}
 	
 	@RequestMapping("mypage_payment.do")
 	public String mypage_list(Model model , String member_id) {

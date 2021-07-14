@@ -76,8 +76,8 @@ public class ClassController {
 		if (mDto != null) {
 			PaymentDto pDto = new PaymentDto();
 			pDto.setMember_id(mDto.getMember_id());
-			pDto.setClass_no(class_no);
-
+			pDto.setDetail_no(class_no);
+			
 			PaymentDto paid = pBiz.checkPaid(pDto);
 			boolean checkPaid = false;
 
