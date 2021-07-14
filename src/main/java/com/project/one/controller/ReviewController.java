@@ -46,6 +46,7 @@ public class ReviewController {
 			cDto.setClass_title(class_title);
 			model.addAttribute("cDto", cDto);
 			model.addAttribute("mDto", mDto);
+			System.out.println(class_no);
 		}
 		
 		return "review_insert_class";
@@ -53,13 +54,8 @@ public class ReviewController {
 	
 	//인서트 결과(클래스리뷰)
 	@RequestMapping("/review_insertres.do")
-	public String reviewInsertRes(ReviewDto rDto, int class_no, HttpSession session) {
-		MemberDto mDto = (MemberDto)session.getAttribute("mDto");
-		if(mDto != null) {
-			rDto.setClass_no(class_no);
-			rDto.setMember_id(mDto.getMember_id());
-			
-		}
+	public String reviewInsertRes(ReviewDto rDto) {
+
 				
 		if(rBiz.insert(rDto)>0) {
 			return "redirect:reviewlist.do";

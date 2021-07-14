@@ -8,9 +8,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>${cDto.class_title }${cDto.class_no } 리뷰 작성</h1>
+	<h1>${cDto.class_title }(${cDto.class_no }) 리뷰 작성</h1>
 		<form action="review_insertres.do" method="post">
-		<input type="hidden" name="class_no" value="${dto.class_no }">
+		<input type="hidden" name="class_no" value="${cDto.class_no }">
 		<table border="1">
 			<tr>
 				<th>ID</th>
@@ -33,7 +33,7 @@
 		</table>
 
 		<input type="submit" value="리뷰등록"/>
-		<input type="button" value="취소" onclick="location.href='classDetail.do?class_no=${dto.class_no }'" />
+		<input type="button" value="취소" onclick="location.href='classDetail.do?class_no=${cDto.class_no }'" />
 	</form>
 </body>
 </html>
