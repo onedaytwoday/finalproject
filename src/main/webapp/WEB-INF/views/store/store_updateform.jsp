@@ -7,7 +7,7 @@
 <title>상품 수정</title>
 </head>
 <body>
-<jsp:include page="header.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
 	<h1>상품 수정</h1>
 	<form action="store_updateres.do" method="post">
 		<input type="hidden" name="product_no" value="${dto.product_no } ">
@@ -62,6 +62,6 @@
 			</tr>
 		</table>
 	</form>
-<jsp:include page="footer.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 </body>
 </html>

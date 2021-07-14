@@ -52,19 +52,19 @@ public class ChatController {
 			List<RoomDto> roomlist = roomBiz.selectListByConsult(member_id);
 			model.addAttribute("roomlist",roomlist);
 			model.addAttribute("mDto",mDto);
-			return "chat_consult";
+			return "chat/chat_consult";
 		}
 		List<RoomDto> roomlist = roomBiz.selectListByUser(member_id);
 		model.addAttribute("roomlist",roomlist);
 		model.addAttribute("mDto",mDto);
-		return "chat_main";
+		return "chat/chat_main";
 	}
 	//강사회원 리스트
 	@RequestMapping("/chat_newlist.do")
 	public String consultList(Model model, String member_grade) {
 		model.addAttribute("list",mBiz.selectListConsult(member_grade));
 		
-		return "chat_newlist";
+		return "chat/chat_newlist";
 	}
 	
 	// 채팅방 있으면 채팅방 없으면 만들어서 채팅방
@@ -114,7 +114,7 @@ public class ChatController {
             	session.setAttribute("room_no", room_no);
             	mav.addObject("rDto", rDto);
             	mav.addObject("Room_no", room_no);
-            	mav.setViewName("chat_room");
+            	mav.setViewName("chat/chat_room");
                 return mav;
 
         }
@@ -126,7 +126,7 @@ public class ChatController {
             session.setAttribute("room_no", exist.getRoom_no());
             mav.addObject("Room_no", exist.getRoom_no());
             mav.addObject("chatlist",chatlist);
-            mav.setViewName("chat_room");
+            mav.setViewName("chat/chat_room");
             return mav;
         }
     }
@@ -141,11 +141,4 @@ public class ChatController {
     	return "redirect:chat_main.do?member_id="+mDto.getMember_id();
     }
     
-    
-	@RequestMapping("/tts.do")
-	public String tts() {
-		return "tts";
-	}
-
-	
 }

@@ -9,6 +9,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 </head>
 <body>
+	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
 	<form method="post">
 		<table border="1">
 			<tr>
@@ -168,6 +169,6 @@ function fileDelete(fileNum){
    	    return false;
 	}
 </script>
-
+<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 </body>
 </html>

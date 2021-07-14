@@ -44,7 +44,7 @@ public class AdminController {
 		model.addAttribute("proCount", proBiz.productCount());
 		model.addAttribute("cCount", cBiz.classCount());
 		
-		return "admin_main";
+		return "admin/admin_main";
 	}
 
 	@RequestMapping("/adminMember.do")
@@ -54,7 +54,7 @@ public class AdminController {
 		model.addAttribute("mList", mBiz.memberList(pDto));
 		model.addAttribute("pDto", pDto);
 		
-		return "admin_member";
+		return "admin/admin_member";
 	}
 
 	@RequestMapping("/adminProduct.do")
@@ -64,7 +64,7 @@ public class AdminController {
 		model.addAttribute("proList", proBiz.productList(pDto));
 		model.addAttribute("pDto", pDto);
 
-		return "admin_product";
+		return "admin/admin_product";
 	}
 	
 	@RequestMapping("/adminClass.do")
@@ -74,7 +74,7 @@ public class AdminController {
 		model.addAttribute("cList", cBiz.classList(pDto));
 		model.addAttribute("pDto", pDto);
 
-		return "admin_class";
+		return "admin/admin_class";
 	}
 
 	@RequestMapping("/adminBoard.do")
@@ -84,7 +84,7 @@ public class AdminController {
 		model.addAttribute("qnaList", bBiz.board_qna_list(pDto));
 		model.addAttribute("pDto", pDto);
 		
-		return "admin_board";
+		return "admin/admin_board";
 	}
 
 	@RequestMapping("/adminPayment.do")
@@ -94,7 +94,7 @@ public class AdminController {
 		model.addAttribute("pList", pBiz.paymentList(pDto));
 		model.addAttribute("pDto", pDto);
 
-		return "admin_payment";
+		return "admin/admin_payment";
 	}
 
 	@ResponseBody

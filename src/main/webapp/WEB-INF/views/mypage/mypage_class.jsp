@@ -27,7 +27,7 @@
 </script>
 </head>
 <body>
-<jsp:include page="header.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
 <table>
 <tr><td><input type="button" name="member_update" value="개인정보수정" onclick="location.href='mypage_update.do?member_id=${member_id}'"></td></tr>
 <tr><td><input type="button" name="member_payment" value="전체 주문 내역" onclick="location.href='mypage_payment.do?member_id=${member_id}'"></td></tr>
@@ -35,43 +35,46 @@
 <tr><td><input type="button" name="member_class" value="수강 클래스 내역" onclick="location.href='mypage_class.do?member_id=${member_id}'"></td></tr>
 <tr><td><input type="button" name="member_class" value="회원탈퇴" onclick="delOk()"></td></tr>
 </table>
-<h1>전체 주문 내역</h1>
+<h1>수강 클래스 내역</h1>
 <table border="1">
 		<col width="50"/>
 		<col width="100"/>
-		<col width="400"/>
 		<col width="200"/>
+		<col width="200"/>
+		<col width="500"/>
 		<col width="200"/>	
 		<tr>
 			<th>번호</th>
-			<th>상품명</th>
-			<th>수량</th>
-			<th>총 가격</th>
-			<th>배송상태</th>
+			<th>제목</th>
+			<th>카테고리</th>
+			<th>모집인원</th>
+			<th>가격</th>
+			<th>강사</th>
 		</tr>
 		
 		<c:set var="cnt" value="1"/>
 		<c:choose>
 			<c:when test="${empty list }">
-				<tr><th colspan="5">-----------------구매하신 상품이 없습니다-------------</th></tr>
+				<tr><th colspan="6">-----------------등록하신 강의가 없습니다-------------</th></tr>
 			</c:when>
 			<c:otherwise>
 				<c:forEach items="${list }" var="dto">
 					<tr>
 						<td>${cnt }</td>
-						<td><a href="store_select.do?product_no=${dto.product_no }">${dto.product_name }</a></td>
-						<td>${dto.payment_num }</td>
-						<td>${dto.payment_price }</td>
-						<td>${dto.payment_del }</td>
+						<td><a href="classDetail.do?class_no=${dto.class_no }">${dto.class_title }</a></td>
+						<td>${dto.class_category }</td>
+						<td>${dto.class_member_num }</td>
+						<td>${dto.class_price } 원</td>
+						<td>${dto.member_id }</td>
 					</tr>
 					<c:set var="cnt" value="cnt+1"/>
 				</c:forEach>
 			</c:otherwise>
 		</c:choose>
 		<tr>
-			<td colspan="5" align="right"><input type="button" value="Home" onclick="location.href='main.do'"/></td>
+			<td colspan="6" align="right"><input type="button" value="Home" onclick="location.href='main.do'"/></td>
 		</tr>
 	</table>
-<jsp:include page="footer.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 </body>
 </html>
