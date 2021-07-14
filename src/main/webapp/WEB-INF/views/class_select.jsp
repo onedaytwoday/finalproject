@@ -100,7 +100,7 @@
 		</div>
 		
 		<!-- TODO: Calendar 추가 / 날짜 & 시간대 선택할 수 있어야 함 -->
-		
+		<jsp:include page="class_calendar.jsp"></jsp:include>
 		
 		
 		<!-- 결제하기 -->

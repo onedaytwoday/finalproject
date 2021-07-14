@@ -155,7 +155,7 @@ function fileDelete(fileNum){
    	      success: function (data) {
    	    	if(JSON.parse(data)['result'] == "OK"){
    	    		alert("파일업로드 성공");
-   	    		$(location).attr('href',"classDetailForm.do?class_no="+JSON.parse(data)['class_no']);
+   	    		$(location).attr('href',"detailInsertForm.do?class_no="+JSON.parse(data)['class_no']);
 			} else
 				alert("서버내 오류로 처리가 지연되고있습니다. 잠시 후 다시 시도해주세요");
    	    		return false;

@@ -52,11 +52,10 @@ li {
 						url : 'getBasketNum.do',
 						dataType : 'json',
 						success : function(res) {
-							console.log(res.basket_num);
 							$("#basket_num").text(res.basket_num);
 						},
 						error : function(err) {
-							console.log("통신 실패!");
+							alert("통신 실패!");
 						}
 					});
 

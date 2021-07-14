@@ -40,7 +40,7 @@
 
 											<p class="card-text">작성자 : ${dto.member_id }</p>
 
-											<a href="classDetail.do?class_no=${dto.class_no }"
+											<a href="classSelect.do?class_no=${dto.class_no }"
 												class="btn btn-primary">자세히 보기</a>
 
 											<c:if test="${dto.member_id eq mDto.member_id }">

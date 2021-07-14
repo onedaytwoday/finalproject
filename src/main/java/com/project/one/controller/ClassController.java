@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -58,6 +59,8 @@ public class ClassController {
 
 	@Autowired
 	private FileTableBiz fbiz;
+	
+	private static int CLASS_NO;
 
 	@RequestMapping("/classList.do")
 	public String class_list(Model model) {
@@ -65,19 +68,17 @@ public class ClassController {
 		return "class_list";
 	}
 
-	@RequestMapping("/classDetail.do")
-	public String class_detail(Model model, int class_no, HttpSession session) {
-
+	@RequestMapping("/classSelect.do")
+	public String class_select(Model model, int class_no, HttpSession session) {
+		CLASS_NO = class_no;
+		
 		MemberDto mDto = (MemberDto) session.getAttribute("mDto");
 		if (mDto != null) {
 			PaymentDto pDto = new PaymentDto();
 			pDto.setMember_id(mDto.getMember_id());
 			pDto.setClass_no(class_no);
 
-			System.out.println("pDto : " + pDto);
-
 			PaymentDto paid = pBiz.checkPaid(pDto);
-			System.out.println(paid);
 			boolean checkPaid = false;
 
 			if (paid != null) {
@@ -86,27 +87,50 @@ public class ClassController {
 
 			model.addAttribute("checkPaid", checkPaid);
 		}
-
+		
 		model.addAttribute("dto", cBiz.selectOne(class_no));
 		model.addAttribute("rdto", rbiz.avgList(class_no));
 
-		return "class_detail";
-	}
-
-	@RequestMapping("/classInsert.do")
-	public String class_insertForm() {
-		return "class_insertform";
-	}
-	
-	@RequestMapping("/classDetailForm.do")
-	public String class_detailForm(Model model, int class_no) {
-		model.addAttribute("class_no", class_no);
-		return "class_detailform";
+		return "class_select";
 	}
 	
 	@ResponseBody
-	@RequestMapping("/classDetailRes.do")
-	public Map<String, String> class_detail_res(int class_no, @RequestBody Map<String, String[]> details) {
+	@RequestMapping(value="/getSchedules.do", method=RequestMethod.POST)
+	public Map<String, List<DetailDto>> get_schedules(@RequestBody Map<String, Date> dates) {
+		Map<String, List<DetailDto>> map = new HashMap<String, List<DetailDto>>();
+
+		Date start = dates.get("start");
+		Date end = dates.get("end");
+		List<DetailDto> list = new ArrayList<>();
+		
+		for(DetailDto d : dBiz.selectList(CLASS_NO)) {
+			if(d.getDetail_date().after(start) && d.getDetail_date().before(end)) {
+				list.add(d);
+			}
+		}
+		map.put("list", list);
+		
+		return map;
+	}
+
+	@RequestMapping("/classInsert.do")
+	public String class_insert_form() {
+		return "class_insertform";
+	}
+	
+	@RequestMapping("/detailInsertForm.do")
+	public String detail_insert_form(Model model, int class_no) {
+		List<DetailDto> dList = dBiz.selectList(class_no);
+		
+		model.addAttribute("dList", dList);
+		model.addAttribute("class_no", class_no);
+		
+		return "detail_insertform";
+	}
+	
+	@ResponseBody
+	@RequestMapping("/detailInsertRes.do")
+	public Map<String, String> detail_insert_res(int class_no, @RequestBody Map<String, String[]> details) {
 		int res = 0;
 		Map<String, String> map = new HashMap<String, String>();
 		DetailDto dto = new DetailDto();
@@ -137,6 +161,14 @@ public class ClassController {
 		
 		return map;
 	}
+	
+	@RequestMapping("/detailDelete.do")
+	public String detail_delete(int detail_no) {
+		if(dBiz.delete(detail_no) > 0) {
+			return "redirect:classSelect.do?class_no="+CLASS_NO;
+		}
+		return "redirect:detailInsertForm.do?class_no="+CLASS_NO;
+	}
 
 	@RequestMapping("/classUpdate.do")
 	public String class_updateForm(Model model, int class_no) {
@@ -148,7 +180,7 @@ public class ClassController {
 	@RequestMapping("/classUpdateRes.do")
 	public String class_update_res(ClassDto dto) {
 		if (cBiz.update(dto) > 0) {
-			return "redirect:classDetail.do?class_no=" + dto.getClass_no();
+			return "redirect:classSelect.do?class_no=" + dto.getClass_no();
 		}
 
 		return "redirect:classUpdate.do?class_no=" + dto.getClass_no();
