@@ -26,7 +26,7 @@
 			</c:when>
 			<c:otherwise>
 				<c:forEach items="${chatlist }" var="dto">
-					<p class="old">${dto.member_id} : ${dto.chatting_content } <input type="button" value="음성" />_${fn:substring(dto.chatting_date,11,19) }</p>
+					<p class="old">${dto.member_id} : ${dto.chatting_content } <input class="tts" type="button" value="음성" />_${fn:substring(dto.chatting_date,11,19) }</p>
 				</c:forEach>
 			</c:otherwise>
 		</c:choose>
@@ -102,12 +102,14 @@
 			utterThis.rate = 1; //속도
 			window.speechSynthesis.speak(utterThis);
 		}
-		document.addEventListener("click", function(e) {
-			var t = e.target;
-			var input = t.parent;
-			var str = input.split(' ');
-			speech(str[1]);
+		$(".tts").click(function(){
+			var input = $(this).parent().text();
+			alert(input);
+			speech(input);	
 		});
+
+		
+		
 	
 	</script>	
 </body>
