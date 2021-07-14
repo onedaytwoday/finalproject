@@ -16,11 +16,11 @@ public class DetailDaoImpl implements DetailDao {
 	private SqlSessionTemplate sqlSession;
 
 	@Override
-	public List<DetailDto> selectList() {
+	public List<DetailDto> selectList(int class_no) {
 		List<DetailDto> list = new ArrayList<DetailDto>();
 
 		try {
-			list = sqlSession.selectList(NAMESPACE + "selectList");
+			list = sqlSession.selectList(NAMESPACE + "selectList", class_no);
 
 		} catch (Exception e) {
 			e.printStackTrace();

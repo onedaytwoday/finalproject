@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="detail">
-	<select id="detail" resultType="detailDto">
+	<select id="selectList" resultType="detailDto">
 		SELECT DETAIL_NO, DETAIL_DATE, DETAIL_MEMBER_NUM, CLASS_NO
 		FROM DETAIL
+		WHERE CLASS_NO = #{class_no}
 		ORDER BY DETAIL_NO
 	</select>
 	

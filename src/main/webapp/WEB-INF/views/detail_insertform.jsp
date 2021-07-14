@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -71,12 +73,10 @@
 				"dates": dates,
 				"times": times
 		}
-		console.log(detailVal)
-		
 		
 		$.ajax({
 			type: "post",
-			url: "classDetailRes.do?class_no="+${class_no},
+			url: "detailInsertRes.do?class_no="+${class_no},
 			data: JSON.stringify(detailVal),
 			contentType: "application/json",
 			dataType: "json",
@@ -97,14 +97,14 @@
 </head>
 <body>
 
-	<div class="container">
+	<div class="container ">
 		<h1>클래스 상세 입력 페이지</h1>
 
 			<div class="form-group row">
 				<label for="detail_member_num" class="col-sm-2 col-form-label">모집인원</label>
 				
 				<div class="col-sm-10">
-					<input type="text" id="detail_member_num" name="detail_member_num" class="form-control" />명
+					<input type="text" id="detail_member_num" name="detail_member_num" class="form-control" />
 				</div>
 			</div>
 			
@@ -123,6 +123,30 @@
 			</div>
 			
 			<div id="panels"></div>
+			
+			<hr />
+			
+			<section class="my-4">
+				<div class="row text-center g-4">
+					<c:if test="${dList != null }">
+						<c:forEach items="${dList }" var="dto">				
+							  <div class="col-md-3">
+							    <div class="card">
+							      <div class="card-body">
+							        <h5 class="card-title">모집인원 : ${dto.detail_member_num }</h5>
+							        <p class="card-text">
+							        	<span>날짜 : <fmt:formatDate value="${dto.detail_date }" pattern="yyyy-MM-dd" /></span>
+							        	<br>
+							        	<span>시간 : <fmt:formatDate value="${dto.detail_date }" pattern="hh:mm a" /></span>
+							        </p>
+							        <button onclick="location.href='detailDelete.do?detail_no=${dto.detail_no}'" class="btn btn-primary">삭제</button>
+							      </div>
+							    </div>
+							</div>	
+						</c:forEach>
+					</c:if>
+				</div>
+			</section>
 			
 			<div class="form-group row">
 				<div class="col-sm-10">
