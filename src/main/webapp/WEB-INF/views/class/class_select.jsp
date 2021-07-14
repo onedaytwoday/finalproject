@@ -121,7 +121,7 @@
 				<button onclick="cancelPayment();" class="btn btn-warning mt-3">결제 취소</button>
 			</c:when>
 		</c:choose>
-		
+		<button onclick="location.href='insertClassReview.do?class_no=${dto.class_no}&class_title=${dto.class_title }'" type="button">리뷰작성</button>
 	</div>
 
 	

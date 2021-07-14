@@ -124,6 +124,17 @@
 				</td>
 			</tr>
 		</table>
+		<button id="btn-upload" type="button"
+			style="border: 1px solid #ddd; outline: none; cursor: pointer;">파일
+			추가</button>
+		<input id="input_file" multiple="multiple" type="file" accept="image/*" style="display: none;"> 
+		<span style="font-size: 10px; color: gray;">※첨부파일은 최대 10개까지 등록이 가능합니다.</span>
+		<div class="data_file_txt" id="data_file_txt" style="margin: 40px;">
+			<span>첨부 파일</span> <br />
+			<div id="articlefileChange"></div>
+		</div>
+		<input type="button" value="등록하기" onclick="registerAction()"/> 
+		<input type="button" value="취소" onclick="location.href='store.do'" />
 	</form>
 <jsp:include page="footer.jsp"></jsp:include>
 </body>

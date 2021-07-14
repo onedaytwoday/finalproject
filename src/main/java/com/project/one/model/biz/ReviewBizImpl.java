@@ -52,4 +52,10 @@ public class ReviewBizImpl implements ReviewBiz {
 		return dao.delete(review_no);
 	}
 
+	@Override
+	public List<ReviewDto> selectClass() {
+		
+		return dao.selectClass();
+	}
+
 }

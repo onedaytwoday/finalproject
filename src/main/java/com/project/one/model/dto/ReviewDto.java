@@ -91,5 +91,12 @@ public class ReviewDto {
 	public void setMember_id(String member_id) {
 		this.member_id = member_id;
 	}
+
+	@Override
+	public String toString() {
+		return "ReviewDto [review_no=" + review_no + ", review_title=" + review_title + ", review_rate=" + review_rate
+				+ ", review_date=" + review_date + ", review_content=" + review_content + ", product_no=" + product_no
+				+ ", class_no=" + class_no + ", member_id=" + member_id + "]";
+	}
 		
 }
