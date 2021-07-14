@@ -72,6 +72,20 @@ public class FileTableDaoImpl implements FileTableDao {
 	}
 	
 	@Override
+	public int event_insert(FileTableDto dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.insert(NAMESPACE + "event_insert", dto);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+	
+	@Override
 	public int update(FileTableDto dto) {
 		int res = 0;
 		
@@ -98,7 +112,5 @@ public class FileTableDaoImpl implements FileTableDao {
 		
 		return res;
 	}
-
-	
 
 }

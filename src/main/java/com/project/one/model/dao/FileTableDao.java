@@ -16,6 +16,8 @@ public interface FileTableDao {
 	
 	public int product_insert(FileTableDto dto);
 	
+	public int event_insert(FileTableDto dto);
+	
 	public int update(FileTableDto dto);
 	
 	public int delete(int file_num);
