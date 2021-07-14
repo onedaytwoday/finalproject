@@ -33,7 +33,7 @@
 								<c:if test="${dto.member_id eq tmp }">
 									<div class="outgoing_msg">
               							<div class="sent_msg">
-                						<p>${dto.chatting_content }</p>
+                						<p>${dto.chatting_content } <img src="resources/images/tts.png" class="tts" alt="tts" style="width: 20px; height: 20px; float: right;"/></p>
                 						<span class="time_date"><fmt:formatDate value="${dto.chatting_date }" pattern="MM/dd hh시mm분" /></span>
                 						</div>
             						</div>
@@ -45,7 +45,7 @@
 	              					</div>
 	              					<div class="received_msg">
 					                	<div class="received_withd_msg">
-					                	<p>${dto.chatting_content }</p>
+					                	<p>${dto.chatting_content } <img src="resources/images/tts.png" class="tts" alt="tts" style="width: 20px; height: 20px; float: right;"/></p>
                   						<span class="time_date"><fmt:formatDate value="${dto.chatting_date }" pattern="MM/dd hh시mm분" /></span>
                   						</div>
               						</div>
@@ -59,7 +59,7 @@
             <div class="input_msg_write">
 	            <form id="chatForm">
 				<input type="text" id="message" class="write_msg" placeholder="Type a message" />
-				<button class="send_btn" style="float: right; position: relative; padding: 10px; top:-48px">보내기</button>
+				<button class="send_btn">보내기</button>
 				<button class="exit_btn" type="button" onclick="exit()">나가기</button>
 				</form>
             </div>
@@ -94,10 +94,57 @@
 		// 연결끊기면 
 			sock.onclose = function(e){
 				console.log(e);
-				$("#chat").append("연결 종료");
 				$(location).attr('href',"chat_main.do?member_id=${rDto.member_id }");
 			}
+	//음성번연(목소리 가져오기)
 
+		var voices = [];
+		function setVoiceList() {
+			voices = window.speechSynthesis.getVoices();
+		}
+		setVoiceList();
+		if (window.speechSynthesis.onvoiceschanged !== undefined) {
+			window.speechSynthesis.onvoiceschanged = setVoiceList;
+		}
+		function speech(txt) {
+			//브라우저 체크
+			if(!window.speechSynthesis) {
+				alert("음성 재생을 지원하지 않는 브라우저입니다. 크롬, 파이어폭스 등의 최신 브라우저를 이용하세요");
+				return;
+			}
+			//음성읽기 객체
+			var lang = 'ko-KR';
+			var utterThis = new SpeechSynthesisUtterance(txt);
+			utterThis.onend = function (event) {
+				console.log('end');
+			};
+			utterThis.onerror = function(event) {
+				console.log('error', event);
+			};
+			var voiceFound = false;
+			for(var i = 0; i < voices.length ; i++) {
+				if(voices[i].lang.indexOf(lang) >= 0 || voices[i].lang.indexOf(lang.replace('-', '_')) >= 0) {
+					utterThis.voice = voices[i];
+					voiceFound = true;
+				}
+			}
+			if(!voiceFound) {
+				alert('voice not found');
+				return;
+			}
+			utterThis.lang = lang;
+			utterThis.pitch = 1;
+			utterThis.rate = 1; //속도
+			window.speechSynthesis.speak(utterThis);
+		}
+		$(".tts").click(function(){
+			var input = $(this).parent().text();
+			speech(input);	
+		});
+
+		
+		
+	
 	</script>	
 </body>
 </html>
