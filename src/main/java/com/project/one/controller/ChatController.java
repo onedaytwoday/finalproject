@@ -131,34 +131,6 @@ public class ChatController {
         }
     }
     
-    // websocket 종료 room 마지막 시간, 내용 update
-    @ResponseBody
-    @RequestMapping(value="/room_update.do", method=RequestMethod.POST)
-    public Map<String, String> update_status(@RequestBody RoomDto dto) {
-		Map<String, String> map = new HashMap<>();
-		
-		if(roomBiz.update(dto) > 0) {
-			map.put("msg", "성공");
-		}else {
-			map.put("msg", "실패");
-		}
-		
-		return map;
-	}
-    
-    @ResponseBody
-	@RequestMapping(value="/chat_insert.do", method=RequestMethod.POST)
-	public Map<String, String> update_status(@RequestBody ChattingDto dto) {
-		Map<String, String> map = new HashMap<>();
-		
-		if(chatBiz.insert(dto) > 0) {
-			map.put("msg", "성공");
-		}else {
-			map.put("msg", "실패");
-		}
-		
-		return map;
-	}
     
     @RequestMapping("/chat_delete.do")
     public String deleteRoom(int room_no, HttpSession session) {
