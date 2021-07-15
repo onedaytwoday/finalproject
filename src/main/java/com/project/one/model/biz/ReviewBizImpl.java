@@ -58,4 +58,16 @@ public class ReviewBizImpl implements ReviewBiz {
 		return dao.selectClass();
 	}
 
+	@Override
+	public List<ReviewDto> selectProduct() {
+		
+		return dao.selectProduct();
+	}
+
+	@Override
+	public int insertProduct(ReviewDto dto) {
+		
+		return dao.insertProduct(dto);
+	}
+
 }
