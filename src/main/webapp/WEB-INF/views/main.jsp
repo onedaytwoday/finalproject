@@ -11,12 +11,13 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
 <style type="text/css">
-
+<%--
 main{
 	border: 1px solid red;
 	width: 100%;
 	height: 1000px;
 }
+--%>
 
 </style>
 
@@ -25,7 +26,7 @@ main{
 </head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
-	
+	<main class="container"></main>
 	
     
 <!-- 채널톡 -->

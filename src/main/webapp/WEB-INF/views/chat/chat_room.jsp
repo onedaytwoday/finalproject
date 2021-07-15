@@ -22,7 +22,7 @@
 		
 		<div>
 			<select name="langs" id="langs">
-			  <option>Languages</option>
+			  <option value="ko" selected>한국어</option>
 			  <option value="en">English</option>
 			  <option value="ja">Japanese</option>
 			  <option value="zh-cn">Chinese(Simplified)</option>
@@ -82,9 +82,9 @@
 	</div>
 	<script>
 		$(document).ready(function(){
-			$("#langs").val('${lang}').prop("selected", true);
-			
-			
+			if('${lang}' != '') {
+				$("#langs").val('${lang}').prop("selected", true);			
+			}
 			
 			$("#message").val('').focus();
 			$("#chatForm").submit(function(event){
@@ -125,7 +125,6 @@
 					dataType: "json",
 					success: function(result){
 						if(result.msg != null) {
-							let confirmed = confirm(result.confirmedMsg);
 							$("#message").val(result.msg);
 						}
 					},
