@@ -1,49 +1,37 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
-	<form method="post">
+	<h1>${cDto.class_title }(${cDto.class_no }) 리뷰 작성</h1>
+		<form method="post">
+		<input type="hidden" name="class_no_str" value="${cDto.class_no }">
 		<table border="1">
 			<tr>
-				<th>계정 ID</th>
-				<td><input type="text" name="member_id"
-					value="${mDto.member_id}" readonly /></td>
+				<th>ID</th>
+				<td><input type="text" name="member_id"value="${mDto.member_id}" readonly /></td>
 			</tr>
 
 			<tr>
-				<th>클래스 명</th>
-				<td><input type="text" name="class_title" /></td>
+				<th>제목</th>
+				<td><input type="text" name="review_title" /></td>
 			</tr>
-
 			<tr>
-				<th>클래스 설명</th>
-				<td><textarea rows="10" cols="60" name="class_desc"></textarea></td>
+				<th>평점</th>
+				<td><input type="text" name="review_rate" /></td>
 			</tr>
-
+					
 			<tr>
-				<th>클래스 위치</th>
-				<td><input type="text" name="class_loc" /></td>
-			</tr>
-
-			<tr>
-				<th>카테고리</th>
-				<td><input type="text" name="class_category" /></td>
-			</tr>
-
-			<tr>
-				<th>클래스 가격</th>
-				<td><input type="text" name="class_price"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/></td>
+				<th>작성내용</th>
+				<td><textarea rows="10" cols="60" name="review_content"></textarea></td>
 			</tr>
 		</table>
-		
 		<button id="btn-upload" type="button" style="border: 1px solid #ddd; outline: none; cursor: pointer;">파일추가</button>
 		<input id="input_file" multiple="multiple" type="file" style="display: none;">
 		<span style="font-size: 10px; color: gray;">※첨부파일은 최대 10개까지 등록이 가능합니다.</span>
@@ -51,8 +39,9 @@
 			<span>첨부 파일</span> <br />
 			<div id="articlefileChange"></div>
 		</div>
-		<input type="button" value="등록하기" onclick="registerAction()"/> 
-		<input type="button" value="취소" onclick="location.href='main.do'" />
+		<input type="button" value="리뷰등록" onclick="registerAction()"/> 
+		<input type="button" value="취소" onclick="location.href='classDetail.do?class_no=${cDto.class_no }'" />
+		
 	</form>
 <script>
 $(document).ready(function()
@@ -145,14 +134,14 @@ function fileDelete(fileNum){
 	$.ajax({
    	      type: "POST",
    	   	  enctype: "multipart/form-data",
-   	      url: "classInsertRes.do",
+   	      url: "review_insertres_class.do",
        	  data : formData,
        	  processData: false,
    	      contentType: false,
    	      success: function (data) {
    	    	if(JSON.parse(data)['result'] == "OK"){
    	    		alert("파일업로드 성공");
-   	    		$(location).attr('href',"detailInsertForm.do?class_no="+JSON.parse(data)['class_no']);
+   	    		$(location).attr('href',"review_list_class.do");
 			} else
 				alert("서버내 오류로 처리가 지연되고있습니다. 잠시 후 다시 시도해주세요");
    	    		return false;
@@ -165,6 +154,5 @@ function fileDelete(fileNum){
    	    return false;
 	}
 </script>
-<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 </body>
 </html>

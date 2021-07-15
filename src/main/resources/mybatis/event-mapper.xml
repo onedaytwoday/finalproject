@@ -19,12 +19,18 @@
 		INSERT INTO EVENT
 		VALUES(EVENT_NO_SEQ.NEXTVAL, #{event_title}, #{event_desc}, #{event_start}, #{event_end}, #{event_noti},#{member_id},
 		#{class_no}, NULL)
+		<selectKey keyProperty="event_no" resultType="int" >
+			SELECT EVENT_NO_SEQ.CURRVAL From DUAL
+		</selectKey>
 	</insert>
 	
 	<insert id="insertEventProduct" parameterType="eventDto">
 		INSERT INTO EVENT
 		VALUES(EVENT_NO_SEQ.NEXTVAL, #{event_title}, #{event_desc}, #{event_start}, #{event_end}, #{event_noti},#{member_id},
 		NULL, #{product_no})
+		<selectKey keyProperty="event_no" resultType="int" >
+			SELECT EVENT_NO_SEQ.CURRVAL From DUAL
+		</selectKey>
 	</insert>
 	
 	<delete id="delete" parameterType="int">

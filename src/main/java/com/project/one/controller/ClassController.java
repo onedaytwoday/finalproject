@@ -216,7 +216,7 @@ public class ClassController {
 					String size = Long.toString(file.getSize());
 
 					FileTableDto fdto = new FileTableDto(0, fileRoot, originalFileName, savedFileName, extension, null,
-							size, dto.getMember_id(), 0, class_no, 0, 0);
+							size, 0, class_no, 0, 0);
 					if (fbiz.class_insert(fdto) > 0) {
 						System.out.println("file db 넣기 성공");
 					} else {
@@ -248,7 +248,7 @@ public class ClassController {
 
 				String size = Long.toString(thumbnailFile.length());
 				FileTableDto fdto = new FileTableDto(0, fileRoot, "thumbnail", thumbnailFile.getName(),
-						extensions.get(0), null, size, dto.getMember_id(), 0, class_no, 0, 0);
+						extensions.get(0), null, size, 0, class_no, 0, 0);
 				if (fbiz.class_insert(fdto) > 0) {
 					System.out.println("썸네일 file db 넣기 성공");
 				} else {
@@ -258,8 +258,9 @@ public class ClassController {
 				strResult = "{ \"result\":\"OK\", \"class_no\":" + class_no + "}";
 			}
 			// (업로드 없이 등록하는경우)
-			else
+			else {
 				strResult = "{ \"result\":\"OK\", \"class_no\":" + class_no + "}";
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

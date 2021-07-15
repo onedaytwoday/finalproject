@@ -20,4 +20,13 @@ public interface ReviewBiz {
 	public int delete(int review_no);
 
 	List<ReviewDto> avgList(int product_no);
+	
+	public List<ReviewDto> selectClass();
+	
+	public List<ReviewDto> selectProduct();
+	
+	public int insertProduct(ReviewDto dto);
+	
+	
+	
 }
