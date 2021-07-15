@@ -119,7 +119,7 @@
 				<input type="button" value="삭제"
 				onclick="location.href='store_delete.do?product_no=${dto.product_no}'" />
 				<input type="button" value="목록" onclick="location.href='store.do'" />
-				<button onclick="location.href='insertProductReview.do?product_no=${dto.product_no}&product_name=${dto.product_name }'" type="button">리뷰작성</button>
+				<button onclick="location.href='review_insert_product.do?product_no=${dto.product_no}&product_name=${dto.product_name }'" type="button">리뷰작성</button>
 			</td>
 		</tr>
 	</table>

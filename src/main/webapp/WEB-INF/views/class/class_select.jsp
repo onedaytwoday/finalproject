@@ -103,6 +103,7 @@
 					
 				<input style="border:none; outline:none;" type="text" name="detail_date" readonly />
 				<button type="submit" class="btn btn-primary">결제하기</button>
+				<button onclick="location.href='review_insert_class.do?class_no=${dto.class_no}&class_title=${dto.class_title }'" type="button">리뷰작성</button>
 			</form>
 		</c:if>
 	</div>
