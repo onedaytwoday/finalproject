@@ -17,8 +17,21 @@
 </head>
 <body>
 	<div class="inbox_msg">
-		<h3>Room_no : ${Room_no }</h3>
+		<h3>Room_no : ${room_no }</h3>
 		<h3>${rDto.consult_id }와 채팅</h3>
+		
+		<div>
+			<select name="langs" id="langs">
+			  <option>Languages</option>
+			  <option value="en">English</option>
+			  <option value="ja">Japanese</option>
+			  <option value="zh-cn">Chinese(Simplified)</option>
+			  <option value="zh-tw">Chinese(Traditional)</option>
+			  <option value="es">Spanish</option>
+			  <option value="fr">France</option>
+			  <option value="it">Italian</option>
+			</select>
+		</div>
 	 <div class="mesgs">
           <div class="msg_history">
 			<div id="chat">
@@ -45,7 +58,7 @@
 	              					</div>
 	              					<div class="received_msg">
 					                	<div class="received_withd_msg">
-					                	<p>${dto.chatting_content } <img src="resources/images/tts.png" class="tts" alt="tts" style="width: 20px; height: 20px; float: right;"/></p>
+					                	<p><span name="consult_chat">${dto.chatting_content }</span> <img src="resources/images/tts.png" class="tts" alt="tts" style="width: 20px; height: 20px; float: right;"/></p>
                   						<span class="time_date"><fmt:formatDate value="${dto.chatting_date }" pattern="MM/dd hh시mm분" /></span>
                   						</div>
               						</div>
@@ -58,9 +71,9 @@
           <div class="type_msg">
             <div class="input_msg_write">
 	            <form id="chatForm">
-				<input type="text" id="message" class="write_msg" placeholder="Type a message" />
-				<button class="send_btn">보내기</button>
-				<button class="exit_btn" type="button" onclick="exit()">나가기</button>
+					<input type="text" id="message" class="write_msg" placeholder="Type a message" />
+					<button class="send_btn">보내기</button>
+					<button class="exit_btn" type="button" onclick="exit()">나가기</button>
 				</form>
             </div>
           </div>
@@ -69,6 +82,10 @@
 	</div>
 	<script>
 		$(document).ready(function(){
+			$("#langs").val('${lang}').prop("selected", true);
+			
+			
+			
 			$("#message").val('').focus();
 			$("#chatForm").submit(function(event){
 				console.log(event);
@@ -76,8 +93,49 @@
 				sock.send($("#message").val());
 				$("#message").val('').focus();
 			});
+			
+			$("#langs").change(function(){
+				let lang = $("select > option:selected").val();
+				
+				$.ajax({
+					url: 'selectLang.do?lang='+lang,
+					type: 'get',
+					success: function(result){
+							if(result.msg == '성공'){
+								location.href='chat_room.do?member_id=${rDto.consult_id }';
+							}
+					},
+					error: function(){
+						alert("통신 실패!");
+					}
+				})
+			});		
+			
+			
+			$("#message").change(function(){
+				let textVal = {
+						"text": $("#message").val()
+				}
+				
+				$.ajax({
+					url: 'translate.do',
+					type: 'post',
+					data: JSON.stringify(textVal),
+					contentType: "application/json",
+					dataType: "json",
+					success: function(result){
+						if(result.msg != null) {
+							let confirmed = confirm(result.confirmedMsg);
+							$("#message").val(result.msg);
+						}
+					},
+					error: function(){
+						alert("통신 실패!");
+					}
+     			});
+			});
 		});
-		
+				
 		var sock = new SockJS("${pageContext.request.contextPath}/echo");
 		
 		// 메세지 왔을때
