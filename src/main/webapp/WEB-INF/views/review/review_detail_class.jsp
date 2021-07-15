@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
 	<h1>Review Detail</h1>
 
 		<table border="1">
@@ -34,6 +35,7 @@
 			</td>
 		</tr>
 	</table>
-
+	
+	<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 </body>
 </html>

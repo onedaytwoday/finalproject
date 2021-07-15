@@ -9,9 +9,10 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-	<h1>${pDto.product_name }(${pDto.product_no }) 리뷰 작성</h1>
+	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
+	<h1>${cDto.class_title }(${cDto.class_no }) 리뷰 작성</h1>
 		<form method="post">
-		<input type="hidden" name="product_no_str" value="${pDto.product_no }">
+		<input type="hidden" name="class_no_str" value="${cDto.class_no }">
 		<table border="1">
 			<tr>
 				<th>ID</th>
@@ -40,7 +41,7 @@
 			<div id="articlefileChange"></div>
 		</div>
 		<input type="button" value="리뷰등록" onclick="registerAction()"/> 
-		<input type="button" value="취소" onclick="location.href='store_select.do?product_no=${cDto.product_no }'" />
+		<input type="button" value="취소" onclick="location.href='classDetail.do?class_no=${cDto.class_no }'" />
 		
 	</form>
 <script>
@@ -134,14 +135,14 @@ function fileDelete(fileNum){
 	$.ajax({
    	      type: "POST",
    	   	  enctype: "multipart/form-data",
-   	      url: "review_insertres_product.do",
+   	      url: "review_insertres_class.do",
        	  data : formData,
        	  processData: false,
    	      contentType: false,
    	      success: function (data) {
    	    	if(JSON.parse(data)['result'] == "OK"){
    	    		alert("파일업로드 성공");
-   	    		$(location).attr('href',"review_list_product.do");
+   	    		$(location).attr('href',"review_list_class.do");
 			} else
 				alert("서버내 오류로 처리가 지연되고있습니다. 잠시 후 다시 시도해주세요");
    	    		return false;
@@ -154,6 +155,6 @@ function fileDelete(fileNum){
    	    return false;
 	}
 </script>
-
+	<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 </body>
 </html>

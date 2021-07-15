@@ -29,6 +29,8 @@ public interface BoardDao {
 	public int qna_count();
 	
 	public int notice_count();
-
+	
+	public int search_notice_count(PagingDto Pdto);
+	
 	public List<BoardDto> mypage_list(String member_id);
 }

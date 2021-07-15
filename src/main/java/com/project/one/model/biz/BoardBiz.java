@@ -29,5 +29,7 @@ public interface BoardBiz {
 	
 	public int notice_count();
 	
+	public int search_notice_count(PagingDto Pdto);
+	
 	public List<BoardDto> mypage_list(String member_id);
 }

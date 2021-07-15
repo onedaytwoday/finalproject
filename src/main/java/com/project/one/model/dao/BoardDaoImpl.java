@@ -170,6 +170,20 @@ public class BoardDaoImpl implements BoardDao {
 	}
 
 	@Override
+	public int search_notice_count(PagingDto Pdto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.selectOne(NAMESPACE + "search_notice_count", Pdto);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+	
+	@Override
 	public List<BoardDto> mypage_list(String member_id) {
 		List<BoardDto> list = new ArrayList<BoardDto>();
 		
@@ -182,5 +196,7 @@ public class BoardDaoImpl implements BoardDao {
 		
 		return list;
 	}
+
+	
 
 }

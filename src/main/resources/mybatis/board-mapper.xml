@@ -55,6 +55,29 @@
 		ORDER BY BOARD_NO DESC
 	</select>
 	
+	<select id="board_notice_search">
+		SELECT X.rnum,
+		X.BOARD_NO, X.BOARD_NOTICE_NO, X.BOARD_QNA_NO, X.BOARD_TITLE, X.BOARD_CONTENT, X.BOARD_DATE, X.BOARD_READCOUNT,
+		X.BOARD_GROUPNO, X.BOARD_GROUPSEQ, X.BOARD_TITLETAB, X.BOARD_DELFLAG, X.BOARD_CATEGORY, X.BOARD_PW, X.MEMBER_ID
+		FROM (
+		SELECT ROWNUM AS rnum,
+		A.BOARD_NO, A.BOARD_NOTICE_NO, A.BOARD_QNA_NO, A.BOARD_TITLE, A.BOARD_CONTENT, A.BOARD_DATE, A.BOARD_READCOUNT,
+		A.BOARD_GROUPNO, A.BOARD_GROUPSEQ, A.BOARD_TITLETAB, A.BOARD_DELFLAG, A.BOARD_CATEGORY, A.BOARD_PW, A.MEMBER_ID
+		FROM (
+		SELECT
+		B.BOARD_NO, B.BOARD_NOTICE_NO, B.BOARD_QNA_NO, B.BOARD_TITLE, B.BOARD_CONTENT, B.BOARD_DATE, B.BOARD_READCOUNT,
+		B.BOARD_GROUPNO, B.BOARD_GROUPSEQ, B.BOARD_TITLETAB, B.BOARD_DELFLAG, B.BOARD_CATEGORY, B.BOARD_PW, M.MEMBER_NICNAME AS MEMBER_ID
+		FROM BOARD b, MEMBER m
+		WHERE BOARD_CATEGORY = 'N' AND B.MEMBER_ID = M.MEMBER_ID
+		ORDER BY BOARD_DATE DESC
+		) A
+		WHERE ROWNUM <![CDATA[ <= ]]>
+		#{pageEnd}
+		) X
+		WHERE X.rnum <![CDATA[ >= ]]>
+		#{pageBegin}
+	</select>
+	
 	<select id="selectOne" resultType="boardDto" parameterType="int">
 		SELECT B.BOARD_NO , B.BOARD_NOTICE_NO, B.BOARD_QNA_NO, B.BOARD_TITLE, B.BOARD_CONTENT, B.BOARD_DATE, B.BOARD_READCOUNT,
 		B.BOARD_GROUPNO, B.BOARD_GROUPSEQ, B.BOARD_TITLETAB, B.BOARD_DELFLAG, B.BOARD_CATEGORY, B.BOARD_PW, M.MEMBER_NICNAME AS MEMBER_ID
@@ -102,5 +125,22 @@
 	</select>
 	<select id="notice_count" resultType="int">
 		SELECT COUNT(BOARD_NOTICE_NO) AS cnt FROM BOARD WHERE BOARD_CATEGORY = 'N'
+	</select>
+	<select id="search_notice_count" resultType="int" parameterType="pagingDto">
+		SELECT COUNT(*) AS cnt FROM BOARD B, MEMBER M WHERE B.BOARD_CATEGORY = 'N' AND B.MEMBER_ID = M.MEMBER_ID 
+		<choose>
+			<when test="search_category != null and search_category.equals('nicname')">
+				AND M.MEMBER_NICNAME LIKE '%'||#{search_keyword}||'%'
+			</when>
+			<when test="search_category != null and search_category.equals('title')">
+				AND B.BOARD_TITLE LIKE '%'||#{search_keyword}||'%'
+			</when>
+			<when test="search_category != null and search_category.equals('content+title')">
+				AND(
+				B.BOARD_TITLE LIKE '%'||#{search_keyword}||'%'
+				OR B.BOARD_CONTENT LIKE '%'||#{search_keyword}||'%'
+				)
+			</when>
+		</choose>
 	</select>
 </mapper>

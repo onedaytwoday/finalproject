@@ -6,8 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <!-- Boostrap Icon -->
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 <style type="text/css">
 .header {
 	margin: 0 auto;
@@ -42,8 +41,7 @@ li {
 	width: 100%;
 }
 </style>
-<script type="text/javascript"
-	src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script type="text/javascript">
 	$(document).ready(function() {
