@@ -49,7 +49,7 @@ public class ReviewController {
 	}
 	
 	//상품리뷰 리스트
-	@RequestMapping("/reviewlist.do")
+	@RequestMapping("/pReviewlist.do")
 	public String pReviewList(Model model) {
 		
 		model.addAttribute("list", rBiz.selectProduct());
