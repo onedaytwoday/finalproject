@@ -22,7 +22,7 @@
 	
 	<insert id="insert" parameterType="reviewDto">
 		INSERT INTO REVIEW
-		VALUES(#{review_no},#{review_title},#{review_rate},#{review_date},#{review_content},#{product_no},#{class_no},
+		VALUES(REVIEW_NO_SEQ.NEXTVAL,#{review_title},#{review_rate},SYSDATE,#{review_content},null,#{class_no},
 		#{member_id})
 	</insert>
 	

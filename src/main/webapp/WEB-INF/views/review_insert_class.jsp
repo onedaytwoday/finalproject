@@ -10,7 +10,7 @@
 <body>
 	<h1>${cDto.class_title }(${cDto.class_no }) 리뷰 작성</h1>
 		<form action="review_insertres.do" method="post">
-		<input type="hidden" name="class_no" value="${cDto.class_no }">
+		<input type="hidden" name="class_no_str" value="${cDto.class_no }">
 		<table border="1">
 			<tr>
 				<th>ID</th>

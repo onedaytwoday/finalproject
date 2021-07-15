@@ -54,9 +54,9 @@ public class ReviewController {
 	
 	//인서트 결과(클래스리뷰)
 	@RequestMapping("/review_insertres.do")
-	public String reviewInsertRes(ReviewDto rDto) {
+	public String reviewInsertRes(ReviewDto rDto, String class_no_str) {
 
-				
+		rDto.setClass_no(Integer.parseInt(class_no_str));		
 		if(rBiz.insert(rDto)>0) {
 			return "redirect:reviewlist.do";
 		}
