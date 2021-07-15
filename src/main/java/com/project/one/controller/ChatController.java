@@ -30,6 +30,7 @@ import com.project.one.model.dto.ChatSession;
 import com.project.one.model.dto.ChattingDto;
 import com.project.one.model.dto.MemberDto;
 import com.project.one.model.dto.RoomDto;
+import com.project.one.util.Translate;
 
 
 @Controller
@@ -74,6 +75,7 @@ public class ChatController {
     	ModelAndView mav = new ModelAndView();
     	MemberDto mDto = (MemberDto)session.getAttribute("mDto");
     	RoomDto rDto = new RoomDto();
+    	
     	if(mDto.getMember_grade().equals("강사회원")) {
     		RoomDto dto = new RoomDto();
     		dto.setMember_id(member_id);
@@ -122,6 +124,15 @@ public class ChatController {
         else{
             System.out.println("방이 있다!!");
             List<ChattingDto> chatlist = chatBiz.selectList(exist.getRoom_no());
+            
+            String lang = (String)session.getAttribute("lang");
+            if(lang != null) {
+            	for(ChattingDto cDto : chatlist) {
+            		String context = Translate.translate(cDto.getChatting_content(), lang, false);
+            		cDto.setChatting_content(context);
+            	}
+            }
+            
             session.setAttribute("opponent", member_id);
             session.setAttribute("room_no", exist.getRoom_no());
             mav.addObject("Room_no", exist.getRoom_no());
@@ -140,5 +151,35 @@ public class ChatController {
     	}
     	return "redirect:chat_main.do?member_id="+mDto.getMember_id();
     }
+    
+    @ResponseBody
+    @RequestMapping("/selectLang.do")
+    public Map<String, String> selectLang(String lang, HttpSession session){
+    	Map<String, String> map = new HashMap<>();
+    	
+    	session.setAttribute("lang", lang);
+    	map.put("msg", "성공");
+    	
+    	return map;
+    }
+    
+    @ResponseBody
+    @RequestMapping(value="/translate.do", method = RequestMethod.POST)
+    public Map<String, String> translate(@RequestBody Map<String, String> param){
+    	Map<String, String> map = new HashMap<>();
+    	String text = param.get("text");
+    	String lang = Translate.detectLangs(text);
+
+    	if(!lang.equals("ko")) {
+    		String msg = Translate.translate(text, lang, true);
+    		String confirmedMsg = Translate.translate("한국어로 자동 번역 하시겠습니까?", lang, false);
+    		map.put("msg", msg);
+    		map.put("confirmedMsg", confirmedMsg);
+    	}
+    	    	
+    	return map;
+    }
+
+    
     
 }
