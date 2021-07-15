@@ -48,6 +48,16 @@ public class ReviewController {
 		return "review_list_class";
 	}
 	
+	//상품리뷰 리스트
+	@RequestMapping("/reviewlist.do")
+	public String pReviewList(Model model) {
+		
+		model.addAttribute("list", rBiz.selectProduct());
+		
+		return "review_list_product";
+	}
+	
+	
 	//클래스리뷰 디테일
 	@RequestMapping("/reviewDetail.do")
 	public String reviewDetail(Model model,int review_no) {
@@ -56,7 +66,15 @@ public class ReviewController {
 		return "review_detail_class";
 	}
 	
-	//인서트폼(class_no, member_id)
+	//상품리뷰 디테일
+	@RequestMapping("/pReviewDetail.do")
+	public String pReviewDetail(Model model, int review_no) {
+		model.addAttribute("dto", rBiz.selectOne(review_no));
+		return "review_detail_product";
+	}
+	
+	
+	//클래스리뷰 인서트
 	@RequestMapping("/insertClassReview.do")
 	public String insertClassReview(Model model, int class_no,String class_title, HttpSession session) {
 		
@@ -73,6 +91,22 @@ public class ReviewController {
 		return "review_insert_class";
 	}
 	
+	//상품리뷰
+	@RequestMapping("/insertProductReview.do")
+	public String insertProductReview(Model model, int product_no, String product_name, HttpSession session) {
+		
+		MemberDto mDto = (MemberDto)session.getAttribute("mDto");
+		if (mDto != null){
+			ProductDto pDto = new ProductDto();
+			pDto.setProduct_no(product_no);
+			pDto.setProduct_name(product_name);
+			model.addAttribute("pDto", pDto);
+			model.addAttribute("mDto", mDto);
+		}
+		
+		return "review_insert_product";
+	}
+	
 
 	//인서트 결과(클래스리뷰)
 	@RequestMapping("/review_insertres.do")
@@ -84,6 +118,17 @@ public class ReviewController {
 		}	
 		return "redirect:insertClassReview.do";
 	}
+	//인서트 결관(상품리뷰)
+	@RequestMapping("/pReview_insertres.do")
+	public String pReviewInsertRes(ReviewDto rDto, String product_no_str) {
+		
+		rDto.setProduct_no(Integer.parseInt(product_no_str));
+		if(rBiz.insertProduct(rDto)>0) {
+			return "redirect:pReviewlist.do";
+		}
+		return "redirect:insertProductReview.do";
+	}
+	
 	@ResponseBody
 	@RequestMapping(value = "/reviewInsertRes", method = RequestMethod.POST)
 	public String fileUpload(@RequestParam("files") List<MultipartFile> multipartFile, ReviewDto rDto, String class_no_str,HttpServletRequest request) {
