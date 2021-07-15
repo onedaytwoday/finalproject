@@ -28,7 +28,7 @@
 		var loginVal = {
 				"member_id":member_id,
 				"member_pw":member_pw,
-				"member_ip": ip()
+				"member_ip": "1111"
 		}
 		
 		if(member_id == null || member_id ==""||member_pw == null || member_pw == "" ){

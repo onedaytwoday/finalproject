@@ -46,7 +46,7 @@ searchAddrFromCoords(map.getCenter(), displayCenterInfo);
 kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
     searchDetailAddrFromCoords(mouseEvent.latLng, function(result, status) {
         if (status === kakao.maps.services.Status.OK) {
-            var detailAddr = !!result[0].road_address ? '<div>도로명주소 : ' + result[0].road_address.address_name + '</div>' : '';
+            var detailAddr = !!result[0].road_address ? '<div>도로명주소 : ' + '<label id="addrdata">' + result[0].road_address.address_name + '</label>' + '</div>' : '';
             detailAddr += '<div>지번 주소 : ' + result[0].address.address_name + '</div>';
             
             var content = '<div class="bAddr">' +
@@ -57,7 +57,7 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
             var content = '<form method="post" class="bAddr">' +
                             '<span class="title">법정동 주소정보</span>' + 
                             detailAddr + 
-                        '<input type="button" value="등록하기" onclick="classAddrInsert()"/></form>';
+                        '<input type="button" id="clickme" value="등록하기" onclick="classAddrInsert()"/></form>';
 			var addrdata = result[0].road_address.address_name;
             // 마커를 클릭한 위치에 표시합니다 
             marker.setPosition(mouseEvent.latLng);
@@ -100,6 +100,11 @@ function displayCenterInfo(result, status) {
     }    
 }
 function classAddrInsert() {
+		//var value = document.getElementById("addrdata").value;	
+       // var addrdata = document.getElementById("addrdata").value;
+        var addrdata = document.getElementById("addrdata").value;
+        window.opener.document.getElementById("inputdata").value = addrdata;
+        window.close();
 	
 }
 
