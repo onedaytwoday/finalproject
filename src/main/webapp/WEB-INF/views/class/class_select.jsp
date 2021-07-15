@@ -8,8 +8,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
-
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -19,13 +17,6 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"
     />    
-<script type="text/javascript">
-	function cancelPayment(){
-		if(confirm("결제를 취소하시겠습니까?")) {
-			location.href='paymentCancel.do?member_id=${mDto.member_id }&class_no=${dto.class_no}';
-		}
-	}
-</script>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>

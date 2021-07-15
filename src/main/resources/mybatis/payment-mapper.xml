@@ -78,21 +78,19 @@
 	</delete>
 	
 	<select id="checkPaid" resultType="paymentDto">
-		SELECT p.PAYMENT_NO, p.PAYMENT_NUM, p.PAYMENT_PRICE, p.PAYMENT_DATE, p.PAYMENT_DEL, p.PAYMENT_UID, p.MEMBER_ID,
-				p.DETAIL_NO
-		FROM PAYMENT p, Detail d
-		WHERE p.DETAIL_NO = d.DETAIL_NO AND p.MEMBER_ID = #{member_id} AND d.CLASS_NO = #{detail_no}
-	</select>
-	
-	<select id="mypage_list" resultType="paymentDto">
-		SELECT P.PAYMENT_NO, P.PAYMENT_NUM, P.PAYMENT_PRICE, P.PAYMENT_DATE, P.PAYMENT_DEL, P.PAYMENT_UID, P.MEMBER_ID,
-		P.PRODUCT_NO, P.BASKET_GROUP, P.DETAIL_NO,B.PRODUCT_NAME
-		FROM PAYMENT P , PRODUCT B
-		WHERE P.PRODUCT_NO = B.PRODUCT_NO AND P.MEMBER_ID = #{member_id}
+		SELECT PAYMENT_NO, PAYMENT_NUM, PAYMENT_PRICE, PAYMENT_DATE, PAYMENT_DEL, PAYMENT_UID, MEMBER_ID, PRODUCT_NO, BASKET_GROUP, DETAIL_NO
+		FROM PAYMENT
+		WHERE PAYMENT_NO = #{payment_no} AND MEMBER_ID = #{member_id}
 	</select>
 	
 	<select id="paymentCount" resultType="int">
 		SELECT COUNT(PAYMENT_NO) AS cnt
 		FROM PAYMENT
+	</select>
+	
+	<select id="paymentMYCount" parameterType="String" resultType="int">
+		SELECT COUNT(PAYMENT_NO) AS cnt
+		FROM PAYMENT
+		WHERE MEMBER_ID = #{member_id}
 	</select>
 </mapper>

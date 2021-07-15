@@ -92,7 +92,7 @@ li {
 			<span id="basket_num" style="position: absolute; left: 1.5rem; bottom: 25px; border-radius: 50%; padding: 5px 10px; background-color: red; color: white;">${basket_num }</span>
 			</a></li>
 			<c:if test="${mDto.member_grade != '관리자' }">
-			<li><a href="mypage_update.do?member_id=${mDto.member_id }">마이페이지</a></li>
+			<li><a href="mypage_update.do">마이페이지</a></li>
 			</c:if>
 			<c:if test="${mDto.member_grade == '관리자' }">
 			<li><a href="adminMain.do">관리자 페이지</a></li>

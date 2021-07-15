@@ -119,24 +119,24 @@ public class PaymentDaoImpl implements PaymentDao {
 	}
 
 	@Override
-	public List<PaymentDto> mypage_list(String member_id) {
-		List<PaymentDto> list = new ArrayList<PaymentDto>();
-		
-		try {
-			list = sqlSession.selectList(NAMESPACE + "mypage_list",member_id);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		return list;
-	}
-
-	@Override
 	public int paymentCount() {
 		int res = 0;
 		
 		try {
 			res = sqlSession.selectOne(NAMESPACE + "paymentCount");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+
+	@Override
+	public int paymentMYCount(String member_id) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.selectOne(NAMESPACE + "paymentMYCount", member_id);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

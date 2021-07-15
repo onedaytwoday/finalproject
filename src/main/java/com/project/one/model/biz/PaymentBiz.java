@@ -13,7 +13,7 @@ public interface PaymentBiz {
 
 	public PaymentDto selectOne(int payment_no);
 
-	public int insert(PaymentDto dto, String type, int basket_group);
+	public int insert(PaymentDto dto, String type);
 
 	public int updateStatus(PaymentDto dto);
 
@@ -21,7 +21,9 @@ public interface PaymentBiz {
 	
 	public PaymentDto checkPaid(PaymentDto dto);
 	
-	public List<PaymentDto> mypage_list(String member_id);
+	public List<PaymentDto> mypage_list(PagingDto dto, String member_id);
 	
 	public int paymentCount();
+	
+	public int paymentMYCount(String member_id);
 }

@@ -26,16 +26,16 @@
 			buyer_tel : '${mDto.member_phone}',
 			buyer_addr : '${mDto.member_addr}',
 		}, function(rsp) {
-			console.log("rsp : ", rsp);
 			if (rsp.success) {
-				
 				let paymentVal = {
 						payment_del : '결제완료',
 						payment_num : '${pDto.payment_num}',
 						payment_price: rsp.paid_amount,
 						member_id: rsp.buyer_name,
 						payment_uid: rsp.imp_uid,
-						detail_no: '${pDto.detail_no}'
+						detail_no: '${pDto.detail_no}',
+						product_no: '${pDto.product_no}',
+						basket_group: '${pDto.basket_group}'
 				}
 				
 				$.ajax({

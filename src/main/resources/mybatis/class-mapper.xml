@@ -40,8 +40,8 @@
 	
 	<select id="userClass" resultType="classDto">
 		SELECT C.CLASS_NO, C.CLASS_TITLE, C.CLASS_DESC, C.CLASS_LOC, C.CLASS_CATEGORY, C.CLASS_PRICE, C.CLASS_SALE, C.MEMBER_ID
-		FROM CLASS C, PAYMENT P
-		WHERE C.CLASS_NO = P.CLASS_NO AND P.MEMBER_ID = #{member_id}
+		FROM CLASS C, PAYMENT P, DETAIL D
+		WHERE D.DETAIL_NO = P.DETAIL_NO AND C.CLASS_NO = D.CLASS_NO AND P.MEMBER_ID = #{member_id}
 	</select>
 	
 	<insert id="insert" parameterType="classDto">

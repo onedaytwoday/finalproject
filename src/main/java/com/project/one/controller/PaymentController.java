@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.one.model.biz.PaymentBiz;
 import com.project.one.model.dto.MemberDto;
+import com.project.one.model.dto.PagingDto;
 import com.project.one.model.dto.PaymentDto;
 
 @Controller
 public class PaymentController {
 
 	private static String TYPE="";
-	private static int BASKET_GROUP=0;
 	
 	@Autowired
 	private PaymentBiz pBiz;
@@ -29,7 +29,6 @@ public class PaymentController {
 	@RequestMapping("/payment.do")
 	public String payment(Model model, PaymentDto pDto,String type, HttpSession session) {
 		TYPE = type;
-		BASKET_GROUP = pDto.getBasket_group();
 		
 		MemberDto mDto = (MemberDto)session.getAttribute("mDto");
 		
@@ -44,7 +43,7 @@ public class PaymentController {
 	public Map<String, String> payment_complete(@RequestBody PaymentDto dto) {
 		Map<String, String> map = new HashMap<>();
 
-		if(pBiz.insert(dto, TYPE, BASKET_GROUP) > 0) {
+		if(pBiz.insert(dto, TYPE) > 0) {
 			map.put("msg", "성공");
 			
 			if(TYPE.equals("basket")) {
@@ -57,21 +56,26 @@ public class PaymentController {
 		return map;
 	}
 
-//	@RequestMapping("paymentCancel.do")
-//	public String payment_cancel(PaymentDto dto) {
-//		PaymentDto pDto = pBiz.checkPaid(dto);
-//
-//		if (pBiz.delete(pDto) > 0) {
-//			return "redirect:classList.do";
-//		}
-//
-//		return "redirect:classDetail.do?class_no="+dto.getClass_no();
-//	}
+	@RequestMapping("paymentCancel.do")
+	public String payment_cancel(PaymentDto dto) {
+		PaymentDto pDto = pBiz.checkPaid(dto);
+
+		if (pDto != null && pBiz.delete(pDto) > 0) {
+			return "redirect:mypage_update.do";
+		}
+
+		return "redirect:mypage_payment.do?nowPage=1";
+	}
 	
 	@RequestMapping("mypage_payment.do")
-	public String mypage_list(Model model , String member_id) {
-		model.addAttribute("list",pBiz.mypage_list(member_id));
-		model.addAttribute("member_id",member_id);
+	public String mypage_list(Model model, int nowPage, HttpSession session) {		
+		MemberDto mDto = (MemberDto)session.getAttribute("mDto");		
+		
+		int count = pBiz.paymentMYCount(mDto.getMember_id());
+		PagingDto pDto = new PagingDto(count, nowPage);
+		
+		model.addAttribute("pList", pBiz.mypage_list(pDto, mDto.getMember_id()));
+		model.addAttribute("pDto", pDto);
 		
 		return "mypage/mypage_payment";
 	}
