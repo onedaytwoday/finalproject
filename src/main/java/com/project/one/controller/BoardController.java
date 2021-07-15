@@ -65,7 +65,13 @@ public class BoardController {
 	
 	@RequestMapping("/board_detail.do")
 	public String board_detail(Model model, int board_no) {
-		model.addAttribute("dto", biz.selectOne(board_no));
+		BoardDto dto = biz.selectOne(board_no);
+		if(biz.board_read(dto) > 0) {
+			System.out.println("read 성공");
+		}else {
+			System.out.println("read 실패");
+		}
+		model.addAttribute("dto", dto);
 		return "board/board_detail";
 	}
 	

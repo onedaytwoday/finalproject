@@ -21,6 +21,8 @@ public interface BoardBiz {
 	
 	public int update(BoardDto dto);
 
+	public int board_read(BoardDto dto);
+	
 	public int delete(int board_no);
 	
 	public int qna_count();

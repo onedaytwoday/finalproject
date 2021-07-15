@@ -88,10 +88,10 @@
 		BOARD_DATE=SYSDATE
 		WHERE BOARD_NO = #{board_no}
 	</update>
-	<update id="board_read">
+	<update id="board_read" parameterType="boardDto">
 		UPDATE BOARD SET
 		BOARD_READCOUNT = #{board_readcount}
-		WEHRE BOARD_NO = #{board_no}
+		WHERE BOARD_NO = #{board_no}
 	</update>
 	<delete id="delete" parameterType="int">
 		DELETE FROM BOARD

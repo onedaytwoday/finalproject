@@ -112,6 +112,20 @@ public class BoardDaoImpl implements BoardDao {
 		
 		return res;
 	}
+	
+	@Override
+	public int board_read(BoardDto dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.update(NAMESPACE + "board_read", dto);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
 
 	@Override
 	public int delete(int board_no) {
@@ -169,5 +183,4 @@ public class BoardDaoImpl implements BoardDao {
 		return list;
 	}
 
-	
 }
