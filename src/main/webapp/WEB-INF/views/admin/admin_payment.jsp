@@ -47,8 +47,16 @@
 							<td>${dto.payment_price }</td>
 							<td>${dto.payment_date }</td>
 							<td><span id="${dto.payment_no }">${dto.payment_del }</span></td>
-							<c:if test="${dto.class_no == 0 }">
-								<td><input onclick="updateStatus(${dto.payment_no})" type="button" value="업데이트" /></td>						
+							<c:if test="${dto.detail_no == 0 }">
+								<c:choose>
+									<c:when test="${dto.payment_del == '배송완료' }">
+										<td><input type="button" value="업데이트" disabled /></td>
+									</c:when>
+									
+									<c:otherwise>
+										<td><input onclick="updateStatus(${dto.payment_no})" type="button" value="업데이트" /></td>						
+									</c:otherwise>
+								</c:choose>
 							</c:if>
 						</tr>
 					</c:forEach>

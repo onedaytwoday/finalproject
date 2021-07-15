@@ -97,7 +97,7 @@
 							<input type="hidden" name="product_no" value="${dto.product_no }" />
 							<input type="hidden" name="payment_num" value="1" />
 							<input type="hidden" name="payment_price" value="${dto.product_price }" />
-							<input type="hidden" name="name" value="${dto.product_name }" />
+							<input type="hidden" name="product_name" value="${dto.product_name }" />
 							<input type="hidden" name="type" value="product" />
 							
 							<input type="submit" value="바로 구매" />
@@ -119,7 +119,7 @@
 				<input type="button" value="삭제"
 				onclick="location.href='store_delete.do?product_no=${dto.product_no}'" />
 				<input type="button" value="목록" onclick="location.href='store.do'" />
-				<button onclick="location.href='insertProductReview.do?product_no=${dto.product_no}&product_name=${dto.product_name }'" type="button">리뷰작성</button>
+				<button onclick="location.href='review_insert_product.do?product_no=${dto.product_no}&product_name=${dto.product_name }'" type="button">리뷰작성</button>
 			</td>
 		</tr>
 	</table>

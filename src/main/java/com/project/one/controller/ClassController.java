@@ -69,24 +69,8 @@ public class ClassController {
 	}
 
 	@RequestMapping("/classSelect.do")
-	public String class_select(Model model, int class_no, HttpSession session) {
+	public String class_select(Model model, int class_no) {
 		CLASS_NO = class_no;
-		
-		MemberDto mDto = (MemberDto) session.getAttribute("mDto");
-		if (mDto != null) {
-			PaymentDto pDto = new PaymentDto();
-			pDto.setMember_id(mDto.getMember_id());
-			pDto.setClass_no(class_no);
-
-			PaymentDto paid = pBiz.checkPaid(pDto);
-			boolean checkPaid = false;
-
-			if (paid != null) {
-				checkPaid = true;
-			}
-
-			model.addAttribute("checkPaid", checkPaid);
-		}
 		
 		model.addAttribute("dto", cBiz.selectOne(class_no));
 		model.addAttribute("rdto", rbiz.avgList(class_no));
@@ -197,10 +181,10 @@ public class ClassController {
 	}
 
 	@RequestMapping("/mypage_class.do")
-	public String class_selectOne(Model model, String member_id) {
-
-		model.addAttribute("list", cBiz.userClass(member_id));
-		model.addAttribute("member_id", member_id);
+	public String class_selectOne(Model model, HttpSession session) {
+		MemberDto dto = (MemberDto)session.getAttribute("mDto");
+		
+		model.addAttribute("list", cBiz.userClass(dto.getMember_id()));
 
 		return "mypage/mypage_class";
 	}
