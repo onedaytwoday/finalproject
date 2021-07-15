@@ -19,6 +19,12 @@
 		VALUES(DETAIL_NO_SEQ.NEXTVAL, #{detail_date}, #{detail_member_num}, #{class_no})
 	</insert>
 	
+	<update id="update" parameterType="int">
+		UPDATE DETAIL
+		SET DETAIL_MEMBER_NUM = DETAIL_MEMBER_NUM -1
+		WHERE DETAIL_NO = ${detail_no}
+	</update>
+	
 	<delete id="delete" parameterType="int">
 		DELETE FROM DETAIL 
 		WHERE DETAIL_NO = #{detail_no}

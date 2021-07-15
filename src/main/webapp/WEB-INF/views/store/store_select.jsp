@@ -97,7 +97,7 @@
 							<input type="hidden" name="product_no" value="${dto.product_no }" />
 							<input type="hidden" name="payment_num" value="1" />
 							<input type="hidden" name="payment_price" value="${dto.product_price }" />
-							<input type="hidden" name="name" value="${dto.product_name }" />
+							<input type="hidden" name="product_name" value="${dto.product_name }" />
 							<input type="hidden" name="type" value="product" />
 							
 							<input type="submit" value="바로 구매" />

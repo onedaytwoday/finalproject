@@ -62,7 +62,7 @@
 				<p style="margin-bottom: 1rem;">총 가격 : <input type="text" id="total_price" name="payment_price" readonly />원</p>
 				
 				<input type="hidden" name="basket_group" value="${basket_group }" />
-				<input type="hidden" name="name" value="장바구니에서 구매" />
+				<input type="hidden" name="product_name" value="장바구니에서 구매" />
 				<input type="hidden" name="type" value="basket" />
 				
 				<input type="submit" value="결제 하기" />

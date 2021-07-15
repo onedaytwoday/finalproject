@@ -1,5 +1,6 @@
 package com.project.one.model.biz;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +24,7 @@ public class PaymentBizImpl implements PaymentBiz {
 	private ProductBiz proBiz;
 	
 	@Autowired
-	private ClassBiz cBiz;
-	
-	@Autowired
-	private BasketBiz bBiz;
+	private DetailBiz dBiz;
 	
 	@Override
 	public List<PaymentDto> selectList() {
@@ -45,26 +43,15 @@ public class PaymentBizImpl implements PaymentBiz {
 
 
 	@Override
-	public int insert(PaymentDto dto, String type, String title, int basket_group) {
-		
+	public int insert(PaymentDto dto, String type) {
 		switch(type) {
 		case "product" :
-			ProductDto proDto = proBiz.selectOneByName(title);
-			dto.setProduct_no(proDto.getProduct_no());
 			dto.setPayment_num(1);
 			break;
 			
-		case "class" :
-			ClassDto cDto = cBiz.selectOneByTitle(title);
-			dto.setClass_no(cDto.getClass_no());
+		case "class" :			
 			dto.setPayment_num(1);
-			break;
-			
-		case "basket" :
-			if(basket_group != 0) {
-				dto.setBasket_group(basket_group);			
-			}
-			
+			dBiz.update(dto.getDetail_no());
 			break;
 		}
 		
@@ -88,18 +75,33 @@ public class PaymentBizImpl implements PaymentBiz {
 		
 		return res;
 	}
-
+	
 	@Override
 	public PaymentDto checkPaid(PaymentDto dto) {
 		return dao.checkPaid(dto);
 	}
 
 	@Override
-	public List<PaymentDto> mypage_list(String member_id) {
-		return dao.mypage_list(member_id);
+	public List<PaymentDto> mypage_list(PagingDto dto, String member_id) {
+		List<PaymentDto> list = dao.paymentList(dto);
+		List<PaymentDto> pList = new ArrayList<>();
+		
+		for(PaymentDto p : list) {
+			if(p.getMember_id().equals(member_id)) {
+				pList.add(p);
+			}
+		}
+		
+		return pList;
+				
 	}
 	public int paymentCount() {
 		return dao.paymentCount();
+	}
+
+	@Override
+	public int paymentMYCount(String member_id) {
+		return dao.paymentMYCount(member_id);
 	}
 
 }

@@ -1,5 +1,7 @@
 package com.project.one.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.project.one.model.biz.BoardBiz;
 import com.project.one.model.dto.BoardDto;
+import com.project.one.model.dto.MemberDto;
 import com.project.one.model.dto.PagingDto;
 
 @Controller
@@ -92,9 +95,9 @@ public class BoardController {
 	
 	//마이페이지
 	@RequestMapping("mypage_board.do")
-	public String mypage_list(Model model,String member_id) {
-		model.addAttribute("list",biz.mypage_list(member_id));
-		model.addAttribute("member_id",member_id);
+	public String mypage_list(Model model, HttpSession session) {
+		MemberDto dto = (MemberDto)session.getAttribute("mDto");
+		model.addAttribute("list",biz.mypage_list(dto.getMember_id()));
 		
 		return "mypage/mypage_board";
 	}
