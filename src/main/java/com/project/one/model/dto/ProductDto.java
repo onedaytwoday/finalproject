@@ -9,6 +9,7 @@ public class ProductDto {
 	private String product_loc;
 	private String product_del;
 	private int product_sale;
+	private String file_new_name;
 
 	public ProductDto() {
 	}
@@ -25,6 +26,21 @@ public class ProductDto {
 		this.product_del = product_del;
 		this.product_sale = product_sale;
 	}
+	
+	public ProductDto(int product_no, String product_name, String product_category, int product_price,
+			String product_desc, String product_loc, String product_del, int product_sale, String file_new_name) {
+		super();
+		this.product_no = product_no;
+		this.product_name = product_name;
+		this.product_category = product_category;
+		this.product_price = product_price;
+		this.product_desc = product_desc;
+		this.product_loc = product_loc;
+		this.product_del = product_del;
+		this.product_sale = product_sale;
+		this.file_new_name = file_new_name;
+	}
+
 
 	public int getProduct_no() {
 		return product_no;
@@ -89,6 +105,14 @@ public class ProductDto {
 	public void setProduct_sale(int product_sale) {
 		this.product_sale = product_sale;
 	}
+	public String getFile_new_name() {
+		return file_new_name;
+	}
+
+	public void setFile_new_name(String file_new_name) {
+		this.file_new_name = file_new_name;
+	}
+
 
 	@Override
 	public String toString() {

@@ -120,7 +120,7 @@ li {
 					<option value="cate02">카테고리2</option>
 					<option value="cate03">카테고리3</option>
 			</select></li>
-			<li><a href="store.do">쇼핑</a></li>
+			<li><a href="store.do?nowPage=1">쇼핑</a></li>
 			<c:if test="${mDto.member_grade == '강사회원' }">
 				<li><a href="classInsert.do">클래스 등록</a></li>
 			</c:if>

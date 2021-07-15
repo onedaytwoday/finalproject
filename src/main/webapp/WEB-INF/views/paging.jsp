@@ -26,6 +26,11 @@
 			<c:when test="${param.board_category eq 'payment' && param.from eq 'mypage' }">
 				<c:url var="action" value="mypage_payment.do" />
 			</c:when>
+			
+			<c:when test="${param.store_category eq 'S' }">
+				<c:url var="action" value="store.do" />
+			</c:when>
+
 
 			<c:otherwise>
 				<c:url var="action" value="admin${param.board_category }.do" />
