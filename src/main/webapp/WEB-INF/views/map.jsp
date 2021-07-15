@@ -48,7 +48,7 @@
 
 </head>
 <body>
-
+<jsp:include page="header.jsp"></jsp:include>
 <div class="map_wrap">
     <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
 
@@ -355,6 +355,6 @@
    } 
 	</script>
 
-
+<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

@@ -94,11 +94,11 @@ public class RoomDaoImpl implements RoomDao {
 	}
 
 	@Override
-	public int delete(int chat_no) {
+	public int delete(int room_no) {
 		int res = 0;
 
 		try {
-			res = sqlSession.delete(NAMESPACE + "delete", chat_no);
+			res = sqlSession.delete(NAMESPACE + "delete", room_no);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -111,9 +111,10 @@ public class RoomDaoImpl implements RoomDao {
 		try {
 			dto = sqlSession.selectOne(NAMESPACE+"isRoom", roomDto);
 		} catch (Exception e) {
-			
+			e.printStackTrace();
 		}
 		return dto;
 	}
+
 
 }

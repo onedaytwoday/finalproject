@@ -160,7 +160,6 @@ public class MemberDaoImpl implements MemberDao {
 
 		try {
 			res = sqlSession.delete(NAMESPACE + "delete", member_id);
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

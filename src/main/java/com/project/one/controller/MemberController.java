@@ -99,7 +99,7 @@ public class MemberController {
 			MemberDto mDto = biz.selectOne(dto.getMember_id());
 			if(mDto!=null) {
 				session.setAttribute("mDto", mDto);
-				session.setMaxInactiveInterval(60*60);
+				session.setMaxInactiveInterval(-1);
 				return "main";
 			}	
 		}
@@ -134,7 +134,7 @@ public class MemberController {
 	public String sns_signupRes(MemberDto mDto, HttpSession session) {
 		if(biz.register(mDto) > 0) {
 			session.setAttribute("mdto", mDto);
-			session.setMaxInactiveInterval(60*60);
+			session.setMaxInactiveInterval(-1);
 			return "main";
 		}
 		
@@ -235,7 +235,7 @@ public class MemberController {
 			MemberDto res = biz.selectOne(member_id);
 			if(res != null) {
 				session.setAttribute("mDto", res);
-				session.setMaxInactiveInterval(60*60);
+				session.setMaxInactiveInterval(-1);
 				return "main";
 			}
 			model.addAttribute("mDto",mDto);
@@ -275,7 +275,7 @@ public class MemberController {
 		MemberDto res = biz.selectOne(kid);
 		if(res != null) {
 			session.setAttribute("mDto", res);
-			session.setMaxInactiveInterval(60*60);
+			session.setMaxInactiveInterval(-1);
 			return "main";
 		}
 		
@@ -292,11 +292,7 @@ public class MemberController {
 		return "main";
 	}
 	@RequestMapping("/main.do")
-	public String main(Model model, HttpSession session) {
-		MemberDto mDto = (MemberDto)session.getAttribute("mDto");
-		List<BasketDto> bList = bBiz.selectList(mDto.getMember_id());
-		model.addAttribute("basket_num", bList.size());
-
+	public String main(Model model) {
 		return "main";
 	}
 	
@@ -308,7 +304,7 @@ public class MemberController {
 		
 		model.addAttribute("dto",dto);
 		
-		return "mypage_update";
+		return "mypage/mypage_update";
 		
 	}
 	
@@ -321,6 +317,15 @@ public class MemberController {
 		
 		
 		return "redirect:mypage_update.do?member_id="+dto.getMember_id();
+	}
+	
+	@RequestMapping("/mypage_del.do")
+	public String delete(String member_id) {
+		if(biz.delete(member_id) > 0) {
+			return "redirect:logout.do";
+		}
+		
+		return "redirect:mypage_update.do?member_id="+member_id;
 	}
 
 }

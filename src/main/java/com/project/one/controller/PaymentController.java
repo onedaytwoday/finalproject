@@ -76,7 +76,7 @@ public class PaymentController {
 		model.addAttribute("list",pBiz.mypage_list(member_id));
 		model.addAttribute("member_id",member_id);
 		
-		return "mypage_payment";
+		return "mypage/mypage_payment";
 	}
 
 }

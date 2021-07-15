@@ -146,4 +146,24 @@ public class BasketController {
 		return map;
 	}
 	
+	@ResponseBody
+	@RequestMapping("/getBasketNum.do")
+	public Map<String, String> get_basket_num(HttpSession session){
+		Map<String, String> map = new HashMap<String, String>();
+		
+		MemberDto mDto = (MemberDto)session.getAttribute("mDto");
+		
+		if(mDto != null) {
+			List<BasketDto> bList = bBiz.selectList(mDto.getMember_id());
+			
+			if(bList != null) {
+				map.put("basket_num", String.valueOf(bList.size()));
+			} else {
+				map.put("basket_num", "0");
+			}
+		}
+		
+		return map;
+	}
+	
 }

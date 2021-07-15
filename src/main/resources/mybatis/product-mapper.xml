@@ -48,7 +48,9 @@
 		INSERT INTO PRODUCT
 		VALUES(PRODUCT_NO_SEQ.NEXTVAL, #{product_name}, #{product_category}, #{product_price}, #{product_desc}, #{product_loc}, #{product_del},
 		#{product_sale})
-	
+		<selectKey keyProperty="product_no" resultType="int" >
+			SELECT PRODUCT_NO_SEQ.CURRVAL From DUAL
+		</selectKey>
 	</insert>
 	
 	<delete id="delete" parameterType="int">

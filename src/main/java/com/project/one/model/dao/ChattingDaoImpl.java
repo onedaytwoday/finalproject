@@ -96,6 +96,17 @@ public class ChattingDaoImpl implements ChattingDao {
 		return chatList;
 	}
 
+	@Override
+	public int deleteByRoom(int room_no) {
+		int res = 0;
+		try {
+			res = sqlSession.delete(NAMESPACE+"deleteByRoom", room_no);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return res;
+	}
+
 
 
 

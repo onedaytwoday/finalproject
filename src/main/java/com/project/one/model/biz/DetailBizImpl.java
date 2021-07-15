@@ -15,8 +15,8 @@ public class DetailBizImpl implements DetailBiz {
 	private DetailDao dao;
 	
 	@Override
-	public List<DetailDto> selectList() {
-		return dao.selectList();
+	public List<DetailDto> selectList(int class_no) {
+		return dao.selectList(class_no);
 	}
 
 	@Override

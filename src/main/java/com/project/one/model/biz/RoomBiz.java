@@ -20,7 +20,7 @@ public interface RoomBiz {
 
 	public int update(RoomDto dto);
 
-	public int delete(int chat_no);
+	public int delete(int room_no);
 	
 	public RoomDto isRoom(RoomDto roomDto);
 

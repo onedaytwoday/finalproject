@@ -52,19 +52,19 @@ public class ChatController {
 			List<RoomDto> roomlist = roomBiz.selectListByConsult(member_id);
 			model.addAttribute("roomlist",roomlist);
 			model.addAttribute("mDto",mDto);
-			return "chat_consult";
+			return "chat/chat_consult";
 		}
 		List<RoomDto> roomlist = roomBiz.selectListByUser(member_id);
 		model.addAttribute("roomlist",roomlist);
 		model.addAttribute("mDto",mDto);
-		return "chat_main";
+		return "chat/chat_main";
 	}
 	//강사회원 리스트
 	@RequestMapping("/chat_newlist.do")
 	public String consultList(Model model, String member_grade) {
 		model.addAttribute("list",mBiz.selectListConsult(member_grade));
 		
-		return "chat_newlist";
+		return "chat/chat_newlist";
 	}
 	
 	// 채팅방 있으면 채팅방 없으면 만들어서 채팅방
@@ -82,6 +82,9 @@ public class ChatController {
     		if(exist!=null) {
     			System.out.println("방이 있다!!");
                 List<ChattingDto> chatlist = chatBiz.selectList(exist.getRoom_no());
+                RoomDto echo = new RoomDto();
+                session.setAttribute("opponent", member_id);
+                session.setAttribute("room_no", exist.getRoom_no());
                 rDto.setConsult_id(member_id);
                 rDto.setMember_id(mDto.getMember_id());
                 mav.addObject("rDto", rDto);
@@ -104,9 +107,14 @@ public class ChatController {
         if(exist == null) {
             System.out.println("방이 없다!!");
             int result = roomBiz.insert(rDto);
+            int room_no = rDto.getRoom_no();
             if(result == 1) 
                 System.out.println("방 만들었다!!");
-            	mav.setViewName("chat_room");
+            	session.setAttribute("opponent", member_id);
+            	session.setAttribute("room_no", room_no);
+            	mav.addObject("rDto", rDto);
+            	mav.addObject("Room_no", room_no);
+            	mav.setViewName("chat/chat_room");
                 return mav;
 
         }
@@ -114,45 +122,23 @@ public class ChatController {
         else{
             System.out.println("방이 있다!!");
             List<ChattingDto> chatlist = chatBiz.selectList(exist.getRoom_no());
+            session.setAttribute("opponent", member_id);
+            session.setAttribute("room_no", exist.getRoom_no());
             mav.addObject("Room_no", exist.getRoom_no());
             mav.addObject("chatlist",chatlist);
-            mav.setViewName("chat_room");
+            mav.setViewName("chat/chat_room");
             return mav;
         }
     }
     
-    // websocket 종료 room 마지막 시간, 내용 update
-    @ResponseBody
-    @RequestMapping(value="/room_update.do", method=RequestMethod.POST)
-    public Map<String, String> update_status(@RequestBody RoomDto dto) {
-		Map<String, String> map = new HashMap<>();
-		
-		if(roomBiz.update(dto) > 0) {
-			map.put("msg", "성공");
-		}else {
-			map.put("msg", "실패");
-		}
-		
-		return map;
-	}
     
-    @ResponseBody
-	@RequestMapping(value="/chat_insert.do", method=RequestMethod.POST)
-	public Map<String, String> update_status(@RequestBody ChattingDto dto) {
-		Map<String, String> map = new HashMap<>();
-		
-		if(chatBiz.insert(dto) > 0) {
-			map.put("msg", "성공");
-		}else {
-			map.put("msg", "실패");
-		}
-		
-		return map;
-	}
-	@RequestMapping("/tts.do")
-	public String tts() {
-		return "tts";
-	}
-
-	
+    @RequestMapping("/chat_delete.do")
+    public String deleteRoom(int room_no, HttpSession session) {
+    	MemberDto mDto = (MemberDto)session.getAttribute("mDto");
+    	if(chatBiz.deleteByRoom(room_no)>0 || roomBiz.delete(room_no)>0 ) {
+    		return "redirect:chat_main.do?member_id="+mDto.getMember_id();
+    	}
+    	return "redirect:chat_main.do?member_id="+mDto.getMember_id();
+    }
+    
 }
