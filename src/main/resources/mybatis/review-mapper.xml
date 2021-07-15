@@ -19,11 +19,17 @@
 		WHERE PRODUCT_NO = #{product_no}
 	</select>
 	
-	
 	<insert id="insert" parameterType="reviewDto">
 		INSERT INTO REVIEW
+<<<<<<< HEAD
 		VALUES(REVIEW_NO_SEQ.NEXTVAL,#{review_title},#{review_rate},SYSDATE,#{review_content},null,#{class_no},
 		#{member_id})
+=======
+		VALUES(REVIEW_NO_SEQ.NEXTVAL,#{review_title},#{review_rate},SYSDATE,#{review_content},NULL,#{class_no},#{member_id})
+		<selectKey keyProperty="review_no" resultType="int" >
+			SELECT REVIEW_NO_SEQ.CURRVAL From DUAL
+		</selectKey>
+>>>>>>> 57aafd99c9fd0cddf703257f567137a2f5c1a21e
 	</insert>
 	
 	<delete id="delete" parameterType="int">

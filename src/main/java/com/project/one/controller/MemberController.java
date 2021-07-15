@@ -304,7 +304,7 @@ public class MemberController {
 		
 		model.addAttribute("dto",dto);
 		
-		return "mypage_update";
+		return "mypage/mypage_update";
 		
 	}
 	

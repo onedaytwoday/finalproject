@@ -7,7 +7,7 @@ import com.project.one.model.dto.DetailDto;
 public interface DetailDao {
 	String NAMESPACE = "detail.";
 	
-	public List<DetailDto> selectList();
+	public List<DetailDto> selectList(int class_no);
 	
 	public DetailDto selectOne(int class_no);
 	

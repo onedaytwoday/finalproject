@@ -69,7 +69,6 @@ public class EchoHandler extends TextWebSocketHandler {
 		if (dto.getMember_grade().equals("관리자")) {
 			for (WebSocketSession sess : sessionList) {
 				sess.sendMessage(new TextMessage(dto.getMember_id() + " : " + message.getPayload()));
-				System.out.println(message.getPayload().toString());
 			}
 		} else {
 			WebSocketSession sess = map.get(dto.getMember_id());
@@ -82,9 +81,9 @@ public class EchoHandler extends TextWebSocketHandler {
 			cDto.setRoom_no(room_no);
 			cDto.setMember_id(dto.getMember_id());
 			if(chatBiz.insert(cDto) > 0) {
-				System.out.println("db 성공");
+				System.out.println("chatting-insert 성공");
 			}else {
-				System.out.println("db 실패");
+				System.out.println("chatting-insert 실패");
 			}
 			
 			if (room.get(dto.getMember_id()).equals(room.get(opponent))) {
@@ -92,7 +91,6 @@ public class EchoHandler extends TextWebSocketHandler {
 				if (sess_op != null) {
 					sess_op.sendMessage(new TextMessage(dto.getMember_id() + " : " + message.getPayload()));
 				}
-				System.out.println(message.getPayload().toString());
 			}
 		}
 	}
@@ -104,13 +102,15 @@ public class EchoHandler extends TextWebSocketHandler {
 		int room_no = getNo(session);
 		System.out.println(dto.getMember_id() + " 연결 종료 => 총 접속 인원 : " + i + "명");
 		// sessionList에 session이 있다면
-		RoomDto rDto = new RoomDto();
-		rDto.setRoom_content(chatting_content);
-		rDto.setRoom_no(room_no);
-		if(roomBiz.update(rDto) > 0) {
-			System.out.println("room update 성공");
-		}else {
-			System.out.println("room update 실패");
+		if(chatting_content != null) {
+			RoomDto rDto = new RoomDto();
+			rDto.setRoom_content(chatting_content);
+			rDto.setRoom_no(room_no);
+			if(roomBiz.update(rDto) > 0) {
+				System.out.println("room-update 성공");
+			}else {
+				System.out.println("room-update 실패");
+			}
 		}
 		if (sessionList != null) {
 			sessionList.remove(session);

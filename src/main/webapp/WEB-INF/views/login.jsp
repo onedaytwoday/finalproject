@@ -69,7 +69,7 @@
 </script>
 </head>
 <body>
-	
+<jsp:include page="header.jsp"></jsp:include>	
 	<c:choose>
 		<c:when test="${sessionId != null}">
 			<h2> 네이버 아이디 로그인 성공하셨습니다!! </h2>
@@ -104,6 +104,6 @@
 		</c:otherwise>
 	</c:choose>
 	
-
+<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

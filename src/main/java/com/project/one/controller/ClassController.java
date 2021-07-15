@@ -3,8 +3,14 @@ package com.project.one.controller;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
@@ -12,9 +18,11 @@ import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,6 +30,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.project.one.model.biz.ClassBiz;
+import com.project.one.model.biz.DetailBiz;
 import com.project.one.model.biz.FileTableBiz;
 import com.project.one.model.biz.PaymentBiz;
 import com.project.one.model.biz.ReviewBiz;
@@ -44,29 +53,32 @@ public class ClassController {
 
 	@Autowired
 	private ReviewBiz rbiz;
+	
+	@Autowired
+	private DetailBiz dBiz;
 
 	@Autowired
 	private FileTableBiz fbiz;
+	
+	private static int CLASS_NO;
 
 	@RequestMapping("/classList.do")
 	public String class_list(Model model) {
 		model.addAttribute("list", cBiz.selectList());
-		return "class_list";
+		return "class/class_list";
 	}
 
-	@RequestMapping("/classDetail.do")
-	public String class_detail(Model model, int class_no, HttpSession session) {
-
+	@RequestMapping("/classSelect.do")
+	public String class_select(Model model, int class_no, HttpSession session) {
+		CLASS_NO = class_no;
+		
 		MemberDto mDto = (MemberDto) session.getAttribute("mDto");
 		if (mDto != null) {
 			PaymentDto pDto = new PaymentDto();
 			pDto.setMember_id(mDto.getMember_id());
 			pDto.setClass_no(class_no);
 
-			System.out.println("pDto : " + pDto);
-
 			PaymentDto paid = pBiz.checkPaid(pDto);
-			System.out.println(paid);
 			boolean checkPaid = false;
 
 			if (paid != null) {
@@ -75,42 +87,100 @@ public class ClassController {
 
 			model.addAttribute("checkPaid", checkPaid);
 		}
-
+		
 		model.addAttribute("dto", cBiz.selectOne(class_no));
 		model.addAttribute("rdto", rbiz.avgList(class_no));
 
-		return "class_detail";
+		return "class/class_select";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/getSchedules.do", method=RequestMethod.POST)
+	public Map<String, List<DetailDto>> get_schedules(@RequestBody Map<String, Date> dates) {
+		Map<String, List<DetailDto>> map = new HashMap<String, List<DetailDto>>();
+
+		Date start = dates.get("start");
+		Date end = dates.get("end");
+		List<DetailDto> list = new ArrayList<>();
+		
+		for(DetailDto d : dBiz.selectList(CLASS_NO)) {
+			if(d.getDetail_date().after(start) && d.getDetail_date().before(end)) {
+				list.add(d);
+			}
+		}
+		map.put("list", list);
+		
+		return map;
 	}
 
 	@RequestMapping("/classInsert.do")
-	public String class_insertForm() {
-		return "class_insertform";
+	public String class_insert_form() {
+		return "class/class_insertform";
 	}
 	
-	@RequestMapping("/classDetailForm.do")
-	public String class_detailForm(Model model, int class_no) {
+	@RequestMapping("/detailInsertForm.do")
+	public String detail_insert_form(Model model, int class_no) {
+		List<DetailDto> dList = dBiz.selectList(class_no);
+		
+		model.addAttribute("dList", dList);
 		model.addAttribute("class_no", class_no);
-		return "class_detailform";
+		
+		return "class/detail_insertform";
 	}
 	
-	@RequestMapping("/classDetailRes.do")
-	public String class_detail_res(DetailDto dto) {
+	@ResponseBody
+	@RequestMapping("/detailInsertRes.do")
+	public Map<String, String> detail_insert_res(int class_no, @RequestBody Map<String, String[]> details) {
+		int res = 0;
+		Map<String, String> map = new HashMap<String, String>();
+		DetailDto dto = new DetailDto();
+		dto.setClass_no(class_no);
 		
+		String[] nums = details.get("nums");
+		String[] dates = details.get("dates");
+		String[] times = details.get("times");
 		
-		return "";
+		for(int i = 0; i < nums.length; i++) {
+			
+			String date_time = dates[i] + " " + times[i];
+	        SimpleDateFormat dateParser = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+	        {
+	            try {
+	                Date date = dateParser.parse(date_time);
+	                dto.setDetail_date(date);
+	                dto.setDetail_member_num(Integer.parseInt(nums[i]));
+	
+	                res += dBiz.insert(dto);                
+	            } catch (Exception e) {
+	                e.printStackTrace();
+	            }
+	        }			
+		}
+		
+		map.put("msg", res > 0 ? "성공" : "실패");
+		
+		return map;
+	}
+	
+	@RequestMapping("/detailDelete.do")
+	public String detail_delete(int detail_no) {
+		if(dBiz.delete(detail_no) > 0) {
+			return "redirect:classSelect.do?class_no="+CLASS_NO;
+		}
+		return "redirect:detailInsertForm.do?class_no="+CLASS_NO;
 	}
 
 	@RequestMapping("/classUpdate.do")
 	public String class_updateForm(Model model, int class_no) {
 		model.addAttribute("dto", cBiz.selectOne(class_no));
 
-		return "class_updateform";
+		return "class/class_updateform";
 	}
 
 	@RequestMapping("/classUpdateRes.do")
 	public String class_update_res(ClassDto dto) {
 		if (cBiz.update(dto) > 0) {
-			return "redirect:classDetail.do?class_no=" + dto.getClass_no();
+			return "redirect:classSelect.do?class_no=" + dto.getClass_no();
 		}
 
 		return "redirect:classUpdate.do?class_no=" + dto.getClass_no();
@@ -132,7 +202,7 @@ public class ClassController {
 		model.addAttribute("list", cBiz.userClass(member_id));
 		model.addAttribute("member_id", member_id);
 
-		return "mypage_class";
+		return "mypage/mypage_class";
 	}
 
 	@ResponseBody
@@ -162,7 +232,7 @@ public class ClassController {
 					String size = Long.toString(file.getSize());
 
 					FileTableDto fdto = new FileTableDto(0, fileRoot, originalFileName, savedFileName, extension, null,
-							size, dto.getMember_id(), 0, class_no, 0, 0);
+							size, 0, class_no, 0, 0);
 					if (fbiz.class_insert(fdto) > 0) {
 						System.out.println("file db 넣기 성공");
 					} else {
@@ -194,7 +264,7 @@ public class ClassController {
 
 				String size = Long.toString(thumbnailFile.length());
 				FileTableDto fdto = new FileTableDto(0, fileRoot, "thumbnail", thumbnailFile.getName(),
-						extensions.get(0), null, size, dto.getMember_id(), 0, class_no, 0, 0);
+						extensions.get(0), null, size, 0, class_no, 0, 0);
 				if (fbiz.class_insert(fdto) > 0) {
 					System.out.println("썸네일 file db 넣기 성공");
 				} else {
@@ -204,14 +274,15 @@ public class ClassController {
 				strResult = "{ \"result\":\"OK\", \"class_no\":" + class_no + "}";
 			}
 			// (업로드 없이 등록하는경우)
-			else
+			else {
 				strResult = "{ \"result\":\"OK\", \"class_no\":" + class_no + "}";
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return strResult;
 	}
-
+	
 	public static String Random(int len) {
 		char[] charSet = new char[] { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'o', 'p', 'q',
 				'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
