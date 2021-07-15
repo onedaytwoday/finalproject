@@ -90,7 +90,7 @@ public class ChatController {
                 mav.addObject("rDto", rDto);
                 mav.addObject("Room_no", exist.getRoom_no());
                 mav.addObject("chatlist",chatlist);
-                mav.setViewName("chat_room");
+                mav.setViewName("chat/chat_room");
                 return mav;
     		}
     	}
