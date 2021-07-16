@@ -118,11 +118,16 @@ public class BoardController {
 		Pdto.setSearch_keyword(search_keyword);
 		Pdto.setNowPage(nowPage);
 		int count = biz.search_notice_count(Pdto);
+		System.out.println(count);
 		PagingDto dto = new PagingDto(count, nowPage);
 		dto.setSearch_category(search_category);
 		dto.setSearch_keyword(search_keyword);
 		System.out.println(dto);
-		model.addAttribute("list", biz.board_notice_search(dto));
+		List<BoardDto> list = biz.board_notice_search(dto);
+		for(int i=0;i<list.size();i++) {
+			System.out.println(list.get(i));
+		}
+		model.addAttribute("list", list);
 		model.addAttribute("Pdto", dto);
 		return "board/board_notice";
 	}

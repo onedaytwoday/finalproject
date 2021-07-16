@@ -67,6 +67,7 @@ public class EchoHandler extends TextWebSocketHandler {
 		MemberDto dto = getdto(session);
 		String opponent = getOpponent(session);
 		int room_no = getNo(session);
+		
 		if (dto.getMember_grade().equals("관리자")) {
 			for (WebSocketSession sess : sessionList) {
 				sess.sendMessage(new TextMessage(dto.getMember_id() + " : " + message.getPayload()));

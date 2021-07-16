@@ -8,6 +8,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>상품 페이지</title>
+<<<<<<< HEAD
+=======
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+>>>>>>> 4bc8ff9db607a62bfa55d3a399e0497eab175e18
 <style type="text/css">
 
 	.product_header{
@@ -73,7 +79,6 @@
 
 	<h1 class="product_header">스토어</h1>
 	<input class="insert_btn" type="button" value="상품 등록" onclick="location.href='store_insertform.do'"/>
-
 		<div class="search">
 			<form action="store_search.do" method="post">
 			<input type="hidden" name="nowPage" value="1">
@@ -81,7 +86,8 @@
 	        <input type="submit" value="검색" />
 	         </form>
 		</div>
-		
+	<main class="container">
+
 		<div class="product_list">
 		
 			<section class="product_section">
@@ -125,6 +131,7 @@
        				</c:otherwise>
        			</c:choose>
             </section>
+        <input type="button" value="상품 등록" onclick="location.href='store_insertform.do'" style="position:relative; top:-50px;"/>
 		</div>
 					<jsp:include page="/WEB-INF/views/paging.jsp">
 						<jsp:param value="S" name="store_category" />
@@ -138,7 +145,7 @@
 						<jsp:param value="${pDto.blockEnd}" name="blockEnd" />
 						<jsp:param value="${pDto.totalBlock}" name="totalBlock" />
 					</jsp:include>
-		
+		</main>
 
 <jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 </body>

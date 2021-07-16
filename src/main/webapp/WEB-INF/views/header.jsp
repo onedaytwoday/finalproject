@@ -57,6 +57,7 @@
 	</script>
 </head>
 <body>
+
 	<!-- Nav Bar -->
     <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 fixed-top">
       <div class="container">

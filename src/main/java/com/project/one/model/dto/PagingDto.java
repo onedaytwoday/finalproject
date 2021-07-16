@@ -28,26 +28,6 @@ public class PagingDto {
 	public PagingDto() {
 	}
 	
-	public PagingDto(int nowPage, int prevPage, int nextPage, int totalPage, int totalBlock, int nowBlock,
-			int prevBlock, int nextBlock, int pageBegin, int pageEnd, int blockBegin, int blockEnd,
-			String search_category, String search_keyword) {
-		super();
-		this.nowPage = nowPage;
-		this.prevPage = prevPage;
-		this.nextPage = nextPage;
-		this.totalPage = totalPage;
-		this.totalBlock = totalBlock;
-		this.nowBlock = nowBlock;
-		this.prevBlock = prevBlock;
-		this.nextBlock = nextBlock;
-		this.pageBegin = pageBegin;
-		this.pageEnd = pageEnd;
-		this.blockBegin = blockBegin;
-		this.blockEnd = blockEnd;
-		this.search_category = search_category;
-		this.search_keyword = search_keyword;
-	}
-
 	public PagingDto(String search_category, String search_keyword) {
 		super();
 		this.search_category = search_category;
@@ -62,6 +42,17 @@ public class PagingDto {
 		setPageRange(); // 페이지 번호 계산
 		setTotalBlock(); // 전체 블록 수 계산
 		setBlockRange(); // 페이지 블록 계산
+	}
+	
+	public PagingDto(int count, int nowPage,String search_category, String search_keyword) {
+		nowBlock = 1; // 현재 페이지 블록
+		this.nowPage = nowPage; // 현재 페이지
+		setTotalPage(count); // 전체 페이지 수 구하기
+		setPageRange(); // 페이지 번호 계산
+		setTotalBlock(); // 전체 블록 수 계산
+		setBlockRange(); // 페이지 블록 계산
+		this.search_category = search_category;
+		this.search_keyword = search_keyword;
 	}
 
 	// 페이지 블록 계산
