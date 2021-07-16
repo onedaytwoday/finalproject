@@ -110,32 +110,6 @@
 					}
 				})
 			});		
-			
-			function translate(){
-				let textVal = {
-						"text": $("#message").val()
-				}
-				
-				$.ajax({
-					url: 'translate.do',
-					type: 'post',
-					data: JSON.stringify(textVal),
-					contentType: "application/json",
-					dataType: "json",
-					success: function(result){
-						if(result.msg != null) {
-							$("#message").val(result.msg);
-						}
-					},
-					error: function(){
-						alert("통신 실패!");
-					}
-     			});
-			}
-			
-			$("#message").change(function(){
-				
-			});
 		});
 				
 		var sock = new SockJS("${pageContext.request.contextPath}/echo");

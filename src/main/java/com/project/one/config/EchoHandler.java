@@ -67,18 +67,20 @@ public class EchoHandler extends TextWebSocketHandler {
 		MemberDto dto = getdto(session);
 		String opponent = getOpponent(session);
 		int room_no = getNo(session);
+		String text = getTranslated(message.getPayload());
+
 		if (dto.getMember_grade().equals("관리자")) {
 			for (WebSocketSession sess : sessionList) {
-				sess.sendMessage(new TextMessage(dto.getMember_id() + " : " + message.getPayload()));
+				sess.sendMessage(new TextMessage(dto.getMember_id() + " : " + text));
 			}
 		} else {
 			WebSocketSession sess = map.get(dto.getMember_id());
-			sess.sendMessage(new TextMessage(dto.getMember_id() + " : " + message.getPayload()));
+			sess.sendMessage(new TextMessage(dto.getMember_id() + " : " + text));
 			
 			//메세지 insert
-			chatting_content = message.getPayload().toString();
+			chatting_content = text;
 			ChattingDto cDto = new ChattingDto();
-			cDto.setChatting_content(message.getPayload().toString());
+			cDto.setChatting_content(text);
 			cDto.setRoom_no(room_no);
 			cDto.setMember_id(dto.getMember_id());
 			if(chatBiz.insert(cDto) > 0) {
@@ -90,7 +92,7 @@ public class EchoHandler extends TextWebSocketHandler {
 			if (room.get(dto.getMember_id()).equals(room.get(opponent))) {
 				WebSocketSession sess_op = map.get(opponent);
 				if (sess_op != null) {
-					sess_op.sendMessage(new TextMessage(dto.getMember_id() + " : " + message.getPayload()));
+					sess_op.sendMessage(new TextMessage(dto.getMember_id() + " : " + text));
 				}
 			}
 		}
@@ -137,5 +139,15 @@ public class EchoHandler extends TextWebSocketHandler {
 		Map<String, Object> httpSession = session.getAttributes();
 		int room_no = (Integer) httpSession.get("room_no");
 		return room_no;
+	}
+	
+	private String getTranslated(String text) {
+		String lang = Translate.detectLangs(text);
+		
+		if(!lang.equals("ko")) {
+			text = Translate.translate(text, lang, true);
+		}
+		
+		return text;
 	}
 }
