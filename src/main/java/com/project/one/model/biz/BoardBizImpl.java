@@ -24,6 +24,12 @@ public class BoardBizImpl implements BoardBiz {
 	public List<BoardDto> board_qna_list(PagingDto Pdto) {
 		return dao.board_qna_list(Pdto);
 	}
+	
+	@Override
+	public List<BoardDto> board_notice_search(PagingDto Pdto) {
+		return dao.board_notice_list(Pdto);
+	}
+
 
 	@Override
 	public BoardDto selectOne(int board_no) {
@@ -80,8 +86,5 @@ public class BoardBizImpl implements BoardBiz {
 		
 		return dao.mypage_list(member_id);
 	}
-
-	
-
 
 }

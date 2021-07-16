@@ -43,6 +43,21 @@ public class BoardDaoImpl implements BoardDao {
 		
 		return list;
 	}
+	
+	@Override
+	public List<BoardDto> board_notice_search(PagingDto Pdto) {
+		List<BoardDto> list = new ArrayList<BoardDto>();
+		
+		try {
+			list = sqlSession.selectList(NAMESPACE + "board_notice_search", Pdto);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
 	@Override
 	public BoardDto selectOne(int board_no) {
 		BoardDto dto = null;
@@ -196,7 +211,5 @@ public class BoardDaoImpl implements BoardDao {
 		
 		return list;
 	}
-
-	
 
 }

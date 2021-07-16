@@ -19,7 +19,8 @@
 <jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
 	<h1>공지사항</h1>
 	<div class="search">
-		<form action="board_search.do" method="post">
+		<form action="board_notice_search.do" method="post">
+		<input type="hidden" name="nowPage" value="1">
 		<select name="search_category">
 			<option value="nicname" selected>닉네임</option>
 			<option value="title">제목</option>
@@ -70,6 +71,7 @@
 	</table>
 					<jsp:include page="/WEB-INF/views/paging.jsp">
 						<jsp:param value="N" name="board_category" />
+						<jsp:param value="${Pdto.search_category }" name="category" />
 						<jsp:param value="${Pdto.nowBlock}" name="nowBlock" />
 						<jsp:param value="${Pdto.blockBegin }" name="blockBegin" />
 						<jsp:param value="${Pdto.blockEnd }" name="blockEnd" />

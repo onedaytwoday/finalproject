@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="board">
-	<select id="board_notice_list" parameterType="PagingDto" resultType="BoardDto">
+	<select id="board_notice_list" parameterType="pagingDto" resultType="BoardDto">
 		SELECT X.rnum,
 		X.BOARD_NO, X.BOARD_NOTICE_NO, X.BOARD_QNA_NO, X.BOARD_TITLE, X.BOARD_CONTENT, X.BOARD_DATE, X.BOARD_READCOUNT,
 		X.BOARD_GROUPNO, X.BOARD_GROUPSEQ, X.BOARD_TITLETAB, X.BOARD_DELFLAG, X.BOARD_CATEGORY, X.BOARD_PW, X.MEMBER_ID
@@ -24,7 +24,7 @@
 		#{pageBegin}
 	</select>
 	
-	<select id="board_qna_list" parameterType="PagingDto" resultType="BoardDto">
+	<select id="board_qna_list" parameterType="pagingDto" resultType="BoardDto">
 		SELECT X.rnum,
 		X.BOARD_NO, X.BOARD_NOTICE_NO, X.BOARD_QNA_NO, X.BOARD_TITLE, X.BOARD_CONTENT, X.BOARD_DATE, X.BOARD_READCOUNT,
 		X.BOARD_GROUPNO, X.BOARD_GROUPSEQ, X.BOARD_TITLETAB, X.BOARD_DELFLAG, X.BOARD_CATEGORY, X.BOARD_PW, X.MEMBER_ID
@@ -54,8 +54,7 @@
 		WHERE MEMBER_ID = #{member_id}
 		ORDER BY BOARD_NO DESC
 	</select>
-	
-	<select id="board_notice_search">
+	<select id="board_notice_search" parameterType="pagingDto" resultType="boardDto">
 		SELECT X.rnum,
 		X.BOARD_NO, X.BOARD_NOTICE_NO, X.BOARD_QNA_NO, X.BOARD_TITLE, X.BOARD_CONTENT, X.BOARD_DATE, X.BOARD_READCOUNT,
 		X.BOARD_GROUPNO, X.BOARD_GROUPSEQ, X.BOARD_TITLETAB, X.BOARD_DELFLAG, X.BOARD_CATEGORY, X.BOARD_PW, X.MEMBER_ID
@@ -69,6 +68,20 @@
 		B.BOARD_GROUPNO, B.BOARD_GROUPSEQ, B.BOARD_TITLETAB, B.BOARD_DELFLAG, B.BOARD_CATEGORY, B.BOARD_PW, M.MEMBER_NICNAME AS MEMBER_ID
 		FROM BOARD b, MEMBER m
 		WHERE BOARD_CATEGORY = 'N' AND B.MEMBER_ID = M.MEMBER_ID
+		<choose>
+			<when test="search_category != null and search_category.equals('nicname')">
+				AND M.MEMBER_NICNAME LIKE '%'||#{search_keyword}||'%'
+			</when>
+			<when test="search_category != null and search_category.equals('title')">
+				AND B.BOARD_TITLE LIKE '%'||#{search_keyword}||'%'
+			</when>
+			<when test="search_category != null and search_category.equals('content+title')">
+				AND(
+				B.BOARD_TITLE LIKE '%'||#{search_keyword}||'%'
+				OR B.BOARD_CONTENT LIKE '%'||#{search_keyword}||'%'
+				)
+			</when>
+		</choose>
 		ORDER BY BOARD_DATE DESC
 		) A
 		WHERE ROWNUM <![CDATA[ <= ]]>
