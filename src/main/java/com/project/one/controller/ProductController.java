@@ -171,7 +171,7 @@ public class ProductController {
 	public String Product_delete(int product_no) {
 		
 		if(biz.delete(product_no)>0) {
-			return "redirect:store.do";
+			return "redirect:store.do?nowPage="+1;
 		}
 
 		return "redirect:store_select.do?product_no="+product_no;

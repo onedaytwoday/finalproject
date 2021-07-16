@@ -55,15 +55,24 @@
 	.product_del{
 		text-color:grey;
 	}
+	#paging{
+		text-align:center;
+		background-color:skyblue;
+		font-weight:bold;
+	}
+	.insert_btn{
+		margin: 0px 90px 8px;
+	}
 	
 </style>
 
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
-<h1 class="product_header">스토어</h1>
+<h1 class="product_header">스토어</h1> <input class="insert_btn" type="button" value="상품 등록" onclick="location.href='store_insertform.do'"/>
 	
 		<div class="product_list">
+		
 			<section class="product_section">
 				
 				<c:choose>
@@ -104,7 +113,6 @@
        			 		</c:forEach>
        				</c:otherwise>
        			</c:choose>
-       			<input type="button" value="상품 등록" onclick="location.href='store_insertform.do'"/>
             </section>
 		</div>
 					<jsp:include page="/WEB-INF/views/paging.jsp">
