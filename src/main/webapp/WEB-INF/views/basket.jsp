@@ -5,14 +5,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="resources/js/basket.js"></script>
 </head>
 <body>
 <jsp:include page="header.jsp"></jsp:include>
-	<div>
+	<main class="container">
 		<h1>장바구니</h1>
 		
 		<table border="1">
@@ -62,13 +66,13 @@
 				<p style="margin-bottom: 1rem;">총 가격 : <input type="text" id="total_price" name="payment_price" readonly />원</p>
 				
 				<input type="hidden" name="basket_group" value="${basket_group }" />
-				<input type="hidden" name="name" value="장바구니에서 구매" />
+				<input type="hidden" name="product_name" value="장바구니에서 구매" />
 				<input type="hidden" name="type" value="basket" />
 				
 				<input type="submit" value="결제 하기" />
 			</form>
 		</div>
-	</div>
+	</main>
 	
 <jsp:include page="footer.jsp"></jsp:include>
 </body>

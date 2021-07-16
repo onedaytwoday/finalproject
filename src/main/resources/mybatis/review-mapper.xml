@@ -25,6 +25,7 @@
 		<selectKey keyProperty="review_no" resultType="int" >
 			SELECT REVIEW_NO_SEQ.CURRVAL From DUAL
 		</selectKey>
+
 	</insert>
 	
 	<delete id="delete" parameterType="int">
@@ -38,4 +39,21 @@
 		WHERE CLASS_NO > 0
 		ORDER BY REVIEW_NO
 	</select>
+	
+	<select id="selectProduct" resultType="reviewDto">
+		SELECT REVIEW_NO, REVIEW_TITLE, REVIEW_RATE, REVIEW_DATE, REVIEW_CONTENT, PRODUCT_NO, CLASS_NO, MEMBER_ID
+		FROM REVIEW
+		WHERE PRODUCT_NO > 0
+		ORDER BY REVIEW_NO
+	</select>
+
+	<insert id="insertProduct" parameterType="reviewDto">
+		INSERT INTO REVIEW
+		VALUES(REVIEW_NO_SEQ.NEXTVAL,#{review_title},#{review_rate},SYSDATE,#{review_content},#{product_no},NULL,#{member_id})
+		<selectKey keyProperty="review_no" resultType="int" >
+			SELECT REVIEW_NO_SEQ.CURRVAL From DUAL
+		</selectKey>
+
+	</insert>	
+	
 </mapper>

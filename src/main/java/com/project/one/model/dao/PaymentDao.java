@@ -17,12 +17,12 @@ public interface PaymentDao {
 	public int insert(PaymentDto dto, String type);
 	
 	public int updateStatus(PaymentDto dto);
-	
+		
 	public int delete(PaymentDto dto);
 	
 	public PaymentDto checkPaid(PaymentDto dto);
-
-	public List<PaymentDto> mypage_list(String member_id);
 	
 	public int paymentCount();
+	
+	public int paymentMYCount(String member_id);
 }

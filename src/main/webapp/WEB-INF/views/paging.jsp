@@ -12,7 +12,12 @@
 
 		<c:choose>
 			<c:when test="${param.board_category eq 'N' }">
+				<c:if test="${param.search_category != null }">
+					<c:url var="action" value="board_notice_search.do"/>
+				</c:if>
+				<c:if test="${param.search_category eq null }">
 				<c:url var="action" value="board_notice_list.do" />
+				</c:if>
 			</c:when>
 			
 			<c:when test="${param.board_category eq 'Q' && param.from == null}">
@@ -21,6 +26,10 @@
 			
 			<c:when test="${param.board_category eq 'Q' && param.from eq 'admin' }">
 				<c:url var="action" value="adminBoard.do" />
+			</c:when>
+			
+			<c:when test="${param.board_category eq 'payment' && param.from eq 'mypage' }">
+				<c:url var="action" value="mypage_payment.do" />
 			</c:when>
 
 			<c:otherwise>

@@ -12,14 +12,14 @@ public class PaymentDto {
 	private String member_id;
 	private int product_no;
 	private int basket_group;
-	private int class_no;
+	private int detail_no;
 	private String product_name;
 	
 	public PaymentDto() {
 	}
 
 	public PaymentDto(int payment_no, int payment_num, int payment_price, Date payment_date, String payment_del,
-			String payment_uid, String member_id, int product_no, int basket_group, int class_no) {
+			String payment_uid, String member_id, int product_no, int basket_group, int detail_no) {
 		super();
 		this.payment_no = payment_no;
 		this.payment_num = payment_num;
@@ -30,11 +30,11 @@ public class PaymentDto {
 		this.member_id = member_id;
 		this.product_no = product_no;
 		this.basket_group = basket_group;
-		this.class_no = class_no;
+		this.detail_no = detail_no;
 	}
 	
 	public PaymentDto(int payment_no, int payment_num, int payment_price, Date payment_date, String payment_del,
-			String payment_uid, String member_id, int product_no, int basket_group, int class_no,String product_name) {
+			String payment_uid, String member_id, int product_no, int basket_group, int detail_no,String product_name) {
 		super();
 		this.payment_no = payment_no;
 		this.payment_num = payment_num;
@@ -45,7 +45,7 @@ public class PaymentDto {
 		this.member_id = member_id;
 		this.product_no = product_no;
 		this.basket_group = basket_group;
-		this.class_no = class_no;
+		this.detail_no = detail_no;
 		this.setProduct_name(product_name);
 	}
 
@@ -121,12 +121,12 @@ public class PaymentDto {
 		this.basket_group = basket_group;
 	}
 
-	public int getClass_no() {
-		return class_no;
+	public int getDetail_no() {
+		return detail_no;
 	}
 
-	public void setClass_no(int class_no) {
-		this.class_no = class_no;
+	public void setDetail_no(int detail_no) {
+		this.detail_no = detail_no;
 	}
 	
 	public String getProduct_name() {
@@ -143,7 +143,7 @@ public class PaymentDto {
 		return "PaymentDto [payment_no=" + payment_no + ", payment_num=" + payment_num + ", payment_price="
 				+ payment_price + ", payment_date=" + payment_date + ", payment_del=" + payment_del + ", payment_uid="
 				+ payment_uid + ", member_id=" + member_id + ", product_no=" + product_no + ", basket_group="
-				+ basket_group + ", class_no=" + class_no + "]";
+				+ basket_group + ", detail_no=" + detail_no + "]";
 	}
 
 

@@ -1,16 +1,15 @@
 document.addEventListener('DOMContentLoaded', function() {
-	var calendarEl = document.getElementById('calendar');
-	var calendar = new FullCalendar.Calendar(calendarEl, {
+	let calendarEl = document.getElementById('calendar');
+	let calendar = new FullCalendar.Calendar(calendarEl, {
 		locale: 'ko',
 		initialView: 'dayGridMonth',
 		contentHeight: 500,
 		dayMaxEvents: true,		
-		events: function(arg, successCallback, failureCallback) {
+		events: function(arg, successCallback) {
 			let eventVal = {
 				"start": arg.startStr,
 				"end": arg.endStr
 			}
-			
 			$.ajax({
 				type: 'post',
 				url: 'getSchedules.do',
@@ -18,24 +17,28 @@ document.addEventListener('DOMContentLoaded', function() {
 				contentType: "application/json",
 				dataType: 'json',
 				success: function(result) {
-					var events = [];
+					let events = [];
 					if (result.list != null) {
-						$.each(result.list, function(index, element) {
+						$.each(result.list, function(index, element) {							
 							events.push({
+								id: element.detail_no,
 								title: element.detail_member_num + '명',
 								start: element.detail_date,
 								allDay: false,
 								eventColor: "#6937a1"
 							}); 
-
 						});
-
 					}
 					successCallback(events);
 				}
 			});
-		}
-		
+		},
+		eventClick: function(arg) {
+			if (confirm(arg.event.start +'으로 예약하시겠습니까?')) {
+				$("[name='detail_no']").val(arg.event.id);
+				$("[name='detail_date']").val(arg.event.start);
+			}
+		},
 	});
 	calendar.render();
 });

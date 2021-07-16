@@ -104,7 +104,7 @@ public class PaymentDaoImpl implements PaymentDao {
 		
 		return res;
 	}
-
+	
 	@Override
 	public PaymentDto checkPaid(PaymentDto dto) {
 		PaymentDto paid = null;
@@ -117,19 +117,6 @@ public class PaymentDaoImpl implements PaymentDao {
 		
 		return paid;
 	}
-	
-	@Override
-	public List<PaymentDto> mypage_list(String member_id) {
-		List<PaymentDto> list = new ArrayList<PaymentDto>();
-		
-		try {
-			list = sqlSession.selectList(NAMESPACE + "mypage_list",member_id);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		return list;
-	}
 
 	@Override
 	public int paymentCount() {
@@ -137,6 +124,19 @@ public class PaymentDaoImpl implements PaymentDao {
 		
 		try {
 			res = sqlSession.selectOne(NAMESPACE + "paymentCount");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+
+	@Override
+	public int paymentMYCount(String member_id) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.selectOne(NAMESPACE + "paymentMYCount", member_id);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -23,4 +23,8 @@ public interface ReviewDao {
 	List<ReviewDto> avgList(int product_no);
 	
 	public List<ReviewDto> selectClass();
+
+	public List<ReviewDto> selectProduct();
+	
+	public int insertProduct(ReviewDto dto);
 }

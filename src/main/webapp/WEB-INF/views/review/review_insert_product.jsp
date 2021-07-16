@@ -7,131 +7,48 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
-
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script type="text/javascript">
-	$(function(){
-		$('input[name="event"]').change(function() {
-			var id = $('input[name="event"]:checked').attr('id');
-			if(id == 'sale') {
-				$("#sale_rate").css("display", "inline");
-			} else {
-				$("#sale_rate").css("display", "none");
-			}
-		});
-		
-		$('input[name="category"]').change(function() {
-			var id = $('input[name="category"]:checked').attr('id');
-			if(id == 'class') {
-				$("#class_sel").css("display", "inline");
-				$("#product_sel").css("display", "none");
-				$("#product_no").attr("name", "");
-				
-			} else {
-				$("#class_sel").css("display", "none");
-				$("#product_sel").css("display", "inline");
-				$("#class_no").attr("name", "");
-			}
-		});
-	})
-</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
 </head>
 <body>
-<jsp:include page="header.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
+	
 	<main class="container">
-		<form action="eventInsertRes.do" method="post">
-			<input type="hidden" name="member_id" value="${mDto.member_id }" />
-			
+		<h1>${pDto.product_name }(${pDto.product_no }) 리뷰 작성</h1>
+			<form method="post">
+			<input type="hidden" name="product_no_str" value="${pDto.product_no }">
 			<table border="1">
 				<tr>
-					<th>이벤트 제목</th>
-					<td><input type="text" name="event_title" required /></td>
-				</tr>
-				
-				<tr>
-					<th>이벤트 내용</th>
-					<td><textarea rows="10" cols="60" name="event_desc" required></textarea></td>
-				</tr>
-				
-				<tr>
-					<th>시작 날짜</th>
-					<td><input type="date" name="start" required /></td>
-				</tr>
-				
-				<tr>
-					<th>종료 날짜</th>
-					<td><input type="date" name="end" required /></td>
+					<th>ID</th>
+					<td><input type="text" name="member_id"value="${mDto.member_id}" readonly /></td>
 				</tr>
 	
 				<tr>
-					<th>이벤트 카테고리</th>
-					<td>
-						<input type="radio" id="sale" name="event" value="할인" />
-						<label for="sale">할인</label>
-						
-						
-						<select style="display:none;" name="sale_rate" id="sale_rate">
-			                <option value="10">10%</option>
-			                <option value="20">20%</option>
-			                <option value="30">30%</option>
-			                <option value="40">40%</option>
-			                <option value="50">50%</option>
-			                <option value="60">60%</option>
-			                <option value="70">70%</option>
-			                <option value="80">80%</option>
-			                <option value="90">90%</option>
-			             </select>
-			             
-			             <input type="radio" id="new" name="event" value="NEW" />
-						<label for="new">NEW</label>
-					</td>
+					<th>제목</th>
+					<td><input type="text" name="review_title" /></td>
 				</tr>
-				
 				<tr>
-					<th>이벤트</th>
-					<td>
-						<input type="radio" id="class" name="category" value="클래스" />
-						<label for="class">클래스</label>
+					<th>평점</th>
+					<td><input type="text" name="review_rate" /></td>
+				</tr>
 						
-						<input type="radio" id="product" name="category" value="상품" />
-						<label for="product">상품</label>
-					
-					
-						<div id="class_sel" style="display:none;">
-							<select name="class_no" id="class_no">
-			                  <c:forEach items="${cList }" var="cDto">
-			                    <option value="${cDto.class_no }">
-			                      ${cDto.class_title }
-			                    </option>
-			                  </c:forEach>
-			                </select>
-						</div>
-						
-						<div id="product_sel" style="display:none;">
-							<select name="product_no" id="product_no">
-			                  <c:forEach items="${pList }" var="pDto">
-			                    <option value="${pDto.product_no }">
-			                      ${pDto.product_name }
-			                    </option>
-			                  </c:forEach>
-			                </select>
-						</div>
-					
-					</td>
+				<tr>
+					<th>작성내용</th>
+					<td><textarea rows="10" cols="60" name="review_content"></textarea></td>
 				</tr>
 			</table>
 			<button id="btn-upload" type="button" style="border: 1px solid #ddd; outline: none; cursor: pointer;">파일추가</button>
-			<input id="input_file" multiple="multiple" type="file" accept="image/*" style="display: none;"> 
+			<input id="input_file" multiple="multiple" type="file" style="display: none;">
 			<span style="font-size: 10px; color: gray;">※첨부파일은 최대 10개까지 등록이 가능합니다.</span>
 			<div class="data_file_txt" id="data_file_txt" style="margin: 40px;">
 				<span>첨부 파일</span> <br />
 				<div id="articlefileChange"></div>
 			</div>
-			<input type="button" value="등록하기" onclick="registerAction()"/> 
-			<input type="button" value="취소" onclick="location.href='main.do'" />
+			<input type="button" value="리뷰등록" onclick="registerAction()"/> 
+			<input type="button" value="취소" onclick="location.href='store_select.do?product_no=${cDto.product_no }'" />
+			
 		</form>
 	</main>
 <script>
@@ -225,14 +142,14 @@ function fileDelete(fileNum){
 	$.ajax({
    	      type: "POST",
    	   	  enctype: "multipart/form-data",
-   	      url: "eventInsertRes.do",
+   	      url: "review_insertres_product.do",
        	  data : formData,
        	  processData: false,
    	      contentType: false,
    	      success: function (data) {
    	    	if(JSON.parse(data)['result'] == "OK"){
    	    		alert("파일업로드 성공");
-   	    		$(location).attr('href','main.do');
+   	    		$(location).attr('href',"review_list_product.do");
 			} else
 				alert("서버내 오류로 처리가 지연되고있습니다. 잠시 후 다시 시도해주세요");
    	    		return false;
@@ -245,6 +162,6 @@ function fileDelete(fileNum){
    	    return false;
 	}
 </script>
-<jsp:include page="footer.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 </body>
 </html>

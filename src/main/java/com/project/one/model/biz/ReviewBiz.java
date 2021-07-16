@@ -23,6 +23,10 @@ public interface ReviewBiz {
 	
 	public List<ReviewDto> selectClass();
 	
+	public List<ReviewDto> selectProduct();
+	
+	public int insertProduct(ReviewDto dto);
+	
 	
 	
 }

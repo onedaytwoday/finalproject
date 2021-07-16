@@ -4,62 +4,70 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>상품 등록</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
-	<h1>상품 등록</h1>
-	<form method="post">
-		<table border="1">
-			<tr>
-				<th>상품 카테고리</th>
-				<td><select name="product_category">
-						<option value="cate01">카테고리1</option>
-						<option value="cate02">카테고리2</option>
-						<option value="cate03">카테고리3</option>
-				</select></td>
-			</tr>
-			<tr>
-				<th>상품명</th>
-				<td><input type="text" name="product_name" value=""></td>
-			</tr>
-			<tr>
-				<th>가격</th>
-				<td><input type="text" name="product_price" value=""></td>
-			</tr>
-			<tr>
-				<th>할인율</th>
-				<td><input type="text" name="product_sale" value=""></td>
-			</tr>
-			<tr>
-				<th>위치</th>
-				<td><input type="text" name="product_loc" value=""></td>
-			</tr>
-			<tr>
-				<th>배송 여부</th>
-				<td>
-					<input type="radio" name="product_del" value="배송가능" />배송가능
-				 	<input type="radio" name="product_del" value="배송불가능" />배송불가능
-				</td>
-			</tr>
-			<tr>
-				<th>상품 상세 설명</th>
-				<td><textarea name="product_desc" rows="10" cols="60"></textarea></td>
-			</tr>
-		</table>
-		<button id="btn-upload" type="button"
-			style="border: 1px solid #ddd; outline: none; cursor: pointer;">파일
-			추가</button>
-		<input id="input_file" multiple="multiple" type="file" accept="image/*" style="display: none;"> 
-		<span style="font-size: 10px; color: gray;">※첨부파일은 최대 10개까지 등록이 가능합니다.</span>
-		<div class="data_file_txt" id="data_file_txt" style="margin: 40px;">
-			<span>첨부 파일</span> <br />
-			<div id="articlefileChange"></div>
-		</div>
-		<input type="button" value="등록하기" onclick="registerAction()"/> 
-		<input type="button" value="목록" onclick="location.href='store.do'" />
-	</form>
+
+	<main class="container">
+		<h1>상품 등록</h1>
+		<form method="post">
+			<table border="1">
+				<tr>
+					<th>상품 카테고리</th>
+					<td><select name="product_category">
+							<option value="cate01">카테고리1</option>
+							<option value="cate02">카테고리2</option>
+							<option value="cate03">카테고리3</option>
+					</select></td>
+				</tr>
+				<tr>
+					<th>상품명</th>
+					<td><input type="text" name="product_name" value=""></td>
+				</tr>
+				<tr>
+					<th>가격</th>
+					<td><input type="text" name="product_price" value=""></td>
+				</tr>
+				<tr>
+					<th>할인율</th>
+					<td><input type="text" name="product_sale" value=""></td>
+				</tr>
+				<tr>
+					<th>위치</th>
+					<td><input type="text" name="product_loc" value=""></td>
+				</tr>
+				<tr>
+					<th>배송 여부</th>
+					<td>
+						<input type="radio" name="product_del" value="배송가능" />배송가능
+					 	<input type="radio" name="product_del" value="배송불가능" />배송불가능
+					</td>
+				</tr>
+				<tr>
+					<th>상품 상세 설명</th>
+					<td><textarea name="product_desc" rows="10" cols="60"></textarea></td>
+				</tr>
+			</table>
+			<button id="btn-upload" type="button"
+				style="border: 1px solid #ddd; outline: none; cursor: pointer;">파일
+				추가</button>
+			<input id="input_file" multiple="multiple" type="file" accept="image/*" style="display: none;"> 
+			<span style="font-size: 10px; color: gray;">※첨부파일은 최대 10개까지 등록이 가능합니다.</span>
+			<div class="data_file_txt" id="data_file_txt" style="margin: 40px;">
+				<span>첨부 파일</span> <br />
+				<div id="articlefileChange"></div>
+			</div>
+			<input type="button" value="등록하기" onclick="registerAction()"/> 
+			<input type="button" value="목록" onclick="location.href='store.do'" />
+		</form>
+	</main>
 	
+	<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 <script>
 $(document).ready(function()
 		// input file 파일 첨부시 fileCheck 함수 실행
@@ -170,6 +178,6 @@ function fileDelete(fileNum){
    	    return false;
 	}
 </script>
-<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
+
 </body>
 </html>

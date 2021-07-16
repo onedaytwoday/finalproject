@@ -16,6 +16,7 @@ import com.project.one.model.biz.RoomBiz;
 import com.project.one.model.dto.ChattingDto;
 import com.project.one.model.dto.MemberDto;
 import com.project.one.model.dto.RoomDto;
+import com.project.one.util.Translate;
 
 public class EchoHandler extends TextWebSocketHandler {
 
@@ -37,7 +38,7 @@ public class EchoHandler extends TextWebSocketHandler {
 	/**
 	 * websocket 연결 성공 시
 	 */
-
+	
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		i++;
