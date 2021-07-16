@@ -4,10 +4,13 @@ import java.util.List;
 
 import com.project.one.model.dto.PagingDto;
 import com.project.one.model.dto.ProductDto;
+import com.project.one.model.dto.StorePagingDto;
 
 public interface ProductDao {
 	String NAMESPACE = "product.";
 	
+	public List<ProductDto> selectListPaging(StorePagingDto pDto);
+
 	public List<ProductDto> selectList();
 	
 	public List<ProductDto> productList(PagingDto pDto);
@@ -23,4 +26,6 @@ public interface ProductDao {
 	public int delete(int product_no);
 	
 	public int productCount();
+	
+	public int productListCount();
 }

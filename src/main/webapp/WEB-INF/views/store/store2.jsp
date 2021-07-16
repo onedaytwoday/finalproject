@@ -6,58 +6,55 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>상품 페이지</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
 <style type="text/css">
 
-	.product_header{
-		margin-left: 5.5rem;		
-	}
 	.product_list{
         width: 1260px;
 		height: 630px;
 	}
 	.product_section {
-		 text-align: center;
     	 border-top: none;
  		 display: grid;
-    	 grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    	 grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
  		 gap: 3rem 1rem;
-    	 padding: 1.5rem 0;
+    	 padding: 3rem 0;
     	 margin: 0 1.5rem;
-    	 border-top: 2px solid black;
+    	 border-top: 4px solid #ccc;
 	}
 	.product_container {
   		display: flex;
   		flex-direction: column; 		
 	}
 	.product_image {
-		border-radius: 1rem;
+		border-radius:12px;
   		width: 100%;
   		height: 100%;
-  		max-height:10rem;
-  		max-width:10rem;
-  		min-height:10rem;
-  		min-width:10rem;
+  		max-height:180px;
+  		min-height:180px;
   		background-color:grey;
 	}
 	.product_bottom_section {
-
+  		text-align:center;
  		margin-top:5px; 		 
 	}	
 	.product_details {
 		  display: flex;
   	      flex-direction: column;	     
 	}
-
-	.product_details p{
-		margin:2px;
+	.product_details .product_title {
+  		font-size: 1.1rem;
+  		font-weight: bold;
+  		margin-bottom: 0.5rem;
+  		text-decoration: none;
+  		color: grey;
 	}
-	.product_del{
-		text-color:grey;
+	.product_title:hover{
+		color:black;
+	}
+	.product_details p{
+		margin:0px;
 	}
 	
 </style>
@@ -65,8 +62,8 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
-<h1 class="product_header">스토어</h1>
-	<main class="container">
+<h1>상품 페이지</h1>
+	
 		<div class="product_list">
 			<section class="product_section">
 				
@@ -80,10 +77,10 @@
 			 				<a href="store_select.do?product_no=${dto.product_no }"><img class="product_image" src="resources/upload/${dto.file_new_name }"></a>       
          					<div class="product_bottom_section">
            						<div class="product_details">
-           							<p class="product_del">${dto.product_del } | ${dto.product_category }</p>
-              						<P>${dto.product_name }</P>
+           							<p>${dto.product_del } | ${dto.product_category }</p>
+              						<a class="product_title" href="store_select.do?product_no=${dto.product_no }">${dto.product_name }</a>
              						<p class="product_price">${dto.product_price } 원</p>
-             						<p>평점 
+             						<p>
 			             				<c:choose>
 											<c:when test="${empty rlist}">
 												리뷰없음
@@ -108,21 +105,10 @@
        			 		</c:forEach>
        				</c:otherwise>
        			</c:choose>
-       			<input type="button" value="상품 등록" onclick="location.href='store_insertform.do'" style="position:relative; top:-50px;"/>
+       			<input type="button" value="상품 작성" onclick="location.href='store_insertform.do'"/>
             </section>
 		</div>
-					<jsp:include page="/WEB-INF/views/paging.jsp">
-						<jsp:param value="S" name="store_category" />
-						<jsp:param value="${pDto.nowBlock}" name="nowBlock" />
-						<jsp:param value="${pDto.blockBegin }" name="blockBegin" />
-						<jsp:param value="${pDto.blockEnd }" name="blockEnd" />
-						<jsp:param value="${pDto.nowPage}" name="nowPage" />
-						<jsp:param value="${pDto.blockBegin}" name="blockBegin" />
-						<jsp:param value="${pDto.blockEnd}" name="blockEnd" />
-						<jsp:param value="${pDto.totalBlock}" name="totalBlock" />
-					</jsp:include>
-		</main>
-
+		
 <jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 </body>
 </html>

@@ -57,6 +57,7 @@
 	</script>
 </head>
 <body>
+<<<<<<< HEAD
 	<!-- Nav Bar -->
     <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 fixed-top">
       <div class="container">
@@ -70,7 +71,7 @@
 	      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 	        
 	        <li class="nav-item">
-	          <a class="nav-link" href="store.do">쇼핑</a>
+	          <a class="nav-link" href="store.do?nowPage=1">쇼핑</a>
 	        </li>
 	        
 	        <li class="nav-item">
@@ -148,6 +149,5 @@
 	    </div>
       </div>
     </nav>
-	
 </body>
 </html>

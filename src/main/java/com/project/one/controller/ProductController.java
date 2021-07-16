@@ -23,13 +23,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.project.one.model.biz.BoardBiz;
 import com.project.one.model.biz.FileTableBiz;
 import com.project.one.model.biz.ProductBiz;
 import com.project.one.model.biz.ReviewBiz;
 import com.project.one.model.dto.ClassDto;
 import com.project.one.model.dto.FileTableDto;
 import com.project.one.model.dto.MemberDto;
+import com.project.one.model.dto.PagingDto;
 import com.project.one.model.dto.ProductDto;
+import com.project.one.model.dto.StorePagingDto;
 
 import net.coobird.thumbnailator.Thumbnails;
 
@@ -44,11 +47,14 @@ public class ProductController {
 	@Autowired
 	private FileTableBiz fbiz;
 	
-	@RequestMapping("/store.do")
-	public String Product_list(Model model) {
-		model.addAttribute("list", biz.selectList());
-		model.addAttribute("rlist",rbiz.selectList());
 
+	@RequestMapping("/store.do")
+	public String Product_list(Model model,int nowPage) {
+		int count = biz.productListCount();
+		StorePagingDto pDto = new StorePagingDto(count, nowPage);
+		model.addAttribute("list", biz.selectListPaging(pDto));
+		model.addAttribute("pDto", pDto);
+		model.addAttribute("rlist",rbiz.selectList());
 		return "store/store";
 
 	}
