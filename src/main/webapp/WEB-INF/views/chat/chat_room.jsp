@@ -157,7 +157,6 @@
 				$(location).attr('href',"chat_main.do?member_id=${rDto.member_id }");
 			}
 	//음성번연(목소리 가져오기)
-
 		var voices = [];
 		function setVoiceList() {
 			voices = window.speechSynthesis.getVoices();
@@ -201,7 +200,6 @@
 			var input = $(this).parent().text();
 			speech(input);	
 		});
-
 		
 		
 	
