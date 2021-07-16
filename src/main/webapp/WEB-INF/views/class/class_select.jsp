@@ -7,6 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
@@ -20,7 +21,7 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
-	<div class="container">
+	<main class="container">
 		<h1 class="my-5">클래스 상세 페이지 </h1>
 		
 		<div>
@@ -106,7 +107,7 @@
 				<button onclick="location.href='review_insert_class.do?class_no=${dto.class_no}&class_title=${dto.class_title }'" type="button">리뷰작성</button>
 			</form>
 		</c:if>
-	</div>
+	</main>
 
 	
 	<script

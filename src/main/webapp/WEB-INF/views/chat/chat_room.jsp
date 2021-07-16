@@ -111,8 +111,7 @@
 				})
 			});		
 			
-			
-			$("#message").change(function(){
+			function translate(){
 				let textVal = {
 						"text": $("#message").val()
 				}
@@ -132,6 +131,10 @@
 						alert("통신 실패!");
 					}
      			});
+			}
+			
+			$("#message").change(function(){
+				
 			});
 		});
 				

@@ -5,44 +5,54 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
 </head>
 <body>
-	<h1>${cDto.class_title }(${cDto.class_no }) 리뷰 작성</h1>
-		<form method="post">
-		<input type="hidden" name="class_no_str" value="${cDto.class_no }">
-		<table border="1">
-			<tr>
-				<th>ID</th>
-				<td><input type="text" name="member_id"value="${mDto.member_id}" readonly /></td>
-			</tr>
-
-			<tr>
-				<th>제목</th>
-				<td><input type="text" name="review_title" /></td>
-			</tr>
-			<tr>
-				<th>평점</th>
-				<td><input type="text" name="review_rate" /></td>
-			</tr>
-					
-			<tr>
-				<th>작성내용</th>
-				<td><textarea rows="10" cols="60" name="review_content"></textarea></td>
-			</tr>
-		</table>
-		<button id="btn-upload" type="button" style="border: 1px solid #ddd; outline: none; cursor: pointer;">파일추가</button>
-		<input id="input_file" multiple="multiple" type="file" style="display: none;">
-		<span style="font-size: 10px; color: gray;">※첨부파일은 최대 10개까지 등록이 가능합니다.</span>
-		<div class="data_file_txt" id="data_file_txt" style="margin: 40px;">
-			<span>첨부 파일</span> <br />
-			<div id="articlefileChange"></div>
-		</div>
-		<input type="button" value="리뷰등록" onclick="registerAction()"/> 
-		<input type="button" value="취소" onclick="location.href='classDetail.do?class_no=${cDto.class_no }'" />
-		
-	</form>
+	<jsp:include page="header.jsp"></jsp:include>	
+	
+	<main class="container">
+		<h1>${cDto.class_title }(${cDto.class_no }) 리뷰 작성</h1>
+			<form method="post">
+			<input type="hidden" name="class_no_str" value="${cDto.class_no }">
+			<table border="1">
+				<tr>
+					<th>ID</th>
+					<td><input type="text" name="member_id"value="${mDto.member_id}" readonly /></td>
+				</tr>
+	
+				<tr>
+					<th>제목</th>
+					<td><input type="text" name="review_title" /></td>
+				</tr>
+				<tr>
+					<th>평점</th>
+					<td><input type="text" name="review_rate" /></td>
+				</tr>
+						
+				<tr>
+					<th>작성내용</th>
+					<td><textarea rows="10" cols="60" name="review_content"></textarea></td>
+				</tr>
+			</table>
+			<button id="btn-upload" type="button" style="border: 1px solid #ddd; outline: none; cursor: pointer;">파일추가</button>
+			<input id="input_file" multiple="multiple" type="file" style="display: none;">
+			<span style="font-size: 10px; color: gray;">※첨부파일은 최대 10개까지 등록이 가능합니다.</span>
+			<div class="data_file_txt" id="data_file_txt" style="margin: 40px;">
+				<span>첨부 파일</span> <br />
+				<div id="articlefileChange"></div>
+			</div>
+			<input type="button" value="리뷰등록" onclick="registerAction()"/> 
+			<input type="button" value="취소" onclick="location.href='classDetail.do?class_no=${cDto.class_no }'" />
+			
+		</form>
+	</main>
+	
+	<jsp:include page="footer.jsp"></jsp:include>
 <script>
 $(document).ready(function()
 		// input file 파일 첨부시 fileCheck 함수 실행

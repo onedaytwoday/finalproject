@@ -6,62 +6,62 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- Boostrap -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+	<!-- Boostrap -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 	
-<style type="text/css">
-body {
-  min-height: 75rem;
-  padding: 7rem 4rem;
-}
-</style>
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-<script type="text/javascript"
-	src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-<script type="text/javascript">
-	$(document).ready(function() {
-					$.ajax({
-						type : 'get',
-						url : 'getBasketNum.do',
-						dataType : 'json',
-						success : function(res) {
-							$("#basket_num").text(res.basket_num);
-						},
-						error : function(err) {
-							alert("통신 실패!");
-						}
-					});
+	<style type="text/css">
+		#logo {
+			width: 70%;
+			object-fit: cover;
+		}
+		
+		main {
+			margin-top: 8rem;
+			margin-bottom: 5rem;
+		}
+	</style>
 	
-		$('#iconImg').click(function(){
-    		window.open('http://localhost:8787/one/chat_main.do?member_id=${mDto.member_id }' ,'채팅', 'width=400px,height=500px,scrollbars=yes');
-    	});
-    	
-	    $('#class').on('change', function() {
-			//클래스 카테고리 선택시에 이동할 경로 수정
-			//카테고리 value는 추후 controller에 맞춰서 수정
-			var cate = this.value;
-			
-			if(cate == "cate01"){
-				location.href = 'classList.do'; 
-			}else if(cate == "cate02"){
-				alert("카테고리 02"); 
-			}else if(cate == "cate03"){
-				alert("카테고리 03"); 
-			}
-	
-	    });
-	});
-</script>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$.ajax({
+				type : 'get',
+				url : 'getBasketNum.do',
+				dataType : 'json',
+				success : function(res) {
+					$("#basket_num").text(res.basket_num);
+				},
+				error : function(err) {
+					alert("통신 실패!");
+				}
+			});
+		
+			$('#iconImg').click(function(){
+	    		window.open('http://localhost:8787/one/chat_main.do?member_id=${mDto.member_id }' ,'채팅', 'width=400px,height=500px,scrollbars=yes');
+	    	});
+	    	
+		    $('#class').on('change', function() {
+				//클래스 카테고리 선택시에 이동할 경로 수정
+				//카테고리 value는 추후 controller에 맞춰서 수정
+				var cate = this.value;
+				
+				if(cate == "cate01"){
+					location.href = 'classList.do'; 
+				}else if(cate == "cate02"){
+					alert("카테고리 02"); 
+				}else if(cate == "cate03"){
+					alert("카테고리 03"); 
+				}
+		
+		    });
+		});
+	</script>
 </head>
 <body>
-	<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
-	  <div class="container-fluid">
-	    <a class="navbar-brand" href="main.do"><img src="resources/images/logo.png"></a>
+	<!-- Nav Bar -->
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="main.do"><img id="logo" src="resources/images/logo.png"></a>
 	    
 	    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
 	      <span class="navbar-toggler-icon"></span>
@@ -147,7 +147,8 @@ body {
 		    </ul>
 	      </div>
 	    </div>
-	  </div>
-	</nav>
+      </div>
+    </nav>
+	
 </body>
 </html>

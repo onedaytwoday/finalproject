@@ -4,56 +4,66 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
-	<form method="post">
-		<table border="1">
-			<tr>
-				<th>계정 ID</th>
-				<td><input type="text" name="member_id"
-					value="${mDto.member_id}" readonly /></td>
-			</tr>
-
-			<tr>
-				<th>클래스 명</th>
-				<td><input type="text" name="class_title" /></td>
-			</tr>
-
-			<tr>
-				<th>클래스 설명</th>
-				<td><textarea rows="10" cols="60" name="class_desc"></textarea></td>
-			</tr>
-
-			<tr>
-				<th>클래스 위치</th>
-				<td><input type="text" name="class_loc" /></td>
-			</tr>
-
-			<tr>
-				<th>카테고리</th>
-				<td><input type="text" name="class_category" /></td>
-			</tr>
-
-			<tr>
-				<th>클래스 가격</th>
-				<td><input type="text" name="class_price"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/></td>
-			</tr>
-		</table>
-		
-		<button id="btn-upload" type="button" style="border: 1px solid #ddd; outline: none; cursor: pointer;">파일추가</button>
-		<input id="input_file" multiple="multiple" type="file" style="display: none;">
-		<span style="font-size: 10px; color: gray;">※첨부파일은 최대 10개까지 등록이 가능합니다.</span>
-		<div class="data_file_txt" id="data_file_txt" style="margin: 40px;">
-			<span>첨부 파일</span> <br />
-			<div id="articlefileChange"></div>
-		</div>
-		<input type="button" value="등록하기" onclick="registerAction()"/> 
-		<input type="button" value="취소" onclick="location.href='main.do'" />
-	</form>
+	
+	<main class="container">
+		<form method="post">
+			<table border="1">
+				<tr>
+					<th>계정 ID</th>
+					<td><input type="text" name="member_id"
+						value="${mDto.member_id}" readonly /></td>
+				</tr>
+	
+				<tr>
+					<th>클래스 명</th>
+					<td><input type="text" name="class_title" /></td>
+				</tr>
+	
+				<tr>
+					<th>클래스 설명</th>
+					<td><textarea rows="10" cols="60" name="class_desc"></textarea></td>
+				</tr>
+	
+				<tr>
+					<th>클래스 위치</th>
+					<td><input type="text" name="class_loc" /></td>
+				</tr>
+	
+				<tr>
+					<th>카테고리</th>
+					<td><input type="text" name="class_category" /></td>
+				</tr>
+	
+				<tr>
+					<th>클래스 가격</th>
+					<td><input type="text" name="class_price"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/></td>
+				</tr>
+			</table>
+			
+			<button id="btn-upload" type="button" style="border: 1px solid #ddd; outline: none; cursor: pointer;">파일추가</button>
+			<input id="input_file" multiple="multiple" type="file" style="display: none;">
+			<span style="font-size: 10px; color: gray;">※첨부파일은 최대 10개까지 등록이 가능합니다.</span>
+			<div class="data_file_txt" id="data_file_txt" style="margin: 40px;">
+				<span>첨부 파일</span> <br />
+				<div id="articlefileChange"></div>
+			</div>
+			<input type="button" value="등록하기" onclick="registerAction()"/> 
+			<input type="button" value="취소" onclick="location.href='main.do'" />
+		</form>
+	</main>
+	
+	<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
+	
 <script>
 $(document).ready(function()
 		// input file 파일 첨부시 fileCheck 함수 실행
@@ -165,6 +175,6 @@ function fileDelete(fileNum){
    	    return false;
 	}
 </script>
-<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
+
 </body>
 </html>
