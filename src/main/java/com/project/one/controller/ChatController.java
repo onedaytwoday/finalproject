@@ -160,27 +160,9 @@ public class ChatController {
 	@RequestMapping("/selectLang.do")
 	public Map<String, String> selectLang(String lang, HttpSession session) {
 		Map<String, String> map = new HashMap<>();
-		System.out.println("*******************************************");
-		System.out.println(lang);
-		System.out.println("*******************************************");
 		session.setAttribute("lang", lang);
 
 		map.put("msg", "성공");
-
-		return map;
-	}
-
-	@ResponseBody
-	@RequestMapping(value = "/translate.do", method = RequestMethod.POST)
-	public Map<String, String> translate(@RequestBody Map<String, String> param) {
-		Map<String, String> map = new HashMap<>();
-		String text = param.get("text");
-		String lang = Translate.detectLangs(text);
-
-		if (!lang.equals("ko")) {
-			String msg = Translate.translate(text, lang, true);
-			map.put("msg", msg);
-		}
 
 		return map;
 	}
