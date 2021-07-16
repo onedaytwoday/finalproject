@@ -14,7 +14,7 @@
 .search{
 	float: right;
 	position: relative;
-	top: -100px;
+	top: -50px;
 }
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
