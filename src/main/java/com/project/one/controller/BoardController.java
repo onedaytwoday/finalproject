@@ -1,5 +1,7 @@
 package com.project.one.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -31,6 +33,7 @@ public class BoardController {
 		model.addAttribute("Pdto", Pdto);
 		return "board/board_notice";
 	}
+	
 	@RequestMapping("/board_qna_list.do")
 	public String board_qna_list(Model model, int nowPage) {
 		int count = biz.qna_count();
@@ -65,7 +68,13 @@ public class BoardController {
 	
 	@RequestMapping("/board_detail.do")
 	public String board_detail(Model model, int board_no) {
-		model.addAttribute("dto", biz.selectOne(board_no));
+		BoardDto dto = biz.selectOne(board_no);
+		if(biz.board_read(dto) > 0) {
+			System.out.println("read 성공");
+		}else {
+			System.out.println("read 실패");
+		}
+		model.addAttribute("dto", dto);
 		return "board/board_detail";
 	}
 	
@@ -100,5 +109,21 @@ public class BoardController {
 		model.addAttribute("list",biz.mypage_list(dto.getMember_id()));
 		
 		return "mypage/mypage_board";
+	}
+	
+	@RequestMapping("board_notice_search.do")
+	public String board_search(Model model, String search_category, String search_keyword, int nowPage) {
+		PagingDto Pdto = new PagingDto();
+		Pdto.setSearch_category(search_category);
+		Pdto.setSearch_keyword(search_keyword);
+		Pdto.setNowPage(nowPage);
+		int count = biz.search_notice_count(Pdto);
+		PagingDto dto = new PagingDto(count, nowPage);
+		dto.setSearch_category(search_category);
+		dto.setSearch_keyword(search_keyword);
+		System.out.println(dto);
+		model.addAttribute("list", biz.board_notice_search(dto));
+		model.addAttribute("Pdto", dto);
+		return "board/board_notice";
 	}
 }

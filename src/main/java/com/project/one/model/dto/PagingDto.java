@@ -21,8 +21,37 @@ public class PagingDto {
 
 	private int blockBegin; // 현재 블록의 시작 페이지 번호
 	private int blockEnd; // 현재 블록의 마지막 페이지 번호
-
+	
+	private String search_category;
+	private String search_keyword;
+	
 	public PagingDto() {
+	}
+	
+	public PagingDto(int nowPage, int prevPage, int nextPage, int totalPage, int totalBlock, int nowBlock,
+			int prevBlock, int nextBlock, int pageBegin, int pageEnd, int blockBegin, int blockEnd,
+			String search_category, String search_keyword) {
+		super();
+		this.nowPage = nowPage;
+		this.prevPage = prevPage;
+		this.nextPage = nextPage;
+		this.totalPage = totalPage;
+		this.totalBlock = totalBlock;
+		this.nowBlock = nowBlock;
+		this.prevBlock = prevBlock;
+		this.nextBlock = nextBlock;
+		this.pageBegin = pageBegin;
+		this.pageEnd = pageEnd;
+		this.blockBegin = blockBegin;
+		this.blockEnd = blockEnd;
+		this.search_category = search_category;
+		this.search_keyword = search_keyword;
+	}
+
+	public PagingDto(String search_category, String search_keyword) {
+		super();
+		this.search_category = search_category;
+		this.search_keyword = search_keyword;
 	}
 
 	// 생성자
@@ -164,12 +193,30 @@ public class PagingDto {
 	public static int getDisplayPage() {
 		return DISPLAY_PAGE;
 	}
+	
+	public String getSearch_category() {
+		return search_category;
+	}
+
+	public void setSearch_category(String search_category) {
+		this.search_category = search_category;
+	}
+
+	public String getSearch_keyword() {
+		return search_keyword;
+	}
+
+	public void setSearch_keyword(String search_keyword) {
+		this.search_keyword = search_keyword;
+	}
 
 	@Override
 	public String toString() {
 		return "PagingDto [nowPage=" + nowPage + ", prevPage=" + prevPage + ", nextPage=" + nextPage + ", totalPage="
 				+ totalPage + ", totalBlock=" + totalBlock + ", nowBlock=" + nowBlock + ", prevBlock=" + prevBlock
 				+ ", nextBlock=" + nextBlock + ", pageBegin=" + pageBegin + ", pageEnd=" + pageEnd + ", blockBegin="
-				+ blockBegin + ", blockEnd=" + blockEnd + "]";
+				+ blockBegin + ", blockEnd=" + blockEnd + ", search_category=" + search_category + ", search_keyword="
+				+ search_keyword + "]";
 	}
+	
 }
