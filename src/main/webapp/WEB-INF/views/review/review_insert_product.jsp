@@ -13,7 +13,7 @@
 
 </head>
 <body>
-	<jsp:include page="header.jsp"></jsp:include>	
+	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
 	
 	<main class="container">
 		<h1>${pDto.product_name }(${pDto.product_no }) 리뷰 작성</h1>
@@ -51,8 +51,6 @@
 			
 		</form>
 	</main>
-	
-	<jsp:include page="footer.jsp"></jsp:include>
 <script>
 $(document).ready(function()
 		// input file 파일 첨부시 fileCheck 함수 실행
@@ -164,6 +162,6 @@ function fileDelete(fileNum){
    	    return false;
 	}
 </script>
-
+	<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 </body>
 </html>

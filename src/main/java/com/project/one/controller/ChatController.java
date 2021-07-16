@@ -184,5 +184,4 @@ public class ChatController {
 
 		return map;
 	}
-
 }

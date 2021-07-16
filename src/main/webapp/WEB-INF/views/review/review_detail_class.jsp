@@ -11,7 +11,7 @@
 
 </head>
 <body>
-	<jsp:include page="header.jsp"></jsp:include>	
+	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>	
 	
 	<main class="container">
 		<h1>Review Detail</h1>
@@ -43,6 +43,6 @@
 		</table>
 	</main>
 	
-	<jsp:include page="footer.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 </body>
 </html>

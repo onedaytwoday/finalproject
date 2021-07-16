@@ -45,7 +45,7 @@ public class ReviewController {
 		
 		model.addAttribute("list", rBiz.selectClass());
 		
-		return "review_list_class";
+		return "review/review_list_class";
 	}
 	
 	//상품리뷰 리스트
@@ -54,7 +54,7 @@ public class ReviewController {
 		
 		model.addAttribute("list", rBiz.selectProduct());
 		
-		return "review_list_product";
+		return "review/review_list_product";
 	}
 	
 	
@@ -63,14 +63,14 @@ public class ReviewController {
 	public String review_detail_class(Model model,int review_no) {
 		
 		model.addAttribute("dto", rBiz.selectOne(review_no));
-		return "review_detail_class";
+		return "review/review_detail_class";
 	}
 	
 	//상품리뷰 디테일
 	@RequestMapping("/review_detail_product.do")
 	public String review_detail_product(Model model, int review_no) {
 		model.addAttribute("dto", rBiz.selectOne(review_no));
-		return "review_detail_product";
+		return "review/review_detail_product";
 	}
 	
 	
@@ -88,7 +88,7 @@ public class ReviewController {
 			System.out.println(class_no);
 		}
 		
-		return "review_insert_class";
+		return "review/review_insert_class";
 	}
 	
 	//상품리뷰
@@ -104,7 +104,7 @@ public class ReviewController {
 			model.addAttribute("mDto", mDto);
 		}
 		
-		return "review_insert_product";
+		return "review/review_insert_product";
 	}
 	
 	@ResponseBody

@@ -12,10 +12,10 @@
 
 </head>
 <body>
-	<jsp:include page="header.jsp"></jsp:include>	
+	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>	
 	
 	<main class="container">
-		<h1>REVIEW LIST(CLASS)</h1>
+		<h1>REVIEW LIST(PRODUCT)</h1>
 		
 		<table border="1">
 			<col width="50"/>
@@ -37,7 +37,7 @@
 						<tr>
 							<td>${dto.review_no }</td>
 							<td>${dto.member_id }</td>
-							<td><a href="reviewDetail.do?review_no=${dto.review_no }">${dto.review_title }</a></td>
+							<td><a href="pReviewDetail.do?review_no=${dto.review_no }">${dto.review_title }</a></td>
 							<td>${dto.review_date }</td>
 						</tr>
 					</c:forEach>
@@ -47,6 +47,6 @@
 		</table>	
 	</main>
 	
-	<jsp:include page="footer.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 </body>
 </html>
