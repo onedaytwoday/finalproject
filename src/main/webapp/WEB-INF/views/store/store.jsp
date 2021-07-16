@@ -70,8 +70,18 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
-<h1 class="product_header">스토어</h1> <input class="insert_btn" type="button" value="상품 등록" onclick="location.href='store_insertform.do'"/>
-	
+
+	<h1 class="product_header">스토어</h1>
+	<input class="insert_btn" type="button" value="상품 등록" onclick="location.href='store_insertform.do'"/>
+
+		<div class="search">
+			<form action="store_search.do" method="post">
+			<input type="hidden" name="nowPage" value="1">
+			<input type="text" class="search_keyword" name="search_keyword" placeholder="Search term...">
+	        <input type="submit" value="검색" />
+	         </form>
+		</div>
+		
 		<div class="product_list">
 		
 			<section class="product_section">
@@ -118,6 +128,8 @@
 		</div>
 					<jsp:include page="/WEB-INF/views/paging.jsp">
 						<jsp:param value="S" name="store_category" />
+						<!-- 질문 PAGING.JSP -->
+						<jsp:param value="${pDto.search_category }" name="ca" />
 						<jsp:param value="${pDto.nowBlock}" name="nowBlock" />
 						<jsp:param value="${pDto.blockBegin }" name="blockBegin" />
 						<jsp:param value="${pDto.blockEnd }" name="blockEnd" />

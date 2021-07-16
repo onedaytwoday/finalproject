@@ -58,6 +58,12 @@ public class ProductController {
 		return "store/store";
 
 	}
+	
+	@RequestMapping("/store_search.do")
+	public String store_search(Model model, int nowPage) {
+		
+		return "";
+	}
 
 	@RequestMapping("/store_select.do")
 	public String Product_selectOne(Model model, int product_no) {
