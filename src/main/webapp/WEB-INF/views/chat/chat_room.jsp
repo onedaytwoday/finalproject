@@ -58,7 +58,7 @@
 	              					</div>
 	              					<div class="received_msg">
 					                	<div class="received_withd_msg">
-					                	<p><span name="consult_chat">${dto.chatting_content }</span> <img src="resources/images/tts.png" class="tts" alt="tts" style="width: 20px; height: 20px; float: right;"/></p>
+					                	<p><span>${dto.chatting_content }</span> <img src="resources/images/tts.png" class="tts" alt="tts" style="width: 20px; height: 20px; float: right;"/></p>
                   						<span class="time_date"><fmt:formatDate value="${dto.chatting_date }" pattern="MM/dd hh시mm분" /></span>
                   						</div>
               						</div>
