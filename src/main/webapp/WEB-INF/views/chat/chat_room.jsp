@@ -22,8 +22,7 @@
 		
 		<div>
 			<select name="langs" id="langs">
-			  <option value="xx" selected>Languages</option>
-			  <option value="ko">한국어</option>
+			  <option value="ko" selected>한국어</option>
 			  <option value="en">English</option>
 			  <option value="ja">Japanese</option>
 			  <option value="zh-cn">Chinese(Simplified)</option>
@@ -83,10 +82,11 @@
 	</div>
 	<script>
 		$(document).ready(function(){
-			$("#langs").val('${lang}').prop("selected", true);
+			if('${lang}' != '') {
+				$("#langs").val('${lang}').prop("selected", true);			
+			}
 			
 			$("#message").val('').focus();
-			
 			$("#chatForm").submit(function(event){
 				console.log(event);
 				event.preventDefault();
@@ -96,7 +96,7 @@
 			
 			$("#langs").change(function(){
 				let lang = $("select > option:selected").val();
-				if(lang!= "xx"){
+				
 				$.ajax({
 					url: 'selectLang.do?lang='+lang,
 					type: 'get',
@@ -109,8 +109,33 @@
 						alert("통신 실패!");
 					}
 				})
-				}
 			});		
+			
+			function translate(){
+				let textVal = {
+						"text": $("#message").val()
+				}
+				
+				$.ajax({
+					url: 'translate.do',
+					type: 'post',
+					data: JSON.stringify(textVal),
+					contentType: "application/json",
+					dataType: "json",
+					success: function(result){
+						if(result.msg != null) {
+							$("#message").val(result.msg);
+						}
+					},
+					error: function(){
+						alert("통신 실패!");
+					}
+     			});
+			}
+			
+			$("#message").change(function(){
+				
+			});
 		});
 				
 		var sock = new SockJS("${pageContext.request.contextPath}/echo");
@@ -132,7 +157,6 @@
 				$(location).attr('href',"chat_main.do?member_id=${rDto.member_id }");
 			}
 	//음성번연(목소리 가져오기)
-
 		var voices = [];
 		function setVoiceList() {
 			voices = window.speechSynthesis.getVoices();
@@ -176,7 +200,6 @@
 			var input = $(this).parent().text();
 			speech(input);	
 		});
-
 		
 		
 	
