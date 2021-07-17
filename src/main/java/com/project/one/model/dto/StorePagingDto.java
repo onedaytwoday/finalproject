@@ -2,7 +2,7 @@ package com.project.one.model.dto;
 
 public class StorePagingDto {
 	// 한 페이지에 출력할 게시글 수
-	public static final int DISPLAY_BOARD = 8;
+	public static final int DISPLAY_BOARD = 2;
 	// 한 블록에 출력할 페이지 수
 	public static final int DISPLAY_PAGE = 5;
 
