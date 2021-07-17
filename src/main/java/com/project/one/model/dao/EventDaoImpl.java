@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.project.one.model.dto.EventDto;
+import com.project.one.model.dto.PagingDto;
 
 @Repository
 public class EventDaoImpl implements EventDao {
@@ -21,6 +22,20 @@ public class EventDaoImpl implements EventDao {
 
 		try {
 			list = sqlSession.selectList(NAMESPACE + "selectList");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return list;
+	}
+	
+	@Override
+	public List<EventDto> eventList(PagingDto dto) {
+		List<EventDto> list = new ArrayList<EventDto>();
+
+		try {
+			list = sqlSession.selectList(NAMESPACE + "eventList", dto);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -84,6 +99,20 @@ public class EventDaoImpl implements EventDao {
 
 		return res;
 	}
+	
+	@Override
+	public int updateNoti(int event_no) {
+		int res = 0;
+
+		try {
+			res = sqlSession.update(NAMESPACE + "updateNoti", event_no);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return res;
+	}
 
 	@Override
 	public int delete(int event_no) {
@@ -99,4 +128,17 @@ public class EventDaoImpl implements EventDao {
 		return res;
 	}
 
+	@Override
+	public int eventCount() {
+		int res = 0;
+
+		try {
+			res = sqlSession.selectOne(NAMESPACE + "eventCount");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return res;
+	}
 }

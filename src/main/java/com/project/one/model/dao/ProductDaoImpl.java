@@ -100,6 +100,20 @@ public class ProductDaoImpl implements ProductDao {
 		
 		return res;
 	}
+	
+	@Override
+	public int updateSale(ProductDto dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.update(NAMESPACE + "updateSale", dto);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
 
 	@Override
 	public int delete(int product_no) {

@@ -12,13 +12,14 @@ public class EventDto {
 	private String member_id;
 	private int class_no;
 	private int product_no;
+	private int original_price;
+	private int event_sale;
 	
 	public EventDto() {
 	}
 
 	public EventDto(int event_no, String event_title, String event_desc, Date event_start, Date event_end,
 			String event_noti, String member_id, int class_no, int product_no) {
-		super();
 		this.event_no = event_no;
 		this.event_title = event_title;
 		this.event_desc = event_desc;
@@ -102,11 +103,27 @@ public class EventDto {
 		this.product_no = product_no;
 	}
 
+	public int getOriginal_price() {
+		return original_price;
+	}
+
+	public void setOriginal_price(int original_price) {
+		this.original_price = original_price;
+	}
+
+	public int getEvent_sale() {
+		return event_sale;
+	}
+
+	public void setEvent_sale(int event_sale) {
+		this.event_sale = event_sale;
+	}
+
 	@Override
 	public String toString() {
 		return "EventDto [event_no=" + event_no + ", event_title=" + event_title + ", event_desc=" + event_desc
 				+ ", event_start=" + event_start + ", event_end=" + event_end + ", event_noti=" + event_noti
-				+ ", member_id=" + member_id + ", class_no=" + class_no + ", product_no=" + product_no + "]";
+				+ ", member_id=" + member_id + ", class_no=" + class_no + ", product_no=" + product_no
+				+ ", original_price=" + original_price + ", event_sale=" + event_sale + "]";
 	}
-
 }

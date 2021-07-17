@@ -27,6 +27,7 @@
           <li onclick="location.href='adminProduct.do?nowPage=1'">상품 관리</li>
           <li onclick="location.href='adminClass.do?nowPage=1'">클래스 관리</li>
           <li onclick="location.href='adminBoard.do?nowPage=1'">게시물 관리</li>
+          <li onclick="location.href='adminEvent.do?nowPage=1'">이벤트 관리</li>
           <li onclick="location.href='adminPayment.do?nowPage=1'">주문 관리</li>
         </ul>
      </div>

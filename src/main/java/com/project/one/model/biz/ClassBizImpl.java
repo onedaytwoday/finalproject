@@ -44,6 +44,11 @@ public class ClassBizImpl implements ClassBiz {
 	public int update(ClassDto dto) {
 		return dao.update(dto);
 	}
+	
+	@Override
+	public int updateSale(ClassDto dto) {
+		return dao.updateSale(dto);
+	}
 
 	@Override
 	public int delete(int class_no) {

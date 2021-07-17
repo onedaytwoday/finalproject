@@ -17,6 +17,8 @@ public interface ClassBiz {
 	public int insert(ClassDto dto);
 
 	public int update(ClassDto dto);
+	
+	public int updateSale(ClassDto dto);
 
 	public int delete(int class_no);
 

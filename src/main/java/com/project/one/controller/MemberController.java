@@ -26,9 +26,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.project.one.model.biz.BasketBiz;
+import com.project.one.model.biz.EventBiz;
 import com.project.one.model.biz.MemberBiz;
 import com.project.one.model.dto.BasketDto;
 import com.project.one.model.dto.ChatSession;
+import com.project.one.model.dto.EventDto;
 import com.project.one.model.dto.MemberDto;
 
 @Controller
@@ -51,7 +53,7 @@ public class MemberController {
 	private MemberBiz biz;	
 	
 	@Autowired
-	private BasketBiz bBiz;
+	private EventBiz eBiz;
 	
 	//20210628 로그인
 	@RequestMapping("/loginform.do")
@@ -68,6 +70,7 @@ public class MemberController {
 		MemberDto mDto = biz.login(dto);
 		boolean chk = false;
 		boolean ip_chk = false;
+		boolean alarm = false;
 		
 		if(mDto != null) {
 			if(mDto.getMember_join().equals("N")) {
@@ -77,16 +80,25 @@ public class MemberController {
 				chk = true;
 				session.setAttribute("mDto", mDto);
 				
-				if(mDto.getMember_notify().equals("N") || dto.getMember_ip().equals(mDto.getMember_ip())) {
+				if(mDto.getMember_notify().equals("N")) {
 					ip_chk = true;
 				
-				} 
+				} else if (mDto.getMember_notify().equals("Y")) {
+					if(dto.getMember_ip().equals(mDto.getMember_ip())) {
+						ip_chk = true;
+					}
+					
+					if(eBiz.selectList() != null) {
+						 alarm = true;
+					 }
+				}
 			}
 			
 		}
 		
 		map.put("chk", chk);
 		map.put("ip_chk", ip_chk);
+		map.put("alarm", alarm);
 		
 		return map;
 		

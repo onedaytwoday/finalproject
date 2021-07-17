@@ -44,6 +44,11 @@ public class ProductBizImpl implements ProductBiz {
 	public int update(ProductDto dto) {
 		return dao.update(dto);
 	}
+	
+	@Override
+	public int updateSale(ProductDto dto) {
+		return dao.updateSale(dto);
+	}
 
 	@Override
 	public int delete(int product_no) {

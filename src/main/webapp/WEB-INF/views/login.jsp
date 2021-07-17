@@ -30,7 +30,7 @@
 		var loginVal = {
 				"member_id":member_id,
 				"member_pw":member_pw,
-				"member_ip": "1111"
+				"member_ip": ip()
 		}
 		
 		if(member_id == null || member_id ==""||member_pw == null || member_pw == "" ){
@@ -49,12 +49,18 @@
 					} else if(msg.chk == true){
 						if(msg.ip_chk == false) {
 							checkIP();
-						}
-						setTimeout(function(){
-							//추후 수정
-							location.href="main.do";
-						}, 2000);
+							
+							setTimeout(function(){
+								//추후 수정
+								location.href="main.do";
+							}, 2000);
+						} 
 						
+						if(msg.alarm == true) {
+							getEvents();
+						}
+						
+						//location.href="main.do";
 					}else{
 						alert("아이디 혹은 패스워드를 확인해주세요.")
 					}
