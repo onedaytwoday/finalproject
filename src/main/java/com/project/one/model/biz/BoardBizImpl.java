@@ -27,7 +27,7 @@ public class BoardBizImpl implements BoardBiz {
 	
 	@Override
 	public List<BoardDto> board_notice_search(PagingDto Pdto) {
-		return dao.board_notice_list(Pdto);
+		return dao.board_notice_search(Pdto);
 	}
 
 

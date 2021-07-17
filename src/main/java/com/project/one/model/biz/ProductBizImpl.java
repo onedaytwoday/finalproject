@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.project.one.model.dao.ProductDao;
 import com.project.one.model.dto.PagingDto;
 import com.project.one.model.dto.ProductDto;
+import com.project.one.model.dto.StorePagingDto;
 
 @Service
 public class ProductBizImpl implements ProductBiz {
@@ -58,6 +59,18 @@ public class ProductBizImpl implements ProductBiz {
 	@Override
 	public int productCount() {
 		return dao.productCount();
+	}
+
+	@Override
+	public List<ProductDto> selectListPaging(StorePagingDto pDto) {
+		
+		return dao.selectListPaging(pDto);
+	}
+
+	@Override
+	public int productListCount() {
+		
+		return dao.productListCount();
 	}
 
 }

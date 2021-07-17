@@ -1,13 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="product">
+
 	<select id="selectList" resultType="productDto">
 		SELECT PRODUCT_NO, PRODUCT_NAME, PRODUCT_CATEGORY, PRODUCT_PRICE, PRODUCT_DESC, PRODUCT_LOC,
 		PRODUCT_DEL, PRODUCT_SALE
-		FROM PRODUCT
+		FROM PRODUCT 
 		ORDER BY PRODUCT_NO
 	</select>
-	
+
+	<select id="selectListPaging" parameterType="PagingDto" resultType="productDto">
+		SELECT X.rnum,
+		X.PRODUCT_NO, X.PRODUCT_NAME, X.PRODUCT_CATEGORY, X.PRODUCT_PRICE, X.PRODUCT_DESC, X.PRODUCT_LOC,
+		X.PRODUCT_DEL, X.PRODUCT_SALE, X.FILE_NEW_NAME
+		FROM (
+		SELECT ROWNUM AS rnum,
+		A.PRODUCT_NO, A.PRODUCT_NAME, A.PRODUCT_CATEGORY, A.PRODUCT_PRICE, A.PRODUCT_DESC, A.PRODUCT_LOC,
+		A.PRODUCT_DEL, A.PRODUCT_SALE, A.FILE_NEW_NAME
+		FROM (
+		SELECT
+		P.PRODUCT_NO, P.PRODUCT_NAME, P.PRODUCT_CATEGORY, P.PRODUCT_PRICE, P.PRODUCT_DESC, P.PRODUCT_LOC,
+		P.PRODUCT_DEL, P.PRODUCT_SALE, F.FILE_NEW_NAME
+		FROM PRODUCT p JOIN FILE_TABLE F
+		ON P.PRODUCT_NO = F.PRODUCT_NO
+		ORDER BY PRODUCT_NO DESC
+		) A
+		WHERE ROWNUM <![CDATA[ <= ]]>
+		#{pageEnd}
+		) X
+		WHERE X.rnum <![CDATA[ >= ]]>
+		#{pageBegin}
+
+	</select>
+			
 	<select id="productList" parameterType="PagingDto" resultType="productDto">
 		SELECT X.rnum,
 		X.PRODUCT_NO, X.PRODUCT_NAME, X.PRODUCT_CATEGORY, X.PRODUCT_PRICE, X.PRODUCT_DESC, X.PRODUCT_LOC,
@@ -68,4 +93,9 @@
 		SELECT COUNT(PRODUCT_NO)
 		FROM PRODUCT
 	</select>
+	<select id="productListCount" resultType="int">
+		SELECT COUNT(PRODUCT_NO)
+		FROM PRODUCT
+	</select>
+
 </mapper>

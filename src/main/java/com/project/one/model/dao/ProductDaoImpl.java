@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.project.one.model.dto.PagingDto;
 import com.project.one.model.dto.ProductDto;
+import com.project.one.model.dto.StorePagingDto;
 
 @Repository
 public class ProductDaoImpl implements ProductDao {
@@ -142,4 +143,34 @@ public class ProductDaoImpl implements ProductDao {
 		
 		return res;
 	}
+
+	@Override
+	public List<ProductDto> selectListPaging(StorePagingDto pDto) {
+		List<ProductDto> list = new ArrayList<ProductDto>();
+		
+		try {
+			list = sqlSession.selectList(NAMESPACE + "selectListPaging",pDto);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+
+	@Override
+	public int productListCount() {
+		int res = 0;
+		
+		try {
+			res = sqlSession.selectOne(NAMESPACE + "productListCount");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+
+	}
+
 }

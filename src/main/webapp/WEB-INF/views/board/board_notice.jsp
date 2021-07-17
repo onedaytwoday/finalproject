@@ -76,9 +76,12 @@
 				</td>
 			</tr>
 		</table>
+		
+		<p>category : ${Pdto.search_category }</p>
 					<jsp:include page="/WEB-INF/views/paging.jsp">
 						<jsp:param value="N" name="board_category" />
-						<jsp:param value="${Pdto.search_category }" name="category" />
+						<jsp:param value="${Pdto.search_category }" name="search_category" />
+						<jsp:param value="${Pdto.search_keyword }" name="search_keyword"/>
 						<jsp:param value="${Pdto.nowBlock}" name="nowBlock" />
 						<jsp:param value="${Pdto.blockBegin }" name="blockBegin" />
 						<jsp:param value="${Pdto.blockEnd }" name="blockEnd" />

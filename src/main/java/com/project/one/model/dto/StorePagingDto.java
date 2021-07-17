@@ -1,8 +1,8 @@
 package com.project.one.model.dto;
 
-public class PagingDto {
+public class StorePagingDto {
 	// 한 페이지에 출력할 게시글 수
-	public static final int DISPLAY_BOARD = 3;
+	public static final int DISPLAY_BOARD = 8;
 	// 한 블록에 출력할 페이지 수
 	public static final int DISPLAY_PAGE = 5;
 
@@ -21,38 +21,18 @@ public class PagingDto {
 
 	private int blockBegin; // 현재 블록의 시작 페이지 번호
 	private int blockEnd; // 현재 블록의 마지막 페이지 번호
-	
-	private String search_category;
-	private String search_keyword;
-	
-	public PagingDto() {
-	}
-	
-	public PagingDto(String search_category, String search_keyword) {
-		super();
-		this.search_category = search_category;
-		this.search_keyword = search_keyword;
+
+	public StorePagingDto() {
 	}
 
 	// 생성자
-	public PagingDto(int count, int nowPage) {
+	public StorePagingDto(int count, int nowPage) {
 		nowBlock = 1; // 현재 페이지 블록
 		this.nowPage = nowPage; // 현재 페이지
 		setTotalPage(count); // 전체 페이지 수 구하기
 		setPageRange(); // 페이지 번호 계산
 		setTotalBlock(); // 전체 블록 수 계산
 		setBlockRange(); // 페이지 블록 계산
-	}
-	
-	public PagingDto(int count, int nowPage,String search_category, String search_keyword) {
-		nowBlock = 1; // 현재 페이지 블록
-		this.nowPage = nowPage; // 현재 페이지
-		setTotalPage(count); // 전체 페이지 수 구하기
-		setPageRange(); // 페이지 번호 계산
-		setTotalBlock(); // 전체 블록 수 계산
-		setBlockRange(); // 페이지 블록 계산
-		this.search_category = search_category;
-		this.search_keyword = search_keyword;
 	}
 
 	// 페이지 블록 계산
@@ -184,30 +164,14 @@ public class PagingDto {
 	public static int getDisplayPage() {
 		return DISPLAY_PAGE;
 	}
-	
-	public String getSearch_category() {
-		return search_category;
-	}
-
-	public void setSearch_category(String search_category) {
-		this.search_category = search_category;
-	}
-
-	public String getSearch_keyword() {
-		return search_keyword;
-	}
-
-	public void setSearch_keyword(String search_keyword) {
-		this.search_keyword = search_keyword;
-	}
 
 	@Override
 	public String toString() {
-		return "PagingDto [nowPage=" + nowPage + ", prevPage=" + prevPage + ", nextPage=" + nextPage + ", totalPage="
+		return "StorePagingDto [nowPage=" + nowPage + ", prevPage=" + prevPage + ", nextPage=" + nextPage + ", totalPage="
 				+ totalPage + ", totalBlock=" + totalBlock + ", nowBlock=" + nowBlock + ", prevBlock=" + prevBlock
 				+ ", nextBlock=" + nextBlock + ", pageBegin=" + pageBegin + ", pageEnd=" + pageEnd + ", blockBegin="
-				+ blockBegin + ", blockEnd=" + blockEnd + ", search_category=" + search_category + ", search_keyword="
-				+ search_keyword + "]";
+				+ blockBegin + ", blockEnd=" + blockEnd + "]";
 	}
-	
+
+
 }

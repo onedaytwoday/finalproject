@@ -58,9 +58,14 @@
 						
 						if(msg.alarm == true) {
 							getEvents();
+							
+							setTimeout(function(){
+								//추후 수정
+								location.href="main.do";
+							}, 2000);
 						}
 						
-						//location.href="main.do";
+						if(msg.ip_chk == true || msg.alarm == false) {location.href="main.do";}
 					}else{
 						alert("아이디 혹은 패스워드를 확인해주세요.")
 					}
