@@ -143,7 +143,7 @@
 		</div>
 					<jsp:include page="/WEB-INF/views/paging.jsp">
 						<jsp:param value="S" name="store_category" />
-						<jsp:param value="${pDto.search_keyword }" name="search_keyword"/>
+						<jsp:param value="${pDto.search_keyword  }" name="search_keyword"/>
 						<jsp:param value="${pDto.nowBlock}" name="nowBlock" />
 						<jsp:param value="${pDto.blockBegin }" name="blockBegin" />
 						<jsp:param value="${pDto.blockEnd }" name="blockEnd" />
