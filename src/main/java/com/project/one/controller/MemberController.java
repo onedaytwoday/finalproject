@@ -47,9 +47,6 @@ public class MemberController {
 	}
 	
 	@Autowired
-	private ChatSession chatSession;
-	
-	@Autowired
 	private MemberBiz biz;	
 	
 	@Autowired
@@ -248,7 +245,7 @@ public class MemberController {
 			if(res != null) {
 				session.setAttribute("mDto", res);
 				session.setMaxInactiveInterval(-1);
-				return "main";
+				return "redirect:main.do";
 			}
 			model.addAttribute("mDto",mDto);
 		} catch (org.json.simple.parser.ParseException e) {
@@ -288,7 +285,7 @@ public class MemberController {
 		if(res != null) {
 			session.setAttribute("mDto", res);
 			session.setMaxInactiveInterval(-1);
-			return "main";
+			return "redirect:main.do";
 		}
 		
 		model.addAttribute("mDto" , mDto);

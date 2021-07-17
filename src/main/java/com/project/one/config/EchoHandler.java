@@ -43,8 +43,11 @@ public class EchoHandler extends TextWebSocketHandler {
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		i++;
 		sessionList.add(session);
-
+		
 		MemberDto dto = getdto(session);
+		if(dto.getMember_grade().equals("관리자")) {
+			
+		}else {
 		String opponent = getOpponent(session);
 		int room_no = getNo(session);
 		RoomDto rdto = roomBiz.selectOne(room_no);
@@ -58,6 +61,7 @@ public class EchoHandler extends TextWebSocketHandler {
 				System.out.println("둘다 들어옴");
 			}
 		}
+		}
 		
 		System.out.println(dto.getMember_id() + " 연결 성공 => 총 접속 인원 : " + i + "명");
 	}
@@ -65,23 +69,27 @@ public class EchoHandler extends TextWebSocketHandler {
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		MemberDto dto = getdto(session);
-		String opponent = getOpponent(session);
-		int room_no = getNo(session);
-		String text = getTranslated(message.getPayload());
-
 		if (dto.getMember_grade().equals("관리자")) {
 			for (WebSocketSession sess : sessionList) {
 				for (String key : room.keySet() ) {
 					int room_number = room.get(key);
 					ChattingDto cDto = new ChattingDto();
-					cDto.setChatting_content(text);
+					cDto.setChatting_content(message.getPayload());
 					cDto.setMember_id(dto.getMember_id());
 					cDto.setRoom_no(room_number);
-					chatBiz.insert(cDto);
+					if(chatBiz.insert(cDto) > 0) {
+						System.out.println("chatting insert 성공 room_no : " + room_number);
+					}else {
+						System.out.println("chatting insert 실패");
+					}
+					
 				}
-				sess.sendMessage(new TextMessage(dto.getMember_id() + " : " + text));
+				sess.sendMessage(new TextMessage(dto.getMember_id() + " : " + message.getPayload()));
 			}
-		} else {
+		}else {
+			String opponent = getOpponent(session);
+			int room_no = getNo(session);
+			String text = getTranslated(message.getPayload());
 			WebSocketSession sess = map.get(dto.getMember_id());
 			sess.sendMessage(new TextMessage(dto.getMember_id() + " : " + text));
 			
@@ -110,6 +118,9 @@ public class EchoHandler extends TextWebSocketHandler {
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
 		i--;
 		MemberDto dto = getdto(session);
+		if (dto.getMember_grade().equals("관리자")) {
+		
+		}else {
 		int room_no = getNo(session);
 		System.out.println(dto.getMember_id() + " 연결 종료 => 총 접속 인원 : " + i + "명");
 		// sessionList에 session이 있다면
@@ -123,12 +134,14 @@ public class EchoHandler extends TextWebSocketHandler {
 				System.out.println("room-update 실패");
 			}
 		}
+		}
 		if (sessionList != null) {
 			sessionList.remove(session);
 		}
 		if(map != null) {
 			map.remove(dto.getMember_id());
 		}
+		
 	}
 
 	private MemberDto getdto(WebSocketSession session) {
