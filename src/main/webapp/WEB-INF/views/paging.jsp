@@ -42,14 +42,14 @@
 			
 			<c:when test="${param.store_category eq 'S' }">
 				<c:choose>
-					<c:when test="${empty param.search_keyword}">
-						<c:url var="action" value="store.do" />
-					</c:when>
-					<c:otherwise>
-						<c:url var="action" value="store_search.do" />
-						<c:set var="search" value="&search_keyword=${param.search_keyword }"/>
-					</c:otherwise>
-				</c:choose>		
+				<c:when test="${empty param.search_keyword }">
+					<c:url var="action" value="store.do" />
+				</c:when>
+				<c:otherwise>
+					<c:url var="action" value="store_search.do" />
+					<c:set var="search" value="&search_keyword=${param.search_keyword }"/>
+				</c:otherwise>
+				</c:choose>	
 			</c:when>
 
 
