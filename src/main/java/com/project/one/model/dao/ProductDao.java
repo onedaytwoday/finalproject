@@ -10,6 +10,8 @@ public interface ProductDao {
 	String NAMESPACE = "product.";
 	
 	public List<ProductDto> selectListPaging(StorePagingDto pDto);
+	
+	public List<ProductDto> selectListSearch(StorePagingDto pDto);
 
 	public List<ProductDto> selectList();
 	
@@ -28,4 +30,6 @@ public interface ProductDao {
 	public int productCount();
 	
 	public int productListCount();
+
+	public int productSearchCount(StorePagingDto pDto);
 }

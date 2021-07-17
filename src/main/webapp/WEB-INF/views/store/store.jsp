@@ -8,16 +8,26 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>상품 페이지</title>
-<<<<<<< HEAD
-=======
+
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
->>>>>>> 4bc8ff9db607a62bfa55d3a399e0497eab175e18
+
 <style type="text/css">
+
+	.container{
+		margin-top:15px;
+	}
+	
+	.search{
+		margin-left:5.5rem;
+	}
+	
+	
 
 	.product_header{
 		margin-left: 5.5rem;		
+		margin-top: 6rem;		
 	}
 	.product_list{
         width: 1260px;
@@ -131,12 +141,10 @@
        				</c:otherwise>
        			</c:choose>
             </section>
-        <input type="button" value="상품 등록" onclick="location.href='store_insertform.do'" style="position:relative; top:-50px;"/>
 		</div>
 					<jsp:include page="/WEB-INF/views/paging.jsp">
 						<jsp:param value="S" name="store_category" />
-						<!-- 질문 PAGING.JSP -->
-						<jsp:param value="${pDto.search_category }" name="ca" />
+						<jsp:param value="${pDto.search_keyword }" name="search_keyword"/>
 						<jsp:param value="${pDto.nowBlock}" name="nowBlock" />
 						<jsp:param value="${pDto.blockBegin }" name="blockBegin" />
 						<jsp:param value="${pDto.blockEnd }" name="blockEnd" />

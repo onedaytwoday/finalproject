@@ -58,11 +58,22 @@ public class ProductController {
 		return "store/store";
 
 	}
-	
+
 	@RequestMapping("/store_search.do")
-	public String store_search(Model model, int nowPage) {
-		
-		return "";
+	public String store_search(Model model,String search_keyword, int nowPage) {
+		StorePagingDto pDto = new StorePagingDto();
+		pDto.setSearch_keyword(search_keyword);
+		pDto.setNowPage(nowPage);
+		int count = biz.productSearchCount(pDto);
+		StorePagingDto dto = new StorePagingDto(count, nowPage);
+		dto.setSearch_keyword(search_keyword);
+		List<ProductDto> list = biz.selectListSearch(dto);
+		for(int i=0;i<list.size();i++) {
+			System.out.println(list.get(i));
+		}
+		model.addAttribute("list", list);
+		model.addAttribute("pDto", dto);
+		return "store/store";
 	}
 
 	@RequestMapping("/store_select.do")
