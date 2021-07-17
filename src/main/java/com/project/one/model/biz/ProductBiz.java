@@ -11,6 +11,8 @@ public interface ProductBiz {
 	
 	public List<ProductDto> selectListPaging(StorePagingDto pDto);
 	
+	public List<ProductDto> selectListSearch(StorePagingDto pDto);
+	
 	public List<ProductDto> productList(PagingDto pDto);
 
 	public ProductDto selectOne(int product_no);
@@ -28,4 +30,6 @@ public interface ProductBiz {
 	public int productCount();
 	
 	public int productListCount();
+	
+	public int productSearchCount(StorePagingDto pDto);
 }

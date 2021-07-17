@@ -173,4 +173,32 @@ public class ProductDaoImpl implements ProductDao {
 
 	}
 
+	@Override
+	public List<ProductDto> selectListSearch(StorePagingDto pDto) {
+		List<ProductDto> list = new ArrayList<ProductDto>();
+		
+		try {
+			list = sqlSession.selectList(NAMESPACE + "selectListSearch",pDto);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+
+	@Override
+	public int productSearchCount(StorePagingDto pDto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.selectOne(NAMESPACE + "productSearchCount", pDto);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+
 }

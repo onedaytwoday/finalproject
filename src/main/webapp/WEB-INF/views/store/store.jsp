@@ -11,10 +11,22 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
 <style type="text/css">
+
+	.container{
+		margin-top:15px;
+	}
+	
+	.search{
+		margin-left:5.5rem;
+	}
+	
+	
 
 	.product_header{
 		margin-left: 5.5rem;		
+		margin-top: 6rem;		
 	}
 	.product_list{
         width: 1260px;
@@ -73,9 +85,18 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
+
 	<main class="container">
-<h1 class="product_header">스토어</h1> <input class="insert_btn" type="button" value="상품 등록" onclick="location.href='store_insertform.do'"/>
-	
+	<h1 class="product_header">스토어</h1>
+	<input class="insert_btn" type="button" value="상품 등록" onclick="location.href='store_insertform.do'"/>
+		<div class="search">
+			<form action="store_search.do" method="post">
+			<input type="hidden" name="nowPage" value="1">
+			<input type="text" class="search_keyword" name="search_keyword" placeholder="Search term...">
+	        <input type="submit" value="검색" />
+	         </form>
+		</div>
+
 		<div class="product_list">
 		
 			<section class="product_section">
@@ -122,6 +143,7 @@
 		</div>
 					<jsp:include page="/WEB-INF/views/paging.jsp">
 						<jsp:param value="S" name="store_category" />
+						<jsp:param value="${pDto.search_keyword }" name="search_keyword"/>
 						<jsp:param value="${pDto.nowBlock}" name="nowBlock" />
 						<jsp:param value="${pDto.blockBegin }" name="blockBegin" />
 						<jsp:param value="${pDto.blockEnd }" name="blockEnd" />

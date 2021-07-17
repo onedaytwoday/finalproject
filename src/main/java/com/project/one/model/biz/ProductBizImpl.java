@@ -73,4 +73,16 @@ public class ProductBizImpl implements ProductBiz {
 		return dao.productListCount();
 	}
 
+	@Override
+	public List<ProductDto> selectListSearch(StorePagingDto pDto) {
+		
+		return dao.selectListSearch(pDto);
+	}
+
+	@Override
+	public int productSearchCount(StorePagingDto pDto) {
+		
+		return dao.productSearchCount(pDto);
+	}
+
 }

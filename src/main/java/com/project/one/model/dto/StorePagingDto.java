@@ -22,7 +22,14 @@ public class StorePagingDto {
 	private int blockBegin; // 현재 블록의 시작 페이지 번호
 	private int blockEnd; // 현재 블록의 마지막 페이지 번호
 
+	private String search_keyword;
+	
 	public StorePagingDto() {
+	}
+	
+	public StorePagingDto(String search_keyword) {
+		super();
+		this.search_keyword = search_keyword;
 	}
 
 	// 생성자
@@ -33,6 +40,16 @@ public class StorePagingDto {
 		setPageRange(); // 페이지 번호 계산
 		setTotalBlock(); // 전체 블록 수 계산
 		setBlockRange(); // 페이지 블록 계산
+	}
+	
+	public StorePagingDto(int count, int nowPage,String search_keyword) {
+		nowBlock = 1; // 현재 페이지 블록
+		this.nowPage = nowPage; // 현재 페이지
+		setTotalPage(count); // 전체 페이지 수 구하기
+		setPageRange(); // 페이지 번호 계산
+		setTotalBlock(); // 전체 블록 수 계산
+		setBlockRange(); // 페이지 블록 계산
+		this.search_keyword = search_keyword;
 	}
 
 	// 페이지 블록 계산
@@ -165,13 +182,22 @@ public class StorePagingDto {
 		return DISPLAY_PAGE;
 	}
 
+	public String getSearch_keyword() {
+		return search_keyword;
+	}
+
+	public void setSearch_keyword(String search_keyword) {
+		this.search_keyword = search_keyword;
+	}
+
 	@Override
 	public String toString() {
 		return "StorePagingDto [nowPage=" + nowPage + ", prevPage=" + prevPage + ", nextPage=" + nextPage + ", totalPage="
 				+ totalPage + ", totalBlock=" + totalBlock + ", nowBlock=" + nowBlock + ", prevBlock=" + prevBlock
 				+ ", nextBlock=" + nextBlock + ", pageBegin=" + pageBegin + ", pageEnd=" + pageEnd + ", blockBegin="
-				+ blockBegin + ", blockEnd=" + blockEnd + "]";
+				+ blockBegin + ", blockEnd=" + blockEnd + ", search_keyword="
+				+ search_keyword + "]";
 	}
-
+	
 
 }
