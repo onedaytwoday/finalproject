@@ -17,19 +17,19 @@ public class EventBizImpl implements EventBiz {
 
 	@Autowired
 	private EventDao dao;
-	
+
 	@Autowired
 	private ClassBiz cBiz;
-	
+
 	@Autowired
 	private ProductBiz pBiz;
-	
+
 	@Override
 	public List<EventDto> selectList() {
 		List<EventDto> eList = dao.selectList();
-		
-		for(EventDto e : eList) {
-			if(e.getClass_no() >= 0 && e.getProduct_no() == 0) {
+
+		for (EventDto e : eList) {
+			if (e.getClass_no() >= 0 && e.getProduct_no() == 0) {
 				ClassDto cDto = cBiz.selectOne(e.getClass_no());
 				e.setOriginal_price(cDto.getClass_price());
 				e.setEvent_sale(cDto.getClass_sale());
@@ -38,12 +38,12 @@ public class EventBizImpl implements EventBiz {
 				e.setOriginal_price(pDto.getProduct_price());
 				e.setEvent_sale(pDto.getProduct_sale());
 			}
+
 		}
-		
-		
+
 		return eList;
 	}
-	
+
 	@Override
 	public List<EventDto> eventList(PagingDto dto) {
 		return dao.eventList(dto);
@@ -58,43 +58,41 @@ public class EventBizImpl implements EventBiz {
 	@Override
 	public int insertEventClass(EventDto dto, String sale_rate) {
 		int res = 0;
-		
+
 		ClassDto cDto = new ClassDto();
 		cDto.setClass_no(dto.getClass_no());
 		cDto.setClass_sale(Integer.parseInt(sale_rate));
-		
+
 		try {
 			res = dao.insertEventClass(dto);
-			if(res > 0) {
+			if (res > 0) {
 				cBiz.updateSale(cDto);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-	
+
 		return res;
 	}
-	
+
 	@Transactional
 	@Override
 	public int insertEventProduct(EventDto dto, String sale_rate) {
 		int res = 0;
-		
+
 		ProductDto pDto = new ProductDto();
 		pDto.setProduct_no(dto.getProduct_no());
 		pDto.setProduct_sale(Integer.parseInt(sale_rate));
-		
+
 		try {
 			res = dao.insertEventProduct(dto);
-			if(res > 0) {
+			if (res > 0) {
 				pBiz.updateSale(pDto);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-	
+
 		return res;
 	}
 
@@ -102,7 +100,7 @@ public class EventBizImpl implements EventBiz {
 	public int update(EventDto dto) {
 		return dao.update(dto);
 	}
-	
+
 	@Override
 	public int updateNoti(int event_no) {
 		return dao.updateNoti(event_no);

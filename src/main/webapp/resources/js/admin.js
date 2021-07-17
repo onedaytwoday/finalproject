@@ -103,7 +103,7 @@ function updateStatus(payment_no) {
 };
 
 // 이벤트 관리
-function sendAlarm() {
+function updateNoti() {
 	if(checked_list.length > 0) {
 		let updateVal = {
 			"checked_list": checked_list
@@ -111,7 +111,7 @@ function sendAlarm() {
 		
 		$.ajax({
 			type: "post",
-			url: "sendAlarm.do",
+			url: "updateNoti.do",
 			data: JSON.stringify(updateVal),
 			contentType: "application/json",
 			dataType: "json",

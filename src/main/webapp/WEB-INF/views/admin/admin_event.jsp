@@ -75,7 +75,7 @@
 				</c:choose>
 				<tr>
 					<td colspan="7" align="right">
-						<input type="button" value="알림 보내기" onclick="sendAlarm()"/>
+						<input type="button" value="알림 보내기" onclick="updateNoti()"/>
 						<input type="button" value="삭제" onclick="deleteChecked('event')" />
 					</td>
 				</tr>

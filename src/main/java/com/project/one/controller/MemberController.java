@@ -72,7 +72,7 @@ public class MemberController {
 		boolean ip_chk = false;
 		boolean alarm = false;
 		
-		if(mDto != null) {
+		if(mDto != null && mDto.getMember_grade() != "관리자") {
 			if(mDto.getMember_join().equals("N")) {
 				map.put("lock", true);
 				

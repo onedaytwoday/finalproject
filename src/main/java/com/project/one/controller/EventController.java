@@ -154,8 +154,8 @@ public class EventController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/sendAlarm.do", method=RequestMethod.POST)
-	public Map<String, String> send_alarm(@RequestBody Map<String, Integer[]> checked_list){
+	@RequestMapping(value="/updateNoti.do", method=RequestMethod.POST)
+	public Map<String, String> update_noti(@RequestBody Map<String, Integer[]> checked_list){
 		Map<String, String> map = new HashMap<>();
 		Integer[] lists = checked_list.get("checked_list");
 		int res = 0;

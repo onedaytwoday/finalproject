@@ -5,7 +5,7 @@
 		SELECT EVENT_NO, EVENT_TITLE, EVENT_DESC, EVENT_START, EVENT_END, EVENT_NOTI, MEMBER_ID, CLASS_NO,
 		PRODUCT_NO
 		FROM EVENT
-		WHERE EVENT_NOTI = 'Y'
+		WHERE EVENT_NOTI = 'Y' AND EVENT_START <![CDATA[ <= ]]> SYSDATE AND EVENT_END <![CDATA[ >= ]]> SYSDATE
 		ORDER BY EVENT_NO
 	</select>
 	
@@ -54,7 +54,7 @@
 	</insert>
 	
 	<update id="updateNoti" parameterType="int">
-		UPDATE EVENT
+		UPDATE EVENT		
 		SET EVENT_NOTI = 'Y'
 		WHERE EVENT_NO = ${event_no}
 	</update>
