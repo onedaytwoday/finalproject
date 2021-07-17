@@ -55,19 +55,21 @@ public class MemberBizImpl implements MemberBiz {
 		}
 
 		MemberDto user = dao.login(dto);
-
-		try {
-			user.setMember_pw(AES256.decrypt(user.getMember_pw()));
-			user.setMember_name(AES256.decrypt(user.getMember_name()));
-			user.setMember_email(AES256.decrypt(user.getMember_email()));
-			user.setMember_addr(AES256.decrypt(user.getMember_addr()));
-			user.setMember_ip(AES256.decrypt(user.getMember_ip()));
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		} catch (GeneralSecurityException e) {
-			e.printStackTrace();
+		
+		if (user != null) {
+			try {
+				user.setMember_pw(AES256.decrypt(user.getMember_pw()));
+				user.setMember_name(AES256.decrypt(user.getMember_name()));
+				user.setMember_email(AES256.decrypt(user.getMember_email()));
+				user.setMember_addr(AES256.decrypt(user.getMember_addr()));
+				user.setMember_ip(AES256.decrypt(user.getMember_ip()));
+			} catch (NoSuchAlgorithmException e) {
+				e.printStackTrace();
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			} catch (GeneralSecurityException e) {
+				e.printStackTrace();
+			}
 		}
 
 		return user;
