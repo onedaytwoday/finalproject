@@ -23,6 +23,8 @@ public interface ProductDao {
 	
 	public int update(ProductDto dto);
 	
+	public int updateSale(ProductDto dto);
+	
 	public int delete(int product_no);
 	
 	public int productCount();

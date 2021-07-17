@@ -20,6 +20,8 @@ public interface ProductBiz {
 	public int insert(ProductDto dto);
 
 	public int update(ProductDto dto);
+	
+	public int updateSale(ProductDto dto);
 
 	public int delete(int product_no);
 	

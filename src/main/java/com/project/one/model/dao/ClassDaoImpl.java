@@ -98,6 +98,19 @@ public class ClassDaoImpl implements ClassDao {
 
 		return res;
 	}
+	
+	@Override
+	public int updateSale(ClassDto dto) {
+		int res = 0;
+
+		try {
+			res = sqlSession.update(NAMESPACE + "updateSale", dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return res;
+	}
 
 	@Override
 	public int delete(int class_no) {
@@ -138,4 +151,5 @@ public class ClassDaoImpl implements ClassDao {
 
 		return res;
 	}
+
 }

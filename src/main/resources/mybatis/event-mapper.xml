@@ -2,14 +2,34 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="event">
 	<select id="selectList" resultType="eventDto">
-		SELECT EVENT_NO, EVENT_TITLE, EVENT_DESC, EVENT_START, EVNET_END, EVENT_NOTI, MEMBER_ID, CLASS_NO,
+		SELECT EVENT_NO, EVENT_TITLE, EVENT_DESC, EVENT_START, EVENT_END, EVENT_NOTI, MEMBER_ID, CLASS_NO,
 		PRODUCT_NO
 		FROM EVENT
+		WHERE EVENT_NOTI = 'Y' AND EVENT_START <![CDATA[ <= ]]> SYSDATE AND EVENT_END <![CDATA[ >= ]]> SYSDATE
 		ORDER BY EVENT_NO
 	</select>
 	
+	<select id="eventList" parameterType="PagingDto" resultType="eventDto">
+		SELECT X.rnum,
+		X.EVENT_NO, X.EVENT_TITLE, X.EVENT_DESC, X.EVENT_START, X.EVENT_END, X.EVENT_NOTI, X.MEMBER_ID, X.CLASS_NO, X.PRODUCT_NO
+		FROM (
+		SELECT ROWNUM AS rnum,
+		A.EVENT_NO, A.EVENT_TITLE, A.EVENT_DESC, A.EVENT_START, A.EVENT_END, A.EVENT_NOTI, A.MEMBER_ID, A.CLASS_NO, A.PRODUCT_NO
+		FROM (
+		SELECT
+		E.EVENT_NO, E.EVENT_TITLE, E.EVENT_DESC, E.EVENT_START, E.EVENT_END, E.EVENT_NOTI, E.MEMBER_ID, E.CLASS_NO, E.PRODUCT_NO
+		FROM EVENT e
+		ORDER BY EVENT_START DESC, EVENT_END DESC
+		) A
+		WHERE ROWNUM <![CDATA[ <= ]]>
+		#{pageEnd}
+		) X
+		WHERE X.rnum <![CDATA[ >= ]]>
+		#{pageBegin}
+	</select>
+	
 	<select id="selectOne" parameterType="int" resultType="eventDto">
-		SELECT EVENT_NO, EVENT_TITLE, EVENT_DESC, EVENT_START, EVNET_END, EVENT_NOTI, MEMBER_ID, CLASS_NO,
+		SELECT EVENT_NO, EVENT_TITLE, EVENT_DESC, EVENT_START, EVENT_END, EVENT_NOTI, MEMBER_ID, CLASS_NO,
 		PRODUCT_NO
 		FROM EVENT
 		WHERE EVENT_NO = #{event_no}
@@ -33,8 +53,19 @@
 		</selectKey>
 	</insert>
 	
+	<update id="updateNoti" parameterType="int">
+		UPDATE EVENT		
+		SET EVENT_NOTI = 'Y'
+		WHERE EVENT_NO = ${event_no}
+	</update>
+	
 	<delete id="delete" parameterType="int">
 		DELETE FROM EVENT 
 		WHERE EVENT_NO = #{event_no}
 	</delete>
+	
+	<select id="eventCount" resultType="int">
+		SELECT COUNT(EVENT_NO)
+		FROM EVENT
+	</select>
 </mapper>

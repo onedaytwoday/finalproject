@@ -111,14 +111,15 @@
 	        				</c:when>
 	        			</c:choose>
 	        			
+	        			<c:if test="${mDto.member_grade != '관리자' }">
 	        			<li class="nav-item">
 				          <a class="nav-link" href="basket.do" style="position: relative;"> 
 							<i class="bi bi-cart4 text-white fs-2" style="cursor: pointer;"></i>
 							<span id="basket_num" style="position: absolute; left: 1.5rem; bottom: 30px; border-radius: 50%; padding: 3px 6px; background-color: red; color: white;">${basket_num }</span>
 				          </a>
 				        </li>
-	        			
-	        			
+	        			</c:if>
+
 	        			<li class="nav-item">
 	        				<i id="iconImg" class="bi bi-chat-text text-white fs-2"></i>
 				        </li>

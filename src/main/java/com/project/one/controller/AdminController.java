@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.one.model.biz.BoardBiz;
 import com.project.one.model.biz.ClassBiz;
+import com.project.one.model.biz.EventBiz;
 import com.project.one.model.biz.MemberBiz;
 import com.project.one.model.biz.PaymentBiz;
 import com.project.one.model.biz.ProductBiz;
@@ -37,6 +38,9 @@ public class AdminController {
 
 	@Autowired
 	private PaymentBiz pBiz;
+	
+	@Autowired
+	private EventBiz eBiz;
 
 	@RequestMapping("/adminMain.do")
 	public String admin_main(Model model) {
@@ -96,6 +100,16 @@ public class AdminController {
 
 		return "admin/admin_payment";
 	}
+	
+	@RequestMapping("/adminEvent.do")
+	public String event_list(Model model, int nowPage) {
+		int count = eBiz.eventCount();
+		PagingDto pDto = new PagingDto(count, nowPage);
+		model.addAttribute("eList", eBiz.eventList(pDto));
+		model.addAttribute("pDto", pDto);
+		
+		return "admin/admin_event";
+	}
 
 	@ResponseBody
 	@RequestMapping(value = "/manageMember.do", method = RequestMethod.POST)
@@ -122,6 +136,7 @@ public class AdminController {
 		String type = "";
 		
 		String[] checked = checked_list.get("checked_list");
+		String url = "";
 		
 		for(String s : types) {
 			type = s;
@@ -132,23 +147,35 @@ public class AdminController {
 		case "product":
 			for(String i : checked) {
 				res += proBiz.delete(Integer.parseInt(i));
+				url = "adminProduct.do?nowPage=1";
 			}
 			break;
 			
 		case "class":
 			for(String i : checked) {
 				res += cBiz.delete(Integer.parseInt(i));
+				url = "adminClass.do?nowPage=1";
 			}
 			break;
 			
 		case "qna":
 			for(String i : checked) {
 				res += bBiz.delete(Integer.parseInt(i));
+				url = "adminBoard.do?nowPage=1";
 			}
 			break;
+		
+		case "event":
+			for(String i : checked) {
+				System.out.println("hello");
+				res += eBiz.delete(Integer.parseInt(i));
+				url = "adminEvent.do?nowPage=1";
+			}
+			
 		}
 
 		map.put("msg", res > 0 ? "성공" : "실패");
+		map.put("url", url);
 
 		return map;
 	}

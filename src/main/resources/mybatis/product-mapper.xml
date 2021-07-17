@@ -82,6 +82,12 @@
 		</selectKey>
 	</insert>
 	
+	<update id="updateSale" parameterType="productDto">
+		UPDATE PRODUCT
+		SET PRODUCT_SALE = #{product_sale}
+		WHERE PRODUCT_NO = #{product_no}
+	</update>
+	
 	<delete id="delete" parameterType="int">
 		DELETE FROM PRODUCT 
 		WHERE PRODUCT_NO = #{product_no}

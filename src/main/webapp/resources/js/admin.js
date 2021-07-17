@@ -14,6 +14,10 @@ $(function() {
 		checked_list.push($(this).val());
 	});
 	
+	$('input[name=chk_event]').click(function() {
+		checked_list.push($(this).val());
+	});
+	
 });
 
 // 회원 관리
@@ -44,35 +48,35 @@ function allCheck(bool, type) {
 	});
 }
 
-// 상품 & 클래스 & 게시물 관리
+
 function deleteChecked(type) {
 	let Type = new Array();
 	Type.push(type);
 	
-	let listVal = {
-		"type": Type,
-		"checked_list": checked_list
-	};
+	if(checked_list.length > 0) {
+		let listVal = {
+			"type": Type,
+			"checked_list": checked_list
+		};
 	
-	let url;
-	
-	type == 'product' ? url = 'adminProduct.do?nowPage=1' : type == 'class' ? url = 'adminClass.do?nowPage=1' : url = 'adminBoard.do?nowPage=1';
-	
-	$.ajax({
-		type: "post",
-		url: "deleteChecked.do",
-		data: JSON.stringify(listVal),
-		contentType: "application/json",
-		dataType: "json",
-		success: function(result) {
-			alert(result.msg);
-			
-			if(result.msg == '성공') {location.href = url};
-		},
-		error: function() {
-			alert("통신 실패!");
-		}
-	})
+		$.ajax({
+			type: "post",
+			url: "deleteChecked.do",
+			data: JSON.stringify(listVal),
+			contentType: "application/json",
+			dataType: "json",
+			success: function(result) {
+				alert(result.msg);
+				
+				if(result.msg == '성공') {location.href = result.url};
+			},
+			error: function() {
+				alert("통신 실패!");
+			}
+		})
+	} else {
+		alert("하나 이상 선택해 주세요!");
+	}	
 }
 
 // 결제 관리
@@ -97,3 +101,31 @@ function updateStatus(payment_no) {
 		}
 	});
 };
+
+// 이벤트 관리
+function updateNoti() {
+	if(checked_list.length > 0) {
+		let updateVal = {
+			"checked_list": checked_list
+		}
+		
+		$.ajax({
+			type: "post",
+			url: "updateNoti.do",
+			data: JSON.stringify(updateVal),
+			contentType: "application/json",
+			dataType: "json",
+			success: function(result) {
+				if(result.msg == '실패') {
+					alert("실패!")
+				}
+				location.href='adminEvent.do?nowPage=1';
+			},
+			error: function() {
+				alert("통신 실패!");
+			}
+		});	
+	} else {
+		alert("하나 이상 선택해 주세요!");
+	}
+}

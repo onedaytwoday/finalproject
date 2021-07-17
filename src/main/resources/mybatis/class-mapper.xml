@@ -58,6 +58,12 @@
 		WHERE CLASS_NO = #{class_no}
 	</update>
 	
+	<update id="updateSale" parameterType="classDto">
+		UPDATE CLASS
+		SET CLASS_SALE = #{class_sale}
+		WHERE CLASS_NO = #{class_no}
+	</update>
+	
 	<delete id="delete">
 		DELETE FROM CLASS
 		WHERE CLASS_NO = #{class_no}

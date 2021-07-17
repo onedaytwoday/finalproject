@@ -63,7 +63,7 @@
 				<div id="articlefileChange"></div>
 			</div>
 			<input type="button" value="등록하기" onclick="registerAction()"/> 
-			<input type="button" value="목록" onclick="location.href='store.do'" />
+			<input type="button" value="목록" onclick="location.href='store.do?nowPage=1'" />
 		</form>
 	</main>
 	
