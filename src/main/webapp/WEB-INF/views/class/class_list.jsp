@@ -17,6 +17,17 @@
 	
 	<main class="container">
 		<h1>클래스 목록</h1>
+	<div class="search">
+		<form action="class_search.do" method="post">
+		<input type="hidden" name="nowPage" value="1">
+		<select name="search_category">
+			<option value="nickname" selected>닉네임</option>
+			<option value="title+desc+category">클래스명+설명+내용</option>
+		</select>
+		<input type="text" class="search_keyword" name="search_keyword" placeholder="Search term...">
+        <input type="submit" value="검색" />
+         </form>
+	</div>
 
 		<section class="p-5">
 			
@@ -56,6 +67,18 @@
 					</c:choose>
 				</div>
 		</section>
+					<jsp:include page="/WEB-INF/views/paging.jsp">
+						<jsp:param value="C" name="class_category" />
+						<jsp:param value="${pDto.search_category }" name="class_search_category" />
+						<jsp:param value="${pDto.search_keyword }" name="search_keyword"/>
+						<jsp:param value="${pDto.nowBlock}" name="nowBlock" />
+						<jsp:param value="${pDto.blockBegin }" name="blockBegin" />
+						<jsp:param value="${pDto.blockEnd }" name="blockEnd" />
+						<jsp:param value="${pDto.nowPage}" name="nowPage" />
+						<jsp:param value="${pDto.blockBegin}" name="blockBegin" />
+						<jsp:param value="${pDto.blockEnd}" name="blockEnd" />
+						<jsp:param value="${pDto.totalBlock}" name="totalBlock" />
+					</jsp:include>
 	</main>
 
 	<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>

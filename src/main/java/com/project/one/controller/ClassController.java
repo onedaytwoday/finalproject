@@ -38,6 +38,7 @@ import com.project.one.model.dto.ClassDto;
 import com.project.one.model.dto.DetailDto;
 import com.project.one.model.dto.FileTableDto;
 import com.project.one.model.dto.MemberDto;
+import com.project.one.model.dto.PagingDto;
 import com.project.one.model.dto.PaymentDto;
 
 import net.coobird.thumbnailator.Thumbnails;
@@ -63,11 +64,30 @@ public class ClassController {
 	private static int CLASS_NO;
 
 	@RequestMapping("/classList.do")
-	public String class_list(Model model) {
-		model.addAttribute("list", cBiz.selectList());
+	public String class_list(Model model, int nowPage) {
+		int count = cBiz.classListCount();
+		PagingDto pDto = new PagingDto(count, nowPage);
+		model.addAttribute("list", cBiz.classListPaging(pDto));
+		//평점? model.addAttribute("rlist",rbiz.selectList());
+		model.addAttribute("pDto", pDto);
 		return "class/class_list";
 	}
-
+	//검색
+	@RequestMapping("/class_search.do")
+	public String class_search(Model model, String search_category, String search_keyword, int nowPage) {
+		PagingDto pDto = new PagingDto();
+		pDto.setSearch_category(search_category);
+		pDto.setSearch_keyword(search_keyword);
+		pDto.setNowPage(nowPage);
+		int count = cBiz.classSearchCount(pDto);
+		PagingDto dto = new PagingDto(count, nowPage);
+		dto.setSearch_category(search_category);
+		dto.setSearch_keyword(search_keyword);
+		model.addAttribute("list", cBiz.classListSearch(pDto));
+		model.addAttribute("pDto", dto);
+		
+		return "class/class_list";
+	}
 	@RequestMapping("/classSelect.do")
 	public String class_select(Model model, int class_no) {
 		CLASS_NO = class_no;

@@ -73,4 +73,47 @@
 		SELECT COUNT(CLASS_NO)
 		FROM CLASS
 	</select>
+	
+	<select id="classListPaging">
+		SELECT X.rnum,
+		X.CLASS_NO, X.CLASS_TITLE, X.CLASS_DESC, X.CLASS_LOC, X.CLASS_CATEGORY, X.CLASS_PRICE,
+		X.CLASS_SALE, X.MEMBER_ID, X.FILE_NEW_NAME
+		FROM (
+			SELECT anum AS rnum,
+			A.CLASS_NO, A.CLASS_TITLE, A.CLASS_DESC, A.CLASS_LOC, A.CLASS_CATEGORY, A.CLASS_PRICE,
+			A.CLASS_SALE, A.MEMBER_ID, A.FILE_NEW_NAME
+			FROM (
+				SELECT ROWNUM as anum,
+				B.CLASS_NO, B.CLASS_TITLE, B.CLASS_DESC, B.CLASS_LOC, B.CLASS_CATEGORY, B.CLASS_PRICE,
+				B.CLASS_SALE, B.MEMBER_ID, B.FILE_NEW_NAME
+				FROM (
+					SELECT C.CLASS_NO, C.CLASS_TITLE, C.CLASS_DESC, C.CLASS_LOC, C.CLASS_CATEGORY, C.CLASS_PRICE,
+					C.CLASS_SALE, C,CLASS_MEMBER_ID, F.FILE_NEW_NAME , ROW_NUMBER() OVER(PARTITION BY C.CLASS_NO ORDER BY F.FILE_NUM DESC) as RowIdx
+					FROM CLASS C JOIN FILE_TABLE F
+					ON C.CLASS_NO = F.CLASS_NO
+					ORDER BY C.CLASS_NO DESC
+					) B
+				WHERE RowIdx = 1
+				)A
+			WHERE anum <![CDATA[ <= ]]>
+			#{pageEnd}
+			) X
+		WHERE X.rnum <![CDATA[ >= ]]>
+		#{pageBegin}	
+	</select>
+	
+	<select id="classListCount">
+		SELECT COUNT(CLASS_NO)
+		FROM CLASS	
+	</select>
+	
+	<select id="classListSearch">
+	
+	</select>
+	
+	<select id="classSearchCount">
+	
+	</select>
+	
+	
 </mapper>

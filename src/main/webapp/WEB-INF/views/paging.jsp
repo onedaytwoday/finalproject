@@ -12,7 +12,7 @@
 		<c:set var="search"/>
 		<c:choose>
 			<c:when test="${param.board_category eq 'N' }">
-				<c:if test="${param.notice_search_category eq 'title' or param.notice_search_category eq 'content' or param.notice_search_category eq 'content+title' }">
+				<c:if test="${param.notice_search_category eq 'title' or param.notice_search_category eq 'nickname' or param.notice_search_category eq 'content+title' }">
 					<c:url var="action" value="board_notice_search.do"/>
 					<c:set var="search" value="&search_category=${param.notice_search_category }&search_keyword=${param.search_keyword }" />
 				</c:if>
@@ -50,6 +50,16 @@
 					<c:set var="search" value="&search_keyword=${param.search_keyword }"/>
 				</c:otherwise>
 				</c:choose>	
+			</c:when>
+			
+			<c:when test="${param.class_category eq 'C' }">
+				<c:if test="${param.class_search_category eq 'nickname' or param.notice_search_category eq 'title+desc+category' }">
+					<c:url var="action" value="class_search.do"/>
+					<c:set var="search" value="&search_category=${param.notice_search_category }&search_keyword=${param.search_keyword }" />
+				</c:if>
+				<c:if test="${param.notice_search_category eq null }">
+				<c:url var="action" value="classList.do" />
+				</c:if>
 			</c:when>
 
 

@@ -9,6 +9,10 @@ public interface ClassBiz {
 	public List<ClassDto> selectList();
 	
 	public List<ClassDto> classList(PagingDto pDto);
+	
+	public List<ClassDto> classListPaging(PagingDto pDto);
+	
+	public List<ClassDto> classListSearch(PagingDto pDto);
 
 	public ClassDto selectOne(int class_no);
 	
@@ -25,4 +29,8 @@ public interface ClassBiz {
 	public List<ClassDto> userClass(String member_id);
 	
 	public int classCount();
+	
+	public int classListCount();
+	
+	public int classSearchCount(PagingDto pDto);
 }
