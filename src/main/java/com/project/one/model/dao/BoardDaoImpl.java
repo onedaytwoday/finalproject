@@ -59,6 +59,20 @@ public class BoardDaoImpl implements BoardDao {
 	}
 	
 	@Override
+	public List<BoardDto> board_qna_search(PagingDto Pdto) {
+		List<BoardDto> list = new ArrayList<BoardDto>();
+		
+		try {
+			list = sqlSession.selectList(NAMESPACE + "board_qna_search", Pdto);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
+	@Override
 	public BoardDto selectOne(int board_no) {
 		BoardDto dto = null;
 		
@@ -190,6 +204,20 @@ public class BoardDaoImpl implements BoardDao {
 		
 		try {
 			res = sqlSession.selectOne(NAMESPACE + "search_notice_count", Pdto);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+	
+	@Override
+	public int search_qna_count(PagingDto Pdto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.selectOne(NAMESPACE + "search_qna_count", Pdto);
 			
 		} catch (Exception e) {
 			e.printStackTrace();

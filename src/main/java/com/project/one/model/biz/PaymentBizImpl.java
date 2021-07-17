@@ -91,7 +91,6 @@ public class PaymentBizImpl implements PaymentBiz {
 				pList.add(p);
 			}
 		}
-		
 		return pList;
 				
 	}

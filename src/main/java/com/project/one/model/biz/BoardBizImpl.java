@@ -29,7 +29,11 @@ public class BoardBizImpl implements BoardBiz {
 	public List<BoardDto> board_notice_search(PagingDto Pdto) {
 		return dao.board_notice_search(Pdto);
 	}
-
+	
+	@Override
+	public List<BoardDto> board_qna_search(PagingDto Pdto) {
+		return dao.board_qna_search(Pdto);
+	}
 
 	@Override
 	public BoardDto selectOne(int board_no) {
@@ -80,6 +84,12 @@ public class BoardBizImpl implements BoardBiz {
 	public int search_notice_count(PagingDto Pdto) {
 		return dao.search_notice_count(Pdto);
 	}
+	
+	@Override
+	public int search_qna_count(PagingDto Pdto) {
+		return dao.search_qna_count(Pdto);
+	}
+
 	
 	@Override
 	public List<BoardDto> mypage_list(String member_id) {

@@ -12,17 +12,24 @@
 		<c:set var="search"/>
 		<c:choose>
 			<c:when test="${param.board_category eq 'N' }">
-				<c:if test="${param.search_category eq 'title' or param.search_category eq 'content' or param.search_category eq 'content+title' }">
+				<c:if test="${param.notice_search_category eq 'title' or param.notice_search_category eq 'content' or param.notice_search_category eq 'content+title' }">
 					<c:url var="action" value="board_notice_search.do"/>
-					<c:set var="search" value="&search_category=${param.search_category }&search_keyword=${param.search_keyword }" />
+					<c:set var="search" value="&search_category=${param.notice_search_category }&search_keyword=${param.search_keyword }" />
 				</c:if>
-				<c:if test="${param.search_category eq null }">
+				<c:if test="${param.notice_search_category eq null }">
 				<c:url var="action" value="board_notice_list.do" />
 				</c:if>
 			</c:when>
 			
 			<c:when test="${param.board_category eq 'Q' && param.from == null}">
+				<c:if test="${param.qna_search_category eq 'title' or param.qna_search_category eq 'content' or param.qna_search_category eq 'content+title' }">
+					<c:url var="action" value="board_qna_search.do"/>
+					<c:set var="search" value="&search_category=${param.qna_search_category }&search_keyword=${param.search_keyword }" />
+				</c:if>
+				<c:if test="${param.qna_search_category eq null }">
 				<c:url var="action" value="board_qna_list.do" />
+				</c:if>
+				
 			</c:when>
 			
 			<c:when test="${param.board_category eq 'Q' && param.from eq 'admin' }">

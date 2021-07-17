@@ -10,13 +10,6 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-<style type="text/css">
-.search{
-	float: right;
-	position: relative;
-	top: -50px;
-}
-</style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -77,10 +70,9 @@
 			</tr>
 		</table>
 		
-		<p>category : ${Pdto.search_category }</p>
 					<jsp:include page="/WEB-INF/views/paging.jsp">
 						<jsp:param value="N" name="board_category" />
-						<jsp:param value="${Pdto.search_category }" name="search_category" />
+						<jsp:param value="${Pdto.search_category }" name="notice_search_category" />
 						<jsp:param value="${Pdto.search_keyword }" name="search_keyword"/>
 						<jsp:param value="${Pdto.nowBlock}" name="nowBlock" />
 						<jsp:param value="${Pdto.blockBegin }" name="blockBegin" />

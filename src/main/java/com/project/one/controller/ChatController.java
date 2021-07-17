@@ -74,7 +74,11 @@ public class ChatController {
 		ModelAndView mav = new ModelAndView();
 		MemberDto mDto = (MemberDto) session.getAttribute("mDto");
 		RoomDto rDto = new RoomDto();
-
+		if (mDto.getMember_grade().equals("관리자")) {
+			System.out.println("관리자다");
+			mav.setViewName("chat/chat_admin");
+			return mav;
+		}
 		if (mDto.getMember_grade().equals("강사회원")) {
 			RoomDto dto = new RoomDto();
 			dto.setMember_id(member_id);
@@ -90,7 +94,7 @@ public class ChatController {
 				mav.addObject("rDto", rDto);
 				mav.addObject("Room_no", exist.getRoom_no());
 				mav.addObject("chatlist", chatlist);
-				mav.setViewName("chat_room");
+				mav.setViewName("chat/chat_room");
 				return mav;
 			}
 		}

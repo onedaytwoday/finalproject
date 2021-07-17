@@ -71,6 +71,14 @@ public class EchoHandler extends TextWebSocketHandler {
 
 		if (dto.getMember_grade().equals("관리자")) {
 			for (WebSocketSession sess : sessionList) {
+				for (String key : room.keySet() ) {
+					int room_number = room.get(key);
+					ChattingDto cDto = new ChattingDto();
+					cDto.setChatting_content(text);
+					cDto.setMember_id(dto.getMember_id());
+					cDto.setRoom_no(room_number);
+					chatBiz.insert(cDto);
+				}
 				sess.sendMessage(new TextMessage(dto.getMember_id() + " : " + text));
 			}
 		} else {

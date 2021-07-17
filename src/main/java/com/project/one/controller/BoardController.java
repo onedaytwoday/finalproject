@@ -112,23 +112,33 @@ public class BoardController {
 	}
 	
 	@RequestMapping("board_notice_search.do")
-	public String board_search(Model model, String search_category, String search_keyword, int nowPage) {
+	public String board_notice_search(Model model, String search_category, String search_keyword, int nowPage) {
 		PagingDto Pdto = new PagingDto();
 		Pdto.setSearch_category(search_category);
 		Pdto.setSearch_keyword(search_keyword);
 		Pdto.setNowPage(nowPage);
 		int count = biz.search_notice_count(Pdto);
-		System.out.println(count);
 		PagingDto dto = new PagingDto(count, nowPage);
 		dto.setSearch_category(search_category);
 		dto.setSearch_keyword(search_keyword);
-		System.out.println(dto);
-		List<BoardDto> list = biz.board_notice_search(dto);
-		for(int i=0;i<list.size();i++) {
-			System.out.println(list.get(i));
-		}
-		model.addAttribute("list", list);
+		model.addAttribute("list", biz.board_notice_search(dto));
 		model.addAttribute("Pdto", dto);
 		return "board/board_notice";
 	}
+	
+	@RequestMapping("board_qna_search.do")
+	public String board_qna_search(Model model, String search_category, String search_keyword, int nowPage) {
+		PagingDto Pdto = new PagingDto();
+		Pdto.setSearch_category(search_category);
+		Pdto.setSearch_keyword(search_keyword);
+		Pdto.setNowPage(nowPage);
+		int count = biz.search_qna_count(Pdto);
+		PagingDto dto = new PagingDto(count, nowPage);
+		dto.setSearch_category(search_category);
+		dto.setSearch_keyword(search_keyword);
+		model.addAttribute("list", biz.board_qna_search(dto));
+		model.addAttribute("Pdto", dto);
+		return "board/board_qna";
+	}
+	
 }

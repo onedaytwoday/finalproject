@@ -17,7 +17,18 @@
 <jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
 	<main class="container">
 		<h1>상품문의</h1>
-	
+		<div class="search">
+		<form action="board_qna_search.do" method="post">
+		<input type="hidden" name="nowPage" value="1">
+		<select name="search_category">
+			<option value="nicname" selected>닉네임</option>
+			<option value="title">제목</option>
+			<option value="content+title">제목+내용</option>
+		</select>
+		<input type="text" class="search_keyword" name="search_keyword" placeholder="Search term...">
+        <input type="submit" value="검색" />
+         </form>
+		</div>
 			<table border="1">
 				<col width="50" />
 				<col width="100" />
@@ -58,8 +69,11 @@
 				</tr>
 			</table>
 	
+			<p>category : ${Pdto.search_category }</p>
 					<jsp:include page="/WEB-INF/views/paging.jsp">
 						<jsp:param value="Q" name="board_category" />
+						<jsp:param value="${Pdto.search_category }" name="qna_search_category" />
+						<jsp:param value="${Pdto.search_keyword }" name="search_keyword"/>
 						<jsp:param value="${Pdto.nowBlock}" name="nowBlock" />
 						<jsp:param value="${Pdto.blockBegin }" name="blockBegin" />
 						<jsp:param value="${Pdto.blockEnd }" name="blockEnd" />
