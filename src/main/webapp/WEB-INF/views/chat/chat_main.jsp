@@ -31,8 +31,10 @@
                					<div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"></div>
                 					<a href="chat_room.do?member_id=${dto.consult_id }">
                 					<div class="chat_ib">
-                  						<h5>${dto.consult_id }<c:forEach items="${member_history }" var="log">
-                  						<c:if test="${dto.consult_id eq log }"><img src="resources/images/green.png" width="10px" height="10px" /></c:if></c:forEach>
+                  						<h5>${dto.consult_id }
+                  						<c:forEach items="${member_history }" var="log">
+                  						<c:if test="${dto.consult_id eq log }"><img src="resources/images/green.png" width="10px" height="10px" /></c:if>
+                  						</c:forEach>
 										<span class="chat_date">${dto.room_con_date }</span></h5>
                   						<p>${dto.room_content }</p>
                 					</div>
