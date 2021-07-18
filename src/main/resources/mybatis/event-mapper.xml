@@ -2,10 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="event">
 	<select id="selectList" resultType="eventDto">
-		SELECT EVENT_NO, EVENT_TITLE, EVENT_DESC, EVENT_START, EVENT_END, EVENT_NOTI, MEMBER_ID, CLASS_NO,
-		PRODUCT_NO
-		FROM EVENT
-		WHERE EVENT_NOTI = 'Y' AND EVENT_START <![CDATA[ <= ]]> SYSDATE AND EVENT_END <![CDATA[ >= ]]> SYSDATE
+		SELECT e.EVENT_NO, e.EVENT_TITLE, e.EVENT_DESC, e.EVENT_START, e.EVENT_END, e.EVENT_NOTI, e.MEMBER_ID, e.CLASS_NO,
+		e.PRODUCT_NO, f.FILE_PATH, f.FILE_NEW_NAME
+		FROM EVENT e, FILE_TABLE f
+		WHERE e.EVENT_NO = f.EVENT_NO AND f.FILE_ORI_NAME  != 'thumbnail'
+		AND EVENT_NOTI = 'Y' AND EVENT_START <![CDATA[ <= ]]> SYSDATE AND EVENT_END <![CDATA[ >= ]]> SYSDATE
 		ORDER BY EVENT_NO
 	</select>
 	

@@ -300,7 +300,7 @@ public class MemberController {
 		return "main";
 	}
 	@RequestMapping("/main.do")
-	public String main(Model model) {
+	public String main() {
 		return "main";
 	}
 	

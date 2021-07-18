@@ -173,9 +173,10 @@ public class EventController {
 	@RequestMapping("/getEvents.do")
 	public Map<String, List<EventDto>> get_events(){
 		Map<String, List<EventDto>> map = new HashMap<>();
-		
 		List<EventDto> list = eBiz.selectList();
+		
 		map.put("list", list);
+		
 		
 		return map;
 	}
