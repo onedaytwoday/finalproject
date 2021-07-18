@@ -47,7 +47,7 @@
 				<div id="articlefileChange"></div>
 			</div>
 			<input type="button" value="리뷰등록" onclick="registerAction()"/> 
-			<input type="button" value="취소" onclick="location.href='classDetail.do?class_no=${cDto.class_no }'" />
+			<input type="button" value="취소" onclick="location.href='classSelect.do?class_no=${cDto.class_no }'" />
 			
 		</form>
 	</main>
