@@ -75,6 +75,7 @@
 		text-align:center;
 		background-color:skyblue;
 		font-weight:bold;
+		margin-bottom:10rem;
 	}
 	.insert_btn{
 		margin: 0px 90px 8px;

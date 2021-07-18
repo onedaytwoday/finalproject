@@ -53,11 +53,11 @@
 			</c:when>
 			
 			<c:when test="${param.class_category eq 'C' }">
-				<c:if test="${param.class_search_category eq 'nickname' or param.notice_search_category eq 'title+desc+category' }">
+				<c:if test="${param.class_search_category eq 'nickname' or param.class_search_category eq 'title+desc+category' }">
 					<c:url var="action" value="class_search.do"/>
-					<c:set var="search" value="&search_category=${param.notice_search_category }&search_keyword=${param.search_keyword }" />
+					<c:set var="search" value="&search_category=${param.class_search_category }&search_keyword=${param.search_keyword }" />
 				</c:if>
-				<c:if test="${param.notice_search_category eq null }">
+				<c:if test="${param.class_search_category eq null }">
 				<c:url var="action" value="classList.do" />
 				</c:if>
 			</c:when>
