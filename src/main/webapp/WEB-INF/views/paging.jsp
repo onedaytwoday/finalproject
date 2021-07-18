@@ -41,13 +41,15 @@
 			</c:when>
 			
 			<c:when test="${param.store_category eq 'S' }">
-				<c:if test="${param.search_keyword eq null }">
+				<c:choose>
+				<c:when test="${empty param.search_keyword }">
 					<c:url var="action" value="store.do" />
-				</c:if>
-				<c:if test="${param.search_keyword != null }">
+				</c:when>
+				<c:otherwise>
 					<c:url var="action" value="store_search.do" />
 					<c:set var="search" value="&search_keyword=${param.search_keyword }"/>
-				</c:if>			
+				</c:otherwise>
+				</c:choose>	
 			</c:when>
 
 

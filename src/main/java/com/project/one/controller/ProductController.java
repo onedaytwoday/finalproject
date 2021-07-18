@@ -52,6 +52,7 @@ public class ProductController {
 	public String Product_list(Model model,int nowPage) {
 		int count = biz.productListCount();
 		StorePagingDto pDto = new StorePagingDto(count, nowPage);
+		System.out.println(pDto);
 		model.addAttribute("list", biz.selectListPaging(pDto));
 		model.addAttribute("pDto", pDto);
 		model.addAttribute("rlist",rbiz.selectList());
