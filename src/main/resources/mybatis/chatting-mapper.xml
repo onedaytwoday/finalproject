@@ -2,21 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="chatting">
 	<select id="selectList" resultType="chattingDto" parameterType="int">
-		SELECT CHATTING_NO, CHATTING_CONTENT, CHATTING_DATE, ROOM_NO,MEMBER_ID
+		SELECT CHATTING_NO, CHATTING_CONTENT, CHATTING_DATE,CHATTING_READ, ROOM_NO,MEMBER_ID
 		FROM CHATTING
 		WHERE ROOM_NO = #{ROOM_NO}
 		ORDER BY CHATTING_DATE
 	</select>
 	
 	<select id="selectOne" parameterType="int" resultType="chattingDto">
-		SELECT CHATTING_NO, CHATTING_CONTENT, CHATTING_DATE, ROOM_NO,MEMBER_ID
+		SELECT CHATTING_NO, CHATTING_CONTENT, CHATTING_DATE,CHATTING_READ, ROOM_NO,MEMBER_ID
 		FROM CHATTING
 		WHERE CHATTING_NO = #{chatting_no}
 	</select>
 	
 	<insert id="insert" parameterType="chattingDto">
 		INSERT INTO CHATTING
-		VALUES(CHATTING_NO_SEQ.NEXTVAL,#{chatting_content},SYSDATE,#{room_no},#{member_id})
+		VALUES(CHATTING_NO_SEQ.NEXTVAL,#{chatting_content},SYSDATE,#{chatting_read},#{room_no},#{member_id})
 	</insert>
 	
 	<delete id="delete" parameterType="int">
@@ -24,7 +24,7 @@
 		WHERE CHATTING_NO = #{chatting_no}
 	</delete>
 	<select id="selecListByRoom" parameterType="int" resultType="chattingDto">
-		SELECT CHATTING_NO, CHATTING_CONTENT, CHATTING_DATE, ROOM_NO,MEMBER_ID
+		SELECT CHATTING_NO, CHATTING_CONTENT, CHATTING_DATE,CHATTING_READ, ROOM_NO,MEMBER_ID
 		FROM CHATTING
 		WHERE ROOM_NO = #{room_no}
 	</select>

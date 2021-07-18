@@ -77,6 +77,7 @@ public class EchoHandler extends TextWebSocketHandler {
 					cDto.setChatting_content(message.getPayload());
 					cDto.setMember_id(dto.getMember_id());
 					cDto.setRoom_no(room_number);
+					cDto.setChatting_read("Y");
 					if(chatBiz.insert(cDto) > 0) {
 						System.out.println("chatting insert 성공 room_no : " + room_number);
 					}else {
@@ -92,24 +93,39 @@ public class EchoHandler extends TextWebSocketHandler {
 			String text = getTranslated(message.getPayload());
 			WebSocketSession sess = map.get(dto.getMember_id());
 			sess.sendMessage(new TextMessage(dto.getMember_id() + " : " + text));
-			
+			if(room.get(opponent)!=null) {
+				if(room.get(opponent).equals(room.get(dto.getMember_id()))){
+					System.out.println("둘다 들어옴");
+					chatting_content = text;
+					ChattingDto cDto = new ChattingDto();
+					cDto.setChatting_content(text);
+					cDto.setRoom_no(room_no);
+					cDto.setMember_id(dto.getMember_id());
+					cDto.setChatting_read("Y");
+					if(chatBiz.insert(cDto) > 0) {
+						System.out.println("chatting-insert 성공");
+					}else {
+						System.out.println("chatting-insert 실패");
+					}
+					
+					WebSocketSession sess_op = map.get(opponent);
+					if (sess_op != null) {
+						sess_op.sendMessage(new TextMessage(dto.getMember_id() + " : " + text));
+					}
+				}
+			}else {
 			//메세지 insert
 			chatting_content = text;
 			ChattingDto cDto = new ChattingDto();
 			cDto.setChatting_content(text);
 			cDto.setRoom_no(room_no);
 			cDto.setMember_id(dto.getMember_id());
+			cDto.setChatting_read("N");
 			if(chatBiz.insert(cDto) > 0) {
 				System.out.println("chatting-insert 성공");
 			}else {
 				System.out.println("chatting-insert 실패");
 			}
-			
-			if (room.get(dto.getMember_id()).equals(room.get(opponent))) {
-				WebSocketSession sess_op = map.get(opponent);
-				if (sess_op != null) {
-					sess_op.sendMessage(new TextMessage(dto.getMember_id() + " : " + text));
-				}
 			}
 		}
 	}
@@ -140,6 +156,9 @@ public class EchoHandler extends TextWebSocketHandler {
 		}
 		if(map != null) {
 			map.remove(dto.getMember_id());
+		}
+		if(room != null) {
+			room.remove(dto.getMember_id());
 		}
 		
 	}

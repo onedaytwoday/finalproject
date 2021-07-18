@@ -12,7 +12,6 @@ public class ChatInterceptor extends HttpSessionHandshakeInterceptor {
 	@Override
 	public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler,
 			Map<String, Object> attributes) throws Exception {
-		
 		System.out.println("before 인터셉터");
 		return super.beforeHandshake(request, response, wsHandler, attributes);
 	}

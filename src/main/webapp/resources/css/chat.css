@@ -72,7 +72,7 @@ img{ max-width:100%;}
   font-size: 14px;
   margin: 0;
   padding: 5px 10px 5px 12px;
-  width: 100%;
+  width: 94%;
 }
 .time_date {
   color: #747474;
@@ -133,4 +133,9 @@ img{ max-width:100%;}
 	position: relative; 
 	padding: 10px; 
 	top:-48px;
+}
+.content_read{
+	float: right; 
+	position: relative; 
+	top: -30px;
 }
