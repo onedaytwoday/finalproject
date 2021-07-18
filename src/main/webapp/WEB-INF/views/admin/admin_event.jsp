@@ -42,7 +42,7 @@
 					<th>시작 날짜</th>
 					<th>종료 날짜</th>
 					<th>알림 여부</th>
-					<th>카테고리</th>
+					<th>상품/클래스</th>
 				</tr>
 				
 				<c:choose>
@@ -62,11 +62,11 @@
 								<td>${dto.event_noti }</td>
 								<c:choose>
 									<c:when test="${dto.class_no >= 0 && dto.product_no == 0 }">
-										<td><a href='classSelect.do?class_no=${dto.class_no }'>클래스</a></td>
+										<td><a href='classSelect.do?class_no=${dto.class_no }'>${dto.title }</a></td>
 									</c:when>
 									
 									<c:otherwise>
-										<td><a href='store_select.do?product_no=${dto.product_no }'>상품</a></td>
+										<td><a href='store_select.do?product_no=${dto.product_no }'>${dto.title }</a></td>
 									</c:otherwise>
 								</c:choose>
 							</tr>
