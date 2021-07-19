@@ -3,11 +3,13 @@ package com.project.one.model.biz;
 import java.util.List;
 
 import com.project.one.model.dto.ReviewDto;
+import com.project.one.model.dto.SearchDto;
 
 public interface ReviewBiz {
 
 	public List<ReviewDto> selectList();
 
+	public List<SearchDto> search();
 	// 작성자별 후기 조회
 	public List<ReviewDto> selectListByUser(String member_id);
 

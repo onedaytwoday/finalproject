@@ -3,15 +3,23 @@ package com.project.one.config;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import com.project.one.model.biz.ReviewBiz;
+
 public class RealHandler extends TextWebSocketHandler {
 	
 	private List<WebSocketSession> sessionList = new ArrayList<WebSocketSession>();
+
 	private int i;
+	
+	@Autowired
+	private ReviewBiz biz;
+	
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		i++;

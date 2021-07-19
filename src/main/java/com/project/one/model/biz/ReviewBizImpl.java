@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.project.one.model.dao.ReviewDao;
 import com.project.one.model.dto.ReviewDto;
+import com.project.one.model.dto.SearchDto;
 
 @Service
 public class ReviewBizImpl implements ReviewBiz {
@@ -18,6 +19,11 @@ public class ReviewBizImpl implements ReviewBiz {
 	public List<ReviewDto> selectList() {
 		return dao.selectList();
 	
+	}
+	
+	@Override
+	public List<SearchDto> search() {
+		return dao.search();
 	}
 	
 	@Override
