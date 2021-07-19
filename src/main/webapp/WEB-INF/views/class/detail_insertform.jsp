@@ -81,7 +81,7 @@
 			dataType: "json",
 			success: function(result) {
 				if(result.msg == '성공') {
-					location.href='classList.do';
+					location.href='classList.do?nowPage=1';
 				} else {
 					alert("저장 실패!");
 				}
