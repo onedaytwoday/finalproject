@@ -2,7 +2,9 @@ package com.project.one.controller;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -15,9 +17,11 @@ import java.util.Map;
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,6 +33,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.mashape.unirest.http.HttpResponse;
 import com.project.one.model.biz.ClassBiz;
 import com.project.one.model.biz.DetailBiz;
 import com.project.one.model.biz.FileTableBiz;
@@ -83,7 +88,7 @@ public class ClassController {
 		PagingDto dto = new PagingDto(count, nowPage);
 		dto.setSearch_category(search_category);
 		dto.setSearch_keyword(search_keyword);
-		model.addAttribute("list", cBiz.classListSearch(pDto));
+		model.addAttribute("list", cBiz.classListSearch(dto));
 		model.addAttribute("pDto", dto);
 		
 		return "class/class_list";
@@ -297,5 +302,30 @@ public class ClassController {
 			sb.append(charSet[idx]);
 		}
 		return sb.toString();
+	}
+	
+	//지도 다시
+	@ResponseBody
+	@RequestMapping(value = "/classmap.do", method = RequestMethod.POST)
+	public String mapList(@RequestBody ClassDto cDto, HttpServletResponse response) throws IOException {
+		PrintWriter out = response.getWriter();
+		List<ClassDto> list = cBiz.selectList();
+		
+		HashMap<String,Object> maplist = new HashMap<String,Object>();
+		JSONObject obj = new JSONObject();
+		JSONArray jsonArray = new JSONArray();
+
+		for(int i = 0; i<list.size(); i++) {
+			
+			maplist.put("class_loc",list.get(i).getClass_loc());
+		    maplist.put("class_title", list.get(i).getClass_title());
+			
+		    obj = new JSONObject(maplist);
+			jsonArray.add(obj);		
+		}
+		out.print(jsonArray);
+		out.flush();
+	
+		return "";
 	}
 }

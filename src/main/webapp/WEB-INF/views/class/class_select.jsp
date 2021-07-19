@@ -81,7 +81,9 @@
 			
 			<p class="my-3">${dto.class_desc }</p>
 			
-			<p>주소 : ${dto.class_loc }</p>
+			<p>주소 : ${dto.class_loc }<br>
+				<input type="button" onclick="">
+			</p>
 			
 			<p>가격 : ${dto.class_price }원</p>
 			
@@ -114,7 +116,7 @@
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-		crossorigin="anonymous"></script>
+		crossorigin="anonymous"></script>	
 <jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>	
 </body>
 </html>
