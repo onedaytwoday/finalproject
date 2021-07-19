@@ -83,11 +83,12 @@ public class ClassController {
 		PagingDto pDto = new PagingDto();
 		pDto.setSearch_category(search_category);
 		pDto.setSearch_keyword(search_keyword);
-		pDto.setNowPage(nowPage);
 		int count = cBiz.classSearchCount(pDto);
+		System.out.println("count : " + count);
 		PagingDto dto = new PagingDto(count, nowPage);
 		dto.setSearch_category(search_category);
 		dto.setSearch_keyword(search_keyword);
+		System.out.println(dto);
 		model.addAttribute("list", cBiz.classListSearch(dto));
 		model.addAttribute("pDto", dto);
 		

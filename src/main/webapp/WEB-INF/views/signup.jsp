@@ -62,7 +62,7 @@
 		var chk = document.getElementsByName("member_id")[0].title;
 		if (chk == "n") {
 			alert("id 중복체크를 먼저 해주세요.");
-			document.getElementsByName("memberid")[0].focus();
+			document.getElementsByName("member_id")[0].focus();
 		}
 	}
 		
@@ -99,7 +99,7 @@
 				<tr>
 					<th>아이디</th>
 					<td>
-						<input type="text" name="member_id" required="required">
+						<input type="text" name="member_id" title="n" required="required">
 						<input type="button" value="중복체크" onclick="idCheck();" />
 					</td>
 				</tr>
@@ -162,7 +162,7 @@
 				<tr>
 					<th>아이디</th>
 					<td>
-						<input type="text" name="member_id" required="required" value="${mDto.member_id }">
+						<input type="text" name="member_id" title="n" required="required" value="${mDto.member_id }">
 						<input type="button" value="중복체크" onclick="idCheck();" />
 					</td>
 				</tr>

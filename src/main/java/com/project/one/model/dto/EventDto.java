@@ -12,8 +12,11 @@ public class EventDto {
 	private String member_id;
 	private int class_no;
 	private int product_no;
+	private String title;
 	private int original_price;
 	private int event_sale;
+	private String file_path;
+	private String file_new_name;
 	
 	public EventDto() {
 	}
@@ -103,6 +106,14 @@ public class EventDto {
 		this.product_no = product_no;
 	}
 
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
 	public int getOriginal_price() {
 		return original_price;
 	}
@@ -118,12 +129,30 @@ public class EventDto {
 	public void setEvent_sale(int event_sale) {
 		this.event_sale = event_sale;
 	}
+	
+	public String getFile_path() {
+		return file_path;
+	}
+
+	public void setFile_path(String file_path) {
+		this.file_path = file_path;
+	}
+
+	public String getFile_new_name() {
+		return file_new_name;
+	}
+
+	public void setFile_new_name(String file_new_name) {
+		this.file_new_name = file_new_name;
+	}
 
 	@Override
 	public String toString() {
 		return "EventDto [event_no=" + event_no + ", event_title=" + event_title + ", event_desc=" + event_desc
 				+ ", event_start=" + event_start + ", event_end=" + event_end + ", event_noti=" + event_noti
-				+ ", member_id=" + member_id + ", class_no=" + class_no + ", product_no=" + product_no
-				+ ", original_price=" + original_price + ", event_sale=" + event_sale + "]";
+				+ ", member_id=" + member_id + ", class_no=" + class_no + ", product_no=" + product_no + ", title="
+				+ title + ", original_price=" + original_price + ", event_sale=" + event_sale + ", file_path="
+				+ file_path + ", file_new_name=" + file_new_name + "]";
 	}
+
 }

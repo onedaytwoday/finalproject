@@ -16,6 +16,7 @@
 	<typeAlias type="com.project.one.model.dto.DetailDto" alias="detailDto" />
 	<typeAlias type="com.project.one.model.dto.PagingDto" alias="pagingDto" />
 	<typeAlias type="com.project.one.model.dto.StorePagingDto" alias="storePagingDto" />
+	<typeAlias type="com.project.one.model.dto.ChatreadDto" alias="chatreadDto" />
 	</typeAliases>
 	
 	<!-- resources : src/main/resources와 연결됨 -->

@@ -60,6 +60,8 @@
 		// 연결끊기면 
 			sock.onclose = function(e){
 				console.log(e);
+			}
+		
 	</script>	
 </body>
 </html>

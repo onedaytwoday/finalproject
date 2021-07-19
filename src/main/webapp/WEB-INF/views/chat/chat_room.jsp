@@ -14,12 +14,27 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="resources/js/sockjs.min.js"></script>
+<style type="text/css">
+.sent_msg {
+  float: right;
+  width: 50%;
+}
+.sent_msg p {
+  background: #05728f none repeat scroll 0 0;
+  border-radius: 3px;
+  font-size: 14px;
+  margin: 0;
+  color:#fff;
+  padding: 5px 10px 5px 12px;
+  width:100%;
+}
+</style>
 </head>
 <body>
 	<div class="inbox_msg">
 		<h3>Room_no : ${room_no }</h3>
 		<h3>${rDto.consult_id }와 채팅</h3>
-		
+			
 		<div>
 			<select name="langs" id="langs">
 			  <option value="ko" selected>한국어</option>
@@ -42,10 +57,22 @@
 							</c:when>
 							<c:otherwise>
 								<c:forEach items="${chatlist }" var="dto">
-								
+								<c:if test="${dto.member_id eq 'admin' }">
+									<div class="incoming_msg">
+	              					<div class="received_msg">
+					                	<div class="received_withd_msg">
+					                	<p>관리자 : <span>${dto.chatting_content }</span> <img src="resources/images/tts.png" class="tts" alt="tts" style="width: 20px; height: 20px; float: right;"/></p>
+                  						<span class="time_date"><fmt:formatDate value="${dto.chatting_date }" pattern="MM/dd hh시mm분" /></span>
+                  						</div>
+              						</div>
+            					</div>
+								</c:if>
 								<c:if test="${dto.member_id eq tmp }">
 									<div class="outgoing_msg">
               							<div class="sent_msg">
+              							<c:if test="${dto.chatting_read eq 'N' }">
+					                	<span class="content_read" style="color:red;float:left;position: relative; left: -15px; top: 2px;">1</span>
+					                	</c:if>
                 						<p>${dto.chatting_content } <img src="resources/images/tts.png" class="tts" alt="tts" style="width: 20px; height: 20px; float: right;"/></p>
                 						<span class="time_date"><fmt:formatDate value="${dto.chatting_date }" pattern="MM/dd hh시mm분" /></span>
                 						</div>
@@ -57,10 +84,15 @@
 	              					<div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> 
 	              					</div>
 	              					<div class="received_msg">
-					                	<div class="received_withd_msg">
-					                	<p><span>${dto.chatting_content }</span> <img src="resources/images/tts.png" class="tts" alt="tts" style="width: 20px; height: 20px; float: right;"/></p>
+					                	<div class="received_withd_msg" style="color:red;">
+					                	<p><span class="content">${dto.chatting_content }</span> 
+					                	<img src="resources/images/tts.png" class="tts" alt="tts" style="width: 20px; height: 20px; float: right;"/></p>
+					                	<c:if test="${dto.chatting_read eq 'N' }">
+					                	<span class="content_read">1</span>
+					                	</c:if>
                   						<span class="time_date"><fmt:formatDate value="${dto.chatting_date }" pattern="MM/dd hh시mm분" /></span>
                   						</div>
+                  						
               						</div>
             					</div>
 								</c:if>
@@ -171,7 +203,7 @@
 			window.speechSynthesis.speak(utterThis);
 		}
 		$(".tts").click(function(){
-			var input = $(this).parent().text();
+			var input = $(this).siblings(".content").text();
 			speech(input);	
 		});
 		

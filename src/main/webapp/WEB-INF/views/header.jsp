@@ -37,6 +37,10 @@
 			$('#iconImg').click(function(){
 	    		window.open('http://localhost:8787/one/chat_main.do?member_id=${mDto.member_id }' ,'채팅', 'width=400px,height=500px,scrollbars=yes');
 	    	});
+			$('#Img').click(function(){
+	    		window.open('http://localhost:8787/one/chat_room.do' ,'채팅', 'width=400px,height=500px,scrollbars=yes');
+	    	});
+			
 	    	
 		    $('#class').on('change', function() {
 				//클래스 카테고리 선택시에 이동할 경로 수정
@@ -118,11 +122,16 @@
 							<span id="basket_num" style="position: absolute; left: 1.5rem; bottom: 30px; border-radius: 50%; padding: 3px 6px; background-color: red; color: white;">${basket_num }</span>
 				          </a>
 				        </li>
-	        			</c:if>
-
-	        			<li class="nav-item">
+				        <li class="nav-item">
 	        				<i id="iconImg" class="bi bi-chat-text text-white fs-2"></i>
 				        </li>
+	        			</c:if>
+						<c:if test="${mDto.member_grade == '관리자' }">
+						<li class="nav-item">
+	        				<i id="Img" class="bi bi-chat-text text-white fs-2"></i>
+				        </li>	
+						</c:if>
+	        			
 				        
 	        			<li class="nav-item">
 				          <a class="nav-link" href="${mDto.member_grade == '관리자' ? 'adminMain.do' : 'mypage_update.do' }">${mDto.member_id }님</a>

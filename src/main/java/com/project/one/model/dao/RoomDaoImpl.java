@@ -9,6 +9,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.project.one.model.dto.ChatreadDto;
 import com.project.one.model.dto.RoomDto;
 
 @Repository
@@ -43,6 +44,34 @@ public class RoomDaoImpl implements RoomDao {
 
 		try {
 			list = sqlSession.selectList(NAMESPACE + "selectListByConsult", consult_id);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return list;
+	}
+	
+	@Override
+	public List<ChatreadDto> member_read(String member_id) {
+		List<ChatreadDto> list = new ArrayList<ChatreadDto>();
+
+		try {
+			list = sqlSession.selectList(NAMESPACE + "member_read", member_id);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return list;
+	}
+
+	@Override
+	public List<ChatreadDto> consult_read(String member_id) {
+		List<ChatreadDto> list = new ArrayList<ChatreadDto>();
+
+		try {
+			list = sqlSession.selectList(NAMESPACE + "consult_read", member_id);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -115,6 +144,5 @@ public class RoomDaoImpl implements RoomDao {
 		}
 		return dto;
 	}
-
 
 }

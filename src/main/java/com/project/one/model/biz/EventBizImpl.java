@@ -46,7 +46,19 @@ public class EventBizImpl implements EventBiz {
 
 	@Override
 	public List<EventDto> eventList(PagingDto dto) {
-		return dao.eventList(dto);
+		List<EventDto> eList = dao.eventList(dto);
+		
+		for(EventDto e : eList) {
+			if (e.getClass_no() >= 0 && e.getProduct_no() == 0) {
+				ClassDto cDto = cBiz.selectOne(e.getClass_no());
+				e.setTitle(cDto.getClass_title());
+			} else {
+				ProductDto pDto = pBiz.selectOne(e.getProduct_no());
+				e.setTitle(pDto.getProduct_name());
+			}
+		}
+		
+		return eList;
 	}
 
 	@Override

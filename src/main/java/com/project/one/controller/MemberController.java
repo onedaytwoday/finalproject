@@ -47,9 +47,6 @@ public class MemberController {
 	}
 	
 	@Autowired
-	private ChatSession chatSession;
-	
-	@Autowired
 	private MemberBiz biz;	
 	
 	@Autowired
@@ -93,7 +90,6 @@ public class MemberController {
 					 }
 				}
 			}
-			
 		}
 		
 		map.put("chk", chk);
@@ -173,8 +169,8 @@ public class MemberController {
 		Map<String, String> map = new HashMap<>();
 
 		if(checkUser != null) {
-			//TODO: 문자 인증번호 보내기 기능 추가 필요
-			map.put("msg", "1111");
+			//SendSMS.sendSMS(checkUser.getMember_phone());
+			map.put("num", "1111");
 			map.put("member_id", checkUser.getMember_id());
 			
 		} else {
@@ -187,11 +183,8 @@ public class MemberController {
 	@RequestMapping("/updatePw.do")
 	public String update_pw(MemberDto dto) {
 		if(biz.updatePw(dto) > 0) {
-			// TODO: 비밀번호 암호화 필요
-			
 			return "redirect:loginform.do";
 		}
-		
 		
 		return "redirect:findIdPwForm.do";
 	}
@@ -248,7 +241,7 @@ public class MemberController {
 			if(res != null) {
 				session.setAttribute("mDto", res);
 				session.setMaxInactiveInterval(-1);
-				return "main";
+				return "redirect:main.do";
 			}
 			model.addAttribute("mDto",mDto);
 		} catch (org.json.simple.parser.ParseException e) {
@@ -288,7 +281,7 @@ public class MemberController {
 		if(res != null) {
 			session.setAttribute("mDto", res);
 			session.setMaxInactiveInterval(-1);
-			return "main";
+			return "redirect:main.do";
 		}
 		
 		model.addAttribute("mDto" , mDto);
@@ -304,7 +297,7 @@ public class MemberController {
 		return "main";
 	}
 	@RequestMapping("/main.do")
-	public String main(Model model) {
+	public String main() {
 		return "main";
 	}
 	

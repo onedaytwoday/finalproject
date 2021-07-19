@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.one.model.dao.RoomDao;
+import com.project.one.model.dto.ChatreadDto;
 import com.project.one.model.dto.RoomDto;
 import com.project.one.util.DateConvert;
 @Service
@@ -52,7 +53,17 @@ public class RoomBizImpl implements RoomBiz {
 		
 		return res;
 	}
+	
+	@Override
+	public List<ChatreadDto> member_read(String member_id) {
+		return dao.member_read(member_id);
+	}
 
+	@Override
+	public List<ChatreadDto> consult_read(String member_id) {
+		return dao.consult_read(member_id);
+	}
+	
 	@Override
 	public RoomDto selectOne(int room_no) {
 		return dao.selectOne(room_no);
@@ -78,10 +89,5 @@ public class RoomBizImpl implements RoomBiz {
 		
 		return dao.isRoom(roomDto);
 	}
-
-
-
-
-
 
 }
