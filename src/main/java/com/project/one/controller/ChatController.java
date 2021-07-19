@@ -27,6 +27,7 @@ import com.project.one.model.biz.ChattingBiz;
 import com.project.one.model.biz.MemberBiz;
 import com.project.one.model.biz.RoomBiz;
 import com.project.one.model.dto.ChatSession;
+import com.project.one.model.dto.ChatreadDto;
 import com.project.one.model.dto.ChattingDto;
 import com.project.one.model.dto.MemberDto;
 import com.project.one.model.dto.RoomDto;
@@ -49,11 +50,15 @@ public class ChatController {
 		MemberDto mDto = (MemberDto) session.getAttribute("mDto");
 		if (mDto.getMember_grade().equals("강사회원")) {
 			List<RoomDto> roomlist = roomBiz.selectListByConsult(member_id);
+			List<ChatreadDto> chatread = roomBiz.consult_read(member_id);
+			model.addAttribute("chatread", chatread);
 			model.addAttribute("roomlist", roomlist);
 			model.addAttribute("mDto", mDto);
 			return "chat/chat_consult";
 		}
 		List<RoomDto> roomlist = roomBiz.selectListByUser(member_id);
+		List<ChatreadDto> chatread = roomBiz.member_read(member_id);
+		model.addAttribute("chatread",chatread);
 		model.addAttribute("roomlist", roomlist);
 		model.addAttribute("mDto", mDto);
 		return "chat/chat_main";
@@ -86,11 +91,19 @@ public class ChatController {
 			RoomDto exist = roomBiz.isRoom(dto);
 			if (exist != null) {
 				System.out.println("방이 있다!!");
-				List<ChattingDto> chatlist = chatBiz.selectList(exist.getRoom_no());
 				session.setAttribute("opponent", member_id);
 				session.setAttribute("room_no", exist.getRoom_no());
+				ChattingDto cdto = new ChattingDto();
+				cdto.setMember_id(member_id);
+				cdto.setRoom_no(exist.getRoom_no());
+				if(chatBiz.update(cdto) > 0) {
+					System.out.println("chatread update 성공");
+				}else {
+					System.out.println("chatread update 실패");
+				}
 				rDto.setConsult_id(member_id);
 				rDto.setMember_id(mDto.getMember_id());
+				List<ChattingDto> chatlist = chatBiz.selectList(exist.getRoom_no());
 				mav.addObject("rDto", rDto);
 				mav.addObject("Room_no", exist.getRoom_no());
 				mav.addObject("chatlist", chatlist);
@@ -125,10 +138,18 @@ public class ChatController {
 		// DB에 방이 있을 때 가져옴
 		else {
 			System.out.println("방이 있다!!");
-			List<ChattingDto> chatlist = chatBiz.selectList(exist.getRoom_no());
-
 			String lang = (String) session.getAttribute("lang");
-
+			session.setAttribute("opponent", member_id);
+			session.setAttribute("room_no", exist.getRoom_no());
+			ChattingDto cdto = new ChattingDto();
+			cdto.setMember_id(member_id);
+			cdto.setRoom_no(exist.getRoom_no());
+			if(chatBiz.update(cdto) > 0) {
+				System.out.println("chatread update 성공");
+			}else {
+				System.out.println("chatread update 실패");
+			}
+			List<ChattingDto> chatlist = chatBiz.selectList(exist.getRoom_no());
 			if (lang != null) {
 				String context = null;
 				for (ChattingDto cDto : chatlist) {
@@ -141,8 +162,6 @@ public class ChatController {
 					cDto.setChatting_content(context);
 				}
 			}
-			session.setAttribute("opponent", member_id);
-			session.setAttribute("room_no", exist.getRoom_no());
 			mav.addObject("Room_no", exist.getRoom_no());
 			mav.addObject("chatlist", chatlist);
 			mav.setViewName("chat/chat_room");

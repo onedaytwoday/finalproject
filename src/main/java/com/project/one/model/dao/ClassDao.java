@@ -13,6 +13,10 @@ public interface ClassDao {
 	
 	public List<ClassDto> classList(PagingDto pDto);
 	
+	public List<ClassDto> classListPaging(PagingDto pDto);
+	
+	public List<ClassDto> classListSearch(PagingDto pDto);
+	
 	public ClassDto selectOne(int class_no);
 	
 	public ClassDto selectOneByTitle(String class_title);
@@ -28,4 +32,8 @@ public interface ClassDao {
 	public List<ClassDto> userClass(String member_id);
 	
 	public int classCount();
+	
+	public int classListCount();
+	
+	public int classSearchCount(PagingDto pDto);
 }

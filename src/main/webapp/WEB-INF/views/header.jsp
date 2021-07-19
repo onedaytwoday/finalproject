@@ -77,7 +77,7 @@
 	        </li>
 	        
 	        <li class="nav-item">
-	          <a class="nav-link" href="classList.do">클래스</a>
+	          <a class="nav-link" href="classList.do?nowPage=1">클래스</a>
 	        </li>
 	        
 	        <li class="nav-item">

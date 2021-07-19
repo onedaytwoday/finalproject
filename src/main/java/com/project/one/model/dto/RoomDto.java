@@ -12,6 +12,7 @@ public class RoomDto {
 	private String room_content;
 	private Date room_date;
 	private String room_con_date;
+	
 	public RoomDto() {
 	}
 	
@@ -89,7 +90,7 @@ public class RoomDto {
 	public void setRoom_date(Date room_date) {
 		this.room_date = room_date;
 	}
-
+	
 	public static RoomDto convertMessage(String source) {
 		RoomDto message = new RoomDto();
 		Gson gson = new Gson();

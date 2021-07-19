@@ -19,6 +19,12 @@
 		VALUES(CHATTING_NO_SEQ.NEXTVAL,#{chatting_content},SYSDATE,#{chatting_read},#{room_no},#{member_id})
 	</insert>
 	
+	<update id="update" parameterType="chattingDto">
+		UPDATE CHATTING SET CHATTING_READ = 'Y' 
+		WHERE ROOM_NO = #{room_no} AND MEMBER_ID = #{member_id} 
+		AND CHATTING_READ IN (SELECT CHATTING_READ FROM CHATTING WHERE CHATTING_READ = 'N')
+	</update>
+	
 	<delete id="delete" parameterType="int">
 		DELETE FROM CHATTING 
 		WHERE CHATTING_NO = #{chatting_no}

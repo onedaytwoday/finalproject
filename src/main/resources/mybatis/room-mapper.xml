@@ -7,27 +7,44 @@
 		ORDER BY ROOM_NO
 	</select>
 	<select id="selectListByUser" parameterType="String" resultType="roomDto">
-		SELECT R.ROOM_NO, R.MEMBER_ID, R.CONSULT_ID, R.ROOM_CONTENT, R.ROOM_DATE ,
-			(SELECT COUNT(*) 
-			FROM CHATTING C 
-			WHERE R.ROOM_NO = C.ROOM_NO
-			AND C.CHATTING_READ = 'N') AS cnt
+		SELECT ROOM_NO, MEMBER_ID, CONSULT_ID, ROOM_CONTENT, ROOM_DATE
 		FROM ROOM R
-		WHERE R.MEMBER_ID = #{member_id}
+		WHERE MEMBER_ID = #{member_id}
 		ORDER BY R.ROOM_NO
 	</select>
 	<select id="selectListByConsult" parameterType="String" resultType="roomDto">
 		SELECT ROOM_NO, MEMBER_ID, CONSULT_ID, ROOM_CONTENT, ROOM_DATE
-		FROM ROOM
+		FROM ROOM R
 		WHERE CONSULT_ID = #{consult_id}
-		ORDER BY ROOM_NO
+		ORDER BY R.ROOM_NO
 	</select>
 	<select id="selectOne" parameterType="int" resultType="roomDto">
 		SELECT ROOM_NO, MEMBER_ID, CONSULT_ID, ROOM_CONTENT, ROOM_DATE
 		FROM ROOM
 		WHERE ROOM_NO = #{room_no}
 	</select>
-	
+	<select id="member_read" parameterType="String" resultType="chatreadDto">
+		SELECT C.ROOM_NO, COUNT(*) AS cnt
+		FROM CHATTING C , (SELECT CONSULT_ID
+							FROM ROOM 
+							WHERE MEMBER_ID = #{member_id}
+							ORDER BY ROOM_NO
+							)A
+		WHERE A.CONSULT_ID = C.MEMBER_ID
+		AND CHATTING_READ = 'N'
+		GROUP BY C.ROOM_NO
+	</select>
+	<select id="consult_read" parameterType="String" resultType="chatreadDto">
+		SELECT C.ROOM_NO, COUNT(*) AS cnt
+		FROM CHATTING C , (SELECT MEMBER_ID
+							FROM ROOM 
+							WHERE CONSULT_ID = #{member_id}
+							ORDER BY ROOM_NO
+							)A
+		WHERE A.MEMBER_ID = C.MEMBER_ID
+		AND CHATTING_READ = 'N'
+		GROUP BY C.ROOM_NO
+	</select>
 	<insert id="insert" parameterType="roomDto">
 		INSERT INTO ROOM
 		VALUES(ROOM_NO_SEQ.NEXTVAL,#{member_id},#{consult_id},NULL,SYSDATE)

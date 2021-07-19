@@ -65,4 +65,28 @@ public class ClassBizImpl implements ClassBiz {
 		return dao.classCount();
 	}
 
+	@Override
+	public List<ClassDto> classListPaging(PagingDto pDto) {
+		
+		return dao.classListPaging(pDto);
+	}
+
+	@Override
+	public int classListCount() {
+		
+		return dao.classListCount();
+	}
+
+	@Override
+	public List<ClassDto> classListSearch(PagingDto pDto) {
+		
+		return dao.classListSearch(pDto);
+	}
+
+	@Override
+	public int classSearchCount(PagingDto pDto) {
+		
+		return dao.classSearchCount(pDto);
+	}
+
 }

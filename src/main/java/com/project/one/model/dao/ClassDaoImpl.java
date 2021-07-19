@@ -152,4 +152,61 @@ public class ClassDaoImpl implements ClassDao {
 		return res;
 	}
 
+	@Override
+	public List<ClassDto> classListPaging(PagingDto pDto) {
+		List<ClassDto> list = new ArrayList<ClassDto>();
+
+		try {
+			list = sqlSession.selectList(NAMESPACE + "classListPaging", pDto);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return list;
+
+	}
+
+	@Override
+	public int classListCount() {
+		int res = 0;
+		
+		try {
+			res = sqlSession.selectOne(NAMESPACE + "classListCount");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+
+	@Override
+	public List<ClassDto> classListSearch(PagingDto pDto) {
+		List<ClassDto> list = new ArrayList<ClassDto>();
+
+		try {
+			list = sqlSession.selectList(NAMESPACE + "classListSearch", pDto);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return list;
+	}
+
+	@Override
+	public int classSearchCount(PagingDto pDto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.selectOne(NAMESPACE + "classSearchCount", pDto);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res;		
+	}
+
 }

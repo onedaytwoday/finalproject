@@ -14,6 +14,21 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="resources/js/sockjs.min.js"></script>
+<style type="text/css">
+.sent_msg {
+  float: right;
+  width: 50%;
+}
+.sent_msg p {
+  background: #05728f none repeat scroll 0 0;
+  border-radius: 3px;
+  font-size: 14px;
+  margin: 0;
+  color:#fff;
+  padding: 5px 10px 5px 12px;
+  width:100%;
+}
+</style>
 </head>
 <body>
 	<div class="inbox_msg">
@@ -55,6 +70,9 @@
 								<c:if test="${dto.member_id eq tmp }">
 									<div class="outgoing_msg">
               							<div class="sent_msg">
+              							<c:if test="${dto.chatting_read eq 'N' }">
+					                	<span class="content_read" style="color:red;float:left;position: relative; left: -15px; top: 2px;">1</span>
+					                	</c:if>
                 						<p>${dto.chatting_content } <img src="resources/images/tts.png" class="tts" alt="tts" style="width: 20px; height: 20px; float: right;"/></p>
                 						<span class="time_date"><fmt:formatDate value="${dto.chatting_date }" pattern="MM/dd hh시mm분" /></span>
                 						</div>

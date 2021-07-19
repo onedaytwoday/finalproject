@@ -74,6 +74,12 @@ public class ChattingDto {
 	public void setChatting_read(String chatting_read) {
 		this.chatting_read = chatting_read;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "ChattingDto [chatting_no=" + chatting_no + ", chatting_content=" + chatting_content + ", chatting_date="
+				+ chatting_date + ", chatting_read=" + chatting_read + ", room_no=" + room_no + ", member_id="
+				+ member_id + "]";
+	}
 	
 }
