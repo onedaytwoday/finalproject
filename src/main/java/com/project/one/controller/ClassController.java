@@ -89,32 +89,7 @@ public class ClassController {
 		
 		return "class/class_list";
 	}
-	
-//	@ResponseBody
-//	@RequestMapping("/class_search.do")
-//	public Map<String, Object> class_search(@RequestBody Map<String, String> search) {
-//		Map<String, Object> map = new HashMap<>();
-//		int nowPage = Integer.parseInt(search.get("nowPage"));
-//		String search_category = search.get("search_category");
-//		String search_keyword = search.get("search_keyword");
-//		
-//		System.out.println(search_category);
-//		
-//		PagingDto pDto = new PagingDto();
-//		pDto.setSearch_category(search_category);
-//		pDto.setSearch_keyword(search_keyword);
-//		int count = cBiz.classSearchCount(pDto);
-//		PagingDto dto = new PagingDto(count, nowPage);
-//		dto.setSearch_category(search_category);
-//		dto.setSearch_keyword(search_keyword);
-//		
-//		map.put("list", cBiz.classListSearch(dto));
-//		map.put("pDto", dto);
-//		
-//		return map;
-//	}
-	
-	
+		
 	@RequestMapping("/classSelect.do")
 	public String class_select(Model model, int class_no) {
 		CLASS_NO = class_no;

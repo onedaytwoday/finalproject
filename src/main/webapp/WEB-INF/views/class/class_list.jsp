@@ -16,66 +16,27 @@
 <script src="resources/js/sockjs.min.js"></script>
 
 <script type="text/javascript">
-	
+	let checked
 	$(function(){
-		<%--
-		$("#searchForm").submit(function(event){
-			event.preventDefault();
-			
-			let searchVal = {
-					"nowPage": $("[name='nowPage']").val(),
-					"search_category": $("select option:selected").val(),
-					"search_keyword": $("[name='search_keyword']:eq(0)").val()
-			}
-			
-			$.ajax({
-				type: 'post',
-				url: 'class_search.do',
-				data: JSON.stringify(searchVal),
-				contentType: "application/json",
-				dataType: "json",
-				success: function(msg) {
-					console.log(msg)
-				},
-				error: function() {
-					alert("통신 실패!");
-				}
-				
-			})
-			
-			sock.send($("[name='search_keyword']:eq(0)").val());
-			$("[name='search_keyword']:eq(0)").val('').focus();
-		});
-		--%>
-		
 		$("#search_category").change(function(){
 			let category = $("select > option:selected").val();
-			if(category == 'title+desc+category') {
-				$("[name='search_keyword']:eq(0)").change(function(){
-					sock.send($("[name='search_keyword']:eq(0)").val());
-				});
-			}
+			checked = category == 'title+desc+category'
 		});		
 	});
 	
-	
-	let sock = new SockJS("${pageContext.request.contextPath}/rank");
-	
-	// 메세지 왔을때
-	sock.onmessage = function(e){
-		$('#result').append(e.data + "<br>");
-		console.log(e);
+	function ranking(){
+		if(checked){
+			sock.send($("[name='search_keyword']:eq(0)").val());		
+		}
 	}
 	
-	// 나가기 버튼
-	function exit(){
-		sock.close();
-	}		
+	
+	let sock = new SockJS("${pageContext.request.contextPath}/rank");		
 	
 	// 연결끊기면 
-		sock.onclose = function(e){
-			console.log(e);
-		}
+	sock.onclose = function(e){
+		console.log(e);
+	}	
 </script>
 </head>
 <body>
@@ -91,7 +52,7 @@
 			<option value="title+desc+category">클래스명+설명+내용</option>
 		</select>
 		<input type="text" class="search_keyword" name="search_keyword" placeholder="Search term...">
-        <input type="submit" value="검색" />
+        <input onclick="ranking()" type="submit" value="검색" />
          </form>
 	</div>
 
