@@ -15,7 +15,7 @@ public class WebSocketConfig implements WebSocketConfigurer{
 	private EchoHandler echoHandler;
 
 	@Autowired
-	private RealHandler realHandler;
+	private RankingHandler realHandler;
 	@Override
 	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
 		registry.addHandler(echoHandler, "/echo").setAllowedOrigins("*").withSockJS()
