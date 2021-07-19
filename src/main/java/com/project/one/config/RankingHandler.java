@@ -1,7 +1,10 @@
 package com.project.one.config;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.socket.CloseStatus;
@@ -11,10 +14,11 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import com.project.one.model.biz.ReviewBiz;
 
-public class RealHandler extends TextWebSocketHandler {
+
+public class RankingHandler extends TextWebSocketHandler {
 	
 	private List<WebSocketSession> sessionList = new ArrayList<WebSocketSession>();
-
+	private Map<String, Integer> ranking = new HashMap<>();
 	private int i;
 	
 	@Autowired
@@ -24,11 +28,32 @@ public class RealHandler extends TextWebSocketHandler {
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		i++;
 		sessionList.add(session);
+		String[] res = getSearch(session);
+		if(res!=null) {
+			for(int i=0;i<res.length;i++) {
+				ranking.put(res[i], 0);
+			}
+		}
+		System.out.println(ranking.toString());
+		
 		System.out.println(session.getId() + " 연결 성공 => 총 접속 인원 : " + i + "명");
 	}
 
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
+		int count = 1;
+		String text = message.getPayload();
+		ranking.put(text, count);
+		
+		Set<String> search = ranking.keySet();
+		for(String s : search) {
+			if(s.equals(text)) {
+				count = ranking.get(s);
+				ranking.replace(s, count++);
+			}
+		}
+		
+		
 		for (WebSocketSession sess : sessionList) {
 			sess.sendMessage(new TextMessage(session.getId() + " : " + message.getPayload()));
 		}
@@ -40,5 +65,11 @@ public class RealHandler extends TextWebSocketHandler {
 		if (sessionList != null) {
 			sessionList.remove(session);
 		}
+		System.out.println("총 접속 인원 : " + i + "명");
+	}
+	private String[] getSearch(WebSocketSession session) {
+		Map<String, Object> httpSession = session.getAttributes();
+		String[] res = (String[]) httpSession.get("res");
+		return res;
 	}
 }

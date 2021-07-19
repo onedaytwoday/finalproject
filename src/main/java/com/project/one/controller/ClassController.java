@@ -33,6 +33,7 @@ import com.project.one.model.biz.ClassBiz;
 import com.project.one.model.biz.DetailBiz;
 import com.project.one.model.biz.FileTableBiz;
 import com.project.one.model.biz.PaymentBiz;
+import com.project.one.model.biz.ProductBiz;
 import com.project.one.model.biz.ReviewBiz;
 import com.project.one.model.dto.ClassDto;
 import com.project.one.model.dto.DetailDto;
@@ -40,6 +41,8 @@ import com.project.one.model.dto.FileTableDto;
 import com.project.one.model.dto.MemberDto;
 import com.project.one.model.dto.PagingDto;
 import com.project.one.model.dto.PaymentDto;
+import com.project.one.model.dto.ProductDto;
+import com.project.one.model.dto.SearchDto;
 
 import net.coobird.thumbnailator.Thumbnails;
 
@@ -56,6 +59,8 @@ public class ClassController {
 	private ReviewBiz rbiz;
 	
 	@Autowired
+	private ProductBiz pbiz;
+	@Autowired
 	private DetailBiz dBiz;
 
 	@Autowired
@@ -64,12 +69,26 @@ public class ClassController {
 	private static int CLASS_NO;
 
 	@RequestMapping("/classList.do")
-	public String class_list(Model model, int nowPage) {
+	public String class_list(Model model, int nowPage , HttpSession session) {
+		List<SearchDto> list = rbiz.search();
+		String[] res = new String[list.size()];
+		for(int i=0;i<list.size();i++) {
+			if(list.get(i).getProduct_no() == 0) {
+				  ClassDto dto = cBiz.selectOne(list.get(i).getClass_no());
+				  res[i] = dto.getClass_title();
+			}else {
+				ProductDto dto = pbiz.selectOne(list.get(i).getProduct_no());
+				res[i] = dto.getProduct_name();
+			}
+		}
+		
 		int count = cBiz.classListCount();
 		PagingDto pDto = new PagingDto(count, nowPage);
 		model.addAttribute("list", cBiz.classListPaging(pDto));
 		//평점? model.addAttribute("rlist",rbiz.selectList());
 		model.addAttribute("pDto", pDto);
+		model.addAttribute("res",res);
+		session.setAttribute("res", res);
 		return "class/class_list";
 	}
 	//검색
@@ -89,6 +108,32 @@ public class ClassController {
 		
 		return "class/class_list";
 	}
+	
+//	@ResponseBody
+//	@RequestMapping("/class_search.do")
+//	public Map<String, Object> class_search(@RequestBody Map<String, String> search) {
+//		Map<String, Object> map = new HashMap<>();
+//		int nowPage = Integer.parseInt(search.get("nowPage"));
+//		String search_category = search.get("search_category");
+//		String search_keyword = search.get("search_keyword");
+//		
+//		System.out.println(search_category);
+//		
+//		PagingDto pDto = new PagingDto();
+//		pDto.setSearch_category(search_category);
+//		pDto.setSearch_keyword(search_keyword);
+//		int count = cBiz.classSearchCount(pDto);
+//		PagingDto dto = new PagingDto(count, nowPage);
+//		dto.setSearch_category(search_category);
+//		dto.setSearch_keyword(search_keyword);
+//		
+//		map.put("list", cBiz.classListSearch(dto));
+//		map.put("pDto", dto);
+//		
+//		return map;
+//	}
+	
+	
 	@RequestMapping("/classSelect.do")
 	public String class_select(Model model, int class_no) {
 		CLASS_NO = class_no;

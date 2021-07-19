@@ -22,8 +22,6 @@
 		margin-left:5.5rem;
 	}
 	
-	
-
 	.product_header{
 		margin-left: 5.5rem;		
 		margin-top: 6rem;		
