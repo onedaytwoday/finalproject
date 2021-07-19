@@ -72,6 +72,7 @@
 	    <div class="collapse navbar-collapse" id="navbarCollapse">
 	      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 	        
+	        <li><a href="real.do">real</a></li>
 	        <li class="nav-item">
 	          <a class="nav-link" href="store.do?nowPage=1">쇼핑</a>
 	        </li>

@@ -42,7 +42,7 @@
 	<!-- transaction -->
 	<tx:annotation-driven />	
 	<beans:bean id="echoHandler" class="com.project.one.config.EchoHandler"/>
-	
+	<beans:bean id="realHandler" class="com.project.one.config.RealHandler"/>
 	<websocket:handlers>
 		<websocket:mapping handler="echoHandler" path="/echo"/>
         <websocket:handshake-interceptors>

@@ -139,3 +139,17 @@ img{ max-width:100%;}
 	position: relative; 
 	top: -30px;
 }
+.circle{
+	background-color:red;
+	width:20px; 
+	height:20px;
+	border-radius:75px;
+	text-align:center;
+	margin:0 auto;
+	font-size:12pt;
+	color:#fff;
+	vertical-align:middle;
+	position: relative;
+	top: -15px;
+	left: -20%;
+}
