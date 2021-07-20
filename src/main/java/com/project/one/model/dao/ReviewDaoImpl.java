@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.project.one.model.dto.ReviewDto;
+import com.project.one.model.dto.SearchDto;
 
 @Repository
 public class ReviewDaoImpl implements ReviewDao {
@@ -21,6 +22,20 @@ public class ReviewDaoImpl implements ReviewDao {
 
 		try {
 			list = sqlSession.selectList(NAMESPACE + "selectList");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return list;
+	}
+	
+	@Override
+	public List<SearchDto> search() {
+		List<SearchDto> list = new ArrayList<SearchDto>();
+
+		try {
+			list = sqlSession.selectList(NAMESPACE + "search");
 
 		} catch (Exception e) {
 			e.printStackTrace();

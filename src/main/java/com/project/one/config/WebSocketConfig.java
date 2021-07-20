@@ -15,13 +15,13 @@ public class WebSocketConfig implements WebSocketConfigurer{
 	private EchoHandler echoHandler;
 
 	@Autowired
-	private RankingHandler realHandler;
+	private RankingHandler rankHandler;
 	@Override
 	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
 		registry.addHandler(echoHandler, "/echo").setAllowedOrigins("*").withSockJS()
 		.setInterceptors(new HttpSessionHandshakeInterceptor())
 		.setClientLibraryUrl("http://localhost:8080/resources/js/sockjs.min.js");
-		registry.addHandler(realHandler, "/real").setAllowedOrigins("*").withSockJS()
+		registry.addHandler(rankHandler, "/rank").setAllowedOrigins("*").withSockJS()
 		.setInterceptors(new HttpSessionHandshakeInterceptor())
 		.setClientLibraryUrl("http://localhost:8080/resources/js/sockjs.min.js");
 	}

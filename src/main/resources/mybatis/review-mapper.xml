@@ -12,6 +12,30 @@
 		FROM REVIEW
 		WHERE REVIEW_NO = #{review_no}
 	</select>
+	<select id="search" resultType="searchDto">
+		SELECT X.PRODUCT_NO,X.CLASS_NO
+		FROM 
+			(
+			SELECT A.avg,A.PRODUCT_NO ,A.CLASS_NO, ROWNUM as rnum
+			FROM
+					(
+					SELECT AVG(REVIEW_RATE)as avg, PRODUCT_NO, CLASS_NO
+					FROM REVIEW 
+					WHERE PRODUCT_NO IN (
+					   		        SELECT PRODUCT_NO 
+					   		        FROM REVIEW 
+					   		        )
+					OR CLASS_NO IN (
+							SELECT CLASS_NO
+							FROM REVIEW 
+							) 
+					GROUP BY PRODUCT_NO , CLASS_NO
+					ORDER BY AVG DESC
+					) A
+			WHERE ROWNUM <![CDATA[ <= ]]> 5
+			) X	
+		WHERE rnum <![CDATA[ >= ]]> 1
+	</select>
 	
 	<select id="avgList" parameterType="int" resultType="reviewDto">
 		SELECT REVIEW_NO, REVIEW_TITLE, REVIEW_RATE, REVIEW_DATE, REVIEW_CONTENT, PRODUCT_NO, CLASS_NO, MEMBER_ID

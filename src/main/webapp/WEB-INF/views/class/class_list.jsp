@@ -18,6 +18,36 @@
 <script type="text/javascript">
 	let checked
 	$(function(){
+		<%--
+		$("#searchForm").submit(function(event){
+			event.preventDefault();
+			
+			let searchVal = {
+					"nowPage": $("[name='nowPage']").val(),
+					"search_category": $("select option:selected").val(),
+					"search_keyword": $("[name='search_keyword']:eq(0)").val()
+			}
+			
+			$.ajax({
+				type: 'post',
+				url: 'class_search.do',
+				data: JSON.stringify(searchVal),
+				contentType: "application/json",
+				dataType: "json",
+				success: function(msg) {
+					console.log(msg)
+				},
+				error: function() {
+					alert("통신 실패!");
+				}
+				
+			})
+			
+			sock.send($("[name='search_keyword']:eq(0)").val());
+			$("[name='search_keyword']:eq(0)").val('').focus();
+		});
+		--%>
+		
 		$("#search_category").change(function(){
 			let category = $("select > option:selected").val();
 			checked = category == 'title+desc+category'
@@ -30,9 +60,20 @@
 			sock.send(list);		
 		}
 	}
+	// 나가기 버튼
+	function exit(){
+		sock.close();
+	}		
 	
 	let sock = new SockJS("${pageContext.request.contextPath}/rank");		
 	
+	sock.onmessage = function(e){
+		var tmp = e.data.split(":");
+		for(var i=0;i<tmp.length;i++){
+			$('.search_ul').append("<li>"+tmp[i]+"</li>");
+		}
+		
+	}
 	// 연결끊기면 
 	sock.onclose = function(e){
 		console.log(e);
@@ -42,9 +83,18 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
-	
 	<main class="container">
 		<h1>클래스 목록</h1>
+	<ul class="search_ul">
+	<c:choose>
+		<c:when test="${empty res }"></c:when>
+		<c:otherwise>
+			<c:forEach items="${res }" var="dto">
+				<li class="search_value">${dto }</li>
+			</c:forEach>
+		</c:otherwise>
+	</c:choose>
+	</ul>
 	<div class="search">
 		<form action="class_search.do" method="post">
 			<input type="hidden" name="nowPage" value="1">

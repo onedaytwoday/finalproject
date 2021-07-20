@@ -33,6 +33,7 @@ import com.project.one.model.biz.ClassBiz;
 import com.project.one.model.biz.DetailBiz;
 import com.project.one.model.biz.FileTableBiz;
 import com.project.one.model.biz.PaymentBiz;
+import com.project.one.model.biz.ProductBiz;
 import com.project.one.model.biz.ReviewBiz;
 import com.project.one.model.dto.ClassDto;
 import com.project.one.model.dto.DetailDto;
@@ -40,6 +41,8 @@ import com.project.one.model.dto.FileTableDto;
 import com.project.one.model.dto.MemberDto;
 import com.project.one.model.dto.PagingDto;
 import com.project.one.model.dto.PaymentDto;
+import com.project.one.model.dto.ProductDto;
+import com.project.one.model.dto.SearchDto;
 
 import net.coobird.thumbnailator.Thumbnails;
 
@@ -64,7 +67,7 @@ public class ClassController {
 	private static int CLASS_NO;
 
 	@RequestMapping("/classList.do")
-	public String class_list(Model model, int nowPage) {
+	public String class_list(Model model, int nowPage , HttpSession session) {
 		int count = cBiz.classListCount();
 		PagingDto pDto = new PagingDto(count, nowPage);
 		model.addAttribute("list", cBiz.classListPaging(pDto));
