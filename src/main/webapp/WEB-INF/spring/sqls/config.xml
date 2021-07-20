@@ -18,6 +18,7 @@
 	<typeAlias type="com.project.one.model.dto.StorePagingDto" alias="storePagingDto" />
 	<typeAlias type="com.project.one.model.dto.ChatreadDto" alias="chatreadDto" />
 	<typeAlias type="com.project.one.model.dto.SearchDto" alias="searchDto" />
+	<typeAlias type="com.project.one.model.dto.RankDto" alias="rankDto" />
 	</typeAliases>
 	
 	<!-- resources : src/main/resources와 연결됨 -->
@@ -34,5 +35,6 @@
 		<mapper resource="/mybatis/chatting-mapper.xml" />
 		<mapper resource="/mybatis/room-mapper.xml" />
 		<mapper resource="/mybatis/detail-mapper.xml" />
+		<mapper resource="/mybatis/rank-mapper.xml" />
 	</mappers>
 </configuration>

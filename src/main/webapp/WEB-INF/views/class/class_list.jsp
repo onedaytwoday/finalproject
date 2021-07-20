@@ -16,7 +16,7 @@
 <script src="resources/js/sockjs.min.js"></script>
 
 <script type="text/javascript">
-	
+	let checked
 	$(function(){
 		<%--
 		$("#searchForm").submit(function(event){
@@ -48,38 +48,43 @@
 		});
 		--%>
 		
+		$("#search_category").change(function(){
+			let category = $("select > option:selected").val();
+			checked = category == 'title+desc+category'
+		});		
 	});
 	
-	
-	let sock = new SockJS("${pageContext.request.contextPath}/rank");
-	
-	// 메세지 왔을때
-	sock.onmessage = function(e){
-		$('#result').append(e.data + "<br>");
-		console.log(e);
-	}
-	function search(){
-		for(var i=0;i<5;i++){
-			sock.send($('.search_value').eq(i).text());
+	function ranking(){
+		if(checked){
+			sock.send($("[name='search_keyword']:eq(0)").val());		
 		}
-		
 	}
 	// 나가기 버튼
 	function exit(){
 		sock.close();
 	}		
 	
-	// 연결끊기면 
-		sock.onclose = function(e){
-			console.log(e);
+	
+	let sock = new SockJS("${pageContext.request.contextPath}/rank");		
+	
+	sock.onmessage = function(e){
+		var tmp = e.data.split(":");
+		for(var i=0;i<tmp.length;i++){
+			$('.search_ul').append("<li>"+tmp[i]+"</li>");
 		}
+		
+	}
+	// 연결끊기면 
+	sock.onclose = function(e){
+		console.log(e);
+	}	
 </script>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
 	<main class="container">
 		<h1>클래스 목록</h1>
-		<ul>
+	<ul class="search_ul">
 	<c:choose>
 		<c:when test="${empty res }"></c:when>
 		<c:otherwise>
@@ -97,7 +102,7 @@
 			<option value="title+desc+category">클래스명+설명+내용</option>
 		</select>
 		<input type="text" class="search_keyword" name="search_keyword" placeholder="Search term...">
-        <input type="submit" value="검색" onclick="search()" />
+        <input onclick="ranking()" type="submit" value="검색" />
          </form>
 	</div>
 

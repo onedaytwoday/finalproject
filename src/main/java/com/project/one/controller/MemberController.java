@@ -26,12 +26,20 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.project.one.model.biz.BasketBiz;
+import com.project.one.model.biz.ClassBiz;
 import com.project.one.model.biz.EventBiz;
 import com.project.one.model.biz.MemberBiz;
+import com.project.one.model.biz.ProductBiz;
+import com.project.one.model.biz.RankBiz;
+import com.project.one.model.biz.ReviewBiz;
 import com.project.one.model.dto.BasketDto;
 import com.project.one.model.dto.ChatSession;
+import com.project.one.model.dto.ClassDto;
 import com.project.one.model.dto.EventDto;
 import com.project.one.model.dto.MemberDto;
+import com.project.one.model.dto.ProductDto;
+import com.project.one.model.dto.RankDto;
+import com.project.one.model.dto.SearchDto;
 
 @Controller
 public class MemberController {
@@ -50,7 +58,47 @@ public class MemberController {
 	private MemberBiz biz;	
 	
 	@Autowired
+	private ReviewBiz rbiz;
+	
+	@Autowired
 	private EventBiz eBiz;
+	
+	@Autowired
+	private ProductBiz pbiz;
+	
+	@Autowired
+	private ClassBiz cBiz;
+	
+	@Autowired
+	private RankBiz Rbiz;
+	
+	@RequestMapping("/index.do")
+	public String index() {
+		List<SearchDto> list = rbiz.search();
+		for(int i=0;i<list.size();i++) {
+			if(list.get(i).getProduct_no() == 0) {
+				  ClassDto dto = cBiz.selectOne(list.get(i).getClass_no());
+				  
+				  RankDto Rdto = new RankDto(i+1,dto.getClass_title());
+				  if(Rbiz.update(Rdto) > 0) {
+					  System.out.println("rank update 성공");
+				  }else {
+					  System.out.println("rank update 실패");
+				  }
+			}else {
+				ProductDto dto = pbiz.selectOne(list.get(i).getProduct_no());
+				
+				RankDto Rdto = new RankDto(i+1,dto.getProduct_name());
+				  if(Rbiz.update(Rdto) > 0) {
+					  System.out.println("rank update 성공");
+				  }else {
+					  System.out.println("rank update 실패");
+				  }
+			}
+		}
+		
+		return "main";
+	}
 	
 	//20210628 로그인
 	@RequestMapping("/loginform.do")

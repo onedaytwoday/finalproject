@@ -7,8 +7,12 @@
 <title>Main</title>
 </head>
 <body>
-
-<jsp:forward page="WEB-INF/views/main.jsp"></jsp:forward>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	location.href='index.do';
+});
+</script>
 
 </body>
 </html>
