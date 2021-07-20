@@ -8,11 +8,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>상품 상세페이지</title>
+<link rel="stylesheet" href="resources/assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="resources/assets/css/owl.carousel.min.css">
+	<link rel="stylesheet" href="resources/assets/css/flaticon.css">
+    <link rel="stylesheet" href="resources/assets/css/slicknav.css">
+    <link rel="stylesheet" href="resources/assets/css/animate.min.css">
+    <link rel="stylesheet" href="resources/assets/css/magnific-popup.css">
+    <link rel="stylesheet" href="resources/assets/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="resources/assets/css/themify-icons.css">
+    <link rel="stylesheet" href="resources/assets/css/slick.css">
+    <link rel="stylesheet" href="resources/assets/css/nice-select.css">
+    <link rel="stylesheet" href="resources/assets/css/style.css">
 
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
 	<script type="text/javascript">
 		function addToBasket(){
 			let productVal = {
