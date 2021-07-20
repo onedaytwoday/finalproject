@@ -83,7 +83,28 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="resources/js/sockjs.min.js"></script>
 
-<script type="text/javascript">	
+<script type="text/javascript">
+$(function(){
+	$.ajax({
+		type: 'post',
+		url: 'rank_list.do',
+		data: JSON.stringify(),
+		contentType: "application/json",
+		dataType: "json",
+		success: function(data) {
+			var tmp = data['list'];
+			for(var i=0;i<tmp.length;i++){
+				var rank_name = tmp[i]['rank_name'];
+				var rank_no = tmp[i]['rank_no'];
+				$('.search_ul').append("<li>" + rank_no +"순위&nbsp;&nbsp;" + rank_name +"</li>");
+			}
+		},
+		error: function() {
+			alert("통신 실패!");
+		}
+	});
+});
+
 	function ranking(){
 		let list = ['product', $("[name='search_keyword']:eq(0)").val()]
 		sock.send(list);
@@ -105,6 +126,8 @@
 
 	<main class="container">
 	<h1 class="product_header">스토어</h1>
+	<ul class="search_ul">
+	</ul>
 	<input class="insert_btn" type="button" value="상품 등록" onclick="location.href='store_insertform.do'"/>
 		<div class="search">
 			<form action="store_search.do" method="post">
