@@ -85,4 +85,9 @@ public class ProductBizImpl implements ProductBiz {
 		return dao.productSearchCount(pDto);
 	}
 
+	@Override
+	public List<ProductDto> searchedList(String search_keyword) {
+		return dao.searchedList(search_keyword);
+	}
+
 }

@@ -9,9 +9,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>상품 페이지</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
 <style type="text/css">
 
 	.container{
@@ -81,6 +78,27 @@
 	
 </style>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="resources/js/sockjs.min.js"></script>
+
+<script type="text/javascript">	
+	function ranking(){
+		let list = ['product', $("[name='search_keyword']:eq(0)").val()]
+		sock.send(list);
+	}
+	
+	let sock = new SockJS("${pageContext.request.contextPath}/rank");		
+	
+	// 연결끊기면 
+	sock.onclose = function(e){
+		console.log(e);
+		$(location).attr('href',"store.do?nowPage=1");
+	}	
+</script>
+
+
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
@@ -90,9 +108,9 @@
 	<input class="insert_btn" type="button" value="상품 등록" onclick="location.href='store_insertform.do'"/>
 		<div class="search">
 			<form action="store_search.do" method="post">
-			<input type="hidden" name="nowPage" value="1">
-			<input type="text" class="search_keyword" name="search_keyword" placeholder="Search term...">
-	        <input type="submit" value="검색" />
+				<input type="hidden" name="nowPage" value="1">
+				<input type="text" class="search_keyword" name="search_keyword" placeholder="Search term...">
+		        <input onclick="ranking()" type="submit" value="검색" />
 	         </form>
 		</div>
 

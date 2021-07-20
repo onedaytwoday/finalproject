@@ -17,6 +17,8 @@ public interface ProductDao {
 	
 	public List<ProductDto> productList(PagingDto pDto);
 	
+	public List<ProductDto> searchedList(String search_keyword);
+	
 	public ProductDto selectOne(int product_no);
 	
 	public ProductDto selectOneByName(String product_name);
@@ -34,4 +36,5 @@ public interface ProductDao {
 	public int productListCount();
 
 	public int productSearchCount(StorePagingDto pDto);
+	
 }

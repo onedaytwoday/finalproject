@@ -33,4 +33,6 @@ public interface ClassBiz {
 	public int classListCount();
 	
 	public int classSearchCount(PagingDto pDto);
+	
+	public List<ClassDto> searchedList(String search_keyword);
 }

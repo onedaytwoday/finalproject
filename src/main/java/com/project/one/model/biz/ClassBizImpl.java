@@ -89,4 +89,9 @@ public class ClassBizImpl implements ClassBiz {
 		return dao.classSearchCount(pDto);
 	}
 
+	@Override
+	public List<ClassDto> searchedList(String search_keyword) {
+		return dao.searchedList(search_keyword);
+	}
+
 }
