@@ -1,6 +1,8 @@
 <%@ page import="com.project.one.model.dto.MemberDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -75,6 +77,16 @@
 		}
 	}
 	
+	function check() {
+		var member_phone = $('input[name=member_phone_1]').val()
+				+ $('input[name=member_phone_2]').val()
+				+ $('input[name=member_phone_3]').val();
+		$('input[name=member_phone]').attr('value', member_phone);
+		
+		var member_addr = $('input[name=member_addr_1]').val()
+				+ $('input[name=member_addr_2]').val();
+		$('input[name=member_addr]').attr('value', member_addr);
+	}
 </script>
 
 </head>
@@ -125,7 +137,12 @@
 				</tr>
 				<tr>
 					<th>전화번호</th>
-					<td><input type="text" name="member_phone" required="required" onclick="idCheckConfirm();"></td>
+					<td>
+						<input type="hidden" name="member_phone" value="">
+					<input type="text" name="member_phone_1" maxlength="3" size="3" required="required" onclick="idCheckConfirm();"> - 
+					<input type="text" name="member_phone_2" maxlength="4" size="3" required="required" onclick="idCheckConfirm();"> - 
+					<input type="text" name="member_phone_3" maxlength="4" size="3" required="required" onclick="idCheckConfirm();">
+					</td>
 				</tr>
 				<tr>
 					<th>주소</th>
@@ -134,8 +151,8 @@
 					<input type="text" id="postcode" placeholder="우편번호" readonly="readonly">
 					<input type="button" onclick="address();" value="우편번호 찾기">
 					<br>
-					<input type="text" name="member_addr" id="addr_1" placeholder="기본주소" readonly="readonly">
-					<input type="text" name="member_addr_t" id="addr_2" placeholder="상세주소" required="required" onclick="idCheckConfirm();">
+					<input type="text" name="member_addr_1" id="addr_1" placeholder="기본주소" readonly="readonly">
+					<input type="text" name="member_addr_2" id="addr_2" placeholder="상세주소" required="required" onclick="idCheckConfirm();">
 					</td>
 				</tr>
 				<tr>
@@ -188,7 +205,13 @@
 				</tr>
 				<tr>
 					<th>전화번호</th>
-					<td><input type="text" name="member_phone" required="required" onclick="idCheckConfirm();" value="${mDto.member_phone }"></td>
+					<td>
+					<c:set var="phone" value="${mDto.member_phone }"/>
+					<input type="hidden" name="member_phone" value="">
+					<input type="text" name="member_phone_1" maxlength="3" size="3" value="${fn:substring(phone,0,3) }" required="required" onclick="idCheckConfirm();"> - 
+					<input type="text" name="member_phone_2" maxlength="4" size="3" value="${fn:substring(phone,3,7) }" required="required" onclick="idCheckConfirm();"> - 
+					<input type="text" name="member_phone_3" maxlength="4" size="3" value="${fn:substring(phone,7,11) }" required="required" onclick="idCheckConfirm();">
+					</td>
 				</tr>
 				<tr>
 					<th>주소</th>
@@ -198,8 +221,8 @@
 					<input type="text" id="postcode" placeholder="우편번호" readonly="readonly">
 					<input type="button" onclick="address();" value="우편번호 찾기">
 					<br>
-					<input type="text" name="member_addr" id="addr_1" placeholder="기본주소" readonly="readonly">
-					<input type="text" name="member_addr_t" id="addr_2" placeholder="상세주소" required="required" onclick="idCheckConfirm();">
+					<input type="text" name="member_addr_1" id="addr_1" placeholder="기본주소" readonly="readonly">
+					<input type="text" name="member_addr_2" id="addr_2" placeholder="상세주소" required="required" onclick="idCheckConfirm();">
 					</td>
 				</tr>
 				<tr>
@@ -214,7 +237,7 @@
 				</tr>
 				<tr>
 					<td colspan="2" align="right">
-						<input type="submit" value="회원가입"/>
+						<input type="submit" value="회원가입" onclick="check()"/>
 						<input type="button" value="취소" onclick="main.do" />
 					</td>
 				</tr>

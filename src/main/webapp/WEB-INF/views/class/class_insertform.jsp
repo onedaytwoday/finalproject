@@ -71,11 +71,12 @@
 				<tr>
 					<th>클래스 위치</th>
 					<td>
+					<input type="hidden" name="class_loc" value="">
 					<input type="text" id="postcode" placeholder="우편번호" readonly="readonly">
 					<input type="button" onclick="address();" value="우편번호 찾기">
 					<br>
-					<input type="text" name="class_loc" id="addr_1" placeholder="기본주소" readonly="readonly">
-					<input type="text" name="class_loc_t" id="addr_2" placeholder="상세주소" required="required"">
+					<input type="text" name="class_loc_1" id="addr_1" placeholder="기본주소" readonly="readonly">
+					<input type="text" name="class_loc_2" id="addr_2" placeholder="상세주소" required="required">
 					</td>
 				</tr>
 	
@@ -177,7 +178,10 @@ function fileDelete(fileNum){
  * 폼 submit 로직
  */
 	function registerAction(){
-		
+	
+		var class_loc = $('input[name=class_loc_1]').val();
+		$('input[name=class_loc]').attr('value', class_loc);
+	
 	var form = $("form")[0];        
  	var formData = new FormData(form);
 		for (var x = 0; x < content_files.length; x++) {
