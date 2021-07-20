@@ -34,12 +34,6 @@ public class RankingHandler extends TextWebSocketHandler {
 		i++;
 		sessionList.add(session);
 		
-		String[] res = getSearch(session);
-		if(res!=null) {
-			for(int i=0;i<res.length;i++) {
-				ranking.put(res[i], 0);
-			}
-		}
 		System.out.println(session.getId() + " 연결 성공 => 총 접속 인원 : " + i + "명");
 	}
 
@@ -86,10 +80,5 @@ public class RankingHandler extends TextWebSocketHandler {
 			sessionList.remove(session);
 		}
 		System.out.println("총 접속 인원 : " + i + "명");
-	}
-	private String[] getSearch(WebSocketSession session) {
-		Map<String, Object> httpSession = session.getAttributes();
-		String[] res = (String[]) httpSession.get("res");
-		return res;
 	}
 }

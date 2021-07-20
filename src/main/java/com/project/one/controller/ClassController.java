@@ -34,6 +34,7 @@ import com.project.one.model.biz.DetailBiz;
 import com.project.one.model.biz.FileTableBiz;
 import com.project.one.model.biz.PaymentBiz;
 import com.project.one.model.biz.ProductBiz;
+import com.project.one.model.biz.RankBiz;
 import com.project.one.model.biz.ReviewBiz;
 import com.project.one.model.dto.ClassDto;
 import com.project.one.model.dto.DetailDto;
@@ -42,6 +43,7 @@ import com.project.one.model.dto.MemberDto;
 import com.project.one.model.dto.PagingDto;
 import com.project.one.model.dto.PaymentDto;
 import com.project.one.model.dto.ProductDto;
+import com.project.one.model.dto.RankDto;
 import com.project.one.model.dto.SearchDto;
 
 import net.coobird.thumbnailator.Thumbnails;
@@ -64,6 +66,9 @@ public class ClassController {
 	@Autowired
 	private FileTableBiz fbiz;
 	
+	@Autowired
+	private RankBiz Rbiz;
+	
 	private static int CLASS_NO;
 
 	@RequestMapping("/classList.do")
@@ -73,8 +78,24 @@ public class ClassController {
 		model.addAttribute("list", cBiz.classListPaging(pDto));
 		//평점? model.addAttribute("rlist",rbiz.selectList());
 		model.addAttribute("pDto", pDto);
+		model.addAttribute("Rlist", Rbiz.selectList());
 		return "class/class_list";
 	}
+	@ResponseBody
+	@RequestMapping(value="/rank_list.do", method=RequestMethod.POST)
+	public Map<String, List<RankDto>> rankList() {
+		Map<String, List<RankDto>> map = new HashMap<String, List<RankDto>>();
+		List<RankDto> list = new ArrayList<>();
+		
+		for(RankDto dto : Rbiz.selectList()) {
+				list.add(dto);
+		}
+		
+		map.put("list", list);
+		System.out.println(map.toString());
+		return map;
+	}
+	
 	//검색
 	@RequestMapping("/class_search.do")
 	public String class_search(Model model, String search_category, String search_keyword, int nowPage) {
