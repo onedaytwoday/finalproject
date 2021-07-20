@@ -9,15 +9,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-	crossorigin="anonymous">
-<link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"
-    />  
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />  
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>  
 </head>
 <body>
@@ -183,9 +176,6 @@ geocoder.addressSearch(classadd, function(result, status) {
 // 이미지 지도에 표시할 마커입니다
 // 이미지 지도에 표시할 마커를 아래와 같이 배열로 넣어주면 여러개의 마커를 표시할 수 있습니다 
 var markers = [
-    {
-        position: new kakao.maps.LatLng(result[0].y, result[0].x)
-    },
     {
         position: new kakao.maps.LatLng(result[0].y, result[0].x), 
         text: classname // text 옵션을 설정하면 마커 위에 텍스트를 함께 표시할 수 있습니다     

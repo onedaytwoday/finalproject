@@ -135,7 +135,7 @@
 					<input type="button" onclick="address();" value="우편번호 찾기">
 					<br>
 					<input type="text" name="member_addr" id="addr_1" placeholder="기본주소" readonly="readonly">
-					<input type="text" name="member_addr" id="addr_2" placeholder="상세주소" required="required" onclick="idCheckConfirm();">
+					<input type="text" name="member_addr_t" id="addr_2" placeholder="상세주소" required="required" onclick="idCheckConfirm();">
 					</td>
 				</tr>
 				<tr>
@@ -192,7 +192,15 @@
 				</tr>
 				<tr>
 					<th>주소</th>
-					<td><input type="text" name="member_addr" required="required" onclick="idCheckConfirm();"></td>
+					<td>
+					<td>
+					<input type="hidden" name="member_addr" value="">
+					<input type="text" id="postcode" placeholder="우편번호" readonly="readonly">
+					<input type="button" onclick="address();" value="우편번호 찾기">
+					<br>
+					<input type="text" name="member_addr" id="addr_1" placeholder="기본주소" readonly="readonly">
+					<input type="text" name="member_addr_t" id="addr_2" placeholder="상세주소" required="required" onclick="idCheckConfirm();">
+					</td>
 				</tr>
 				<tr>
 					<th>알림</th>

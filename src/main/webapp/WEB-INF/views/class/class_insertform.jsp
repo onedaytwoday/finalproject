@@ -8,9 +8,44 @@
 <title>Insert title here</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>  
+<script type="text/javascript">
+	function address() {
+		new daum.Postcode(
+				{
+					oncomplete : function(data) {
+						var roadAddr = data.roadAddress;
+						var extraRoadAddr = '';
+
+						if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
+							extraRoadAddr += data.bname;
+						}
+
+						if (data.buildingName !== '' && data.apartment === 'Y') {
+							extraRoadAddr += (extraRoadAddr !== '' ? ', '
+									+ data.buildingName : data.buildingName);
+						}
+
+						if (extraRoadAddr !== '') {
+							extraRoadAddr = ' (' + extraRoadAddr + ')';
+						}
+
+						document.getElementById('postcode').value = data.zonecode;
+						document.getElementById("addr_1").value = roadAddr;
+						document.getElementById("addr_1").value = data.jibunAddress;
+
+						if (data.autoRoadAddress) {
+							document.getElementById("addr_1").value = roadAddr;
+						} else if (data.autoJibunAddress) {
+							document.getElementById("addr_1").value = data.jibunAddress;
+						} else {
+						}
+					}
+				}).open();
+}
+</script>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
@@ -35,7 +70,13 @@
 	
 				<tr>
 					<th>클래스 위치</th>
-					<td><input type="text" name="class_loc" /></td>
+					<td>
+					<input type="text" id="postcode" placeholder="우편번호" readonly="readonly">
+					<input type="button" onclick="address();" value="우편번호 찾기">
+					<br>
+					<input type="text" name="class_loc" id="addr_1" placeholder="기본주소" readonly="readonly">
+					<input type="text" name="class_loc_t" id="addr_2" placeholder="상세주소" required="required"">
+					</td>
 				</tr>
 	
 				<tr>
