@@ -201,4 +201,18 @@ public class ProductDaoImpl implements ProductDao {
 		return res;
 	}
 
+	@Override
+	public List<ProductDto> searchedList(String search_keyword) {
+		List<ProductDto> list = new ArrayList<ProductDto>();
+		
+		try {
+			list = sqlSession.selectList(NAMESPACE + "searchedList",search_keyword);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+
 }

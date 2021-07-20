@@ -45,11 +45,6 @@ public class ChatController {
 	@Autowired
 	private MemberBiz mBiz;
 
-	
-	@RequestMapping("/real.do")
-	public String real() {
-		return "real";
-	}
 	@RequestMapping("/chat_main.do")
 	public String chat_main(Model model, String member_id, HttpSession session) {
 		MemberDto mDto = (MemberDto) session.getAttribute("mDto");

@@ -140,4 +140,11 @@
 		WHERE PRODUCT_NAME LIKE '%'||#{search_keyword}||'%'
 		OR PRODUCT_DESC LIKE '%'||#{search_keyword}||'%'
 	</select>
+	
+	<select id="searchedList" parameterType="String" resultType="productDto">
+		SELECT PRODUCT_NO, PRODUCT_NAME, PRODUCT_CATEGORY, PRODUCT_PRICE, PRODUCT_DESC, PRODUCT_LOC,
+		PRODUCT_DEL, PRODUCT_SALE
+		FROM PRODUCT 
+		WHERE PRODUCT_NAME LIKE '%'||#{search_keyword}||'%'
+	</select>
 </mapper>

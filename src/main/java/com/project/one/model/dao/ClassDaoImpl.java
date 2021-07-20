@@ -209,4 +209,18 @@ public class ClassDaoImpl implements ClassDao {
 		return res;		
 	}
 
+	@Override
+	public List<ClassDto> searchedList(String search_keyword) {
+		List<ClassDto> list = new ArrayList<ClassDto>();
+
+		try {
+			list = sqlSession.selectList(NAMESPACE + "searchedList", search_keyword);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return list;
+	}
+
 }

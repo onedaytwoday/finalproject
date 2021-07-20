@@ -13,18 +13,22 @@ import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import com.project.one.model.biz.ClassBiz;
+import com.project.one.model.biz.ProductBiz;
 import com.project.one.model.dto.ClassDto;
 import com.project.one.model.dto.PagingDto;
+import com.project.one.model.dto.ProductDto;
 
 public class RankingHandler extends TextWebSocketHandler {
 	
 	private List<WebSocketSession> sessionList = new ArrayList<WebSocketSession>();
 	private Map<String, Integer> ranking = new HashMap<>();
 	private int i;
-	private int COUNT = 1;
 	
 	@Autowired
 	private ClassBiz cBiz;
+	
+	@Autowired
+	private ProductBiz pBiz;
 	
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
@@ -35,32 +39,32 @@ public class RankingHandler extends TextWebSocketHandler {
 
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-		String text = message.getPayload();
-				
-		if(ranking.containsKey(text)) {
-			int count = ranking.get(text);
-			ranking.replace(text, ++count);
+		String[] messages = message.getPayload().split(",");		
+		String text = messages[1];
+		
+		List<ClassDto> cList = new ArrayList<>();
+		List<ProductDto> pList = new ArrayList<>();
+		
+		if(messages[0].equals("class")) {
+			cList = cBiz.searchedList(text);
 		} else {
-			PagingDto pDto = new PagingDto();
-			pDto.setSearch_category("title+desc+category");
-			pDto.setSearch_keyword(text);
-			
-			if(cBiz.classListSearch(pDto) != null) {
-				System.out.println("NOT NULL!!!!!!!!!!!");
-				ranking.put(text, COUNT);
+			pList = pBiz.searchedList(text);		
+		}
+		
+		if(cList.size() > 0 || pList.size() > 0) {
+			if (ranking.containsKey(text)) {
+				int count = ranking.get(text);
+				ranking.replace(text, ++count);
 			} else {
-				System.out.println("NULL!!!!!!!!!!!");
+				ranking.put(text, 1);
 			}
 		}
 		
         List<String> listKeySet = new ArrayList<>(ranking.keySet());
-        
-        // 내림차순 정렬
-        System.out.println("-------------- 내림차순 정렬 --------------"); 
+         
         Collections.sort(listKeySet, (value1, value2) -> (ranking.get(value2).compareTo(ranking.get(value1)))); 
         for(String key : listKeySet) { System.out.println("key : " + key + " , " + "value : " + ranking.get(key)); }
 
-        
 		for (WebSocketSession sess : sessionList) {
 			sess.sendMessage(new TextMessage(session.getId() + " : " + message.getPayload()));
 		}

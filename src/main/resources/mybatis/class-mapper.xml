@@ -168,5 +168,9 @@
 		</choose>	
 	</select>
 	
-	
+	<select id="searchedList" parameterType="String" resultType="classDto">
+		SELECT CLASS_NO, CLASS_TITLE, CLASS_DESC, CLASS_LOC, CLASS_CATEGORY, CLASS_PRICE, CLASS_SALE, MEMBER_ID
+		FROM CLASS
+		WHERE CLASS_TITLE LIKE '%'||#{search_keyword}||'%'
+	</select>
 </mapper>

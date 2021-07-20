@@ -26,16 +26,17 @@
 	
 	function ranking(){
 		if(checked){
-			sock.send($("[name='search_keyword']:eq(0)").val());		
+			let list = ['class', $("[name='search_keyword']:eq(0)").val()]
+			sock.send(list);		
 		}
 	}
-	
 	
 	let sock = new SockJS("${pageContext.request.contextPath}/rank");		
 	
 	// 연결끊기면 
 	sock.onclose = function(e){
 		console.log(e);
+		$(location).attr('href',"classList.do?nowPage=1");
 	}	
 </script>
 </head>
@@ -45,14 +46,14 @@
 	<main class="container">
 		<h1>클래스 목록</h1>
 	<div class="search">
-		<form id="searchForm" action="class_search.do" method="post">
-		<input type="hidden" name="nowPage" value="1">
-		<select id="search_category" name="search_category">
-			<option value="nickname" selected>닉네임</option>
-			<option value="title+desc+category">클래스명+설명+내용</option>
-		</select>
-		<input type="text" class="search_keyword" name="search_keyword" placeholder="Search term...">
-        <input onclick="ranking()" type="submit" value="검색" />
+		<form action="class_search.do" method="post">
+			<input type="hidden" name="nowPage" value="1">
+			<select id="search_category" name="search_category">
+				<option value="nickname" selected>닉네임</option>
+				<option value="title+desc+category">클래스명+설명+내용</option>
+			</select>
+			<input type="text" class="search_keyword" name="search_keyword" placeholder="Search term...">
+	        <input onclick="ranking()" type="submit" value="검색" />
          </form>
 	</div>
 
