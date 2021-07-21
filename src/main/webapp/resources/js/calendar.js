@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			let date = moment(arg.event.start).format('yyyy-MM-DD HH:mm')
 			if (confirm(date +'으로 예약하시겠습니까?')) {
 				$("[name='detail_no']").val(arg.event.id);
-				$("[name='detail_date']").val(date);
+				$("#detail_date").text(date);
 			}
 		},
 	});

@@ -120,6 +120,7 @@ public class ClassController {
 		
 		model.addAttribute("dto", cBiz.selectOne(class_no));
 		model.addAttribute("rdto", rbiz.avgList(class_no));
+		model.addAttribute("rList", rbiz.listByClass(class_no));
 
 		return "class/class_select";
 	}

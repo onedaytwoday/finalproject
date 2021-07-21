@@ -76,4 +76,9 @@ public class ReviewBizImpl implements ReviewBiz {
 		return dao.insertProduct(dto);
 	}
 
+	@Override
+	public List<ReviewDto> listByClass(int class_no) {
+		return dao.listByClass(class_no);
+	}
+
 }

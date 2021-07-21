@@ -8,19 +8,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>상품 페이지</title>
-    <link rel="stylesheet" href="resources/assets/css/bootstrap.min.css">
-	<link rel="stylesheet" href="resources/assets/css/owl.carousel.min.css">
-	<link rel="stylesheet" href="resources/assets/css/flaticon.css">
-    <link rel="stylesheet" href="resources/assets/css/slicknav.css">
-    <link rel="stylesheet" href="resources/assets/css/animate.min.css">
-    <link rel="stylesheet" href="resources/assets/css/magnific-popup.css">
-    <link rel="stylesheet" href="resources/assets/css/fontawesome-all.min.css">
-    <link rel="stylesheet" href="resources/assets/css/themify-icons.css">
-    <link rel="stylesheet" href="resources/assets/css/slick.css">
-    <link rel="stylesheet" href="resources/assets/css/nice-select.css">
-    <link rel="stylesheet" href="resources/assets/css/style.css">
-    
-
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="resources/js/sockjs.min.js"></script>
