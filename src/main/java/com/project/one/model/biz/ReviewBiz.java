@@ -29,6 +29,6 @@ public interface ReviewBiz {
 	
 	public int insertProduct(ReviewDto dto);
 	
-	
+	public List<ReviewDto> listByClass(int class_no);
 	
 }

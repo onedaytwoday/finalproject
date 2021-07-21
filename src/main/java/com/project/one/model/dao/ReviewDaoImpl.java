@@ -166,4 +166,17 @@ public class ReviewDaoImpl implements ReviewDao {
 		
 	}
 
+	@Override
+	public List<ReviewDto> listByClass(int class_no) {
+		List<ReviewDto> list = new ArrayList<ReviewDto>();
+		
+		try {
+			list = sqlSession.selectList(NAMESPACE+"listByClass", class_no);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+
 }
