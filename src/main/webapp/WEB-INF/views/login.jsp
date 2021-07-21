@@ -7,10 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
 <!-- IP주소 얻기 -->
 <script defer type="text/javascript" src="http://jsgetip.appspot.com"></script>
 
@@ -81,41 +78,57 @@
 </script>
 </head>
 <body>
-	<jsp:include page="header.jsp"></jsp:include>	
-	
-	<main class="container">
+	<jsp:include page="header.jsp"></jsp:include>
+	<main class="container my-0">
 		<c:choose>
 			<c:when test="${sessionId != null}">
 				<h2> 네이버 아이디 로그인 성공하셨습니다!! </h2>
 				<h3>'${sessionId}'님 </h3>
 				<h3><a href="logout">로그아웃</a></h3>
 			</c:when>
+			
 			<c:otherwise>
-				
-				<div class="box-body">
-					<div class="form-group">
-						<input type="text" id="member_id" 
-							class="form-control" placeholder="아이디를 입력해주세요" />
+				<section class="login_part section_padding ">
+				    <div class="container">
+					    <div class="row align-items-center">
+				    	    <div class="col-lg-6 col-md-6 w-full">
+				        	    <div class="login_part_text text-center">
+				            	    <div class="login_part_text_iner">
+				                	    <h2>아직 회원이 아니신가요?</h2>
+				                        <p>There are advances being made in science and technology
+				                    	    everyday, and a good example of this is the</p>
+				                        <a href="signup.do" class="btn_3">회원가입 하러가기</a>
+				                    </div>
+				                </div>
+				            </div>
+				            <div class="col-lg-6 col-md-6">
+				            	<div class="login_part_form">
+				                	<div class="login_part_form_iner">
+				                    	<h3>Welcome Back ! <br>
+				                        	Please Sign in now</h3>
+				                        <form class="row contact_form" novalidate="novalidate">
+				                        	<div class="col-md-12 form-group p_star">
+				                            	<input type="text" class="form-control" id="member_id" placeholder="아이디를 입력해주세요">
+				                            </div>
+				                            <div class="col-md-12 form-group p_star">
+				                            	<input type="password" class="form-control" id="member_pw" placeholder="패스워드를 입력해주세요">
+				                            </div>
+				                            <div class="col-md-12 form-group">
+				                            	<div class="creat_account d-flex align-items-center justify-content-between">
+				                                    <a href="${naverUrl}"><img width="150" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png" /></a>
+				 	  								<a href="${kakaoUrl}"><img width="150" src="resources/images/kakao_login.png" />카카오로그인</a>
+				                                </div>
+				                                <input type="button" onclick="login();" class="btn_3" value="login" />
+				                                <a class="lost_pass" href="findIdPwForm.do">forget password?</a>
+				                            </div>
+				                        </form>
+				                    </div>
+				               	</div>
+				          	</div>
+				    	</div>
 					</div>
-					<div class="form-group">
-						<input type="password" id="member_pw" 
-							class="form-control" placeholder="패스워드를 입력해주세요"/>
-					</div>
-				</div> 
-				<div class="box-footer">
-				  <input type="button" value="login" onclick="login();" />
-				  <input type="button" value="register" onclick="location.href='signup.do'" />
-				</div>
-				
-				<div>
-					<a href="findIdPwForm.do">아이디/비밀번호 찾기</a>
-				</div>
-				
-				<div class="text-center">
-			 	  <a href="${naverUrl}"><img width="150" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png" /></a>
-			 	  <a href="${kakaoUrl}"><img width="150" src="resources/images/kakao_login.png" />카카오로그인</a>
-				</div>
-			</c:otherwise>
+				</section>
+	        </c:otherwise>
 		</c:choose>
 	</main>
 	
