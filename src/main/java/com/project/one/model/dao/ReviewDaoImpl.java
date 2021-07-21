@@ -45,17 +45,29 @@ public class ReviewDaoImpl implements ReviewDao {
 	}
 	
 	@Override
-	public List<ReviewDto> avgList(int product_no) {
-		List<ReviewDto> list = new ArrayList<ReviewDto>();
-
+	public double avgListByProduct(int product_no) {
+		double res = 0;
+		
 		try {
-			list = sqlSession.selectList(NAMESPACE + "avgList",product_no);
-
+			res = sqlSession.selectOne(NAMESPACE + "avgListByProduct", product_no);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-		return list;
+		
+		return res;
+	}
+	
+	@Override
+	public double avgListByClass(int class_no) {
+		double res = 0;
+		
+		try {
+			res = sqlSession.selectOne(NAMESPACE + "avgListByClass", class_no);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res;
 	}
 	
 
@@ -172,6 +184,19 @@ public class ReviewDaoImpl implements ReviewDao {
 		
 		try {
 			list = sqlSession.selectList(NAMESPACE+"listByClass", class_no);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+
+	@Override
+	public List<ReviewDto> listByProduct(int product_no) {
+		List<ReviewDto> list = new ArrayList<ReviewDto>();
+		
+		try {
+			list = sqlSession.selectList(NAMESPACE+"listByProduct", product_no);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

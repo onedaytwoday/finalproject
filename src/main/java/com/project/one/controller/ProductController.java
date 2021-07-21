@@ -32,6 +32,7 @@ import com.project.one.model.dto.FileTableDto;
 import com.project.one.model.dto.MemberDto;
 import com.project.one.model.dto.PagingDto;
 import com.project.one.model.dto.ProductDto;
+import com.project.one.model.dto.ReviewDto;
 import com.project.one.model.dto.StorePagingDto;
 
 import net.coobird.thumbnailator.Thumbnails;
@@ -52,10 +53,10 @@ public class ProductController {
 	public String Product_list(Model model,int nowPage) {
 		int count = biz.productListCount();
 		StorePagingDto pDto = new StorePagingDto(count, nowPage);
-		System.out.println(pDto);
+		
 		model.addAttribute("list", biz.selectListPaging(pDto));
 		model.addAttribute("pDto", pDto);
-		model.addAttribute("rlist",rbiz.selectList());
+		
 		return "store/store";
 
 	}
@@ -80,7 +81,7 @@ public class ProductController {
 	@RequestMapping("/store_select.do")
 	public String Product_selectOne(Model model, int product_no) {
 		model.addAttribute("dto", biz.selectOne(product_no));
-		model.addAttribute("list",rbiz.avgList(product_no));
+		//model.addAttribute("list",rbiz.avgList(product_no));
 
 		return "store/store_select";
 	}

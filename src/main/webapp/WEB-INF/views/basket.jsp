@@ -88,19 +88,22 @@
                   </tr>
                 </tbody>
               </table>
-              <div class="checkout_btn_inner float-right">
-                
-                <form action="payment.do" method="post">
-					<input type="hidden" id="total_num" name="payment_num" />
-					<input type="hidden" id="total_price" name="payment_price" />
-					
-					<input type="hidden" name="basket_group" value="${basket_group }" />
-					<input type="hidden" name="product_name" value="장바구니에서 구매" />
-					<input type="hidden" name="type" value="basket" />
-					
-					<input class="btn_1 checkout_btn_1" type="submit" value="결제 하기" />
-				</form>
-              </div>
+              
+              <c:if test="${bList.size() > 0 }">
+	              <div class="checkout_btn_inner float-right">
+	                
+	                <form action="payment.do" method="post">
+						<input type="hidden" id="total_num" name="payment_num" />
+						<input type="hidden" id="total_price" name="payment_price" />
+						
+						<input type="hidden" name="basket_group" value="${basket_group }" />
+						<input type="hidden" name="product_name" value="장바구니에서 구매" />
+						<input type="hidden" name="type" value="basket" />
+						
+						<input class="btn_1 checkout_btn_1" type="submit" value="결제 하기" />
+					</form>
+	              </div>
+              </c:if>
             </div>
           </div>
           </div>

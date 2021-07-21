@@ -21,7 +21,9 @@ public interface ReviewBiz {
 
 	public int delete(int review_no);
 
-	List<ReviewDto> avgList(int product_no);
+	public double avgListByProduct(int product_no);
+	
+	public double avgListByClass(int class_no);
 	
 	public List<ReviewDto> selectClass();
 	
@@ -30,5 +32,7 @@ public interface ReviewBiz {
 	public int insertProduct(ReviewDto dto);
 	
 	public List<ReviewDto> listByClass(int class_no);
+	
+	public List<ReviewDto> listByProduct(int product_no);
 	
 }

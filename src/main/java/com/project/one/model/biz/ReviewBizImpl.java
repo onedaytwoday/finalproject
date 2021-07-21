@@ -27,8 +27,13 @@ public class ReviewBizImpl implements ReviewBiz {
 	}
 	
 	@Override
-	public List<ReviewDto> avgList(int product_no){
-		return dao.avgList(product_no);
+	public double avgListByProduct(int product_no){
+		return dao.avgListByProduct(product_no);
+	}
+	
+	@Override
+	public double avgListByClass(int class_no){
+		return dao.avgListByClass(class_no);
 	}
 
 	@Override
@@ -79,6 +84,11 @@ public class ReviewBizImpl implements ReviewBiz {
 	@Override
 	public List<ReviewDto> listByClass(int class_no) {
 		return dao.listByClass(class_no);
+	}
+
+	@Override
+	public List<ReviewDto> listByProduct(int product_no) {
+		return dao.listByProduct(product_no);
 	}
 
 }

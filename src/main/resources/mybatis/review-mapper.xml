@@ -37,8 +37,14 @@
 		WHERE rnum <![CDATA[ >= ]]> 1
 	</select>
 	
-	<select id="avgListByProduct" parameterType="int" resultType="reviewDto">
-		SELECT REVIEW_NO, REVIEW_TITLE, REVIEW_RATE, REVIEW_DATE, REVIEW_CONTENT, PRODUCT_NO, CLASS_NO, MEMBER_ID
+	<select id="avgListByProduct" parameterType="int" resultType="double">
+		SELECT AVG(REVIEW_RATE)
+		FROM REVIEW
+		WHERE PRODUCT_NO = #{product_no}
+	</select>
+	
+	<select id="avgListByClass" parameterType="int" resultType="double">
+		SELECT AVG(REVIEW_RATE)
 		FROM REVIEW
 		WHERE CLASS_NO = #{class_no}
 	</select>
@@ -82,6 +88,13 @@
 		SELECT REVIEW_NO, REVIEW_TITLE, REVIEW_RATE, REVIEW_DATE, REVIEW_CONTENT, PRODUCT_NO, CLASS_NO, MEMBER_ID
 		FROM REVIEW
 		WHERE CLASS_NO = #{class_no}
+		ORDER BY REVIEW_NO DESC
+	</select>
+	
+	<select id="listByProduct" resultType="reviewDto">
+		SELECT REVIEW_NO, REVIEW_TITLE, REVIEW_RATE, REVIEW_DATE, REVIEW_CONTENT, PRODUCT_NO, CLASS_NO, MEMBER_ID
+		FROM REVIEW
+		WHERE PRODUCT_NO = #{product_no}
 		ORDER BY REVIEW_NO DESC
 	</select>
 	

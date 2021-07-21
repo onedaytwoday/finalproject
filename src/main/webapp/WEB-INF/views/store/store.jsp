@@ -8,31 +8,32 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>상품 페이지</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="resources/js/sockjs.min.js"></script>
 
 <script type="text/javascript">
-$(function(){
-	$.ajax({
-		type: 'post',
-		url: 'rank_list.do',
-		data: JSON.stringify(),
-		contentType: "application/json",
-		dataType: "json",
-		success: function(data) {
-			var tmp = data['list'];
-			for(var i=0;i<tmp.length;i++){
-				var rank_name = tmp[i]['rank_name'];
-				var rank_no = tmp[i]['rank_no'];
-				$('.search_ul').append("<li>" + rank_no +"순위&nbsp;&nbsp;" + rank_name +"</li>");
+	$(function(){
+		$.ajax({
+			type: 'post',
+			url: 'rank_list.do',
+			data: JSON.stringify(),
+			contentType: "application/json",
+			dataType: "json",
+			success: function(data) {
+				var tmp = data['list'];
+				for(var i=0;i<tmp.length;i++){
+					var rank_name = tmp[i]['rank_name'];
+					var rank_no = tmp[i]['rank_no'];
+					$('.search_ul').append("<li>" + rank_no +"순위&nbsp;&nbsp;" + rank_name +"</li>");
+				}
+			},
+			error: function() {
+				alert("통신 실패!");
 			}
-		},
-		error: function() {
-			alert("통신 실패!");
-		}
+		});
 	});
-});
 
 	function ranking(){
 		let list = ['product', $("[name='search_keyword']:eq(0)").val()]
@@ -94,25 +95,7 @@ $(function(){
 					                        <a href="store_select.do?product_no=${dto.product_no }">${dto.product_name }</a>
 					                      </h3>
 					                      <span>${dto.product_price } 원</span>
-					                      <p>평점 
-				             				<c:choose>
-												<c:when test="${empty rlist}">
-													리뷰없음
-												</c:when>
-												<c:otherwise>
-													<c:forEach items="${rlist }" var="rdto">
-														<c:set var="product_no" value="${dto.product_no }" />
-														<c:set var="review_no" value="${rdto.product_no }" />
-														<c:set var="rate" value="${rdto.review_rate }" />
-														<c:if test="${product_no eq review_no}">
-															<c:set var="sum" value="${sum + rate }" />
-															<c:set var="cnt" value="${cnt + 1 }" />
-														</c:if>
-													</c:forEach>
-													${sum/cnt }
-												</c:otherwise>
-											</c:choose>
-	             						   </p>
+					                      
 					                    </div>
 					                  </div>
 					                </div>

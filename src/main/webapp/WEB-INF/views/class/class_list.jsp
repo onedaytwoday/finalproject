@@ -65,62 +65,91 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
-	<main class="container">
-		<h1>클래스 목록</h1>
-	<ul class="search_ul">
-	</ul>
-	<div class="search">
-		<form action="class_search.do" method="post">
-			<input type="hidden" name="nowPage" value="1">
-			<select id="search_category" name="search_category">
-				<option value="nickname" selected>닉네임</option>
-				<option value="title+desc+category">클래스명+설명+내용</option>
-			</select>
-			<input type="text" class="search_keyword" name="search_keyword" placeholder="Search term...">
-	        <input onclick="ranking()" type="submit" value="검색" />
-         </form>
-	</div>
+	<main class="container mb-100">
+		<ul class="search_ul"></ul>
+		
+		<div class="search">
+			<form action="class_search.do" method="post">
+				<input type="hidden" name="nowPage" value="1">
+				<select id="search_category" name="search_category">
+					<option value="nickname" selected>닉네임</option>
+					<option value="title+desc+category">클래스명+설명+내용</option>
+				</select>
+				<input type="text" class="search_keyword" name="search_keyword" placeholder="Search term...">
+		        <input onclick="ranking()" type="submit" value="검색" />
+	         </form>
+		</div>
+		
 		<c:if test="${mDto.member_grade eq '강사회원' }">
 			<button type="button" onclick="location.href='classInsert.do'" style="color:black">클래스 작성</button>
 		</c:if>
-		<section class="p-5">
+		
+		<section class="blog_area section-padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 mb-5 mb-lg-0">
+                        <div class="blog_left_sidebar">
+                        	<c:choose>
+                        		<c:when test="${empty list }">
+									<p>--------등록된 클래스가 없습니다.---------</p>
+								</c:when>
+		
+								<c:otherwise>
+									<c:forEach items="${list }" var="dto">
+										<article class="blog_item">
+			                                <div class="blog_item_img">
+			                                    <img class="card-img rounded-0" src="resources/assets/img/blog/single_blog_1.png" alt="">
+			                                </div>
 			
-				<div class="row text-center g-4">
-					<c:choose>
-						<c:when test="${empty list }">
-							<p>--------등록된 클래스가 없습니다.---------</p>
-						</c:when>
-
-						<c:otherwise>
-							<c:forEach items="${list }" var="dto">
-
-								<div class="col-md-4">
-									<div class="card bg-dark text-light">
-										<div class="card-body text-center">
-											<div class="h1 mb-3">
-												<i class="bi bi-laptop"></i>
-											</div>
-
-											<h3 class="card-title mb-3">${dto.class_title }</h3>
-
-											<p class="card-text">작성자 : ${dto.member_id }</p>
-
-											<a href="classSelect.do?class_no=${dto.class_no }"
-												class="btn btn-primary">자세히 보기</a>
-
-											<c:if test="${dto.member_id eq mDto.member_id }">
-												<button
-													onclick="location.href='classDelete.do?class_no=${dto.class_no}'"
-													type="button" class="btn btn-warning">삭제</button>
-											</c:if>
-										</div>
-									</div>
-								</div>
-							</c:forEach>
-						</c:otherwise>
-					</c:choose>
-				</div>
-		</section>
+			                                <div class="blog_details">
+			                                    <a class="d-inline-block" href="classSelect.do?class_no=${dto.class_no }">
+			                                        <h2>${dto.class_title }</h2>
+			                                    </a>
+			                                    <p>${dto.class_desc }</p>
+			                                    <ul class="blog-info-link">
+			                                        <li><a href="#"><i class="fa fa-user"></i> ${dto.loc }</a></li>
+			                                        <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li>
+			                                    </ul>
+			                                    
+			                                    <c:if test="${dto.member_id eq mDto.member_id }">
+													<button
+														onclick="location.href='classDelete.do?class_no=${dto.class_no}'"
+														type="button" class="btn btn-warning">삭제</button>
+												</c:if>
+			                                </div>
+		                            	</article>
+	                            	</c:forEach>
+								</c:otherwise>
+                        	</c:choose>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-4">
+                        <div class="blog_right_sidebar">
+                            <aside class="single_sidebar_widget search_widget">
+                                <form action="#">
+                                    <div class="form-group">
+                                        <div class="input-group mb-3">
+                                            <input type="text" class="form-control" placeholder='Search Keyword'
+                                                onfocus="this.placeholder = ''"
+                                                onblur="this.placeholder = 'Search Keyword'">
+                                            <div class="input-group-append">
+                                                <button class="btns" type="button"><i class="ti-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
+                                        type="submit">Search</button>
+                                </form>
+                            </aside>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+		
+		
 					<jsp:include page="/WEB-INF/views/paging.jsp">
 						<jsp:param value="C" name="class_category" />
 						<jsp:param value="${pDto.search_category }" name="class_search_category" />
