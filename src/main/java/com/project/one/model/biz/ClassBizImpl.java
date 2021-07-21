@@ -26,6 +26,12 @@ public class ClassBizImpl implements ClassBiz {
 	}
 	
 	@Override
+	public List<ClassDto> main_selectList() {
+		return dao.main_selectList();
+	}
+
+	
+	@Override
 	public ClassDto selectOne(int class_no) {
 		return dao.selectOne(class_no);
 	}
@@ -93,5 +99,5 @@ public class ClassBizImpl implements ClassBiz {
 	public List<ClassDto> searchedList(String search_keyword) {
 		return dao.searchedList(search_keyword);
 	}
-
+	
 }

@@ -25,7 +25,23 @@
 		WHERE X.rnum <![CDATA[ >= ]]>
 		#{pageBegin}
 	</select>
-	
+	<select id="main_selectList" resultType="classDto">
+		SELECT X.CLASS_NO, X.CLASS_TITLE , X.CLASS_PRICE, X.FILE_NEW_NAME
+		FROM(
+			SELECT ROWNUM as rnum,A.avg,A.CLASS_TITLE, A.CLASS_NO, A.CLASS_PRICE , A.FILE_NEW_NAME
+			FROM(
+				SELECT AVG(R.REVIEW_RATE) AS avg, C.CLASS_TITLE, C.CLASS_NO , C.CLASS_PRICE , F.FILE_NEW_NAME
+				FROM CLASS C, REVIEW R, FILE_TABLE F
+				WHERE C.CLASS_NO = R.CLASS_NO
+				AND F.CLASS_NO = C.CLASS_NO
+				AND F.FILE_ORI_NAME = 'thumbnail'
+				GROUP BY C.CLASS_TITLE, C.CLASS_NO, C.CLASS_PRICE, F.FILE_NEW_NAME
+				ORDER BY avg desc
+				)A
+			WHERE ROWNUM <![CDATA[ <= ]]> 3
+			) X
+		WHERE X.rnum <![CDATA[ >= ]]> 1
+	</select>
 	<select id="selectOne" resultType="classDto">
 		SELECT CLASS_NO, CLASS_TITLE, CLASS_DESC, CLASS_LOC, CLASS_CATEGORY, CLASS_PRICE, CLASS_SALE, MEMBER_ID
 		FROM CLASS
