@@ -40,7 +40,7 @@
 	<select id="avgList" parameterType="int" resultType="reviewDto">
 		SELECT REVIEW_NO, REVIEW_TITLE, REVIEW_RATE, REVIEW_DATE, REVIEW_CONTENT, PRODUCT_NO, CLASS_NO, MEMBER_ID
 		FROM REVIEW
-		WHERE PRODUCT_NO = #{product_no}
+		WHERE CLASS_NO = #{class_no}
 	</select>
 	
 	<insert id="insert" parameterType="reviewDto">

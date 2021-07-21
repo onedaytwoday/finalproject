@@ -39,6 +39,7 @@
 						</c:when>
 						<c:otherwise>
 							<c:forEach items="${list }" var="rdto">
+								<h1>${rdto.review_rate }</h1>
 								<c:set var="rate" value="${rdto.review_rate }" />
 								<c:set var="sum" value="${sum + rate }" />
 								<c:set var="cnt" value="${cnt + 1 }" />

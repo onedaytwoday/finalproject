@@ -73,7 +73,7 @@ public class MemberController {
 	private RankBiz Rbiz;
 	
 	@RequestMapping("/index.do")
-	public String index() {
+	public String index(Model model) {
 		List<SearchDto> list = rbiz.search();
 		for(int i=0;i<list.size();i++) {
 			if(list.get(i).getProduct_no() == 0) {
@@ -96,7 +96,7 @@ public class MemberController {
 				  }
 			}
 		}
-		
+		model.addAttribute("list", eBiz.selectList());
 		return "main";
 	}
 	
@@ -345,7 +345,8 @@ public class MemberController {
 		return "main";
 	}
 	@RequestMapping("/main.do")
-	public String main() {
+	public String main(Model model) {
+		model.addAttribute("list", eBiz.selectList());
 		return "main";
 	}
 	

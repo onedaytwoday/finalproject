@@ -7,38 +7,46 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Insert title here</title>
-    <link rel="stylesheet" href="resources/css/main.css">
+	<link rel="stylesheet" type="text/css" href="resources/css/slick.css"/>
+	<link rel="stylesheet" type="text/css" href="resources/css/slick-theme.css"/>
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>	
-	<script type="text/javascript" src="resources/js/main.js"></script>
 </head>
 
 <body>
 	<jsp:include page="header.jsp"></jsp:include>  
+	<!--? slider Area Start -->
+        <div class="slider-area ">
+            <div class="slider-active">
+                <!-- Single Slider -->
+                <c:choose>
+                <c:when test="${empty list }">
+                	<div>이벤트 없음</div>
+                </c:when>
+                <c:otherwise>
+                <c:forEach items="${list }" var="dto">
+                <div class="single-slider slider-height d-flex align-items-center slide-bg" style="overflow:hidden; margin:0 auto;">
+                     <img src="resources/upload/${dto.file_new_name }" alt="" class="heartbeat" style="width:100%; height:100%; object-fit:cover;"/>
+                </div>
+                </c:forEach>
+                </c:otherwise>
+                </c:choose>
+            </div>
+        </div>
+        <!-- slider Area End-->
+		<div style="width:100%; height: 500px;">
 		
-	<%--이벤트 배너 --%>
-    <section>
-		<div id="carouselExampleCaptions" class="carousel slide carousel-fade" data-bs-ride="carousel">
-		  <div id="indicator" class="carousel-indicators">
-		   
-		  </div>
-		  
-		  <div id="banner" class="carousel-inner">
-		    
-		  </div>
-		  
-		  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-		    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-		    <span class="visually-hidden">Previous</span>
-		  </button>
-		  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-		    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-		    <span class="visually-hidden">Next</span>
-		  </button>
 		</div>
-    </section>
 
     <jsp:include page="footer.jsp"></jsp:include>
-    
+  	<script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+  	<script type="text/javascript" src="resources/js/slick.min.js"></script>
+
+  	<script type="text/javascript">
+    $(document).ready(function(){
+      $('.slider-active').slick({
+      });
+    });
+  </script>
 <!-- 채널톡 -->
 <script>
   (function() {

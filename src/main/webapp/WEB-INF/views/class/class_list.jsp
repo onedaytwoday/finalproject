@@ -80,7 +80,9 @@
 	        <input onclick="ranking()" type="submit" value="검색" />
          </form>
 	</div>
-
+		<c:if test="${mDto.member_grade eq '강사회원' }">
+			<button type="button" onclick="location.href='classInsert.do'" style="color:black">클래스 작성</button>
+		</c:if>
 		<section class="p-5">
 			
 				<div class="row text-center g-4">

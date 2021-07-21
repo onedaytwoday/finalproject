@@ -15,7 +15,6 @@ public class EventDto {
 	private String title;
 	private int original_price;
 	private int event_sale;
-	private String file_path;
 	private String file_new_name;
 	
 	public EventDto() {
@@ -32,6 +31,25 @@ public class EventDto {
 		this.member_id = member_id;
 		this.class_no = class_no;
 		this.product_no = product_no;
+	}
+
+	public EventDto(int event_no, String event_title, String event_desc, Date event_start, Date event_end,
+			String event_noti, String member_id, int class_no, int product_no, String title, int original_price,
+			int event_sale, String file_new_name) {
+		super();
+		this.event_no = event_no;
+		this.event_title = event_title;
+		this.event_desc = event_desc;
+		this.event_start = event_start;
+		this.event_end = event_end;
+		this.event_noti = event_noti;
+		this.member_id = member_id;
+		this.class_no = class_no;
+		this.product_no = product_no;
+		this.title = title;
+		this.original_price = original_price;
+		this.event_sale = event_sale;
+		this.file_new_name = file_new_name;
 	}
 
 	public int getEvent_no() {
@@ -130,29 +148,12 @@ public class EventDto {
 		this.event_sale = event_sale;
 	}
 	
-	public String getFile_path() {
-		return file_path;
-	}
-
-	public void setFile_path(String file_path) {
-		this.file_path = file_path;
-	}
-
 	public String getFile_new_name() {
 		return file_new_name;
 	}
 
 	public void setFile_new_name(String file_new_name) {
 		this.file_new_name = file_new_name;
-	}
-
-	@Override
-	public String toString() {
-		return "EventDto [event_no=" + event_no + ", event_title=" + event_title + ", event_desc=" + event_desc
-				+ ", event_start=" + event_start + ", event_end=" + event_end + ", event_noti=" + event_noti
-				+ ", member_id=" + member_id + ", class_no=" + class_no + ", product_no=" + product_no + ", title="
-				+ title + ", original_price=" + original_price + ", event_sale=" + event_sale + ", file_path="
-				+ file_path + ", file_new_name=" + file_new_name + "]";
 	}
 
 }
