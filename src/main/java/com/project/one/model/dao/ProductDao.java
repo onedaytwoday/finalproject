@@ -19,6 +19,8 @@ public interface ProductDao {
 	
 	public List<ProductDto> searchedList(String search_keyword);
 	
+	public List<ProductDto> main_selectList();
+	
 	public ProductDto selectOne(int product_no);
 	
 	public ProductDto selectOneByName(String product_name);

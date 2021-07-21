@@ -17,6 +17,8 @@ public interface ClassDao {
 	
 	public List<ClassDto> classListSearch(PagingDto pDto);
 	
+	public List<ClassDto> main_selectList();
+	
 	public ClassDto selectOne(int class_no);
 	
 	public ClassDto selectOneByTitle(String class_title);

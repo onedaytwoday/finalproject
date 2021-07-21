@@ -44,6 +44,20 @@ public class ProductDaoImpl implements ProductDao {
 		
 		return list;
 	}
+	
+	@Override
+	public List<ProductDto> main_selectList() {
+		List<ProductDto> list = new ArrayList<ProductDto>();
+		
+		try {
+			list = sqlSession.selectList(NAMESPACE + "main_selectList");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
 
 	@Override
 	public ProductDto selectOne(int product_no) {

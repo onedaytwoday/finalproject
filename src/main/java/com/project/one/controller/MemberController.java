@@ -97,6 +97,8 @@ public class MemberController {
 			}
 		}
 		model.addAttribute("list", eBiz.selectList());
+		model.addAttribute("clist", cBiz.main_selectList());
+		model.addAttribute("plist", pbiz.main_selectList());
 		return "main";
 	}
 	
@@ -347,6 +349,8 @@ public class MemberController {
 	@RequestMapping("/main.do")
 	public String main(Model model) {
 		model.addAttribute("list", eBiz.selectList());
+		model.addAttribute("clist", cBiz.main_selectList());
+		model.addAttribute("plist", pbiz.main_selectList());
 		return "main";
 	}
 	
