@@ -70,10 +70,6 @@
 			
 		</div>
 		
-		<c:if test="${mDto.member_grade eq '강사회원' }">
-			<button type="button" onclick="location.href='classInsert.do'" style="color:black">클래스 작성</button>
-		</c:if>
-		
 		<section class="blog_area section-padding">
             <div class="container">
                 <div class="row">
@@ -116,6 +112,10 @@
                     
                     <div class="col-lg-4">
                         <div class="blog_right_sidebar">
+	                    	<c:if test="${mDto.member_grade eq '강사회원' }">
+								<button type="button" class="genric-btn primary-border mb-2" style="width:100%;" onclick="location.href='classInsert.do'"><i class="bi bi-pencil-fill"></i> 클래스 등록</button>
+							</c:if>
+						
                             <aside class="single_sidebar_widget search_widget">
                                 <form action="class_search.do" method="post">
                                 	<input type="hidden" name="nowPage" value="1">

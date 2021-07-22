@@ -24,7 +24,7 @@
 
 		<div class="row g-5">
 			<div class="col-lg-7">
-				<div class="d-md-flex justify-content-between pb-4 mt-2 mb-4 border-bottom">
+				<div class="d-md-flex justify-content-between pb-4 mt-2 mb-4 border-bottom">	
 					<h3>${dto.class_title }</h3>
 					<h4>${dto.class_price }원</h4>
 				</div>
@@ -101,13 +101,6 @@
 						Proin vitae odio id nisl aliquam pellentesque quis sit amet tellus. Nam in feugiat nibh. In sodales mi tortor, non accumsan nunc sodales accumsan.
 					</p>
 					
-					<%-- 
-					<c:if test="${dto.member_id eq mDto.member_id }">
-						<button
-							onclick="location.href='classUpdate.do?class_no=${dto.class_no}'"
-							type="button" class="btn btn-warning">수정</button>
-					</c:if>
-					--%>
 				</article>
 
 				<div class="comments-area">
@@ -149,6 +142,11 @@
 							<button onclick="location.href='review_insert_class.do?class_no=${dto.class_no}&class_title=${dto.class_title }'" class="button button-contactForm btn_1 boxed-btn">리뷰 작성하기</button>
 						</div>					
 					</div>
+				</c:if>
+				
+				<c:if test="${dto.member_id eq mDto.member_id }">
+					<button onclick="location.href='classUpdate.do?class_no=${dto.class_no}'"
+						type="button" class="genric-btn warning circle ml-auto"><i class="bi bi-pencil-fill"></i> 수정</button>
 				</c:if>
 			</div>
 
