@@ -79,7 +79,19 @@
 </head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
-	<main class="container my-0">
+	<div class="slider-area">
+        <div class="single-slider slider-height2 d-flex align-items-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="hero-cap text-center">
+                            <h2>LOGIN</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 		<c:choose>
 			<c:when test="${sessionId != null}">
 				<h2> 네이버 아이디 로그인 성공하셨습니다!! </h2>
@@ -116,7 +128,7 @@
 				                            <div class="col-md-12 form-group">
 				                            	<div class="creat_account d-flex align-items-center justify-content-between">
 				                                    <a href="${naverUrl}"><img width="150" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png" /></a>
-				 	  								<a href="${kakaoUrl}"><img width="150" src="resources/images/kakao_login.png" />카카오로그인</a>
+				 	  								<a href="${kakaoUrl}"><img width="150" src="resources/images/kakao_login.png" /></a>
 				                                </div>
 				                                <input type="button" onclick="login();" class="btn_3" value="login" />
 				                                <a class="lost_pass" href="findIdPwForm.do">forget password?</a>
@@ -130,7 +142,6 @@
 				</section>
 	        </c:otherwise>
 		</c:choose>
-	</main>
 	
 	<jsp:include page="footer.jsp"></jsp:include>
 </body>

@@ -19,7 +19,7 @@
 <body>
 	<jsp:include page="header.jsp"></jsp:include>  
 	<!--? slider Area Start -->
-        <div class="slider-area product_image_area">
+        <div class="slider-area product_image_area" style="margin-top: 130px; ">
             		<div class="row justify-content-center">
                 <div class="col-lg-12">
                 <div class="product_img_slide owl-carousel">
@@ -119,9 +119,7 @@
                 </div>
                 <!-- Button -->
                 <div class="row justify-content-center">
-                    <div class="room-btn pt-70">
-                        <a href="store.do?nowPage=1" class="btn view-btn1">View More Products</a>
-                    </div>
+                	<button type="button" class="button button-contactForm btn_1 boxed-btn" onclick="location.href='store.do?nowPage=1'">View More Products</button>
                 </div>
             </div>
         </div>

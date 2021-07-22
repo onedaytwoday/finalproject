@@ -179,7 +179,7 @@ a {
   color: #635c5c;
 }
 a:hover {
-  color: #fff;
+  color: f44a40;
 }
 a:focus,
 a:hover,
@@ -189,7 +189,7 @@ a:hover,
 }
 a,
 button {
-  color: #fff;
+  color: #415094;
   outline: medium none;
 }
 button:focus,
@@ -309,51 +309,6 @@ input:focus::-moz-placeholder {
 .owl-carousel:hover .owl-nav div:hover {
   color: #fff;
   background: #ff3500;
-}
-.btn {
-  background: #ff2020;
-  font-family: 'Josefin Sans', sans-serif;
-  text-transform: uppercase;
-  color: #fff;
-  font-size: 16px;
-  font-weight: 600;
-  letter-spacing: 0.03em;
-  padding: 30px 28px;
-  border-radius: 0px;
-  display: inline-block;
-  line-height: 0;
-  cursor: pointer;
-  margin-bottom: 0;
-  margin: 10px;
-  cursor: pointer;
-  transition: color 0.4s linear;
-  position: relative;
-  z-index: 1;
-  -moz-user-select: none;
-  border: 0;
-  overflow: hidden;
-  margin: 0;
-}
-.btn::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background: #4a4a4b;
-  z-index: 1;
-  transition: transform 0.5s;
-  transition-timing-function: ease;
-  transform-origin: 0 0;
-  transition-timing-function: cubic-bezier(0.5, 1.6, 0.4, 0.7);
-  transform: scaleX(0);
-  border-radius: 0px;
-}
-.btn:hover::before {
-  transform: scaleX(1);
-  color: #fff !important;
-  z-index: -1;
 }
 .header-btn {
   padding: 25px 28px !important;
@@ -1962,26 +1917,26 @@ input:focus {
   background-color: #f4f4f4;
 }
 .section_padding {
-  padding: 200px 0px;
+  padding: 100px 0px;
 }
 @media only screen and (min-width: 992px) and (max-width: 1200px) {
   .section_padding {
-    padding: 100px 0px;
+    padding: 50px 0px;
   }
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .section_padding {
-    padding: 70px 0px;
+    padding: 35px 0px;
   }
 }
 @media (max-width: 576px) {
   .section_padding {
-    padding: 70px 0px;
+    padding: 35px 0px;
   }
 }
 @media only screen and (min-width: 480px) and (max-width: 767px) {
   .section_padding {
-    padding: 70px 0px;
+    padding: 35px 0px;
   }
 }
 .single_padding_top {
@@ -2590,13 +2545,13 @@ input:focus {
 }
 .slider-height2 {
   background-image: url(../img/hero/about_hero.png);
-  min-height: 500px;
+  min-height: 300px;
   background-repeat: no-repeat;
   background-position: center center;
 }
 @media (max-width: 575px) {
   .slider-height2 {
-    min-height: 260px;
+    min-height: 180px;
   }
 }
 .slider-area {
@@ -4331,11 +4286,6 @@ input:focus {
   padding-top: 15px;
   border-bottom: 1px solid #f0e9ff;
 }
-.blog_right_sidebar .single_sidebar_widget {
-  background: #fbf9ff;
-  padding: 30px;
-  margin-bottom: 30px;
-}
 .blog_right_sidebar .single_sidebar_widget .btn_1 {
   margin-top: 0px;
 }
@@ -5456,10 +5406,9 @@ del {
   border-left: 2px solid #222;
 }
 .progress-table-wrap {
-  overflow-x: scroll;
+  overflow-x: hidden;
 }
 .progress-table {
-  background: #f9f9ff;
   padding: 15px 0px 30px 0px;
   min-width: 800px;
 }
