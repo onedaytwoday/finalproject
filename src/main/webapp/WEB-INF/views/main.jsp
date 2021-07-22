@@ -19,7 +19,7 @@
 <body>
 	<jsp:include page="header.jsp"></jsp:include>  
 	<!--? slider Area Start -->
-        <div class="slider-area product_image_area">
+        <div class="slider-area product_image_area" style="margin-top: 130px; ">
             		<div class="row justify-content-center">
                 <div class="col-lg-12">
                 <div class="product_img_slide owl-carousel">

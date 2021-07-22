@@ -289,7 +289,7 @@ public class MemberController {
 			
 			MemberDto res = biz.selectOne(member_id);
 			if(res != null) {
-				if(res.getMember_join()=="Y") {
+				if(res.getMember_join().equals("Y")) {
 					session.setAttribute("mDto", res);
 					session.setMaxInactiveInterval(-1);
 					return "redirect:main.do";
@@ -333,7 +333,7 @@ public class MemberController {
 		
 		MemberDto res = biz.selectOne(kid);
 		if(res != null) {
-			if(res.getMember_join()=="Y") {
+			if(res.getMember_join().equals("Y")) {
 				session.setAttribute("mDto", res);
 				session.setMaxInactiveInterval(-1);
 				return "redirect:main.do";

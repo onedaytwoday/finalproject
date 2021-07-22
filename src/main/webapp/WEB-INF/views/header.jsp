@@ -15,11 +15,11 @@
     <link rel="stylesheet" href="resources/assets/css/magnific-popup.css">
     <link rel="stylesheet" href="resources/assets/css/fontawesome-all.min.css">
     <link rel="stylesheet" href="resources/assets/css/themify-icons.css">
-    <link rel="stylesheet" href="resources/assets/css/nice-select.css">
+    <link rel="stylesheet" href="resources/assets/css/nice-select.css?ver=1">
     <link rel="stylesheet" href="resources/assets/css/slick.css">
     <link rel="stylesheet" href="resources/assets/css/slick.min.css">
     <link rel="stylesheet" href="resources/assets/css/slick-theme.min.css">
-    <link rel="stylesheet" href="resources/assets/css/style.css">
+    <link rel="stylesheet" href="resources/assets/css/style.css?ver=3">
 
 
 
@@ -114,12 +114,7 @@
                                 			<li><img src="resources/images/chat.png" id="iconImg" width="20px" height="20px" onmouseover="this.src='resources/images/chat_ahover.png'" onmouseout="this.src='resources/images/chat.png'"></li>
 											</c:otherwise>
 										</c:choose>
-                                		<li><a href="${mDto.member_grade == '관리자' ? 'adminMain.do' : 'mypage_update.do' }"><span class="flaticon-user"></span></a>
-                                			<ul class="submenu">
-                                			<li><a href="#">category1</a></li>
-                                            <li><a href="#">category2</a></li>
-                                			</ul>
-                                		</li>
+                                		<li><a href="${mDto.member_grade == '관리자' ? 'adminMain.do' : 'mypage_update.do' }"><span class="flaticon-user"></span></a></li>
                                 		<li><a href="logout.do"><img src="resources/images/logout.png" width="20px" height="20px" onmouseover="this.src='resources/images/logout_ahover.png'" onmouseout="this.src='resources/images/logout.png'"></a></li>
                                 		<li><a href="basket.do"><span class="flaticon-shopping-cart"></span></a> </li>
                                 	</c:otherwise>
