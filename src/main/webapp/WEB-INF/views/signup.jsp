@@ -116,7 +116,7 @@
 				<input type="hidden" name="member_auto" value="Y" />
 							
 				<div class="mt-10 d-flex flex-row justify-content-between">
-					<input type="text"  name="member_id" title="n" placeholder="아이디" onfocus="this.placeholder = ''" onblur="this.placeholder = '아이디'" required class="single-input">
+					<input type="text" name="member_id" title="n" placeholder="아이디" class="single-input" value="${mDto != null ? mDto.member_id : ''}" onfocus="this.placeholder = ''" onblur="this.placeholder = '아이디'" required>
 					<input type="button" class="genric-btn primary-border circle" value="중복체크" onclick="idCheck();" />
 				</div>
 								
@@ -129,22 +129,23 @@
 				</div>
 				
 				<div class="mt-10">
-					<input type="text" name="member_name" placeholder="이름" onfocus="this.placeholder = ''" onblur="this.placeholder = '이름'" required class="single-input" onclick="idCheckConfirm()">
+					<input type="text" name="member_name" placeholder="이름" class="single-input" value="${mDto != null ? mDto.member_name : ''}" onfocus="this.placeholder = ''" onblur="this.placeholder = '이름'" required onclick="idCheckConfirm()">
 				</div>
 				
 				<div class="mt-10">
-					<input type="text" name="member_nicname" placeholder="닉네임" onfocus="this.placeholder = ''" onblur="this.placeholder = '닉네임'" required class="single-input" onclick="idCheckConfirm()">
+					<input type="text" name="member_nicname" placeholder="닉네임" class="single-input" value="${mDto != null ? mDto.member_nicname : ''}" onfocus="this.placeholder = ''" onblur="this.placeholder = '닉네임'" required onclick="idCheckConfirm()">
 				</div>
 				
 				<div class="mt-10">
-					<input type="email" name="member_email" placeholder="이메일 주소" onfocus="this.placeholder = ''" onblur="this.placeholder = '이메일 주소'" required class="single-input" onclick="idCheckConfirm()">
+					<input type="email" name="member_email" placeholder="이메일 주소" class="single-input" value="${mDto != null ? mDto.member_email : ''}" onfocus="this.placeholder = ''" onblur="this.placeholder = '이메일 주소'" required onclick="idCheckConfirm()">
 				</div>
 				
 				<div class="mt-10 d-flex flex-row justify-content-between">
+					<c:set var="phone" value="${mDto != null ? mDto.member_phone : ''}"/>
 					<input type="hidden" name="member_phone" value="">
-					<input type="text" name="member_phone_1" required  maxlength="3" class="single-input" onclick="idCheckConfirm()"> <i class="bi bi-dash-lg mt-2 px-1"></i>
-					<input type="text" name="member_phone_2" required  maxlength="4" class="single-input" onclick="idCheckConfirm()"> <i class="bi bi-dash-lg mt-2 px-1"></i>
-					<input type="text" name="member_phone_3" required  maxlength="4" class="single-input" onclick="idCheckConfirm()">
+					<input type="text" name="member_phone_1" maxlength="3" class="single-input" value="${mDto != null ? fn:substring(phone,0,3) : '' }" onclick="idCheckConfirm()" required> <i class="bi bi-dash-lg mt-2 px-1"></i>
+					<input type="text" name="member_phone_2" maxlength="4" class="single-input" value="${mDto != null ? fn:substring(phone,3,7) : '' }" onclick="idCheckConfirm()" required> <i class="bi bi-dash-lg mt-2 px-1"></i>
+					<input type="text" name="member_phone_3" maxlength="4" class="single-input" value="${mDto != null ? fn:substring(phone,7,11) : '' }" onclick="idCheckConfirm()" required>
 				</div>
 				
 				<div class="mt-10">
@@ -179,92 +180,11 @@
 				</div>
 				
 				<div class="float-right mt-30">
-					<input class="genric-btn danger radius" type="submit" value="회원가입" >
+					<input class="genric-btn danger radius" type="submit" value="회원가입" onclick="check()" />
 					<input class="genric-btn default radius" type="button" value="취소" onclick="location.href='main.do'" />
 				</div>
 			</form>					
 		</div>
-	
-	
-		<form action="signupRes.do" method="post">
-		
-		<%
-			if(request.getAttribute("mDto")==null){
-		%>
-		
-			
-		<%}else{
-			MemberDto mDto = (MemberDto)request.getAttribute("mDto");	
-		%>
-			<table border="1">
-				<tr>
-					<th>아이디</th>
-					<td>
-						<input type="text" name="member_id" title="n" required="required" value="${mDto.member_id }">
-						<input type="button" value="중복체크" onclick="idCheck();" />
-					</td>
-				</tr>
-				<tr>
-					<th>비밀번호</th>
-					<td><input type="text" name="member_pw" required="required" onclick="idCheckConfirm();"></td>
-				</tr>
-				<tr>
-					<th>비밀번호 확인</th>
-					<td><input type="text" name="member_pw_chk" required="required" onclick="idCheckConfirm();"></td>
-				</tr>
-				<tr>
-					<th>이름</th>
-					<td><input type="text" name="member_name" required="required" onclick="idCheckConfirm();" value="${mDto.member_name }"></td>
-				</tr>
-				<tr>
-					<th>닉네임</th>
-					<td><input type="text" name="member_nicname" required="required" onclick="idCheckConfirm();" value="${mDto.member_nicname }"></td>
-				</tr>
-				<tr>
-					<th>이메일</th>
-					<td><input type="text" name="member_email" required="required" onclick="idCheckConfirm();" value="${mDto.member_email }"></td>
-				</tr>
-				<tr>
-					<th>전화번호</th>
-					<td>
-					<c:set var="phone" value="${mDto.member_phone }"/>
-					<input type="hidden" name="member_phone" value="">
-					<input type="text" name="member_phone_1" maxlength="3" size="3" value="${fn:substring(phone,0,3) }" required="required" onclick="idCheckConfirm();"> - 
-					<input type="text" name="member_phone_2" maxlength="4" size="3" value="${fn:substring(phone,3,7) }" required="required" onclick="idCheckConfirm();"> - 
-					<input type="text" name="member_phone_3" maxlength="4" size="3" value="${fn:substring(phone,7,11) }" required="required" onclick="idCheckConfirm();">
-					</td>
-				</tr>
-				<tr>
-					<th>주소</th>
-					<td>
-					<td>
-					<input type="hidden" name="member_addr" value="">
-					<input type="text" id="postcode" placeholder="우편번호" readonly="readonly">
-					<input type="button" onclick="address();" value="우편번호 찾기">
-					<br>
-					<input type="text" name="member_addr_1" id="addr_1" placeholder="기본주소" readonly="readonly">
-					<input type="text" name="member_addr_2" id="addr_2" placeholder="상세주소" required="required" onclick="idCheckConfirm();">
-					</td>
-				</tr>
-				<tr>
-					<th>알림</th>
-					<td>
-						<input type="radio" name="member_notify" value="Y" onclick="notificationOn()" />
-						<label for="member_notify">허용</label>
-						
-						<input type="radio" name="member_notify" value="N" />
-						<label for="member_notify">거부</label>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2" align="right">
-						<input type="submit" value="회원가입" onclick="check()"/>
-						<input type="button" value="취소" onclick="main.do" />
-					</td>
-				</tr>
-			</table>		
-		<%} %>
-		</form>
 	</main>
 	
 	<jsp:include page="footer.jsp"></jsp:include>
