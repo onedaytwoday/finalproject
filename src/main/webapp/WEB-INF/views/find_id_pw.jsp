@@ -5,17 +5,71 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>    
-	
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
     <script type="text/javascript" src="resources/js/findIdPw.js"></script>
 </head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
 	
 	<main class="container">
+	
+		  <div class="billing_details">
+                <div class="">
+                  <h3>아이디 찾기</h3>
+                  
+                  <form class="row contact_form" action="#" method="post" novalidate="novalidate">
+                    <div class="col-md-6 form-group p_star">
+                      <input type="text" class="form-control" id="first" name="name" />
+                      <span class="placeholder" data-placeholder="First name"></span>
+                    </div>
+                    <div class="col-md-6 form-group p_star">
+                      <input type="text" class="form-control" id="last" name="name" />
+                      <span class="placeholder" data-placeholder="Last name"></span>
+                    </div>
+                    <div class="col-md-12 form-group">
+                      <input type="text" class="form-control" id="company" name="company" placeholder="Company name" />
+                    </div>
+                    <div class="col-md-6 form-group p_star">
+                      <input type="text" class="form-control" id="number" name="number" />
+                      <span class="placeholder" data-placeholder="Phone number"></span>
+                    </div>
+                    <div class="col-md-6 form-group p_star">
+                      <input type="text" class="form-control" id="email" name="compemailany" />
+                      <span class="placeholder" data-placeholder="Email Address"></span>
+                    </div>
+                    <div class="col-md-12 form-group p_star">
+                      <select class="country_select">
+                        <option value="1">Country</option>
+                        <option value="2">Country</option>
+                        <option value="4">Country</option>
+                      </select>
+                    </div>
+                    <div class="col-md-12 form-group p_star">
+                      <input type="text" class="form-control" id="add1" name="add1" />
+                      <span class="placeholder" data-placeholder="Address line 01"></span>
+                    </div>
+                    <div class="col-md-12 form-group p_star">
+                      <input type="text" class="form-control" id="add2" name="add2" />
+                      <span class="placeholder" data-placeholder="Address line 02"></span>
+                    </div>
+                    <div class="col-md-12 form-group p_star">
+                      <input type="text" class="form-control" id="city" name="city" />
+                      <span class="placeholder" data-placeholder="Town/City"></span>
+                    </div>
+                    
+                  </form>
+                </div>
+               
+              </div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
 		<div class="border p-3 rounded-3 mb-3">
 		  <h3>아이디 찾기</h3>
 		  
