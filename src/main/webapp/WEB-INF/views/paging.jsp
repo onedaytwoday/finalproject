@@ -68,51 +68,50 @@
 			</c:otherwise>
 		</c:choose>
 
-		<c:if test="${param.nowBlock > 1}">
-			<a href="${action}?nowPage=${param.blockBegin-1}${search}">◀</a>
-		</c:if>
-
-		<c:forEach begin="${param.blockBegin}" end="${param.blockEnd}"
-			var="index">
-			<c:choose>
-				<c:when test="${param.nowPage == index}">
-					     ${index}
-				    </c:when>
-				<c:otherwise>
-					<a href="${action}?nowPage=${index}${search}">${index}</a>
-				</c:otherwise>
-			</c:choose>
-		</c:forEach>
-
-		<c:if test="${param.nowBlock < param.totalBlock}">
-			<a href="${action}?nowPage=${param.blockEnd+1}${search}">▶</a>
-		</c:if>
+		<nav class="blog-pagination justify-content-center d-flex">
+			<ul class="pagination">
+	        	<li class="page-item">
+	        		<%-- 
+	        		<c:if test="${param.nowBlock > 1}">
+						<a class="page-link" aria-label="Previous" href="${action}?nowPage=${param.blockBegin-1}${search}"><i class="ti-angle-left"></i></a>
+					</c:if>
+	            	--%>
+	            	<a href="#" class="page-link" aria-label="Previous">
+	                	<i class="ti-angle-left"></i>
+	                </a>
+	            </li>
+	            <li class="page-item d-flex">
+	            	<c:forEach begin="${param.blockBegin}" end="${param.blockEnd}" var="index">
+						<c:choose>
+							<c:when test="${param.nowPage == index}">
+								     <a class="page-link">${index}</a>
+							    </c:when>
+							<c:otherwise>
+								<a class="page-link" href="${action}?nowPage=${index}${search}">${index}</a>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+	            </li>
+	            
+	            <li class="page-item">
+	            	<%--
+	            	<c:if test="${param.nowBlock < param.totalBlock}">
+						<a href="${action}?nowPage=${param.blockEnd+1}${search}">▶</a>
+					</c:if>
+	            	--%>
+	            	<a href="#" class="page-link" aria-label="Next">
+	                	<i class="ti-angle-right"></i>
+	                </a>
+	            </li>
+	        </ul>
+	    </nav>
+		
 	</div>
 	
 	
-	<%--
 	
-	<nav class="blog-pagination justify-content-center d-flex">
-                                <ul class="pagination">
-                                    <li class="page-item">
-                                        <a href="#" class="page-link" aria-label="Previous">
-                                            <i class="ti-angle-left"></i>
-                                        </a>
-                                    </li>
-                                    <li class="page-item">
-                                        <a href="#" class="page-link">1</a>
-                                    </li>
-                                    <li class="page-item active">
-                                        <a href="#" class="page-link">2</a>
-                                    </li>
-                                    <li class="page-item">
-                                        <a href="#" class="page-link" aria-label="Next">
-                                            <i class="ti-angle-right"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav>
 	
-	 --%>
+	
+	
 </body>
 </html>

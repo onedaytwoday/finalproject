@@ -81,8 +81,9 @@ public class ProductController {
 	@RequestMapping("/store_select.do")
 	public String Product_selectOne(Model model, int product_no) {
 		model.addAttribute("dto", biz.selectOne(product_no));
-		//model.addAttribute("list",rbiz.avgList(product_no));
-
+		model.addAttribute("rate", rbiz.avgListByProduct(product_no));
+		model.addAttribute("rList", rbiz.listByProduct(product_no));
+		
 		return "store/store_select";
 	}
 	

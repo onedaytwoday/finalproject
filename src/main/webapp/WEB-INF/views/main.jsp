@@ -119,9 +119,7 @@
                 </div>
                 <!-- Button -->
                 <div class="row justify-content-center">
-                    <div class="room-btn pt-70">
-                        <a href="store.do?nowPage=1" class="btn view-btn1">View More Products</a>
-                    </div>
+                	<button type="button" class="button button-contactForm btn_1 boxed-btn" onclick="location.href='store.do?nowPage=1'">View More Products</button>
                 </div>
             </div>
         </div>

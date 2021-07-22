@@ -54,13 +54,27 @@
 <jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
 	<main class="container">
 		<ul class="search_ul"></ul>
-		<input class="insert_btn" type="button" value="상품 등록" onclick="location.href='store_insertform.do'"/>
-		<div class="search">
-			<form action="store_search.do" method="post">
-				<input type="hidden" name="nowPage" value="1">
-				<input type="text" class="search_keyword" name="search_keyword" placeholder="Search term...">
-		        <input onclick="ranking()" type="submit" value="검색" />
-	         </form>
+		
+		<div class="blog_right_sidebar w-25 ml-auto">
+			<c:if test="${mDto.member_grade eq '강사회원' }">
+				<button type="button" class="genric-btn primary-border mt-5 mb-2" style="width:100%;" onclick="location.href='store_insertform.do'"><i class="bi bi-pencil-fill"></i> 상품 등록</button>
+			</c:if>
+                        
+            <aside class="single_sidebar_widget search_widget">
+            	<form action="store_search.do" method="post">
+                 	<input type="hidden" name="nowPage" value="1">
+                
+                    <div class="form-group">  										
+                    	<div class="input-group mb-3">
+                        	<input type="text" class="form-control" name="search_keyword" placeholder="Search term..." onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search term...'">
+                            <div class="input-group-append">
+                            	<button class="btns" type="button"><i class="ti-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" type="submit" onclick="ranking()">검색</button>
+                </form>
+            </aside>
 		</div>
 	
 		<section class="popular-items mt-5">
@@ -82,12 +96,7 @@
 					                  <div class="single-popular-items mb-50 text-center">
 					                    <div class="popular-img">
 					                      <img src="resources/assets/img/gallery/popular1.png" alt="" />
-					                      <div class="img-cap">
-					                        <span>Add to cart</span>
-					                      </div>
-					                      <div class="favorit-items">
-					                        <span class="flaticon-heart"></span>
-					                      </div>
+					                      
 					                    </div>
 					                    <div class="popular-caption">
 					                      <p>${dto.product_del } | ${dto.product_category }</p>

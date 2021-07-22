@@ -117,11 +117,8 @@ public class ClassController {
 	@RequestMapping("/classSelect.do")
 	public String class_select(Model model, int class_no) {
 		CLASS_NO = class_no;
-		double rate = rbiz.avgListByClass(class_no);
-		rate = Math.round(rate/5);
-		
 		model.addAttribute("dto", cBiz.selectOne(class_no));
-		model.addAttribute("rate", rate);
+		model.addAttribute("rate", rbiz.avgListByClass(class_no));
 		model.addAttribute("rList", rbiz.listByClass(class_no));
 
 		return "class/class_select";

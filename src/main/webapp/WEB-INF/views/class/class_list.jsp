@@ -7,9 +7,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
-
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -69,20 +67,8 @@
 		<ul class="search_ul"></ul>
 		
 		<div class="search">
-			<form action="class_search.do" method="post">
-				<input type="hidden" name="nowPage" value="1">
-				<select id="search_category" name="search_category">
-					<option value="nickname" selected>닉네임</option>
-					<option value="title+desc+category">클래스명+설명+내용</option>
-				</select>
-				<input type="text" class="search_keyword" name="search_keyword" placeholder="Search term...">
-		        <input onclick="ranking()" type="submit" value="검색" />
-	         </form>
+			
 		</div>
-		
-		<c:if test="${mDto.member_grade eq '강사회원' }">
-			<button type="button" onclick="location.href='classInsert.do'" style="color:black">클래스 작성</button>
-		</c:if>
 		
 		<section class="blog_area section-padding">
             <div class="container">
@@ -103,12 +89,12 @@
 			
 			                                <div class="blog_details">
 			                                    <a class="d-inline-block" href="classSelect.do?class_no=${dto.class_no }">
-			                                        <div>${dto.class_title }</div>
+			                                       	<h2>${dto.class_title }</h2>	
 			                                    </a>
 			                                    <p>${dto.class_desc }</p>
 			                                    <ul class="blog-info-link">
-			                                        <li><a href="#"><i class="fa fa-user"></i> ${dto.class_loc }</a></li>
-			                                        <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li>
+			                                        <li><a href="#"><i class="bi bi-tag-fill"></i> ${dto.class_category }</a></li>
+			                                        <li><a href="#"><i class="bi bi-geo-alt"></i> ${dto.class_loc } </a></li>
 			                                    </ul>
 			                                    
 			                                    <c:if test="${dto.member_id eq mDto.member_id }">
@@ -126,20 +112,32 @@
                     
                     <div class="col-lg-4">
                         <div class="blog_right_sidebar">
+	                    	<c:if test="${mDto.member_grade eq '강사회원' }">
+								<button type="button" class="genric-btn primary-border mb-2" style="width:100%;" onclick="location.href='classInsert.do'"><i class="bi bi-pencil-fill"></i> 클래스 등록</button>
+							</c:if>
+						
                             <aside class="single_sidebar_widget search_widget">
-                                <form action="#">
-                                    <div class="form-group">
+                                <form action="class_search.do" method="post">
+                                	<input type="hidden" name="nowPage" value="1">
+                                    <div class="form-group">  
+                                    	<div class="default-select" id="default-select">
+											<select class="shipping_select" id="search_category" name="search_category">
+												<option value="nickname" selected>닉네임</option>
+												<option value="title+desc+category">클래스명+설명+내용</option>
+											</select>
+										</div>
+										
                                         <div class="input-group mb-3">
-                                            <input type="text" class="form-control" placeholder='Search Keyword'
+                                            <input type="text" class="form-control" name="search_keyword" placeholder="Search term..."
                                                 onfocus="this.placeholder = ''"
-                                                onblur="this.placeholder = 'Search Keyword'">
+                                                onblur="this.placeholder = 'Search term...'">
                                             <div class="input-group-append">
                                                 <button class="btns" type="button"><i class="ti-search"></i></button>
                                             </div>
                                         </div>
                                     </div>
                                     <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
-                                        type="submit">Search</button>
+                                        type="submit" onclick="ranking()">Search</button>
                                 </form>
                             </aside>
                         </div>
