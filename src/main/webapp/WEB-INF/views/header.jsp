@@ -110,7 +110,7 @@
 										</c:choose>
                                 		<li><a href="${mDto.member_grade == '관리자' ? 'adminMain.do' : 'mypage_update.do' }"><span class="flaticon-user"></span></a></li>
                                 		<li><a href="logout.do"><img src="resources/images/logout.png" width="20px" height="20px" onmouseover="this.src='resources/images/logout_ahover.png'" onmouseout="this.src='resources/images/logout.png'"></a></li>
-                                		<li><a href="cart.html"><span class="flaticon-shopping-cart"></span></a> </li>
+                                		<li><a href="basket.do"><span class="flaticon-shopping-cart"></span></a> </li>
                                 	</c:otherwise>
                                 </c:choose>
                                 

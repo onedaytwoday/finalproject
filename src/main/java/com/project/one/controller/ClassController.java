@@ -75,10 +75,10 @@ public class ClassController {
 	public String class_list(Model model, int nowPage , HttpSession session) {
 		int count = cBiz.classListCount();
 		PagingDto pDto = new PagingDto(count, nowPage);
+		
 		model.addAttribute("list", cBiz.classListPaging(pDto));
-		//평점? model.addAttribute("rlist",rbiz.selectList());
 		model.addAttribute("pDto", pDto);
-		model.addAttribute("Rlist", Rbiz.selectList());
+		
 		return "class/class_list";
 	}
 	@ResponseBody
@@ -117,9 +117,11 @@ public class ClassController {
 	@RequestMapping("/classSelect.do")
 	public String class_select(Model model, int class_no) {
 		CLASS_NO = class_no;
+		double rate = rbiz.avgListByClass(class_no);
+		rate = Math.round(rate/5);
 		
 		model.addAttribute("dto", cBiz.selectOne(class_no));
-		model.addAttribute("rdto", rbiz.avgList(class_no));
+		model.addAttribute("rate", rate);
 		model.addAttribute("rList", rbiz.listByClass(class_no));
 
 		return "class/class_select";
