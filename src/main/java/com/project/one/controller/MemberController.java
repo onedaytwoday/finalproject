@@ -158,7 +158,7 @@ public class MemberController {
 			if(mDto!=null) {
 				session.setAttribute("mDto", mDto);
 				session.setMaxInactiveInterval(-1);
-				return "main";
+				return "redirect:main.do";
 			}	
 		}
 		return "signup";
@@ -193,7 +193,7 @@ public class MemberController {
 		if(biz.register(mDto) > 0) {
 			session.setAttribute("mdto", mDto);
 			session.setMaxInactiveInterval(-1);
-			return "main";
+			return "redirect:main.do";
 		}
 		
 		return "redirect:signup.do?mDto="+mDto;
@@ -289,9 +289,13 @@ public class MemberController {
 			
 			MemberDto res = biz.selectOne(member_id);
 			if(res != null) {
-				session.setAttribute("mDto", res);
-				session.setMaxInactiveInterval(-1);
-				return "redirect:main.do";
+				if(res.getMember_join()=="Y") {
+					session.setAttribute("mDto", res);
+					session.setMaxInactiveInterval(-1);
+					return "redirect:main.do";
+				}else {
+					return "redirect:main.do";
+				}
 			}
 			model.addAttribute("mDto",mDto);
 		} catch (org.json.simple.parser.ParseException e) {
@@ -329,9 +333,13 @@ public class MemberController {
 		
 		MemberDto res = biz.selectOne(kid);
 		if(res != null) {
-			session.setAttribute("mDto", res);
-			session.setMaxInactiveInterval(-1);
-			return "redirect:main.do";
+			if(res.getMember_join()=="Y") {
+				session.setAttribute("mDto", res);
+				session.setMaxInactiveInterval(-1);
+				return "redirect:main.do";
+			}else {
+				return "redirect:main.do";
+			}
 		}
 		
 		model.addAttribute("mDto" , mDto);
@@ -344,7 +352,7 @@ public class MemberController {
 		
 		session.invalidate();
 
-		return "main";
+		return "redirect:main.do";
 	}
 	@RequestMapping("/main.do")
 	public String main(Model model) {

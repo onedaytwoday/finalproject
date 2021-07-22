@@ -46,15 +46,11 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
-	
 		<main class="container">
-	        <div class="mt-100">
+		
+	        <div class="product_image_area">
 	            <div class="row">
-	                <div class="col-md-6">
-	                	<div class="single_product_img">
-		                	<img src="resources/assets/img/gallery/gallery01.png" alt="#" class="img-fluid">
-		                </div>
-	                	<%-- 
+	                <div class="col-md-6">            	
 		                <div class="product_img_slide owl-carousel">
 		                    <div class="single_product_img">
 		                        <img src="resources/assets/img/gallery/gallery01.png" alt="#" class="img-fluid">
@@ -66,7 +62,7 @@
 		                        <img src="resources/assets/img/gallery/gallery1.png" alt="#" class="img-fluid">
 		                    </div>
 		                </div>
-		                --%>
+		                
 	                </div>
 	                
 	                <div class="col-md-6">
@@ -129,69 +125,80 @@
 		                    <p class="ml-2">${dto.product_desc }</p>
 		                    
 		                    <div class="card_area ml-2">
-			                    <div class="add_to_cart d-flex">
-			                        <input class="genric-btn success-border mr-5" type="button" value="장바구니" onclick="addToBasket()" />
-			                    
-			                    
-			                    	<form action="payment.do" method="post">
-										<input type="hidden" name="product_no" value="${dto.product_no }" />
-										<input type="hidden" name="payment_num" value="1" />
-										<input type="hidden" name="payment_price" value="${dto.product_price }" />
-										<input type="hidden" name="product_name" value="${dto.product_name }" />
-										<input type="hidden" name="type" value="product" />
-										
-										<input class="genric-btn primary-border" type="submit" value="바로 구매" />
-									</form> 
-			                    </div>
+		                    	<c:choose>
+		                    		<c:when test="${mDto != null && mDto.member_grade == '일반회원' }">
+			                    		<div class="add_to_cart d-flex">
+					                        <input class="genric-btn success-border mr-5" type="button" value="장바구니" onclick="addToBasket()" />
+					                    
+					                    
+					                    	<form action="payment.do" method="post">
+												<input type="hidden" name="product_no" value="${dto.product_no }" />
+												<input type="hidden" name="payment_num" value="1" />
+												<input type="hidden" name="payment_price" value="${dto.product_price }" />
+												<input type="hidden" name="product_name" value="${dto.product_name }" />
+												<input type="hidden" name="type" value="product" />
+												
+												<input class="genric-btn primary-border" type="submit" value="바로 구매" />
+											</form> 
+				                    	</div>
+		                    		</c:when>
+		                    		
+		                    		<c:when test="${mDto != null && mDto.member_grade != '일반회원' }">
+				                    	<div class="mt-3">
+					                    	<a href="store_updateform.do?product_no=${dto.product_no}" class="genric-btn warning circle"><i class="bi bi-pencil-square"></i> 수정</a>
+					                    	<a href="store_delete.do?product_no=${dto.product_no}" class="genric-btn danger circle"><i class="bi bi-trash"></i> 삭제</a>
+					                    </div>
+		                    		</c:when>
+		                    	</c:choose>
 		                    </div>
 		                </div>
 	                </div>
 	            </div>
 	        </div>
-
-	
-	
-	
-		
-			<%-- 
-			<c:if test="${mDto.member_id != null }">
-				<tr>
-					<td colspan="2" align="center">
-						<div style="display:flex; justify-content:space-evenly;">
-							<input type="button" value="장바구니" onclick="addToBasket()" />
-						
-						
-							<form action="payment.do" method="post">
-								<input type="hidden" name="product_no" value="${dto.product_no }" />
-								<input type="hidden" name="payment_num" value="1" />
-								<input type="hidden" name="payment_price" value="${dto.product_price }" />
-								<input type="hidden" name="product_name" value="${dto.product_name }" />
-								<input type="hidden" name="type" value="product" />
-								
-								<input type="submit" value="바로 구매" />
-							</form> 
+	        
+	        <div class="comments-area">
+				<h4>${rList.size() } Comments</h4>
+					
+				<c:if test="${rList.size() > 0 }">
+					<c:forEach items="${rList }" var="dto">
+						<div class="comment-list">
+							<div class="single-comment justify-content-between d-flex">
+								<div class="user justify-content-start d-flex w-100">
+									<div class="thumb">
+										<img src="resources/assets/img/comment/comment_1.png" alt="">
+									</div>
+									<div class="desc">
+										<div class="d-md-flex justify-content-between">
+											<p class="comment">${dto.review_content }</p>
+											<div>${dto.review_rate }</div>
+										</div>
+										
+										<div class="d-flex justify-content-between">
+											<div class="d-flex align-items-center">
+												<span>
+													${dto.member_id }
+												</span>
+												<p class="date"><fmt:formatDate value="${dto.review_date }" pattern="yyyy/MM/dd hh:mm a"/></p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
-						
-					</td>
-				</tr>
+					</c:forEach>
+				</c:if>
+			</div>
+			<c:if test="${mDto.member_id != null && mDto.member_grade == '일반회원'}">
+				<div class="comment-form">
+					<div class="form-group">
+						<button onclick="location.href='review_insert_product.do?product_no=${dto.product_no}&product_name=${dto.product_name }'" class="button button-contactForm btn_1 boxed-btn">리뷰 작성하기</button>
+					</div>					
+				</div>
 			</c:if>
-			
-	
-			
-			<tr>
-				<td colspan="2" align="right"><input type="button" value="수정"
-					onclick="location.href='store_updateform.do?product_no=${dto.product_no}'" />
-					<input type="button" value="삭제"
-					onclick="location.href='store_delete.do?product_no=${dto.product_no}'" />
-					<input type="button" value="목록" onclick="location.href='store.do?nowPage=1'" />
-					<button onclick="location.href='review_insert_product.do?product_no=${dto.product_no}&product_name=${dto.product_name }'" type="button">리뷰작성</button>
-				</td>
-			</tr>
-		--%>
-	</main>
-	
+		</main>
 	<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 	
 	
+	<script src="resources/assets/js/main.js"></script>
 </body>
 </html>

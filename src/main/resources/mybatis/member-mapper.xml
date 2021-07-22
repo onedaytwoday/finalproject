@@ -41,6 +41,7 @@
 		FROM MEMBER
 		WHERE MEMBER_ID = #{member_id}
 		AND MEMBER_PW = #{member_pw}
+		AND MEMBER_JOIN = 'Y'
 	</select>
 	<select id="selectOne" parameterType="String" resultType="memberDto">
 		SELECT MEMBER_ID, MEMBER_PW, MEMBER_NAME, MEMBER_NICNAME, MEMBER_EMAIL, MEMBER_PHONE,

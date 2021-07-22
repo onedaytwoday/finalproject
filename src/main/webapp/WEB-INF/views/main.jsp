@@ -7,31 +7,38 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Insert title here</title>
-	<link rel="stylesheet" type="text/css" href="resources/css/slick.css"/>
-	<link rel="stylesheet" type="text/css" href="resources/css/slick-theme.css"/>
-	<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>	
+    <link rel="stylesheet" href="resources/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="resources/assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="resources/assets/css/slicknav.css">
+    <link rel="stylesheet" href="resources/assets/css/slick.css">
+    <link rel="stylesheet" href="resources/assets/css/slick.min.css">
+    <link rel="stylesheet" href="resources/assets/css/slick-theme.min.css">
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>	
 </head>
 
 <body>
 	<jsp:include page="header.jsp"></jsp:include>  
 	<!--? slider Area Start -->
-        <div class="slider-area ">
-            <div class="slider-active">
-                <!-- Single Slider -->
-                <c:choose>
-                <c:when test="${empty list }">
-                	<div>이벤트 없음</div>
-                </c:when>
-                <c:otherwise>
-                <c:forEach items="${list }" var="dto">
-                <div class="single-slider slider-height d-flex align-items-center slide-bg" style="overflow:hidden; margin:0 auto;">
-                     <img src="resources/assets/img/blog/learn_about_bg.png" alt="" class="heartbeat" style="width:100%; height:100%; object-fit:cover;"/>
+        <div class="slider-area product_image_area">
+            		<div class="row justify-content-center">
+                <div class="col-lg-12">
+                <div class="product_img_slide owl-carousel">
+                	 <c:choose>
+                		<c:when test="${empty list }">
+                			<div>이벤트 없음</div>
+                		</c:when>
+                		<c:otherwise>
+                		<c:forEach items="${list }" var="dto">
+                    		<div class="single_product_img">
+                        		<img src="resources/assets/img/gallery/gallery1.png" alt="#" class="img-fluid">
+                    		</div>
+                		</c:forEach>
+                    	</c:otherwise>
+                    </c:choose>
                 </div>
-                </c:forEach>
-                </c:otherwise>
-                </c:choose>
-            </div>
-        </div>
+                </div>
+                </div>
+                </div>
         <!-- slider Area End-->
         <!-- ? New Product Start -->
         <section class="new-product-area section-padding30">
@@ -120,16 +127,9 @@
         </div>
         <!-- Popular Items End -->
         
+    <script src="resources/assets/js/main.js"></script>
     <jsp:include page="footer.jsp"></jsp:include>
-  	<script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-  	<script type="text/javascript" src="resources/js/slick.min.js"></script>
 
-  	<script type="text/javascript">
-    $(document).ready(function(){
-      $('.slider-active').slick({
-      });
-    });
-  </script>
 <!-- 채널톡 -->
 <script>
   (function() {
