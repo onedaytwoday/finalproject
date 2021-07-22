@@ -16,7 +16,13 @@
     <link rel="stylesheet" href="resources/assets/css/fontawesome-all.min.css">
     <link rel="stylesheet" href="resources/assets/css/themify-icons.css">
     <link rel="stylesheet" href="resources/assets/css/nice-select.css">
+    <link rel="stylesheet" href="resources/assets/css/slick.css">
+    <link rel="stylesheet" href="resources/assets/css/slick.min.css">
+    <link rel="stylesheet" href="resources/assets/css/slick-theme.min.css">
     <link rel="stylesheet" href="resources/assets/css/style.css">
+
+
+
 	<style type="text/css">
 		#iconImg:hover , #Img:hover {
 			cursor: pointer;
@@ -108,7 +114,12 @@
                                 			<li><img src="resources/images/chat.png" id="iconImg" width="20px" height="20px" onmouseover="this.src='resources/images/chat_ahover.png'" onmouseout="this.src='resources/images/chat.png'"></li>
 											</c:otherwise>
 										</c:choose>
-                                		<li><a href="${mDto.member_grade == '관리자' ? 'adminMain.do' : 'mypage_update.do' }"><span class="flaticon-user"></span></a></li>
+                                		<li><a href="${mDto.member_grade == '관리자' ? 'adminMain.do' : 'mypage_update.do' }"><span class="flaticon-user"></span></a>
+                                			<ul class="submenu">
+                                			<li><a href="#">category1</a></li>
+                                            <li><a href="#">category2</a></li>
+                                			</ul>
+                                		</li>
                                 		<li><a href="logout.do"><img src="resources/images/logout.png" width="20px" height="20px" onmouseover="this.src='resources/images/logout_ahover.png'" onmouseout="this.src='resources/images/logout.png'"></a></li>
                                 		<li><a href="basket.do"><span class="flaticon-shopping-cart"></span></a> </li>
                                 	</c:otherwise>
@@ -127,17 +138,16 @@
         <!-- Header End -->
     </header>
     
-    <script src="resources//assets/js/vendor/modernizr-3.5.0.min.js"></script>
+    <script src="resources/assets/js/vendor/modernizr-3.5.0.min.js"></script>
     <!-- Jquery, Popper, Bootstrap -->
     <script src="resources/assets/js/vendor/jquery-1.12.4.min.js"></script>
     <script src="resources/assets/js/popper.min.js"></script>
     <script src="resources/assets/js/bootstrap.min.js"></script>
     <!-- Jquery Mobile Menu -->
     <script src="resources/assets/js/jquery.slicknav.min.js"></script>
-
     <!-- Jquery Slick , Owl-Carousel Plugins -->
     <script src="resources/assets/js/owl.carousel.min.js"></script>
-
+	<script src="resources/assets/js/slick.min.js"></script>
     <!-- One Page, Animated-HeadLin -->
     <script src="resources/assets/js/wow.min.js"></script>
     <script src="resources/assets/js/animated.headline.js"></script>
@@ -158,5 +168,10 @@
     <!-- Jquery Plugins, main Jquery -->	
     <script src="resources/assets/js/plugins.js"></script>
     <script src="resources/assets/js/main.js"></script>
+   
+    <script src="resources/assets/js/swiper.min.js"></script>
+    <script src="resources/assets/js/mixitup.min.js"></script>
+    <script src="resources/assets/js/jquery.counterup.min.js"></script>
+    <script src="resources/assets/js/waypoints.min.js"></script>
 </body>
 </html>

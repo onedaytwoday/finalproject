@@ -58,7 +58,25 @@
 	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
 	<main class="container">
 		<h1>상품 상세페이지</h1>
-
+		<div class="product_image_area">
+            <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-12">
+                <div class="product_img_slide owl-carousel">
+                    <div class="single_product_img">
+                        <img src="resources/assets/img/gallery/gallery1.png" alt="#" class="img-fluid">
+                    </div>
+                    <div class="single_product_img">
+                        <img src="resources/assets/img/gallery/gallery01.png" alt="#" class="img-fluid">
+                    </div>
+                    <div class="single_product_img">
+                        <img src="resources/assets/img/gallery/gallery1.png" alt="#" class="img-fluid">
+                    </div>
+                </div>
+                </div>
+             </div>
+             </div>
+        </div>
 		<table border="1">
 			<tr>
 				<th>상품 사진</th>
@@ -136,7 +154,7 @@
 			</tr>
 		</table>
 	</main>
-	
+	<script src="resources/assets/js/main.js"></script>
 	<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 </body>
 </html>

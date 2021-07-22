@@ -103,11 +103,11 @@
 			
 			                                <div class="blog_details">
 			                                    <a class="d-inline-block" href="classSelect.do?class_no=${dto.class_no }">
-			                                        <h2>${dto.class_title }</h2>
+			                                        <div>${dto.class_title }</div>
 			                                    </a>
 			                                    <p>${dto.class_desc }</p>
 			                                    <ul class="blog-info-link">
-			                                        <li><a href="#"><i class="fa fa-user"></i> ${dto.loc }</a></li>
+			                                        <li><a href="#"><i class="fa fa-user"></i> ${dto.class_loc }</a></li>
 			                                        <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li>
 			                                    </ul>
 			                                    
