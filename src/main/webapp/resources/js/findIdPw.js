@@ -1,7 +1,6 @@
 let confirm_num = "";
 let memberId = "";
 let memberPhone = "";
-let id_pw = "id";
 let confirmNum = "";
 
 function checkUserName(){
@@ -45,14 +44,13 @@ function checkUserName(){
 }
 
 function checkUserId(){
-	id_pw = "pw";
-	
 	memberId = $("#member_id").val();
 	memberPhone = $("[name='member_phone']:eq(1)").val();
 	
 	if(memberId == "" || memberPhone == "") {
-		$("#msg_pw").text("입력칸에 입력해주세요");
+		$("#msg_pw").text("입력칸에 입력해주세요!");
 		$("#msg_pw").css("color", "red");
+		
 	} else {
 		var checkUser = {
 				"member_id" : memberId,
@@ -84,12 +82,15 @@ function checkUserId(){
 	$("input[name='member_phone']:eq(1)").val("");
 }
 
-
-function confirmed(){
-	if(id_pw == "id") {
+function confirmed(type){
+	if(type == "id") {
 		confirmNum = $("input[name='confirmNum']:eq(0)").val();
-	
-		if(confirmNum == confirm_num) {
+		
+		if(confirmNum == '') {
+			$("#msg").text('인증번호를 입력해 주세요.');
+			$("#msg").css("color", "red");
+		
+		} else if(confirmNum == confirm_num) {
 			$("#msg").text(`아이디는 ${memberId}입니다.`);
 		} else {
 			$("#msg").text('인증번호가 다릅니다.');
@@ -98,14 +99,17 @@ function confirmed(){
 		
 		$("[name='confirmNum']:eq(0)").val("");
 		
-	} else if(id_pw == 'pw') {
+	} else if(type == 'pw') {
 		confirmNum = $("[name='confirmNum']:eq(1)").val();
 	
-		if(confirmNum == confirm_num) {
+		if(confirmNum == '') {
+			$("#msg_pw").text('인증번호를 입력해 주세요.');
+			$("#msg_pw").css("color", "red");
+		
+		} else if(confirmNum == confirm_num) {
 			$("#msg_pw").text('인증되었습니다.');
 			
-			let btn = "<button type='button' class='btn btn-primary mx-5' data-bs-toggle='modal' data-bs-target='#exampleModal'>비밀번호 변경</button>"
-			$("#msg_pw").append(btn);
+			$("#change_pw").css("display", "block");
 			
 			$("#h_member_id").val(memberId);
 			$("#h_member_phone").val(memberPhone);

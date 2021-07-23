@@ -121,7 +121,7 @@
 				</div>
 								
 				<div class="mt-10">
-					<input type="text" name="member_pw" placeholder="비밀번호" onfocus="this.placeholder = ''" onblur="this.placeholder = '비밀번호'" required class="single-input" onclick="idCheckConfirm()";>
+					<input type="text" name="member_pw" placeholder="비밀번호" onfocus="this.placeholder = ''" onblur="this.placeholder = '비밀번호'" required class="single-input" onclick="idCheckConfirm()">
 				</div>
 				
 				<div class="mt-10">
