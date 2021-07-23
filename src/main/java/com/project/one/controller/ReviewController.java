@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.project.one.model.biz.FileTableBiz;
 import com.project.one.model.biz.ReviewBiz;
+import com.project.one.model.dto.BoardDto;
 import com.project.one.model.dto.ClassDto;
 import com.project.one.model.dto.FileTableDto;
 import com.project.one.model.dto.MemberDto;
@@ -39,38 +40,18 @@ public class ReviewController {
 	
 	@Autowired
 	private FileTableBiz fbiz;
-	//클래스리뷰 리스트
-	@RequestMapping("/review_list_class.do")
+	
+	@RequestMapping("/review_list.do")
 	public String review_list_class(Model model) {
-		
-		model.addAttribute("list", rBiz.selectClass());
-		
-		return "review/review_list_class";
+		model.addAttribute("list", rBiz.selectList());
+		return "review/review_list";
 	}
 	
-	//상품리뷰 리스트
-	@RequestMapping("/review_list_product.do")
-	public String review_list_product(Model model) {
-		
-		model.addAttribute("list", rBiz.selectProduct());
-		
-		return "review/review_list_product";
-	}
-	
-	
-	//클래스리뷰 디테일
-	@RequestMapping("/review_detail_class.do")
+	@RequestMapping("/review_detail.do")
 	public String review_detail_class(Model model,int review_no) {
-		
-		model.addAttribute("dto", rBiz.selectOne(review_no));
-		return "review/review_detail_class";
-	}
-	
-	//상품리뷰 디테일
-	@RequestMapping("/review_detail_product.do")
-	public String review_detail_product(Model model, int review_no) {
-		model.addAttribute("dto", rBiz.selectOne(review_no));
-		return "review/review_detail_product";
+		ReviewDto dto = rBiz.selectOne(review_no);
+		model.addAttribute("dto" , dto);
+		return "review/review_detail";
 	}
 	
 	
@@ -265,12 +246,25 @@ public class ReviewController {
 
 		}
 	
-	@RequestMapping("/reviewDelete.do")
+	@RequestMapping("/review_updateform.do")
+	public String review_updateform(Model model, int review_no) {
+		model.addAttribute("dto", rBiz.selectOne(review_no));
+		return "review/review_updateform";
+	}
+	@RequestMapping("/review_updateRes.do")
+	public String review_updateRes(ReviewDto dto) {
+		if(rBiz.update(dto) > 0) {
+			return "redirect:review_detail.do?review_no="+dto.getReview_no();
+		}
+		return "redirect:review_updateform.do?review_no="+dto.getReview_no();
+	}
+	
+	@RequestMapping("/review_delete.do")
 	public String reviewDelete(int review_no) {
 		if(rBiz.delete(review_no)>0) {
-			return "redirect:reviewlist.do";
+			return "redirect:review_list.do";
 		}
-		return "redirect:reviewlist.do";
+		return "redirect:review_list.do";
 	}
 	
 	public static String Random(int len) {

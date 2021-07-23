@@ -2,9 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="review">
 	<select id="selectList" resultType="reviewDto">
-		SELECT REVIEW_NO, REVIEW_TITLE, REVIEW_RATE, REVIEW_DATE, REVIEW_CONTENT, PRODUCT_NO, CLASS_NO, MEMBER_ID
-		FROM REVIEW
-		ORDER BY REVIEW_NO
+		SELECT R.REVIEW_NO, R.REVIEW_TITLE, R.REVIEW_RATE, R.REVIEW_DATE, R.REVIEW_CONTENT, R.PRODUCT_NO, R.CLASS_NO, M.MEMBER_NICNAME AS MEMBER_ID
+		FROM REVIEW R , MEMBER M 
+		WHERE R.MEMBER_ID = M.MEMBER_ID
+		ORDER BY R.REVIEW_NO
 	</select>
 	
 	<select id="selectOne" parameterType="int" resultType="reviewDto">
@@ -56,25 +57,19 @@
 			SELECT REVIEW_NO_SEQ.CURRVAL From DUAL
 		</selectKey>
 	</insert>
+		
+	<update id="update" parameterType="reviewDto">
+		UPDATE REVIEW SET
+		REVIEW_TITLE=#{review_title},REVIEW_CONTENT=#{review_content},
+		REVIEW_DATE=SYSDATE , REVIEW_RATE= #{review_rate}
+		WHERE REVIEW_NO = #{review_no}
+	</update>
 	
 	<delete id="delete" parameterType="int">
 		DELETE FROM REVIEW 
 		WHERE REVIEW_NO = #{review_no}
 	</delete>
 	
-	<select id="selectClass" resultType="reviewDto">
-		SELECT REVIEW_NO, REVIEW_TITLE, REVIEW_RATE, REVIEW_DATE, REVIEW_CONTENT, PRODUCT_NO, CLASS_NO, MEMBER_ID
-		FROM REVIEW
-		WHERE CLASS_NO > 0
-		ORDER BY REVIEW_NO
-	</select>
-	
-	<select id="selectProduct" resultType="reviewDto">
-		SELECT REVIEW_NO, REVIEW_TITLE, REVIEW_RATE, REVIEW_DATE, REVIEW_CONTENT, PRODUCT_NO, CLASS_NO, MEMBER_ID
-		FROM REVIEW
-		WHERE PRODUCT_NO > 0
-		ORDER BY REVIEW_NO
-	</select>
 
 	<insert id="insertProduct" parameterType="reviewDto">
 		INSERT INTO REVIEW
