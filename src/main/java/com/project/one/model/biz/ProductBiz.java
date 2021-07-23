@@ -14,6 +14,10 @@ public interface ProductBiz {
 	public List<ProductDto> selectListSearch(StorePagingDto pDto);
 	
 	public List<ProductDto> productList(PagingDto pDto);
+	
+	public List<ProductDto> main_selectList();
+	
+	public List<ProductDto> searchedList(String search_keyword);
 
 	public ProductDto selectOne(int product_no);
 	

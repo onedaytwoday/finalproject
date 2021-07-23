@@ -42,9 +42,17 @@
 	<!-- transaction -->
 	<tx:annotation-driven />	
 	<beans:bean id="echoHandler" class="com.project.one.config.EchoHandler"/>
-	
+	<beans:bean id="rankingHandler" class="com.project.one.config.RankingHandler"/>
 	<websocket:handlers>
 		<websocket:mapping handler="echoHandler" path="/echo"/>
+        <websocket:handshake-interceptors>
+        	<beans:bean class="com.project.one.common.interceptor.ChatInterceptor"/>
+        </websocket:handshake-interceptors>
+		<websocket:sockjs/>
+	</websocket:handlers>
+	
+	<websocket:handlers>
+		<websocket:mapping handler="rankingHandler" path="/rank"/>
         <websocket:handshake-interceptors>
         	<beans:bean class="com.project.one.common.interceptor.ChatInterceptor"/>
         </websocket:handshake-interceptors>

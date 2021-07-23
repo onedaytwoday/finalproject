@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="rank">
+
+	<select id="selectList" resultType="rankDto">
+		SELECT RANK_NO, RANK_NAME
+		FROM RANK
+		ORDER BY RANK_NO
+	</select>
+	
+	<select id="selectOne" parameterType="int" resultType="rankDto">
+		SELECT RANK_NO, RANK_NAME
+		FROM RANK
+		WHERE RANK_NO = #{rank_no}
+	</select>
+	<insert id="insert" parameterType="rankDto">
+		INSERT INTO RANK
+		VALUES(RANK_NO_SEQ.NEXTVAL,#{rank_name})
+	</insert>
+	<update id="update" parameterType="rankDto">
+		UPDATE RANK
+		SET RANK_NAME = #{rank_name}
+		WHERE RANK_NO = #{rank_no}
+	</update>
+</mapper>

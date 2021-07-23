@@ -48,7 +48,7 @@
                   						<c:otherwise>
                   							<c:forEach items="${chatread }" var="c_dto">
 												<c:if test="${c_dto.room_no eq dto.room_no }">
-													<span class="circle">${c_dto.cnt }</span>
+													<div class="circle">${c_dto.cnt }</div>
 												</c:if>
 											</c:forEach>
 										</c:otherwise>

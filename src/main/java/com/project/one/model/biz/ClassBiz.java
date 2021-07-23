@@ -14,6 +14,8 @@ public interface ClassBiz {
 	
 	public List<ClassDto> classListSearch(PagingDto pDto);
 
+	public List<ClassDto> main_selectList();
+	
 	public ClassDto selectOne(int class_no);
 	
 	public ClassDto selectOneByTitle(String class_title);
@@ -33,4 +35,6 @@ public interface ClassBiz {
 	public int classListCount();
 	
 	public int classSearchCount(PagingDto pDto);
+	
+	public List<ClassDto> searchedList(String search_keyword);
 }

@@ -14,12 +14,16 @@ public class WebSocketConfig implements WebSocketConfigurer{
 	@Autowired
 	private EchoHandler echoHandler;
 
+	@Autowired
+	private RankingHandler rankHandler;
 	@Override
 	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
 		registry.addHandler(echoHandler, "/echo").setAllowedOrigins("*").withSockJS()
 		.setInterceptors(new HttpSessionHandshakeInterceptor())
 		.setClientLibraryUrl("http://localhost:8080/resources/js/sockjs.min.js");
-		
+		registry.addHandler(rankHandler, "/rank").setAllowedOrigins("*").withSockJS()
+		.setInterceptors(new HttpSessionHandshakeInterceptor())
+		.setClientLibraryUrl("http://localhost:8080/resources/js/sockjs.min.js");
 	}
 
 }

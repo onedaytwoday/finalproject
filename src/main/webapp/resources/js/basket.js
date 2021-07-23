@@ -8,6 +8,8 @@ function getTotalBasket(){
 			url: "getTotalBasket.do",
 			dataType: "json",
 			success: function(res) {
+				$("#total").text(String(res.total_price)+"원");
+				$("#num").text(String(res.total_num)+"개");
 				$("#total_num").val(String(res.total_num));
 				$("#total_price").val(String(res.total_price));
 			},
@@ -18,20 +20,20 @@ function getTotalBasket(){
 };
 
 function updateBasket(basket_no, price, type){
-		basket_num = $("#"+ basket_no).text();
+		basket_num = $("#"+ basket_no).val();
 		
 		if(type == 'increase') {
-			$("#"+ basket_no).text(Number(basket_num) + 1);		
+			$("#"+ basket_no).val(Number(basket_num) + 1);		
 			
 		} else if(type == 'decrease') {
 			if(basket_num > 0) {
-				$("#"+ basket_no).text(Number(basket_num) - 1);			
+				$("#"+ basket_no).val(Number(basket_num) - 1);			
 			} else {
-				$("#"+ basket_no).text(0);			
+				$("#"+ basket_no).val(0);			
 			}
 		}
 		
-		basket_num = $("#"+ basket_no).text();
+		basket_num = $("#"+ basket_no).val();
 		
 		basket_price = Number(price * basket_num);
 		

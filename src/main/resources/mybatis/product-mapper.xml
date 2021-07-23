@@ -36,7 +36,7 @@
 		WHERE X.rnum <![CDATA[ >= ]]>
 		#{pageBegin}
 	</select>
-			
+	
 	<select id="productList" parameterType="PagingDto" resultType="productDto">
 		SELECT X.rnum,
 		X.PRODUCT_NO, X.PRODUCT_NAME, X.PRODUCT_CATEGORY, X.PRODUCT_PRICE, X.PRODUCT_DESC, X.PRODUCT_LOC,
@@ -89,7 +89,23 @@
 		#{pageBegin}
 	</select>
 	
-	
+	<select id="main_selectList" resultType="productDto">
+		SELECT X.PRODUCT_NO, X.PRODUCT_NAME, X.PRODUCT_PRICE, X.FILE_NEW_NAME
+		FROM(
+			SELECT ROWNUM as rnum,A.avg,A.PRODUCT_NAME, A.PRODUCT_NO, A.PRODUCT_PRICE, A.FILE_NEW_NAME
+			FROM(
+				SELECT AVG(R.REVIEW_RATE) AS avg, P.PRODUCT_NAME, P.PRODUCT_NO, P.PRODUCT_PRICE , F.FILE_NEW_NAME
+				FROM PRODUCT P, REVIEW R, FILE_TABLE F
+				WHERE P.PRODUCT_NO = R.PRODUCT_NO
+				AND F.PRODUCT_NO = P.PRODUCT_NO
+				AND F.FILE_ORI_NAME = 'thumbnail'
+				GROUP BY P.PRODUCT_NAME, P.PRODUCT_NO, P.PRODUCT_PRICE, F.FILE_NEW_NAME
+				ORDER BY avg desc
+				)A
+			WHERE ROWNUM <![CDATA[ <= ]]> 6
+			) X
+		WHERE X.rnum <![CDATA[ >= ]]> 1
+	</select>
 	<select id="selectOne" parameterType="int" resultType="productDto">
 		SELECT PRODUCT_NO, PRODUCT_NAME, PRODUCT_CATEGORY, PRODUCT_PRICE, PRODUCT_DESC, PRODUCT_LOC,
 		PRODUCT_DEL, PRODUCT_SALE
@@ -139,5 +155,12 @@
 		FROM PRODUCT
 		WHERE PRODUCT_NAME LIKE '%'||#{search_keyword}||'%'
 		OR PRODUCT_DESC LIKE '%'||#{search_keyword}||'%'
+	</select>
+	
+	<select id="searchedList" parameterType="String" resultType="productDto">
+		SELECT PRODUCT_NO, PRODUCT_NAME, PRODUCT_CATEGORY, PRODUCT_PRICE, PRODUCT_DESC, PRODUCT_LOC,
+		PRODUCT_DEL, PRODUCT_SALE
+		FROM PRODUCT 
+		WHERE PRODUCT_NAME LIKE '%'||#{search_keyword}||'%'
 	</select>
 </mapper>

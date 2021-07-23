@@ -7,16 +7,25 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- Boostrap -->
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+	<link rel="stylesheet" href="resources/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="resources/assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="resources/assets/css/flaticon.css">
+    <link rel="stylesheet" href="resources/assets/css/slicknav.css">
+    <link rel="stylesheet" href="resources/assets/css/animate.min.css">
+    <link rel="stylesheet" href="resources/assets/css/magnific-popup.css">
+    <link rel="stylesheet" href="resources/assets/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="resources/assets/css/themify-icons.css">
+    <link rel="stylesheet" href="resources/assets/css/nice-select.css?ver=1">
+    <link rel="stylesheet" href="resources/assets/css/slick.css">
+    <link rel="stylesheet" href="resources/assets/css/slick.min.css">
+    <link rel="stylesheet" href="resources/assets/css/slick-theme.min.css">
+    <link rel="stylesheet" href="resources/assets/css/style.css?ver=3">
+
+
+
 	<style type="text/css">
-		#logo {
-			width: 70%;
-			object-fit: cover;
-		}
-		
-		main {
-			margin-top: 8rem;
-			margin-bottom: 5rem;
+		#iconImg:hover , #Img:hover {
+			cursor: pointer;
 		}
 	</style>
 	
@@ -40,122 +49,124 @@
 			$('#Img').click(function(){
 	    		window.open('http://localhost:8787/one/chat_room.do' ,'채팅', 'width=400px,height=500px,scrollbars=yes');
 	    	});
-			
 	    	
-		    $('#class').on('change', function() {
-				//클래스 카테고리 선택시에 이동할 경로 수정
-				//카테고리 value는 추후 controller에 맞춰서 수정
-				var cate = this.value;
-				
-				if(cate == "cate01"){
-					location.href = 'classList.do'; 
-				}else if(cate == "cate02"){
-					alert("카테고리 02"); 
-				}else if(cate == "cate03"){
-					alert("카테고리 03"); 
-				}
-		
-		    });
 		});
 	</script>
 </head>
 <body>
-	<!-- Nav Bar -->
-    <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 fixed-top">
-      <div class="container">
-        <a class="navbar-brand" href="main.do"><img id="logo" src="resources/images/logo.png"></a>
-	    
-	    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-	      <span class="navbar-toggler-icon"></span>
-	    </button>
-	    
-	    <div class="collapse navbar-collapse" id="navbarCollapse">
-	      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-	        
-	        <li class="nav-item">
-	          <a class="nav-link" href="store.do?nowPage=1">쇼핑</a>
-	        </li>
-	        
-	        <li class="nav-item">
-	          <a class="nav-link" href="classList.do?nowPage=1">클래스</a>
-	        </li>
-	        
-	        <li class="nav-item">
-	          <a class="nav-link" href="board_notice_list.do?nowPage=1">공지사항</a>
-	        </li>
-	        
-	        <li class="nav-item">
-	          <a class="nav-link" href="board_qna_list.do?nowPage=1">상품문의</a>
-	        </li>
-	        
-	        <li class="nav-item">
-	          <a class="nav-link" href="#">수강후기포토</a>
-	        </li>
-	        
-	        <li class="nav-item">
-	          <a class="nav-link" href="map.do">지도</a>
-	        </li>
-	      </ul>
-	      
-	      <div class="d-flex">
-	        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-	        	<c:choose>
-	        		<c:when test="${mDto != null }">
-	        			<c:choose>
-	        				<c:when test="${mDto.member_grade == '관리자' }">
-	        					<li class="nav-item">
-						          <a class="nav-link" href="eventInsert.do"><i class="bi bi-pencil-square text-white fs-3"></i></a>
-						        </li>
-	        				</c:when>
-	        				
-	        				<c:when test="${mDto.member_grade == '강사회원' }">
-	        					<li class="nav-item">
-						          <a class="nav-link" href="classInsert.do"><i class="bi bi-pencil-square text-white fs-3"></i></a>
-						        </li>
-	        				</c:when>
-	        			</c:choose>
-	        			
-	        			<c:if test="${mDto.member_grade != '관리자' }">
-	        			<li class="nav-item">
-				          <a class="nav-link" href="basket.do" style="position: relative;"> 
-							<i class="bi bi-cart4 text-white fs-2" style="cursor: pointer;"></i>
-							<span id="basket_num" style="position: absolute; left: 1.5rem; bottom: 30px; border-radius: 50%; padding: 3px 6px; background-color: red; color: white;">${basket_num }</span>
-				          </a>
-				        </li>
-				        <li class="nav-item">
-	        				<i id="iconImg" class="bi bi-chat-text text-white fs-2"></i>
-				        </li>
-	        			</c:if>
-						<c:if test="${mDto.member_grade == '관리자' }">
-						<li class="nav-item">
-	        				<i id="Img" class="bi bi-chat-text text-white fs-2"></i>
-				        </li>	
-						</c:if>
-	        			
-				        
-	        			<li class="nav-item">
-				          <a class="nav-link" href="${mDto.member_grade == '관리자' ? 'adminMain.do' : 'mypage_update.do' }">${mDto.member_id }님</a>
-				        </li>
-				        
-				        <li class="nav-item">
-				          <a class="nav-link" href="logout.do">로그아웃</a>
-				        </li>
-	        		</c:when>
-	        		
-	        		<c:otherwise>
-	        			<li class="nav-item">
-				          <a class="nav-link" href="loginform.do">로그인</a>
-				        </li>
-				        
-				        <li class="nav-item">
-				          <a class="nav-link" href="signup.do">회원가입</a>
-				        </li>
-	        		</c:otherwise>
-	        	</c:choose>
-		    </ul>
-	      </div>
-	    </div>
-      </div>
-    </nav>
+	<div id="preloader-active">
+        <div class="preloader d-flex align-items-center justify-content-center">
+            <div class="preloader-inner position-relative">
+                <div class="preloader-circle"></div>
+                <div class="preloader-img pere-text">
+                    <img src="assets/img/logo/logo.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+	<header>
+        <!-- Header Start -->
+        <div class="header-area">
+            <div class="main-header header-sticky">
+                <div class="container-fluid">
+                    <div class="menu-wrapper">
+                        <!-- Logo -->
+                        <div class="logo">
+                            <a href="main.do"><img id="logo" src="resources/images/logo.png"></a>
+                        </div>
+                        <!-- Main-menu -->
+                        <div class="main-menu d-none d-lg-block">
+                            <nav>                                                
+                                <ul id="navigation">  
+                                    <li><a href="main.do">Home</a></li>
+                                    <li><a href="board_notice_list.do?nowPage=1">Notice</a></li>
+                                    <li class="hot"><a href="store.do?nowPage=1">Shop</a>
+                                    	<ul class="submenu">
+                                            <li><a href="#">category1</a></li>
+                                            <li><a href="#">category2</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="classList.do?nowPage=1">Class</a>
+                                    	<ul class="submenu">
+                                            <li><a href="#">category1</a></li>
+                                            <li><a href="#">category2</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="board_qna_list.do?nowPage=1">QNA</a></li>
+                                    <li><a href="#">Photo</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <!-- Header Right -->
+                        <div class="header-right">
+                            <ul>
+                                <c:choose>
+	        						<c:when test="${mDto == null }">
+                                		<li><a href="loginform.do"><span class="flaticon-user"></span></a></li>
+                                	</c:when>
+                                	<c:otherwise>
+                                		<c:choose>
+                                			<c:when test="${mDto.member_grade eq '관리자' }">
+                                			<li><a href="eventInsert.do" style="color:black">이벤트 임시</a></li>
+                                			<li><img src="resources/images/chat.png" id="Img" width="20px" height="20px" onmouseover="this.src='resources/images/chat_ahover.png'" onmouseout="this.src='resources/images/chat.png'"></li>
+                                			</c:when>
+                                			<c:otherwise>
+                                			<li><img src="resources/images/chat.png" id="iconImg" width="20px" height="20px" onmouseover="this.src='resources/images/chat_ahover.png'" onmouseout="this.src='resources/images/chat.png'"></li>
+											</c:otherwise>
+										</c:choose>
+                                		<li><a href="${mDto.member_grade == '관리자' ? 'adminMain.do' : 'mypage_update.do' }"><span class="flaticon-user"></span></a></li>
+                                		<li><a href="logout.do"><img src="resources/images/logout.png" width="20px" height="20px" onmouseover="this.src='resources/images/logout_ahover.png'" onmouseout="this.src='resources/images/logout.png'"></a></li>
+                                		<li><a href="basket.do"><span class="flaticon-shopping-cart"></span></a> </li>
+                                	</c:otherwise>
+                                </c:choose>
+                                
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Mobile Menu -->
+                    <div class="col-12">
+                        <div class="mobile_menu d-block d-lg-none"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Header End -->
+    </header>
+    
+    <script src="resources/assets/js/vendor/modernizr-3.5.0.min.js"></script>
+    <!-- Jquery, Popper, Bootstrap -->
+    <script src="resources/assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="resources/assets/js/popper.min.js"></script>
+    <script src="resources/assets/js/bootstrap.min.js"></script>
+    <!-- Jquery Mobile Menu -->
+    <script src="resources/assets/js/jquery.slicknav.min.js"></script>
+    <!-- Jquery Slick , Owl-Carousel Plugins -->
+    <script src="resources/assets/js/owl.carousel.min.js"></script>
+	<script src="resources/assets/js/slick.min.js"></script>
+    <!-- One Page, Animated-HeadLin -->
+    <script src="resources/assets/js/wow.min.js"></script>
+    <script src="resources/assets/js/animated.headline.js"></script>
+    <script src="resources/assets/js/jquery.magnific-popup.js"></script>
+
+    <!-- Scrollup, nice-select, sticky -->
+    <script src="resources/assets/js/jquery.scrollUp.min.js"></script>
+    <script src="resources/assets/js/jquery.nice-select.min.js"></script>
+    <script src="resources/assets/js/jquery.sticky.js"></script>
+    
+    <!-- contact js -->
+    <script src="resources/assets/js/contact.js"></script>
+    <script src="resources/assets/js/jquery.form.js"></script>
+    <script src="resources/assets/js/jquery.validate.min.js"></script>
+    <script src="resources/assets/js/mail-script.js"></script>
+    <script src="resources/assets/js/jquery.ajaxchimp.min.js"></script>
+    
+    <!-- Jquery Plugins, main Jquery -->	
+    <script src="resources/assets/js/plugins.js"></script>
+    <script src="resources/assets/js/main.js"></script>
+   
+    <script src="resources/assets/js/swiper.min.js"></script>
+    <script src="resources/assets/js/mixitup.min.js"></script>
+    <script src="resources/assets/js/jquery.counterup.min.js"></script>
+    <script src="resources/assets/js/waypoints.min.js"></script>
 </body>
 </html>

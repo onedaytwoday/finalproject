@@ -26,12 +26,20 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.project.one.model.biz.BasketBiz;
+import com.project.one.model.biz.ClassBiz;
 import com.project.one.model.biz.EventBiz;
 import com.project.one.model.biz.MemberBiz;
+import com.project.one.model.biz.ProductBiz;
+import com.project.one.model.biz.RankBiz;
+import com.project.one.model.biz.ReviewBiz;
 import com.project.one.model.dto.BasketDto;
 import com.project.one.model.dto.ChatSession;
+import com.project.one.model.dto.ClassDto;
 import com.project.one.model.dto.EventDto;
 import com.project.one.model.dto.MemberDto;
+import com.project.one.model.dto.ProductDto;
+import com.project.one.model.dto.RankDto;
+import com.project.one.model.dto.SearchDto;
 
 @Controller
 public class MemberController {
@@ -50,7 +58,49 @@ public class MemberController {
 	private MemberBiz biz;	
 	
 	@Autowired
+	private ReviewBiz rbiz;
+	
+	@Autowired
 	private EventBiz eBiz;
+	
+	@Autowired
+	private ProductBiz pbiz;
+	
+	@Autowired
+	private ClassBiz cBiz;
+	
+	@Autowired
+	private RankBiz Rbiz;
+	
+	@RequestMapping("/index.do")
+	public String index(Model model) {
+		List<SearchDto> list = rbiz.search();
+		for(int i=0;i<list.size();i++) {
+			if(list.get(i).getProduct_no() == 0) {
+				  ClassDto dto = cBiz.selectOne(list.get(i).getClass_no());
+				  
+				  RankDto Rdto = new RankDto(i+1,dto.getClass_title());
+				  if(Rbiz.update(Rdto) > 0) {
+					  System.out.println("rank update 성공");
+				  }else {
+					  System.out.println("rank update 실패");
+				  }
+			}else {
+				ProductDto dto = pbiz.selectOne(list.get(i).getProduct_no());
+				
+				RankDto Rdto = new RankDto(i+1,dto.getProduct_name());
+				  if(Rbiz.update(Rdto) > 0) {
+					  System.out.println("rank update 성공");
+				  }else {
+					  System.out.println("rank update 실패");
+				  }
+			}
+		}
+		model.addAttribute("list", eBiz.selectList());
+		model.addAttribute("clist", cBiz.main_selectList());
+		model.addAttribute("plist", pbiz.main_selectList());
+		return "main";
+	}
 	
 	//20210628 로그인
 	@RequestMapping("/loginform.do")
@@ -108,7 +158,7 @@ public class MemberController {
 			if(mDto!=null) {
 				session.setAttribute("mDto", mDto);
 				session.setMaxInactiveInterval(-1);
-				return "main";
+				return "redirect:main.do";
 			}	
 		}
 		return "signup";
@@ -143,7 +193,7 @@ public class MemberController {
 		if(biz.register(mDto) > 0) {
 			session.setAttribute("mdto", mDto);
 			session.setMaxInactiveInterval(-1);
-			return "main";
+			return "redirect:main.do";
 		}
 		
 		return "redirect:signup.do?mDto="+mDto;
@@ -239,9 +289,13 @@ public class MemberController {
 			
 			MemberDto res = biz.selectOne(member_id);
 			if(res != null) {
-				session.setAttribute("mDto", res);
-				session.setMaxInactiveInterval(-1);
-				return "redirect:main.do";
+				if(res.getMember_join().equals("Y")) {
+					session.setAttribute("mDto", res);
+					session.setMaxInactiveInterval(-1);
+					return "redirect:main.do";
+				}else {
+					return "redirect:main.do";
+				}
 			}
 			model.addAttribute("mDto",mDto);
 		} catch (org.json.simple.parser.ParseException e) {
@@ -279,9 +333,13 @@ public class MemberController {
 		
 		MemberDto res = biz.selectOne(kid);
 		if(res != null) {
-			session.setAttribute("mDto", res);
-			session.setMaxInactiveInterval(-1);
-			return "redirect:main.do";
+			if(res.getMember_join().equals("Y")) {
+				session.setAttribute("mDto", res);
+				session.setMaxInactiveInterval(-1);
+				return "redirect:main.do";
+			}else {
+				return "redirect:main.do";
+			}
 		}
 		
 		model.addAttribute("mDto" , mDto);
@@ -294,10 +352,13 @@ public class MemberController {
 		
 		session.invalidate();
 
-		return "main";
+		return "redirect:main.do";
 	}
 	@RequestMapping("/main.do")
-	public String main() {
+	public String main(Model model) {
+		model.addAttribute("list", eBiz.selectList());
+		model.addAttribute("clist", cBiz.main_selectList());
+		model.addAttribute("plist", pbiz.main_selectList());
 		return "main";
 	}
 	
