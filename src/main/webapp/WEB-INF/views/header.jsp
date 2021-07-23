@@ -31,6 +31,7 @@
 	
 	<script type="text/javascript">
 		$(document).ready(function() {
+			<%--
 			$.ajax({
 				type : 'get',
 				url : 'getBasketNum.do',
@@ -42,7 +43,8 @@
 					alert("통신 실패!");
 				}
 			});
-		
+			--%>
+			
 			$('#iconImg').click(function(){
 	    		window.open('http://localhost:8787/one/chat_main.do?member_id=${mDto.member_id }' ,'채팅', 'width=400px,height=500px,scrollbars=yes');
 	    	});
