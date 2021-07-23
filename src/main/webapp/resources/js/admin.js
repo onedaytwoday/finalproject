@@ -18,6 +18,9 @@ $(function() {
 		checked_list.push($(this).val());
 	});
 	
+	$('.nav-item').click(function(){
+		$(this).addClass('active')
+	})
 });
 
 // 회원 관리
