@@ -6,7 +6,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
@@ -90,7 +92,7 @@
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                                 TOTAL 결제 수</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">${pCount }</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="bi bi-credit-card text-gray-300" style="font-size:2rem;"></i>
@@ -103,12 +105,19 @@
 
                 </div>
                 <!-- /.container-fluid -->
-
+				
+				<div class="w-75 h-75 mx-auto">
+				  <canvas id="myChart"></canvas>
+				</div>
+				
             </div>
             <!-- End of Main Content -->
            </div>
 		</div>
 
     <jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
+    
+    
+    
 </body>
 </html>

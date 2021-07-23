@@ -28,7 +28,7 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item">
+            <li class="nav-item ${path eq 'dashboard' ? 'active' : '' }">
                 <a class="nav-link" href="adminMain.do">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
@@ -43,7 +43,7 @@
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
+            <li class="nav-item ${path eq 'member' ? 'active' : '' }">
                 <a class="nav-link" href="adminMember.do?nowPage=1">
                     <i class="bi bi-people-fill"></i>
                     <span>회원 관리</span></a>
@@ -58,14 +58,14 @@
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
+            <li class="nav-item ${path eq 'product' ? 'active' : '' }">
                 <a class="nav-link" href="adminProduct.do?nowPage=1">
                     <i class="bi bi-bag"></i>
                     <span>상품 관리</span></a>
             </li>
             
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
+            <li class="nav-item ${path eq 'class' ? 'active' : '' }">
                 <a class="nav-link" href="adminClass.do?nowPage=1">
                     <i class="bi bi-archive"></i>
                     <span>클래스 관리</span></a>
@@ -80,7 +80,7 @@
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
+            <li class="nav-item ${path eq 'board' ? 'active' : '' }">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#board"
                     aria-expanded="true" aria-controls="collapsePages">
                     <i class="bi bi-table"></i>

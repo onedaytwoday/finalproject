@@ -1,6 +1,7 @@
 package com.project.one.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +48,8 @@ public class AdminController {
 		model.addAttribute("mCount", mBiz.memberCount());
 		model.addAttribute("proCount", proBiz.productCount());
 		model.addAttribute("cCount", cBiz.classCount());
+		model.addAttribute("pCount", pBiz.paymentCount());
+		model.addAttribute("path", "dashboard");
 		
 		return "admin/admin_main";
 	}
@@ -57,6 +60,7 @@ public class AdminController {
 		PagingDto pDto = new PagingDto(count, nowPage);
 		model.addAttribute("mList", mBiz.memberList(pDto));
 		model.addAttribute("pDto", pDto);
+		model.addAttribute("path", "member");
 		
 		return "admin/admin_member";
 	}
@@ -67,6 +71,7 @@ public class AdminController {
 		PagingDto pDto = new PagingDto(count, nowPage);
 		model.addAttribute("proList", proBiz.productList(pDto));
 		model.addAttribute("pDto", pDto);
+		model.addAttribute("path", "product");
 
 		return "admin/admin_product";
 	}
@@ -77,6 +82,7 @@ public class AdminController {
 		PagingDto pDto = new PagingDto(count, nowPage);
 		model.addAttribute("cList", cBiz.classList(pDto));
 		model.addAttribute("pDto", pDto);
+		model.addAttribute("path", "class");
 
 		return "admin/admin_class";
 	}
@@ -87,6 +93,7 @@ public class AdminController {
 		PagingDto pDto = new PagingDto(count, nowPage);
 		model.addAttribute("qnaList", bBiz.board_qna_list(pDto));
 		model.addAttribute("pDto", pDto);
+		model.addAttribute("path", "board");
 		
 		return "admin/admin_board";
 	}
@@ -97,6 +104,7 @@ public class AdminController {
 		PagingDto pDto = new PagingDto(count, nowPage);
 		model.addAttribute("pList", pBiz.paymentList(pDto));
 		model.addAttribute("pDto", pDto);
+		model.addAttribute("path", "board");
 
 		return "admin/admin_payment";
 	}
@@ -107,6 +115,7 @@ public class AdminController {
 		PagingDto pDto = new PagingDto(count, nowPage);
 		model.addAttribute("eList", eBiz.eventList(pDto));
 		model.addAttribute("pDto", pDto);
+		model.addAttribute("path", "board");
 		
 		return "admin/admin_event";
 	}

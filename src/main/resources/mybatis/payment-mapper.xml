@@ -93,4 +93,13 @@
 		FROM PAYMENT
 		WHERE MEMBER_ID = #{member_id}
 	</select>
+	
+	<select id="montlyPayment" resultType="paymentDto">
+		SELECT COUNT(PAYMENT_NO) AS cnt, PAYMENT_DATE
+		FROM PAYMENT
+		WHERE <![CDATA[
+        	TO_CHAR(PAYMENT_DATE, 'yyyy-MM-DD') >= '2021-07-01' AND TO_CHAR(PAYMENT_DATE, 'yyyy-MM-DD') <= '2021-08-01'
+        ]]>
+		GROUP BY PAYMENT_DATE 
+	</select>
 </mapper>
