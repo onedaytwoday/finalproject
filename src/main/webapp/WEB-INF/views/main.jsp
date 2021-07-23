@@ -14,6 +14,13 @@
     <link rel="stylesheet" href="resources/assets/css/slick.min.css">
     <link rel="stylesheet" href="resources/assets/css/slick-theme.min.css">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>	
+<script type="text/javascript">
+$(document).ready(function(){
+	$('.add').click(function(){
+		alert($(this).parent().parent().siblings().text());
+	});
+});
+	</script>
 </head>
 
 <body>
@@ -103,7 +110,10 @@
                                 <img src="resources/assets/img/gallery/popular1.png" alt="">
                                 <c:if test="${mDto != null }">
                                 <div class="img-cap">
-                                    <a href="#"><span>Add to cart</span></a>
+                                    <div class="add"><span>Add to cart</span></div>
+                                    <input type="hidden" name="product_no" value="${dto.product_no }">
+                                    <input type="hidden" name="product_name" value="${dto.product_name }">
+                                    <input type="hidden" name="product_price" value="${dto.product_price }">
                                 </div>
                                 </c:if>
                             </div>
