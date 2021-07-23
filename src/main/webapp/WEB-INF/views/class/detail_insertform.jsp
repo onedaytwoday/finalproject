@@ -9,9 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script type="text/javascript">
 	let nums = new Array();
 	let dates = new Array();
@@ -39,11 +37,10 @@
 			if(confirmed){
 				detail_date = $("#detail_date").val();		
 			
-				let num = $("<p></p>").text("모집인원 : " + detail_member_num);
-				let date = $("<p></p>").text("날짜 : " + detail_date);
-				let time = $("<p></p>").text("시간 : " + detail_time);
-				let deleteBtn = $("<input onclick='deletePanel("+count+")' type='button' />").val("삭제");
-				
+				let num = $("<h5></h5>").text("모집인원 : " + detail_member_num);
+				let date = $("<p></p>").append("<span>날짜 : " + detail_date + "</span>");
+				let time = $("<p></p>").append("<span>시간 : " + detail_time + "</span>");
+				let deleteBtn = $("<button  class='btn btn-primary' onclick='deletePanel("+count+")'>삭제</button>")
 				$("#"+count).append(num, date, time, deleteBtn);
 				$("#"+count).css("border", "1px solid lightgray");
 				
@@ -96,27 +93,35 @@
 <body>
 	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
 	
-	<main class="container ">
-		<h1>클래스 상세 입력 페이지</h1>
-
+	<div class="slider-area">
+		<div class="single-slider slider-height2 d-flex align-items-center">
+			<div class="container">
+				<div class="row">
+					<div class="col-xl-12">
+						<div class="hero-cap text-center">
+							<h2>Class Detail</h2>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+		<div class="comment-form"
+		style="padding-left: 60px; padding-right: 60px">
 			<div class="form-group row">
-				<label for="detail_member_num" class="col-sm-2 col-form-label">모집인원</label>
-				
-				<div class="col-sm-10">
-					<input type="text" id="detail_member_num" name="detail_member_num" class="form-control" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
+				<div class="col-12">
+					<input type="text" id="detail_member_num" name="detail_member_num" placeholder="People" class="form-control" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
 				</div>
 			</div>
 			
 			<div class="form-group row">
-				<label for="detail_time" class="col-sm-2 col-form-label">가능한 시간</label>
-				<div class="col-sm-10">
+				<div class="col-12">
 					<input type="time" class="form-control" id="detail_time" />
 				</div>
 			</div>
 			
 			<div class="form-group row">
-				<label for="detail_date" class="col-sm-2 col-form-label">가능한 날짜</label>
-				<div class="col-sm-10">
+				<div class="col-sm-12">
 					<input type="date" class="form-control" id="detail_date" />
 				</div>
 			</div>
@@ -152,8 +157,7 @@
 					<button onclick="addToDetail()" class="btn btn-primary">추가</button>
 				</div>
 			</div>
-	</main>
-	
+		</div>
 	<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 </body>
 </html>

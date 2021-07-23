@@ -6,8 +6,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>  
@@ -49,48 +47,73 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
-	<main class="container">
-		<form method="post">
-			<table border="1">
-				<tr>
-					<th>계정 ID</th>
-					<td><input type="text" name="member_id"
-						value="${mDto.member_id}" readonly /></td>
-				</tr>
-	
-				<tr>
-					<th>클래스 명</th>
-					<td><input type="text" name="class_title" /></td>
-				</tr>
-	
-				<tr>
-					<th>클래스 설명</th>
-					<td><textarea rows="10" cols="60" name="class_desc"></textarea></td>
-				</tr>
-	
-				<tr>
-					<th>클래스 위치</th>
-					<td>
-					<input type="hidden" name="class_loc" value="">
-					<input type="text" id="postcode" placeholder="우편번호" readonly="readonly">
-					<input type="button" onclick="address();" value="우편번호 찾기">
-					<br>
-					<input type="text" name="class_loc_1" id="addr_1" placeholder="기본주소" readonly="readonly">
-					<input type="text" name="class_loc_2" id="addr_2" placeholder="상세주소" required="required">
-					</td>
-				</tr>
-	
-				<tr>
-					<th>카테고리</th>
-					<td><input type="text" name="class_category" /></td>
-				</tr>
-	
-				<tr>
-					<th>클래스 가격</th>
-					<td><input type="text" name="class_price"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/></td>
-				</tr>
-			</table>
-			
+	<div class="slider-area">
+		<div class="single-slider slider-height2 d-flex align-items-center">
+			<div class="container">
+				<div class="row">
+					<div class="col-xl-12">
+						<div class="hero-cap text-center">
+							<h2>Class Insert</h2>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="comment-form"
+		style="padding-left: 60px; padding-right: 60px">
+		<form class="form-contact comment_form" action="board_insertRes.do" method="post" id="board_insertRes">
+			<div class="row">
+			<div class="col-12">
+					<div class="form-group">
+						<input class="form-control" type="text" name="member_id" value="${mDto.member_id}" readonly >
+					</div>
+				</div>
+				<div class="col-12">
+					<div class="form-group">
+						<input class="form-control" name="class_title" type="text"
+							placeholder="Class Title">
+					</div>
+				</div>
+				<div class="col-12">
+					<div class="form-group">
+						<textarea class="form-control w-100" rows="10" cols="60"
+							name="class_desc"></textarea>
+					</div>
+				</div>
+				<div class="col-2">
+					<div class="form-group">
+					<input class="form-control" type="text" id="postcode" placeholder="Post Code" readonly="readonly">
+					</div>
+				</div>
+				<div class="col-6">
+					<div class="form-group">
+					<input type="button" class="button button-contactForm btn_1 boxed-btn" onclick="address();" value="우편번호 찾기">
+					</div>
+				</div>
+				<div class="col-6">
+					<div class="form-group">
+					<input class="form-control" type="text" name="class_loc" id="addr_1" placeholder="Address" readonly="readonly">
+					</div>
+				</div>
+				<div class="col-6">
+					<div class="form-group">
+					<input class="form-control" type="text" name="class_loc_2" id="addr_2" placeholder="Detail Address" required="required">
+					</div>
+				</div>
+				<div class="col-12">
+					<div class="form-group">
+						<input class="form-control" name="class_category" type="text"
+							placeholder="Class Category">
+					</div>
+				</div>
+				<div class="col-12">
+					<div class="form-group">
+						<input class="form-control" name="class_price"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" type="text"
+							placeholder="Class Price">
+					</div>
+				</div>
+			</div>
 			<button id="btn-upload" type="button" style="border: 1px solid #ddd; outline: none; cursor: pointer;">파일추가</button>
 			<input id="input_file" multiple="multiple" type="file" accept="image/*" style="display: none;">
 			<span style="font-size: 10px; color: gray;">※첨부파일은 최대 10개까지 등록이 가능합니다.</span>
@@ -98,12 +121,14 @@
 				<span>첨부 파일</span> <br />
 				<div id="articlefileChange"></div>
 			</div>
-			<input type="button" value="등록하기" onclick="registerAction()"/> 
-			<input type="button" value="취소" onclick="location.href='main.do'" />
+			<div class="form-group" align="right">
+				<button type="button" class="button button-contactForm btn_1 boxed-btn" onclick="registerAction()">Send</button>
+				<button type="button" class="button button-contactForm btn_1 boxed-btn" onclick="location.href='main.do'">Cancle</button>
+			</div>
 		</form>
-	</main>
-	
+	</div>
 	<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
+		
 	
 <script>
 $(document).ready(function()
