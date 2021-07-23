@@ -305,28 +305,5 @@ public class ClassController {
 		return sb.toString();
 	}
 	
-	//지도 다시
-	@ResponseBody
-	@RequestMapping(value = "/classmap.do", method = RequestMethod.POST)
-	public String mapList(@RequestBody ClassDto cDto, HttpServletResponse response) throws IOException {
-		PrintWriter out = response.getWriter();
-		List<ClassDto> list = cBiz.selectList();
-		
-		HashMap<String,Object> maplist = new HashMap<String,Object>();
-		JSONObject obj = new JSONObject();
-		JSONArray jsonArray = new JSONArray();
-
-		for(int i = 0; i<list.size(); i++) {
-			
-			maplist.put("class_loc",list.get(i).getClass_loc());
-		    maplist.put("class_title", list.get(i).getClass_title());
-			
-		    obj = new JSONObject(maplist);
-			jsonArray.add(obj);		
-		}
-		out.print(jsonArray);
-		out.flush();
 	
-		return "";
-	}
 }
