@@ -11,7 +11,8 @@ public class ReviewDto {
 	private int product_no;
 	private int class_no;
 	private String member_id;
-	
+	private String product_name;
+	private String class_title;
 	public ReviewDto() {
 	}
 

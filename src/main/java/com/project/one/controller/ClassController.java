@@ -220,10 +220,10 @@ public class ClassController {
 	public String class_delete(int class_no) {
 
 		if (cBiz.delete(class_no) > 0) {
-			return "redirect:classList.do";
+			return "redirect:classList.do?nowPage=1";
 		}
 
-		return "redirect:classList.do";
+		return "redirect:classList.do?nowPage=1";
 	}
 
 	@RequestMapping("/mypage_class.do")

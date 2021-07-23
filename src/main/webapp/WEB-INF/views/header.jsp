@@ -19,13 +19,16 @@
     <link rel="stylesheet" href="resources/assets/css/slick.css">
     <link rel="stylesheet" href="resources/assets/css/slick.min.css">
     <link rel="stylesheet" href="resources/assets/css/slick-theme.min.css">
-    <link rel="stylesheet" href="resources/assets/css/style.css?ver=3">
+    <link rel="stylesheet" href="resources/assets/css/style.css?ver=4">
 
 
 
 	<style type="text/css">
 		#iconImg:hover , #Img:hover {
 			cursor: pointer;
+		}
+		.right-li{
+			padding-right: 20px;
 		}
 	</style>
 	
@@ -109,16 +112,16 @@
                                 	<c:otherwise>
                                 		<c:choose>
                                 			<c:when test="${mDto.member_grade eq '관리자' }">
-                                			<li><a href="eventInsert.do" style="color:black">이벤트 임시</a></li>
-                                			<li><img src="resources/images/chat.png" id="Img" width="20px" height="20px" onmouseover="this.src='resources/images/chat_ahover.png'" onmouseout="this.src='resources/images/chat.png'"></li>
+                                			<li class="right-li"><a href="eventInsert.do"><img src="resources/images/event.png" id="Img" width="20px" height="20px" onmouseover="this.src='resources/images/event_ahover.png'" onmouseout="this.src='resources/images/event.png'"></a></li>
+                                			<li class="right-li"><img src="resources/images/chat.png" id="Img" width="20px" height="20px" onmouseover="this.src='resources/images/chat_ahover.png'" onmouseout="this.src='resources/images/chat.png'"></li>
                                 			</c:when>
                                 			<c:otherwise>
-                                			<li><img src="resources/images/chat.png" id="iconImg" width="20px" height="20px" onmouseover="this.src='resources/images/chat_ahover.png'" onmouseout="this.src='resources/images/chat.png'"></li>
+                                			<li class="right-li"><img src="resources/images/chat.png" id="iconImg" width="20px" height="20px" onmouseover="this.src='resources/images/chat_ahover.png'" onmouseout="this.src='resources/images/chat.png'"></li>
 											</c:otherwise>
 										</c:choose>
-                                		<li><a href="${mDto.member_grade == '관리자' ? 'adminMain.do' : 'mypage_update.do' }"><span class="flaticon-user"></span></a></li>
-                                		<li><a href="logout.do"><img src="resources/images/logout.png" width="20px" height="20px" onmouseover="this.src='resources/images/logout_ahover.png'" onmouseout="this.src='resources/images/logout.png'"></a></li>
-                                		<li><a href="basket.do"><span class="flaticon-shopping-cart"></span></a> </li>
+                                		<li class="right-li"><a href="${mDto.member_grade == '관리자' ? 'adminMain.do' : 'mypage_update.do' }"><span class="flaticon-user"></span></a></li>
+                                		<li class="right-li"><a href="logout.do"><img src="resources/images/logout.png" width="20px" height="20px" onmouseover="this.src='resources/images/logout_ahover.png'" onmouseout="this.src='resources/images/logout.png'"></a></li>
+                                		<li class="right-li"><a href="basket.do"><span class="flaticon-shopping-cart"></span></a> </li>
                                 	</c:otherwise>
                                 </c:choose>
                                 

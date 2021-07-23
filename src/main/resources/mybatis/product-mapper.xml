@@ -108,8 +108,8 @@
 	</select>
 	<select id="selectOne" parameterType="int" resultType="productDto">
 		SELECT PRODUCT_NO, PRODUCT_NAME, PRODUCT_CATEGORY, PRODUCT_PRICE, PRODUCT_DESC, PRODUCT_LOC,
-		PRODUCT_DEL, PRODUCT_SALE
-		FROM PRODUCT
+		PRODUCT_DEL, PRODUCT_SALE 
+		FROM PRODUCT 
 		WHERE PRODUCT_NO = #{product_no}
 	</select>
 	
@@ -132,6 +132,13 @@
 	<update id="updateSale" parameterType="productDto">
 		UPDATE PRODUCT
 		SET PRODUCT_SALE = #{product_sale}
+		WHERE PRODUCT_NO = #{product_no}
+	</update>
+	
+	<update id="update" parameterType="classDto">
+		UPDATE PRODUCT
+		SET PRODUCT_CATEGORY = #{product_category}, PRODUCT_DEL = #{product_del}, PRODUCT_NAME = #{product_name}, PRODUCT_LOC = #{product_loc},
+		PRODUCT_PRICE = #{product_price}, PRODUCT_SALE = #{product_sale}, PRODUCT_DESC = #{product_desc} 
 		WHERE PRODUCT_NO = #{product_no}
 	</update>
 	

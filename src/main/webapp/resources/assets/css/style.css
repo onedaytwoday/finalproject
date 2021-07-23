@@ -439,7 +439,7 @@ input:focus::-moz-placeholder {
   height: 50px;
   width: 50px;
   right: 31px;
-  bottom: 18px;
+  bottom: 90px;
   color: #fff;
   font-size: 20px;
   text-align: center;
@@ -2399,7 +2399,6 @@ input:focus {
   color: #000000;
   font-size: 16px;
   cursor: pointer;
-  padding: 31px 19px;
 }
 .header-area .main-header .menu-wrapper .header-right span:hover {
   color: #ff2020;
