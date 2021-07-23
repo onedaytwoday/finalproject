@@ -12,6 +12,8 @@ public interface PaymentDao {
 	
 	public List<PaymentDto> paymentList(PagingDto pDto);
 	
+	public List<PaymentDto> montlyPayment();
+	
 	public PaymentDto selectOne(int payment_no);
 	
 	public int insert(PaymentDto dto, String type);
@@ -25,4 +27,5 @@ public interface PaymentDao {
 	public int paymentCount();
 	
 	public int paymentMYCount(String member_id);
+	
 }
