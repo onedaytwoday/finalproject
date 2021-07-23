@@ -10,7 +10,7 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 	
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script type="text/javascript" src="resources/js/admin.js"></script>
+	<script type="text/javascript" src="resources/js/admin.js?ver=1"></script>
 </head>
 <body>
 <!-- Sidebar -->
@@ -26,7 +26,6 @@
 
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
-
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
                 <a class="nav-link" href="adminMain.do">

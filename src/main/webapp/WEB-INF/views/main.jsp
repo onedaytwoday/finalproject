@@ -17,8 +17,38 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	$('.add').click(function(){
-		alert($(this).parent().parent().siblings().text());
+		var i = $(this).siblings('#product_no').val();
+		var j = $(this).siblings('#product_name').val();
+		var k = $(this).siblings('#product_price').val();
+		let productVal = {
+				"product_no" : i,
+				"product_name" : j,
+				"product_price" : k
+		}
+	
+		$.ajax({
+			type: "post",
+			url: "addToBasket.do",
+			data: JSON.stringify(productVal),
+			contentType: "application/json",
+			dataType: "json",
+			success: function(msg) {
+				console.log(msg.result);
+				
+				if(msg.result == "성공") {
+					let redirect = confirm("장바구니에 넣었습니다. 장바구니로 이동하시겠습니까?");
+					
+					if(redirect) {
+						location.href='basket.do';
+					}
+				}
+			},
+			error: function() {
+				alert("통신 실패!");
+			}
+		});
 	});
+	
 });
 	</script>
 </head>
@@ -111,9 +141,9 @@ $(document).ready(function(){
                                 <c:if test="${mDto != null }">
                                 <div class="img-cap">
                                     <div class="add"><span>Add to cart</span></div>
-                                    <input type="hidden" name="product_no" value="${dto.product_no }">
-                                    <input type="hidden" name="product_name" value="${dto.product_name }">
-                                    <input type="hidden" name="product_price" value="${dto.product_price }">
+                                    <input type="hidden" id="product_no" name="product_no" value="${dto.product_no }">
+                                    <input type="hidden" id="product_name" name="product_name" value="${dto.product_name }">
+                                    <input type="hidden" id="product_price" name="product_price" value="${dto.product_price }">
                                 </div>
                                 </c:if>
                             </div>

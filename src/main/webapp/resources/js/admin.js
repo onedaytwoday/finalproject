@@ -19,7 +19,7 @@ $(function() {
 	});
 	
 	$('.nav-item').click(function(){
-		$(this).addClass('active')
+		$(this).addClass('active');
 	})
 });
 
