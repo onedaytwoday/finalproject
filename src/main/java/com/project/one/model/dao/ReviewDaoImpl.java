@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.project.one.model.dto.PagingDto;
 import com.project.one.model.dto.ReviewDto;
 import com.project.one.model.dto.SearchDto;
 
@@ -203,5 +204,31 @@ public class ReviewDaoImpl implements ReviewDao {
 		
 		return list;
 	}
+
+	@Override
+	public List<ReviewDto> reviewPaging(PagingDto pDto) {
+		List<ReviewDto> list = new ArrayList<ReviewDto>();
+		try {
+			list = sqlSession.selectList(NAMESPACE+"reviewPaging",pDto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	@Override
+	public int reviewCount() {
+		int res = 0;
+		
+		try {
+			res = sqlSession.selectOne(NAMESPACE + "reviewCount");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+
 
 }

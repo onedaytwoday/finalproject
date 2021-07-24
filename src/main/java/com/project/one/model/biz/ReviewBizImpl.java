@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.one.model.dao.ReviewDao;
+import com.project.one.model.dto.PagingDto;
 import com.project.one.model.dto.ReviewDto;
 import com.project.one.model.dto.SearchDto;
 
@@ -90,5 +91,18 @@ public class ReviewBizImpl implements ReviewBiz {
 	public List<ReviewDto> listByProduct(int product_no) {
 		return dao.listByProduct(product_no);
 	}
+
+	@Override
+	public List<ReviewDto> reviewPaging(PagingDto pDto) {
+		
+		return dao.reviewPaging(pDto);
+	}
+
+	@Override
+	public int reviewCount() {
+		
+		return dao.reviewCount();
+	}
+
 
 }

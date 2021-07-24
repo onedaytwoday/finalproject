@@ -77,6 +77,19 @@
 			</div>
 		</div>
 	</div>
+	
+					<div style="width: 100%; text-align: center;">
+					<jsp:include page="/WEB-INF/views/paging.jsp">
+						<jsp:param value="R" name="review_category" />
+						<jsp:param value="${pDto.nowBlock}" name="nowBlock" />
+						<jsp:param value="${pDto.blockBegin }" name="blockBegin" />
+						<jsp:param value="${pDto.blockEnd }" name="blockEnd" />
+						<jsp:param value="${pDto.nowPage}" name="nowPage" />
+						<jsp:param value="${pDto.blockBegin}" name="blockBegin" />
+						<jsp:param value="${pDto.blockEnd}" name="blockEnd" />
+						<jsp:param value="${pDto.totalBlock}" name="totalBlock" />
+					</jsp:include>
+					</div>
 	<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 		
 </body>

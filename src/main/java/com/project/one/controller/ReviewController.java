@@ -27,6 +27,7 @@ import com.project.one.model.dto.BoardDto;
 import com.project.one.model.dto.ClassDto;
 import com.project.one.model.dto.FileTableDto;
 import com.project.one.model.dto.MemberDto;
+import com.project.one.model.dto.PagingDto;
 import com.project.one.model.dto.ProductDto;
 import com.project.one.model.dto.ReviewDto;
 
@@ -40,10 +41,15 @@ public class ReviewController {
 	
 	@Autowired
 	private FileTableBiz fbiz;
-	
+	//리뷰 리스트(페이징)
 	@RequestMapping("/review_list.do")
-	public String review_list_class(Model model) {
-		model.addAttribute("list", rBiz.selectList());
+	public String review_list(Model model, int nowPage , HttpSession session) {
+		int count = rBiz.reviewCount();
+		System.out.println(count);
+		PagingDto pDto = new PagingDto(count, nowPage);
+		
+		model.addAttribute("list", rBiz.reviewPaging(pDto));
+		model.addAttribute("pDto", pDto);
 		return "review/review_list";
 	}
 	
