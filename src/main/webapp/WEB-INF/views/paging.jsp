@@ -61,6 +61,10 @@
 				<c:url var="action" value="classList.do" />
 				</c:if>
 			</c:when>
+			<c:when test="${param.review_category eq 'R'}">
+				<c:url var="action" value="review_list_class.do" />
+			</c:when>
+
 
 
 			<c:otherwise>

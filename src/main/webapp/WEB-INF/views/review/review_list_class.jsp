@@ -37,14 +37,25 @@
 						<tr>
 							<td>${dto.review_no }</td>
 							<td>${dto.member_id }</td>
-							<td><a href="reviewDetail.do?review_no=${dto.review_no }">${dto.review_title }</a></td>
+							<td><a href="review_detail_class.do?review_no=${dto.review_no }">${dto.review_title }</a></td>
 							<td>${dto.review_date }</td>
 						</tr>
 					</c:forEach>
 				</c:otherwise>
 			</c:choose>
 	
-		</table>	
+		</table>
+					<jsp:include page="/WEB-INF/views/paging.jsp">
+						<jsp:param value="R" name="review_catagory" />
+						<jsp:param value="${pDto.nowBlock}" name="nowBlock" />
+						<jsp:param value="${pDto.blockBegin }" name="blockBegin" />
+						<jsp:param value="${pDto.blockEnd }" name="blockEnd" />
+						<jsp:param value="${pDto.nowPage}" name="nowPage" />
+						<jsp:param value="${pDto.blockBegin}" name="blockBegin" />
+						<jsp:param value="${pDto.blockEnd}" name="blockEnd" />
+						<jsp:param value="${pDto.totalBlock}" name="totalBlock" />
+					</jsp:include>
+			
 	</main>
 	<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 </body>
