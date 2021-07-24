@@ -95,7 +95,7 @@
 	</select>
 	
 	<select id="montlyPayment" resultType="paymentDto">
-		SELECT TO_DATE(A.day) AS day, SUM(A.PAYMENT_PRICE)
+		SELECT TO_DATE(A.day) as PAYMENT_DATE, SUM(A.PAYMENT_PRICE) as PAYMENT_PRICE
 		FROM (
 		      SELECT TO_CHAR(PAYMENT_DATE, 'yyyy-MM-DD')AS day , PAYMENT_PRICE 
 		      FROM PAYMENT

@@ -1,7 +1,6 @@
 package com.project.one.controller;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +49,8 @@ public class AdminController {
 		model.addAttribute("cCount", cBiz.classCount());
 		model.addAttribute("pCount", pBiz.paymentCount());
 		model.addAttribute("path", "dashboard");
-		model.addAttribute("chart" , pBiz.montlyPayment());
+		model.addAttribute("chart", pBiz.montlyPayment());
+		
 		return "admin/admin_main";
 	}
 
