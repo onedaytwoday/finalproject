@@ -77,7 +77,7 @@
 	
 	<update id="update" parameterType="memberDto">
 		UPDATE MEMBER
-		SET MEMBER_PW = #{member_pw} , MEMBER_ADDR = #{member_addr} , MEMBER_EMAIL = #{member_email}
+		SET MEMBER_PW = #{member_pw}, MEMBER_NICNAME = #{member_nicname}, MEMBER_PHONE = #{member_phone}, MEMBER_EMAIL = #{member_email}, MEMBER_ADDR = #{member_addr}, MEMBER_NOTIFY = #{member_notify}
 		WHERE MEMBER_ID = #{member_id}
 	</update>
 	

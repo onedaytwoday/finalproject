@@ -68,16 +68,18 @@ public class PaymentController {
 	}
 	
 	@RequestMapping("mypage_payment.do")
-	public String mypage_list(Model model, int nowPage, HttpSession session) {		
+	public String mypage_payment(Model model, int nowPage, HttpSession session) {		
 		MemberDto mDto = (MemberDto)session.getAttribute("mDto");		
 		
 		int count = pBiz.paymentMYCount(mDto.getMember_id());
 		PagingDto pDto = new PagingDto(count, nowPage);
 		
+		System.out.println(pBiz.mypage_list(pDto, mDto.getMember_id()));
+		
 		model.addAttribute("pList", pBiz.mypage_list(pDto, mDto.getMember_id()));
 		model.addAttribute("pDto", pDto);
+		model.addAttribute("path", "payment");
 		
 		return "mypage/mypage_payment";
 	}
-
 }

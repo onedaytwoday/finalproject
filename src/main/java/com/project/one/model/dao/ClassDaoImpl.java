@@ -139,33 +139,6 @@ public class ClassDaoImpl implements ClassDao {
 		return res;
 	}
 	
-	//마이페이지 
-	@Override
-	public List<ClassDto> userClass(String member_id) {
-		List<ClassDto> list = new ArrayList<ClassDto>();
-
-		try {
-			list = sqlSession.selectList(NAMESPACE + "userClass", member_id);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-			
-			return list;
-		}
-
-	@Override
-	public int classCount() {
-		int res = 0;
-
-		try {
-			res = sqlSession.selectOne(NAMESPACE + "classCount");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return res;
-	}
-
 	@Override
 	public List<ClassDto> classListPaging(PagingDto pDto) {
 		List<ClassDto> list = new ArrayList<ClassDto>();
@@ -187,6 +160,20 @@ public class ClassDaoImpl implements ClassDao {
 		
 		try {
 			res = sqlSession.selectOne(NAMESPACE + "classListCount");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+	
+	@Override
+	public int myClassCount(String member_id) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.selectOne(NAMESPACE + "myClassCount", member_id);
 			
 		} catch (Exception e) {
 			e.printStackTrace();

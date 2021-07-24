@@ -267,6 +267,14 @@ public class ReviewController {
 		return "redirect:review_list.do";
 	}
 	
+	@RequestMapping("/mypage_review.do")
+	public String mypage_review(Model model, int nowPage, HttpSession session) {
+		
+		model.addAttribute("path", "board");
+		
+		return "mypage/mypage_review";
+	}
+	
 	public static String Random(int len) {
 		char[] charSet = new char[] { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'o', 'p', 'q',
 				'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };

@@ -1,5 +1,6 @@
 package com.project.one.model.biz;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,16 +63,6 @@ public class ClassBizImpl implements ClassBiz {
 	}
 	
 	@Override
-	public List<ClassDto> userClass(String member_id) {
-		return dao.userClass(member_id);
-	}
-
-	@Override
-	public int classCount() {
-		return dao.classCount();
-	}
-
-	@Override
 	public List<ClassDto> classListPaging(PagingDto pDto) {
 		
 		return dao.classListPaging(pDto);
@@ -81,6 +72,12 @@ public class ClassBizImpl implements ClassBiz {
 	public int classListCount() {
 		
 		return dao.classListCount();
+	}
+	
+	@Override
+	public int myClassCount(String member_id) {
+		
+		return dao.myClassCount(member_id);
 	}
 
 	@Override
@@ -98,6 +95,20 @@ public class ClassBizImpl implements ClassBiz {
 	@Override
 	public List<ClassDto> searchedList(String search_keyword) {
 		return dao.searchedList(search_keyword);
+	}
+
+	@Override
+	public List<ClassDto> myClass(PagingDto dto, String member_id) {
+		List<ClassDto> list = dao.classList(dto);
+		List<ClassDto> cList = new ArrayList<>();
+		
+		for(ClassDto c : list) {
+			if(c.getMember_id().equals(member_id)) {
+				cList.add(c);
+			}
+		}
+		
+		return cList;
 	}
 	
 }

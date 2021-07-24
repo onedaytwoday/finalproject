@@ -41,7 +41,15 @@
 				<c:url var="action" value="mypage_payment.do" />
 			</c:when>
 			
-			<c:when test="${param.store eq 'S' }">
+			<c:when test="${param.board_category eq 'qna' && param.from eq 'mypage' }">
+				<c:url var="action" value="mypage_board.do" />
+			</c:when>
+			
+			<c:when test="${param.board_category eq 'class' && param.from eq 'mypage' }">
+				<c:url var="action" value="mypage_class.do" />
+			</c:when>
+			
+			<c:when test="${param.store_category eq 'S' }">
 				<c:choose>
 				<c:when test="${param.product_category != '' }">
 					<c:url var="action" value="store_category.do" />
