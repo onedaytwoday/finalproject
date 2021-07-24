@@ -64,6 +64,16 @@
 		style="padding-left: 60px; padding-right: 60px">
 		<form class="form-contact comment_form" action="board_insertRes.do" method="post" id="board_insertRes">
 			<div class="row">
+			<div class="col-4" style="margin-bottom: 30px;">
+					<select name="class_category">
+						<option value="handmade" selected="selected">handmade</option>
+						<option value="cooking">cooking</option>
+						<option value="flower">flower</option>
+						<option value="drawing">drawing</option>
+						<option value="music">music</option>
+						<option value="yoga">yoga</option>
+					</select>
+				</div>
 			<div class="col-12">
 					<div class="form-group">
 						<input class="form-control" type="text" name="member_id" value="${mDto.member_id}" readonly >
@@ -99,12 +109,6 @@
 				<div class="col-6">
 					<div class="form-group">
 					<input class="form-control" type="text" name="class_loc_2" id="addr_2" placeholder="Detail Address" required="required">
-					</div>
-				</div>
-				<div class="col-12">
-					<div class="form-group">
-						<input class="form-control" name="class_category" type="text"
-							placeholder="Class Category">
 					</div>
 				</div>
 				<div class="col-12">

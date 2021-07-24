@@ -220,7 +220,10 @@ $(document).ready(function() {
 					</div>
 				</div>
 			</div>
+			<c:choose>
+			<c:when test="${mDto.member_nicname eq dto.member_id }">
 			<div class="form-group" align="right">
+				
 				<button type="button" class="button button-contactForm btn_1 boxed-btn" onclick="location.href='board_updateform.do?board_no=${dto.board_no}'">Modify</button>
 				<button type="button" class="button button-contactForm btn_1 boxed-btn" onclick="location.href='board_delete.do?board_no=${dto.board_no}&board_category=${board_category}'">Delete</button>
 				<c:choose>
@@ -232,6 +235,8 @@ $(document).ready(function() {
 					</c:when>
 					</c:choose>
 			</div>
+			</c:when>
+			</c:choose>
 	</div>
 	<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 </body>

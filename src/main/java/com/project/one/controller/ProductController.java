@@ -197,6 +197,19 @@ public class ProductController {
 		return "redirect:store_select.do?product_no="+product_no;
 	}
 	
+	@RequestMapping("/store_category.do")
+	public String store_category(Model model, String category, int nowPage) {
+		int count = biz.productcategoryCount(category);
+		System.out.println(count);
+		model.addAttribute("category",category);
+		
+		StorePagingDto pDto = new StorePagingDto(count, nowPage);
+		pDto.setProduct_category(category);
+		model.addAttribute("list", biz.categoryListPaging(pDto));
+		model.addAttribute("pDto", pDto);
+		return "store/store";
+	}
+	
 	public static String Random(int len) {
 		char[] charSet = new char[] { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'o', 'p', 'q',
 				'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };

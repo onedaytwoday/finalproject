@@ -173,6 +173,20 @@ public class ProductDaoImpl implements ProductDao {
 	}
 
 	@Override
+	public List<ProductDto> categoryListPaging(StorePagingDto pDto) {
+		List<ProductDto> list = new ArrayList<ProductDto>();
+		
+		try {
+			list = sqlSession.selectList(NAMESPACE + "categoryListPaging",pDto);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
+	@Override
 	public int productListCount() {
 		int res = 0;
 		
@@ -214,7 +228,21 @@ public class ProductDaoImpl implements ProductDao {
 		
 		return res;
 	}
-
+	
+	@Override
+	public int productcategoryCount(String product_category) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.selectOne(NAMESPACE + "productcategoryCount", product_category);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+	
 	@Override
 	public List<ProductDto> searchedList(String search_keyword) {
 		List<ProductDto> list = new ArrayList<ProductDto>();

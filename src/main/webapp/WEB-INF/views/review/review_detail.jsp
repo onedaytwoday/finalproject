@@ -224,11 +224,15 @@ $(document).ready(function() {
 					</select>
 				</div>
 			</div>
+			<c:choose>
+			<c:when test="${mDto.member_nicname eq dto.member_id }">
 			<div class="form-group" align="right">
 				<button type="button" class="button button-contactForm btn_1 boxed-btn" onclick="location.href='review_updateform.do?review_no=${dto.review_no}'">Modify</button>
 				<button type="button" class="button button-contactForm btn_1 boxed-btn" onclick="location.href='review_delete.do?review_no=${dto.review_no}'">Delete</button>
 				<button type="button" class="button button-contactForm btn_1 boxed-btn" onclick="location.href='review_list.do'">Cancle</button>
 			</div>
+			</c:when>
+			</c:choose>
 	</div>
 	<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 </body>

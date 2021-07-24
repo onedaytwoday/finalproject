@@ -46,18 +46,6 @@
                                         </tr>
                                     </thead>
                                     
-                                    <tfoot>
-                                        <tr>
-                                            <th><input type="checkbox" onclick="allCheck(this.checked, 'event')" /></th>
-											<th>이벤트 제목</th>
-											<th>내용</th>
-											<th>시작 날짜</th>
-											<th>종료 날짜</th>
-											<th>알림 여부</th>
-											<th>상품/클래스</th>
-                                        </tr>
-                                    </tfoot>
-                                    
                                     <tbody>
 	                                    <c:choose>
 											<c:when test="${empty eList }">

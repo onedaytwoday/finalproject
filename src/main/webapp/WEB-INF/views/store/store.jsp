@@ -33,6 +33,23 @@
 				alert("통신 실패!");
 			}
 		});
+		
+		var category = "${category}";
+		if(category == "handmade"){
+			$('#nav-handmade-tab').addClass("active");
+		}else if(category == "cooking"){
+			$('#nav-cooking-tab').addClass("active");
+		}else if(category == "flower"){
+			$('#nav-flower-tab').addClass("active");
+		}else if(category == "drawing"){
+			$('#nav-drawing-tab').addClass("active");
+		}else if(category == "music"){
+			$('#nav-music-tab').addClass("active");
+		}else if(category == "yoga"){
+			$('#nav-yoga-tab').addClass("active");
+		}else if(category == ""){
+			$('#nav-home-tab').addClass("active");
+		}
 	});
 
 	function ranking(){
@@ -53,6 +70,35 @@
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
 	<main class="container">
+		<div class="slider-area" style="margin-bottom: 150px;">
+        <div class="single-slider slider-height2 d-flex align-items-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="hero-cap text-center">
+                            <h2>Product</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+   		 </div>
+   		 <div class="row product-btn justify-content-between mb-40">
+                    <div class="properties__button">
+                        <!--Nav Button  -->
+                        <nav>                                                      
+                            <div class="nav nav-tabs" id="nav-tab" >
+                                <a class="nav-item nav-link" id="nav-home-tab" href="store.do?nowPage=1">All</a>
+                                <a class="nav-item nav-link" id="nav-handmade-tab" href="store_category.do?category=handmade&nowPage=1">handmade</a>
+                                <a class="nav-item nav-link" id="nav-cooking-tab"href="store_category.do?category=cooking&nowPage=1">cooking</a>
+                                <a class="nav-item nav-link" id="nav-flower-tab" href="store_category.do?category=flower&nowPage=1">flower</a>
+                                <a class="nav-item nav-link" id="nav-drawing-tab" href="store_category.do?category=drawing&nowPage=1">drawing</a>
+                                <a class="nav-item nav-link" id="nav-music-tab" href="store_category.do?category=music&nowPage=1">music</a>
+                            	<a class="nav-item nav-link" id="nav-yoga-tab" href="store_category.do?category=yoga&nowPage=1">yoga</a>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
 		<ul class="search_ul"></ul>
 		
 		<div class="blog_right_sidebar w-25 ml-auto">
@@ -116,9 +162,9 @@
        		</c:choose>	          
       </section>
       
-      
       <jsp:include page="/WEB-INF/views/paging.jsp">
-		<jsp:param value='S' name="store_category" />
+      	<jsp:param value="S" name="store"/>
+		<jsp:param value='${pDto.product_category }' name="product_category" />
 		<jsp:param value="${pDto.search_keyword }" name="search_keyword"/>
 		<jsp:param value="${pDto.nowBlock}" name="nowBlock" />
 		<jsp:param value="${pDto.blockBegin }" name="blockBegin" />

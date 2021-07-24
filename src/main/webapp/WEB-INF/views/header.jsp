@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- Boostrap -->
-	<link rel="stylesheet" href="resources/assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="resources/assets/css/bootstrap.min.css?ver=1">
     <link rel="stylesheet" href="resources/assets/css/owl.carousel.min.css">
     <link rel="stylesheet" href="resources/assets/css/flaticon.css">
     <link rel="stylesheet" href="resources/assets/css/slicknav.css">
@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="resources/assets/css/slick.css">
     <link rel="stylesheet" href="resources/assets/css/slick.min.css">
     <link rel="stylesheet" href="resources/assets/css/slick-theme.min.css">
-    <link rel="stylesheet" href="resources/assets/css/style.css?ver=4">
+    <link rel="stylesheet" href="resources/assets/css/style.css?ver=1">
 
 
 
@@ -85,16 +85,24 @@
                                 <ul id="navigation">  
                                     <li><a href="main.do">Home</a></li>
                                     <li><a href="board_notice_list.do?nowPage=1">Notice</a></li>
-                                    <li class="hot"><a href="store.do?nowPage=1">Shop</a>
-                                    	<ul class="submenu">
-                                            <li><a href="#">category1</a></li>
-                                            <li><a href="#">category2</a></li>
+                                    <li><a href="store.do?nowPage=1">Shop</a>
+                                        <ul class="submenu" style="width: 250px; height: 130px;">
+                                            <li class="hot" style="width: 110px;"><a href="store_category.do?category=handmade&nowPage=1">handmade</a></li>
+                                            <li><a href="store_category.do?category=cooking&nowPage=1">cooking</a></li>
+                                            <li><a href="store_category.do?category=flower&nowPage=1">flower</a></li>
+                                            <li style="position: relative; left:120px; top:-108px;"><a href="store_category.do?category=drawing&nowPage=1">drawing</a></li>
+                                            <li style="position: relative; left:120px; top:-108px;"><a href="store_category.do?category=music&nowPage=1">music</a></li>
+                                            <li style="position: relative; left:120px; top:-108px;"><a href="store_category.do?category=yoga&nowPage=1">yoga</a></li>
                                         </ul>
                                     </li>
                                     <li><a href="classList.do?nowPage=1">Class</a>
-                                    	<ul class="submenu">
-                                            <li><a href="#">category1</a></li>
-                                            <li><a href="#">category2</a></li>
+                                    	 <ul class="submenu" style="width: 250px; height: 130px;">
+                                            <li class="hot" style="width: 110px;"><a href="#">handmade</a></li>
+                                            <li><a href="#">cooking</a></li>
+                                            <li><a href="#">flower</a></li>
+                                            <li style="position: relative; left:120px; top:-108px;"><a href="#">drawing</a></li>
+                                            <li style="position: relative; left:120px; top:-108px;"><a href="#">music</a></li>
+                                            <li style="position: relative; left:120px; top:-108px;"><a href="#">yoga</a></li>
                                         </ul>
                                     </li>
                                     <li><a href="board_qna_list.do?nowPage=1">QNA</a></li>
@@ -112,7 +120,7 @@
                                 	<c:otherwise>
                                 		<c:choose>
                                 			<c:when test="${mDto.member_grade eq '관리자' }">
-                                			<li class="right-li"><a href="eventInsert.do"><img src="resources/images/event.png" id="Img" width="20px" height="20px" onmouseover="this.src='resources/images/event_ahover.png'" onmouseout="this.src='resources/images/event.png'"></a></li>
+                                			<li class="right-li"><a href="eventInsert.do"><img src="resources/images/event.png" width="20px" height="20px" onmouseover="this.src='resources/images/event_ahover.png'" onmouseout="this.src='resources/images/event.png'"></a></li>
                                 			<li class="right-li"><img src="resources/images/chat.png" id="Img" width="20px" height="20px" onmouseover="this.src='resources/images/chat_ahover.png'" onmouseout="this.src='resources/images/chat.png'"></li>
                                 			</c:when>
                                 			<c:otherwise>

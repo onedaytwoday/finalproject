@@ -10,6 +10,7 @@
 <body>
 	<div id="paging">
 		<c:set var="search"/>
+		<c:set var="category"/>
 		<c:choose>
 			<c:when test="${param.board_category eq 'N' }">
 				<c:if test="${param.notice_search_category eq 'title' or param.notice_search_category eq 'nicname' or param.notice_search_category eq 'content+title' }">
@@ -40,8 +41,12 @@
 				<c:url var="action" value="mypage_payment.do" />
 			</c:when>
 			
-			<c:when test="${param.store_category eq 'S' }">
+			<c:when test="${param.store eq 'S' }">
 				<c:choose>
+				<c:when test="${param.product_category != '' }">
+					<c:url var="action" value="store_category.do" />
+					<c:set var="category" value="&category=${param.product_category }"/>
+				</c:when>
 				<c:when test="${empty param.search_keyword }">
 					<c:url var="action" value="store.do" />
 				</c:when>
@@ -87,7 +92,7 @@
 								     <a class="page-link">${index}</a>
 							    </c:when>
 							<c:otherwise>
-								<a class="page-link" href="${action}?nowPage=${index}${search}">${index}</a>
+								<a class="page-link" href="${action}?nowPage=${index}${search}${category}">${index}</a>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>

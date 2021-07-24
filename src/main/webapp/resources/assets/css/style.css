@@ -2287,8 +2287,8 @@ input:focus {
   text-align: center;
   border-radius: 8px;
   font-size: 10px;
-  top: 19px;
-  right: -13px;
+  top: -12px;
+  right: -7px;
   -webkit-transition: all 0.2s ease-out 0s;
   -moz-transition: all 0.2s ease-out 0s;
   -ms-transition: all 0.2s ease-out 0s;

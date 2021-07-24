@@ -100,9 +100,13 @@
 				</c:otherwise>
 				</c:choose>
 			</div>
+			<c:choose>
+			<c:when test="${!empty mDto}">
 			<div align="right">
 			<input type="button" class="genric-btn default circle" value="글작성" onclick="location.href='board_insertform.do?board_category=Q'" />
 			</div>
+			</c:when>
+			</c:choose>
 		</div>
 	</div>
 					<div style="width: 100%; text-align: center;">

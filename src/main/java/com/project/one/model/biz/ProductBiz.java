@@ -19,6 +19,8 @@ public interface ProductBiz {
 	
 	public List<ProductDto> searchedList(String search_keyword);
 
+	public List<ProductDto> categoryListPaging(StorePagingDto pDto);
+	
 	public ProductDto selectOne(int product_no);
 	
 	public ProductDto selectOneByName(String product_name);
@@ -34,6 +36,8 @@ public interface ProductBiz {
 	public int productCount();
 	
 	public int productListCount();
+	
+	public int productcategoryCount(String product_category);
 	
 	public int productSearchCount(StorePagingDto pDto);
 }

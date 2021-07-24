@@ -28,9 +28,12 @@
 			<div class="row">
 				<div class="col-4" style="margin-bottom: 30px;">
 					<select name="product_category">
-						<option value="cate01" selected="selected">카테고리1</option>
-						<option value="cate02">카테고리2</option>
-						<option value="cate03">카테고리3</option>
+						<option value="handmade" selected="selected">handmade</option>
+						<option value="cooking">cooking</option>
+						<option value="flower">flower</option>
+						<option value="drawing">drawing</option>
+						<option value="music">music</option>
+						<option value="yoga">yoga</option>
 					</select>
 				</div>
 				<div class="col-4" style="margin-bottom: 30px;">
