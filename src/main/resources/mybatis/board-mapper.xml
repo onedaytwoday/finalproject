@@ -47,13 +47,6 @@
 		#{pageBegin}
 	</select>
 	
-	<select id="mypage_list" resultType="boardDto">
-		SELECT BOARD_NO,BOARD_NOTICE_NO,BOARD_QNA_NO,BOARD_TITLE,BOARD_CONTENT,BOARD_DATE,BOARD_READCOUNT,BOARD_GROUPNO,BOARD_GROUPSEQ,
-		BOARD_TITLETAB,BOARD_DELFLAG,BOARD_CATEGORY,BOARD_PW,MEMBER_ID
-		FROM BOARD
-		WHERE MEMBER_ID = #{member_id}
-		ORDER BY BOARD_NO DESC
-	</select>
 	<select id="board_notice_search" parameterType="pagingDto" resultType="boardDto">
 		SELECT X.rnum,
 		X.BOARD_NO, X.BOARD_NOTICE_NO, X.BOARD_QNA_NO, X.BOARD_TITLE, X.BOARD_CONTENT, X.BOARD_DATE, X.BOARD_READCOUNT,
@@ -181,6 +174,10 @@
 	
 	<select id="notice_count" resultType="int">
 		SELECT COUNT(BOARD_NOTICE_NO) AS cnt FROM BOARD WHERE BOARD_CATEGORY = 'N'
+	</select>
+	
+	<select id="my_qna_count" resultType="int">
+		SELECT COUNT(BOARD_QNA_NO) AS cnt FROM BOARD WHERE BOARD_CATEGORY = 'Q' AND MEMBER_ID = #{member_id}
 	</select>
 	
 	<select id="search_notice_count" resultType="int" parameterType="pagingDto">

@@ -197,6 +197,20 @@ public class BoardDaoImpl implements BoardDao {
 		
 		return res;
 	}
+	
+	@Override
+	public int my_qna_count(String member_id) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.selectOne(NAMESPACE + "my_qna_count", member_id);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
 
 	@Override
 	public int search_notice_count(PagingDto Pdto) {
@@ -224,20 +238,6 @@ public class BoardDaoImpl implements BoardDao {
 		}
 		
 		return res;
-	}
-	
-	@Override
-	public List<BoardDto> mypage_list(String member_id) {
-		List<BoardDto> list = new ArrayList<BoardDto>();
-		
-		try {
-			list = sqlSession.selectList(NAMESPACE + "mypage_list", member_id);
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		return list;
 	}
 
 }

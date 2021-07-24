@@ -28,11 +28,11 @@ public interface ClassBiz {
 
 	public int delete(int class_no);
 
-	public List<ClassDto> userClass(String member_id);
-	
-	public int classCount();
+	public List<ClassDto> myClass(PagingDto dto, String member_id);
 	
 	public int classListCount();
+	
+	public int myClassCount(String member_id);
 	
 	public int classSearchCount(PagingDto pDto);
 	

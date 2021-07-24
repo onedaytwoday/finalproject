@@ -33,9 +33,11 @@ public interface BoardBiz {
 	
 	public int notice_count();
 	
+	public int my_qna_count(String member_id);
+	
 	public int search_notice_count(PagingDto Pdto);
 	
 	public int search_qna_count(PagingDto Pdto);
 	
-	public List<BoardDto> mypage_list(String member_id);
+	public List<BoardDto> mypage_list(PagingDto dto, String member_id);
 }

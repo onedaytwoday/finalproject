@@ -365,12 +365,15 @@ public class MemberController {
 	
 	//마이 페이지
 	@RequestMapping("/mypage_update.do")
-	public String mypage() {		
+	public String mypage(Model model) {
+		model.addAttribute("path", "update");
+		
 		return "mypage/mypage_update";
 	}
 	
 	@RequestMapping("/mypage_updateres.do")
 	public String update(MemberDto dto) {
+		System.out.println(dto);
 		if(biz.update(dto) > 0) {
 			
 			return "redirect:mypage_update.do?member_id="+dto.getMember_id();

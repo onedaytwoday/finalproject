@@ -227,10 +227,15 @@ public class ClassController {
 	}
 
 	@RequestMapping("/mypage_class.do")
-	public String class_selectOne(Model model, HttpSession session) {
+	public String mypage_class(Model model, int nowPage, HttpSession session) {
 		MemberDto dto = (MemberDto)session.getAttribute("mDto");
 		
-		model.addAttribute("list", cBiz.userClass(dto.getMember_id()));
+		int count = cBiz.myClassCount(dto.getMember_id());
+		PagingDto pDto = new PagingDto(count, nowPage);
+		
+		model.addAttribute("list", cBiz.myClass(pDto, dto.getMember_id()));
+		model.addAttribute("pDto", pDto);
+		model.addAttribute("path", "board");
 
 		return "mypage/mypage_class";
 	}
