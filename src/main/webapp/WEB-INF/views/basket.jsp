@@ -7,18 +7,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
-	<link rel="stylesheet" href="resources/assets/css/bootstrap.min.css">
-	<link rel="stylesheet" href="resources/assets/css/owl.carousel.min.css">
-	<link rel="stylesheet" href="resources/assets/css/flaticon.css">
-    <link rel="stylesheet" href="resources/assets/css/slicknav.css">
-    <link rel="stylesheet" href="resources/assets/css/animate.min.css">
-    <link rel="stylesheet" href="resources/assets/css/magnific-popup.css">
-    <link rel="stylesheet" href="resources/assets/css/fontawesome-all.min.css">
-    <link rel="stylesheet" href="resources/assets/css/themify-icons.css">
-    <link rel="stylesheet" href="resources/assets/css/slick.css">
-    <link rel="stylesheet" href="resources/assets/css/nice-select.css">
-    <link rel="stylesheet" href="resources/assets/css/style.css">
-
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script type="text/javascript" src="resources/js/basket.js"></script>
 </head>

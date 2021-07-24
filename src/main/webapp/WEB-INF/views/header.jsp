@@ -95,7 +95,7 @@
                                         </ul>
                                     </li>
                                     <li><a href="board_qna_list.do?nowPage=1">QNA</a></li>
-                                    <li><a href="#">Photo</a></li>
+                                    <li><a href="review_list.do">Photo</a></li>
                                 </ul>
                             </nav>
                         </div>

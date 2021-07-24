@@ -95,11 +95,11 @@
 	</select>
 	
 	<select id="montlyPayment" resultType="paymentDto">
-		SELECT COUNT(PAYMENT_NO) AS cnt, PAYMENT_DATE
-		FROM PAYMENT
-		WHERE <![CDATA[
-        	TO_CHAR(PAYMENT_DATE, 'yyyy-MM-DD') >= '2021-07-01' AND TO_CHAR(PAYMENT_DATE, 'yyyy-MM-DD') <= '2021-08-01'
-        ]]>
-		GROUP BY PAYMENT_DATE 
+		SELECT TO_DATE(A.day) as PAYMENT_DATE, SUM(A.PAYMENT_PRICE) as PAYMENT_PRICE
+		FROM (
+		      SELECT TO_CHAR(PAYMENT_DATE, 'yyyy-MM-DD')AS day , PAYMENT_PRICE 
+		      FROM PAYMENT
+		      )A
+		GROUP BY A.day
 	</select>
 </mapper>

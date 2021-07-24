@@ -28,18 +28,12 @@ public class ReviewBizImpl implements ReviewBiz {
 	
 	@Override
 	public double avgListByProduct(int product_no){
-		double rate = dao.avgListByProduct(product_no);
-		rate = Math.round(rate/5);
-		
-		return rate;
+		return dao.avgListByProduct(product_no);
 	}
 	
 	@Override
 	public double avgListByClass(int class_no){
-		double rate = dao.avgListByClass(class_no);
-		rate = Math.round(rate/5);
-		
-		return rate;
+		return dao.avgListByClass(class_no);
 	}
 
 	@Override

@@ -37,38 +37,13 @@
 						
 						<div>
 							<c:choose>
-								<c:when test="${rate == 0 }">
-									<i class="bi bi-star"></i>
-									<i class="bi bi-star"></i>
-									<i class="bi bi-star"></i>
-									<i class="bi bi-star"></i>
-									<i class="bi bi-star"></i>
+								<c:when test="${rate > 4 }">
+									<i class="bi bi-star-fill"></i>
+									<i class="bi bi-star-fill"></i>
+									<i class="bi bi-star-fill"></i>
+									<i class="bi bi-star-fill"></i>
+									<i class="bi bi-star-fill"></i>
 								</c:when>
-								
-								<c:when test="${rate > 0 }">
-									<i class="bi bi-star-fill"></i>
-									<i class="bi bi-star"></i>
-									<i class="bi bi-star"></i>
-									<i class="bi bi-star"></i>
-									<i class="bi bi-star"></i>
-								</c:when>
-								
-								<c:when test="${rate > 1 }">
-									<i class="bi bi-star-fill"></i>
-									<i class="bi bi-star-fill"></i>
-									<i class="bi bi-star"></i>
-									<i class="bi bi-star"></i>
-									<i class="bi bi-star"></i>
-								</c:when>
-								
-								<c:when test="${rate > 2 }">
-									<i class="bi bi-star-fill"></i>
-									<i class="bi bi-star-fill"></i>
-									<i class="bi bi-star-fill"></i>
-									<i class="bi bi-star"></i>
-									<i class="bi bi-star"></i>
-								</c:when>
-								
 								<c:when test="${rate > 3 }">
 									<i class="bi bi-star-fill"></i>
 									<i class="bi bi-star-fill"></i>
@@ -76,13 +51,33 @@
 									<i class="bi bi-star-fill"></i>
 									<i class="bi bi-star"></i>
 								</c:when>
-								
-								<c:when test="${rate > 4 }">
+								<c:when test="${rate > 2 }">
 									<i class="bi bi-star-fill"></i>
 									<i class="bi bi-star-fill"></i>
 									<i class="bi bi-star-fill"></i>
+									<i class="bi bi-star"></i>
+									<i class="bi bi-star"></i>
+								</c:when>
+								<c:when test="${rate > 1 }">
 									<i class="bi bi-star-fill"></i>
 									<i class="bi bi-star-fill"></i>
+									<i class="bi bi-star"></i>
+									<i class="bi bi-star"></i>
+									<i class="bi bi-star"></i>
+								</c:when>
+								<c:when test="${rate > 0 }">
+									<i class="bi bi-star-fill"></i>
+									<i class="bi bi-star"></i>
+									<i class="bi bi-star"></i>
+									<i class="bi bi-star"></i>
+									<i class="bi bi-star"></i>
+								</c:when>
+								<c:when test="${rate == 0 }">
+									<i class="bi bi-star"></i>
+									<i class="bi bi-star"></i>
+									<i class="bi bi-star"></i>
+									<i class="bi bi-star"></i>
+									<i class="bi bi-star"></i>
 								</c:when>
 							</c:choose>
 						</div>					
