@@ -17,7 +17,7 @@
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="hero-cap text-center">
-                            <h2>아이디/비밀번호 찾기</h2>
+                            <h2>Find ID/PW</h2>
                         </div>
                     </div>
                 </div>

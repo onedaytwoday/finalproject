@@ -219,8 +219,9 @@ public class MemberController {
 		Map<String, String> map = new HashMap<>();
 
 		if(checkUser != null) {
-			//SendSMS.sendSMS(checkUser.getMember_phone());
-			map.put("num", "1111");
+			String num = Random(4);
+			SendSMS.sendSMS(checkUser.getMember_phone(),num);
+			map.put("num", num);
 			map.put("member_id", checkUser.getMember_id());
 			
 		} else {
@@ -388,5 +389,16 @@ public class MemberController {
 		
 		return "redirect:mypage_update.do?member_id="+member_id;
 	}
-
+	
+	
+	public static String Random(int len) {
+		char[] charSet = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+		int idx = 0;
+		StringBuffer sb = new StringBuffer();
+		for (int i = 0; i < len; i++) {
+			idx = (int) (charSet.length * Math.random());
+			sb.append(charSet[idx]);
+		}
+		return sb.toString();
+	}
 }
