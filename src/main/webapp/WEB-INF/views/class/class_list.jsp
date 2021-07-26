@@ -39,7 +39,24 @@
 		$("#search_category").change(function(){
 			let category = $("select > option:selected").val();
 			checked = category == 'title+desc+category'
-		});		
+		});	
+		
+		var category = "${category}";
+		if(category == "handmade"){
+			$('#nav-handmade-tab').addClass("active");
+		}else if(category == "cooking"){
+			$('#nav-cooking-tab').addClass("active");
+		}else if(category == "flower"){
+			$('#nav-flower-tab').addClass("active");
+		}else if(category == "drawing"){
+			$('#nav-drawing-tab').addClass("active");
+		}else if(category == "music"){
+			$('#nav-music-tab').addClass("active");
+		}else if(category == "yoga"){
+			$('#nav-yoga-tab').addClass("active");
+		}else if(category == ""){
+			$('#nav-home-tab').addClass("active");
+		}
 	});
 	
 	function ranking(){
@@ -66,10 +83,22 @@
 	<main class="container mb-100">
 		<ul class="search_ul"></ul>
 		
-		<div class="search">
-			
-		</div>
-		
+		<div class="row product-btn justify-content-between mb-40">
+                    <div class="properties__button">
+                        <!--Nav Button  -->
+                        <nav>                                                      
+                            <div class="nav nav-tabs" id="nav-tab" >
+                                <a class="nav-item nav-link" id="nav-home-tab" href="classList.do?nowPage=1">All</a>
+                                <a class="nav-item nav-link" id="nav-handmade-tab" href="class_category.do?category=handmade&nowPage=1">handmade</a>
+                                <a class="nav-item nav-link" id="nav-cooking-tab"href="class_category.do?category=cooking&nowPage=1">cooking</a>
+                                <a class="nav-item nav-link" id="nav-flower-tab" href="class_category.do?category=flower&nowPage=1">flower</a>
+                                <a class="nav-item nav-link" id="nav-drawing-tab" href="class_category.do?category=drawing&nowPage=1">drawing</a>
+                                <a class="nav-item nav-link" id="nav-music-tab" href="class_category.do?category=music&nowPage=1">music</a>
+                            	<a class="nav-item nav-link" id="nav-yoga-tab" href="class_category.do?category=yoga&nowPage=1">yoga</a>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
 		<section class="blog_area section-padding">
             <div class="container">
                 <div class="row">
@@ -131,9 +160,6 @@
                                             <input type="text" class="form-control" name="search_keyword" placeholder="Search term..."
                                                 onfocus="this.placeholder = ''"
                                                 onblur="this.placeholder = 'Search term...'">
-                                            <div class="input-group-append">
-                                                <button class="btns" type="button"><i class="ti-search"></i></button>
-                                            </div>
                                         </div>
                                     </div>
                                     <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
@@ -146,10 +172,9 @@
                 </div>
             </div>
         </section>
-		
-		
 					<jsp:include page="/WEB-INF/views/paging.jsp">
-						<jsp:param value="C" name="class_category" />
+						<jsp:param value="C" name="class_list" />
+						<jsp:param value="${pDto.class_category }" name="class_category" />
 						<jsp:param value="${pDto.search_category }" name="class_search_category" />
 						<jsp:param value="${pDto.search_keyword }" name="search_keyword"/>
 						<jsp:param value="${pDto.nowBlock}" name="nowBlock" />

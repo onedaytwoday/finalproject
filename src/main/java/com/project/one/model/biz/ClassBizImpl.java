@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.project.one.model.dao.ClassDao;
 import com.project.one.model.dto.ClassDto;
 import com.project.one.model.dto.PagingDto;
+import com.project.one.model.dto.StorePagingDto;
 
 @Service
 public class ClassBizImpl implements ClassBiz {
@@ -109,6 +110,16 @@ public class ClassBizImpl implements ClassBiz {
 		}
 		
 		return cList;
+	}
+
+	@Override
+	public List<ClassDto> categoryListPaging(PagingDto pDto) {
+		return dao.categoryListPaging(pDto);
+	}
+
+	@Override
+	public int classcategoryCount(String class_category) {
+		return dao.classcategoryCount(class_category);
 	}
 	
 }

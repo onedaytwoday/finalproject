@@ -97,12 +97,12 @@
                                     </li>
                                     <li><a href="classList.do?nowPage=1">Class</a>
                                     	 <ul class="submenu" style="width: 250px; height: 130px;">
-                                            <li class="hot" style="width: 110px;"><a href="#">handmade</a></li>
-                                            <li><a href="#">cooking</a></li>
-                                            <li><a href="#">flower</a></li>
-                                            <li style="position: relative; left:120px; top:-108px;"><a href="#">drawing</a></li>
-                                            <li style="position: relative; left:120px; top:-108px;"><a href="#">music</a></li>
-                                            <li style="position: relative; left:120px; top:-108px;"><a href="#">yoga</a></li>
+                                            <li class="hot" style="width: 110px;"><a href="class_category.do?category=handmade&nowPage=1">handmade</a></li>
+                                            <li><a href="class_category.do?category=cooking&nowPage=1">cooking</a></li>
+                                            <li><a href="class_category.do?category=flower&nowPage=1">flower</a></li>
+                                            <li style="position: relative; left:120px; top:-108px;"><a href="class_category.do?category=drawing&nowPage=1">drawing</a></li>
+                                            <li style="position: relative; left:120px; top:-108px;"><a href="class_category.do?category=music&nowPage=1">music</a></li>
+                                            <li style="position: relative; left:120px; top:-108px;"><a href="class_category.do?category=yoga&nowPage=1">yoga</a></li>
                                         </ul>
                                     </li>
                                     <li><a href="board_qna_list.do?nowPage=1">QNA</a></li>

@@ -50,6 +50,7 @@ import com.project.one.model.dto.PaymentDto;
 import com.project.one.model.dto.ProductDto;
 import com.project.one.model.dto.RankDto;
 import com.project.one.model.dto.SearchDto;
+import com.project.one.model.dto.StorePagingDto;
 
 import net.coobird.thumbnailator.Thumbnails;
 
@@ -321,6 +322,19 @@ public class ClassController {
 			e.printStackTrace();
 		}
 		return strResult;
+	}
+	
+	@RequestMapping("/class_category.do")
+	public String class_category(Model model, String category, int nowPage) {
+		int count = cBiz.classcategoryCount(category);
+		System.out.println(count);
+		model.addAttribute("category",category);
+		
+		PagingDto pDto = new PagingDto(count, nowPage);
+		pDto.setClass_category(category);
+		model.addAttribute("list", cBiz.categoryListPaging(pDto));
+		model.addAttribute("pDto", pDto);
+		return "class/class_list";
 	}
 	
 	public static String Random(int len) {

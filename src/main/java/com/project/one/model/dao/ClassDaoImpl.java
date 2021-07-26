@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.project.one.model.dto.ClassDto;
 import com.project.one.model.dto.PagingDto;
+import com.project.one.model.dto.StorePagingDto;
 
 @Repository
 public class ClassDaoImpl implements ClassDao {
@@ -50,6 +51,20 @@ public class ClassDaoImpl implements ClassDao {
 
 		try {
 			list = sqlSession.selectList(NAMESPACE + "main_selectList");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return list;
+	}
+	
+	@Override
+	public List<ClassDto> categoryListPaging(PagingDto pDto) {
+		List<ClassDto> list = new ArrayList<ClassDto>();
+
+		try {
+			list = sqlSession.selectList(NAMESPACE + "categoryListPaging",pDto);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -182,6 +197,20 @@ public class ClassDaoImpl implements ClassDao {
 		return res;
 	}
 
+	@Override
+	public int classcategoryCount(String class_category) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.selectOne(NAMESPACE + "classcategoryCount", class_category);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+	
 	@Override
 	public List<ClassDto> classListSearch(PagingDto pDto) {
 		List<ClassDto> list = new ArrayList<ClassDto>();
