@@ -19,34 +19,98 @@
     <link rel="stylesheet" href="resources/assets/css/slick.css">
     <link rel="stylesheet" href="resources/assets/css/slick.min.css">
     <link rel="stylesheet" href="resources/assets/css/slick-theme.min.css">
-    <link rel="stylesheet" href="resources/assets/css/style.css?ver=1">
+    <link rel="stylesheet" href="resources/assets/css/style.css?ver=3">
 
 
 
-	<style type="text/css">
-		#iconImg:hover , #Img:hover {
-			cursor: pointer;
-		}
-		.right-li{
-			padding-right: 20px;
-		}
+<style type="text/css">
+#iconImg:hover , #Img:hover {
+	cursor: pointer;
+}
+.right-li{
+	padding-right: 20px;
+}
+#content {
+margin: 20px;
+padding: 10px;
+}
+
+#rank-list a {
+	color: #FFF;
+	text-decoration: none;
+}
+
+#rank-list a:hover {
+	text-decoration: underline;
+}
+
+#rank-list {
+	overflow: hidden;
+	width: 100px;
+	height: 20px;
+	margin: 0;
+}
+
+#rank-list dt {
+	display: none;
+}
+
+#rank-list dd {
+	position: relative;
+	margin: 0;
+}
+
+#rank-list ol {
+	position: absolute;
+	top: 0;
+	left: 0;
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+
+#rank-list li {
+	height: 20px;
+	line-height: 20px;
+}
+.rank{
+	color:red;
+}
 	</style>
 	
 	<script type="text/javascript">
 		$(document).ready(function() {
-			<%--
 			$.ajax({
-				type : 'get',
-				url : 'getBasketNum.do',
-				dataType : 'json',
-				success : function(res) {
-					$("#basket_num").text(res.basket_num);
+				type: 'post',
+				url: 'rank_list.do',
+				data: JSON.stringify(),
+				contentType: "application/json",
+				dataType: "json",
+				success: function(data) {
+					var tmp = data['list'];
+					for(var i=0;i<tmp.length;i++){
+						var rank_name = tmp[i]['rank_name'];
+						var rank_no = tmp[i]['rank_no'];
+						$('.search_ul').append("<li style='font-size:8pt;font-weight: 600;'><span class='rank'>" + rank_no +"&nbsp&nbsp&nbsp</span>" + rank_name +"</li>");
+						var count = $('#rank-list li').length;
+					    var height = $('#rank-list li').height();
+
+					    function step(index) {
+					        $('#rank-list ol').delay(100).animate({
+					            top: -height * index,
+					        }, 500, function() {
+					            step((index + 1) % count);
+					        });
+					    }
+
+					    step(1);
+					}
 				},
-				error : function(err) {
+				error: function() {
 					alert("통신 실패!");
 				}
 			});
-			--%>
+			
 			
 			$('#iconImg').click(function(){
 	    		window.open('http://localhost:8787/one/chat_main.do?member_id=${mDto.member_id }' ,'채팅', 'width=400px,height=500px,scrollbars=yes');
@@ -145,6 +209,15 @@
         </div>
         <!-- Header End -->
     </header>
+    <div id="content" style="position: fixed;z-index: 2147483647; top: 2%;left: 18%">
+		<dl id="rank-list">
+			<dt>실시간 급상승 검색어</dt>
+			<dd>
+				<ol class="search_ul">
+				</ol>
+			</dd>
+		</dl>
+	</div>
     
     <script src="resources/assets/js/vendor/modernizr-3.5.0.min.js"></script>
     <!-- Jquery, Popper, Bootstrap -->

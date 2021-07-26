@@ -47,15 +47,15 @@
 				                      </div>
 				                    </td>
 				                    <td>
-				                      <fmt:formatNumber type="number" maxFractionDigits="0" value="${pList[status.index].product_price * (pList[status.index].product_sale / 100) }" var="sale" />
+				                      <fmt:parseNumber integerOnly="true" value="${pList[status.index].product_price * (pList[status.index].product_sale / 100) }" var="sale"/>
 				                      <h5>${pList[status.index].product_sale > 0 ? (pList[status.index].product_price - sale) : pList[status.index].product_price }원</h5>
 				                    </td>
 				                    <td>
 				                      <div class="product_count">
-				                      	<fmt:formatNumber type="number" maxFractionDigits="0" value="${sale > 0 ? pList[status.index].product_price - sale : pList[status.index].product_price}" var="price" />
-				                        <span class="input-number-decrement" onclick="updateBasket(${dto.basket_no}, ${price},'decrease')"> <i class="ti-minus"></i></span>
+				                        <fmt:parseNumber integerOnly="true" value="${sale > 0 ? pList[status.index].product_price - sale : pList[status.index].product_price}" var="price"/>
+				                        <span class="input-number-decrement"> <i class="ti-minus" style="padding:5px" onclick="updateBasket(${dto.basket_no}, ${price},'decrease')"></i></span>
                           				<input id="${dto.basket_no }" class="input-number" type="text" value="${dto.basket_num > 0 ? dto.basket_num : 0}" readonly>
-                          				<span class="input-number-increment" onclick="updateBasket(${dto.basket_no}, ${price},'increase')"> <i class="ti-plus"></i></span>
+                          				<span class="input-number-increment"> <i class="ti-plus" style="padding:5px" onclick="updateBasket(${dto.basket_no}, ${price},'increase')"></i></span>
 				                      </div>
 				                    </td>
 				                    <td>

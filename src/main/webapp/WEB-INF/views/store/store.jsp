@@ -15,24 +15,6 @@
 
 <script type="text/javascript">
 	$(function(){
-		$.ajax({
-			type: 'post',
-			url: 'rank_list.do',
-			data: JSON.stringify(),
-			contentType: "application/json",
-			dataType: "json",
-			success: function(data) {
-				var tmp = data['list'];
-				for(var i=0;i<tmp.length;i++){
-					var rank_name = tmp[i]['rank_name'];
-					var rank_no = tmp[i]['rank_no'];
-					$('.search_ul').append("<li>" + rank_no +"순위&nbsp;&nbsp;" + rank_name +"</li>");
-				}
-			},
-			error: function() {
-				alert("통신 실패!");
-			}
-		});
 		
 		var category = "${category}";
 		if(category == "handmade"){
@@ -106,8 +88,6 @@
                         </nav>
                     </div>
                 </div>
-		<ul class="search_ul"></ul>
-		
 		<div class="blog_right_sidebar w-25 ml-auto">
 			<c:if test="${mDto.member_grade eq '강사회원' }">
 				<button type="button" class="genric-btn primary-border mt-5 mb-2" style="width:100%;" onclick="location.href='store_insertform.do'"><i class="bi bi-pencil-fill"></i> 상품 등록</button>
