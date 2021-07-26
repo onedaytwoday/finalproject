@@ -86,7 +86,15 @@
 				<div class="row">
 					<div class="col-xl-12">
 						<div class="hero-cap text-center">
-							<h2>Class</h2>
+							<c:choose>
+								<c:when test="${empty category }">
+									<h2>Class</h2>
+								</c:when>
+								<c:otherwise>
+									<h2>${category }</h2>
+								</c:otherwise>
+							</c:choose>
+							
 						</div>
 					</div>
 				</div>
