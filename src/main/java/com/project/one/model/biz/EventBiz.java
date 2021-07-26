@@ -18,7 +18,7 @@ public interface EventBiz {
 
 	public int update(EventDto dto);
 	
-	public int updateNoti(int event_no);
+	public int updateNoti();
 
 	public int delete(int event_no);
 	

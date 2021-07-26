@@ -15,6 +15,20 @@ public class EventDaoImpl implements EventDao {
 
 	@Autowired
 	private SqlSessionTemplate sqlSession;
+	
+	@Override
+	public List<EventDto> allList() {
+		List<EventDto> list = new ArrayList<EventDto>();
+
+		try {
+			list = sqlSession.selectList(NAMESPACE + "allList");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return list;
+	}
 
 	@Override
 	public List<EventDto> selectList() {
@@ -101,11 +115,25 @@ public class EventDaoImpl implements EventDao {
 	}
 	
 	@Override
-	public int updateNoti(int event_no) {
+	public int updateNotiY(int event_no) {
 		int res = 0;
 
 		try {
-			res = sqlSession.update(NAMESPACE + "updateNoti", event_no);
+			res = sqlSession.update(NAMESPACE + "updateNotiY", event_no);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return res;
+	}
+	
+	@Override
+	public int updateNotiN(int event_no) {
+		int res = 0;
+
+		try {
+			res = sqlSession.update(NAMESPACE + "updateNotiN", event_no);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -141,4 +169,5 @@ public class EventDaoImpl implements EventDao {
 
 		return res;
 	}
+
 }

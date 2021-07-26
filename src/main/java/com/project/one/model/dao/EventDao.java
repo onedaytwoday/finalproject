@@ -8,6 +8,8 @@ import com.project.one.model.dto.PagingDto;
 public interface EventDao {
 	String NAMESPACE = "event.";
 	
+	public List<EventDto> allList();
+	
 	public List<EventDto> selectList();
 	
 	public List<EventDto> eventList(PagingDto dto);
@@ -20,7 +22,9 @@ public interface EventDao {
 	
 	public int update(EventDto dto);
 	
-	public int updateNoti(int event_no);
+	public int updateNotiY(int event_no);
+	
+	public int updateNotiN(int event_no);
 	
 	public int delete(int event_no);
 	

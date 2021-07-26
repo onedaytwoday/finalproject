@@ -154,22 +154,6 @@ public class EventController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/updateNoti.do", method=RequestMethod.POST)
-	public Map<String, String> update_noti(@RequestBody Map<String, Integer[]> checked_list){
-		Map<String, String> map = new HashMap<>();
-		Integer[] lists = checked_list.get("checked_list");
-		int res = 0;
-		
-		for(int i : lists) {
-			res += eBiz.updateNoti(i);
-		}
-		
-		map.put("msg", res > 0 ? "성공" : "실패");
-		
-		return map;
-	}
-	
-	@ResponseBody
 	@RequestMapping("/getEvents.do")
 	public Map<String, List<EventDto>> get_events(){
 		Map<String, List<EventDto>> map = new HashMap<>();

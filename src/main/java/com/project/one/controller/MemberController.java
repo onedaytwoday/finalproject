@@ -74,6 +74,9 @@ public class MemberController {
 	
 	@RequestMapping("/index.do")
 	public String index(Model model) {
+		int res = eBiz.updateNoti();
+		System.out.println("res : " + res);
+		
 		List<SearchDto> list = rbiz.search();
 		for(int i=0;i<list.size();i++) {
 			if(list.get(i).getProduct_no() == 0) {
