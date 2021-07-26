@@ -2220,25 +2220,40 @@ input:focus {
   .header-area .main-header {
     padding: 0px 10px;
   }
+  #content{
+  	display: block;
+  }
 }
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
   .header-area .main-header {
     padding: 0px 10px;
+  }
+  #content{
+  	display: block;
   }
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .header-area .main-header {
     padding: 22px 0px;
   }
+  #content{
+  	display: none;
+  }
 }
 @media only screen and (min-width: 576px) and (max-width: 767px) {
   .header-area .main-header {
     padding: 22px 0px;
   }
+  #content{
+  	display: none;
+  }
 }
 @media (max-width: 575px) {
   .header-area .main-header {
     padding: 22px 0px;
+  }
+  #content{
+  	display: none;
   }
 }
 .header-area .main-header .menu-wrapper {

@@ -16,25 +16,6 @@
 <script type="text/javascript">
 	let checked
 	$(function(){
-			$.ajax({
-				type: 'post',
-				url: 'rank_list.do',
-				data: JSON.stringify(),
-				contentType: "application/json",
-				dataType: "json",
-				success: function(data) {
-					var tmp = data['list'];
-					for(var i=0;i<tmp.length;i++){
-						var rank_name = tmp[i]['rank_name'];
-						var rank_no = tmp[i]['rank_no'];
-						$('.search_ul').append("<li>" + rank_no +"순위&nbsp;&nbsp;" + rank_name +"</li>");
-					}
-				},
-				error: function() {
-					alert("통신 실패!");
-				}
-			});
-		
 		
 		$("#search_category").change(function(){
 			let category = $("select > option:selected").val();
@@ -86,7 +67,15 @@
 				<div class="row">
 					<div class="col-xl-12">
 						<div class="hero-cap text-center">
-							<h2>Class</h2>
+							<c:choose>
+								<c:when test="${empty category }">
+									<h2>Class</h2>
+								</c:when>
+								<c:otherwise>
+									<h2>${category }</h2>
+								</c:otherwise>
+							</c:choose>
+							
 						</div>
 					</div>
 				</div>
@@ -94,8 +83,6 @@
 		</div>
 	</div>
 	<main class="container mb-100">
-		<ul class="search_ul"></ul>
-		
 		<div class="row product-btn justify-content-between mb-40">
                     <div class="properties__button">
                         <!--Nav Button  -->
