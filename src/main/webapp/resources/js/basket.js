@@ -44,7 +44,7 @@ function updateBasket(basket_no, price, type){
 				"basket_num" : Number(basket_num),
 				"basket_price" : Number(basket_price)
 		}
-
+		
 		$.ajax({
 			type: "post",
 			url: "updateBasket.do",
@@ -60,4 +60,5 @@ function updateBasket(basket_no, price, type){
 				alert("통신 실패!");
 			}
 		});
+	
 }

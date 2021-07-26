@@ -164,10 +164,11 @@
 
 						<c:if test="${mDto.member_id != null && mDto.member_grade == '일반회원'}">
 							<form class="mt-3" action="payment.do" method="post">
-								<input type="hidden" name="detail_no" /> <input type="hidden"
-									name="payment_num" value="1" /> <input type="hidden"
-									name="payment_price" value="${dto.class_price }" /> <input
-									type="hidden" name="product_name" value="${dto.class_title }" />
+								<input type="hidden" name="detail_no" /> 
+								<input type="hidden" name="payment_num" value="1" /> 
+								<fmt:formatNumber type="number" maxFractionDigits="0" value="${dto.class_price * (dto.class_sale / 100) }" var="sale" />
+								<input type="hidden" name="payment_price" value="${dto.class_sale > 0 ? (dto.class_price - sale) : dto.class_price }" /> 
+								<input type="hidden" name="product_name" value="${dto.class_title }" />
 								<input type="hidden" name="type" value="class" /> 
 								
 								<span id="detail_date"></span>
