@@ -13,12 +13,21 @@
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script type="text/javascript">
 		function addToBasket(){
+			let price = $("#price").text();
+			let sale = $("#sale").text();
+
+			if(sale > 0) {
+				sale = Math.round(price * (sale / 100));
+				price = price - sale;
+			}
+			
+			
 			let productVal = {
 					"product_no" : "${dto.product_no}",
 					"product_name" : "${dto.product_name}",
-					"product_price" : "${dto.product_price}"
+					"product_price" : sale > 0 ? price : "${dto.product_price}"
 			}
-		
+			
 			$.ajax({
 				type: "post",
 				url: "addToBasket.do",
@@ -68,7 +77,16 @@
 	                <div class="col-md-6">
 		                <div class="single_product_text mt-3">
 		                    <h3>${dto.product_name }</h3>
-		                    <h5 class="ml-2">${dto.product_price }원</h5>
+		                    
+		                    <c:choose>
+								<c:when test="${dto.product_sale > 0 }">
+									<h5 class="ml-2"><del id="price">${dto.product_price }</del>원</h5>
+									<h4 class="ml-2 font-weight-bold text-monospace text-danger"><span id="sale">${dto.product_sale }</span>% 할인중!!</h4>
+								</c:when>
+								<c:otherwise>
+									<h5 class="ml-2">${dto.product_price }원</h5>				
+								</c:otherwise>
+							</c:choose>
 		                    
 		                    <div class="ml-2">
 								<c:choose>
@@ -129,7 +147,8 @@
 					                    	<form action="payment.do" method="post">
 												<input type="hidden" name="product_no" value="${dto.product_no }" />
 												<input type="hidden" name="payment_num" value="1" />
-												<input type="hidden" name="payment_price" value="${dto.product_price }" />
+												<fmt:formatNumber type="number" maxFractionDigits="0" value="${dto.product_price * (dto.product_sale / 100) }" var="sale" />
+												<input type="hidden" name="payment_price" value="${dto.product_sale > 0 ? (dto.product_price - sale) : dto.product_price }" /> 
 												<input type="hidden" name="product_name" value="${dto.product_name }" />
 												<input type="hidden" name="type" value="product" />
 												

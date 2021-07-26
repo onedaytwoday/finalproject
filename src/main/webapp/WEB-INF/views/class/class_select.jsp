@@ -26,7 +26,18 @@
 			<div class="col-lg-7">
 				<div class="d-md-flex justify-content-between pb-4 mt-2 mb-4 border-bottom">	
 					<h3>${dto.class_title }</h3>
-					<h4>${dto.class_price }원</h4>
+					
+					<div class="text-center">
+						<c:choose>
+							<c:when test="${dto.class_sale > 0 }">
+								<h5><del>${dto.class_price }원</del></h5>
+								<h3 class="font-weight-bold text-monospace text-danger">${dto.class_sale }% 할인중!!</h3>
+							</c:when>
+							<c:otherwise>
+								<h4>${dto.class_price }원</h4>					
+							</c:otherwise>
+						</c:choose>
+					</div>
 				</div>
 
 				<article class="blog-post">
@@ -153,10 +164,11 @@
 
 						<c:if test="${mDto.member_id != null && mDto.member_grade == '일반회원'}">
 							<form class="mt-3" action="payment.do" method="post">
-								<input type="hidden" name="detail_no" /> <input type="hidden"
-									name="payment_num" value="1" /> <input type="hidden"
-									name="payment_price" value="${dto.class_price }" /> <input
-									type="hidden" name="product_name" value="${dto.class_title }" />
+								<input type="hidden" name="detail_no" /> 
+								<input type="hidden" name="payment_num" value="1" /> 
+								<fmt:formatNumber type="number" maxFractionDigits="0" value="${dto.class_price * (dto.class_sale / 100) }" var="sale" />
+								<input type="hidden" name="payment_price" value="${dto.class_sale > 0 ? (dto.class_price - sale) : dto.class_price }" /> 
+								<input type="hidden" name="product_name" value="${dto.class_title }" />
 								<input type="hidden" name="type" value="class" /> 
 								
 								<span id="detail_date"></span>

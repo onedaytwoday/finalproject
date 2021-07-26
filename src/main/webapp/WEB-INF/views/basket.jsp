@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,13 +47,15 @@
 				                      </div>
 				                    </td>
 				                    <td>
-				                      <h5>${pList[status.index].product_price }원</h5>
+				                      <fmt:formatNumber type="number" maxFractionDigits="0" value="${pList[status.index].product_price * (pList[status.index].product_sale / 100) }" var="sale" />
+				                      <h5>${pList[status.index].product_sale > 0 ? (pList[status.index].product_price - sale) : pList[status.index].product_price }원</h5>
 				                    </td>
 				                    <td>
 				                      <div class="product_count">
-				                        <span class="input-number-decrement" onclick="updateBasket(${dto.basket_no}, ${pList[status.index].product_price},'decrease')"> <i class="ti-minus"></i></span>
+				                      	<fmt:formatNumber type="number" maxFractionDigits="0" value="${sale > 0 ? pList[status.index].product_price - sale : pList[status.index].product_price}" var="price" />
+				                        <span class="input-number-decrement" onclick="updateBasket(${dto.basket_no}, ${price},'decrease')"> <i class="ti-minus"></i></span>
                           				<input id="${dto.basket_no }" class="input-number" type="text" value="${dto.basket_num > 0 ? dto.basket_num : 0}" readonly>
-                          				<span class="input-number-increment" onclick="updateBasket(${dto.basket_no}, ${pList[status.index].product_price},'increase')"> <i class="ti-plus"></i></span>
+                          				<span class="input-number-increment" onclick="updateBasket(${dto.basket_no}, ${price},'increase')"> <i class="ti-plus"></i></span>
 				                      </div>
 				                    </td>
 				                    <td>

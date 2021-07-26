@@ -12,6 +12,7 @@
 <script type="text/javascript" src="resources/js/calendar.js"></script>
 </head>
 <body>
+	<input type="hidden" id="member_id" value="${mDto.member_id }" />
 	<div id="calendar">
 		<c:if test="${mDto.member_grade == '강사회원' }">
 			<button class="btn btn-warning" onclick="location.href='detailInsertForm.do?class_no=${dto.class_no}'">일정 추가/변경하기</button>	
