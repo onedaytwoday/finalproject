@@ -80,6 +80,19 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
+	<div class="slider-area" style="margin-bottom: 150px;">
+		<div class="single-slider slider-height2 d-flex align-items-center">
+			<div class="container">
+				<div class="row">
+					<div class="col-xl-12">
+						<div class="hero-cap text-center">
+							<h2>Class</h2>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 	<main class="container mb-100">
 		<ul class="search_ul"></ul>
 		

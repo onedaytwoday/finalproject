@@ -55,8 +55,20 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
-		<main class="container">
-		
+		<main class="container" style="margin-bottom: 150px;">
+			<div class="slider-area">
+				<div class="single-slider slider-height2 d-flex align-items-center">
+					<div class="container">
+						<div class="row">
+							<div class="col-xl-12">
+								<div class="hero-cap text-center">
+									<h2>Product Detail</h2>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 	        <div class="product_image_area">
 	            <div class="row">
 	                <div class="col-md-6">            	

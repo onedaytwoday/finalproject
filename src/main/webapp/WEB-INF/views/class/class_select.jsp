@@ -14,7 +14,19 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
-	
+	<div class="slider-area" style="margin-bottom: 150px;">
+		<div class="single-slider slider-height2 d-flex align-items-center">
+			<div class="container">
+				<div class="row">
+					<div class="col-xl-12">
+						<div class="hero-cap text-center">
+							<h2>Class Detail</h2>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 	<main class="container mb-100">
 		<div class="mb-4 text-white rounded bg-dark">
 			<div class="col-md-6 px-0 w-250">
