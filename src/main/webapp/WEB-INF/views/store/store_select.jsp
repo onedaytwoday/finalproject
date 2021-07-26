@@ -91,7 +91,7 @@
 		                    <h3>${dto.product_name }</h3>
 		                    
 		                    <c:choose>
-								<c:when test="${dto.product_sale > 0 }">
+								<c:when test="${event != null and event.event_noti eq 'Y' and dto.product_sale > 0 }">
 									<h5 class="ml-2"><del id="price">${dto.product_price }</del>원</h5>
 									<h4 class="ml-2 font-weight-bold text-monospace text-danger"><span id="sale">${dto.product_sale }</span>% 할인중!!</h4>
 								</c:when>

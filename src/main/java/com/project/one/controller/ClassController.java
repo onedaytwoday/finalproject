@@ -36,6 +36,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.mashape.unirest.http.HttpResponse;
 import com.project.one.model.biz.ClassBiz;
 import com.project.one.model.biz.DetailBiz;
+import com.project.one.model.biz.EventBiz;
 import com.project.one.model.biz.FileTableBiz;
 import com.project.one.model.biz.PaymentBiz;
 import com.project.one.model.biz.ProductBiz;
@@ -43,6 +44,7 @@ import com.project.one.model.biz.RankBiz;
 import com.project.one.model.biz.ReviewBiz;
 import com.project.one.model.dto.ClassDto;
 import com.project.one.model.dto.DetailDto;
+import com.project.one.model.dto.EventDto;
 import com.project.one.model.dto.FileTableDto;
 import com.project.one.model.dto.MemberDto;
 import com.project.one.model.dto.PagingDto;
@@ -61,7 +63,7 @@ public class ClassController {
 	private ClassBiz cBiz;
 
 	@Autowired
-	private PaymentBiz pBiz;
+	private EventBiz eBiz;
 
 	@Autowired
 	private ReviewBiz rbiz;
@@ -123,10 +125,14 @@ public class ClassController {
 	@RequestMapping("/classSelect.do")
 	public String class_select(Model model, int class_no) {
 		CLASS_NO = class_no;
+		
+		EventDto eDto = eBiz.eventClass(class_no);
+		
 		model.addAttribute("dto", cBiz.selectOne(class_no));
 		model.addAttribute("rate", rbiz.avgListByClass(class_no));
 		model.addAttribute("rList", rbiz.listByClass(class_no));
-
+		model.addAttribute("event", eDto != null ? eDto : null);
+		
 		return "class/class_select";
 	}
 	

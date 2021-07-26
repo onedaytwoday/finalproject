@@ -81,4 +81,18 @@
 		SELECT COUNT(EVENT_NO)
 		FROM EVENT
 	</select>
+	
+	<select id="eventClass" resultType="eventDto">
+		SELECT EVENT_NO, EVENT_TITLE, EVENT_DESC, EVENT_START, EVENT_END, EVENT_NOTI, MEMBER_ID, CLASS_NO,
+		PRODUCT_NO
+		FROM EVENT
+		WHERE CLASS_NO = #{class_no}
+	</select>
+	
+	<select id="eventProduct" resultType="eventDto">
+		SELECT EVENT_NO, EVENT_TITLE, EVENT_DESC, EVENT_START, EVENT_END, EVENT_NOTI, MEMBER_ID, CLASS_NO,
+		PRODUCT_NO
+		FROM EVENT
+		WHERE PRODUCT_NO = #{product_no}
+	</select>
 </mapper>

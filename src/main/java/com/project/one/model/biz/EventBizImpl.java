@@ -61,10 +61,15 @@ public class EventBizImpl implements EventBiz {
 		
 		return eList;
 	}
+	
+	@Override
+	public EventDto eventClass(int class_no) {
+		return dao.eventClass(class_no);
+	}
 
 	@Override
-	public EventDto selectOne(int event_no) {
-		return dao.selectOne(event_no);
+	public EventDto eventProduct(int product_no) {
+		return dao.eventProduct(product_no);
 	}
 
 	@Transactional
@@ -171,4 +176,5 @@ public class EventBizImpl implements EventBiz {
 		
 		return res;
 	}
+
 }

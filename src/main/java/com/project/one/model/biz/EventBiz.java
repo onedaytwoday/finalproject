@@ -10,7 +10,9 @@ public interface EventBiz {
 	
 	public List<EventDto> eventList(PagingDto dto);
 
-	public EventDto selectOne(int event_no);
+	public EventDto eventClass(int class_no);
+	
+	public EventDto eventProduct(int product_no);
 
 	public int insertEventClass(EventDto dto, String sale_rate);
 	

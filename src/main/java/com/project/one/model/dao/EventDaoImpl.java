@@ -57,20 +57,35 @@ public class EventDaoImpl implements EventDao {
 
 		return list;
 	}
-
+	
 	@Override
-	public EventDto selectOne(int event_no) {
-		EventDto dto = null;
-
+	public EventDto eventClass(int class_no) {
+		EventDto dto = new EventDto();
+		
 		try {
-			dto = sqlSession.selectOne(NAMESPACE + "selectOne", event_no);
-
+			dto = sqlSession.selectOne(NAMESPACE + "eventClass", class_no);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		
 		return dto;
 	}
+
+	@Override
+	public EventDto eventProduct(int product_no) {
+		EventDto dto = new EventDto();
+		
+		try {
+			dto = sqlSession.selectOne(NAMESPACE + "eventProduct", product_no);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return dto;
+	}
+
 	
 	@Override
 	public int insertEventClass(EventDto dto) {

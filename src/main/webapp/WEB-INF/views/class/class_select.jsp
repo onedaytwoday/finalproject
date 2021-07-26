@@ -41,7 +41,7 @@
 					
 					<div class="text-center">
 						<c:choose>
-							<c:when test="${dto.class_sale > 0 }">
+							<c:when test="${event != null and event.event_noti eq 'Y' and dto.class_sale > 0 }">
 								<h5><del>${dto.class_price }원</del></h5>
 								<h3 class="font-weight-bold text-monospace text-danger">${dto.class_sale }% 할인중!!</h3>
 							</c:when>
