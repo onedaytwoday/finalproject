@@ -68,7 +68,16 @@
 	                <div class="col-md-6">
 		                <div class="single_product_text mt-3">
 		                    <h3>${dto.product_name }</h3>
-		                    <h5 class="ml-2">${dto.product_price }원</h5>
+		                    
+		                    <c:choose>
+								<c:when test="${dto.product_sale > 0 }">
+									<h5 class="ml-2"><del>${dto.product_price }원</del></h5>
+									<h4 class="ml-2 font-weight-bold text-monospace text-danger">${dto.product_sale }% 할인중!!</h4>
+								</c:when>
+								<c:otherwise>
+									<h5 class="ml-2">${dto.product_price }원</h5>				
+								</c:otherwise>
+							</c:choose>
 		                    
 		                    <div class="ml-2">
 								<c:choose>

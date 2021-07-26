@@ -26,7 +26,18 @@
 			<div class="col-lg-7">
 				<div class="d-md-flex justify-content-between pb-4 mt-2 mb-4 border-bottom">	
 					<h3>${dto.class_title }</h3>
-					<h4>${dto.class_price }원</h4>
+					
+					<div class="text-center">
+						<c:choose>
+							<c:when test="${dto.class_sale > 0 }">
+								<h5><del>${dto.class_price }원</del></h5>
+								<h3 class="font-weight-bold text-monospace text-danger">${dto.class_sale }% 할인중!!</h3>
+							</c:when>
+							<c:otherwise>
+								<h4>${dto.class_price }원</h4>					
+							</c:otherwise>
+						</c:choose>
+					</div>
 				</div>
 
 				<article class="blog-post">
