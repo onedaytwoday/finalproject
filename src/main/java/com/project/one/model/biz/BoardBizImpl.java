@@ -96,19 +96,9 @@ public class BoardBizImpl implements BoardBiz {
 		return dao.search_qna_count(Pdto);
 	}
 
-	
 	@Override
-	public List<BoardDto> mypage_list(PagingDto dto, String nickname) {
-		List<BoardDto> bList = new ArrayList<>();
-		List<BoardDto> list = dao.board_qna_list(dto);
-		
-		for(BoardDto d : list) {
-			if(d.getMember_id().equals(nickname)) {
-				bList.add(d);
-			}
-		}
-		
-		return bList;
+	public List<BoardDto> my_qna_list(PagingDto dto) {
+		return dao.my_qna_list(dto);
 	}
 
 }

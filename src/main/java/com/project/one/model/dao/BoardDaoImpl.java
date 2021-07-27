@@ -73,6 +73,20 @@ public class BoardDaoImpl implements BoardDao {
 	}
 	
 	@Override
+	public List<BoardDto> my_qna_list(PagingDto dto) {
+		List<BoardDto> list = new ArrayList<BoardDto>();
+		
+		try {
+			list = sqlSession.selectList(NAMESPACE + "my_qna_list", dto);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
+	@Override
 	public BoardDto selectOne(int board_no) {
 		BoardDto dto = null;
 		

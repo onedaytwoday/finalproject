@@ -229,5 +229,16 @@ public class ReviewDaoImpl implements ReviewDao {
 		return res;
 	}
 
+	@Override
+	public List<ReviewDto> myReviewList(PagingDto pDto) {
+		List<ReviewDto> list = new ArrayList<ReviewDto>();
+		try {
+			list = sqlSession.selectList(NAMESPACE+"myReviewList", pDto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
 
 }

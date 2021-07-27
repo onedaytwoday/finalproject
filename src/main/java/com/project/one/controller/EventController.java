@@ -62,7 +62,7 @@ public class EventController {
 	@ResponseBody
 	@RequestMapping(value = "/eventInsertRes.do", method = RequestMethod.POST)
 	public String fileUpload(@RequestParam("files") List<MultipartFile> multipartFile, EventDto dto, String start,
-			String end, String sale_rate, HttpServletRequest request) throws ParseException {
+			String end, String sale_rate, String category, HttpServletRequest request) throws ParseException {
 		int res = 0;
 		dto.setEvent_noti("N");
 
@@ -73,19 +73,24 @@ public class EventController {
 
 		dto.setEvent_start(start_date);
 		dto.setEvent_end(end_date);
-
-		if (dto.getClass_no() == 0 && dto.getProduct_no() >= 0) {
+		
+		if (category.equals("product")) {
+			dto.setClass_no(0);
 			res = eBiz.insertEventProduct(dto, sale_rate);
-		} else if (dto.getClass_no() >= 0 && dto.getProduct_no() == 0) {
+			
+		} else if (category.equals("class")) {
+			dto.setProduct_no(0);
 			res = eBiz.insertEventClass(dto, sale_rate);
 		}
+		
 		if (res > 0) {
 			System.out.println("event insert 성공");
 		} else {
 			System.out.println("event insert 성공");
 		}
+		
 		int event_no = dto.getEvent_no();
-		System.out.println("event_no : " + event_no);
+
 		String strResult = "{ \"result\":\"FAIL\" }";
 		String contextRoot = new HttpServletRequestWrapper(request).getRealPath("/");
 		String fileRoot;
@@ -145,7 +150,7 @@ public class EventController {
 			}
 			// (업로드 없이 등록하는경우)
 			else {
-				strResult = "{ \"result\":\"OK\", \"event_no\":" + event_no + "}";
+				strResult = "{ \"result\":\"FAIL\", \"event_no\":" + event_no + "}";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

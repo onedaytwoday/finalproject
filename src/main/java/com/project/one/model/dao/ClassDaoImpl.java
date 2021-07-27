@@ -253,4 +253,18 @@ public class ClassDaoImpl implements ClassDao {
 		return list;
 	}
 
+	@Override
+	public List<ClassDto> myClassList(PagingDto pDto) {
+		List<ClassDto> list = new ArrayList<ClassDto>();
+
+		try {
+			list = sqlSession.selectList(NAMESPACE + "myClassList", pDto);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return list;
+	}
+
 }

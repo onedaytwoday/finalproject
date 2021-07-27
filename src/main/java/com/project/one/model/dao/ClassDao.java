@@ -43,4 +43,6 @@ public interface ClassDao {
 	public int classSearchCount(PagingDto pDto);
 	
 	public List<ClassDto> searchedList(String search_keyword);
+	
+	public List<ClassDto> myClassList(PagingDto pDto);
 }

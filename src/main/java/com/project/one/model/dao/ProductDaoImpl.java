@@ -145,20 +145,6 @@ public class ProductDaoImpl implements ProductDao {
 	}
 
 	@Override
-	public int productCount() {
-		int res = 0;
-		
-		try {
-			res = sqlSession.selectOne(NAMESPACE + "productCount");
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		return res;
-	}
-
-	@Override
 	public List<ProductDto> selectListPaging(StorePagingDto pDto) {
 		List<ProductDto> list = new ArrayList<ProductDto>();
 		
@@ -199,6 +185,20 @@ public class ProductDaoImpl implements ProductDao {
 		
 		return res;
 
+	}
+	
+	@Override
+	public int myProductCount(String member_id) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.selectOne(NAMESPACE + "myProductCount", member_id);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res;
 	}
 
 	@Override

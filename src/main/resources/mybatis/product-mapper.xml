@@ -176,11 +176,6 @@
 		WHERE PRODUCT_NO = #{product_no}
 	</delete>
 	
-	<select id="productCount" resultType="int">
-		SELECT COUNT(PRODUCT_NO)
-		FROM PRODUCT
-	</select>
-	
 	<select id="productListCount" resultType="int">
 		SELECT COUNT(PRODUCT_NO)
 		FROM PRODUCT

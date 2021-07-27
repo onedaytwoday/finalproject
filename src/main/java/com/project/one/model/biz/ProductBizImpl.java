@@ -30,11 +30,10 @@ public class ProductBizImpl implements ProductBiz {
 		
 		for(ProductDto p : list) {
 			eDto = eBiz.eventProduct(p.getProduct_no());
-			if(eDto != null) {
+			if(eDto == null) {
 				pList.add(p);
 			}
 		}
-		
 		
 		return pList;
 	}
@@ -97,11 +96,6 @@ public class ProductBizImpl implements ProductBiz {
 	}
 
 	@Override
-	public int productCount() {
-		return dao.productCount();
-	}
-
-	@Override
 	public List<ProductDto> selectListPaging(StorePagingDto pDto) {
 		
 		return dao.selectListPaging(pDto);
@@ -134,5 +128,4 @@ public class ProductBizImpl implements ProductBiz {
 	public List<ProductDto> searchedList(String search_keyword) {
 		return dao.searchedList(search_keyword);
 	}
-
 }

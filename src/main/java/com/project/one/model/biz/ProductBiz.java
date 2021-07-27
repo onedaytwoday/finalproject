@@ -33,11 +33,10 @@ public interface ProductBiz {
 
 	public int delete(int product_no);
 	
-	public int productCount();
-	
 	public int productListCount();
 	
 	public int productcategoryCount(String product_category);
 	
 	public int productSearchCount(StorePagingDto pDto);
+
 }

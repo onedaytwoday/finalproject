@@ -37,19 +37,21 @@ public class ReviewBizImpl implements ReviewBiz {
 	}
 	
 	@Override
-	public List<ReviewDto> myReviewList(PagingDto pDto, String member_id) {
-		List<ReviewDto> list = dao.reviewPaging(pDto);
-		List<ReviewDto> rList = new ArrayList<>();
-		
-		System.out.println("*************************************");
+	public List<ReviewDto> myReviewList(PagingDto pDto) {
+		List<ReviewDto> list = dao.myReviewList(pDto);
 		
 		for(ReviewDto r : list) {
-			System.out.println(r);
+			if(r.getProduct_no() > 0) {
+				ProductDto proDto = pBiz.selectOne(r.getProduct_no());
+				r.setProduct_name(proDto.getProduct_name());
+			
+			} else if(r.getClass_no() > 0) {
+				ClassDto cDto = cBiz.selectOne(r.getClass_no());
+				r.setClass_title(cDto.getClass_title());
+			}
 		}
 		
-		System.out.println("*************************************");
-		
-		return rList;
+		return list;
 	}
 	
 	@Override

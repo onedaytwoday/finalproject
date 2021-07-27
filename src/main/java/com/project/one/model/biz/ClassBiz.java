@@ -31,8 +31,6 @@ public interface ClassBiz {
 
 	public int delete(int class_no);
 
-	public List<ClassDto> myClass(PagingDto dto, String member_id);
-	
 	public int classListCount();
 	
 	public int classcategoryCount(String class_category);
@@ -42,4 +40,6 @@ public interface ClassBiz {
 	public int classSearchCount(PagingDto pDto);
 	
 	public List<ClassDto> searchedList(String search_keyword);
+	
+	public List<ClassDto> myClassList(PagingDto pDto);
 }

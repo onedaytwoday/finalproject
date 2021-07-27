@@ -31,7 +31,9 @@ $(function() {
 	
 	$('[name=dates]').each(function(i){
 		let date = $(`[name=dates]:eq(${i})`).val();
-		dates.push(date);
+		date = new Date();
+		result = date.toDateString();
+		dates.push(result);
 	});
 	
 	

@@ -35,9 +35,9 @@ public interface ProductDao {
 	
 	public int delete(int product_no);
 	
-	public int productCount();
-	
 	public int productListCount();
+	
+	public int myProductCount(String member_id);
 
 	public int productcategoryCount(String product_category);
 	

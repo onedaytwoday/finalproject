@@ -184,16 +184,19 @@ padding: 10px;
                                 	<c:otherwise>
                                 		<c:choose>
                                 			<c:when test="${mDto.member_grade eq '관리자' }">
-                                			<li class="right-li"><a href="eventInsert.do"><img src="resources/images/event.png" width="20px" height="20px" onmouseover="this.src='resources/images/event_ahover.png'" onmouseout="this.src='resources/images/event.png'"></a></li>
-                                			<li class="right-li"><img src="resources/images/chat.png" id="Img" width="20px" height="20px" onmouseover="this.src='resources/images/chat_ahover.png'" onmouseout="this.src='resources/images/chat.png'"></li>
+                                				<li class="right-li"><a href="eventInsert.do"><img src="resources/images/event.png" width="20px" height="20px" onmouseover="this.src='resources/images/event_ahover.png'" onmouseout="this.src='resources/images/event.png'"></a></li>
+                                				<li class="right-li"><img src="resources/images/chat.png" id="Img" width="20px" height="20px" onmouseover="this.src='resources/images/chat_ahover.png'" onmouseout="this.src='resources/images/chat.png'"></li>
                                 			</c:when>
+                                			
                                 			<c:otherwise>
-                                			<li class="right-li"><img src="resources/images/chat.png" id="iconImg" width="20px" height="20px" onmouseover="this.src='resources/images/chat_ahover.png'" onmouseout="this.src='resources/images/chat.png'"></li>
+                                				<li class="right-li"><img src="resources/images/chat.png" id="iconImg" width="20px" height="20px" onmouseover="this.src='resources/images/chat_ahover.png'" onmouseout="this.src='resources/images/chat.png'"></li>
+												<li class="right-li"><a href="basket.do"><span class="flaticon-shopping-cart"></span></a> </li>
 											</c:otherwise>
 										</c:choose>
+                                		
                                 		<li class="right-li"><a href="${mDto.member_grade == '관리자' ? 'adminMain.do' : 'mypage_update.do' }"><span class="flaticon-user"></span></a></li>
                                 		<li class="right-li"><a href="logout.do"><img src="resources/images/logout.png" width="20px" height="20px" onmouseover="this.src='resources/images/logout_ahover.png'" onmouseout="this.src='resources/images/logout.png'"></a></li>
-                                		<li class="right-li"><a href="basket.do"><span class="flaticon-shopping-cart"></span></a> </li>
+                                		
                                 	</c:otherwise>
                                 </c:choose>
                                 

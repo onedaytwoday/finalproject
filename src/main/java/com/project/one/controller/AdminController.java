@@ -45,7 +45,7 @@ public class AdminController {
 	@RequestMapping("/adminMain.do")
 	public String admin_main(Model model) {
 		model.addAttribute("mCount", mBiz.memberCount());
-		model.addAttribute("proCount", proBiz.productCount());
+		model.addAttribute("proCount", proBiz.productListCount());
 		model.addAttribute("cCount", cBiz.classListCount());
 		model.addAttribute("pCount", pBiz.paymentCount());
 		model.addAttribute("path", "dashboard");
@@ -67,7 +67,7 @@ public class AdminController {
 
 	@RequestMapping("/adminProduct.do")
 	public String admin_product(Model model, int nowPage) {
-		int count = proBiz.productCount();
+		int count = proBiz.productListCount();
 		PagingDto pDto = new PagingDto(count, nowPage);
 		model.addAttribute("proList", proBiz.productList(pDto));
 		model.addAttribute("pDto", pDto);

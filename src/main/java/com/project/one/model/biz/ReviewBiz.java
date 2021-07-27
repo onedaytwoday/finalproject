@@ -12,7 +12,7 @@ public interface ReviewBiz {
 	
 	public List<ReviewDto> reviewPaging(PagingDto pDto);
 	
-	public List<ReviewDto> myReviewList(PagingDto pDto, String member_id);
+	public List<ReviewDto> myReviewList(PagingDto pDto);
 	
 	public int reviewCount();
 

@@ -64,7 +64,16 @@
 													<tr>
 														<td>${cnt }</td>
 														<td><a href="review_detail.do?review_no=${dto.review_no }">${dto.review_title }</a></td>
-														<td>${dto.product_name eq null ? dto.class_title : dto.product_name }</td>
+														<c:choose>
+															<c:when test="${dto.product_no > 0 }">
+																<td><a href="store_select.do?product_no=${dto.product_no }">${dto.product_name }</a></td>
+															</c:when>
+															
+															<c:when test="${dto.class_no > 0 }">
+																<td><a href="classDelete.do?class_no=${dto.class_no}">${dto.class_title }</a></td>
+															</c:when>
+														</c:choose>
+														
 														<td>${dto.review_rate }</td>
 														<td><fmt:formatDate value="${dto.review_date }" pattern="yyyy-MM-dd" /></td>
 													</tr>

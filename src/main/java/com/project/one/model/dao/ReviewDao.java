@@ -13,6 +13,8 @@ public interface ReviewDao {
 	
 	public List<ReviewDto> reviewPaging(PagingDto pDto);
 	
+	public List<ReviewDto> myReviewList(PagingDto pDto);
+	
 	public int reviewCount();
 
 	public List<SearchDto> search();

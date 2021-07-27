@@ -29,11 +29,10 @@ public class ClassBizImpl implements ClassBiz {
 		
 		for(ClassDto c : list) {
 			eDto = eBiz.eventClass(c.getClass_no());
-			if(eDto != null) {
+			if(eDto == null) {
 				cList.add(c);
 			}
 		}
-		
 		
 		return cList;
 	}
@@ -126,20 +125,6 @@ public class ClassBizImpl implements ClassBiz {
 	}
 
 	@Override
-	public List<ClassDto> myClass(PagingDto dto, String member_id) {
-		List<ClassDto> list = dao.classList(dto);
-		List<ClassDto> cList = new ArrayList<>();
-
-		for(ClassDto c : list) {
-			if(c.getMember_id().equals(member_id)) {
-				cList.add(c);
-			}
-		}
-		
-		return cList;
-	}
-
-	@Override
 	public List<ClassDto> categoryListPaging(PagingDto pDto) {
 		return dao.categoryListPaging(pDto);
 	}
@@ -147,6 +132,11 @@ public class ClassBizImpl implements ClassBiz {
 	@Override
 	public int classcategoryCount(String class_category) {
 		return dao.classcategoryCount(class_category);
+	}
+
+	@Override
+	public List<ClassDto> myClassList(PagingDto pDto) {
+		return dao.myClassList(pDto);
 	}
 	
 }

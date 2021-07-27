@@ -43,9 +43,6 @@ document.addEventListener('DOMContentLoaded', function() {
 				alert("로그인 먼저 해주세요!!");
 				location.href='loginform.do';
 			
-			} else if (arg.event.title <= 0) {
-				alert("인원이 모두 찼습니다. 다른 날짜나 시간을 선택해 주세요!");
-			
 			} else if (confirm('현재 ' + arg.event.title +'가능합니다. ' + date +'으로 예약하시겠습니까?')) {
 				$("[name='detail_no']").val(arg.event.id);
 				$("#detail_date").text(date);

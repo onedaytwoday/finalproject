@@ -246,10 +246,11 @@ public class ClassController {
 		
 		int count = cBiz.myClassCount(dto.getMember_id());
 		PagingDto pDto = new PagingDto(count, nowPage);
+		pDto.setMember_id(dto.getMember_id());
 		
-		model.addAttribute("list", cBiz.myClass(pDto, dto.getMember_id()));
+		model.addAttribute("list", cBiz.myClassList(pDto));
 		model.addAttribute("pDto", pDto);
-		model.addAttribute("path", "board");
+		model.addAttribute("path", "class");
 
 		return "mypage/mypage_class";
 	}
@@ -324,7 +325,7 @@ public class ClassController {
 			}
 			// (업로드 없이 등록하는경우)
 			else {
-				strResult = "{ \"result\":\"OK\", \"class_no\":" + class_no + "}";
+				strResult = "{ \"result\":\"FAIL\", \"class_no\":" + class_no + "}";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
