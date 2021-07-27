@@ -128,6 +128,8 @@ public class ClassController {
 		
 		EventDto eDto = eBiz.eventClass(class_no);
 		
+		System.out.println("eDto : " + eDto);
+		
 		model.addAttribute("dto", cBiz.selectOne(class_no));
 		model.addAttribute("rate", rbiz.avgListByClass(class_no));
 		model.addAttribute("rList", rbiz.listByClass(class_no));

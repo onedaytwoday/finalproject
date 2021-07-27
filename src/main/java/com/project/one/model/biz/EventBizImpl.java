@@ -118,17 +118,22 @@ public class EventBizImpl implements EventBiz {
 		
 		List<EventDto> list = dao.allList();
 		for(EventDto d : list) {
-			if(d.getEvent_start().before(today) && d.getEvent_end().after(today)) {
+			if((d.getEvent_start().before(today) || d.getEvent_start().equals(today))
+					&& (d.getEvent_end().after(today) || d.getEvent_end().equals(today))) {
+				
 				res += dao.updateNotiY(d.getEvent_no());
 			
-			} else {
+			} else if(d.getEvent_end().before(today)) {
 				res += dao.updateNotiN(d.getEvent_no());
+				
 				if(res > 0 && d.getProduct_no() > 0) {
 					updateProductSale(d.getProduct_no(), 0);
 				
 				} else if(res > 0 && d.getClass_no() > 0) {
 					updateClassSale(d.getClass_no(), 0);
 				}
+			} else {
+				res += dao.updateNotiN(d.getEvent_no());
 			}
 			
 		}

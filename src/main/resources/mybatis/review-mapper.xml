@@ -14,6 +14,7 @@
 		WHERE R.MEMBER_ID = M.MEMBER_ID
 		AND R.REVIEW_NO = #{review_no}
 	</select>
+	
 	<select id="search" resultType="searchDto">
 		SELECT X.PRODUCT_NO,X.CLASS_NO
 		FROM 
@@ -125,6 +126,12 @@
 	<select id="reviewCount"  resultType="int">
 		SELECT COUNT(REVIEW_NO)
 		FROM REVIEW
+	</select>
+	
+	<select id="reviewMyCount" resultType="int">
+		SELECT COUNT(REVIEW_NO)
+		FROM REVIEW
+		WHERE MEMBER_ID = #{member_id}
 	</select>
 
 </mapper>

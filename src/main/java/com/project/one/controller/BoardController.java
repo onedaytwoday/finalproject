@@ -109,7 +109,7 @@ public class BoardController {
 		
 		int count = biz.my_qna_count(dto.getMember_id());
 		PagingDto pDto = new PagingDto(count, nowPage);
-		model.addAttribute("list", biz.mypage_list(pDto, dto.getMember_id()));
+		model.addAttribute("list", biz.mypage_list(pDto, dto.getMember_nicname()));
 		model.addAttribute("pDto", pDto);
 		model.addAttribute("path", "board");
 		

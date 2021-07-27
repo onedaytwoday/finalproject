@@ -98,12 +98,12 @@ public class BoardBizImpl implements BoardBiz {
 
 	
 	@Override
-	public List<BoardDto> mypage_list(PagingDto dto, String member_id) {
+	public List<BoardDto> mypage_list(PagingDto dto, String nickname) {
 		List<BoardDto> bList = new ArrayList<>();
 		List<BoardDto> list = dao.board_qna_list(dto);
 		
 		for(BoardDto d : list) {
-			if(d.getMember_id().equals(member_id)) {
+			if(d.getMember_id().equals(nickname)) {
 				bList.add(d);
 			}
 		}

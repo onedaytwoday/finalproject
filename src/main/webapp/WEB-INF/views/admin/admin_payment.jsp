@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -68,7 +69,7 @@
 														<td>${dto.member_id }</td>
 														<td>${dto.payment_num }</td>
 														<td>${dto.payment_price }</td>
-														<td>${dto.payment_date }</td>
+														<td><fmt:formatDate value="${dto.payment_date }" pattern="yyyy/MM/dd" /></td>
 														<td><span id="${dto.payment_no }">${dto.payment_del }</span></td>
 														<c:if test="${dto.detail_no == 0 }">
 															<c:choose>
