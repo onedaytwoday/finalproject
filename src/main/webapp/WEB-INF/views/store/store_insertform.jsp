@@ -186,7 +186,7 @@ function fileDelete(fileNum){
    	    		alert("파일업로드 성공");
    	    		$(location).attr('href',"store.do?nowPage=1");
 			} else
-				alert("서버내 오류로 처리가 지연되고있습니다. 잠시 후 다시 시도해주세요");
+				alert("파일을 업로드 해주세요");
    	    		return false;
    	      },
    	      error: function (xhr, status, error) {

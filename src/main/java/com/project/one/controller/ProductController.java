@@ -162,7 +162,7 @@ public class ProductController {
 				}
 				// (업로드 없이 등록하는경우)
 				else {
-					strResult = "{ \"result\":\"OK\", \"product_no\":" + product_no + "}";
+					strResult = "{ \"result\":\"FAIL\", \"product_no\":" + product_no + "}";
 				}
 			} catch (Exception e) {
 				e.printStackTrace();

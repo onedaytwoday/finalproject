@@ -316,7 +316,7 @@ public class ClassController {
 			}
 			// (업로드 없이 등록하는경우)
 			else {
-				strResult = "{ \"result\":\"OK\", \"class_no\":" + class_no + "}";
+				strResult = "{ \"result\":\"FAIL\", \"class_no\":" + class_no + "}";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

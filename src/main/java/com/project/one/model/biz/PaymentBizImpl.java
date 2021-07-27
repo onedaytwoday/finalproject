@@ -94,6 +94,7 @@ public class PaymentBizImpl implements PaymentBiz {
 		List<PaymentDto> pList = new ArrayList<>();
 		
 		for(PaymentDto p : list) {
+			System.out.println(p);
 			if(p.getMember_id().equals(member_id)) {
 				if(p.getDetail_no() == 0 && p.getProduct_no() > 0) {
 					ProductDto pDto = proBiz.selectOne(p.getProduct_no());

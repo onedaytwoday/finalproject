@@ -47,7 +47,10 @@ public class ReviewController {
 		int count = rBiz.reviewCount();
 		System.out.println(count);
 		PagingDto pDto = new PagingDto(count, nowPage);
-		
+		List<ReviewDto> list = rBiz.reviewPaging(pDto);
+		for(int i=0;i<list.size();i++) {
+			System.out.println(list.get(i).toString());
+		}
 		model.addAttribute("list", rBiz.reviewPaging(pDto));
 		model.addAttribute("pDto", pDto);
 		return "review/review_list";
@@ -164,7 +167,7 @@ public class ReviewController {
 				}
 				// (업로드 없이 등록하는경우)
 				else {
-					strResult = "{ \"result\":\"OK\", \"review_no\":" + review_no + "}";
+					strResult = "{ \"result\":\"FAIL\", \"review_no\":" + review_no + "}";
 				}
 			} catch (Exception e) {
 				e.printStackTrace();

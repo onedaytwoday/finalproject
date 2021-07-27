@@ -145,7 +145,7 @@ public class EventController {
 			}
 			// (업로드 없이 등록하는경우)
 			else {
-				strResult = "{ \"result\":\"OK\", \"event_no\":" + event_no + "}";
+				strResult = "{ \"result\":\"FAIL\", \"event_no\":" + event_no + "}";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
