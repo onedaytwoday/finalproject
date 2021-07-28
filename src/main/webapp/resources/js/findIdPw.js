@@ -3,6 +3,20 @@ let memberId = "";
 let memberPhone = "";
 let confirmNum = "";
 
+window.onload = function() {
+	let form = document.getElementById("needs-validation");
+	form.addEventListener("submit", function(event) {
+		if (form.checkValidity() == false) {
+			event.preventDefault();
+			event.stopPropagation();
+			form.classList.add("was-validated");
+		}
+
+		// 서버 연동 처리
+	}, false);
+
+}
+
 function checkUserName(){
 	let member_name = $("#member_name").val();
 	let member_phone = $("[name='member_phone']:eq(0)").val();
