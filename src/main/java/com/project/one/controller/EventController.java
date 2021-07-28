@@ -73,7 +73,7 @@ public class EventController {
 
 		dto.setEvent_start(start_date);
 		dto.setEvent_end(end_date);
-
+		System.out.println(dto);
 		if (dto.getClass_no() == 0 && dto.getProduct_no() >= 0) {
 			res = eBiz.insertEventProduct(dto, sale_rate);
 		} else if (dto.getClass_no() >= 0 && dto.getProduct_no() == 0) {

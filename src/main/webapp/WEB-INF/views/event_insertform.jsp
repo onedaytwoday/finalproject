@@ -7,10 +7,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
-
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 	$(function(){
@@ -26,14 +22,11 @@
 		$('input[name="category"]').change(function() {
 			var id = $('input[name="category"]:checked').attr('id');
 			if(id == 'class') {
-				$("#class_sel").css("display", "inline");
-				$("#product_sel").css("display", "none");
-				$("#product_no").attr("name", "");
-				
+				$("#class_no").next().removeClass("disabled");
+				$("#product_no").next().addClass("disabled");
 			} else {
-				$("#class_sel").css("display", "none");
-				$("#product_sel").css("display", "inline");
-				$("#class_no").attr("name", "");
+				$("#product_no").next().removeClass("disabled");
+				$("#class_no").next().addClass("disabled");
 			}
 		});
 	})
@@ -79,7 +72,7 @@
 				<label for="product">상품</label>
 			</div>
 			</div>
-			<div class="col-1" style="margin-bottom: 30px;">
+			<div class="col-2" style="margin-bottom: 30px;">
 				<div id="class_sel" >
 					<select name="class_no" id="class_no">
 	                  <c:forEach items="${cList }" var="cDto">
@@ -89,17 +82,17 @@
 	                  </c:forEach>
 	                </select>
 				</div>
-						
-				<div id="product_sel" style="display:none;">
-					<select name="product_no" id="product_no">
+			</div>
+			<div class="col-2" style="margin-bottom: 30px;">
+				<div id="product_sel" >
+					<select name="product_no" id="product_no" disabled="disabled">
 	                  <c:forEach items="${pList }" var="pDto">
 	                    <option value="${pDto.product_no }">
 	                      ${pDto.product_name }
 	                    </option>
 	                  </c:forEach>
 	                </select>
-				</div>
-				
+	            </div>
 			</div>
 				<div class="col-12">
 					<div class="form-group">

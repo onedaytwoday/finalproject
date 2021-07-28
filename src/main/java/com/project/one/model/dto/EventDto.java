@@ -156,4 +156,13 @@ public class EventDto {
 		this.file_new_name = file_new_name;
 	}
 
+	@Override
+	public String toString() {
+		return "EventDto [event_no=" + event_no + ", event_title=" + event_title + ", event_desc=" + event_desc
+				+ ", event_start=" + event_start + ", event_end=" + event_end + ", event_noti=" + event_noti
+				+ ", member_id=" + member_id + ", class_no=" + class_no + ", product_no=" + product_no + ", title="
+				+ title + ", original_price=" + original_price + ", event_sale=" + event_sale + ", file_new_name="
+				+ file_new_name + "]";
+	}
+
 }
