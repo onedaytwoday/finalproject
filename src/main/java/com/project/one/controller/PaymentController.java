@@ -74,7 +74,7 @@ public class PaymentController {
 		int count = pBiz.paymentMYCount(mDto.getMember_id());
 		PagingDto pDto = new PagingDto(count, nowPage);
 		pDto.setMember_id(mDto.getMember_id());
-		
+		System.out.println(pDto);
 		model.addAttribute("pList", pBiz.myPaymentList(pDto));
 		model.addAttribute("pDto", pDto);
 		model.addAttribute("path", "payment");

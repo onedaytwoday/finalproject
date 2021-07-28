@@ -90,7 +90,7 @@ public class PaymentBizImpl implements PaymentBiz {
 
 	@Override
 	public List<PaymentDto> myPaymentList(PagingDto dto) {
-		List<PaymentDto> list = dao.paymentList(dto);
+		List<PaymentDto> list = dao.myPaymentList(dto);
 		List<PaymentDto> pList = new ArrayList<>();
 
 		for (PaymentDto p : list) {

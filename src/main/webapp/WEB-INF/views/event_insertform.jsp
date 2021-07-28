@@ -40,6 +40,19 @@
 <body>
 <jsp:include page="header.jsp" />
 	<div class="comment-form" style="padding-left: 60px; padding-right: 60px">
+		<div class="slider-area" style="margin-bottom: 150px;">
+			<div class="single-slider slider-height2 d-flex align-items-center">
+				<div class="container">
+					<div class="row">
+						<div class="col-xl-12">
+							<div class="hero-cap text-center">
+								<h2>Event Insert</h2>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 		<form class="form-contact comment_form">
 		<input type="hidden" name="member_id" value="${mDto.member_id }" />
 			<div class="row">

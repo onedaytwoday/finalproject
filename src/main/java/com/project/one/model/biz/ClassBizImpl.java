@@ -57,7 +57,11 @@ public class ClassBizImpl implements ClassBiz {
 	public List<ClassDto> main_selectList() {
 		return dao.main_selectList();
 	}
-
+	
+	@Override
+	public List<ClassDto> selectfile(int class_no) {
+		return dao.selectfile(class_no);
+	}
 	
 	@Override
 	public ClassDto selectOne(int class_no) {
@@ -138,5 +142,5 @@ public class ClassBizImpl implements ClassBiz {
 	public List<ClassDto> myClassList(PagingDto pDto) {
 		return dao.myClassList(pDto);
 	}
-	
+
 }

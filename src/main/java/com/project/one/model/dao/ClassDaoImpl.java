@@ -74,6 +74,20 @@ public class ClassDaoImpl implements ClassDao {
 	}
 	
 	@Override
+	public List<ClassDto> selectfile(int class_no) {
+		List<ClassDto> list = new ArrayList<ClassDto>();
+
+		try {
+			list = sqlSession.selectList(NAMESPACE + "selectfile",class_no);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return list;
+	}
+	
+	@Override
 	public ClassDto selectOne(int class_no) {
 		ClassDto dto = null;
 
@@ -266,5 +280,7 @@ public class ClassDaoImpl implements ClassDao {
 
 		return list;
 	}
+
+	
 
 }

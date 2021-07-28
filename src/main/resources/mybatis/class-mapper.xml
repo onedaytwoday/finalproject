@@ -43,10 +43,20 @@
 			) X
 		WHERE X.rnum <![CDATA[ >= ]]> 1
 	</select>
-	<select id="selectOne" resultType="classDto">
-		SELECT CLASS_NO, CLASS_TITLE, CLASS_DESC, CLASS_LOC, CLASS_CATEGORY, CLASS_PRICE, CLASS_SALE, MEMBER_ID
-		FROM CLASS
-		WHERE CLASS_NO = #{class_no}
+	<select id="selectfile" resultType="classDto" parameterType="int" >
+		SELECT F.FILE_NEW_NAME
+		FROM CLASS C, FILE_TABLE F
+		WHERE C.CLASS_NO = F.CLASS_NO
+		AND C.CLASS_NO = #{class_no}
+		AND F.FILE_ORI_NAME != 'thumbnail'
+	</select>
+	<select id="selectOne" resultType="classDto" parameterType="int">
+		SELECT C.CLASS_NO, C.CLASS_TITLE, C.CLASS_DESC, C.CLASS_LOC, C.CLASS_CATEGORY, C.CLASS_PRICE, C.CLASS_SALE, M.MEMBER_NICNAME AS MEMBER_ID, F.FILE_NEW_NAME
+		FROM CLASS C, FILE_TABLE F, MEMBER M
+		WHERE C.CLASS_NO = F.CLASS_NO
+		AND C.MEMBER_ID = M.MEMBER_ID 
+		AND C.CLASS_NO = #{class_no}
+		AND F.FILE_ORI_NAME = 'thumbnail'
 	</select>
 	
 	<select id="selectOneByTitle" resultType="classDto">
@@ -94,14 +104,13 @@
 				B.CLASS_SALE, B.MEMBER_ID, B.FILE_NEW_NAME
 				FROM (
 					SELECT C.CLASS_NO, C.CLASS_TITLE, C.CLASS_DESC, C.CLASS_LOC, C.CLASS_CATEGORY, C.CLASS_PRICE,
-					C.CLASS_SALE, M.MEMBER_NICNAME AS MEMBER_ID , F.FILE_NEW_NAME , ROW_NUMBER() OVER(PARTITION BY C.CLASS_NO ORDER BY F.FILE_NUM DESC) as RowIdx
-					FROM CLASS C JOIN FILE_TABLE F
-					ON C.CLASS_NO = F.CLASS_NO
-					JOIN MEMBER M 
-					ON C.MEMBER_ID = M.MEMBER_ID
+					C.CLASS_SALE, M.MEMBER_NICNAME AS MEMBER_ID , F.FILE_NEW_NAME
+					FROM CLASS C , FILE_TABLE F , MEMBER M
+					WHERE C.CLASS_NO = F.CLASS_NO
+					AND C.MEMBER_ID = M.MEMBER_ID
+					AND F.FILE_ORI_NAME = 'thumbnail'
 					ORDER BY C.CLASS_NO DESC
 					) B
-				WHERE RowIdx = 1
 				)A
 			WHERE anum <![CDATA[ <= ]]>
 			#{pageEnd}

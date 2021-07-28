@@ -19,6 +19,8 @@ public interface ClassBiz {
 	
 	public List<ClassDto> categoryListPaging(PagingDto pDto); 
 	
+	public List<ClassDto> selectfile(int class_no);
+	
 	public ClassDto selectOne(int class_no);
 	
 	public ClassDto selectOneByTitle(String class_title);

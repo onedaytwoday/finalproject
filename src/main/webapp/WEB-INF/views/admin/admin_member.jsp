@@ -43,18 +43,6 @@
 											<th></th>
                                         </tr>
                                     </thead>
-                                    
-                                    <tfoot>
-                                        <tr>
-                                            <th>회원 ID</th>
-											<th>이름</th>
-											<th>닉네임</th>
-											<th>이메일</th>
-											<th>등급</th>
-											<th></th>
-                                        </tr>
-                                    </tfoot>
-                                    
                                     <tbody>
 	                                    <c:choose>
 											<c:when test="${empty mList }">

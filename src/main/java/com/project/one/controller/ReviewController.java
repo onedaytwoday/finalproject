@@ -283,7 +283,7 @@ public class ReviewController {
 		
 		PagingDto pDto = new PagingDto(count, nowPage);
 		pDto.setMember_id(mDto.getMember_id());
-
+		System.out.println(pDto);
 		model.addAttribute("list", rBiz.myReviewList(pDto));
 		model.addAttribute("pDto", pDto);
 		model.addAttribute("path", "board");

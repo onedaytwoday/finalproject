@@ -28,9 +28,9 @@
 		</div>
 	</div>
 	<main class="container mb-100">
-		<div class="mb-4 text-white rounded bg-dark">
-			<div class="col-md-6 px-0 w-250">
-				<img class="w-full image-fluid" alt="class" src="resources/images/event.jpg">
+		<div class="row" style="margin-bottom: 50px">
+			<div class="col-xl-12" align="center">
+				<img class="w-full image-fluid" alt="class" src="resources/upload/${dto.file_new_name }">
 			</div>
 		</div>
 
@@ -107,18 +107,10 @@
 					</div>
 						
 					<div id="staticMap" style="width:650px;height:350px;"></div> 
-					
+					<c:forEach items="${fList }" var="dto">
+						<img src="resources/upload/${dto.file_new_name }" width="100%" height="100%" alt="상품">
+					</c:forEach>
 					<p>${dto.class_desc }</p>
-					
-					<p>
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam at convallis dui, ut convallis neque. Nunc sollicitudin sem diam, 
-						vitae maximus dolor pretium sed. Cras viverra justo ac elit consectetur, tincidunt lobortis massa interdum. Mauris fermentum in odio pretium posuere. 
-						Nullam commodo sapien in diam eleifend, nec gravida lacus tincidunt. Nulla ut rhoncus elit, vel aliquam nulla. Vestibulum congue maximus nisl, blandit blandit turpis efficitur quis. 
-						Praesent dapibus feugiat justo at mollis. Nunc nunc neque, vehicula sed magna ac, sollicitudin sodales lacus. Maecenas id nunc quis arcu faucibus tincidunt eget nec odio. Duis suscipit faucibus mi, 
-						at dapibus nisi venenatis eu. Ut diam tellus, porta nec auctor a, imperdiet quis nisl. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
-						Proin vitae odio id nisl aliquam pellentesque quis sit amet tellus. Nam in feugiat nibh. In sodales mi tortor, non accumsan nunc sodales accumsan.
-					</p>
-					
 				</article>
 
 				<div class="comments-area">

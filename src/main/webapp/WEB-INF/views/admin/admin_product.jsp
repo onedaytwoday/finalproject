@@ -36,7 +36,6 @@
                                     <thead>
                                         <tr>
                                             <th><input type="checkbox" onclick="allCheck(this.checked, 'product')" /></th>
-											<th>상품 사진</th>
 											<th>상품 이름</th>
 											<th>상품 가격</th>
 											<th>카테고리</th>
@@ -45,32 +44,17 @@
 											<th>배송 여부</th>
                                         </tr>
                                     </thead>
-                                    
-                                    <tfoot>
-                                        <tr>
-                                            <th><input type="checkbox" onclick="allCheck(this.checked, 'product')" /></th>
-											<th>상품 사진</th>
-											<th>상품 이름</th>
-											<th>상품 가격</th>
-											<th>카테고리</th>
-											<th>할인율</th>
-											<th>위치</th>
-											<th>배송 여부</th>
-                                        </tr>
-                                    </tfoot>
-                                    
                                     <tbody>
 	                                    <c:choose>
 											<c:when test="${empty proList }">
 												<tr>
-													<th colspan="8">------------등록된 상품이 존재하지 않습니다.------------</th>
+													<th colspan="7">------------등록된 상품이 존재하지 않습니다.------------</th>
 												</tr>
 											</c:when>
 											<c:otherwise>
 												<c:forEach items="${proList }" var="dto">
 													<tr>
 														<td><input type="checkbox" name="chk_product" value="${dto.product_no }" /></td>
-														<td>사진</td>
 														<td><a href="store_select.do?product_no=${dto.product_no }">${dto.product_name }</a></td>
 														<td>${dto.product_price }원</td>
 														<td>${dto.product_category }</td>

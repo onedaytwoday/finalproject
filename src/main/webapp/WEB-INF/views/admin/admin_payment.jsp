@@ -44,18 +44,6 @@
 											<th></th>
                                         </tr>
                                     </thead>
-                                    
-                                    <tfoot>
-                                        <tr>
-                                            <th>결제자</th>
-											<th>결제 수량</th>
-											<th>결제 가격</th>
-											<th>결제 날짜</th>
-											<th>상태</th>
-											<th></th>
-                                        </tr>
-                                    </tfoot>
-                                    
                                     <tbody>
 	                                    <c:choose>
 											<c:when test="${empty pList }">

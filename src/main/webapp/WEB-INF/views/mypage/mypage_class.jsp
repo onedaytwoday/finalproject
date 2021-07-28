@@ -41,16 +41,6 @@
 											<th>가격</th>
                                         </tr>
                                     </thead>
-                                    
-                                    <tfoot>
-                                        <tr>
-                                            <th>번호</th>
-											<th>제목</th>
-											<th>카테고리</th>
-											<th>가격</th>
-                                        </tr>
-                                    </tfoot>
-                                    
                                     <tbody>
 	                                    <c:choose>
 											<c:when test="${empty list }">
