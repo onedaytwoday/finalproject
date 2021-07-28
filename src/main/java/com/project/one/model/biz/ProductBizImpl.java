@@ -64,6 +64,10 @@ public class ProductBizImpl implements ProductBiz {
 		return dao.categoryListPaging(pDto);
 	}
 
+	@Override
+	public List<ProductDto> selectfile(int product_no) {
+		return dao.selectfile(product_no);
+	}
 	
 	@Override
 	public ProductDto selectOne(int product_no) {
@@ -128,4 +132,5 @@ public class ProductBizImpl implements ProductBiz {
 	public List<ProductDto> searchedList(String search_keyword) {
 		return dao.searchedList(search_keyword);
 	}
+
 }

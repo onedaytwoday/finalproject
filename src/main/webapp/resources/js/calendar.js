@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
 				alert("로그인 먼저 해주세요!!");
 				location.href='loginform.do';
 			
-			} else if (confirm('현재 ' + arg.event.title +'가능합니다. ' + date +'으로 예약하시겠습니까?')) {
+			} else if (confirm('현재 ' + arg.event.title +'명 가능합니다. ' + date +'으로 예약하시겠습니까?')) {
 				$("[name='detail_no']").val(arg.event.id);
 				$("#detail_date").text(date);
 			}

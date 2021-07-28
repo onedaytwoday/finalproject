@@ -52,7 +52,7 @@
 				                    <td>
 				                      <div class="media">
 				                        <div class="d-flex">
-				                          <img src="resources/assets/img/gallery/card1.png" alt="" />
+				                          <img src="resources/upload/${dto.file_new_name }" alt="상품" />
 				                        </div>
 				                        <div class="media-body">
 				                          <span style="cursor:pointer;" onclick="location.href='store_select.do?product_no=${pList[status.index].product_no }'">${pList[status.index].product_name }</span>

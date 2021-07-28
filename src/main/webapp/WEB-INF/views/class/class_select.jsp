@@ -106,9 +106,9 @@
 						</div>					
 					</div>
 						
-					<div id="staticMap" style="width:650px;height:350px;"></div> 
+					<div id="staticMap" style="width:650px;height:350px;margin-bottom: 40px;"></div> 
 					<c:forEach items="${fList }" var="dto">
-						<img src="resources/upload/${dto.file_new_name }" width="100%" height="100%" alt="상품">
+						<img src="resources/upload/${dto.file_new_name }" width="100%" height="100%" alt="상품" style="margin-bottom: 40px;">
 					</c:forEach>
 					<p>${dto.class_desc }</p>
 				</article>

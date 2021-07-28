@@ -73,17 +73,13 @@
 	            <div class="row">
 	                <div class="col-md-6">            	
 		                <div class="product_img_slide owl-carousel">
-		                    <div class="single_product_img">
-		                        <img src="resources/assets/img/gallery/gallery01.png" alt="#" class="img-fluid">
-		                    </div>
-		                    <div class="single_product_img">
-		                        <img src="resources/assets/img/gallery/gallery01.png" alt="#" class="img-fluid">
-		                    </div>
-		                    <div class="single_product_img">
-		                        <img src="resources/assets/img/gallery/gallery1.png" alt="#" class="img-fluid">
-		                    </div>
+		                	<c:forEach items="${fList }" var="dto">
+								<div class="single_product_img">
+		                        	<img src="resources/upload/${dto.file_new_name }" alt="상품" class="img-fluid">
+		                   		</div>
+								
+							</c:forEach>
 		                </div>
-		                
 	                </div>
 	                
 	                <div class="col-md-6">
