@@ -70,21 +70,6 @@ public class ReviewDaoImpl implements ReviewDao {
 		
 		return res;
 	}
-	
-
-	@Override
-	public List<ReviewDto> selectListByUser(String member_id) {
-		List<ReviewDto> list = new ArrayList<ReviewDto>();
-
-		try {
-			list = sqlSession.selectList(NAMESPACE + "selectListByUser", member_id);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return list;
-	}
 
 	@Override
 	public ReviewDto selectOne(int review_no) {
@@ -228,6 +213,31 @@ public class ReviewDaoImpl implements ReviewDao {
 		}
 		
 		return res;
+	}
+
+	@Override
+	public int reviewMyCount(String member_id) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.selectOne(NAMESPACE + "reviewMyCount", member_id);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+
+	@Override
+	public List<ReviewDto> myReviewList(PagingDto pDto) {
+		List<ReviewDto> list = new ArrayList<ReviewDto>();
+		try {
+			list = sqlSession.selectList(NAMESPACE+"myReviewList", pDto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
 	}
 
 

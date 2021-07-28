@@ -25,6 +25,7 @@ public class PagingDto {
 	private String search_category;
 	private String search_keyword;
 	private String class_category;
+	private String member_id;
 	
 	
 	public PagingDto() {
@@ -209,6 +210,14 @@ public class PagingDto {
 
 	public void setClass_category(String class_category) {
 		this.class_category = class_category;
+	}
+	
+	public String getMember_id() {
+		return member_id;
+	}
+
+	public void setMember_id(String member_id) {
+		this.member_id = member_id;
 	}
 
 	@Override

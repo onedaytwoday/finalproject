@@ -49,6 +49,10 @@
 				<c:url var="action" value="mypage_class.do" />
 			</c:when>
 			
+			<c:when test="${param.board_category eq 'review' && param.from eq 'mypage' }">
+				<c:url var="action" value="mypage_review.do" />
+			</c:when>
+			
 			<c:when test="${param.store_list eq 'S' }">
 				<c:choose>
 					<c:when test="${param.product_category != '' }">

@@ -89,30 +89,28 @@ public class PaymentBizImpl implements PaymentBiz {
 	}
 
 	@Override
-	public List<PaymentDto> mypage_list(PagingDto dto, String member_id) {
+	public List<PaymentDto> myPaymentList(PagingDto dto) {
 		List<PaymentDto> list = dao.paymentList(dto);
 		List<PaymentDto> pList = new ArrayList<>();
-		
-		for(PaymentDto p : list) {
-			System.out.println(p);
-			if(p.getMember_id().equals(member_id)) {
-				if(p.getDetail_no() == 0 && p.getProduct_no() > 0) {
-					ProductDto pDto = proBiz.selectOne(p.getProduct_no());
-					p.setProduct_name(pDto.getProduct_name());
-				
-				} else if(p.getDetail_no() > 0 && p.getProduct_no() == 0) {
-					DetailDto dDto = dBiz.selectOne(p.getDetail_no());
-					ClassDto cDto = cBiz.selectOne(dDto.getClass_no());
-					p.setProduct_name(cDto.getClass_title());
-					p.setClass_no(cDto.getClass_no());
-				}
 
-				pList.add(p);
+		for (PaymentDto p : list) {
+
+			if (p.getDetail_no() == 0 && p.getProduct_no() > 0) {
+				ProductDto pDto = proBiz.selectOne(p.getProduct_no());
+				p.setProduct_name(pDto.getProduct_name());
+
+			} else if (p.getDetail_no() > 0 && p.getProduct_no() == 0) {
+				DetailDto dDto = dBiz.selectOne(p.getDetail_no());
+				ClassDto cDto = cBiz.selectOne(dDto.getClass_no());
+				p.setProduct_name(cDto.getClass_title());
+				p.setClass_no(cDto.getClass_no());
 			}
-			
+
+			pList.add(p);
+
 		}
 		return pList;
-				
+
 	}
 
 	public int paymentCount() {

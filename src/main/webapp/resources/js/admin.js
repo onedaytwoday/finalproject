@@ -31,7 +31,9 @@ $(function() {
 	
 	$('[name=dates]').each(function(i){
 		let date = $(`[name=dates]:eq(${i})`).val();
-		dates.push(date);
+		date = new Date();
+		result = date.toDateString();
+		dates.push(result);
 	});
 	
 	
@@ -142,31 +144,3 @@ function updateStatus(payment_no) {
 		}
 	});
 };
-
-// 이벤트 관리
-function updateNoti() {
-	if (checked_list.length > 0) {
-		let updateVal = {
-			"checked_list": checked_list
-		}
-
-		$.ajax({
-			type: "post",
-			url: "updateNoti.do",
-			data: JSON.stringify(updateVal),
-			contentType: "application/json",
-			dataType: "json",
-			success: function(result) {
-				if (result.msg == '실패') {
-					alert("실패!")
-				}
-				location.href = 'adminEvent.do?nowPage=1';
-			},
-			error: function() {
-				alert("통신 실패!");
-			}
-		});
-	} else {
-		alert("하나 이상 선택해 주세요!");
-	}
-}

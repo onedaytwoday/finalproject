@@ -45,6 +45,20 @@ public class PaymentDaoImpl implements PaymentDao {
 	}
 	
 	@Override
+	public List<PaymentDto> myPaymentList(PagingDto pDto) {
+		List<PaymentDto> list = new ArrayList<PaymentDto>();
+		
+		try {
+			list = sqlSession.selectList(NAMESPACE + "myPaymentList", pDto);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
+	@Override
 	public List<PaymentDto> montlyPayment() {
 		List<PaymentDto> list = new ArrayList<PaymentDto>();
 		

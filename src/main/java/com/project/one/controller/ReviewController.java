@@ -277,7 +277,15 @@ public class ReviewController {
 	
 	@RequestMapping("/mypage_review.do")
 	public String mypage_review(Model model, int nowPage, HttpSession session) {
+		MemberDto mDto = (MemberDto) session.getAttribute("mDto");
 		
+		int count = rBiz.reviewMyCount(mDto.getMember_id());
+		
+		PagingDto pDto = new PagingDto(count, nowPage);
+		pDto.setMember_id(mDto.getMember_id());
+
+		model.addAttribute("list", rBiz.myReviewList(pDto));
+		model.addAttribute("pDto", pDto);
 		model.addAttribute("path", "board");
 		
 		return "mypage/mypage_review";

@@ -96,7 +96,7 @@
 									<div class="d-flex justify-content-around">
 										<div class="switch-wrap d-flex justify-content-start">
 											<div class="confirm-radio mr-1">
-												<input type="radio" id="confirm-radio" name="member_grade" value="일반회원" ${mDto.member_grade eq '일반회원' ? "checked" : ""}>
+												<input type="radio" id="confirm-radio" name="member_grade" value="일반회원" ${dto.member_grade eq '일반회원' ? "checked" : ""}>
 												<label for="confirm-radio"></label>
 											</div>
 											<p>일반회원</p>
@@ -104,7 +104,7 @@
 												
 										<div class="switch-wrap d-flex justify-content-start">
 											<div class="confirm-radio mr-1">
-												<input type="radio" id="confirm-radio1" name="member_grade" value="강사회원" ${mDto.member_grade eq '강사회원' ? "checked" : ""}>
+												<input type="radio" id="confirm-radio1" name="member_grade" value="강사회원" ${dto.member_grade eq '강사회원' ? "checked" : ""}>
 												<label for="confirm-radio1"></label>
 											</div>
 											<p>강사회원</p>
@@ -112,27 +112,27 @@
 									</div>
 												
 									<div class="mt-10">
-										<input type="text" name="member_id" title="n" placeholder="아이디" class="single-input" value="${mDto.member_id}" onfocus="this.placeholder = ''" onblur="this.placeholder = '아이디'" readonly>
+										<input type="text" name="member_id" title="n" placeholder="아이디" class="single-input" value="${dto.member_id}" onfocus="this.placeholder = ''" onblur="this.placeholder = '아이디'" readonly>
 									</div>
 													
 									<div class="mt-10">
-										<input type="password" name="member_pw" placeholder="비밀번호" onfocus="this.placeholder = ''" onblur="this.placeholder = '비밀번호'" class="single-input" value="${mDto.member_pw}" required>
+										<input type="password" name="member_pw" placeholder="비밀번호" onfocus="this.placeholder = ''" onblur="this.placeholder = '비밀번호'" class="single-input" value="${dto.member_pw}" required>
 									</div>
 									
 									<div class="mt-10">
-										<input type="text" name="member_name" placeholder="이름" class="single-input" value="${mDto.member_name}" onfocus="this.placeholder = ''" onblur="this.placeholder = '이름'" readonly>
+										<input type="text" name="member_name" placeholder="이름" class="single-input" value="${dto.member_name}" onfocus="this.placeholder = ''" onblur="this.placeholder = '이름'" readonly>
 									</div>
 									
 									<div class="mt-10">
-										<input type="text" name="member_nicname" placeholder="닉네임" class="single-input" value="${mDto.member_nicname}" onfocus="this.placeholder = ''" onblur="this.placeholder = '닉네임'" required>
+										<input type="text" name="member_nicname" placeholder="닉네임" class="single-input" value="${dto.member_nicname}" onfocus="this.placeholder = ''" onblur="this.placeholder = '닉네임'" required>
 									</div>
 									
 									<div class="mt-10">
-										<input type="email" name="member_email" placeholder="이메일 주소" class="single-input" value="${mDto.member_email}" onfocus="this.placeholder = ''" onblur="this.placeholder = '이메일 주소'" required>
+										<input type="email" name="member_email" placeholder="이메일 주소" class="single-input" value="${dto.member_email}" onfocus="this.placeholder = ''" onblur="this.placeholder = '이메일 주소'" required>
 									</div>
 									
 									<div class="mt-10 d-flex flex-row justify-content-between">
-										<c:set var="phone" value="${mDto.member_phone}"/>
+										<c:set var="phone" value="${dto.member_phone}"/>
 										<input type="hidden" name="member_phone" value="">
 										<input type="text" name="member_phone_1" maxlength="3" class="single-input" value="${fn:substring(phone,0,3)}" required> <i class="bi bi-dash-lg mt-2 px-1"></i>
 										<input type="text" name="member_phone_2" maxlength="4" class="single-input" value="${fn:substring(phone,3,7)}" required> <i class="bi bi-dash-lg mt-2 px-1"></i>
@@ -147,7 +147,7 @@
 										</div>
 										
 										<div class="mt-2 d-flex flex-row">
-											<input type="text" name="member_addr_1" id="addr_1" placeholder="기본주소" value="${mDto.member_addr }" required class="single-input">
+											<input type="text" name="member_addr_1" id="addr_1" placeholder="기본주소" value="${dto.member_addr }" required class="single-input">
 											<input type="text" name="member_addr_2" id="addr_2" placeholder="상세주소" class="single-input ml-2">				
 										</div>
 									</div>
@@ -155,7 +155,7 @@
 									<div class="mt-10 ml-3 d-flex align-items-center">
 										<div class="switch-wrap d-flex">
 											<div class="primary-radio mr-1">
-												<input type="radio" id="default-radio" name="member_notify" value="Y" ${mDto.member_notify eq 'Y' ? "checked" : ""} onclick="notificationOn()">
+												<input type="radio" id="default-radio" name="member_notify" value="Y" ${dto.member_notify eq 'Y' ? "checked" : ""} onclick="notificationOn()">
 												<label for="default-radio"></label>
 											</div>
 											<p>알림 허용</p>
@@ -163,7 +163,7 @@
 										
 										<div class="switch-wrap d-flex ml-5">	
 											<div class="primary-radio mr-1">
-												<input type="radio" id="default-radio1" name="member_notify" value="N" ${mDto.member_notify eq 'N' ? "checked" : ""} >
+												<input type="radio" id="default-radio1" name="member_notify" value="N" ${dto.member_notify eq 'N' ? "checked" : ""} >
 												<label for="default-radio1"></label>
 											</div>
 											<p>알림 거부</p>

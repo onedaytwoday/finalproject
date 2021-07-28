@@ -1,12 +1,15 @@
 package com.project.one.model.biz;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.one.model.dao.ReviewDao;
+import com.project.one.model.dto.ClassDto;
 import com.project.one.model.dto.PagingDto;
+import com.project.one.model.dto.ProductDto;
 import com.project.one.model.dto.ReviewDto;
 import com.project.one.model.dto.SearchDto;
 
@@ -15,6 +18,12 @@ public class ReviewBizImpl implements ReviewBiz {
 
 	@Autowired
 	private ReviewDao dao;
+	
+	@Autowired
+	private ClassBiz cBiz;
+	
+	@Autowired
+	private ProductBiz pBiz;
 	
 	@Override
 	public List<ReviewDto> selectList() {
@@ -28,6 +37,24 @@ public class ReviewBizImpl implements ReviewBiz {
 	}
 	
 	@Override
+	public List<ReviewDto> myReviewList(PagingDto pDto) {
+		List<ReviewDto> list = dao.myReviewList(pDto);
+		
+		for(ReviewDto r : list) {
+			if(r.getProduct_no() > 0) {
+				ProductDto proDto = pBiz.selectOne(r.getProduct_no());
+				r.setProduct_name(proDto.getProduct_name());
+			
+			} else if(r.getClass_no() > 0) {
+				ClassDto cDto = cBiz.selectOne(r.getClass_no());
+				r.setClass_title(cDto.getClass_title());
+			}
+		}
+		
+		return list;
+	}
+	
+	@Override
 	public double avgListByProduct(int product_no){
 		return dao.avgListByProduct(product_no);
 	}
@@ -37,12 +64,6 @@ public class ReviewBizImpl implements ReviewBiz {
 		return dao.avgListByClass(class_no);
 	}
 
-	@Override
-	public List<ReviewDto> selectListByUser(String member_id) {
-		return dao.selectListByUser(member_id);
-	}
-	
-	
 
 	@Override
 	public ReviewDto selectOne(int review_no) {
@@ -104,5 +125,8 @@ public class ReviewBizImpl implements ReviewBiz {
 		return dao.reviewCount();
 	}
 
-
+	@Override
+	public int reviewMyCount(String member_id) {
+		return dao.reviewMyCount(member_id);
+	}
 }

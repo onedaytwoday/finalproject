@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.project.one.model.dao.ClassDao;
 import com.project.one.model.dto.ClassDto;
+import com.project.one.model.dto.EventDto;
 import com.project.one.model.dto.PagingDto;
 import com.project.one.model.dto.StorePagingDto;
 
@@ -17,14 +18,39 @@ public class ClassBizImpl implements ClassBiz {
 	@Autowired
 	private ClassDao dao;
 	
+	@Autowired
+	private EventBiz eBiz;
+	
 	@Override
 	public List<ClassDto> selectList() {
-		return dao.selectList();
+		List<ClassDto> list = dao.selectList();
+		List<ClassDto> cList = new ArrayList<ClassDto>();
+		EventDto eDto;
+		
+		for(ClassDto c : list) {
+			eDto = eBiz.eventClass(c.getClass_no());
+			if(eDto == null) {
+				cList.add(c);
+			}
+		}
+		
+		return cList;
 	}
 
 	@Override
 	public List<ClassDto> classList(PagingDto pDto) {
-		return dao.classList(pDto);
+		List<ClassDto> list = dao.classList(pDto);
+		EventDto eDto;
+		
+		for(ClassDto c : list) {
+			eDto = eBiz.eventClass(c.getClass_no());
+			if(eDto == null || eDto.getEvent_noti().equals("N")) {
+				c.setClass_sale(0);
+			}
+		}
+		
+		
+		return list;
 	}
 	
 	@Override
@@ -99,20 +125,6 @@ public class ClassBizImpl implements ClassBiz {
 	}
 
 	@Override
-	public List<ClassDto> myClass(PagingDto dto, String member_id) {
-		List<ClassDto> list = dao.classList(dto);
-		List<ClassDto> cList = new ArrayList<>();
-		
-		for(ClassDto c : list) {
-			if(c.getMember_id().equals(member_id)) {
-				cList.add(c);
-			}
-		}
-		
-		return cList;
-	}
-
-	@Override
 	public List<ClassDto> categoryListPaging(PagingDto pDto) {
 		return dao.categoryListPaging(pDto);
 	}
@@ -120,6 +132,11 @@ public class ClassBizImpl implements ClassBiz {
 	@Override
 	public int classcategoryCount(String class_category) {
 		return dao.classcategoryCount(class_category);
+	}
+
+	@Override
+	public List<ClassDto> myClassList(PagingDto pDto) {
+		return dao.myClassList(pDto);
 	}
 	
 }

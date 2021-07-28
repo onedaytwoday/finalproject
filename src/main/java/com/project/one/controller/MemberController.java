@@ -74,6 +74,9 @@ public class MemberController {
 	
 	@RequestMapping("/index.do")
 	public String index(Model model) {
+		int res = eBiz.updateNoti();
+		System.out.println("res : " + res);
+		
 		List<SearchDto> list = rbiz.search();
 		for(int i=0;i<list.size();i++) {
 			if(list.get(i).getProduct_no() == 0) {
@@ -366,7 +369,10 @@ public class MemberController {
 	
 	//마이 페이지
 	@RequestMapping("/mypage_update.do")
-	public String mypage(Model model) {
+	public String mypage(Model model, HttpSession session) {
+		MemberDto mDto = (MemberDto)session.getAttribute("mDto");
+		
+		model.addAttribute("dto", biz.selectOne(mDto.getMember_id()));
 		model.addAttribute("path", "update");
 		
 		return "mypage/mypage_update";
@@ -381,7 +387,7 @@ public class MemberController {
 		}
 		
 		
-		return "redirect:mypage_update.do?member_id="+dto.getMember_id();
+		return "redirect:main.do";
 	}
 	
 	@RequestMapping("/mypage_del.do")

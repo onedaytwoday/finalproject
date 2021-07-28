@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="event">
+	<select id="allList" resultType="eventDto">
+		SELECT EVENT_NO, EVENT_TITLE, EVENT_DESC, EVENT_START, EVENT_END, EVENT_NOTI, MEMBER_ID, CLASS_NO,
+		PRODUCT_NO
+		FROM EVENT
+	</select>
+	
 	<select id="selectList" resultType="eventDto">
 		SELECT e.EVENT_NO, e.EVENT_TITLE, e.EVENT_DESC, e.EVENT_START, e.EVENT_END, e.EVENT_NOTI, e.MEMBER_ID, e.CLASS_NO,
 		e.PRODUCT_NO, f.FILE_NEW_NAME
@@ -54,9 +60,15 @@
 		</selectKey>
 	</insert>
 	
-	<update id="updateNoti" parameterType="int">
+	<update id="updateNotiY" parameterType="int">
 		UPDATE EVENT		
 		SET EVENT_NOTI = 'Y'
+		WHERE EVENT_NO = ${event_no}
+	</update>
+	
+	<update id="updateNotiN" parameterType="int">
+		UPDATE EVENT		
+		SET EVENT_NOTI = 'N'
 		WHERE EVENT_NO = ${event_no}
 	</update>
 	
@@ -68,5 +80,19 @@
 	<select id="eventCount" resultType="int">
 		SELECT COUNT(EVENT_NO)
 		FROM EVENT
+	</select>
+	
+	<select id="eventClass" resultType="eventDto">
+		SELECT EVENT_NO, EVENT_TITLE, EVENT_DESC, EVENT_START, EVENT_END, EVENT_NOTI, MEMBER_ID, CLASS_NO,
+		PRODUCT_NO
+		FROM EVENT
+		WHERE CLASS_NO = #{class_no}
+	</select>
+	
+	<select id="eventProduct" resultType="eventDto">
+		SELECT EVENT_NO, EVENT_TITLE, EVENT_DESC, EVENT_START, EVENT_END, EVENT_NOTI, MEMBER_ID, CLASS_NO,
+		PRODUCT_NO
+		FROM EVENT
+		WHERE PRODUCT_NO = #{product_no}
 	</select>
 </mapper>

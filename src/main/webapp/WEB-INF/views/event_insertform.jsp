@@ -7,6 +7,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
+<style type="text/css">
+.lab{
+	font-size: 10pt;
+}
+</style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 	$(function(){
@@ -38,62 +43,79 @@
 		<form class="form-contact comment_form">
 		<input type="hidden" name="member_id" value="${mDto.member_id }" />
 			<div class="row">
-			<div class="col-1" style="margin-bottom: 30px;">
-				<div>
-					<input type="radio" id="sale" name="event" value="할인" checked="checked"/>
-					<label for="sale">할인</label>
+				<div class="col-2" style="margin-bottom: 30px;">
+					<div class="switch-wrap d-flex justify-content-start">
+						<div class="primary-radio mr-1">
+							<input type="radio" id="new" name="event" value="NEW">
+							<label for="new"></label>
+						</div>
+						<span class="lab">New</span>
+					</div>
+					
 				</div>
-				<div>
-					<input type="radio" id="new" name="event" value="NEW" />
-					<label for="new">NEW</label>
+				<div class="col-1" style="margin-bottom: 30px;">
+					<div class="switch-wrap d-flex justify-content-start">
+						<div class="primary-radio mr-1">
+							<input type="radio" id="sale" name="event" value="할인" checked>
+							<label for="sale"></label>
+						</div>
+						<span class="lab">Sale</span>
+					</div>				
+				</div>	
+				<div class="col-2" style="margin-bottom: 30px;">
+					<select name="sale_rate" id="sale_rate">
+						<option value="0">0%</option>
+		                <option value="10">10%</option>
+		                <option value="20">20%</option>
+		                <option value="30">30%</option>
+		                <option value="40">40%</option>
+		                <option value="50">50%</option>
+		                <option value="60">60%</option>
+		                <option value="70">70%</option>
+		                <option value="80">80%</option>
+		                <option value="90">90%</option>
+					</select>
 				</div>
-			</div>
-			<div class="col-1" style="margin-bottom: 30px;">
-				<select name="sale_rate" id="sale_rate">
-					<option value="0">0%</option>
-	                <option value="10">10%</option>
-	                <option value="20">20%</option>
-	                <option value="30">30%</option>
-	                <option value="40">40%</option>
-	                <option value="50">50%</option>
-	                <option value="60">60%</option>
-	                <option value="70">70%</option>
-	                <option value="80">80%</option>
-	                <option value="90">90%</option>
-				</select>
-			</div>
-			<div class="col-1" style="margin-bottom: 30px;">
-			<div>
-				<input type="radio" id="class" name="category" value="클래스" checked="checked"/>
-				<label for="class">클래스</label>
-			</div>
-			<div>
-				<input type="radio" id="product" name="category" value="상품" />
-				<label for="product">상품</label>
-			</div>
-			</div>
-			<div class="col-2" style="margin-bottom: 30px;">
-				<div id="class_sel" >
-					<select name="class_no" id="class_no">
-	                  <c:forEach items="${cList }" var="cDto">
-	                    <option value="${cDto.class_no }">
-	                      ${cDto.class_title }
-	                    </option>
-	                  </c:forEach>
-	                </select>
+				<div class="col-1" style="margin-bottom: 30px;">
+					<div class="switch-wrap d-flex justify-content-start">
+						<div class="confirm-radio mr-1">
+							<input type="radio" id="class" name="category" value="class" checked>
+							<label for="class"></label>
+						</div>
+						<span class="lab">Class</span>
+					</div>
 				</div>
-			</div>
-			<div class="col-2" style="margin-bottom: 30px;">
-				<div id="product_sel" >
-					<select name="product_no" id="product_no" disabled="disabled">
-	                  <c:forEach items="${pList }" var="pDto">
-	                    <option value="${pDto.product_no }">
-	                      ${pDto.product_name }
-	                    </option>
-	                  </c:forEach>
-	                </select>
-	            </div>
-			</div>
+				<div class="col-2" style="margin-bottom: 30px;">
+					<div id="class_sel" >
+						<select name="class_no" id="class_no">
+		                  <c:forEach items="${cList }" var="cDto">
+		                    <option value="${cDto.class_no }">
+		                      ${cDto.class_title }
+		                    </option>
+		                  </c:forEach>
+		                </select>
+					</div>
+				</div>
+				<div class="col-1" style="margin-bottom: 30px;">
+					<div class="switch-wrap d-flex justify-content-start">
+						<div class="confirm-radio mr-1">
+							<input type="radio" id="product" name="category" value="product" >
+							<label for="product"></label>
+						</div>
+						<span class="lab">product</span>
+					</div>
+				</div>
+				<div class="col-2" style="margin-bottom: 30px;">
+					<div id="product_sel" >
+						<select name="product_no" id="product_no" disabled="disabled">
+		                  <c:forEach items="${pList }" var="pDto">
+		                    <option value="${pDto.product_no }">
+		                      ${pDto.product_name }
+		                    </option>
+		                  </c:forEach>
+		                </select>
+		            </div>
+				</div>
 				<div class="col-12">
 					<div class="form-group">
 					<input class="form-control" type="text" name="event_title" placeholder="Event Title" required="required">
@@ -137,7 +159,6 @@ $(document).ready(function()
 		{
 			$("#input_file").on("change", fileCheck);
 		});
-
 /**
  * 첨부파일로직
  */
@@ -147,7 +168,6 @@ $(function () {
         $('#input_file').click();
     });
 });
-
 // 파일 현재 필드 숫자 totalCount랑 비교값
 var fileCount = 0;
 // 해당 숫자를 수정하여 전체 업로드 갯수를 정한다.
@@ -156,7 +176,6 @@ var totalCount = 10;
 var fileNum = 0;
 // 첨부파일 배열
 var content_files = new Array();
-
 function fileCheck(e) {
     var files = e.target.files;
     
@@ -190,7 +209,6 @@ function fileCheck(e) {
     //초기화 한다.
     $("#input_file").val("");
   }
-
 // 파일 부분 삭제 함수
 function fileDelete(fileNum){
     var no = fileNum.replace(/[^0-9]/g, "");
@@ -199,7 +217,6 @@ function fileDelete(fileNum){
 	fileCount --;
     console.log(content_files);
 }
-
 /*
  * 폼 submit 로직
  */
@@ -213,9 +230,7 @@ function fileDelete(fileNum){
 				 formData.append("files", content_files[x]);
 			}
 		}
-	for (var pair of formData.entries()) {
-		//alert(pair[0]+ ', ' + pair[1]); 
-	}
+	
    /*
    * 파일업로드 multiple ajax처리
    */    
@@ -229,7 +244,7 @@ function fileDelete(fileNum){
    	      success: function (data) {
    	    	if(JSON.parse(data)['result'] == "OK"){
    	    		alert("파일업로드 성공");
-   	    		$(location).attr('href','adminEvent.do?nowPage=1');
+   	    		$(location).attr('href','index.do');
 			} else
 				alert("파일을 업로드 해주세요");
    	    		return false;

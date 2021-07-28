@@ -19,14 +19,16 @@ document.addEventListener('DOMContentLoaded', function() {
 				success: function(result) {
 					let events = [];
 					if (result.list != null) {
-						$.each(result.list, function(index, element) {							
-							events.push({
-								id: element.detail_no,
-								title: element.detail_member_num + '명',
-								start: element.detail_date,
-								allDay: false,
-								eventColor: "#6937a1"
-							}); 
+						$.each(result.list, function(index, element) {
+							if(element.detail_member_num > 0) {
+								events.push({
+									id: element.detail_no,
+									title: element.detail_member_num,
+									start: element.detail_date,
+									allDay: false,
+									eventColor: "#6937a1"
+								}); 
+							}							
 						});
 					}
 					successCallback(events);
@@ -34,7 +36,6 @@ document.addEventListener('DOMContentLoaded', function() {
 			});
 		},
 		eventClick: function(arg) {
-			console.log(arg.event);
 			let date = moment(arg.event.start).format('yyyy-MM-DD HH:mm')
 			let member_id = $("#member_id").val();
 

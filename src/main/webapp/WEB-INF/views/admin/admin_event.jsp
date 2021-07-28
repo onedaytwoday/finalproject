@@ -78,7 +78,6 @@
                                     </tbody>
                                 </table>
                                 
-                                <input class="genric-btn success-border circle float-right ml-2" type="button" value="알림 보내기" onclick="updateNoti()"/>
 								<input class="genric-btn danger-border circle float-right" type="button" value="삭제" onclick="deleteChecked('event')" />
                             </div>
                         </div>

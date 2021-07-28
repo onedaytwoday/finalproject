@@ -16,6 +16,8 @@ public interface BoardDao {
 	
 	public List<BoardDto> board_qna_search(PagingDto Pdto);
 	
+	public List<BoardDto> my_qna_list(PagingDto dto);
+	
 	public BoardDto selectOne(int board_no);
 	
 	public int insert(BoardDto dto);
