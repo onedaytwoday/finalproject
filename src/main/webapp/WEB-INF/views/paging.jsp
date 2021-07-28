@@ -99,12 +99,8 @@
 		<nav class="blog-pagination justify-content-center d-flex">
 			<ul class="pagination">
 	        	<li class="page-item">
-	        		<%-- 
-	        		<c:if test="${param.nowBlock > 1}">
-						<a class="page-link" aria-label="Previous" href="${action}?nowPage=${param.blockBegin-1}${search}"><i class="ti-angle-left"></i></a>
-					</c:if>
-	            	--%>
-	            	<a href="#" class="page-link" aria-label="Previous">
+	        		
+	            	<a href="${action}?nowPage=${param.nowBlock > 1 ? param.blockBegin-1 : 1}${search}" class="page-link" aria-label="Previous">
 	                	<i class="ti-angle-left"></i>
 	                </a>
 	            </li>
@@ -122,12 +118,7 @@
 	            </li>
 	            
 	            <li class="page-item">
-	            	<%--
-	            	<c:if test="${param.nowBlock < param.totalBlock}">
-						<a href="${action}?nowPage=${param.blockEnd+1}${search}">▶</a>
-					</c:if>
-	            	--%>
-	            	<a href="#" class="page-link" aria-label="Next">
+	            	<a href="${action}?nowPage=${param.nowBlock < param.totalBlock ? param.blockEnd+1 : param.blockEnd}${search}" class="page-link" aria-label="Next">
 	                	<i class="ti-angle-right"></i>
 	                </a>
 	            </li>

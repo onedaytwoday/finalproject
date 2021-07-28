@@ -47,12 +47,13 @@
                     <div class="col-xl-3 col-lg-3 col-md-4 col-sm-7">
                         <div class="single-footer-caption mb-50">
                             <div class="footer-tittle">
-                                <h4>New Products</h4>
-                                <ul>
-                                    <li><a href="#">Woman Cloth</a></li>
-                                    <li><a href="#">Fashion Accessories</a></li>
-                                    <li><a href="#"> Man Accessories</a></li>
-                                    <li><a href="#"> Rubber made Toys</a></li>
+                                <h4>Developers</h4>
+                                <ul class="row">
+                                    <li class="col-md-6"><a href="https://github.com/NamMinHyuk">남민혁</a></li>
+                                    <li class="col-md-6"><a href="https://github.com/skwak0205">곽수정</a></li>
+                                    <li class="col-md-6"><a href="https://github.com/kimkj1108">김정규</a></li>
+                                    <li class="col-md-6"><a href="https://github.com/heeju-g">심희주</a></li>
+                                    <li class="col-md-12"><a href="https://github.com/U1mong">안재완</a></li>
                                 </ul>
                             </div>
                         </div>
