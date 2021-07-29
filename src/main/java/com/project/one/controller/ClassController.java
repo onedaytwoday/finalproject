@@ -53,6 +53,7 @@ import com.project.one.model.dto.ProductDto;
 import com.project.one.model.dto.RankDto;
 import com.project.one.model.dto.SearchDto;
 import com.project.one.model.dto.StorePagingDto;
+import com.project.one.util.ElasticSearch;
 
 import net.coobird.thumbnailator.Thumbnails;
 
@@ -110,12 +111,12 @@ public class ClassController {
 		PagingDto pDto = new PagingDto();
 		pDto.setSearch_category(search_category);
 		pDto.setSearch_keyword(search_keyword);
+		
 		int count = cBiz.classSearchCount(pDto);
-		System.out.println("count : " + count);
 		PagingDto dto = new PagingDto(count, nowPage);
 		dto.setSearch_category(search_category);
 		dto.setSearch_keyword(search_keyword);
-		System.out.println(dto);
+		
 		model.addAttribute("list", cBiz.classListSearch(dto));
 		model.addAttribute("pDto", dto);
 		
@@ -344,6 +345,19 @@ public class ClassController {
 		model.addAttribute("list", cBiz.categoryListPaging(pDto));
 		model.addAttribute("pDto", pDto);
 		return "class/class_list";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/autoComplete.do", method = RequestMethod.POST)
+	public Map<String, List<String>> auto_complete(@RequestBody Map<String, String> keyword) {
+		String term = keyword.get("keyword");
+		System.out.println("keyword : " + term);
+		
+		Map<String, List<String>> map = new HashMap<>();
+		
+		map.put("list", ElasticSearch.getAutoCompleted(term));
+		
+		return map;
 	}
 	
 	public static String Random(int len) {

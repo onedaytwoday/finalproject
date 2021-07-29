@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Insert title here</title>
+<title>Class</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -20,9 +20,33 @@
 		$("#search_category").change(function(){
 			let category = $("select > option:selected").val();
 			checked = category == 'title+desc+category'
-		});	
+		});
 		
-		var category = "${category}";
+		$("[name=search_keyword]:eq(0)").on("propertychange change keyup paste input", function() {
+			$.ajax({
+				type: "post",
+				url: "autoComplete.do",
+				data: JSON.stringify({"keyword" : $("[name=search_keyword]:eq(0)").val()}),
+				contentType: "application/json",
+				dataType: "json",
+				success: function(result) {
+					let list = result.list;
+
+					for(let i=0; i<list.length; i++) {
+						let input = $("<input type='text' class='form-control bg-white' value=" + list[i] +" readonly />")
+						$("#auto_result").append(input)												
+					}
+					
+				},
+				error: function() {
+					alert("통신 실패!");
+				}
+			});
+		});
+		
+		
+		
+		let category = "${category}";
 		if(category == "handmade"){
 			$('#nav-handmade-tab').addClass("active");
 		}else if(category == "cooking"){
@@ -156,10 +180,14 @@
 											</select>
 										</div>
 										
-                                        <div class="input-group mb-3">
-                                            <input type="text" class="form-control" name="search_keyword" placeholder="Search term..."
+                                        <div id="searchInput" class="input-group ">
+                                            <input type="text" class="d-block form-control" name="search_keyword" placeholder="Search term..." autocomplete=off
                                                 onfocus="this.placeholder = ''"
                                                 onblur="this.placeholder = 'Search term...'">
+                                        </div>
+                                        
+                                        <div id="auto_result">
+                                        	
                                         </div>
                                     </div>
                                     <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"

@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Log In</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- IP주소 얻기 -->
 <script defer type="text/javascript" src="http://jsgetip.appspot.com"></script>
@@ -107,8 +107,6 @@
 				        	    <div class="login_part_text text-center">
 				            	    <div class="login_part_text_iner">
 				                	    <h2>아직 회원이 아니신가요?</h2>
-				                        <p>There are advances being made in science and technology
-				                    	    everyday, and a good example of this is the</p>
 				                        <a href="signup.do" class="btn_3">회원가입 하러가기</a>
 				                    </div>
 				                </div>
