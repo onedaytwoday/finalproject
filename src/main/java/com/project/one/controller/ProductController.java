@@ -4,7 +4,9 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +19,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,6 +39,7 @@ import com.project.one.model.dto.PagingDto;
 import com.project.one.model.dto.ProductDto;
 import com.project.one.model.dto.ReviewDto;
 import com.project.one.model.dto.StorePagingDto;
+import com.project.one.util.ElasticSearch;
 
 import net.coobird.thumbnailator.Thumbnails;
 
@@ -218,6 +222,19 @@ public class ProductController {
 		model.addAttribute("list", biz.categoryListPaging(pDto));
 		model.addAttribute("pDto", pDto);
 		return "store/store";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/auto_product.do", method = RequestMethod.POST)
+	public Map<String, List<String>> auto_product(@RequestBody Map<String, String> keyword) {
+		String term = keyword.get("keyword");
+		System.out.println("keyword : " + term);
+		
+		Map<String, List<String>> map = new HashMap<>();
+		
+		map.put("list", ElasticSearch.getAutoCompleted("product", term));
+		
+		return map;
 	}
 	
 	public static String Random(int len) {

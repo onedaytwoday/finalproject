@@ -15,8 +15,7 @@
 
 <script type="text/javascript">
 	$(function(){
-		
-		var category = "${category}";
+		let category = "${category}";
 		if(category == "handmade"){
 			$('#nav-handmade-tab').addClass("active");
 		}else if(category == "cooking"){
@@ -32,6 +31,29 @@
 		}else if(category == ""){
 			$('#nav-home-tab').addClass("active");
 		}
+		
+		$("[name=search_keyword]:eq(0)").change(function(){
+			$.ajax({
+				type: "post",
+				url: "auto_product.do",
+				data: JSON.stringify({"keyword" : $("[name=search_keyword]:eq(0)").val()}),
+				contentType: "application/json",
+				dataType: "json",
+				success: function(result) {
+					console.log(result.list);
+					let list = result.list;
+
+					for(let i=0; i<list.length; i++) {
+						let input = $("<input type='text' class='form-control bg-white' value=" + list[1] +" readonly />")
+						$("#auto_result").append(input)												
+					}
+					
+				},
+				error: function() {
+					alert("통신 실패!");
+				}
+			});
+		});
 	});
 
 	function ranking(){
@@ -98,10 +120,13 @@
                  	<input type="hidden" name="nowPage" value="1">
                 
                     <div class="form-group">  										
-                    	<div class="input-group mb-3">
+                    	<div class="input-group">
                         	<input type="text" class="form-control" name="search_keyword" placeholder="Search term..." onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search term...'">
                         </div>
                     </div>
+                    
+                    <div id="auto_result"></div>
+                                        
                     <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" type="submit" onclick="ranking()">검색</button>
                 </form>
             </aside>

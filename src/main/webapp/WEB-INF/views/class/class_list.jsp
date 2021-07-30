@@ -22,6 +22,7 @@
 			checked = category == 'title+desc+category'
 		});
 		
+		<%--
 		$("[name=search_keyword]:eq(0)").on("propertychange change keyup paste input", function() {
 			$.ajax({
 				type: "post",
@@ -43,6 +44,29 @@
 				}
 			});
 		});
+		--%>
+		$("[name=search_keyword]:eq(0)").change(function(){
+			$.ajax({
+				type: "post",
+				url: "auto_class.do",
+				data: JSON.stringify({"keyword" : $("[name=search_keyword]:eq(0)").val()}),
+				contentType: "application/json",
+				dataType: "json",
+				success: function(result) {
+					console.log(result.list);
+					let list = result.list;
+
+					for(let i=0; i<list.length; i++) {
+						let input = $("<input type='text' class='form-control bg-white' value=" + list[i] +" readonly />")
+						$("#auto_result").append(input)												
+					}
+					
+				},
+				error: function() {
+					alert("통신 실패!");
+				}
+			});
+		})
 		
 		
 		

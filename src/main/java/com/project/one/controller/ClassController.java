@@ -348,14 +348,14 @@ public class ClassController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/autoComplete.do", method = RequestMethod.POST)
-	public Map<String, List<String>> auto_complete(@RequestBody Map<String, String> keyword) {
+	@RequestMapping(value="/auto_class.do", method = RequestMethod.POST)
+	public Map<String, List<String>> auto_class(@RequestBody Map<String, String> keyword) {
 		String term = keyword.get("keyword");
 		System.out.println("keyword : " + term);
 		
 		Map<String, List<String>> map = new HashMap<>();
 		
-		map.put("list", ElasticSearch.getAutoCompleted(term));
+		map.put("list", ElasticSearch.getAutoCompleted("class", term));
 		
 		return map;
 	}
