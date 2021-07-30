@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Insert title here</title>
+<title>Class 상세</title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>  
 </head>
@@ -214,7 +214,7 @@
 	
 			// 마커가 표시될 위치입니다 37.5114167909
 			var markerPosition  = new kakao.maps.LatLng(y, x); 
-			var text = "<div class='tex' style='font-size:10pt;'>" + classname + "<br></div>";
+			var text = "<div class='tex' style='font-size:10pt;'>" + classname + "</div>";
 			// 마커를 생성합니다
 			var marker = new kakao.maps.Marker({
 			    position: markerPosition,

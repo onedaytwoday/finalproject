@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Log In</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- IP주소 얻기 -->
 <script defer type="text/javascript" src="http://jsgetip.appspot.com"></script>
