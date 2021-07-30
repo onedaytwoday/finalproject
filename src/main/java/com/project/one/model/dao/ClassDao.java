@@ -12,6 +12,8 @@ public interface ClassDao {
 	
 	public List<ClassDto> selectList();
 	
+	public List<ClassDto> totalList();
+	
 	public List<ClassDto> classList(PagingDto pDto);
 	
 	public List<ClassDto> classListPaging(PagingDto pDto);

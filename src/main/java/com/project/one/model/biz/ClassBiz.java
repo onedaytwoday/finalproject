@@ -9,6 +9,8 @@ import com.project.one.model.dto.StorePagingDto;
 public interface ClassBiz {
 	public List<ClassDto> selectList();
 	
+	public List<ClassDto> totalList();
+	
 	public List<ClassDto> classList(PagingDto pDto);
 	
 	public List<ClassDto> classListPaging(PagingDto pDto);

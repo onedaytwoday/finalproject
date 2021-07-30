@@ -32,6 +32,20 @@ public class ClassDaoImpl implements ClassDao {
 	}
 	
 	@Override
+	public List<ClassDto> totalList() {
+		List<ClassDto> list = new ArrayList<ClassDto>();
+
+		try {
+			list = sqlSession.selectList(NAMESPACE + "totalList");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return list;
+	}
+	
+	@Override
 	public List<ClassDto> classList(PagingDto pDto) {
 		List<ClassDto> list = new ArrayList<ClassDto>();
 
@@ -280,7 +294,5 @@ public class ClassDaoImpl implements ClassDao {
 
 		return list;
 	}
-
-	
 
 }

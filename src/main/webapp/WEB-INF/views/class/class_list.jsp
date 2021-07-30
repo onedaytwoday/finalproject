@@ -22,11 +22,11 @@
 			checked = category == 'title+desc+category'
 		});
 		
-		<%--
+		
 		$("[name=search_keyword]:eq(0)").on("propertychange change keyup paste input", function() {
 			$.ajax({
 				type: "post",
-				url: "autoComplete.do",
+				url: "auto_class.do",
 				data: JSON.stringify({"keyword" : $("[name=search_keyword]:eq(0)").val()}),
 				contentType: "application/json",
 				dataType: "json",
@@ -34,8 +34,8 @@
 					let list = result.list;
 
 					for(let i=0; i<list.length; i++) {
-						let input = $("<input type='text' class='form-control bg-white' value=" + list[i] +" readonly />")
-						$("#auto_result").append(input)												
+						let input = $("<div>" + list[i] + "</div>");
+						$("#auto_result").append(input);											
 					}
 					
 				},
@@ -44,7 +44,8 @@
 				}
 			});
 		});
-		--%>
+		
+		<%--
 		$("[name=search_keyword]:eq(0)").change(function(){
 			$.ajax({
 				type: "post",
@@ -55,10 +56,10 @@
 				success: function(result) {
 					console.log(result.list);
 					let list = result.list;
-
+					
 					for(let i=0; i<list.length; i++) {
-						let input = $("<input type='text' class='form-control bg-white' value=" + list[i] +" readonly />")
-						$("#auto_result").append(input)												
+						let input = $("<div>" + list[i] + "</div>");
+						$("#auto_result").append(input);											
 					}
 					
 				},
@@ -66,7 +67,8 @@
 					alert("통신 실패!");
 				}
 			});
-		})
+		});
+		--%>
 		
 		
 		
@@ -224,6 +226,7 @@
                 </div>
             </div>
         </section>
+        <h1>${pDto.search_category }</h1>
 					<jsp:include page="/WEB-INF/views/paging.jsp">
 						<jsp:param value="C" name="class_list" />
 						<jsp:param value="${pDto.class_category }" name="class_category" />

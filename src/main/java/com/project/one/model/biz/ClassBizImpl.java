@@ -54,6 +54,11 @@ public class ClassBizImpl implements ClassBiz {
 	}
 	
 	@Override
+	public List<ClassDto> totalList() {
+		return dao.totalList();
+	}
+	
+	@Override
 	public List<ClassDto> main_selectList() {
 		return dao.main_selectList();
 	}

@@ -1,46 +1,29 @@
 package com.project.one.controller;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.project.one.model.biz.ClassBiz;
+import com.project.one.model.dto.PagingDto;
 
 
 @Controller
 public class KakaoMap {
 	
+	@Autowired
+	private ClassBiz biz;
+	
 	//메인에서 지도 클릭시
 	@RequestMapping("/map.do")
-	public String map() {
+	public String map(Model model ,int nowPage) {
+		int count = biz.classListCount();
+		System.out.println(count);
+		PagingDto pDto = new PagingDto(count, nowPage);
+		
+		model.addAttribute("list", biz.classListPaging(pDto));
+		model.addAttribute("pDto", pDto);
+		model.addAttribute("total",biz.totalList());
 		return "map";
 	}
-	
-	//등록된 클래스의 위치..클래스컨트롤러로 옮기는게 나은가...
-	@RequestMapping("/classmap.do")
-	public String classMap() {
-		
-		
-		
-		/*아래 코드는 예제 코드입니다.
-		 * 
-		 * 			PrintWriter out = response.getWriter();
-			
-			List<BusinessDto> list = biz.bookableMap();
-			JSONObject obj = new JSONObject();
-			JSONArray jsonArray = new JSONArray();
-			for(int i = 0; i<list.size(); i++) {
-				
-				
-				obj.put("business_addr",list.get(i).getBusiness_addr());
-			    obj.put("business_name", list.get(i).getBusiness_name());
-				
-				jsonArray.add(obj);
-			
-			}
-						
-			out.print(jsonArray);
-			out.flush();
-		 */
-		
-		return null;
-	}
-	
-
 }

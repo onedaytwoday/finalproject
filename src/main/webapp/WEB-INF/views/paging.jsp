@@ -71,7 +71,7 @@
 			
 			<c:when test="${param.class_list eq 'C' }">
 				<c:choose>
-					<c:when test="${param.class_search_category eq 'nickname' or param.class_search_category eq 'title+desc+category' }">
+					<c:when test="${param.class_search_category != ''}">
 						<c:url var="action" value="class_search.do"/>
 						<c:set var="search" value="&search_category=${param.class_search_category }&search_keyword=${param.search_keyword }" />
 					</c:when>
@@ -88,9 +88,9 @@
 			<c:when test="${param.review_category eq 'R'}">
 				<c:url var="action" value="review_list.do" />
 			</c:when>
-
-
-
+			<c:when test="${param.map_category eq 'M' }">
+				<c:url var="action" value="map.do"/>
+			</c:when>
 			<c:otherwise>
 				<c:url var="action" value="admin${param.board_category }.do" />
 			</c:otherwise>

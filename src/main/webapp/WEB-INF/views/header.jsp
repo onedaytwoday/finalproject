@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="resources/assets/css/slick.min.css">
     <link rel="stylesheet" href="resources/assets/css/slick-theme.min.css">
     <link rel="stylesheet" href="resources/assets/css/style.css?ver=3">
-
+<script src="resources/assets/js/vendor/jquery-1.12.4.min.js"></script>
 
 
 <style type="text/css">
@@ -91,7 +91,7 @@ padding: 10px;
 					for(var i=0;i<tmp.length;i++){
 						var rank_name = tmp[i]['rank_name'];
 						var rank_no = tmp[i]['rank_no'];
-						$('.search_ul').append("<li style='font-size:8pt;font-weight: 600;'><span class='rank'>" + rank_no +"&nbsp&nbsp&nbsp</span>" + rank_name +"</li>");
+						$('.search_ul').append("<li style='font-size:8pt;font-weight: 600;overflow:hidden;'><span class='rank'>" + rank_no +"&nbsp&nbsp&nbsp</span>" + rank_name +"</li>");
 						var count = $('#rank-list li').length;
 					    var height = $('#rank-list li').height();
 
@@ -171,6 +171,7 @@ padding: 10px;
                                     </li>
                                     <li><a href="board_qna_list.do?nowPage=1">QNA</a></li>
                                     <li><a href="review_list.do?nowPage=1">Photo</a></li>
+                                    <li><a href="map.do">Map</a></li>
                                 </ul>
                             </nav>
                         </div>
@@ -224,7 +225,7 @@ padding: 10px;
     
     <script src="resources/assets/js/vendor/modernizr-3.5.0.min.js"></script>
     <!-- Jquery, Popper, Bootstrap -->
-    <script src="resources/assets/js/vendor/jquery-1.12.4.min.js"></script>
+    
     <script src="resources/assets/js/popper.min.js"></script>
     <script src="resources/assets/js/bootstrap.min.js"></script>
     <!-- Jquery Mobile Menu -->
@@ -243,7 +244,6 @@ padding: 10px;
     <script src="resources/assets/js/jquery.sticky.js"></script>
     
     <!-- contact js -->
-    <script src="resources/assets/js/contact.js"></script>
     <script src="resources/assets/js/jquery.form.js"></script>
     <script src="resources/assets/js/jquery.validate.min.js"></script>
     <script src="resources/assets/js/mail-script.js"></script>

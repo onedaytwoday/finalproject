@@ -247,14 +247,6 @@ function fileDelete(fileNum){
    	    });
    	    return false;
 	}
-	
-	//지도
-	            window.onload = function(){
-                document.getElementById("classmap").onclick = function(){
-                    window.open('mapselect.do', '지도', 'width=500px, height=400px;');
-                }
-
-            };
 </script>
 
 </body>

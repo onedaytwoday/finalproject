@@ -111,15 +111,15 @@ public class ClassController {
 		PagingDto pDto = new PagingDto();
 		pDto.setSearch_category(search_category);
 		pDto.setSearch_keyword(search_keyword);
-		
 		int count = cBiz.classSearchCount(pDto);
+		System.out.println("count : " + count);
 		PagingDto dto = new PagingDto(count, nowPage);
 		dto.setSearch_category(search_category);
 		dto.setSearch_keyword(search_keyword);
-		
+		System.out.println(dto);
 		model.addAttribute("list", cBiz.classListSearch(dto));
 		model.addAttribute("pDto", dto);
-		
+			
 		return "class/class_list";
 	}
 		
@@ -357,7 +357,6 @@ public class ClassController {
 		
 		return map;
 	}
-	
 	public static String Random(int len) {
 		char[] charSet = new char[] { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'o', 'p', 'q',
 				'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
