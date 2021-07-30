@@ -12,82 +12,8 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="resources/js/sockjs.min.js"></script>
-
+<script type="text/javascript" src="resources/js/class.js"></script>
 <script type="text/javascript">
-	let checked
-	$(function(){
-		
-		$("#search_category").change(function(){
-			let category = $("select > option:selected").val();
-			checked = category == 'title+desc+category'
-		});
-		
-		<%--
-		$("[name=search_keyword]:eq(0)").on("propertychange change keyup paste input", function() {
-			$.ajax({
-				type: "post",
-				url: "autoComplete.do",
-				data: JSON.stringify({"keyword" : $("[name=search_keyword]:eq(0)").val()}),
-				contentType: "application/json",
-				dataType: "json",
-				success: function(result) {
-					let list = result.list;
-
-					for(let i=0; i<list.length; i++) {
-						let input = $("<input type='text' class='form-control bg-white' value=" + list[i] +" readonly />")
-						$("#auto_result").append(input)												
-					}
-					
-				},
-				error: function() {
-					alert("통신 실패!");
-				}
-			});
-		});
-		--%>
-		$("[name=search_keyword]:eq(0)").change(function(){
-			$.ajax({
-				type: "post",
-				url: "auto_class.do",
-				data: JSON.stringify({"keyword" : $("[name=search_keyword]:eq(0)").val()}),
-				contentType: "application/json",
-				dataType: "json",
-				success: function(result) {
-					console.log(result.list);
-					let list = result.list;
-
-					for(let i=0; i<list.length; i++) {
-						let input = $("<input type='text' class='form-control bg-white' value=" + list[i] +" readonly />")
-						$("#auto_result").append(input)												
-					}
-					
-				},
-				error: function() {
-					alert("통신 실패!");
-				}
-			});
-		})
-		
-		
-		
-		let category = "${category}";
-		if(category == "handmade"){
-			$('#nav-handmade-tab').addClass("active");
-		}else if(category == "cooking"){
-			$('#nav-cooking-tab').addClass("active");
-		}else if(category == "flower"){
-			$('#nav-flower-tab').addClass("active");
-		}else if(category == "drawing"){
-			$('#nav-drawing-tab').addClass("active");
-		}else if(category == "music"){
-			$('#nav-music-tab').addClass("active");
-		}else if(category == "yoga"){
-			$('#nav-yoga-tab').addClass("active");
-		}else if(category == ""){
-			$('#nav-home-tab').addClass("active");
-		}
-	});
-	
 	function ranking(){
 		if(checked){
 			let list = ['class', $("[name='search_keyword']:eq(0)").val()]
@@ -194,14 +120,34 @@
 							</c:if>
 						
                             <aside class="single_sidebar_widget search_widget">
+                            
+                            	<div class="switch-wrap d-flex justify-content-start">
+									<p>자동완성</p>
+									
+									<c:choose>
+										<c:when test="${mDto != null and mDto.member_auto == 'Y' }">
+											<p id="on" name="on_off">ON</p><p id="off" name="on_off" style="display:none;">OFF</p>
+										</c:when>
+										<c:otherwise>
+											<p id="off" name="on_off">OFF</p><p id="on" name="on_off" style="display:none;">ON</p>
+										</c:otherwise>
+									</c:choose>
+									
+									<div class="primary-switch mt-1 ml-2">
+										<input type="checkbox" id="default-switch" name="onoff">
+										<label for="default-switch"></label>
+									</div>
+								</div>
+                                
                                 <form action="class_search.do" method="post">
                                 	<input type="hidden" name="nowPage" value="1">
                                     <div class="form-group">  
-                                    	<div class="default-select" id="default-select">
+	                                    <div class="default-select" id="default-select">
 											<select class="shipping_select" id="search_category" name="search_category">
 												<option value="nickname" selected>닉네임</option>
 												<option value="title+desc+category">클래스명+설명+내용</option>
 											</select>
+											
 										</div>
 										
                                         <div id="searchInput" class="input-group ">

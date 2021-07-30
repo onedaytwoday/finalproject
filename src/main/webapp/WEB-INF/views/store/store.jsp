@@ -14,7 +14,11 @@
 <script src="resources/js/sockjs.min.js"></script>
 
 <script type="text/javascript">
+	let autoChecked = "${mDto.member_auto}";
+	
 	$(function(){
+		on_off();
+		
 		let category = "${category}";
 		if(category == "handmade"){
 			$('#nav-handmade-tab').addClass("active");
@@ -32,6 +36,30 @@
 			$('#nav-home-tab').addClass("active");
 		}
 		
+		if(autoChecked === 'Y') {
+			$("#default-switch").attr('checked', true);
+		}
+		
+		let onoff = $("[name=onoff]");
+		onoff.click(function(){
+			$("[name=on_off]").toggle();
+			
+			on_off();
+		});
+		
+	});
+	
+	function on_off() {
+		if($("#on").is(":visible")) {
+			alert("on")
+			getAutoCompleted();
+		} else {
+			alert("off")
+			$("#auto_result").empty();
+		}
+	}
+	
+	function getAutoCompleted() {
 		$("[name=search_keyword]:eq(0)").change(function(){
 			$.ajax({
 				type: "post",
@@ -40,7 +68,6 @@
 				contentType: "application/json",
 				dataType: "json",
 				success: function(result) {
-					console.log(result.list);
 					let list = result.list;
 
 					for(let i=0; i<list.length; i++) {
@@ -54,7 +81,7 @@
 				}
 			});
 		});
-	});
+	}
 
 	function ranking(){
 		let list = ['product', $("[name='search_keyword']:eq(0)").val()]
@@ -116,6 +143,25 @@
 			</c:if>
                         
             <aside class="single_sidebar_widget search_widget">
+            
+            	<div class="switch-wrap d-flex justify-content-start">
+					<p>자동완성</p>
+					
+					<c:choose>
+						<c:when test="${mDto != null and mDto.member_auto == 'Y' }">
+							<p id="on" name="on_off">ON</p><p id="off" name="on_off" style="display:none;">OFF</p>
+						</c:when>
+						<c:otherwise>
+							<p id="off" name="on_off">OFF</p><p id="on" name="on_off" style="display:none;">ON</p>
+						</c:otherwise>
+					</c:choose>
+					
+					<div class="primary-switch mt-1 ml-2">
+						<input type="checkbox" id="default-switch" name="onoff">
+						<label for="default-switch"></label>
+					</div>
+				</div>
+            
             	<form action="store_search.do" method="post">
                  	<input type="hidden" name="nowPage" value="1">
                 
