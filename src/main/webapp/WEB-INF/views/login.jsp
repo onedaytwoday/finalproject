@@ -107,8 +107,8 @@
 				        	    <div class="login_part_text text-center">
 				            	    <div class="login_part_text_iner">
 				                	    <h2>아직 회원이 아니신가요?</h2>
-				                        <p>There are advances being made in science and technology
-				                    	    everyday, and a good example of this is the</p>
+				                	    <p>If you are not a member of the OneDay Twoday,<br> 
+				                	    please click the sign up button and register as a member.</p>
 				                        <a href="signup.do" class="btn_3">회원가입 하러가기</a>
 				                    </div>
 				                </div>

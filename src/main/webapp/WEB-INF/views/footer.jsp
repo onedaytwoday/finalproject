@@ -37,7 +37,7 @@
                                 <h4>Developers</h4>
                                 <ul class="row">
                                     <li class="col-md-6"><a href="https://github.com/NamMinHyuk">Nam Min Hyuk</a></li>
-                                    <li class="col-md-6"><a href="https://github.com/skwak0205">Kwak So Jung</a></li>
+                                    <li class="col-md-6"><a href="https://github.com/skwak0205">Kwak Soo Jung</a></li>
                                     <li class="col-md-6"><a href="https://github.com/kimkj1108">Kim Jung Gyu</a></li>
                                     <li class="col-md-6"><a href="https://github.com/heeju-g">Sim Hee Ju</a></li>
                                     <li class="col-md-12"><a href="https://github.com/U1mong">An Jae Wan</a></li>

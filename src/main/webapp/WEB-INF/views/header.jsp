@@ -113,10 +113,10 @@ padding: 10px;
 			
 			
 			$('#iconImg').click(function(){
-	    		window.open('http://localhost:8787/one/chat_main.do?member_id=${mDto.member_id }' ,'채팅', 'width=400px,height=500px,scrollbars=yes');
+	    		window.open('http://132.226.236.97:8787/finalproject/chat_main.do?member_id=${mDto.member_id }' ,'채팅', 'width=400px,height=500px,scrollbars=yes');
 	    	});
 			$('#Img').click(function(){
-	    		window.open('http://localhost:8787/one/chat_room.do' ,'채팅', 'width=400px,height=500px,scrollbars=yes');
+	    		window.open('http://132.226.236.97:8787/finalproject/chat_room.do' ,'채팅', 'width=400px,height=500px,scrollbars=yes');
 	    	});
 	    	
 		});
