@@ -84,6 +84,11 @@ public class ClassBizImpl implements ClassBiz {
 	}
 
 	@Override
+	public int class_location(ClassDto dto) {
+		return dao.class_location(dto);
+	}
+	
+	@Override
 	public int update(ClassDto dto) {
 		return dao.update(dto);
 	}

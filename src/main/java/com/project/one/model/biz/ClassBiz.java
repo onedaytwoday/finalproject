@@ -28,7 +28,9 @@ public interface ClassBiz {
 	public ClassDto selectOneByTitle(String class_title);
 
 	public int insert(ClassDto dto);
-
+	
+	public int class_location(ClassDto dto);
+	
 	public int update(ClassDto dto);
 	
 	public int updateSale(ClassDto dto);

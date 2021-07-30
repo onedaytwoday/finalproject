@@ -256,12 +256,17 @@ public class ClassController {
 
 	@ResponseBody
 	@RequestMapping(value = "/classInsertRes.do", method = RequestMethod.POST)
-	public String fileUpload(@RequestParam("files") List<MultipartFile> multipartFile, ClassDto dto,
+	public String fileUpload(@RequestParam("files") List<MultipartFile> multipartFile, ClassDto dto, 
 			HttpServletRequest request) {
 		if (cBiz.insert(dto) > 0) {
 			System.out.println("class insert 성공");
 		} else {
 			System.out.println("class insert 실패");
+		}
+		if (cBiz.class_location(dto) > 0) {
+			System.out.println("위도경도 성공");
+		}else {
+			System.out.println("위도경도 실패");
 		}
 		int class_no = dto.getClass_no();
 		System.out.println("class no : " + class_no);

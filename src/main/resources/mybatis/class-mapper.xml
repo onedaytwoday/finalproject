@@ -79,6 +79,11 @@
 		</selectKey>
 	</insert>
 	
+	<insert id="class_location" parameterType="classDto">
+		INSERT INTO CLASS_LOCATION
+		VALUES(#{class_no},#{class_lat},#{class_lng})
+	</insert>
+	
 	<update id="update" parameterType="classDto">
 		UPDATE CLASS
 		SET CLASS_TITLE = #{class_title}, CLASS_DESC = #{class_desc}, CLASS_LOC = #{class_loc}, CLASS_PRICE = #{class_price}, CLASS_SALE = #{class_sale} 
