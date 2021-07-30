@@ -1,7 +1,6 @@
-let checked = false;
 $(function() {
 	on_off();
-
+	
 	let autoChecked = $("#member_auto").val();
 
 	let category = "${category}";
@@ -21,14 +20,6 @@ $(function() {
 		$('#nav-home-tab').addClass("active");
 	}
 
-	$("#search_category").change(function() {
-		let category = $("select > option:selected").val();
-
-		if (category == 'title+desc+category') {
-			checked = true;
-		}
-	});
-
 	if (autoChecked === 'Y') {
 		$("#default-switch").attr('checked', true);
 	}
@@ -36,18 +27,21 @@ $(function() {
 	let onoff = $("[name=onoff]");
 	onoff.click(function() {
 		$("[name=on_off]").toggle();
+
+		on_off();
 	});
 
-	$("#close").click(function(){
+	$("#close").click(function() {
 		$("#auto_result").empty();
 	});
+
 });
 
 function on_off() {
 	if ($("#on").is(":visible")) {
 		alert("on")
 		getAutoCompleted();
-
+		
 	} else {
 		alert("off")
 		$("#auto_result").empty();
@@ -56,30 +50,29 @@ function on_off() {
 
 function getAutoCompleted() {
 	$("[name=search_keyword]:eq(0)").change(function() {
-		if (checked) {
-			$.ajax({
-				type: "post",
-				url: "auto_class.do",
-				data: JSON.stringify({ "keyword": $("[name=search_keyword]:eq(0)").val() }),
-				contentType: "application/json",
-				dataType: "json",
-				success: function(result) {
-					let list = result.list;
+		$.ajax({
+			type: "post",
+			url: "auto_product.do",
+			data: JSON.stringify({ "keyword": $("[name=search_keyword]:eq(0)").val() }),
+			contentType: "application/json",
+			dataType: "json",
+			success: function(result) {
+				let list = result.list;
 
-					for (let i = 0; i < list.length; i++) {
-						let input = $(`<input id=${i} type='text' class='form-control bg-white border-right' style="cursor:pointer;" value= ${list[i]} readonly />`);
-						$("#auto_result").append(input);
-					
-						$(`#${i}`).click(function(){
-							let newInput = $(`#${i}`).val();
-							$("[name=search_keyword]:eq(0)").val(newInput);
-						});
-					}
-				},
-				error: function() {
-					alert("통신 실패!");
+				for (let i = 0; i < list.length; i++) {
+					let input = $(`<input id=${i} type='text' class='form-control bg-white border-right' style="cursor:pointer;" value= ${list[i]} readonly />`);
+					$("#auto_result").append(input);
+
+					$(`#${i}`).click(function() {
+						let newInput = $(`#${i}`).val();
+						$("[name=search_keyword]:eq(0)").val(newInput);
+					});
 				}
-			});
-		}
+
+			},
+			error: function() {
+				alert("통신 실패!");
+			}
+		});
 	});
 }

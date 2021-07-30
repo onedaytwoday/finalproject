@@ -137,7 +137,7 @@ public class MemberController {
 					if(dto.getMember_ip().equals(mDto.getMember_ip())) {
 						ip_chk = true;
 					}
-					
+					System.out.println(eBiz.selectList());
 					if(eBiz.selectList() != null) {
 						 alarm = true;
 					 }

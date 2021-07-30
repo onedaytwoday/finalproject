@@ -12,77 +12,8 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="resources/js/sockjs.min.js"></script>
-
+<script type="text/javascript" src="resources/js/product.js"></script>
 <script type="text/javascript">
-	let autoChecked = "${mDto.member_auto}";
-	
-	$(function(){
-		on_off();
-		
-		let category = "${category}";
-		if(category == "handmade"){
-			$('#nav-handmade-tab').addClass("active");
-		}else if(category == "cooking"){
-			$('#nav-cooking-tab').addClass("active");
-		}else if(category == "flower"){
-			$('#nav-flower-tab').addClass("active");
-		}else if(category == "drawing"){
-			$('#nav-drawing-tab').addClass("active");
-		}else if(category == "music"){
-			$('#nav-music-tab').addClass("active");
-		}else if(category == "yoga"){
-			$('#nav-yoga-tab').addClass("active");
-		}else if(category == ""){
-			$('#nav-home-tab').addClass("active");
-		}
-		
-		if(autoChecked === 'Y') {
-			$("#default-switch").attr('checked', true);
-		}
-		
-		let onoff = $("[name=onoff]");
-		onoff.click(function(){
-			$("[name=on_off]").toggle();
-			
-			on_off();
-		});
-		
-	});
-	
-	function on_off() {
-		if($("#on").is(":visible")) {
-			alert("on")
-			getAutoCompleted();
-		} else {
-			alert("off")
-			$("#auto_result").empty();
-		}
-	}
-	
-	function getAutoCompleted() {
-		$("[name=search_keyword]:eq(0)").change(function(){
-			$.ajax({
-				type: "post",
-				url: "auto_product.do",
-				data: JSON.stringify({"keyword" : $("[name=search_keyword]:eq(0)").val()}),
-				contentType: "application/json",
-				dataType: "json",
-				success: function(result) {
-					let list = result.list;
-
-					for(let i=0; i<list.length; i++) {
-						let input = $("<input type='text' class='form-control bg-white' value=" + list[1] +" readonly />")
-						$("#auto_result").append(input)												
-					}
-					
-				},
-				error: function() {
-					alert("통신 실패!");
-				}
-			});
-		});
-	}
-
 	function ranking(){
 		let list = ['product', $("[name='search_keyword']:eq(0)").val()]
 		sock.send(list);
@@ -145,6 +76,7 @@
             <aside class="single_sidebar_widget search_widget">
             
             	<div class="switch-wrap d-flex justify-content-start">
+            		<input type="hidden" id="member_auto" value="${mDto.member_auto }" />
 					<p>자동완성</p>
 					
 					<c:choose>
@@ -167,7 +99,8 @@
                 
                     <div class="form-group">  										
                     	<div class="input-group">
-                        	<input type="text" class="form-control" name="search_keyword" placeholder="Search term..." onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search term...'">
+                        	<input type="text" class="position-relative form-control border-right" name="search_keyword" placeholder="Search term..." onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search term...'" autocomplete=off>
+                        	<i id="close" class="bi bi-x-lg position-absolute t-50 r-0" style="cursor:pointer; top: 25%; right: 5%;"></i>
                         </div>
                     </div>
                     

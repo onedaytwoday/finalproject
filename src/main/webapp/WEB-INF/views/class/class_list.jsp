@@ -58,21 +58,21 @@
 	</div>
 	<main class="container mb-100">
 		<div class="row product-btn justify-content-between mb-40">
-                    <div class="properties__button">
-                        <!--Nav Button  -->
-                        <nav>                                                      
-                            <div class="nav nav-tabs" id="nav-tab" >
-                                <a class="nav-item nav-link" id="nav-home-tab" href="classList.do?nowPage=1">All</a>
-                                <a class="nav-item nav-link" id="nav-handmade-tab" href="class_category.do?category=handmade&nowPage=1">handmade</a>
-                                <a class="nav-item nav-link" id="nav-cooking-tab"href="class_category.do?category=cooking&nowPage=1">cooking</a>
-                                <a class="nav-item nav-link" id="nav-flower-tab" href="class_category.do?category=flower&nowPage=1">flower</a>
-                                <a class="nav-item nav-link" id="nav-drawing-tab" href="class_category.do?category=drawing&nowPage=1">drawing</a>
-                                <a class="nav-item nav-link" id="nav-music-tab" href="class_category.do?category=music&nowPage=1">music</a>
-                            	<a class="nav-item nav-link" id="nav-yoga-tab" href="class_category.do?category=yoga&nowPage=1">yoga</a>
-                            </div>
-                        </nav>
+        	<div class="properties__button">
+            	<!--Nav Button  -->
+                <nav>                                                      
+                	<div class="nav nav-tabs" id="nav-tab" >
+                    	<a class="nav-item nav-link" id="nav-home-tab" href="classList.do?nowPage=1">All</a>
+                        <a class="nav-item nav-link" id="nav-handmade-tab" href="class_category.do?category=handmade&nowPage=1">handmade</a>
+                        <a class="nav-item nav-link" id="nav-cooking-tab"href="class_category.do?category=cooking&nowPage=1">cooking</a>
+                        <a class="nav-item nav-link" id="nav-flower-tab" href="class_category.do?category=flower&nowPage=1">flower</a>
+                        <a class="nav-item nav-link" id="nav-drawing-tab" href="class_category.do?category=drawing&nowPage=1">drawing</a>
+                        <a class="nav-item nav-link" id="nav-music-tab" href="class_category.do?category=music&nowPage=1">music</a>
+                        <a class="nav-item nav-link" id="nav-yoga-tab" href="class_category.do?category=yoga&nowPage=1">yoga</a>
                     </div>
-                </div>
+                </nav>
+            </div>
+        </div>
 		<section class="blog_area section-padding">
             <div class="container">
                 <div class="row">
@@ -122,6 +122,7 @@
                             <aside class="single_sidebar_widget search_widget">
                             
                             	<div class="switch-wrap d-flex justify-content-start">
+                            		<input type="hidden" id="member_auto" value="${mDto.member_auto }" />
 									<p>자동완성</p>
 									
 									<c:choose>
@@ -151,9 +152,11 @@
 										</div>
 										
                                         <div id="searchInput" class="input-group ">
-                                            <input type="text" class="d-block form-control" name="search_keyword" placeholder="Search term..." autocomplete=off
+                                            <input type="text" class="position-relative form-control border-right" name="search_keyword" placeholder="Search term..." autocomplete=off
                                                 onfocus="this.placeholder = ''"
                                                 onblur="this.placeholder = 'Search term...'">
+                                                
+                                            <i id="close" class="bi bi-x-lg position-absolute t-50 r-0" style="cursor:pointer; top: 25%; right: 5%;"></i>
                                         </div>
                                         
                                         <div id="auto_result">

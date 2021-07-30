@@ -156,7 +156,7 @@ public class EventController {
 	public Map<String, List<EventDto>> get_events(){
 		Map<String, List<EventDto>> map = new HashMap<>();
 		List<EventDto> list = eBiz.selectList();
-		
+		System.out.println("list : " + list);
 		map.put("list", list);
 		
 		
