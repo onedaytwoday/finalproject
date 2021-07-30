@@ -43,7 +43,21 @@ public class ClassDaoImpl implements ClassDao {
 
 		return list;
 	}
+	
+	@Override
+	public List<ClassDto> main_selectList() {
+		List<ClassDto> list = new ArrayList<ClassDto>();
 
+		try {
+			list = sqlSession.selectList(NAMESPACE + "main_selectList");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return list;
+	}
+	
 	@Override
 	public ClassDto selectOne(int class_no) {
 		ClassDto dto = null;
@@ -207,6 +221,20 @@ public class ClassDaoImpl implements ClassDao {
 		}
 		
 		return res;		
+	}
+
+	@Override
+	public List<ClassDto> searchedList(String search_keyword) {
+		List<ClassDto> list = new ArrayList<ClassDto>();
+
+		try {
+			list = sqlSession.selectList(NAMESPACE + "searchedList", search_keyword);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return list;
 	}
 
 }

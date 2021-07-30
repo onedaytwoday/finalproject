@@ -7,55 +7,167 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Insert title here</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-      crossorigin="anonymous"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"
-    />
-    
-    <link rel="stylesheet" href="resources/css/main.css">
-    
-	<script
-	      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-	      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-	      crossorigin="anonymous"
-	    ></script>
-	<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>	
-	<script type="text/javascript" src="resources/js/main.js"></script>
+    <link rel="stylesheet" href="resources/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="resources/assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="resources/assets/css/slicknav.css">
+    <link rel="stylesheet" href="resources/assets/css/slick.css">
+    <link rel="stylesheet" href="resources/assets/css/slick.min.css">
+    <link rel="stylesheet" href="resources/assets/css/slick-theme.min.css">
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>	
+<script type="text/javascript">
+$(document).ready(function(){
+	$('.add').click(function(){
+		var i = $(this).siblings('#product_no').val();
+		var j = $(this).siblings('#product_name').val();
+		var k = $(this).siblings('#product_price').val();
+		let productVal = {
+				"product_no" : i,
+				"product_name" : j,
+				"product_price" : k
+		}
+	
+		$.ajax({
+			type: "post",
+			url: "addToBasket.do",
+			data: JSON.stringify(productVal),
+			contentType: "application/json",
+			dataType: "json",
+			success: function(msg) {
+				console.log(msg.result);
+				
+				if(msg.result == "성공") {
+					let redirect = confirm("장바구니에 넣었습니다. 장바구니로 이동하시겠습니까?");
+					
+					if(redirect) {
+						location.href='basket.do';
+					}
+				}
+			},
+			error: function() {
+				alert("통신 실패!");
+			}
+		});
+	});
+	
+});
+	</script>
 </head>
 
 <body>
 	<jsp:include page="header.jsp"></jsp:include>  
-		
-	<%--이벤트 배너 --%>
-    <section>
-		<div id="carouselExampleCaptions" class="carousel slide carousel-fade" data-bs-ride="carousel">
-		  <div id="indicator" class="carousel-indicators">
-		   
-		  </div>
-		  
-		  <div id="banner" class="carousel-inner">
-		    
-		  </div>
-		  
-		  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-		    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-		    <span class="visually-hidden">Previous</span>
-		  </button>
-		  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-		    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-		    <span class="visually-hidden">Next</span>
-		  </button>
-		</div>
-    </section>
-
+	<!--? slider Area Start -->
+        <div class="slider-area product_image_area" style="margin-top: 130px; ">
+            		<div class="row justify-content-center">
+                <div class="col-lg-12">
+                <div class="product_img_slide owl-carousel">
+                	 <c:choose>
+                		<c:when test="${empty list }">
+                			<div>이벤트 없음</div>
+                		</c:when>
+                		<c:otherwise>
+                		<c:forEach items="${list }" var="dto">
+                    		<div class="single_product_img">
+                        		<img src="resources/assets/img/gallery/gallery1.png" alt="#" class="img-fluid">
+                    		</div>
+                		</c:forEach>
+                    	</c:otherwise>
+                    </c:choose>
+                </div>
+                </div>
+                </div>
+                </div>
+        <!-- slider Area End-->
+        <!-- ? New Product Start -->
+        <section class="new-product-area section-padding30">
+            <div class="container">
+                <!-- Section tittle -->
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="section-tittle mb-70">
+                            <h2>Recommend Class</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                <c:choose>
+				<c:when test="${empty clist }">
+                	<div>클래스 없음</div>
+                </c:when>
+                <c:otherwise>
+                <c:forEach items="${clist }" var="dto">
+                
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+                        <div class="single-new-pro mb-30 text-center">
+                            <div class="product-img">
+                                <img src="resources/assets/img/gallery/new_product1.png" alt="">
+                            </div>
+                            <div class="product-caption">
+                                <h3><a href="classSelect.do?class_no=${dto.class_no }">${dto.class_title }</a></h3>
+                                <span>${dto.class_price }원</span>
+                            </div>
+                        </div>
+                    </div>
+                </c:forEach>
+                </c:otherwise>
+               </c:choose>
+               </div>
+            </div>
+        </section>
+        <!--  New Product End -->
+        <!--? Popular Items Start -->
+        <div class="popular-items section-padding30">
+            <div class="container">
+                <!-- Section tittle -->
+                <div class="row justify-content-center">
+                    <div class="col-xl-7 col-lg-8 col-md-10">
+                        <div class="section-tittle mb-70 text-center">
+                            <h2>Popular Items</h2>
+                            <p>Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                	<c:choose>
+					<c:when test="${empty plist }">
+                		<div>상품 없음</div>
+                	</c:when>
+               		<c:otherwise>
+                	<c:forEach items="${plist }" var="dto">
+                		
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+                        <div class="single-popular-items mb-50 text-center">
+                            <div class="popular-img">
+                                <img src="resources/assets/img/gallery/popular1.png" alt="">
+                                <c:if test="${mDto != null }">
+                                <div class="img-cap">
+                                    <div class="add"><span>Add to cart</span></div>
+                                    <input type="hidden" id="product_no" name="product_no" value="${dto.product_no }">
+                                    <input type="hidden" id="product_name" name="product_name" value="${dto.product_name }">
+                                    <input type="hidden" id="product_price" name="product_price" value="${dto.product_price }">
+                                </div>
+                                </c:if>
+                            </div>
+                            <div class="popular-caption">
+                                <h3><a href="store_select.do?product_no=${dto.product_no }">${dto.product_name }</a></h3>
+                                <span>${dto.product_price }원</span>
+                            </div>
+                        </div>
+                    </div>
+                	</c:forEach>
+               		</c:otherwise>
+               		</c:choose>
+                </div>
+                <!-- Button -->
+                <div class="row justify-content-center">
+                	<button type="button" class="button button-contactForm btn_1 boxed-btn" onclick="location.href='store.do?nowPage=1'">View More Products</button>
+                </div>
+            </div>
+        </div>
+        <!-- Popular Items End -->
+        
+    <script src="resources/assets/js/main.js"></script>
     <jsp:include page="footer.jsp"></jsp:include>
-    
+
 <!-- 채널톡 -->
 <script>
   (function() {

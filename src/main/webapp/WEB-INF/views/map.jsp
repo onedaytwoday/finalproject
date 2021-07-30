@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%--아래 확인용 코드 --%>	
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,23 +10,37 @@
     
 </head>
 <body>
+	<input type="hidden" value="">
+	<c:forEach items="${list }" var="dto">
+		<div>${dto.class_title }>	
+		<a href="#">${dto.class_loc } </a>
+	</c:forEach>
+<%-----------위 바디태그 전까지 확인용 코드----------- --%>
 <p style="margin-top:-12px">
 
 </p>
 <div id="map" style="width:100%;height:350px;"></div>
-<div>${list }</div>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b09278ee8c0d306e4d38397589fed58d&libraries=services"></script>
 <script>
 
 var data = '${list }';
-var list = new Array();
+var class_title = '${dto.class_title }'//이건 왜 값이 안뜰까?
+var list = new Array(data);
+alert(data);
+//alert('${dto.class_title }');
+//alert('${list }');
+//alert("["+data+"]");
+
+//alert(list);//값없음
+
 for(var i = 0; i<data.length;i++){//리스트가 뭔지 정의되어있지 않다?무슨에러지...
 		list[i] = new Array();
 		list[i][0] = data[i].class_loc;
 		list[i][1] = data[i].class_title;
 }
-
+var listData = "["+list+"]";
+//alert(listData);
 var name = '어딘가'
 var addr = '서울 강남구 삼성동 112-1'
 

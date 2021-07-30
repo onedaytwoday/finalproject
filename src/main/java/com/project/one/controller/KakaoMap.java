@@ -37,7 +37,9 @@ public class KakaoMap {
 	
 	@Autowired
 	private ClassBiz cBiz;
+	private ClassDto cDto;
 
+	private static int CLASS_NO;
 	
 	//메인에서 지도 클릭시
 	@RequestMapping("/map.do")
@@ -47,7 +49,7 @@ public class KakaoMap {
 		List<ClassDto> list = cBiz.selectList();
 		model.addAttribute("list", list);
 
-		return "map";
+		return "map4";
 	}
 	
 	

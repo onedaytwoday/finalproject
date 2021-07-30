@@ -25,7 +25,12 @@ public class ProductBizImpl implements ProductBiz {
 	public List<ProductDto> productList(PagingDto pDto) {
 		return dao.productList(pDto);
 	}
-
+	
+	@Override
+	public List<ProductDto> main_selectList() {
+		return dao.main_selectList();
+	}
+	
 	@Override
 	public ProductDto selectOne(int product_no) {
 		return dao.selectOne(product_no);
@@ -83,6 +88,11 @@ public class ProductBizImpl implements ProductBiz {
 	public int productSearchCount(StorePagingDto pDto) {
 		
 		return dao.productSearchCount(pDto);
+	}
+
+	@Override
+	public List<ProductDto> searchedList(String search_keyword) {
+		return dao.searchedList(search_keyword);
 	}
 
 }

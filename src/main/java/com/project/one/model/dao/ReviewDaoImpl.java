@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.project.one.model.dto.ReviewDto;
+import com.project.one.model.dto.SearchDto;
 
 @Repository
 public class ReviewDaoImpl implements ReviewDao {
@@ -30,17 +31,43 @@ public class ReviewDaoImpl implements ReviewDao {
 	}
 	
 	@Override
-	public List<ReviewDto> avgList(int product_no) {
-		List<ReviewDto> list = new ArrayList<ReviewDto>();
+	public List<SearchDto> search() {
+		List<SearchDto> list = new ArrayList<SearchDto>();
 
 		try {
-			list = sqlSession.selectList(NAMESPACE + "avgList",product_no);
+			list = sqlSession.selectList(NAMESPACE + "search");
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 		return list;
+	}
+	
+	@Override
+	public double avgListByProduct(int product_no) {
+		double res = 0;
+		
+		try {
+			res = sqlSession.selectOne(NAMESPACE + "avgListByProduct", product_no);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+	
+	@Override
+	public double avgListByClass(int class_no) {
+		double res = 0;
+		
+		try {
+			res = sqlSession.selectOne(NAMESPACE + "avgListByClass", class_no);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res;
 	}
 	
 
@@ -149,6 +176,32 @@ public class ReviewDaoImpl implements ReviewDao {
 
 		return res;
 		
+	}
+
+	@Override
+	public List<ReviewDto> listByClass(int class_no) {
+		List<ReviewDto> list = new ArrayList<ReviewDto>();
+		
+		try {
+			list = sqlSession.selectList(NAMESPACE+"listByClass", class_no);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+
+	@Override
+	public List<ReviewDto> listByProduct(int product_no) {
+		List<ReviewDto> list = new ArrayList<ReviewDto>();
+		
+		try {
+			list = sqlSession.selectList(NAMESPACE+"listByProduct", product_no);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
 	}
 
 }

@@ -8,19 +8,6 @@
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css" rel="stylesheet" />
 <link href="resources/css/chat.css" rel="stylesheet" />
-<style type="text/css">
-.circle{
-	background-color:red;
-	width:20px; 
-	height:20px;
-	border-radius:50%;
-	text-align:center;
-	margin:0 auto;
-	font-size:12pt;
-	color:#fff;
-	vertical-align:middle;
-}
-</style>
 </head>
 <body>
 	<div class="inbox_people">
@@ -54,7 +41,7 @@
                   						<c:otherwise>
                   							<c:forEach items="${chatread }" var="c_dto">
 												<c:if test="${c_dto.room_no eq dto.room_no }">
-													<span class="circle">${c_dto.cnt }</span>
+													<div class="circle">${c_dto.cnt }</div>
 												</c:if>
 											</c:forEach>
 										</c:otherwise>

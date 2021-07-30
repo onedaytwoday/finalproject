@@ -7,71 +7,107 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+	<link rel="stylesheet" href="resources/assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="resources/assets/css/owl.carousel.min.css">
+	<link rel="stylesheet" href="resources/assets/css/flaticon.css">
+    <link rel="stylesheet" href="resources/assets/css/slicknav.css">
+    <link rel="stylesheet" href="resources/assets/css/animate.min.css">
+    <link rel="stylesheet" href="resources/assets/css/magnific-popup.css">
+    <link rel="stylesheet" href="resources/assets/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="resources/assets/css/themify-icons.css">
+    <link rel="stylesheet" href="resources/assets/css/slick.css">
+    <link rel="stylesheet" href="resources/assets/css/nice-select.css">
+    <link rel="stylesheet" href="resources/assets/css/style.css">
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script type="text/javascript" src="resources/js/basket.js"></script>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script type="text/javascript" src="resources/js/basket.js"></script>
 </head>
 <body>
 <jsp:include page="header.jsp"></jsp:include>
-	<main class="container">
-		<h1>장바구니</h1>
-		
-		<table border="1">
-			<col width="100" />
-			<col width="100" />
-			<col width="150" />
-			<col width="100" />
-			<tr>
-				<th>상품</th>
-				<th>상품명</th>
-				<th>수량</th>
-				<th>가격</th>
-				<th></th>
-			</tr>
-			<c:choose>
-				<c:when test="${empty bList }">
-					<tr>
-						<th colspan="4">------------장바구니가 비었습니다.------------</th>
-					</tr>
-				</c:when>
-				<c:otherwise>
-					<c:forEach items="${bList }" var="dto" varStatus="status">
-						<tr>
-							<td>상품사진</td>
-							<td><a href="store_select.do?product_no=${pList[status.index].product_no }">${pList[status.index].product_name }</a></td>
-							<td>
-								<i onclick="updateBasket(${dto.basket_no}, ${pList[status.index].product_price},'increase')" class="bi bi-plus-square" style="font-size:1.5rem; margin-right: 0.5rem; cursor:pointer;"></i>
-									
-									<span id="${dto.basket_no }">${dto.basket_num > 0 ? dto.basket_num : 0}</span>
-								
-								<i onclick="updateBasket(${dto.basket_no}, ${pList[status.index].product_price},'decrease')" class="bi bi-dash-square" style="font-size:1.5rem; margin-left: 0.5rem; cursor:pointer;"></i>
-							</td>
-							<td id="${dto.basket_no }_price">${dto.basket_price > 0 ? dto.basket_price : 0}원</td>
+	<main class="container my-0">
+      <section class="cart_area section_padding">
+        <div class="container">
+          <div class="cart_inner">
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">상품</th>
+                    <th scope="col">가격</th>
+                    <th scope="col">수량</th>
+                    <th scope="col">Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                	<c:choose>
+						<c:when test="${empty bList }">
 							
-							<td><i onclick="location.href='deleteBasket.do?basket_no=${dto.basket_no}'" class="bi bi-trash" style="font-size:1.5rem; cursor:pointer;"></i></td>
-						</tr>
-					</c:forEach>
-				</c:otherwise>
-			</c:choose>
-		</table>
-	
-		<div style="border: 1px solid lightgray; width: fit-content; margin-top: 2rem; padding: 2rem;">
-			<h3>Total</h3>
-			
-			<form action="payment.do" method="post" style="display:flex; flex-direction:column;">
-				<p style="margin-bottom: 1rem;">총 수량 : <input type="text" id="total_num" name="payment_num" readonly /></p> 
-				<p style="margin-bottom: 1rem;">총 가격 : <input type="text" id="total_price" name="payment_price" readonly />원</p>
-				
-				<input type="hidden" name="basket_group" value="${basket_group }" />
-				<input type="hidden" name="product_name" value="장바구니에서 구매" />
-				<input type="hidden" name="type" value="basket" />
-				
-				<input type="submit" value="결제 하기" />
-			</form>
-		</div>
+						</c:when>
+						<c:otherwise>
+							<c:forEach items="${bList }" var="dto" varStatus="status">
+								<tr>
+				                    <td>
+				                      <div class="media">
+				                        <div class="d-flex">
+				                          <img src="resources/assets/img/gallery/card1.png" alt="" />
+				                        </div>
+				                        <div class="media-body">
+				                          <span style="cursor:pointer;" onclick="location.href='store_select.do?product_no=${pList[status.index].product_no }'">${pList[status.index].product_name }</span>
+				                        </div>
+				                      </div>
+				                    </td>
+				                    <td>
+				                      <h5>${pList[status.index].product_price }원</h5>
+				                    </td>
+				                    <td>
+				                      <div class="product_count">
+				                        <span class="input-number-decrement" onclick="updateBasket(${dto.basket_no}, ${pList[status.index].product_price},'decrease')"> <i class="ti-minus"></i></span>
+                          				<input id="${dto.basket_no }" class="input-number" type="text" value="${dto.basket_num > 0 ? dto.basket_num : 0}" readonly>
+                          				<span class="input-number-increment" onclick="updateBasket(${dto.basket_no}, ${pList[status.index].product_price},'increase')"> <i class="ti-plus"></i></span>
+				                      </div>
+				                    </td>
+				                    <td>
+				                      <h5 id="${dto.basket_no }_price">${dto.basket_price > 0 ? dto.basket_price : 0}원</h5>
+				                    </td>
+				                    <td>
+				                    	<i onclick="location.href='deleteBasket.do?basket_no=${dto.basket_no}'" class="bi bi-trash" style="font-size:1.5rem; cursor:pointer;"></i>
+				                    </td>
+				                  </tr>
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>                  
+                  
+                  <tr>
+                  	<td></td>
+                    <td><h5>수량</h5></td>
+                    <td><h5 id="num"></h5></td>
+                    <td>
+                      <h5>Total</h5>
+                    </td>
+                    <td><h5 id="total"></h5></td>
+                  </tr>
+                </tbody>
+              </table>
+              
+              <c:if test="${bList.size() > 0 }">
+	              <div class="checkout_btn_inner float-right">
+	                
+	                <form action="payment.do" method="post">
+						<input type="hidden" id="total_num" name="payment_num" />
+						<input type="hidden" id="total_price" name="payment_price" />
+						
+						<input type="hidden" name="basket_group" value="${basket_group }" />
+						<input type="hidden" name="product_name" value="장바구니에서 구매" />
+						<input type="hidden" name="type" value="basket" />
+						
+						<input class="btn_1 checkout_btn_1" type="submit" value="결제 하기" />
+					</form>
+	              </div>
+              </c:if>
+            </div>
+          </div>
+          </div>
+      </section>
 	</main>
 	
 <jsp:include page="footer.jsp"></jsp:include>

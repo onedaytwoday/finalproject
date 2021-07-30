@@ -8,10 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.project.one.model.dao.PaymentDao;
-import com.project.one.model.dto.ClassDto;
 import com.project.one.model.dto.PagingDto;
 import com.project.one.model.dto.PaymentDto;
-import com.project.one.model.dto.ProductDto;
 import com.project.one.util.Payment;
 
 @Service
@@ -34,6 +32,11 @@ public class PaymentBizImpl implements PaymentBiz {
 	@Override
 	public List<PaymentDto> paymentList(PagingDto pDto) {
 		return dao.paymentList(pDto);
+	}
+	
+	@Override
+	public List<PaymentDto> montlyPayment() {
+		return dao.montlyPayment();
 	}
 	
 	@Override

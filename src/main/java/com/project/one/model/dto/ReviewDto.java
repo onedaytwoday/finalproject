@@ -11,6 +11,8 @@ public class ReviewDto {
 	private int product_no;
 	private int class_no;
 	private String member_id;
+	private String product_name;
+	private String class_title;
 	
 	public ReviewDto() {
 	}
@@ -26,6 +28,21 @@ public class ReviewDto {
 		this.product_no = product_no;
 		this.class_no = class_no;
 		this.member_id = member_id;
+	}
+
+	public ReviewDto(int review_no, String review_title, double review_rate, Date review_date, String review_content,
+			int product_no, int class_no, String member_id, String product_name, String class_title) {
+		super();
+		this.review_no = review_no;
+		this.review_title = review_title;
+		this.review_rate = review_rate;
+		this.review_date = review_date;
+		this.review_content = review_content;
+		this.product_no = product_no;
+		this.class_no = class_no;
+		this.member_id = member_id;
+		this.product_name = product_name;
+		this.class_title = class_title;
 	}
 
 	public int getReview_no() {
@@ -90,6 +107,22 @@ public class ReviewDto {
 
 	public void setMember_id(String member_id) {
 		this.member_id = member_id;
+	}
+
+	public String getProduct_name() {
+		return product_name;
+	}
+
+	public void setProduct_name(String product_name) {
+		this.product_name = product_name;
+	}
+
+	public String getClass_title() {
+		return class_title;
+	}
+
+	public void setClass_title(String class_title) {
+		this.class_title = class_title;
 	}
 
 	@Override

@@ -10,6 +10,8 @@ public interface PaymentBiz {
 	public List<PaymentDto> selectList();
 	
 	public List<PaymentDto> paymentList(PagingDto pDto);
+	
+	public List<PaymentDto> montlyPayment();
 
 	public PaymentDto selectOne(int payment_no);
 

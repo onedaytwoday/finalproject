@@ -131,8 +131,10 @@
 				<span>첨부 파일</span> <br />
 				<div id="articlefileChange"></div>
 			</div>
+			<div style="height:200px">
 			<input type="button" value="등록하기" onclick="registerAction()"/> 
 			<input type="button" value="취소" onclick="location.href='main.do'" />
+			</div>
 		</form>
 	</main>
 <script>

@@ -93,4 +93,13 @@
 		FROM PAYMENT
 		WHERE MEMBER_ID = #{member_id}
 	</select>
+	
+	<select id="montlyPayment" resultType="paymentDto">
+		SELECT TO_DATE(A.day) AS day, SUM(A.PAYMENT_PRICE)
+		FROM (
+		      SELECT TO_CHAR(PAYMENT_DATE, 'yyyy-MM-DD')AS day , PAYMENT_PRICE 
+		      FROM PAYMENT
+		      )A
+		GROUP BY A.day
+	</select>
 </mapper>

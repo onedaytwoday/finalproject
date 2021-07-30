@@ -33,6 +33,8 @@ import com.project.one.model.biz.ClassBiz;
 import com.project.one.model.biz.DetailBiz;
 import com.project.one.model.biz.FileTableBiz;
 import com.project.one.model.biz.PaymentBiz;
+import com.project.one.model.biz.ProductBiz;
+import com.project.one.model.biz.RankBiz;
 import com.project.one.model.biz.ReviewBiz;
 import com.project.one.model.dto.ClassDto;
 import com.project.one.model.dto.DetailDto;
@@ -40,6 +42,9 @@ import com.project.one.model.dto.FileTableDto;
 import com.project.one.model.dto.MemberDto;
 import com.project.one.model.dto.PagingDto;
 import com.project.one.model.dto.PaymentDto;
+import com.project.one.model.dto.ProductDto;
+import com.project.one.model.dto.RankDto;
+import com.project.one.model.dto.SearchDto;
 
 import net.coobird.thumbnailator.Thumbnails;
 
@@ -61,17 +66,36 @@ public class ClassController {
 	@Autowired
 	private FileTableBiz fbiz;
 	
+	@Autowired
+	private RankBiz Rbiz;
+	
 	private static int CLASS_NO;
 
 	@RequestMapping("/classList.do")
-	public String class_list(Model model, int nowPage) {
+	public String class_list(Model model, int nowPage , HttpSession session) {
 		int count = cBiz.classListCount();
 		PagingDto pDto = new PagingDto(count, nowPage);
+		
 		model.addAttribute("list", cBiz.classListPaging(pDto));
-		//평점? model.addAttribute("rlist",rbiz.selectList());
 		model.addAttribute("pDto", pDto);
+		
 		return "class/class_list";
 	}
+	@ResponseBody
+	@RequestMapping(value="/rank_list.do", method=RequestMethod.POST)
+	public Map<String, List<RankDto>> rankList() {
+		Map<String, List<RankDto>> map = new HashMap<String, List<RankDto>>();
+		List<RankDto> list = new ArrayList<>();
+		
+		for(RankDto dto : Rbiz.selectList()) {
+				list.add(dto);
+		}
+		
+		map.put("list", list);
+		System.out.println(map.toString());
+		return map;
+	}
+	
 	//검색
 	@RequestMapping("/class_search.do")
 	public String class_search(Model model, String search_category, String search_keyword, int nowPage) {
@@ -89,12 +113,13 @@ public class ClassController {
 		
 		return "class/class_list";
 	}
+		
 	@RequestMapping("/classSelect.do")
 	public String class_select(Model model, int class_no) {
 		CLASS_NO = class_no;
-		
 		model.addAttribute("dto", cBiz.selectOne(class_no));
-		model.addAttribute("rdto", rbiz.avgList(class_no));
+		model.addAttribute("rate", rbiz.avgListByClass(class_no));
+		model.addAttribute("rList", rbiz.listByClass(class_no));
 
 		return "class/class_select";
 	}
@@ -195,10 +220,10 @@ public class ClassController {
 	public String class_delete(int class_no) {
 
 		if (cBiz.delete(class_no) > 0) {
-			return "redirect:classList.do";
+			return "redirect:classList.do?nowPage=1";
 		}
 
-		return "redirect:classList.do";
+		return "redirect:classList.do?nowPage=1";
 	}
 
 	@RequestMapping("/mypage_class.do")
