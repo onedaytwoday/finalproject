@@ -58,16 +58,17 @@ function getAutoCompleted() {
 				dataType: "json",
 				success: function(result) {
 					let list = result.list;
-	
+					let ul = $("<ul id='results' class='mb-2'></ul>");
 					for (let i = 0; i < list.length; i++) {
-						let input = $(`<input id=${i} type='text' class='form-control bg-white border-right' style="cursor:pointer;" value= ${list[i]} readonly />`);
-						$("#auto_result").append(input);
-	
-						$(`#${i}`).click(function() {
-							let newInput = $(`#${i}`).val();
-							$("[name=search_keyword]:eq(0)").val(newInput);
-						});
+						let li = $(`<li id=${i} class='border border-light text-muted py-2 px-3' style="cursor:pointer;">${list[i]}</li>`);
+						ul.append(li);
+						
 					}
+					$('#auto_result').append(ul);
+					
+					$('ul').on('click', 'li', function(){
+						$("[name=search_keyword]:eq(0)").val($(this).text());
+					})
 	
 				},
 				error: function() {
