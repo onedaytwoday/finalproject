@@ -116,7 +116,7 @@
                     <div class="col-lg-4">
                         <div class="blog_right_sidebar">
 	                    	<c:if test="${mDto.member_grade eq '강사회원' }">
-								<button type="button" class="genric-btn primary-border mb-2" style="width:100%;" onclick="location.href='classInsert.do'"><i class="bi bi-pencil-fill"></i> 클래스 등록</button>
+								<button type="button" class="genric-btn primary-border mb-4" style="width:100%;" onclick="location.href='classInsert.do'"><i class="bi bi-pencil-fill"></i> 클래스 등록</button>
 							</c:if>
 						
                             <aside class="single_sidebar_widget search_widget">
