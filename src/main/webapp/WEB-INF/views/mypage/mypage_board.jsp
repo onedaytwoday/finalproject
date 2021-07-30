@@ -41,16 +41,6 @@
 											<th>작성일</th>
                                         </tr>
                                     </thead>
-                                    
-                                    <tfoot>
-                                        <tr>
-                                            <th>번호</th>
-											<th>제목</th>
-											<th>조회수</th>
-											<th>작성일</th>
-                                        </tr>
-                                    </tfoot>
-                                    
                                     <tbody>
 	                                    <c:choose>
 											<c:when test="${empty list }">

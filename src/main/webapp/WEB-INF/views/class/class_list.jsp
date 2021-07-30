@@ -161,7 +161,7 @@
 									<c:forEach items="${list }" var="dto">
 										<article class="blog_item">
 			                                <div class="blog_item_img">
-			                                    <img class="card-img rounded-0" src="resources/assets/img/blog/single_blog_1.png" alt="">
+			                                    <img class="card-img rounded-0" src="resources/upload/${dto.file_new_name }" alt="상품">
 			                                </div>
 			
 			                                <div class="blog_details">

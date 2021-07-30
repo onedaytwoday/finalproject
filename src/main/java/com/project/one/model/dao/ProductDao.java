@@ -23,6 +23,8 @@ public interface ProductDao {
 	
 	public List<ProductDto> categoryListPaging(StorePagingDto pDto); 
 	
+	public List<ProductDto> selectfile(int product_no);
+	
 	public ProductDto selectOne(int product_no);
 	
 	public ProductDto selectOneByName(String product_name);

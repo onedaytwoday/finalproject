@@ -164,5 +164,4 @@ public class EventDto {
 				+ title + ", original_price=" + original_price + ", event_sale=" + event_sale + ", file_new_name="
 				+ file_new_name + "]";
 	}
-	
 }

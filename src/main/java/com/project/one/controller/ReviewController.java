@@ -175,7 +175,6 @@ public class ReviewController {
 			return strResult;
 
 		}
-	
 	@ResponseBody
 	@RequestMapping(value = "/review_insertres_product.do", method = RequestMethod.POST)
 	public String review_insertres_product(@RequestParam("files") List<MultipartFile> multipartFile, ReviewDto rDto, String product_no_str,HttpServletRequest request) {
@@ -284,7 +283,7 @@ public class ReviewController {
 		
 		PagingDto pDto = new PagingDto(count, nowPage);
 		pDto.setMember_id(mDto.getMember_id());
-
+		System.out.println(pDto);
 		model.addAttribute("list", rBiz.myReviewList(pDto));
 		model.addAttribute("pDto", pDto);
 		model.addAttribute("path", "board");

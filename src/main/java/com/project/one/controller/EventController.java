@@ -73,24 +73,17 @@ public class EventController {
 
 		dto.setEvent_start(start_date);
 		dto.setEvent_end(end_date);
-		
-		if (category.equals("product")) {
-			dto.setClass_no(0);
+		if (dto.getClass_no() == 0 && dto.getProduct_no() >= 0) {
 			res = eBiz.insertEventProduct(dto, sale_rate);
-			
-		} else if (category.equals("class")) {
-			dto.setProduct_no(0);
+		} else if (dto.getClass_no() >= 0 && dto.getProduct_no() == 0) {
 			res = eBiz.insertEventClass(dto, sale_rate);
 		}
-		
 		if (res > 0) {
 			System.out.println("event insert 성공");
 		} else {
 			System.out.println("event insert 성공");
 		}
-		
 		int event_no = dto.getEvent_no();
-
 		String strResult = "{ \"result\":\"FAIL\" }";
 		String contextRoot = new HttpServletRequestWrapper(request).getRealPath("/");
 		String fileRoot;

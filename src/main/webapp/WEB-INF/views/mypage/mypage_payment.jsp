@@ -43,17 +43,6 @@
 											<th>배송상태</th>
                                         </tr>
                                     </thead>
-                                    
-                                    <tfoot>
-                                        <tr>
-                                            <th>번호</th>
-											<th>카테고리</th>
-											<th>수량</th>
-											<th>총 가격</th>
-											<th>배송상태</th>
-                                        </tr>
-                                    </tfoot>
-                                    
                                     <tbody>
 										<c:choose>
 											<c:when test="${empty pList }">

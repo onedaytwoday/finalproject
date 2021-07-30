@@ -128,9 +128,8 @@ public class ClassController {
 		CLASS_NO = class_no;
 		
 		EventDto eDto = eBiz.eventClass(class_no);
-		
-		System.out.println("eDto : " + eDto);
-		
+	
+		model.addAttribute("fList", cBiz.selectfile(class_no));
 		model.addAttribute("dto", cBiz.selectOne(class_no));
 		model.addAttribute("rate", rbiz.avgListByClass(class_no));
 		model.addAttribute("rList", rbiz.listByClass(class_no));
@@ -248,7 +247,6 @@ public class ClassController {
 		int count = cBiz.myClassCount(dto.getMember_id());
 		PagingDto pDto = new PagingDto(count, nowPage);
 		pDto.setMember_id(dto.getMember_id());
-		
 		model.addAttribute("list", cBiz.myClassList(pDto));
 		model.addAttribute("pDto", pDto);
 		model.addAttribute("path", "class");

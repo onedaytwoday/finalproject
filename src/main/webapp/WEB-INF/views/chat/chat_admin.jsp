@@ -44,7 +44,7 @@
 			
 		});
 				
-		var sock = new SockJS("${pageContext.request.contextPath}/echo");
+		var sock = new SockJS("/echo");
 		
 		// 메세지 왔을때
 		sock.onmessage = function(e){

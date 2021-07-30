@@ -44,18 +44,6 @@
 											<th>작성일</th>
                                         </tr>
                                     </thead>
-                                    
-                                    <tfoot>
-                                        <tr>
-                                            <th><input type="checkbox" onclick="allCheck(this.checked, 'qna')" /></th>
-											<th>번호</th>
-											<th>작성자</th>
-											<th>제목</th>
-											<th>조회수</th>
-											<th>작성일</th>
-                                        </tr>
-                                    </tfoot>
-                                    
                                     <tbody>
 	                                    <c:choose>
 											<c:when test="${empty qnaList }">

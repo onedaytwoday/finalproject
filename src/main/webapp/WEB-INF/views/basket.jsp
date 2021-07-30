@@ -16,6 +16,19 @@
 <jsp:include page="header.jsp"></jsp:include>
 	<main class="container my-0">
       <section class="cart_area section_padding">
+      	<div class="slider-area" style="margin-bottom: 150px;">
+			<div class="single-slider slider-height2 d-flex align-items-center">
+				<div class="container">
+					<div class="row">
+						<div class="col-xl-12">
+							<div class="hero-cap text-center">
+								<h2>Basket</h2>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
         <div class="container">
           <div class="cart_inner">
             <div class="table-responsive">
@@ -39,7 +52,7 @@
 				                    <td>
 				                      <div class="media">
 				                        <div class="d-flex">
-				                          <img src="resources/assets/img/gallery/card1.png" alt="" />
+				                          <img src="resources/upload/${dto.file_new_name }" alt="상품" />
 				                        </div>
 				                        <div class="media-body">
 				                          <span style="cursor:pointer;" onclick="location.href='store_select.do?product_no=${pList[status.index].product_no }'">${pList[status.index].product_name }</span>

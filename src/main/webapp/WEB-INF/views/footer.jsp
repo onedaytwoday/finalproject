@@ -31,29 +31,16 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-5">
-                        <div class="single-footer-caption mb-50">
-                            <div class="footer-tittle">
-                                <h4>Quick Links</h4>
-                                <ul>
-                                    <li><a href="#">About</a></li>
-                                    <li><a href="#"> Offers & Discounts</a></li>
-                                    <li><a href="#"> Get Coupon</a></li>
-                                    <li><a href="#">  Contact Us</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-7">
+                    <div class="col-xl-6 col-lg-3 col-md-4 col-sm-7">
                         <div class="single-footer-caption mb-50">
                             <div class="footer-tittle">
                                 <h4>Developers</h4>
                                 <ul class="row">
-                                    <li class="col-md-6"><a href="https://github.com/NamMinHyuk">남민혁</a></li>
-                                    <li class="col-md-6"><a href="https://github.com/skwak0205">곽수정</a></li>
-                                    <li class="col-md-6"><a href="https://github.com/kimkj1108">김정규</a></li>
-                                    <li class="col-md-6"><a href="https://github.com/heeju-g">심희주</a></li>
-                                    <li class="col-md-12"><a href="https://github.com/U1mong">안재완</a></li>
+                                    <li class="col-md-6"><a href="https://github.com/NamMinHyuk">Nam Min Hyuk</a></li>
+                                    <li class="col-md-6"><a href="https://github.com/skwak0205">Kwak Soo Jung</a></li>
+                                    <li class="col-md-6"><a href="https://github.com/kimkj1108">Kim Jung Gyu</a></li>
+                                    <li class="col-md-6"><a href="https://github.com/heeju-g">Sim Hee Ju</a></li>
+                                    <li class="col-md-12"><a href="https://github.com/U1mong">An Jae Wan</a></li>
                                 </ul>
                             </div>
                         </div>

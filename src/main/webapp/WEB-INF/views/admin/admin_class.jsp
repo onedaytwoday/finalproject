@@ -36,7 +36,6 @@
                                     <thead>
                                         <tr>
                                             <th><input type="checkbox" onclick="allCheck(this.checked, 'class')" /></th>
-											<th>클래스 사진</th>
 											<th>작성자</th>
 											<th>클래스 이름</th>
 											<th>클래스 가격</th>
@@ -45,32 +44,17 @@
 											<th>위치</th>
                                         </tr>
                                     </thead>
-                                    
-                                    <tfoot>
-                                        <tr>
-                                            <th><input type="checkbox" onclick="allCheck(this.checked, 'class')" /></th>
-											<th>클래스 사진</th>
-											<th>작성자</th>
-											<th>클래스 이름</th>
-											<th>클래스 가격</th>
-											<th>카테고리</th>
-											<th>할인율</th>
-											<th>위치</th>
-                                        </tr>
-                                    </tfoot>
-                                    
                                     <tbody>
 	                                    <c:choose>
 											<c:when test="${empty cList }">
 												<tr>
-													<th colspan="9">------------등록된 클래스가 존재하지 않습니다.------------</th>
+													<th colspan="8">------------등록된 클래스가 존재하지 않습니다.------------</th>
 												</tr>
 											</c:when>
 											<c:otherwise>
 												<c:forEach items="${cList }" var="dto">
 													<tr>
 														<td><input type="checkbox" name="chk_class" value="${dto.class_no }" /></td>
-														<td>사진</td>
 														<td>${dto.member_id }</td>
 														<td><a href="classSelect.do?class_no=${dto.class_no }">${dto.class_title }</a></td>
 														<td>${dto.class_price }원</td>

@@ -28,9 +28,9 @@
 		</div>
 	</div>
 	<main class="container mb-100">
-		<div class="mb-4 text-white rounded bg-dark">
-			<div class="col-md-6 px-0 w-250">
-				<img class="w-full image-fluid" alt="class" src="resources/images/event.jpg">
+		<div class="row" style="margin-bottom: 50px">
+			<div class="col-xl-12" align="center">
+				<img class="w-full image-fluid" alt="class" src="resources/upload/${dto.file_new_name }">
 			</div>
 		</div>
 
@@ -106,19 +106,11 @@
 						</div>					
 					</div>
 						
-					<div id="staticMap" style="width:650px;height:350px;"></div> 
-					
+					<div id="map" style="width:650px;height:350px;margin-bottom: 40px;"></div> 
+					<c:forEach items="${fList }" var="dto">
+						<img src="resources/upload/${dto.file_new_name }" width="100%" height="100%" alt="상품" style="margin-bottom: 40px;">
+					</c:forEach>
 					<p>${dto.class_desc }</p>
-					
-					<p>
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam at convallis dui, ut convallis neque. Nunc sollicitudin sem diam, 
-						vitae maximus dolor pretium sed. Cras viverra justo ac elit consectetur, tincidunt lobortis massa interdum. Mauris fermentum in odio pretium posuere. 
-						Nullam commodo sapien in diam eleifend, nec gravida lacus tincidunt. Nulla ut rhoncus elit, vel aliquam nulla. Vestibulum congue maximus nisl, blandit blandit turpis efficitur quis. 
-						Praesent dapibus feugiat justo at mollis. Nunc nunc neque, vehicula sed magna ac, sollicitudin sodales lacus. Maecenas id nunc quis arcu faucibus tincidunt eget nec odio. Duis suscipit faucibus mi, 
-						at dapibus nisi venenatis eu. Ut diam tellus, porta nec auctor a, imperdiet quis nisl. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
-						Proin vitae odio id nisl aliquam pellentesque quis sit amet tellus. Nam in feugiat nibh. In sodales mi tortor, non accumsan nunc sodales accumsan.
-					</p>
-					
 				</article>
 
 				<div class="comments-area">
@@ -162,7 +154,7 @@
 					</div>
 				</c:if>
 				
-				<c:if test="${dto.member_id eq mDto.member_id }">
+				<c:if test="${mDto.member_grade eq '강사회원' }">
 					<button onclick="location.href='classUpdate.do?class_no=${dto.class_no}'"
 						type="button" class="genric-btn warning circle ml-auto"><i class="bi bi-pencil-fill"></i> 수정</button>
 				</c:if>
@@ -203,37 +195,47 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b09278ee8c0d306e4d38397589fed58d"></script>
 <script>
 	//클래스 주소
-	var classadd = '${dto.class_loc }';//나중에 클래스에서 주소값을 받기로 한다.
+	$.ajax({
+           url:'https://dapi.kakao.com/v2/local/search/address.json?query='+encodeURIComponent('${dto.class_loc }'),
+           type:'GET',
+           datatype: 'json',
+           headers: {'Authorization' : 'KakaoAK 0704a24e218cc486b2613072fabc7239'},
+	   success:function(data){
+			var x = data.documents[0].address.x;
+			var y = data.documents[0].address.y;
+			var classname= '${dto.class_title }';
+			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+		    mapOption = { 
+		        center: new kakao.maps.LatLng(y, x), // 지도의 중심좌표
+		        level: 3 // 지도의 확대 레벨
+		    };
+
+			var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 	
-	//클래스명
-	var classname= '${dto.class_title }';//나중에 클래스에서 클래스명을 받기로 한다...
+			// 마커가 표시될 위치입니다 37.5114167909
+			var markerPosition  = new kakao.maps.LatLng(y, x); 
+			var text = "<div class='tex' style='font-size:10pt;'>" + classname + "</div>";
+			// 마커를 생성합니다
+			var marker = new kakao.maps.Marker({
+			    position: markerPosition,
+			});
 	
-	// 주소-좌표 변환 객체를 생성합니다
-	var geocoder = new kakao.maps.services.Geocoder();
-	//주소로 좌표를 검색합니다
-	geocoder.addressSearch(classadd, function(result, status) {
+			// 마커가 지도 위에 표시되도록 설정합니다
+			marker.setMap(map);
+			var infowindow = new kakao.maps.InfoWindow({
+			    position : markerPosition, 
+			    content : text 
+			});
+			infowindow.open(map, marker);
+			
+			$('.tex').parent().width('1000px');
+		   },
+		   error : function(e){
+		       console.log(e);
+		   }
 	
-	// 이미지 지도에 표시할 마커입니다
-	// 이미지 지도에 표시할 마커를 아래와 같이 배열로 넣어주면 여러개의 마커를 표시할 수 있습니다 
-	var markers = [
-	    {
-	        position: new kakao.maps.LatLng(result[0].y, result[0].x), 
-	        text: classname // text 옵션을 설정하면 마커 위에 텍스트를 함께 표시할 수 있습니다     
-	    }
-	];
-	
-	var staticMapContainer  = document.getElementById('staticMap'), // 이미지 지도를 표시할 div  
-	    staticMapOption = { 
-	        center: new kakao.maps.LatLng(result[0].y, result[0].x), // 이미지 지도의 중심좌표
-	        level: 3, // 이미지 지도의 확대 레벨
-	        marker: markers // 이미지 지도에 표시할 마커 
-	    };    
-	
-	// 이미지 지도를 생성합니다
-	var staticMap = new kakao.maps.StaticMap(staticMapContainer, staticMapOption);
 	}); 
 </script>
-
 
 	
 </body>

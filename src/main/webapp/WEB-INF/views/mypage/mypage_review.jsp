@@ -42,17 +42,6 @@
 											<th>작성일</th>
                                         </tr>
                                     </thead>
-                                    
-                                    <tfoot>
-                                        <tr>
-                                            <th>번호</th>
-											<th>제목</th>
-											<th>상품/클래스</th>
-											<th>평점</th>
-											<th>작성일</th>
-                                        </tr>
-                                    </tfoot>
-                                    
                                     <tbody>
 	                                    <c:choose>
 											<c:when test="${empty list }">

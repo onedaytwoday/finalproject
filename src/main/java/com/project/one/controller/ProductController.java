@@ -93,6 +93,7 @@ public class ProductController {
 	public String Product_selectOne(Model model, int product_no) {
 		EventDto eDto = eBiz.eventProduct(product_no);
 		
+		model.addAttribute("fList" , biz.selectfile(product_no));
 		model.addAttribute("dto", biz.selectOne(product_no));
 		model.addAttribute("rate", rbiz.avgListByProduct(product_no));
 		model.addAttribute("rList", rbiz.listByProduct(product_no));
