@@ -1,6 +1,4 @@
 $(function() {
-	on_off();
-	
 	let autoChecked = $("#member_auto").val();
 
 	let category = "${category}";
@@ -22,16 +20,18 @@ $(function() {
 
 	if (autoChecked === 'Y') {
 		$("#default-switch").attr('checked', true);
+		getAutoCompleted();
 	}
 
 	let onoff = $("[name=onoff]");
 	onoff.click(function() {
 		$("[name=on_off]").toggle();
-		on_off();
+		getAutoCompleted();
 	});
 
 	$("#close").click(function() {
 		$("#auto_result").empty();
+		$("[name=search_keyword]:eq(0)").val("");
 	});
 
 });
@@ -49,29 +49,33 @@ function on_off() {
 
 function getAutoCompleted() {
 	$("[name=search_keyword]:eq(0)").change(function() {
-		$.ajax({
-			type: "post",
-			url: "auto_product.do",
-			data: JSON.stringify({ "keyword": $("[name=search_keyword]:eq(0)").val() }),
-			contentType: "application/json",
-			dataType: "json",
-			success: function(result) {
-				let list = result.list;
-
-				for (let i = 0; i < list.length; i++) {
-					let input = $(`<input id=${i} type='text' class='form-control bg-white border-right' style="cursor:pointer;" value= ${list[i]} readonly />`);
-					$("#auto_result").append(input);
-
-					$(`#${i}`).click(function() {
-						let newInput = $(`#${i}`).val();
-						$("[name=search_keyword]:eq(0)").val(newInput);
-					});
+		if ($("#on").is(":visible")) {
+			$.ajax({
+				type: "post",
+				url: "auto_product.do",
+				data: JSON.stringify({ "keyword": $("[name=search_keyword]:eq(0)").val() }),
+				contentType: "application/json",
+				dataType: "json",
+				success: function(result) {
+					let list = result.list;
+	
+					for (let i = 0; i < list.length; i++) {
+						let input = $(`<input id=${i} type='text' class='form-control bg-white border-right' style="cursor:pointer;" value= ${list[i]} readonly />`);
+						$("#auto_result").append(input);
+	
+						$(`#${i}`).click(function() {
+							let newInput = $(`#${i}`).val();
+							$("[name=search_keyword]:eq(0)").val(newInput);
+						});
+					}
+	
+				},
+				error: function() {
+					alert("통신 실패!");
 				}
-
-			},
-			error: function() {
-				alert("통신 실패!");
-			}
-		});
+			});
+		} else if(!$("#on").is(":visible")){
+			$("#auto_result").empty();
+		}
 	});
 }

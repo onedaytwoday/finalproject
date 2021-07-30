@@ -91,7 +91,7 @@ function sendKakao(event, newPrice){
 					data: {
 						template_id: 56492,
 						template_args: {
-							'${image}' : 'http://132.226.236.97:8787/finalproject/resources/upload/',
+							'${image}' : `http://132.226.236.97:8787/finalproject/resources/upload/${event.file_new_name}`,
 							'${event_title}': event.event_title,
 							'${event_desc}': event.event_desc,
 							'${original_price}': event.original_price,

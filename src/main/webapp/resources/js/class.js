@@ -1,7 +1,5 @@
 let checked = false;
 $(function() {
-	on_off();
-
 	let autoChecked = $("#member_auto").val();
 
 	let category = "${category}";
@@ -31,33 +29,25 @@ $(function() {
 
 	if (autoChecked === 'Y') {
 		$("#default-switch").attr('checked', true);
+		getAutoCompleted();
 	}
 
 	let onoff = $("[name=onoff]");
 	onoff.click(function() {
 		$("[name=on_off]").toggle();
-		on_off();
+		getAutoCompleted();
 	});
 
 	$("#close").click(function(){
 		$("#auto_result").empty();
+		$("[name=search_keyword]:eq(0)").val("");
 	});
 });
 
-function on_off() {
-	if ($("#on").is(":visible")) {
-		alert("on")
-		getAutoCompleted();
-
-	} else {
-		alert("off")
-		$("#auto_result").empty();
-	}
-}
 
 function getAutoCompleted() {
 	$("[name=search_keyword]:eq(0)").change(function() {
-		if (checked) {
+		if ($("#on").is(":visible") && checked) {
 			$.ajax({
 				type: "post",
 				url: "auto_class.do",
@@ -81,6 +71,8 @@ function getAutoCompleted() {
 					alert("통신 실패!");
 				}
 			});
+		} else if(!$("#on").is(":visible")){
+			$("#auto_result").empty();
 		}
 	});
 }
