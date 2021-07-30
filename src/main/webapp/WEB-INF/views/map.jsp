@@ -53,6 +53,19 @@
 </head>
 <body>
 <jsp:include page="header.jsp"></jsp:include>
+<div class="slider-area" style="margin-bottom: 100px">
+        <div class="single-slider slider-height2 d-flex align-items-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="hero-cap text-center">
+                            <h2>Map</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 <div class="map_wrap">
     <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
 
@@ -64,10 +77,11 @@
         <li class="item">
 	        <span class="markerbg marker_${tmp }"></span>
 	        <div class="info">   
-	        <h5>${dto.class_title }</h5>    
-	        <span class="loc${tmp}">${dto.class_loc }</span>   
-	        <span class="tel">
-	        </span>
+		        <h5>${dto.class_title }</h5>    
+		        <span >${dto.class_loc }</span>   
+		        <input type="hidden" class="title${tmp }" value="${dto.class_title }">
+		        <input type="hidden" class="lat${tmp }" value="${dto.class_lat }">
+		        <input type="hidden" class="lng${tmp }" value="${dto.class_lng }">
 	        </div>
         </li>
         <c:set value="${tmp+1}" var="tmp" />
@@ -90,7 +104,15 @@
 
 <script>
 // 마커를 담을 배열입니다
-
+$('.info').click(function(){
+	var i = $(this).children(":eq(3)").val();
+	var j = $(this).children(":eq(4)").val();
+	var moveLatLon = new kakao.maps.LatLng(i,j);
+	    
+	    // 지도 중심을 부드럽게 이동시킵니다
+	    // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+	map.panTo(moveLatLon);  
+})
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
         center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
@@ -104,21 +126,17 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 var ps = new kakao.maps.services.Places();  
 var positions = [
     {
-        content: '<div>카카오</div>', 
-        latlng: new kakao.maps.LatLng(loc1y, loc1x)
+        content: '<div>' + $('.title1').val() + '</div>', 
+        latlng: new kakao.maps.LatLng($('.lat1').val(), $('.lng1').val())
     },
     {
-        content: '<div>생태연못</div>', 
-        latlng: new kakao.maps.LatLng(33.450936, 126.569477)
+        content: '<div>' + $('.title2').val() + '</div>', 
+        latlng: new kakao.maps.LatLng($('.lat2').val(), $('.lng2').val())
     },
     {
-        content: '<div>텃밭</div>', 
-        latlng: new kakao.maps.LatLng(33.450879, 126.569940)
+        content: '<div>' + $('.title3').val() + '</div>', 
+        latlng: new kakao.maps.LatLng($('.lat3').val(), $('.lng3').val())
     },
-    {
-        content: '<div>근린공원</div>',
-        latlng: new kakao.maps.LatLng(33.451393, 126.570738)
-    }
 ];
 
 for (var i = 0; i < positions.length; i ++) {

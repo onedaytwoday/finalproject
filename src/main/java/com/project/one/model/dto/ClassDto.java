@@ -10,6 +10,8 @@ public class ClassDto {
 	private int class_sale;
 	private String member_id;
 	private String file_new_name;
+	private String class_lat;
+	private String class_lng;
 	public ClassDto() {
 	}
 
@@ -109,6 +111,23 @@ public class ClassDto {
 
 	public void setFile_new_name(String file_new_name) {
 		this.file_new_name = file_new_name;
+	}
+
+	
+	public String getClass_lat() {
+		return class_lat;
+	}
+
+	public void setClass_lat(String class_lat) {
+		this.class_lat = class_lat;
+	}
+
+	public String getClass_lng() {
+		return class_lng;
+	}
+
+	public void setClass_lng(String class_lng) {
+		this.class_lng = class_lng;
 	}
 
 	@Override
