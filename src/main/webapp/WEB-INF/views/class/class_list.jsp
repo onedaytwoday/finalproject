@@ -156,7 +156,7 @@
                                                 onfocus="this.placeholder = ''"
                                                 onblur="this.placeholder = 'Search term...'">
                                                 
-                                            <i id="close" class="bi bi-x-lg position-absolute t-50 r-0" style="cursor:pointer; top: 25%; right: 5%;"></i>
+                                            <i id="close" class="bi bi-x-lg position-absolute" style="cursor:pointer; top: 25%; right: 5%;"></i>
                                         </div>
                                         
                                         <div id="auto_result">
