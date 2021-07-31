@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>  
+<title>Find ID/PW</title>  
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript" src="resources/js/findIdPw.js"></script>
 </head>
@@ -17,7 +17,7 @@
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="hero-cap text-center">
-                            <h2>아이디/비밀번호 찾기</h2>
+                            <h2>Find ID/PW</h2>
                         </div>
                     </div>
                 </div>
@@ -101,16 +101,30 @@
 		          	<h2>비밀번호 변경</h2>
 		       	  </div>
                   
-                  <form class="row contact_form px-3" action="updatePw.do" method="post" novalidate="novalidate">
+                  <form id="needs-validation" class="row contact_form px-3" action="updatePw.do" method="post" novalidate>
                   	  <input type="hidden" id="h_member_id" name="member_id" />
 					  <input type="hidden" id="h_member_phone" name="member_phone" />
 					  
 	                  <div class="col-md-12 form-group p_star">
-	                    <input type="password" class="form-control" id="newPw" name="member_pw" placeholder="새 비밀번호" />
+	                    <input type="password" class="form-control" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d~!@#$%^&*()+|=]{6,20}$" id="newPw" name="member_pw" placeholder="새 비밀번호" required />
+	                  
+	                  	<div class="mt-2 valid-feedback">
+				        	Looks good!
+				      	</div>
+				      	<div class="mt-2 invalid-feedback">
+				        	비밀번호는 최소 6자 이상 20자 이하로 영문 최소 하나, 숫자, 특수문자 포함하여 입력해야 합니다.
+				      	</div>
 	                  </div>
 	                    
 	                  <div class="col-md-12 form-group p_star">
-			          	<input type="password" class="form-control" id="checkNewPw" type="password" placeholder="비밀번호 확인" />
+			          	<input type="password" class="form-control" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d~!@#$%^&*()+|=]{6,20}$" id="checkNewPw" type="password" placeholder="비밀번호 확인" required />
+	                 
+	                 	<div class="mt-2 valid-feedback">
+				        	Looks good!
+				      	</div>
+				      	<div class="mt-2 invalid-feedback">
+				        	비밀번호를 다시 한번 입력해 주세요.
+				      	</div>
 	                 </div>
 	    				
 	    				<button type="submit" class="genric-btn primary-border ml-3 mt-sm-3">비밀번호 변경</button>

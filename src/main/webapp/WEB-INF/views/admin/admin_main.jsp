@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Insert title here</title>
+<title>Admin Page</title>
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 	
@@ -107,6 +108,11 @@
                 <!-- /.container-fluid -->
 				
 				<div class="w-75 h-75 mx-auto">
+				  <c:forEach items="${chart }" var="c">
+				  	<input type="hidden" name="prices" value="${c.payment_price}" />
+				  	<input type="hidden" name="dates" value="${c.payment_date}" />
+				  </c:forEach>
+				  
 				  <canvas id="myChart"></canvas>
 				</div>
 				

@@ -2,7 +2,9 @@ package com.project.one.controller;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -15,9 +17,11 @@ import java.util.Map;
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,8 +33,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.mashape.unirest.http.HttpResponse;
 import com.project.one.model.biz.ClassBiz;
 import com.project.one.model.biz.DetailBiz;
+import com.project.one.model.biz.EventBiz;
 import com.project.one.model.biz.FileTableBiz;
 import com.project.one.model.biz.PaymentBiz;
 import com.project.one.model.biz.ProductBiz;
@@ -38,6 +44,7 @@ import com.project.one.model.biz.RankBiz;
 import com.project.one.model.biz.ReviewBiz;
 import com.project.one.model.dto.ClassDto;
 import com.project.one.model.dto.DetailDto;
+import com.project.one.model.dto.EventDto;
 import com.project.one.model.dto.FileTableDto;
 import com.project.one.model.dto.MemberDto;
 import com.project.one.model.dto.PagingDto;
@@ -45,6 +52,8 @@ import com.project.one.model.dto.PaymentDto;
 import com.project.one.model.dto.ProductDto;
 import com.project.one.model.dto.RankDto;
 import com.project.one.model.dto.SearchDto;
+import com.project.one.model.dto.StorePagingDto;
+import com.project.one.util.ElasticSearch;
 
 import net.coobird.thumbnailator.Thumbnails;
 
@@ -55,7 +64,7 @@ public class ClassController {
 	private ClassBiz cBiz;
 
 	@Autowired
-	private PaymentBiz pBiz;
+	private EventBiz eBiz;
 
 	@Autowired
 	private ReviewBiz rbiz;
@@ -102,12 +111,12 @@ public class ClassController {
 		PagingDto pDto = new PagingDto();
 		pDto.setSearch_category(search_category);
 		pDto.setSearch_keyword(search_keyword);
+		
 		int count = cBiz.classSearchCount(pDto);
-		System.out.println("count : " + count);
 		PagingDto dto = new PagingDto(count, nowPage);
 		dto.setSearch_category(search_category);
 		dto.setSearch_keyword(search_keyword);
-		System.out.println(dto);
+		
 		model.addAttribute("list", cBiz.classListSearch(dto));
 		model.addAttribute("pDto", dto);
 		
@@ -117,10 +126,15 @@ public class ClassController {
 	@RequestMapping("/classSelect.do")
 	public String class_select(Model model, int class_no) {
 		CLASS_NO = class_no;
+		
+		EventDto eDto = eBiz.eventClass(class_no);
+	
+		model.addAttribute("fList", cBiz.selectfile(class_no));
 		model.addAttribute("dto", cBiz.selectOne(class_no));
 		model.addAttribute("rate", rbiz.avgListByClass(class_no));
 		model.addAttribute("rList", rbiz.listByClass(class_no));
-
+		model.addAttribute("event", eDto != null ? eDto : null);
+		
 		return "class/class_select";
 	}
 	
@@ -227,10 +241,15 @@ public class ClassController {
 	}
 
 	@RequestMapping("/mypage_class.do")
-	public String class_selectOne(Model model, HttpSession session) {
+	public String mypage_class(Model model, int nowPage, HttpSession session) {
 		MemberDto dto = (MemberDto)session.getAttribute("mDto");
 		
-		model.addAttribute("list", cBiz.userClass(dto.getMember_id()));
+		int count = cBiz.myClassCount(dto.getMember_id());
+		PagingDto pDto = new PagingDto(count, nowPage);
+		pDto.setMember_id(dto.getMember_id());
+		model.addAttribute("list", cBiz.myClassList(pDto));
+		model.addAttribute("pDto", pDto);
+		model.addAttribute("path", "class");
 
 		return "mypage/mypage_class";
 	}
@@ -305,12 +324,38 @@ public class ClassController {
 			}
 			// (업로드 없이 등록하는경우)
 			else {
-				strResult = "{ \"result\":\"OK\", \"class_no\":" + class_no + "}";
+				strResult = "{ \"result\":\"FAIL\", \"class_no\":" + class_no + "}";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return strResult;
+	}
+	
+	@RequestMapping("/class_category.do")
+	public String class_category(Model model, String category, int nowPage) {
+		int count = cBiz.classcategoryCount(category);
+		System.out.println(count);
+		model.addAttribute("category",category);
+		
+		PagingDto pDto = new PagingDto(count, nowPage);
+		pDto.setClass_category(category);
+		model.addAttribute("list", cBiz.categoryListPaging(pDto));
+		model.addAttribute("pDto", pDto);
+		return "class/class_list";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/autoComplete.do", method = RequestMethod.POST)
+	public Map<String, List<String>> auto_complete(@RequestBody Map<String, String> keyword) {
+		String term = keyword.get("keyword");
+		System.out.println("keyword : " + term);
+		
+		Map<String, List<String>> map = new HashMap<>();
+		
+		map.put("list", ElasticSearch.getAutoCompleted(term));
+		
+		return map;
 	}
 	
 	public static String Random(int len) {
@@ -324,4 +369,6 @@ public class ClassController {
 		}
 		return sb.toString();
 	}
+	
+	
 }

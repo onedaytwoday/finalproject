@@ -74,6 +74,9 @@ public class MemberController {
 	
 	@RequestMapping("/index.do")
 	public String index(Model model) {
+		int res = eBiz.updateNoti();
+		System.out.println("res : " + res);
+		
 		List<SearchDto> list = rbiz.search();
 		for(int i=0;i<list.size();i++) {
 			if(list.get(i).getProduct_no() == 0) {
@@ -219,8 +222,9 @@ public class MemberController {
 		Map<String, String> map = new HashMap<>();
 
 		if(checkUser != null) {
-			//SendSMS.sendSMS(checkUser.getMember_phone());
-			map.put("num", "1111");
+			String num = Random(4);
+			SendSMS.sendSMS(checkUser.getMember_phone(),num);
+			map.put("num", num);
 			map.put("member_id", checkUser.getMember_id());
 			
 		} else {
@@ -365,19 +369,25 @@ public class MemberController {
 	
 	//마이 페이지
 	@RequestMapping("/mypage_update.do")
-	public String mypage() {		
+	public String mypage(Model model, HttpSession session) {
+		MemberDto mDto = (MemberDto)session.getAttribute("mDto");
+		
+		model.addAttribute("dto", biz.selectOne(mDto.getMember_id()));
+		model.addAttribute("path", "update");
+		
 		return "mypage/mypage_update";
 	}
 	
 	@RequestMapping("/mypage_updateres.do")
 	public String update(MemberDto dto) {
+		System.out.println(dto);
 		if(biz.update(dto) > 0) {
 			
 			return "redirect:mypage_update.do?member_id="+dto.getMember_id();
 		}
 		
 		
-		return "redirect:mypage_update.do?member_id="+dto.getMember_id();
+		return "redirect:main.do";
 	}
 	
 	@RequestMapping("/mypage_del.do")
@@ -388,5 +398,16 @@ public class MemberController {
 		
 		return "redirect:mypage_update.do?member_id="+member_id;
 	}
-
+	
+	
+	public static String Random(int len) {
+		char[] charSet = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+		int idx = 0;
+		StringBuffer sb = new StringBuffer();
+		for (int i = 0; i < len; i++) {
+			idx = (int) (charSet.length * Math.random());
+			sb.append(charSet[idx]);
+		}
+		return sb.toString();
+	}
 }

@@ -1,7 +1,6 @@
 package com.project.one.controller;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,11 +45,12 @@ public class AdminController {
 	@RequestMapping("/adminMain.do")
 	public String admin_main(Model model) {
 		model.addAttribute("mCount", mBiz.memberCount());
-		model.addAttribute("proCount", proBiz.productCount());
-		model.addAttribute("cCount", cBiz.classCount());
+		model.addAttribute("proCount", proBiz.productListCount());
+		model.addAttribute("cCount", cBiz.classListCount());
 		model.addAttribute("pCount", pBiz.paymentCount());
 		model.addAttribute("path", "dashboard");
-		model.addAttribute("chart" , pBiz.montlyPayment());
+		model.addAttribute("chart", pBiz.montlyPayment());
+		
 		return "admin/admin_main";
 	}
 
@@ -67,7 +67,7 @@ public class AdminController {
 
 	@RequestMapping("/adminProduct.do")
 	public String admin_product(Model model, int nowPage) {
-		int count = proBiz.productCount();
+		int count = proBiz.productListCount();
 		PagingDto pDto = new PagingDto(count, nowPage);
 		model.addAttribute("proList", proBiz.productList(pDto));
 		model.addAttribute("pDto", pDto);
@@ -78,7 +78,7 @@ public class AdminController {
 	
 	@RequestMapping("/adminClass.do")
 	public String admin_class(Model model, int nowPage) {
-		int count = cBiz.classCount();
+		int count = cBiz.classListCount();
 		PagingDto pDto = new PagingDto(count, nowPage);
 		model.addAttribute("cList", cBiz.classList(pDto));
 		model.addAttribute("pDto", pDto);

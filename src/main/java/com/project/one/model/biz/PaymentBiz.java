@@ -11,6 +11,8 @@ public interface PaymentBiz {
 	
 	public List<PaymentDto> paymentList(PagingDto pDto);
 	
+	public List<PaymentDto> myPaymentList(PagingDto pDto);
+	
 	public List<PaymentDto> montlyPayment();
 
 	public PaymentDto selectOne(int payment_no);
@@ -22,8 +24,6 @@ public interface PaymentBiz {
 	public int delete(PaymentDto dto);
 	
 	public PaymentDto checkPaid(PaymentDto dto);
-	
-	public List<PaymentDto> mypage_list(PagingDto dto, String member_id);
 	
 	public int paymentCount();
 	

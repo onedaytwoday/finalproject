@@ -198,8 +198,6 @@
 </style>
 </head>
 <body>
-<div>${list}</div>
-<div id="map1" style="width:100%;height:350px;"></div>
 <div id="map" style="width:100%;height:350px;"></div>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b09278ee8c0d306e4d38397589fed58d&libraries=clusterer"></script>

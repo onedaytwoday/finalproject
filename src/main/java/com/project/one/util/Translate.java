@@ -25,7 +25,7 @@ public class Translate {
 	private static HttpURLConnection con;
 
 	public static String detectLangs(String text){
-        HttpURLConnection con = connect(DETECT_URL);
+        con = connect(DETECT_URL);
         String postParams =  "query="  + addText(text);
         try {
             con.setRequestMethod("POST");
@@ -52,7 +52,7 @@ public class Translate {
     }
 	
 	public static String translate(String text, String lang, boolean bool){
-        HttpURLConnection con = connect(TRANSLATE_URL);
+        con = connect(TRANSLATE_URL);
         String postParams;
         if(bool) {
         	postParams = "source="+lang+"&target=ko&text=" + text;

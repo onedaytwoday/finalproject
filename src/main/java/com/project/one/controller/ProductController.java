@@ -24,10 +24,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.project.one.model.biz.BoardBiz;
+import com.project.one.model.biz.EventBiz;
 import com.project.one.model.biz.FileTableBiz;
 import com.project.one.model.biz.ProductBiz;
 import com.project.one.model.biz.ReviewBiz;
 import com.project.one.model.dto.ClassDto;
+import com.project.one.model.dto.EventDto;
 import com.project.one.model.dto.FileTableDto;
 import com.project.one.model.dto.MemberDto;
 import com.project.one.model.dto.PagingDto;
@@ -43,10 +45,15 @@ public class ProductController {
 
 	@Autowired
 	private ProductBiz biz;
+	
 	@Autowired
 	private ReviewBiz rbiz;
+	
 	@Autowired
 	private FileTableBiz fbiz;
+	
+	@Autowired
+	private EventBiz eBiz;
 	
 
 	@RequestMapping("/store.do")
@@ -80,9 +87,13 @@ public class ProductController {
 
 	@RequestMapping("/store_select.do")
 	public String Product_selectOne(Model model, int product_no) {
+		EventDto eDto = eBiz.eventProduct(product_no);
+		
+		model.addAttribute("fList" , biz.selectfile(product_no));
 		model.addAttribute("dto", biz.selectOne(product_no));
 		model.addAttribute("rate", rbiz.avgListByProduct(product_no));
 		model.addAttribute("rList", rbiz.listByProduct(product_no));
+		model.addAttribute("event", eDto != null ? eDto : null);
 		
 		return "store/store_select";
 	}
@@ -162,7 +173,7 @@ public class ProductController {
 				}
 				// (업로드 없이 등록하는경우)
 				else {
-					strResult = "{ \"result\":\"OK\", \"product_no\":" + product_no + "}";
+					strResult = "{ \"result\":\"FAIL\", \"product_no\":" + product_no + "}";
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -195,6 +206,19 @@ public class ProductController {
 		}
 
 		return "redirect:store_select.do?product_no="+product_no;
+	}
+	
+	@RequestMapping("/store_category.do")
+	public String store_category(Model model, String category, int nowPage) {
+		int count = biz.productcategoryCount(category);
+		System.out.println(count);
+		model.addAttribute("category",category);
+		
+		StorePagingDto pDto = new StorePagingDto(count, nowPage);
+		pDto.setProduct_category(category);
+		model.addAttribute("list", biz.categoryListPaging(pDto));
+		model.addAttribute("pDto", pDto);
+		return "store/store";
 	}
 	
 	public static String Random(int len) {

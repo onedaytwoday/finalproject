@@ -2,6 +2,7 @@ package com.project.one.model.dao;
 
 import java.util.List;
 
+import com.project.one.model.dto.PagingDto;
 import com.project.one.model.dto.ReviewDto;
 import com.project.one.model.dto.SearchDto;
 
@@ -9,10 +10,14 @@ public interface ReviewDao {
 	String NAMESPACE = "review.";
 
 	public List<ReviewDto> selectList();
+	
+	public List<ReviewDto> reviewPaging(PagingDto pDto);
+	
+	public List<ReviewDto> myReviewList(PagingDto pDto);
+	
+	public int reviewCount();
 
 	public List<SearchDto> search();
-	// 작성자별 후기 조회
-	public List<ReviewDto> selectListByUser(String member_id);
 	
 	public ReviewDto selectOne(int review_no);
 
@@ -35,4 +40,6 @@ public interface ReviewDao {
 	public List<ReviewDto> listByClass(int class_no);
 	
 	public List<ReviewDto> listByProduct(int product_no);
+	
+	public int reviewMyCount(String member_id);
 }

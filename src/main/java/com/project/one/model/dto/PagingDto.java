@@ -24,6 +24,9 @@ public class PagingDto {
 	
 	private String search_category;
 	private String search_keyword;
+	private String class_category;
+	private String member_id;
+	
 	
 	public PagingDto() {
 	}
@@ -200,6 +203,22 @@ public class PagingDto {
 	public void setSearch_keyword(String search_keyword) {
 		this.search_keyword = search_keyword;
 	}
+	
+	public String getClass_category() {
+		return class_category;
+	}
+
+	public void setClass_category(String class_category) {
+		this.class_category = class_category;
+	}
+	
+	public String getMember_id() {
+		return member_id;
+	}
+
+	public void setMember_id(String member_id) {
+		this.member_id = member_id;
+	}
 
 	@Override
 	public String toString() {
@@ -207,7 +226,7 @@ public class PagingDto {
 				+ totalPage + ", totalBlock=" + totalBlock + ", nowBlock=" + nowBlock + ", prevBlock=" + prevBlock
 				+ ", nextBlock=" + nextBlock + ", pageBegin=" + pageBegin + ", pageEnd=" + pageEnd + ", blockBegin="
 				+ blockBegin + ", blockEnd=" + blockEnd + ", search_category=" + search_category + ", search_keyword="
-				+ search_keyword + "]";
+				+ search_keyword + ", class_category=" + class_category + "]";
 	}
 	
 }

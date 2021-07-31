@@ -12,6 +12,8 @@ public interface PaymentDao {
 	
 	public List<PaymentDto> paymentList(PagingDto pDto);
 	
+	public List<PaymentDto> myPaymentList(PagingDto pDto);
+	
 	public List<PaymentDto> montlyPayment();
 	
 	public PaymentDto selectOne(int payment_no);

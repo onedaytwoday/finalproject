@@ -8,17 +8,29 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Insert title here</title>
+<title>Class 상세</title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>  
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
-	
+	<div class="slider-area" style="margin-bottom: 150px;">
+		<div class="single-slider slider-height2 d-flex align-items-center">
+			<div class="container">
+				<div class="row">
+					<div class="col-xl-12">
+						<div class="hero-cap text-center">
+							<h2>Class Detail</h2>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 	<main class="container mb-100">
-		<div class="mb-4 text-white rounded bg-dark">
-			<div class="col-md-6 px-0 w-250">
-				<img class="w-full image-fluid" alt="class" src="resources/images/event.jpg">
+		<div class="row" style="margin-bottom: 50px">
+			<div class="col-xl-12" align="center">
+				<img class="w-full image-fluid" alt="class" src="resources/upload/${dto.file_new_name }">
 			</div>
 		</div>
 
@@ -26,7 +38,18 @@
 			<div class="col-lg-7">
 				<div class="d-md-flex justify-content-between pb-4 mt-2 mb-4 border-bottom">	
 					<h3>${dto.class_title }</h3>
-					<h4>${dto.class_price }원</h4>
+					
+					<div class="text-center">
+						<c:choose>
+							<c:when test="${event != null and event.event_noti eq 'Y' and dto.class_sale > 0 }">
+								<h5><del>${dto.class_price }원</del></h5>
+								<h3 class="font-weight-bold text-monospace text-danger">${dto.class_sale }% 할인중!!</h3>
+							</c:when>
+							<c:otherwise>
+								<h4>${dto.class_price }원</h4>					
+							</c:otherwise>
+						</c:choose>
+					</div>
 				</div>
 
 				<article class="blog-post">
@@ -83,19 +106,11 @@
 						</div>					
 					</div>
 						
-					<div id="staticMap" style="width:650px;height:350px;"></div> 
-					
+					<div id="map" style="width:650px;height:350px;margin-bottom: 40px;"></div> 
+					<c:forEach items="${fList }" var="dto">
+						<img src="resources/upload/${dto.file_new_name }" width="100%" height="100%" alt="상품" style="margin-bottom: 40px;">
+					</c:forEach>
 					<p>${dto.class_desc }</p>
-					
-					<p>
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam at convallis dui, ut convallis neque. Nunc sollicitudin sem diam, 
-						vitae maximus dolor pretium sed. Cras viverra justo ac elit consectetur, tincidunt lobortis massa interdum. Mauris fermentum in odio pretium posuere. 
-						Nullam commodo sapien in diam eleifend, nec gravida lacus tincidunt. Nulla ut rhoncus elit, vel aliquam nulla. Vestibulum congue maximus nisl, blandit blandit turpis efficitur quis. 
-						Praesent dapibus feugiat justo at mollis. Nunc nunc neque, vehicula sed magna ac, sollicitudin sodales lacus. Maecenas id nunc quis arcu faucibus tincidunt eget nec odio. Duis suscipit faucibus mi, 
-						at dapibus nisi venenatis eu. Ut diam tellus, porta nec auctor a, imperdiet quis nisl. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
-						Proin vitae odio id nisl aliquam pellentesque quis sit amet tellus. Nam in feugiat nibh. In sodales mi tortor, non accumsan nunc sodales accumsan.
-					</p>
-					
 				</article>
 
 				<div class="comments-area">
@@ -139,7 +154,7 @@
 					</div>
 				</c:if>
 				
-				<c:if test="${dto.member_id eq mDto.member_id }">
+				<c:if test="${mDto.member_grade eq '강사회원' }">
 					<button onclick="location.href='classUpdate.do?class_no=${dto.class_no}'"
 						type="button" class="genric-btn warning circle ml-auto"><i class="bi bi-pencil-fill"></i> 수정</button>
 				</c:if>
@@ -153,10 +168,11 @@
 
 						<c:if test="${mDto.member_id != null && mDto.member_grade == '일반회원'}">
 							<form class="mt-3" action="payment.do" method="post">
-								<input type="hidden" name="detail_no" /> <input type="hidden"
-									name="payment_num" value="1" /> <input type="hidden"
-									name="payment_price" value="${dto.class_price }" /> <input
-									type="hidden" name="product_name" value="${dto.class_title }" />
+								<input type="hidden" name="detail_no" /> 
+								<input type="hidden" name="payment_num" value="1" /> 
+								<fmt:formatNumber type="number" maxFractionDigits="0" value="${dto.class_price * (dto.class_sale / 100) }" var="sale" />
+								<input type="hidden" name="payment_price" value="${dto.class_sale > 0 ? (dto.class_price - sale) : dto.class_price }" /> 
+								<input type="hidden" name="product_name" value="${dto.class_title }" />
 								<input type="hidden" name="type" value="class" /> 
 								
 								<span id="detail_date"></span>
@@ -179,39 +195,48 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b09278ee8c0d306e4d38397589fed58d"></script>
 <script>
 	//클래스 주소
-	var classadd = '${dto.class_loc }';//나중에 클래스에서 주소값을 받기로 한다.
+	$.ajax({
+           url:'https://dapi.kakao.com/v2/local/search/address.json?query='+encodeURIComponent('${dto.class_loc }'),
+           type:'GET',
+           datatype: 'json',
+           headers: {'Authorization' : 'KakaoAK 0704a24e218cc486b2613072fabc7239'},
+	   success:function(data){
+			var x = data.documents[0].address.x;
+			var y = data.documents[0].address.y;
+			var classname= '${dto.class_title }';
+			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+		    mapOption = { 
+		        center: new kakao.maps.LatLng(y, x), // 지도의 중심좌표
+		        level: 3 // 지도의 확대 레벨
+		    };
+
+			var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 	
-	//클래스명
-	var classname= '${dto.class_title }';//나중에 클래스에서 클래스명을 받기로 한다...
+			// 마커가 표시될 위치입니다 37.5114167909
+			var markerPosition  = new kakao.maps.LatLng(y, x); 
+			var text = "<div class='tex' style='font-size:10pt;'>" + classname + "</div>";
+			// 마커를 생성합니다
+			var marker = new kakao.maps.Marker({
+			    position: markerPosition,
+			});
 	
-	// 주소-좌표 변환 객체를 생성합니다
-	var geocoder = new kakao.maps.services.Geocoder();
-	//주소로 좌표를 검색합니다
-	geocoder.addressSearch(classadd, function(result, status) {
+			// 마커가 지도 위에 표시되도록 설정합니다
+			marker.setMap(map);
+			var infowindow = new kakao.maps.InfoWindow({
+			    position : markerPosition, 
+			    content : text 
+			});
+			infowindow.open(map, marker);
+			
+			$('.tex').parent().width('1000px');
+		   },
+		   error : function(e){
+		       console.log(e);
+		   }
 	
-	// 이미지 지도에 표시할 마커입니다
-	// 이미지 지도에 표시할 마커를 아래와 같이 배열로 넣어주면 여러개의 마커를 표시할 수 있습니다 
-	var markers = [
-	    {
-	        position: new kakao.maps.LatLng(result[0].y, result[0].x), 
-	        text: classname // text 옵션을 설정하면 마커 위에 텍스트를 함께 표시할 수 있습니다     
-	    }
-	];
-	
-	var staticMapContainer  = document.getElementById('staticMap'), // 이미지 지도를 표시할 div  
-	    staticMapOption = { 
-	        center: new kakao.maps.LatLng(result[0].y, result[0].x), // 이미지 지도의 중심좌표
-	        level: 3, // 이미지 지도의 확대 레벨
-	        marker: markers // 이미지 지도에 표시할 마커 
-	    };    
-	
-	// 이미지 지도를 생성합니다
-	var staticMap = new kakao.maps.StaticMap(staticMapContainer, staticMapOption);
 	}); 
 </script>
 
-
 	
-
 </body>
 </html>

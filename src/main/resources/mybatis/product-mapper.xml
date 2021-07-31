@@ -23,12 +23,41 @@
 				B.PRODUCT_DEL, B.PRODUCT_SALE, B.FILE_NEW_NAME
 				FROM (
 					SELECT P.PRODUCT_NO, P.PRODUCT_NAME, P.PRODUCT_CATEGORY, P.PRODUCT_PRICE, P.PRODUCT_DESC, P.PRODUCT_LOC,
-					P.PRODUCT_DEL, P.PRODUCT_SALE, F.FILE_NEW_NAME 	, ROW_NUMBER() OVER(PARTITION BY P.PRODUCT_NO ORDER BY F.FILE_NUM DESC) as RowIdx
+					P.PRODUCT_DEL, P.PRODUCT_SALE, F.FILE_NEW_NAME
 					FROM PRODUCT p JOIN FILE_TABLE F
 					ON P.PRODUCT_NO = F.PRODUCT_NO
+					WHERE F.FILE_ORI_NAME = 'thumbnail'
 					ORDER BY P.PRODUCT_NO DESC
 					) B
-				WHERE RowIdx = 1
+				)A
+			WHERE anum <![CDATA[ <= ]]>
+			#{pageEnd}
+			) X
+		WHERE X.rnum <![CDATA[ >= ]]>
+		#{pageBegin}
+	</select>
+	
+	<select id="categoryListPaging" parameterType="storePagingDto" resultType="productDto">
+		SELECT X.rnum,
+		X.PRODUCT_NO, X.PRODUCT_NAME,  X.PRODUCT_CATEGORY, X.PRODUCT_PRICE, X.PRODUCT_DESC, X.PRODUCT_LOC,
+		X.PRODUCT_DEL, X.PRODUCT_SALE, X.FILE_NEW_NAME
+		FROM (
+			SELECT anum AS rnum,
+			A.PRODUCT_NO, A.PRODUCT_NAME, A.PRODUCT_CATEGORY, A.PRODUCT_PRICE, A.PRODUCT_DESC, A.PRODUCT_LOC,
+			A.PRODUCT_DEL, A.PRODUCT_SALE, A.FILE_NEW_NAME
+			FROM (
+				SELECT ROWNUM as anum,
+				B.PRODUCT_NO, B.PRODUCT_NAME, B.PRODUCT_CATEGORY, B.PRODUCT_PRICE, B.PRODUCT_DESC, B.PRODUCT_LOC,
+				B.PRODUCT_DEL, B.PRODUCT_SALE, B.FILE_NEW_NAME
+				FROM (
+					SELECT P.PRODUCT_NO, P.PRODUCT_NAME, P.PRODUCT_CATEGORY, P.PRODUCT_PRICE, P.PRODUCT_DESC, P.PRODUCT_LOC,
+					P.PRODUCT_DEL, P.PRODUCT_SALE, F.FILE_NEW_NAME
+					FROM PRODUCT p JOIN FILE_TABLE F
+					ON P.PRODUCT_NO = F.PRODUCT_NO
+					WHERE P.PRODUCT_CATEGORY = #{product_category}
+					AND F.FILE_ORI_NAME = 'thumbnail'
+					ORDER BY P.PRODUCT_NO DESC
+					) B
 				)A
 			WHERE anum <![CDATA[ <= ]]>
 			#{pageEnd}
@@ -73,14 +102,13 @@
 				B.PRODUCT_DEL, B.PRODUCT_SALE, B.FILE_NEW_NAME
 				FROM (
 					SELECT P.PRODUCT_NO, P.PRODUCT_NAME, P.PRODUCT_CATEGORY, P.PRODUCT_PRICE, P.PRODUCT_DESC, P.PRODUCT_LOC,
-					P.PRODUCT_DEL, P.PRODUCT_SALE, F.FILE_NEW_NAME , ROW_NUMBER() OVER(PARTITION BY P.PRODUCT_NO ORDER BY F.FILE_NUM DESC) as RowIdx
+					P.PRODUCT_DEL, P.PRODUCT_SALE, F.FILE_NEW_NAME
 					FROM PRODUCT p JOIN FILE_TABLE F
 					ON P.PRODUCT_NO = F.PRODUCT_NO
-					WHERE P.PRODUCT_NAME LIKE '%'||#{search_keyword}||'%'
-					OR P.PRODUCT_DESC LIKE '%'||#{search_keyword}||'%'				
+					WHERE F.FILE_ORI_NAME = 'thumbnail' AND (P.PRODUCT_NAME LIKE '%'||#{search_keyword}||'%'
+					OR P.PRODUCT_DESC LIKE '%'||#{search_keyword}||'%')				
 					ORDER BY P.PRODUCT_NO DESC
 					) B
-				WHERE RowIdx = 1
 				)A
 			WHERE anum <![CDATA[ <= ]]>
 			#{pageEnd}
@@ -106,6 +134,15 @@
 			) X
 		WHERE X.rnum <![CDATA[ >= ]]> 1
 	</select>
+	
+	<select id="selectfile" resultType="productDto" parameterType="int" >
+		SELECT F.FILE_NEW_NAME
+		FROM PRODUCT P, FILE_TABLE F
+		WHERE P.PRODUCT_NO = F.PRODUCT_NO
+		AND P.PRODUCT_NO = #{product_no}
+		AND F.FILE_ORI_NAME != 'thumbnail'
+	</select>
+	
 	<select id="selectOne" parameterType="int" resultType="productDto">
 		SELECT PRODUCT_NO, PRODUCT_NAME, PRODUCT_CATEGORY, PRODUCT_PRICE, PRODUCT_DESC, PRODUCT_LOC,
 		PRODUCT_DEL, PRODUCT_SALE 
@@ -147,11 +184,6 @@
 		WHERE PRODUCT_NO = #{product_no}
 	</delete>
 	
-	<select id="productCount" resultType="int">
-		SELECT COUNT(PRODUCT_NO)
-		FROM PRODUCT
-	</select>
-	
 	<select id="productListCount" resultType="int">
 		SELECT COUNT(PRODUCT_NO)
 		FROM PRODUCT
@@ -162,6 +194,11 @@
 		FROM PRODUCT
 		WHERE PRODUCT_NAME LIKE '%'||#{search_keyword}||'%'
 		OR PRODUCT_DESC LIKE '%'||#{search_keyword}||'%'
+	</select>
+	<select id="productcategoryCount" resultType="int" parameterType="String">
+		SELECT COUNT(*) AS cnt
+		FROM PRODUCT
+		WHERE PRODUCT_CATEGORY = #{product_category}
 	</select>
 	
 	<select id="searchedList" parameterType="String" resultType="productDto">

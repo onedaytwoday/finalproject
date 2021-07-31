@@ -15,6 +15,8 @@ public interface BoardBiz {
 	
 	public List<BoardDto> board_qna_search(PagingDto Pdto);
 	
+	public List<BoardDto> my_qna_list(PagingDto dto);
+	
 	public BoardDto selectOne(int board_no);
 
 	public int insert(BoardDto dto);
@@ -33,9 +35,9 @@ public interface BoardBiz {
 	
 	public int notice_count();
 	
+	public int my_qna_count(String member_id);
+	
 	public int search_notice_count(PagingDto Pdto);
 	
 	public int search_qna_count(PagingDto Pdto);
-	
-	public List<BoardDto> mypage_list(String member_id);
 }

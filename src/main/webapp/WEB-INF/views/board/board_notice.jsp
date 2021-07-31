@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Insert title here</title>
+<title>Notice</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style type="text/css">
 .no, .nicname, .title, .readcount, .date{
@@ -99,9 +99,13 @@
 				</c:otherwise>
 				</c:choose>
 			</div>
+			<c:choose>
+			<c:when test="${mDto.member_grade eq '관리자' }">
 			<div align="right">
 			<input type="button" class="genric-btn default circle" value="글작성" onclick="location.href='board_insertform.do?board_category=N'" />
 			</div>
+			</c:when>
+			</c:choose>
 		</div>
 	</div>
 					<div style="width: 100%; text-align: center;">

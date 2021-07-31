@@ -1,5 +1,6 @@
 package com.project.one.model.biz;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,10 +61,15 @@ public class EventBizImpl implements EventBiz {
 		
 		return eList;
 	}
+	
+	@Override
+	public EventDto eventClass(int class_no) {
+		return dao.eventClass(class_no);
+	}
 
 	@Override
-	public EventDto selectOne(int event_no) {
-		return dao.selectOne(event_no);
+	public EventDto eventProduct(int product_no) {
+		return dao.eventProduct(product_no);
 	}
 
 	@Transactional
@@ -71,14 +77,10 @@ public class EventBizImpl implements EventBiz {
 	public int insertEventClass(EventDto dto, String sale_rate) {
 		int res = 0;
 
-		ClassDto cDto = new ClassDto();
-		cDto.setClass_no(dto.getClass_no());
-		cDto.setClass_sale(Integer.parseInt(sale_rate));
-
 		try {
 			res = dao.insertEventClass(dto);
 			if (res > 0) {
-				cBiz.updateSale(cDto);
+				updateClassSale(dto.getClass_no(), Integer.parseInt(sale_rate));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -92,14 +94,10 @@ public class EventBizImpl implements EventBiz {
 	public int insertEventProduct(EventDto dto, String sale_rate) {
 		int res = 0;
 
-		ProductDto pDto = new ProductDto();
-		pDto.setProduct_no(dto.getProduct_no());
-		pDto.setProduct_sale(Integer.parseInt(sale_rate));
-
 		try {
 			res = dao.insertEventProduct(dto);
 			if (res > 0) {
-				pBiz.updateSale(pDto);
+				updateProductSale(dto.getProduct_no(), Integer.parseInt(sale_rate));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -114,8 +112,32 @@ public class EventBizImpl implements EventBiz {
 	}
 
 	@Override
-	public int updateNoti(int event_no) {
-		return dao.updateNoti(event_no);
+	public int updateNoti() {
+		Date today = new Date();
+		int res = 0;
+		
+		List<EventDto> list = dao.allList();
+		for(EventDto d : list) {
+			if((d.getEvent_start().before(today) || d.getEvent_start().equals(today))
+					&& (d.getEvent_end().after(today) || d.getEvent_end().equals(today))) {
+				
+				res += dao.updateNotiY(d.getEvent_no());
+			
+			} else if(d.getEvent_end().before(today)) {
+				res += dao.updateNotiN(d.getEvent_no());
+				
+				if(res > 0 && d.getProduct_no() > 0) {
+					updateProductSale(d.getProduct_no(), 0);
+				
+				} else if(res > 0 && d.getClass_no() > 0) {
+					updateClassSale(d.getClass_no(), 0);
+				}
+			} else {
+				res += dao.updateNotiN(d.getEvent_no());
+			}
+			
+		}
+		return res;
 	}
 
 	@Override
@@ -127,4 +149,37 @@ public class EventBizImpl implements EventBiz {
 	public int eventCount() {
 		return dao.eventCount();
 	}
+	
+	private int updateProductSale(int product_no, int sale_rate) {
+		ProductDto pDto = new ProductDto();
+		pDto.setProduct_no(product_no);
+		pDto.setProduct_sale(sale_rate);
+		
+		int res = 0;
+		
+		try {
+			res = pBiz.updateSale(pDto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+	
+	private int updateClassSale(int class_no, int sale_rate) {
+		ClassDto cDto = new ClassDto();
+		cDto.setClass_no(class_no);
+		cDto.setClass_sale(sale_rate);
+		
+		int res = 0;
+		
+		try {
+			res = cBiz.updateSale(cDto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+
 }

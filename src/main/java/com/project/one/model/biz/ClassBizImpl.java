@@ -1,5 +1,6 @@
 package com.project.one.model.biz;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +8,9 @@ import org.springframework.stereotype.Service;
 
 import com.project.one.model.dao.ClassDao;
 import com.project.one.model.dto.ClassDto;
+import com.project.one.model.dto.EventDto;
 import com.project.one.model.dto.PagingDto;
+import com.project.one.model.dto.StorePagingDto;
 
 @Service
 public class ClassBizImpl implements ClassBiz {
@@ -15,21 +18,50 @@ public class ClassBizImpl implements ClassBiz {
 	@Autowired
 	private ClassDao dao;
 	
+	@Autowired
+	private EventBiz eBiz;
+	
 	@Override
 	public List<ClassDto> selectList() {
-		return dao.selectList();
+		List<ClassDto> list = dao.selectList();
+		List<ClassDto> cList = new ArrayList<ClassDto>();
+		EventDto eDto;
+		
+		for(ClassDto c : list) {
+			eDto = eBiz.eventClass(c.getClass_no());
+			if(eDto == null) {
+				cList.add(c);
+			}
+		}
+		
+		return cList;
 	}
 
 	@Override
 	public List<ClassDto> classList(PagingDto pDto) {
-		return dao.classList(pDto);
+		List<ClassDto> list = dao.classList(pDto);
+		EventDto eDto;
+		
+		for(ClassDto c : list) {
+			eDto = eBiz.eventClass(c.getClass_no());
+			if(eDto == null || eDto.getEvent_noti().equals("N")) {
+				c.setClass_sale(0);
+			}
+		}
+		
+		
+		return list;
 	}
 	
 	@Override
 	public List<ClassDto> main_selectList() {
 		return dao.main_selectList();
 	}
-
+	
+	@Override
+	public List<ClassDto> selectfile(int class_no) {
+		return dao.selectfile(class_no);
+	}
 	
 	@Override
 	public ClassDto selectOne(int class_no) {
@@ -62,16 +94,6 @@ public class ClassBizImpl implements ClassBiz {
 	}
 	
 	@Override
-	public List<ClassDto> userClass(String member_id) {
-		return dao.userClass(member_id);
-	}
-
-	@Override
-	public int classCount() {
-		return dao.classCount();
-	}
-
-	@Override
 	public List<ClassDto> classListPaging(PagingDto pDto) {
 		
 		return dao.classListPaging(pDto);
@@ -81,6 +103,12 @@ public class ClassBizImpl implements ClassBiz {
 	public int classListCount() {
 		
 		return dao.classListCount();
+	}
+	
+	@Override
+	public int myClassCount(String member_id) {
+		
+		return dao.myClassCount(member_id);
 	}
 
 	@Override
@@ -99,5 +127,20 @@ public class ClassBizImpl implements ClassBiz {
 	public List<ClassDto> searchedList(String search_keyword) {
 		return dao.searchedList(search_keyword);
 	}
-	
+
+	@Override
+	public List<ClassDto> categoryListPaging(PagingDto pDto) {
+		return dao.categoryListPaging(pDto);
+	}
+
+	@Override
+	public int classcategoryCount(String class_category) {
+		return dao.classcategoryCount(class_category);
+	}
+
+	@Override
+	public List<ClassDto> myClassList(PagingDto pDto) {
+		return dao.myClassList(pDto);
+	}
+
 }

@@ -6,11 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>상품 수정</title>
+<title>Store</title>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
-	<div class="slider-area">
+	<div class="slider-area" style="margin-bottom: 150px;">
 		<div class="single-slider slider-height2 d-flex align-items-center">
 			<div class="container">
 				<div class="row">

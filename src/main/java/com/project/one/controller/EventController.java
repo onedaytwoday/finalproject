@@ -62,7 +62,7 @@ public class EventController {
 	@ResponseBody
 	@RequestMapping(value = "/eventInsertRes.do", method = RequestMethod.POST)
 	public String fileUpload(@RequestParam("files") List<MultipartFile> multipartFile, EventDto dto, String start,
-			String end, String sale_rate, HttpServletRequest request) throws ParseException {
+			String end, String sale_rate, String category, HttpServletRequest request) throws ParseException {
 		int res = 0;
 		dto.setEvent_noti("N");
 
@@ -73,7 +73,6 @@ public class EventController {
 
 		dto.setEvent_start(start_date);
 		dto.setEvent_end(end_date);
-
 		if (dto.getClass_no() == 0 && dto.getProduct_no() >= 0) {
 			res = eBiz.insertEventProduct(dto, sale_rate);
 		} else if (dto.getClass_no() >= 0 && dto.getProduct_no() == 0) {
@@ -85,7 +84,6 @@ public class EventController {
 			System.out.println("event insert 성공");
 		}
 		int event_no = dto.getEvent_no();
-		System.out.println("event_no : " + event_no);
 		String strResult = "{ \"result\":\"FAIL\" }";
 		String contextRoot = new HttpServletRequestWrapper(request).getRealPath("/");
 		String fileRoot;
@@ -145,28 +143,12 @@ public class EventController {
 			}
 			// (업로드 없이 등록하는경우)
 			else {
-				strResult = "{ \"result\":\"OK\", \"event_no\":" + event_no + "}";
+				strResult = "{ \"result\":\"FAIL\", \"event_no\":" + event_no + "}";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return strResult;
-	}
-	
-	@ResponseBody
-	@RequestMapping(value="/updateNoti.do", method=RequestMethod.POST)
-	public Map<String, String> update_noti(@RequestBody Map<String, Integer[]> checked_list){
-		Map<String, String> map = new HashMap<>();
-		Integer[] lists = checked_list.get("checked_list");
-		int res = 0;
-		
-		for(int i : lists) {
-			res += eBiz.updateNoti(i);
-		}
-		
-		map.put("msg", res > 0 ? "성공" : "실패");
-		
-		return map;
 	}
 	
 	@ResponseBody

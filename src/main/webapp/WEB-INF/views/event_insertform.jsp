@@ -6,144 +6,172 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Insert title here</title>
-
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<title>Event</title>
+<style type="text/css">
+.lab{
+	font-size: 10pt;
+}
+</style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 	$(function(){
 		$('input[name="event"]').change(function() {
 			var id = $('input[name="event"]:checked').attr('id');
 			if(id == 'sale') {
-				$("#sale_rate").css("display", "inline");
+				$("#sale_rate").next().removeClass("disabled");
 			} else {
-				$("#sale_rate").css("display", "none");
+				$("#sale_rate").next().addClass("disabled");
 			}
 		});
 		
 		$('input[name="category"]').change(function() {
 			var id = $('input[name="category"]:checked').attr('id');
 			if(id == 'class') {
-				$("#class_sel").css("display", "inline");
-				$("#product_sel").css("display", "none");
-				$("#product_no").attr("name", "");
-				
+				$("#class_no").next().removeClass("disabled");
+				$("#product_no").next().addClass("disabled");
 			} else {
-				$("#class_sel").css("display", "none");
-				$("#product_sel").css("display", "inline");
-				$("#class_no").attr("name", "");
+				$("#product_no").next().removeClass("disabled");
+				$("#class_no").next().addClass("disabled");
 			}
 		});
 	})
 </script>
 </head>
 <body>
-<jsp:include page="header.jsp"></jsp:include>
-	<main class="container">
-		<form action="eventInsertRes.do" method="post">
-			<input type="hidden" name="member_id" value="${mDto.member_id }" />
-			
-			<table border="1">
-				<tr>
-					<th>이벤트 제목</th>
-					<td><input type="text" name="event_title" required /></td>
-				</tr>
-				
-				<tr>
-					<th>이벤트 내용</th>
-					<td><textarea rows="10" cols="60" name="event_desc" required></textarea></td>
-				</tr>
-				
-				<tr>
-					<th>시작 날짜</th>
-					<td><input type="date" name="start" required /></td>
-				</tr>
-				
-				<tr>
-					<th>종료 날짜</th>
-					<td><input type="date" name="end" required /></td>
-				</tr>
-	
-				<tr>
-					<th>이벤트 카테고리</th>
-					<td>
-						<input type="radio" id="sale" name="event" value="할인" />
-						<label for="sale">할인</label>
-						
-						
-						<select style="display:none;" name="sale_rate" id="sale_rate">
-							<option value="0">0%</option>
-			                <option value="10">10%</option>
-			                <option value="20">20%</option>
-			                <option value="30">30%</option>
-			                <option value="40">40%</option>
-			                <option value="50">50%</option>
-			                <option value="60">60%</option>
-			                <option value="70">70%</option>
-			                <option value="80">80%</option>
-			                <option value="90">90%</option>
-			             </select>
-			             
-			             <input type="radio" id="new" name="event" value="NEW" />
-						<label for="new">NEW</label>
-					</td>
-				</tr>
-				
-				<tr>
-					<th>이벤트</th>
-					<td>
-						<input type="radio" id="class" name="category" value="클래스" />
-						<label for="class">클래스</label>
-						
-						<input type="radio" id="product" name="category" value="상품" />
-						<label for="product">상품</label>
-					
-					
-						<div id="class_sel" style="display:none;">
-							<select name="class_no" id="class_no">
-			                  <c:forEach items="${cList }" var="cDto">
-			                    <option value="${cDto.class_no }">
-			                      ${cDto.class_title }
-			                    </option>
-			                  </c:forEach>
-			                </select>
+<jsp:include page="header.jsp" />
+	<div class="comment-form" style="padding-left: 60px; padding-right: 60px">
+		<div class="slider-area" style="margin-bottom: 150px;">
+			<div class="single-slider slider-height2 d-flex align-items-center">
+				<div class="container">
+					<div class="row">
+						<div class="col-xl-12">
+							<div class="hero-cap text-center">
+								<h2>Event Insert</h2>
+							</div>
 						</div>
-						
-						<div id="product_sel" style="display:none;">
-							<select name="product_no" id="product_no">
-			                  <c:forEach items="${pList }" var="pDto">
-			                    <option value="${pDto.product_no }">
-			                      ${pDto.product_name }
-			                    </option>
-			                  </c:forEach>
-			                </select>
+					</div>
+				</div>
+			</div>
+		</div>
+		<form class="form-contact comment_form">
+		<input type="hidden" name="member_id" value="${mDto.member_id }" />
+			<div class="row">
+				<div class="col-2" style="margin-bottom: 30px;">
+					<div class="switch-wrap d-flex justify-content-start">
+						<div class="primary-radio mr-1">
+							<input type="radio" id="new" name="event" value="NEW">
+							<label for="new"></label>
 						</div>
+						<span class="lab">New</span>
+					</div>
 					
-					</td>
-				</tr>
-			</table>
+				</div>
+				<div class="col-1" style="margin-bottom: 30px;">
+					<div class="switch-wrap d-flex justify-content-start">
+						<div class="primary-radio mr-1">
+							<input type="radio" id="sale" name="event" value="할인" checked>
+							<label for="sale"></label>
+						</div>
+						<span class="lab">Sale</span>
+					</div>				
+				</div>	
+				<div class="col-2" style="margin-bottom: 30px;">
+					<select name="sale_rate" id="sale_rate">
+						<option value="0">0%</option>
+		                <option value="10">10%</option>
+		                <option value="20">20%</option>
+		                <option value="30">30%</option>
+		                <option value="40">40%</option>
+		                <option value="50">50%</option>
+		                <option value="60">60%</option>
+		                <option value="70">70%</option>
+		                <option value="80">80%</option>
+		                <option value="90">90%</option>
+					</select>
+				</div>
+				<div class="col-1" style="margin-bottom: 30px;">
+					<div class="switch-wrap d-flex justify-content-start">
+						<div class="confirm-radio mr-1">
+							<input type="radio" id="class" name="category" value="class" checked>
+							<label for="class"></label>
+						</div>
+						<span class="lab">Class</span>
+					</div>
+				</div>
+				<div class="col-2" style="margin-bottom: 30px;">
+					<div id="class_sel" >
+						<select name="class_no" id="class_no">
+		                  <c:forEach items="${cList }" var="cDto">
+		                    <option value="${cDto.class_no }">
+		                      ${cDto.class_title }
+		                    </option>
+		                  </c:forEach>
+		                </select>
+					</div>
+				</div>
+				<div class="col-1" style="margin-bottom: 30px;">
+					<div class="switch-wrap d-flex justify-content-start">
+						<div class="confirm-radio mr-1">
+							<input type="radio" id="product" name="category" value="product" >
+							<label for="product"></label>
+						</div>
+						<span class="lab">product</span>
+					</div>
+				</div>
+				<div class="col-2" style="margin-bottom: 30px;">
+					<div id="product_sel" >
+						<select name="product_no" id="product_no" disabled="disabled">
+		                  <c:forEach items="${pList }" var="pDto">
+		                    <option value="${pDto.product_no }">
+		                      ${pDto.product_name }
+		                    </option>
+		                  </c:forEach>
+		                </select>
+		            </div>
+				</div>
+				<div class="col-12">
+					<div class="form-group">
+					<input class="form-control" type="text" name="event_title" placeholder="Event Title" required="required">
+					</div>
+				</div>
+				<div class="col-12">
+					<div class="form-group">
+						<textarea class="form-control w-100" rows="10" cols="60"
+							name="event_desc"></textarea>
+					</div>
+				</div>
+				<div class="col-4">
+					<div class="form-group">
+					<input class="form-control" type="date" name="start" placeholder="Detail Address" required="required">
+					</div>
+				</div>
+				~
+				<div class="col-4">
+					<div class="form-group">
+					<input class="form-control" type="date" name="end" placeholder="Detail Address" required="required">
+					</div>
+				</div>
+			</div>
 			<button id="btn-upload" type="button" style="border: 1px solid #ddd; outline: none; cursor: pointer;">파일추가</button>
-			<input id="input_file" multiple="multiple" type="file" accept="image/*" style="display: none;"> 
+			<input id="input_file" multiple="multiple" type="file" accept="image/*" style="display: none;">
 			<span style="font-size: 10px; color: gray;">※첨부파일은 최대 10개까지 등록이 가능합니다.</span>
 			<div class="data_file_txt" id="data_file_txt" style="margin: 40px;">
 				<span>첨부 파일</span> <br />
 				<div id="articlefileChange"></div>
 			</div>
-			<div style="height:200px">
-			<input type="button" value="등록하기" onclick="registerAction()"/> 
-			<input type="button" value="취소" onclick="location.href='main.do'" />
+			<div class="form-group" align="right">
+				<button type="button" class="button button-contactForm btn_1 boxed-btn" onclick="registerAction()">Send</button>
+				<button type="button" class="button button-contactForm btn_1 boxed-btn" onclick="location.href='main.do'">Cancle</button>
 			</div>
 		</form>
-	</main>
+	</div>
+	
 <script>
 $(document).ready(function()
 		// input file 파일 첨부시 fileCheck 함수 실행
 		{
 			$("#input_file").on("change", fileCheck);
 		});
-
 /**
  * 첨부파일로직
  */
@@ -153,7 +181,6 @@ $(function () {
         $('#input_file').click();
     });
 });
-
 // 파일 현재 필드 숫자 totalCount랑 비교값
 var fileCount = 0;
 // 해당 숫자를 수정하여 전체 업로드 갯수를 정한다.
@@ -162,7 +189,6 @@ var totalCount = 10;
 var fileNum = 0;
 // 첨부파일 배열
 var content_files = new Array();
-
 function fileCheck(e) {
     var files = e.target.files;
     
@@ -196,7 +222,6 @@ function fileCheck(e) {
     //초기화 한다.
     $("#input_file").val("");
   }
-
 // 파일 부분 삭제 함수
 function fileDelete(fileNum){
     var no = fileNum.replace(/[^0-9]/g, "");
@@ -205,7 +230,6 @@ function fileDelete(fileNum){
 	fileCount --;
     console.log(content_files);
 }
-
 /*
  * 폼 submit 로직
  */
@@ -219,9 +243,7 @@ function fileDelete(fileNum){
 				 formData.append("files", content_files[x]);
 			}
 		}
-	for (var pair of formData.entries()) {
-		//alert(pair[0]+ ', ' + pair[1]); 
-	}
+	
    /*
    * 파일업로드 multiple ajax처리
    */    
@@ -235,9 +257,9 @@ function fileDelete(fileNum){
    	      success: function (data) {
    	    	if(JSON.parse(data)['result'] == "OK"){
    	    		alert("파일업로드 성공");
-   	    		$(location).attr('href','adminEvent.do?nowPage=1');
+   	    		$(location).attr('href','index.do');
 			} else
-				alert("서버내 오류로 처리가 지연되고있습니다. 잠시 후 다시 시도해주세요");
+				alert("파일을 업로드 해주세요");
    	    		return false;
    	      },
    	      error: function (xhr, status, error) {

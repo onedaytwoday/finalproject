@@ -5,11 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>상품 등록</title>
+<title>Store</title>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
-	<div class="slider-area">
+	<div class="slider-area" style="margin-bottom: 150px;">
 		<div class="single-slider slider-height2 d-flex align-items-center">
 			<div class="container">
 				<div class="row">
@@ -28,9 +28,12 @@
 			<div class="row">
 				<div class="col-4" style="margin-bottom: 30px;">
 					<select name="product_category">
-						<option value="cate01" selected="selected">카테고리1</option>
-						<option value="cate02">카테고리2</option>
-						<option value="cate03">카테고리3</option>
+						<option value="handmade" selected="selected">handmade</option>
+						<option value="cooking">cooking</option>
+						<option value="flower">flower</option>
+						<option value="drawing">drawing</option>
+						<option value="music">music</option>
+						<option value="yoga">yoga</option>
 					</select>
 				</div>
 				<div class="col-4" style="margin-bottom: 30px;">
@@ -183,7 +186,7 @@ function fileDelete(fileNum){
    	    		alert("파일업로드 성공");
    	    		$(location).attr('href',"store.do?nowPage=1");
 			} else
-				alert("서버내 오류로 처리가 지연되고있습니다. 잠시 후 다시 시도해주세요");
+				alert("파일을 업로드 해주세요");
    	    		return false;
    	      },
    	      error: function (xhr, status, error) {

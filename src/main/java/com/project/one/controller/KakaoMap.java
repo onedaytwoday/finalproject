@@ -49,7 +49,7 @@ public class KakaoMap {
 		List<ClassDto> list = cBiz.selectList();
 		model.addAttribute("list", list);
 
-		return "map4";
+		return "map7";
 	}
 	
 	

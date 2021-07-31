@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Insert title here</title>
+<title>Admin Page</title>
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -46,18 +46,6 @@
                                         </tr>
                                     </thead>
                                     
-                                    <tfoot>
-                                        <tr>
-                                            <th><input type="checkbox" onclick="allCheck(this.checked, 'event')" /></th>
-											<th>이벤트 제목</th>
-											<th>내용</th>
-											<th>시작 날짜</th>
-											<th>종료 날짜</th>
-											<th>알림 여부</th>
-											<th>상품/클래스</th>
-                                        </tr>
-                                    </tfoot>
-                                    
                                     <tbody>
 	                                    <c:choose>
 											<c:when test="${empty eList }">
@@ -90,7 +78,6 @@
                                     </tbody>
                                 </table>
                                 
-                                <input class="genric-btn success-border circle float-right ml-2" type="button" value="알림 보내기" onclick="updateNoti()"/>
 								<input class="genric-btn danger-border circle float-right" type="button" value="삭제" onclick="deleteChecked('event')" />
                             </div>
                         </div>

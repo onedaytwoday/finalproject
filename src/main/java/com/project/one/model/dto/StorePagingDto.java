@@ -23,6 +23,7 @@ public class StorePagingDto {
 	private int blockEnd; // 현재 블록의 마지막 페이지 번호
 
 	private String search_keyword;
+	private String product_category;
 	
 	public StorePagingDto() {
 	}
@@ -190,14 +191,21 @@ public class StorePagingDto {
 		this.search_keyword = search_keyword;
 	}
 
+	public String getProduct_category() {
+		return product_category;
+	}
+
+	public void setProduct_category(String product_category) {
+		this.product_category = product_category;
+	}
+
 	@Override
 	public String toString() {
-		return "StorePagingDto [nowPage=" + nowPage + ", prevPage=" + prevPage + ", nextPage=" + nextPage + ", totalPage="
-				+ totalPage + ", totalBlock=" + totalBlock + ", nowBlock=" + nowBlock + ", prevBlock=" + prevBlock
-				+ ", nextBlock=" + nextBlock + ", pageBegin=" + pageBegin + ", pageEnd=" + pageEnd + ", blockBegin="
-				+ blockBegin + ", blockEnd=" + blockEnd + ", search_keyword="
-				+ search_keyword + "]";
+		return "StorePagingDto [nowPage=" + nowPage + ", prevPage=" + prevPage + ", nextPage=" + nextPage
+				+ ", totalPage=" + totalPage + ", totalBlock=" + totalBlock + ", nowBlock=" + nowBlock + ", prevBlock="
+				+ prevBlock + ", nextBlock=" + nextBlock + ", pageBegin=" + pageBegin + ", pageEnd=" + pageEnd
+				+ ", blockBegin=" + blockBegin + ", blockEnd=" + blockEnd + ", search_keyword=" + search_keyword
+				+ ", product_category=" + product_category + "]";
 	}
-	
 
 }

@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- Boostrap -->
-	<link rel="stylesheet" href="resources/assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="resources/assets/css/bootstrap.min.css?ver=1">
     <link rel="stylesheet" href="resources/assets/css/owl.carousel.min.css">
     <link rel="stylesheet" href="resources/assets/css/flaticon.css">
     <link rel="stylesheet" href="resources/assets/css/slicknav.css">
@@ -19,40 +19,104 @@
     <link rel="stylesheet" href="resources/assets/css/slick.css">
     <link rel="stylesheet" href="resources/assets/css/slick.min.css">
     <link rel="stylesheet" href="resources/assets/css/slick-theme.min.css">
-    <link rel="stylesheet" href="resources/assets/css/style.css?ver=4">
+    <link rel="stylesheet" href="resources/assets/css/style.css?ver=3">
 
 
 
-	<style type="text/css">
-		#iconImg:hover , #Img:hover {
-			cursor: pointer;
-		}
-		.right-li{
-			padding-right: 20px;
-		}
+<style type="text/css">
+#iconImg:hover , #Img:hover {
+	cursor: pointer;
+}
+.right-li{
+	padding-right: 20px;
+}
+#content {
+margin: 20px;
+padding: 10px;
+}
+
+#rank-list a {
+	color: #FFF;
+	text-decoration: none;
+}
+
+#rank-list a:hover {
+	text-decoration: underline;
+}
+
+#rank-list {
+	overflow: hidden;
+	width: 100px;
+	height: 20px;
+	margin: 0;
+}
+
+#rank-list dt {
+	display: none;
+}
+
+#rank-list dd {
+	position: relative;
+	margin: 0;
+}
+
+#rank-list ol {
+	position: absolute;
+	top: 0;
+	left: 0;
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+
+#rank-list li {
+	height: 20px;
+	line-height: 20px;
+}
+.rank{
+	color:red;
+}
 	</style>
 	
 	<script type="text/javascript">
 		$(document).ready(function() {
-			<%--
 			$.ajax({
-				type : 'get',
-				url : 'getBasketNum.do',
-				dataType : 'json',
-				success : function(res) {
-					$("#basket_num").text(res.basket_num);
+				type: 'post',
+				url: 'rank_list.do',
+				data: JSON.stringify(),
+				contentType: "application/json",
+				dataType: "json",
+				success: function(data) {
+					var tmp = data['list'];
+					for(var i=0;i<tmp.length;i++){
+						var rank_name = tmp[i]['rank_name'];
+						var rank_no = tmp[i]['rank_no'];
+						$('.search_ul').append("<li style='font-size:8pt;font-weight: 600;'><span class='rank'>" + rank_no +"&nbsp&nbsp&nbsp</span>" + rank_name +"</li>");
+						var count = $('#rank-list li').length;
+					    var height = $('#rank-list li').height();
+
+					    function step(index) {
+					        $('#rank-list ol').delay(100).animate({
+					            top: -height * index,
+					        }, 500, function() {
+					            step((index + 1) % count);
+					        });
+					    }
+
+					    step(1);
+					}
 				},
-				error : function(err) {
+				error: function() {
 					alert("통신 실패!");
 				}
 			});
-			--%>
+			
 			
 			$('#iconImg').click(function(){
-	    		window.open('http://localhost:8787/one/chat_main.do?member_id=${mDto.member_id }' ,'채팅', 'width=400px,height=500px,scrollbars=yes');
+	    		window.open('http://132.226.236.97:8787/finalproject/chat_main.do?member_id=${mDto.member_id }' ,'채팅', 'width=400px,height=500px,scrollbars=yes');
 	    	});
 			$('#Img').click(function(){
-	    		window.open('http://localhost:8787/one/chat_room.do' ,'채팅', 'width=400px,height=500px,scrollbars=yes');
+	    		window.open('http://132.226.236.97:8787/finalproject/chat_room.do' ,'채팅', 'width=400px,height=500px,scrollbars=yes');
 	    	});
 	    	
 		});
@@ -85,22 +149,31 @@
                                 <ul id="navigation">  
                                     <li><a href="main.do">Home</a></li>
                                     <li><a href="board_notice_list.do?nowPage=1">Notice</a></li>
-                                    <li class="hot"><a href="store.do?nowPage=1">Shop</a>
-                                    	<ul class="submenu">
-                                            <li><a href="#">category1</a></li>
-                                            <li><a href="#">category2</a></li>
+                                    <li><a href="store.do?nowPage=1">Shop</a>
+                                        <ul class="submenu" style="width: 250px; height: 130px;">
+                                            <li class="hot" style="width: 110px;"><a href="store_category.do?category=handmade&nowPage=1">handmade</a></li>
+                                            <li><a href="store_category.do?category=cooking&nowPage=1">cooking</a></li>
+                                            <li><a href="store_category.do?category=flower&nowPage=1">flower</a></li>
+                                            <li style="position: relative; left:120px; top:-108px;"><a href="store_category.do?category=drawing&nowPage=1">drawing</a></li>
+                                            <li style="position: relative; left:120px; top:-108px;"><a href="store_category.do?category=music&nowPage=1">music</a></li>
+                                            <li style="position: relative; left:120px; top:-108px;"><a href="store_category.do?category=yoga&nowPage=1">yoga</a></li>
                                         </ul>
                                     </li>
                                     <li><a href="classList.do?nowPage=1">Class</a>
-                                    	<ul class="submenu">
-                                            <li><a href="#">category1</a></li>
-                                            <li><a href="#">category2</a></li>
+                                    	 <ul class="submenu" style="width: 250px; height: 130px;">
+                                            <li class="hot" style="width: 110px;"><a href="class_category.do?category=handmade&nowPage=1">handmade</a></li>
+                                            <li><a href="class_category.do?category=cooking&nowPage=1">cooking</a></li>
+                                            <li><a href="class_category.do?category=flower&nowPage=1">flower</a></li>
+                                            <li style="position: relative; left:120px; top:-108px;"><a href="class_category.do?category=drawing&nowPage=1">drawing</a></li>
+                                            <li style="position: relative; left:120px; top:-108px;"><a href="class_category.do?category=music&nowPage=1">music</a></li>
+                                            <li style="position: relative; left:120px; top:-108px;"><a href="class_category.do?category=yoga&nowPage=1">yoga</a></li>
                                         </ul>
                                     </li>
                                     <li><a href="board_qna_list.do?nowPage=1">QNA</a></li>
                                     <li><a href="review_list.do">Photo</a></li>
                                     <!-- test map -->
                                     <li><a href="map.do">Map</a></li>
+                                    <li><a href="review_list.do?nowPage=1">Photo</a></li>
                                 </ul>
                             </nav>
                         </div>
@@ -114,16 +187,19 @@
                                 	<c:otherwise>
                                 		<c:choose>
                                 			<c:when test="${mDto.member_grade eq '관리자' }">
-                                			<li class="right-li"><a href="eventInsert.do"><img src="resources/images/event.png" id="Img" width="20px" height="20px" onmouseover="this.src='resources/images/event_ahover.png'" onmouseout="this.src='resources/images/event.png'"></a></li>
-                                			<li class="right-li"><img src="resources/images/chat.png" id="Img" width="20px" height="20px" onmouseover="this.src='resources/images/chat_ahover.png'" onmouseout="this.src='resources/images/chat.png'"></li>
+                                				<li class="right-li"><a href="eventInsert.do"><img src="resources/images/event.png" width="20px" height="20px" onmouseover="this.src='resources/images/event_ahover.png'" onmouseout="this.src='resources/images/event.png'"></a></li>
+                                				<li class="right-li"><img src="resources/images/chat.png" id="Img" width="20px" height="20px" onmouseover="this.src='resources/images/chat_ahover.png'" onmouseout="this.src='resources/images/chat.png'"></li>
                                 			</c:when>
+                                			
                                 			<c:otherwise>
-                                			<li class="right-li"><img src="resources/images/chat.png" id="iconImg" width="20px" height="20px" onmouseover="this.src='resources/images/chat_ahover.png'" onmouseout="this.src='resources/images/chat.png'"></li>
+                                				<li class="right-li"><img src="resources/images/chat.png" id="iconImg" width="20px" height="20px" onmouseover="this.src='resources/images/chat_ahover.png'" onmouseout="this.src='resources/images/chat.png'"></li>
+												<li class="right-li"><a href="basket.do"><span class="flaticon-shopping-cart"></span></a> </li>
 											</c:otherwise>
 										</c:choose>
+                                		
                                 		<li class="right-li"><a href="${mDto.member_grade == '관리자' ? 'adminMain.do' : 'mypage_update.do' }"><span class="flaticon-user"></span></a></li>
                                 		<li class="right-li"><a href="logout.do"><img src="resources/images/logout.png" width="20px" height="20px" onmouseover="this.src='resources/images/logout_ahover.png'" onmouseout="this.src='resources/images/logout.png'"></a></li>
-                                		<li class="right-li"><a href="basket.do"><span class="flaticon-shopping-cart"></span></a> </li>
+                                		
                                 	</c:otherwise>
                                 </c:choose>
                                 
@@ -139,6 +215,15 @@
         </div>
         <!-- Header End -->
     </header>
+    <div id="content" style="position: fixed;z-index: 2147483647; top: 2%;left: 18%">
+		<dl id="rank-list">
+			<dt>실시간 급상승 검색어</dt>
+			<dd>
+				<ol class="search_ul">
+				</ol>
+			</dd>
+		</dl>
+	</div>
     
     <script src="resources/assets/js/vendor/modernizr-3.5.0.min.js"></script>
     <!-- Jquery, Popper, Bootstrap -->

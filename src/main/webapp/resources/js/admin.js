@@ -21,22 +21,32 @@ $(function() {
 		$(this).addClass('active');
 	})
 
+	let prices = new Array();
+	let dates = new Array();
+	
+	$('[name=prices]').each(function(i){
+		let price = $(`[name=prices]:eq(${i})`).val();
+		prices.push(price);
+	});
+	
+	$('[name=dates]').each(function(i){
+		let date = $(`[name=dates]:eq(${i})`).val();
+		date = new Date();
+		result = date.toDateString();
+		dates.push(result);
+	});
+	
+	
 	// 차트
-	const labels = [
-		'January',
-		'February',
-		'March',
-		'April',
-		'May',
-		'June',
-	];
+	const labels = dates;
+	
 	const data = {
 		labels: labels,
 		datasets: [{
-			label: '한 달 결제 수',
+			label: '7월 총 결제',
 			backgroundColor: 'rgb(255, 99, 132)',
 			borderColor: 'rgb(255, 99, 132)',
-			data: [0, 10, 5, 2, 20, 30, 45],
+			data: prices,
 		}]
 	};
 
@@ -134,31 +144,3 @@ function updateStatus(payment_no) {
 		}
 	});
 };
-
-// 이벤트 관리
-function updateNoti() {
-	if (checked_list.length > 0) {
-		let updateVal = {
-			"checked_list": checked_list
-		}
-
-		$.ajax({
-			type: "post",
-			url: "updateNoti.do",
-			data: JSON.stringify(updateVal),
-			contentType: "application/json",
-			dataType: "json",
-			success: function(result) {
-				if (result.msg == '실패') {
-					alert("실패!")
-				}
-				location.href = 'adminEvent.do?nowPage=1';
-			},
-			error: function() {
-				alert("통신 실패!");
-			}
-		});
-	} else {
-		alert("하나 이상 선택해 주세요!");
-	}
-}

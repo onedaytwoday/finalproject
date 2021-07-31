@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.project.one.model.dto.ClassDto;
 import com.project.one.model.dto.PagingDto;
+import com.project.one.model.dto.StorePagingDto;
 
 @Repository
 public class ClassDaoImpl implements ClassDao {
@@ -50,6 +51,34 @@ public class ClassDaoImpl implements ClassDao {
 
 		try {
 			list = sqlSession.selectList(NAMESPACE + "main_selectList");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return list;
+	}
+	
+	@Override
+	public List<ClassDto> categoryListPaging(PagingDto pDto) {
+		List<ClassDto> list = new ArrayList<ClassDto>();
+
+		try {
+			list = sqlSession.selectList(NAMESPACE + "categoryListPaging",pDto);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return list;
+	}
+	
+	@Override
+	public List<ClassDto> selectfile(int class_no) {
+		List<ClassDto> list = new ArrayList<ClassDto>();
+
+		try {
+			list = sqlSession.selectList(NAMESPACE + "selectfile",class_no);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -139,33 +168,6 @@ public class ClassDaoImpl implements ClassDao {
 		return res;
 	}
 	
-	//마이페이지 
-	@Override
-	public List<ClassDto> userClass(String member_id) {
-		List<ClassDto> list = new ArrayList<ClassDto>();
-
-		try {
-			list = sqlSession.selectList(NAMESPACE + "userClass", member_id);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-			
-			return list;
-		}
-
-	@Override
-	public int classCount() {
-		int res = 0;
-
-		try {
-			res = sqlSession.selectOne(NAMESPACE + "classCount");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return res;
-	}
-
 	@Override
 	public List<ClassDto> classListPaging(PagingDto pDto) {
 		List<ClassDto> list = new ArrayList<ClassDto>();
@@ -194,7 +196,35 @@ public class ClassDaoImpl implements ClassDao {
 		
 		return res;
 	}
+	
+	@Override
+	public int myClassCount(String member_id) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.selectOne(NAMESPACE + "myClassCount", member_id);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
 
+	@Override
+	public int classcategoryCount(String class_category) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.selectOne(NAMESPACE + "classcategoryCount", class_category);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+	
 	@Override
 	public List<ClassDto> classListSearch(PagingDto pDto) {
 		List<ClassDto> list = new ArrayList<ClassDto>();
@@ -236,5 +266,21 @@ public class ClassDaoImpl implements ClassDao {
 
 		return list;
 	}
+
+	@Override
+	public List<ClassDto> myClassList(PagingDto pDto) {
+		List<ClassDto> list = new ArrayList<ClassDto>();
+
+		try {
+			list = sqlSession.selectList(NAMESPACE + "myClassList", pDto);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return list;
+	}
+
+	
 
 }

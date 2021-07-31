@@ -20,8 +20,8 @@ public class DetailBizImpl implements DetailBiz {
 	}
 
 	@Override
-	public DetailDto selectOne(int class_no) {
-		return dao.selectOne(class_no);
+	public DetailDto selectOne(int detail_no) {
+		return dao.selectOne(detail_no);
 	}
 
 	@Override
@@ -30,13 +30,13 @@ public class DetailBizImpl implements DetailBiz {
 	}
 
 	@Override
-	public int update(int class_no) {
-		return dao.update(class_no);
+	public int update(int detail_no) {
+		return dao.update(detail_no);
 	}
 
 	@Override
-	public int delete(int class_no) {
-		return dao.delete(class_no);
+	public int delete(int detail_no) {
+		return dao.delete(detail_no);
 	}
 
 }

@@ -30,11 +30,11 @@ public class DetailDaoImpl implements DetailDao {
 	}
 
 	@Override
-	public DetailDto selectOne(int class_no) {
+	public DetailDto selectOne(int detail_no) {
 		DetailDto dto = null;
 
 		try {
-			dto = sqlSession.selectOne(NAMESPACE + "selectOne", class_no);
+			dto = sqlSession.selectOne(NAMESPACE + "selectOne", detail_no);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -58,11 +58,11 @@ public class DetailDaoImpl implements DetailDao {
 	}
 
 	@Override
-	public int update(int class_no) {
+	public int update(int detail_no) {
 		int res = 0;
 
 		try {
-			res = sqlSession.update(NAMESPACE + "update", class_no);
+			res = sqlSession.update(NAMESPACE + "update", detail_no);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -72,11 +72,11 @@ public class DetailDaoImpl implements DetailDao {
 	}
 
 	@Override
-	public int delete(int class_no) {
+	public int delete(int detail_no) {
 		int res = 0;
 
 		try {
-			res = sqlSession.delete(NAMESPACE + "delete", class_no);
+			res = sqlSession.delete(NAMESPACE + "delete", detail_no);
 
 		} catch (Exception e) {
 			e.printStackTrace();

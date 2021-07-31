@@ -27,6 +27,7 @@ import com.project.one.model.dto.BoardDto;
 import com.project.one.model.dto.ClassDto;
 import com.project.one.model.dto.FileTableDto;
 import com.project.one.model.dto.MemberDto;
+import com.project.one.model.dto.PagingDto;
 import com.project.one.model.dto.ProductDto;
 import com.project.one.model.dto.ReviewDto;
 
@@ -40,10 +41,18 @@ public class ReviewController {
 	
 	@Autowired
 	private FileTableBiz fbiz;
-	
+	//리뷰 리스트(페이징)
 	@RequestMapping("/review_list.do")
-	public String review_list_class(Model model) {
-		model.addAttribute("list", rBiz.selectList());
+	public String review_list(Model model, int nowPage , HttpSession session) {
+		int count = rBiz.reviewCount();
+		System.out.println(count);
+		PagingDto pDto = new PagingDto(count, nowPage);
+		List<ReviewDto> list = rBiz.reviewPaging(pDto);
+		for(int i=0;i<list.size();i++) {
+			System.out.println(list.get(i).toString());
+		}
+		model.addAttribute("list", rBiz.reviewPaging(pDto));
+		model.addAttribute("pDto", pDto);
 		return "review/review_list";
 	}
 	
@@ -158,7 +167,7 @@ public class ReviewController {
 				}
 				// (업로드 없이 등록하는경우)
 				else {
-					strResult = "{ \"result\":\"OK\", \"review_no\":" + review_no + "}";
+					strResult = "{ \"result\":\"FAIL\", \"review_no\":" + review_no + "}";
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -166,7 +175,6 @@ public class ReviewController {
 			return strResult;
 
 		}
-	
 	@ResponseBody
 	@RequestMapping(value = "/review_insertres_product.do", method = RequestMethod.POST)
 	public String review_insertres_product(@RequestParam("files") List<MultipartFile> multipartFile, ReviewDto rDto, String product_no_str,HttpServletRequest request) {
@@ -265,6 +273,22 @@ public class ReviewController {
 			return "redirect:review_list.do";
 		}
 		return "redirect:review_list.do";
+	}
+	
+	@RequestMapping("/mypage_review.do")
+	public String mypage_review(Model model, int nowPage, HttpSession session) {
+		MemberDto mDto = (MemberDto) session.getAttribute("mDto");
+		
+		int count = rBiz.reviewMyCount(mDto.getMember_id());
+		
+		PagingDto pDto = new PagingDto(count, nowPage);
+		pDto.setMember_id(mDto.getMember_id());
+		System.out.println(pDto);
+		model.addAttribute("list", rBiz.myReviewList(pDto));
+		model.addAttribute("pDto", pDto);
+		model.addAttribute("path", "board");
+		
+		return "mypage/mypage_review";
 	}
 	
 	public static String Random(int len) {

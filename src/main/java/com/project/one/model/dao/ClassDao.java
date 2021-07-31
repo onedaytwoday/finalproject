@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.project.one.model.dto.ClassDto;
 import com.project.one.model.dto.PagingDto;
+import com.project.one.model.dto.StorePagingDto;
 
 public interface ClassDao {
 
@@ -19,6 +20,10 @@ public interface ClassDao {
 	
 	public List<ClassDto> main_selectList();
 	
+	public List<ClassDto> categoryListPaging(PagingDto pDto); 
+	
+	public List<ClassDto> selectfile(int class_no);
+	
 	public ClassDto selectOne(int class_no);
 	
 	public ClassDto selectOneByTitle(String class_title);
@@ -31,13 +36,15 @@ public interface ClassDao {
 	
 	public int delete(int class_no);
 
-	public List<ClassDto> userClass(String member_id);
-	
-	public int classCount();
-	
 	public int classListCount();
+	
+	public int myClassCount(String member_id);
+	
+	public int classcategoryCount(String class_category);
 	
 	public int classSearchCount(PagingDto pDto);
 	
 	public List<ClassDto> searchedList(String search_keyword);
+	
+	public List<ClassDto> myClassList(PagingDto pDto);
 }

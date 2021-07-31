@@ -7,7 +7,7 @@ public class BasketDto {
 	private int basket_group;
 	private int product_no;
 	private String member_id;
-	
+	private String file_new_name;
 	public BasketDto() {
 	}
 
@@ -69,10 +69,20 @@ public class BasketDto {
 		this.member_id = member_id;
 	}
 
+	public String getFile_new_name() {
+		return file_new_name;
+	}
+
+	public void setFile_new_name(String file_new_name) {
+		this.file_new_name = file_new_name;
+	}
+
 	@Override
 	public String toString() {
 		return "BasketDto [basket_no=" + basket_no + ", basket_num=" + basket_num + ", basket_price=" + basket_price
-				+ ", basket_group=" + basket_group + ", product_no=" + product_no + ", member_id=" + member_id + "]";
+				+ ", basket_group=" + basket_group + ", product_no=" + product_no + ", member_id=" + member_id
+				+ ", file_new_name=" + file_new_name + "]";
 	}
+
 	
 }

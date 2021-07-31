@@ -21,6 +21,10 @@ public interface ProductDao {
 	
 	public List<ProductDto> main_selectList();
 	
+	public List<ProductDto> categoryListPaging(StorePagingDto pDto); 
+	
+	public List<ProductDto> selectfile(int product_no);
+	
 	public ProductDto selectOne(int product_no);
 	
 	public ProductDto selectOneByName(String product_name);
@@ -33,10 +37,12 @@ public interface ProductDao {
 	
 	public int delete(int product_no);
 	
-	public int productCount();
-	
 	public int productListCount();
+	
+	public int myProductCount(String member_id);
 
+	public int productcategoryCount(String product_category);
+	
 	public int productSearchCount(StorePagingDto pDto);
 	
 }

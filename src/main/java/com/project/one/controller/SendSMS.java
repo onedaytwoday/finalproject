@@ -20,7 +20,7 @@ import java.io.BufferedReader;
 public class SendSMS {
 	
 	
-	public static void sendSMS(String phonenumber) {
+	public static void sendSMS(String phonenumber, String content) {
 		String hostNameUrl = "https://sens.apigw.ntruss.com";
 		String requestUrl = "/sms/v2/services/";
 		String requestUrlType = "/messages";
@@ -35,7 +35,6 @@ public class SendSMS {
 		JSONObject bodyJson = new JSONObject();
 		JSONObject toJson = new JSONObject();
 		JSONArray toArr = new JSONArray();
-		String content = Random(4);
 		toJson.put("content", "인증번호는 " + content + "입니다.");
 		toJson.put("to", phonenumber);
 		toArr.add(toJson);
@@ -61,7 +60,7 @@ public class SendSMS {
 			con.setRequestProperty("content-type", "application/json");
 			con.setRequestProperty("x-ncp-apigw-timestamp", timestamp);
 			con.setRequestProperty("x-ncp-iam-access-key", accessKey);
-			con.setRequestProperty("x-ncp-apigw-signatrue-v2", makeSignature(requestUrl, timestamp,method, accessKey, secretKey));
+			con.setRequestProperty("x-ncp-apigw-signature-v2", makeSignature(requestUrl, timestamp,method, accessKey, secretKey));
 			
 			con.setRequestMethod(method);	
 			con.setDoOutput(true);
@@ -115,17 +114,6 @@ public class SendSMS {
 			encodeBase64String = e.toString();
 		}
 		return encodeBase64String;
-	}
-	
-	public static String Random(int len) {
-		char[] charSet = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
-		int idx = 0;
-		StringBuffer sb = new StringBuffer();
-		for (int i = 0; i < len; i++) {
-			idx = (int) (charSet.length * Math.random());
-			sb.append(charSet[idx]);
-		}
-		return sb.toString();
 	}
 	
 }

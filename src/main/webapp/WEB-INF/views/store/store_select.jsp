@@ -7,18 +7,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>상품 상세페이지</title>
+<title>Store</title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 	
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script type="text/javascript">
 		function addToBasket(){
+			let price = $("#price").text();
+			let sale = $("#sale").text();
+
+			if(sale > 0) {
+				sale = Math.round(price * (sale / 100));
+				price = price - sale;
+			}
+			
+			
 			let productVal = {
 					"product_no" : "${dto.product_no}",
 					"product_name" : "${dto.product_name}",
-					"product_price" : "${dto.product_price}"
+					"product_price" : sale > 0 ? price : "${dto.product_price}"
 			}
-		
+			
 			$.ajax({
 				type: "post",
 				url: "addToBasket.do",
@@ -46,29 +55,46 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
-		<main class="container">
-		
+		<main class="container" style="margin-bottom: 150px;">
+			<div class="slider-area">
+				<div class="single-slider slider-height2 d-flex align-items-center">
+					<div class="container">
+						<div class="row">
+							<div class="col-xl-12">
+								<div class="hero-cap text-center">
+									<h2>Product Detail</h2>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 	        <div class="product_image_area">
 	            <div class="row">
 	                <div class="col-md-6">            	
 		                <div class="product_img_slide owl-carousel">
-		                    <div class="single_product_img">
-		                        <img src="resources/assets/img/gallery/gallery01.png" alt="#" class="img-fluid">
-		                    </div>
-		                    <div class="single_product_img">
-		                        <img src="resources/assets/img/gallery/gallery01.png" alt="#" class="img-fluid">
-		                    </div>
-		                    <div class="single_product_img">
-		                        <img src="resources/assets/img/gallery/gallery1.png" alt="#" class="img-fluid">
-		                    </div>
+		                	<c:forEach items="${fList }" var="dto">
+								<div class="single_product_img">
+		                        	<img src="resources/upload/${dto.file_new_name }" alt="상품" class="img-fluid">
+		                   		</div>
+								
+							</c:forEach>
 		                </div>
-		                
 	                </div>
 	                
 	                <div class="col-md-6">
 		                <div class="single_product_text mt-3">
 		                    <h3>${dto.product_name }</h3>
-		                    <h5 class="ml-2">${dto.product_price }원</h5>
+		                    
+		                    <c:choose>
+								<c:when test="${event != null and event.event_noti eq 'Y' and dto.product_sale > 0 }">
+									<h5 class="ml-2"><del id="price">${dto.product_price }</del>원</h5>
+									<h4 class="ml-2 font-weight-bold text-monospace text-danger"><span id="sale">${dto.product_sale }</span>% 할인중!!</h4>
+								</c:when>
+								<c:otherwise>
+									<h5 class="ml-2">${dto.product_price }원</h5>				
+								</c:otherwise>
+							</c:choose>
 		                    
 		                    <div class="ml-2">
 								<c:choose>
@@ -129,7 +155,8 @@
 					                    	<form action="payment.do" method="post">
 												<input type="hidden" name="product_no" value="${dto.product_no }" />
 												<input type="hidden" name="payment_num" value="1" />
-												<input type="hidden" name="payment_price" value="${dto.product_price }" />
+												<fmt:parseNumber integerOnly="true" value="${dto.product_price * (dto.product_sale / 100) }" var="sale"/>
+												<input type="hidden" name="payment_price" value="${dto.product_sale > 0 ? (dto.product_price - sale) : dto.product_price }" /> 
 												<input type="hidden" name="product_name" value="${dto.product_name }" />
 												<input type="hidden" name="type" value="product" />
 												

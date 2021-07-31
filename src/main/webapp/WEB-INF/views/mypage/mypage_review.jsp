@@ -1,20 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Admin Page</title>
-	<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<title>Insert title here</title>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
 	
 	<!-- Page Wrapper -->
     <div id="wrapper">
-		<jsp:include page="admin_menu.jsp"></jsp:include>
+		<jsp:include page="mypage_menu.jsp"></jsp:include>
         
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -23,42 +23,48 @@
             <div id="content">
                 <!-- Begin Page Content -->
                 <div class="container-fluid mt-3">
-                	<h1 class="h3 mb-4 text-gray-800">회원 관리</h1>
+                	<h1 class="h3 mb-4 text-gray-800">게시판</h1>
                 	
                 	<!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">회원 목록</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">내가 쓴 후기</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered text-center align-items-center" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>회원 ID</th>
-											<th>이름</th>
-											<th>닉네임</th>
-											<th>이메일</th>
-											<th>등급</th>
-											<th></th>
+                                            <th>번호</th>
+											<th>제목</th>
+											<th>상품/클래스</th>
+											<th>평점</th>
+											<th>작성일</th>
                                         </tr>
                                     </thead>
                                     <tbody>
 	                                    <c:choose>
-											<c:when test="${empty mList }">
-												<tr>
-													<th colspan="5">------------회원이 존재하지 않습니다.------------</th>
-												</tr>
+											<c:when test="${empty list }">
+												<tr><th colspan="5">-----------------작성하신 글이 없습니다-------------</th></tr>
 											</c:when>
 											<c:otherwise>
-												<c:forEach items="${mList }" var="dto">
+												<c:forEach items="${list }" var="dto">
+													<c:set var="cnt" value="${cnt + 1}"/>
 													<tr>
-														<td>${dto.member_id }</td>
-														<td>${dto.member_name }</td>
-														<td>${dto.member_nicname }</td>
-														<td>${dto.member_email }</td>
-														<td>${dto.member_grade }</td>
-														<td><input id="${dto.member_id }" class="genric-btn primary-border circle medium" type="button" onclick="manageMember('${dto.member_id}');" value="${dto.member_join == 'Y' ? '계정 잠그기' : '계정 풀기' }" /></td>
+														<td>${cnt }</td>
+														<td><a href="review_detail.do?review_no=${dto.review_no }">${dto.review_title }</a></td>
+														<c:choose>
+															<c:when test="${dto.product_no > 0 }">
+																<td><a href="store_select.do?product_no=${dto.product_no }">${dto.product_name }</a></td>
+															</c:when>
+															
+															<c:when test="${dto.class_no > 0 }">
+																<td><a href="classDelete.do?class_no=${dto.class_no}">${dto.class_title }</a></td>
+															</c:when>
+														</c:choose>
+														
+														<td>${dto.review_rate }</td>
+														<td><fmt:formatDate value="${dto.review_date }" pattern="yyyy-MM-dd" /></td>
 													</tr>
 												</c:forEach>
 											</c:otherwise>
@@ -71,10 +77,9 @@
                 </div>
                 <!-- /.container-fluid -->
                 
-                
-                
                 <jsp:include page="/WEB-INF/views/paging.jsp">
-					<jsp:param value="Member" name="board_category" />
+					<jsp:param value="review" name="board_category" />
+					<jsp:param value="mypage" name="from" />
 					<jsp:param value="${pDto.nowBlock}" name="nowBlock" />
 					<jsp:param value="${pDto.blockBegin }" name="blockBegin" />
 					<jsp:param value="${pDto.blockEnd }" name="blockEnd" />
@@ -86,7 +91,8 @@
             </div>
         </div>
     </div>
+	
+	<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 
-    <jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 </body>
 </html>

@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Insert title here</title>
+<title>Class 등록</title>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
@@ -93,13 +93,13 @@
 <body>
 	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
 	
-	<div class="slider-area">
+	<div class="slider-area" style="margin-bottom: 150px;">
 		<div class="single-slider slider-height2 d-flex align-items-center">
 			<div class="container">
 				<div class="row">
 					<div class="col-xl-12">
 						<div class="hero-cap text-center">
-							<h2>Class Detail</h2>
+							<h2>Class Insert Detail</h2>
 						</div>
 					</div>
 				</div>

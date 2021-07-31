@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Insert title here</title>
+<title>Class 등록</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>  
@@ -47,7 +47,7 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
-	<div class="slider-area">
+	<div class="slider-area" style="margin-bottom: 150px;">
 		<div class="single-slider slider-height2 d-flex align-items-center">
 			<div class="container">
 				<div class="row">
@@ -64,6 +64,16 @@
 		style="padding-left: 60px; padding-right: 60px">
 		<form class="form-contact comment_form" action="board_insertRes.do" method="post" id="board_insertRes">
 			<div class="row">
+			<div class="col-4" style="margin-bottom: 30px;">
+					<select name="class_category">
+						<option value="handmade" selected="selected">handmade</option>
+						<option value="cooking">cooking</option>
+						<option value="flower">flower</option>
+						<option value="drawing">drawing</option>
+						<option value="music">music</option>
+						<option value="yoga">yoga</option>
+					</select>
+				</div>
 			<div class="col-12">
 					<div class="form-group">
 						<input class="form-control" type="text" name="member_id" value="${mDto.member_id}" readonly >
@@ -99,12 +109,6 @@
 				<div class="col-6">
 					<div class="form-group">
 					<input class="form-control" type="text" name="class_loc_2" id="addr_2" placeholder="Detail Address" required="required">
-					</div>
-				</div>
-				<div class="col-12">
-					<div class="form-group">
-						<input class="form-control" name="class_category" type="text"
-							placeholder="Class Category">
 					</div>
 				</div>
 				<div class="col-12">
@@ -233,7 +237,7 @@ function fileDelete(fileNum){
    	    		alert("파일업로드 성공");
    	    		$(location).attr('href',"detailInsertForm.do?class_no="+JSON.parse(data)['class_no']);
 			} else
-				alert("서버내 오류로 처리가 지연되고있습니다. 잠시 후 다시 시도해주세요");
+				alert("파일을 업로드 해주세요");
    	    		return false;
    	      },
    	      error: function (xhr, status, error) {

@@ -104,9 +104,16 @@ public class BoardController {
 	
 	//마이페이지
 	@RequestMapping("mypage_board.do")
-	public String mypage_list(Model model, HttpSession session) {
+	public String mypage_list(Model model, int nowPage, HttpSession session) {
 		MemberDto dto = (MemberDto)session.getAttribute("mDto");
-		model.addAttribute("list",biz.mypage_list(dto.getMember_id()));
+		
+		int count = biz.my_qna_count(dto.getMember_id());
+		PagingDto pDto = new PagingDto(count, nowPage);
+		pDto.setMember_id(dto.getMember_id());
+
+		model.addAttribute("list", biz.my_qna_list(pDto));
+		model.addAttribute("pDto", pDto);
+		model.addAttribute("path", "board");
 		
 		return "mypage/mypage_board";
 	}

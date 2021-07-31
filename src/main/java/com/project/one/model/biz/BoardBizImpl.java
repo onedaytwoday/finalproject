@@ -1,5 +1,6 @@
 package com.project.one.model.biz;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,6 +82,11 @@ public class BoardBizImpl implements BoardBiz {
 	}
 	
 	@Override
+	public int my_qna_count(String member_id) {
+		return dao.my_qna_count(member_id);
+	}
+	
+	@Override
 	public int search_notice_count(PagingDto Pdto) {
 		return dao.search_notice_count(Pdto);
 	}
@@ -90,11 +96,9 @@ public class BoardBizImpl implements BoardBiz {
 		return dao.search_qna_count(Pdto);
 	}
 
-	
 	@Override
-	public List<BoardDto> mypage_list(String member_id) {
-		
-		return dao.mypage_list(member_id);
+	public List<BoardDto> my_qna_list(PagingDto dto) {
+		return dao.my_qna_list(dto);
 	}
 
 }
