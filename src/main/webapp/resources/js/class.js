@@ -44,7 +44,7 @@ $(function() {
 	});
 });
 
-
+let newVal;
 function getAutoCompleted() {
 	$("[name=search_keyword]:eq(0)").change(function() {
 		if ($("#on").is(":visible") && checked) {
@@ -66,7 +66,7 @@ function getAutoCompleted() {
 					$('#auto_result').append(ul);
 					
 					$('ul').on('click', 'li', function(){
-						$("[name=search_keyword]:eq(0)").val($(this).text());
+						newVal = $(this).text();
 					});
 					
 				},
@@ -79,3 +79,5 @@ function getAutoCompleted() {
 		}
 	});
 }
+
+$("[name=search_keyword]:eq(0)").val(newVal);

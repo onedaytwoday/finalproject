@@ -13,83 +13,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="resources/js/sockjs.min.js"></script>
 <script type="text/javascript" src="resources/js/class.js"></script>
-<script type="text/javascript">
-	let checked
-	$(function(){
-		
-		$("#search_category").change(function(){
-			let category = $("select > option:selected").val();
-			checked = category == 'title+desc+category'
-		});
-		
-		
-		$("[name=search_keyword]:eq(0)").on("propertychange change keyup paste input", function() {
-			$.ajax({
-				type: "post",
-				url: "auto_class.do",
-				data: JSON.stringify({"keyword" : $("[name=search_keyword]:eq(0)").val()}),
-				contentType: "application/json",
-				dataType: "json",
-				success: function(result) {
-					let list = result.list;
-
-					for(let i=0; i<list.length; i++) {
-						let input = $("<div>" + list[i] + "</div>");
-						$("#auto_result").append(input);											
-					}
-					
-				},
-				error: function() {
-					alert("통신 실패!");
-				}
-			});
-		});
-		
-		<%--
-		$("[name=search_keyword]:eq(0)").change(function(){
-			$.ajax({
-				type: "post",
-				url: "auto_class.do",
-				data: JSON.stringify({"keyword" : $("[name=search_keyword]:eq(0)").val()}),
-				contentType: "application/json",
-				dataType: "json",
-				success: function(result) {
-					console.log(result.list);
-					let list = result.list;
-					
-					for(let i=0; i<list.length; i++) {
-						let input = $("<div>" + list[i] + "</div>");
-						$("#auto_result").append(input);											
-					}
-					
-				},
-				error: function() {
-					alert("통신 실패!");
-				}
-			});
-		});
-		--%>
-		
-		
-		
-		let category = "${category}";
-		if(category == "handmade"){
-			$('#nav-handmade-tab').addClass("active");
-		}else if(category == "cooking"){
-			$('#nav-cooking-tab').addClass("active");
-		}else if(category == "flower"){
-			$('#nav-flower-tab').addClass("active");
-		}else if(category == "drawing"){
-			$('#nav-drawing-tab').addClass("active");
-		}else if(category == "music"){
-			$('#nav-music-tab').addClass("active");
-		}else if(category == "yoga"){
-			$('#nav-yoga-tab').addClass("active");
-		}else if(category == ""){
-			$('#nav-home-tab').addClass("active");
-		}
-	});
-	
+<script type="text/javascript">	
 	function ranking(){
 		if(checked){
 			let list = ['class', $("[name='search_keyword']:eq(0)").val()]
@@ -249,7 +173,6 @@
                 </div>
             </div>
         </section>
-        <h1>${pDto.search_category }</h1>
 					<jsp:include page="/WEB-INF/views/paging.jsp">
 						<jsp:param value="C" name="class_list" />
 						<jsp:param value="${pDto.class_category }" name="class_category" />
