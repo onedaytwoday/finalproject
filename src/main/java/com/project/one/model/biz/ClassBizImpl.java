@@ -54,6 +54,11 @@ public class ClassBizImpl implements ClassBiz {
 	}
 	
 	@Override
+	public List<ClassDto> totalList() {
+		return dao.totalList();
+	}
+	
+	@Override
 	public List<ClassDto> main_selectList() {
 		return dao.main_selectList();
 	}
@@ -78,6 +83,11 @@ public class ClassBizImpl implements ClassBiz {
 		return dao.insert(dto);
 	}
 
+	@Override
+	public int class_location(ClassDto dto) {
+		return dao.class_location(dto);
+	}
+	
 	@Override
 	public int update(ClassDto dto) {
 		return dao.update(dto);

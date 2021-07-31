@@ -12,7 +12,7 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="resources/js/sockjs.min.js"></script>
-<script type="text/javascript" src="resources/js/product.js"></script>
+<script type="text/javascript" src="resources/js/product.js?ver=1"></script>
 <script type="text/javascript">
 	function ranking(){
 		let list = ['product', $("[name='search_keyword']:eq(0)").val()]

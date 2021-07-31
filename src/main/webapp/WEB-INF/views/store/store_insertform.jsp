@@ -56,12 +56,6 @@
 				</div>
 				<div class="col-12">
 					<div class="form-group">
-						<input class="form-control" name="product_sale"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" type="text"
-							placeholder="Product Sale">
-					</div>
-				</div>
-				<div class="col-12">
-					<div class="form-group">
 						<input class="form-control" name="product_loc" type="text"
 							placeholder="Seller Location">
 					</div>

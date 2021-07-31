@@ -12,6 +12,8 @@ public interface ClassDao {
 	
 	public List<ClassDto> selectList();
 	
+	public List<ClassDto> totalList();
+	
 	public List<ClassDto> classList(PagingDto pDto);
 	
 	public List<ClassDto> classListPaging(PagingDto pDto);
@@ -29,6 +31,8 @@ public interface ClassDao {
 	public ClassDto selectOneByTitle(String class_title);
 	
 	public int insert(ClassDto dto);
+	
+	public int class_location(ClassDto dto);
 	
 	public int update(ClassDto dto);
 	

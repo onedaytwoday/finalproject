@@ -36,6 +36,17 @@ $(function() {
 
 });
 
+function on_off() {
+	if ($("#on").css('display') === 'block') {
+		alert("on");
+		getAutoCompleted();
+		
+	} else {
+		alert("off");
+		$("#auto_result").empty();
+	}
+}
+
 function getAutoCompleted() {
 	$("[name=search_keyword]:eq(0)").change(function() {
 		if ($("#on").is(":visible")) {
