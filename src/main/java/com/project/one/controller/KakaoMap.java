@@ -1,4 +1,5 @@
 package com.project.one.controller;
+<<<<<<< HEAD
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
@@ -17,6 +18,8 @@ import org.json.JSONObject;
 
 //import javax.servlet.http.HttpSession;
 
+=======
+>>>>>>> 8aed2efd405f2a335ea2287fa6c5081c61e8a5a9
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,6 +33,9 @@ import com.project.one.model.dto.ClassDto;
 //import org.slf4j.Logger;
 //import org.slf4j.LoggerFactory;
 
+import com.project.one.model.biz.ClassBiz;
+import com.project.one.model.dto.PagingDto;
+
 
 @Controller
 public class KakaoMap {
@@ -41,8 +47,12 @@ public class KakaoMap {
 
 	private static int CLASS_NO;
 	
+	@Autowired
+	private ClassBiz biz;
+	
 	//메인에서 지도 클릭시
 	@RequestMapping("/map.do")
+<<<<<<< HEAD
 	public String map(Model model) {
 //		logger.info("KakaoMap map" + new Date());
 //		---------------------
@@ -102,4 +112,16 @@ public class KakaoMap {
 //		return str;	
 //	}
 //	
+=======
+	public String map(Model model ,int nowPage) {
+		int count = biz.classListCount();
+		System.out.println(count);
+		PagingDto pDto = new PagingDto(count, nowPage);
+		
+		model.addAttribute("list", biz.classListPaging(pDto));
+		model.addAttribute("pDto", pDto);
+		model.addAttribute("total",biz.totalList());
+		return "map";
+	}
+>>>>>>> 8aed2efd405f2a335ea2287fa6c5081c61e8a5a9
 }

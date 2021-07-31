@@ -59,17 +59,20 @@
 														<td>${dto.payment_price }</td>
 														<td><fmt:formatDate value="${dto.payment_date }" pattern="yyyy/MM/dd" /></td>
 														<td><span id="${dto.payment_no }">${dto.payment_del }</span></td>
-														<c:if test="${dto.detail_no == 0 }">
-															<c:choose>
-																<c:when test="${dto.payment_del == '배송완료' }">
-																	<td><input type="button" value="업데이트" disabled /></td>
-																</c:when>
-																
-																<c:otherwise>
-																	<td><input class="genric-btn primary-border circle medium" onclick="updateStatus(${dto.payment_no})" type="button" value="업데이트" /></td>						
-																</c:otherwise>
-															</c:choose>
-														</c:if>
+														<c:choose>
+															<c:when test="${dto.detail_no == 0 }">
+																<c:choose>
+																	<c:when test="${dto.payment_del == '배송완료' }">
+																		<td><input type="button" value="업데이트" disabled /></td>
+																	</c:when>
+																	
+																	<c:otherwise>
+																		<td><input class="genric-btn primary-border circle medium" onclick="updateStatus(${dto.payment_no})" type="button" value="업데이트" /></td>						
+																	</c:otherwise>
+																</c:choose>
+															</c:when>
+															<c:otherwise><td></td></c:otherwise>
+														</c:choose>
 													</tr>
 												</c:forEach>
 											</c:otherwise>

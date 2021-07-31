@@ -21,46 +21,6 @@ $(function() {
 		$(this).addClass('active');
 	})
 
-	let prices = new Array();
-	let dates = new Array();
-	
-	$('[name=prices]').each(function(i){
-		let price = $(`[name=prices]:eq(${i})`).val();
-		prices.push(price);
-	});
-	
-	$('[name=dates]').each(function(i){
-		let date = $(`[name=dates]:eq(${i})`).val();
-		date = new Date();
-		result = date.toDateString();
-		dates.push(result);
-	});
-	
-	
-	// 차트
-	const labels = dates;
-	
-	const data = {
-		labels: labels,
-		datasets: [{
-			label: '7월 총 결제',
-			backgroundColor: 'rgb(255, 99, 132)',
-			borderColor: 'rgb(255, 99, 132)',
-			data: prices,
-		}]
-	};
-
-	const config = {
-		type: 'line',
-		data,
-		options: {}
-	};
-
-	let myChart = new Chart(
-		document.getElementById('myChart'),
-		config
-	);
-
 });
 
 // 회원 관리

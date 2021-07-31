@@ -111,15 +111,15 @@ public class ClassController {
 		PagingDto pDto = new PagingDto();
 		pDto.setSearch_category(search_category);
 		pDto.setSearch_keyword(search_keyword);
-		
 		int count = cBiz.classSearchCount(pDto);
+		System.out.println("count : " + count);
 		PagingDto dto = new PagingDto(count, nowPage);
 		dto.setSearch_category(search_category);
 		dto.setSearch_keyword(search_keyword);
-		
+		System.out.println(dto);
 		model.addAttribute("list", cBiz.classListSearch(dto));
 		model.addAttribute("pDto", dto);
-		
+			
 		return "class/class_list";
 	}
 		
@@ -256,12 +256,17 @@ public class ClassController {
 
 	@ResponseBody
 	@RequestMapping(value = "/classInsertRes.do", method = RequestMethod.POST)
-	public String fileUpload(@RequestParam("files") List<MultipartFile> multipartFile, ClassDto dto,
+	public String fileUpload(@RequestParam("files") List<MultipartFile> multipartFile, ClassDto dto, 
 			HttpServletRequest request) {
 		if (cBiz.insert(dto) > 0) {
 			System.out.println("class insert 성공");
 		} else {
 			System.out.println("class insert 실패");
+		}
+		if (cBiz.class_location(dto) > 0) {
+			System.out.println("위도경도 성공");
+		}else {
+			System.out.println("위도경도 실패");
 		}
 		int class_no = dto.getClass_no();
 		System.out.println("class no : " + class_no);
@@ -346,18 +351,17 @@ public class ClassController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/autoComplete.do", method = RequestMethod.POST)
-	public Map<String, List<String>> auto_complete(@RequestBody Map<String, String> keyword) {
+	@RequestMapping(value="/auto_class.do", method = RequestMethod.POST)
+	public Map<String, List<String>> auto_class(@RequestBody Map<String, String> keyword) {
 		String term = keyword.get("keyword");
 		System.out.println("keyword : " + term);
 		
 		Map<String, List<String>> map = new HashMap<>();
 		
-		map.put("list", ElasticSearch.getAutoCompleted(term));
+		map.put("list", ElasticSearch.getAutoCompleted("class", term));
 		
 		return map;
 	}
-	
 	public static String Random(int len) {
 		char[] charSet = new char[] { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'o', 'p', 'q',
 				'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };

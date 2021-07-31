@@ -50,8 +50,10 @@ public class EventBizImpl implements EventBiz {
 		List<EventDto> eList = dao.eventList(dto);
 		
 		for(EventDto e : eList) {
+			System.out.println(e.getClass_no());
 			if (e.getClass_no() >= 0 && e.getProduct_no() == 0) {
 				ClassDto cDto = cBiz.selectOne(e.getClass_no());
+				System.out.println(cDto);
 				e.setTitle(cDto.getClass_title());
 			} else {
 				ProductDto pDto = pBiz.selectOne(e.getProduct_no());

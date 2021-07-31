@@ -91,7 +91,7 @@ function sendKakao(event, newPrice){
 					data: {
 						template_id: 56492,
 						template_args: {
-							'${image}' : 'https://images.unsplash.com/photo-1499233983070-99a5f004e720?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80',
+							'${image}' : `http://132.226.236.97:8787/finalproject/resources/upload/${event.file_new_name}`,
 							'${event_title}': event.event_title,
 							'${event_desc}': event.event_desc,
 							'${original_price}': event.original_price,

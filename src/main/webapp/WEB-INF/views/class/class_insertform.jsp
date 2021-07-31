@@ -10,6 +10,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>  
 <script type="text/javascript">
+var tmp;
 	function address() {
 		new daum.Postcode(
 				{
@@ -33,16 +34,37 @@
 						document.getElementById('postcode').value = data.zonecode;
 						document.getElementById("addr_1").value = roadAddr;
 						document.getElementById("addr_1").value = data.jibunAddress;
-
 						if (data.autoRoadAddress) {
 							document.getElementById("addr_1").value = roadAddr;
+							
 						} else if (data.autoJibunAddress) {
 							document.getElementById("addr_1").value = data.jibunAddress;
 						} else {
 						}
+						$.ajax({
+					           url:'https://dapi.kakao.com/v2/local/search/address.json?query='+encodeURIComponent(roadAddr),
+					           type:'GET',
+					           datatype: 'json',
+					           headers: {'Authorization' : 'KakaoAK 0704a24e218cc486b2613072fabc7239'},
+						   success:function(data){
+								var x = data.documents[0].address.x;
+								var y = data.documents[0].address.y;
+								$('.class_lng').val(x);
+								$('.class_lat').val(y);
+						   },
+						   error : function(e){
+						       console.log(e);
+						   }
+						});
+						
 					}
+				
 				}).open();
-}
+	}
+		
+		
+		
+
 </script>
 </head>
 <body>
@@ -63,6 +85,8 @@
 	<div class="comment-form"
 		style="padding-left: 60px; padding-right: 60px">
 		<form class="form-contact comment_form" action="board_insertRes.do" method="post" id="board_insertRes">
+			<input type="hidden" class="class_lat" name="class_lat" value="" />
+			<input type="hidden" class="class_lng" name="class_lng" value="" />
 			<div class="row">
 			<div class="col-4" style="margin-bottom: 30px;">
 					<select name="class_category">
@@ -135,11 +159,11 @@
 		
 	
 <script>
-$(document).ready(function()
+$(document).ready(function(){
 		// input file 파일 첨부시 fileCheck 함수 실행
-		{
 			$("#input_file").on("change", fileCheck);
-		});
+});
+	
 
 /**
  * 첨부파일로직
@@ -247,14 +271,6 @@ function fileDelete(fileNum){
    	    });
    	    return false;
 	}
-	
-	//지도
-	            window.onload = function(){
-                document.getElementById("classmap").onclick = function(){
-                    window.open('mapselect.do', '지도', 'width=500px, height=400px;');
-                }
-
-            };
 </script>
 
 </body>

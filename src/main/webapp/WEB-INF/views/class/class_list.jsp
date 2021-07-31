@@ -12,7 +12,7 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="resources/js/sockjs.min.js"></script>
-
+<script type="text/javascript" src="resources/js/class.js"></script>
 <script type="text/javascript">
 	let checked
 	$(function(){
@@ -22,10 +22,11 @@
 			checked = category == 'title+desc+category'
 		});
 		
+		
 		$("[name=search_keyword]:eq(0)").on("propertychange change keyup paste input", function() {
 			$.ajax({
 				type: "post",
-				url: "autoComplete.do",
+				url: "auto_class.do",
 				data: JSON.stringify({"keyword" : $("[name=search_keyword]:eq(0)").val()}),
 				contentType: "application/json",
 				dataType: "json",
@@ -33,8 +34,8 @@
 					let list = result.list;
 
 					for(let i=0; i<list.length; i++) {
-						let input = $("<input type='text' class='form-control bg-white' value=" + list[i] +" readonly />")
-						$("#auto_result").append(input)												
+						let input = $("<div>" + list[i] + "</div>");
+						$("#auto_result").append(input);											
 					}
 					
 				},
@@ -43,6 +44,31 @@
 				}
 			});
 		});
+		
+		<%--
+		$("[name=search_keyword]:eq(0)").change(function(){
+			$.ajax({
+				type: "post",
+				url: "auto_class.do",
+				data: JSON.stringify({"keyword" : $("[name=search_keyword]:eq(0)").val()}),
+				contentType: "application/json",
+				dataType: "json",
+				success: function(result) {
+					console.log(result.list);
+					let list = result.list;
+					
+					for(let i=0; i<list.length; i++) {
+						let input = $("<div>" + list[i] + "</div>");
+						$("#auto_result").append(input);											
+					}
+					
+				},
+				error: function() {
+					alert("통신 실패!");
+				}
+			});
+		});
+		--%>
 		
 		
 		
@@ -108,21 +134,21 @@
 	</div>
 	<main class="container mb-100">
 		<div class="row product-btn justify-content-between mb-40">
-                    <div class="properties__button">
-                        <!--Nav Button  -->
-                        <nav>                                                      
-                            <div class="nav nav-tabs" id="nav-tab" >
-                                <a class="nav-item nav-link" id="nav-home-tab" href="classList.do?nowPage=1">All</a>
-                                <a class="nav-item nav-link" id="nav-handmade-tab" href="class_category.do?category=handmade&nowPage=1">handmade</a>
-                                <a class="nav-item nav-link" id="nav-cooking-tab"href="class_category.do?category=cooking&nowPage=1">cooking</a>
-                                <a class="nav-item nav-link" id="nav-flower-tab" href="class_category.do?category=flower&nowPage=1">flower</a>
-                                <a class="nav-item nav-link" id="nav-drawing-tab" href="class_category.do?category=drawing&nowPage=1">drawing</a>
-                                <a class="nav-item nav-link" id="nav-music-tab" href="class_category.do?category=music&nowPage=1">music</a>
-                            	<a class="nav-item nav-link" id="nav-yoga-tab" href="class_category.do?category=yoga&nowPage=1">yoga</a>
-                            </div>
-                        </nav>
+        	<div class="properties__button">
+            	<!--Nav Button  -->
+                <nav>                                                      
+                	<div class="nav nav-tabs" id="nav-tab" >
+                    	<a class="nav-item nav-link" id="nav-home-tab" href="classList.do?nowPage=1">All</a>
+                        <a class="nav-item nav-link" id="nav-handmade-tab" href="class_category.do?category=handmade&nowPage=1">handmade</a>
+                        <a class="nav-item nav-link" id="nav-cooking-tab"href="class_category.do?category=cooking&nowPage=1">cooking</a>
+                        <a class="nav-item nav-link" id="nav-flower-tab" href="class_category.do?category=flower&nowPage=1">flower</a>
+                        <a class="nav-item nav-link" id="nav-drawing-tab" href="class_category.do?category=drawing&nowPage=1">drawing</a>
+                        <a class="nav-item nav-link" id="nav-music-tab" href="class_category.do?category=music&nowPage=1">music</a>
+                        <a class="nav-item nav-link" id="nav-yoga-tab" href="class_category.do?category=yoga&nowPage=1">yoga</a>
                     </div>
-                </div>
+                </nav>
+            </div>
+        </div>
 		<section class="blog_area section-padding">
             <div class="container">
                 <div class="row">
@@ -166,24 +192,47 @@
                     <div class="col-lg-4">
                         <div class="blog_right_sidebar">
 	                    	<c:if test="${mDto.member_grade eq '강사회원' }">
-								<button type="button" class="genric-btn primary-border mb-2" style="width:100%;" onclick="location.href='classInsert.do'"><i class="bi bi-pencil-fill"></i> 클래스 등록</button>
+								<button type="button" class="genric-btn primary-border mb-4" style="width:100%;" onclick="location.href='classInsert.do'"><i class="bi bi-pencil-fill"></i> 클래스 등록</button>
 							</c:if>
 						
                             <aside class="single_sidebar_widget search_widget">
+                            
+                            	<div class="switch-wrap d-flex justify-content-start">
+                            		<input type="hidden" id="member_auto" value="${mDto.member_auto }" />
+									<p>자동완성</p>
+									
+									<c:choose>
+										<c:when test="${mDto != null and mDto.member_auto == 'Y' }">
+											<p id="on" name="on_off">ON</p><p id="off" name="on_off" style="display:none;">OFF</p>
+										</c:when>
+										<c:otherwise>
+											<p id="off" name="on_off">OFF</p><p id="on" name="on_off" style="display:none;">ON</p>
+										</c:otherwise>
+									</c:choose>
+									
+									<div class="primary-switch mt-1 ml-2">
+										<input type="checkbox" id="default-switch" name="onoff">
+										<label for="default-switch"></label>
+									</div>
+								</div>
+                                
                                 <form action="class_search.do" method="post">
                                 	<input type="hidden" name="nowPage" value="1">
                                     <div class="form-group">  
-                                    	<div class="default-select" id="default-select">
+	                                    <div class="default-select" id="default-select">
 											<select class="shipping_select" id="search_category" name="search_category">
 												<option value="nickname" selected>닉네임</option>
 												<option value="title+desc+category">클래스명+설명+내용</option>
 											</select>
+											
 										</div>
 										
                                         <div id="searchInput" class="input-group ">
-                                            <input type="text" class="d-block form-control" name="search_keyword" placeholder="Search term..." autocomplete=off
+                                            <input type="text" class="position-relative form-control border-right" name="search_keyword" placeholder="Search term..." autocomplete=off
                                                 onfocus="this.placeholder = ''"
                                                 onblur="this.placeholder = 'Search term...'">
+                                                
+                                            <i id="close" class="bi bi-x-lg position-absolute t-50 r-0" style="cursor:pointer; top: 25%; right: 5%;"></i>
                                         </div>
                                         
                                         <div id="auto_result">
@@ -200,6 +249,7 @@
                 </div>
             </div>
         </section>
+        <h1>${pDto.search_category }</h1>
 					<jsp:include page="/WEB-INF/views/paging.jsp">
 						<jsp:param value="C" name="class_list" />
 						<jsp:param value="${pDto.class_category }" name="class_category" />

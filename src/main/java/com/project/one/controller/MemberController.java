@@ -137,10 +137,9 @@ public class MemberController {
 					if(dto.getMember_ip().equals(mDto.getMember_ip())) {
 						ip_chk = true;
 					}
-					
 					if(eBiz.selectList() != null) {
 						 alarm = true;
-					 }
+					}
 				}
 			}
 		}
@@ -310,9 +309,7 @@ public class MemberController {
 	}
 	
 	//카카오
-
 	@RequestMapping(value = "/kakaologin.do",produces = "application/json", method = { RequestMethod.GET, RequestMethod.POST })
-
 	public String kakaoLogin(Model model, @RequestParam("code") String code, HttpServletRequest request,
 			HttpServletResponse response, HttpSession session) {
 		
@@ -340,6 +337,7 @@ public class MemberController {
 			if(res.getMember_join().equals("Y")) {
 				session.setAttribute("mDto", res);
 				session.setMaxInactiveInterval(-1);
+				
 				return "redirect:main.do";
 			}else {
 				return "redirect:main.do";

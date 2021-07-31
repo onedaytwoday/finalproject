@@ -7,7 +7,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Admin Page</title>
-	<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 	
 </head>
@@ -123,7 +122,48 @@
 
     <jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
     
-    
+    <script>
+    	let dates = new Array();
+    	let prices = new Array();
+    	
+    	$('[name=prices]').each(function(i){
+    		let price = $(`[name=prices]:eq(${i})`).val();
+    		prices.push(price);
+    	});
+    	
+    	$('[name=dates]').each(function(i){
+    		let date = $(`[name=dates]:eq(${i})`).val();
+    		date = new Date();
+    		result = date.toDateString();
+    		dates.push(result);
+    	});
+    	
+    	
+    	// 차트
+    	const labels = dates;
+    	
+    	const data = {
+    		labels: labels,
+    		datasets: [{
+    			label: '총 결제',
+    			backgroundColor: 'rgb(255, 99, 132)',
+    			borderColor: 'rgb(255, 99, 132)',
+    			data: prices,
+    		}]
+    	};
+
+    	const config = {
+    		type: 'line',
+    		data,
+    		options: {}
+    	};
+
+    	let myChart = new Chart(
+    		document.getElementById('myChart'),
+    		config
+    	);
+    	
+    </script>
     
 </body>
 </html>

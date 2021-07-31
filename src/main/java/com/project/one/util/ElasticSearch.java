@@ -16,14 +16,15 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 public class ElasticSearch {
-	private static String URL = "https://onedaytwoday.ent.us-west1.gcp.cloud.es.io/api/as/v1/engines/onedaytwoday/query_suggestion";
+	private static String CLASS_URL = "https://onedaytwoday.ent.us-west1.gcp.cloud.es.io/api/as/v1/engines/my-search-class/query_suggestion";
+	private static String PRODUCT_URL = "https://onedaytwoday.ent.us-west1.gcp.cloud.es.io/api/as/v1/engines/my-search-product/query_suggestion";
 	private static String PUBLIC_KEY = "search-5k8tjm2fv1y1c977mrmgtm72";
 	
-	public static List<String> getAutoCompleted(String keyword) {
+	public static List<String> getAutoCompleted(String category, String keyword) {
 		List<String> list = new ArrayList<>();
 		
 		try {
-			URL url = new URL(URL);
+			URL url = new URL(category.equals("class") ? CLASS_URL : PRODUCT_URL);
 			HttpURLConnection con = (HttpURLConnection) url.openConnection();
 			con.setConnectTimeout(5000); 
 			con.setReadTimeout(5000); 

@@ -48,7 +48,6 @@
 							checkIP();
 							
 							setTimeout(function(){
-								//추후 수정
 								location.href="main.do";
 							}, 5000);
 						} 
@@ -57,7 +56,6 @@
 							getEvents();
 							
 							setTimeout(function(){
-								//추후 수정
 								location.href="main.do";
 							}, 5000);
 						}
