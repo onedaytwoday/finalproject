@@ -99,7 +99,7 @@ $(document).ready(function(){
                     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
                         <div class="single-new-pro mb-30 text-center">
                             <div class="product-img">
-                                <img src="resources/upload/${dto.file_new_name }" alt="">
+                                <img src="resources/upload/${dto.file_new_name }" alt="" width="350px" height="350px">
                             </div>
                             <div class="product-caption">
                                 <h3><a href="classSelect.do?class_no=${dto.class_no }">${dto.class_title }</a></h3>
@@ -137,7 +137,7 @@ $(document).ready(function(){
                     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
                         <div class="single-popular-items mb-50 text-center">
                             <div class="popular-img">
-                                <img src="resources/upload/${dto.file_new_name }" alt="">
+                                <img src="resources/upload/${dto.file_new_name }" alt="" width="350px" height="350px">
                                 <c:if test="${mDto != null }">
                                 <div class="img-cap">
                                     <div class="add"><span>Add to cart</span></div>
