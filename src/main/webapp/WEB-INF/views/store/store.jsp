@@ -26,6 +26,25 @@
 		console.log(e);
 		$(location).attr('href',"store.do?nowPage=1");
 	}	
+	
+	$(function(){
+		var category = "${category}";
+		if(category=="handmade"){
+			$("#nav-handmade-tab").addClass('active');
+		}else if(category=="cooking"){
+			$("#nav-cooking-tab").addClass('active');
+		}else if(category=="flower"){
+			$("#nav-flower-tab").addClass('active');
+		}else if(category=="drawing"){
+			$("#nav-drawing-tab").addClass('active');
+		}else if(category=="music"){
+			$("#nav-music-tab").addClass('active');
+		}else if(category=="yoga"){
+			$("#nav-yoga-tab").addClass('active');
+		}else{
+			$("#nav-home-tab").addClass('active');
+		}
+	});
 </script>
 
 </head>

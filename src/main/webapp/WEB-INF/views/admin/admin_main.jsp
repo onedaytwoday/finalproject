@@ -123,6 +123,7 @@
     <jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
     
     <script>
+    
     	let dates = new Array();
     	let prices = new Array();
     	
@@ -138,31 +139,31 @@
     		dates.push(result);
     	});
     	
-    	
-    	// 차트
-    	const labels = dates;
-    	
-    	const data = {
-    		labels: labels,
-    		datasets: [{
-    			label: '총 결제',
-    			backgroundColor: 'rgb(255, 99, 132)',
-    			borderColor: 'rgb(255, 99, 132)',
-    			data: prices,
-    		}]
-    	};
-
-    	const config = {
-    		type: 'line',
-    		data,
-    		options: {}
-    	};
-
-    	let myChart = new Chart(
-    		document.getElementById('myChart'),
-    		config
-    	);
-    	
+    	$(function(){
+	    	// 차트
+	    	const labels = dates;
+	    	
+	    	const data = {
+	    		labels: labels,
+	    		datasets: [{
+	    			label: '총 결제',
+	    			backgroundColor: 'rgb(255, 99, 132)',
+	    			borderColor: 'rgb(255, 99, 132)',
+	    			data: prices,
+	    		}]
+	    	};
+	
+	    	const config = {
+	    		type: 'line',
+	    		data,
+	    		options: {}
+	    	};
+	
+	    	let myChart = new Chart(
+	    		document.getElementById('myChart'),
+	    		config
+	    	);
+    	});
     </script>
     
 </body>

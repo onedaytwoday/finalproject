@@ -11,6 +11,19 @@
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css" rel="stylesheet" />
 <link href="resources/css/chat.css" rel="stylesheet" />
+<link rel="stylesheet" href="resources/assets/css/bootstrap.min.css?ver=1">
+    <link rel="stylesheet" href="resources/assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="resources/assets/css/flaticon.css">
+    <link rel="stylesheet" href="resources/assets/css/slicknav.css">
+    <link rel="stylesheet" href="resources/assets/css/animate.min.css">
+    <link rel="stylesheet" href="resources/assets/css/magnific-popup.css">
+    <link rel="stylesheet" href="resources/assets/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="resources/assets/css/themify-icons.css">
+    <link rel="stylesheet" href="resources/assets/css/nice-select.css?ver=1">
+    <link rel="stylesheet" href="resources/assets/css/slick.css">
+    <link rel="stylesheet" href="resources/assets/css/slick.min.css">
+    <link rel="stylesheet" href="resources/assets/css/slick-theme.min.css">
+    <link rel="stylesheet" href="resources/assets/css/style.css?ver=3">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="resources/js/sockjs.min.js"></script>
@@ -32,20 +45,19 @@
 </head>
 <body>
 	<div class="inbox_msg">
-		<h3>Room_no : ${room_no }</h3>
-		<h3>${rDto.consult_id }와 채팅</h3>
+		<div align="center">
 			
 		<div>
+			<span style="font-size: 18pt">${rDto.consult_id }</span>
 			<select name="langs" id="langs">
 			  <option value="ko" selected>한국어</option>
 			  <option value="en">English</option>
 			  <option value="ja">Japanese</option>
-			  <option value="zh-cn">Chinese(Simplified)</option>
-			  <option value="zh-tw">Chinese(Traditional)</option>
 			  <option value="es">Spanish</option>
 			  <option value="fr">France</option>
 			  <option value="it">Italian</option>
 			</select>
+		</div>
 		</div>
 	 <div class="mesgs">
           <div class="msg_history">
@@ -61,7 +73,7 @@
 									<div class="incoming_msg">
 	              					<div class="received_msg">
 					                	<div class="received_withd_msg">
-					                	<p>관리자 : <span>${dto.chatting_content }</span> <img src="resources/images/tts.png" class="tts" alt="tts" style="width: 20px; height: 20px; float: right;"/></p>
+					                	<p>관리자 : <span class="content">${dto.chatting_content }</span> <img src="resources/images/tts.png" class="tts" alt="tts" style="width: 20px; height: 20px; float: right;"/></p>
                   						<span class="time_date"><fmt:formatDate value="${dto.chatting_date }" pattern="MM/dd hh시mm분" /></span>
                   						</div>
               						</div>
@@ -73,7 +85,7 @@
               							<c:if test="${dto.chatting_read eq 'N' }">
 					                	<span class="content_read" style="color:red;float:left;position: relative; left: -15px; top: 2px;">1</span>
 					                	</c:if>
-                						<p>${dto.chatting_content } <img src="resources/images/tts.png" class="tts" alt="tts" style="width: 20px; height: 20px; float: right;"/></p>
+                						<p><span class="content">${dto.chatting_content }</span> <img src="resources/images/tts.png" class="tts" alt="tts" style="width: 20px; height: 20px; float: right;"/></p>
                 						<span class="time_date"><fmt:formatDate value="${dto.chatting_date }" pattern="MM/dd hh시mm분" /></span>
                 						</div>
             						</div>
@@ -104,8 +116,8 @@
             <div class="input_msg_write">
 	            <form id="chatForm">
 					<input type="text" id="message" class="write_msg" placeholder="Type a message" />
-					<button class="send_btn">보내기</button>
-					<button class="exit_btn" type="button" onclick="exit()">나가기</button>
+					<button class="send_btn button">보내기</button>
+					<button class="exit_btn button" type="button" onclick="exit()">나가기</button>
 				</form>
             </div>
           </div>
@@ -209,6 +221,41 @@
 		
 		
 	
-	</script>	
+	</script>
+	
+	<script src="resources/assets/js/vendor/modernizr-3.5.0.min.js"></script>
+    <!-- Jquery, Popper, Bootstrap -->
+    
+    <script src="resources/assets/js/popper.min.js"></script>
+    <script src="resources/assets/js/bootstrap.min.js"></script>
+    <!-- Jquery Mobile Menu -->
+    <script src="resources/assets/js/jquery.slicknav.min.js"></script>
+    <!-- Jquery Slick , Owl-Carousel Plugins -->
+    <script src="resources/assets/js/owl.carousel.min.js"></script>
+	<script src="resources/assets/js/slick.min.js"></script>
+    <!-- One Page, Animated-HeadLin -->
+    <script src="resources/assets/js/wow.min.js"></script>
+    <script src="resources/assets/js/animated.headline.js"></script>
+    <script src="resources/assets/js/jquery.magnific-popup.js"></script>
+
+    <!-- Scrollup, nice-select, sticky -->
+    <script src="resources/assets/js/jquery.scrollUp.min.js"></script>
+    <script src="resources/assets/js/jquery.nice-select.min.js"></script>
+    <script src="resources/assets/js/jquery.sticky.js"></script>
+    
+    <!-- contact js -->
+    <script src="resources/assets/js/jquery.form.js"></script>
+    <script src="resources/assets/js/jquery.validate.min.js"></script>
+    <script src="resources/assets/js/mail-script.js"></script>
+    <script src="resources/assets/js/jquery.ajaxchimp.min.js"></script>
+    
+    <!-- Jquery Plugins, main Jquery -->	
+    <script src="resources/assets/js/plugins.js"></script>
+    <script src="resources/assets/js/main.js"></script>
+   
+    <script src="resources/assets/js/swiper.min.js"></script>
+    <script src="resources/assets/js/mixitup.min.js"></script>
+    <script src="resources/assets/js/jquery.counterup.min.js"></script>
+    <script src="resources/assets/js/waypoints.min.js"></script>	
 </body>
 </html>

@@ -103,7 +103,7 @@ padding: 10px;
 					for(var i=0;i<tmp.length;i++){
 						var rank_name = tmp[i]['rank_name'];
 						var rank_no = tmp[i]['rank_no'];
-						$('.search_ul').append("<li style='font-size:8pt;font-weight: 600;'><span class='rank'>" + rank_no +"&nbsp&nbsp&nbsp</span>" + rank_name +"</li>");
+						$('.search_ul').append("<li style='font-size:8pt;font-weight: 600;overflow:hidden;'><span class='rank'>" + rank_no +"&nbsp&nbsp&nbsp</span>" + rank_name +"</li>");
 						var count = $('#rank-list li').length;
 					    var height = $('#rank-list li').height();
 
@@ -234,7 +234,6 @@ padding: 10px;
     
     <script src="resources/assets/js/vendor/modernizr-3.5.0.min.js"></script>
     <!-- Jquery, Popper, Bootstrap -->
-    <script src="resources/assets/js/vendor/jquery-1.12.4.min.js"></script>
     <script src="resources/assets/js/popper.min.js"></script>
     <script src="resources/assets/js/bootstrap.min.js"></script>
     <!-- Jquery Mobile Menu -->

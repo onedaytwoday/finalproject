@@ -75,7 +75,7 @@
 						<span class="lab">Sale</span>
 					</div>				
 				</div>	
-				<div class="col-2" style="margin-bottom: 30px;">
+				<div class="col-9" style="margin-bottom: 30px;">
 					<select name="sale_rate" id="sale_rate">
 						<option value="0">0%</option>
 		                <option value="10">10%</option>
@@ -98,7 +98,7 @@
 						<span class="lab">Class</span>
 					</div>
 				</div>
-				<div class="col-2" style="margin-bottom: 30px;">
+				<div class="col-5" style="margin-bottom: 30px;">
 					<div id="class_sel" >
 						<select name="class_no" id="class_no">
 		                  <c:forEach items="${cList }" var="cDto">
@@ -118,7 +118,7 @@
 						<span class="lab">product</span>
 					</div>
 				</div>
-				<div class="col-2" style="margin-bottom: 30px;">
+				<div class="col-5" style="margin-bottom: 30px;">
 					<div id="product_sel" >
 						<select name="product_no" id="product_no" disabled="disabled">
 		                  <c:forEach items="${pList }" var="pDto">
