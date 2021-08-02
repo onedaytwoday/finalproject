@@ -20,25 +20,25 @@
      
 *** 
 ### 주요 기능
-- 개인 정보 암호화 기능
-  Rsa256 알고리즘을 통하여 양방향 암호화 기능
-- 문자 기능
-  Naver Sens API를 이용하여 Id/Pw찾기에 필요한 인증번호를 보내준다.
-- 타 Sns로그인 연동 기능(naver,kakao)
-- 채팅 기능
-  Websocket과 Sock js을 이용한 실시간 채팅 기능
-- 번역 기능
-  Naver Papago API를 이용하여 여러가지 언어를 지원해주는 기능
-- 텍스트 음성번역 기능(tts)
-  Speech Synthesis API (javascript)를 이용하여 텍스트 음성변환 기능
-- 지도 기능
-- 알림 기능
-  Kakao API를 이용하여 (할인내역,로그인내역IP주소) 알림을 주는 기능
-- 결제 기능
-  Kakao Pay API를 이용하여 결제하는 기능
-- 실시간 검색어 기능
-  Websocket, ajax 통신을 이용하여 실시간으로 검색되는 순위를 알려주는 기능
-- 자동완성 기능
-  검색에서 완벽하지 않은 문장을 자동완성 시켜주는 기능
+- 개인 정보 암호화 기능    
+  Rsa256 알고리즘을 통하여 양방향 암호화 기능    
+- 문자 기능    
+  Naver Sens API를 이용하여 Id/Pw찾기에 필요한 인증번호를 보내줌    
+- 타 Sns로그인 연동 기능(naver,kakao)        
+- 채팅 기능    
+  Websocket과 Sock js을 이용한 실시간 채팅 기능    
+- 번역 기능    
+  Naver Papago API를 이용하여 여러가지 언어를 지원해주는 기능    
+- 텍스트 음성번역 기능(tts)    
+  Speech Synthesis API (javascript)를 이용하여 텍스트 음성변환 기능    
+- 지도 기능    
+- 알림 기능    
+  Kakao API를 이용하여 (할인내역,로그인내역IP주소) 알림을 주는 기능    
+- 결제 기능    
+  Kakao Pay API를 이용하여 결제하는 기능    
+- 실시간 검색어 기능    
+  Websocket, ajax 통신을 이용하여 실시간으로 검색되는 순위를 알려주는 기능    
+- 자동완성 기능    
+  검색에서 완벽하지 않은 문장을 자동완성 시켜주는 기능    
  
   
