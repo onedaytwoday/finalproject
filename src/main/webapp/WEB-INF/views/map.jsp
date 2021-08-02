@@ -43,7 +43,7 @@
 #pagination {margin:10px auto;text-align: center;}
 #pagination a {display:inline-block;margin-right:10px;}
 #pagination .on {font-weight: bold; cursor: default;color:#777;}
-.minus:hover{
+.minus:hover , .plus:hover{
 	cursor: pointer
 }
 </style>
@@ -68,9 +68,11 @@
     </div>
 <div class="map_wrap">
     <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
-
-    <div id="menu_wrap" class="bg_white" style="height:350px;">
-    <div style="height: 50px"><img class="minus" src="resources/images/minus.png" width="20px" height="20px" style="float:right"></div>    
+	
+    <div id="menu_wrap" class="bg_white" style="height:400px;">
+    <div style="height: 50px">
+    <img class="plus" src="resources/images/plus.png" width="20px" height="20px" style="float:left;display: none;">
+    <img class="minus" src="resources/images/minus.png" width="20px" height="20px" style="float:right"></div>    
         <ul id="placesList">
         <c:set value="1" var="tmp" />
         <c:forEach items="${list }" var="dto">
@@ -87,7 +89,7 @@
         <c:set value="${tmp+1}" var="tmp" />
         </c:forEach>
         </ul>
-       			 <div style="width: 100%; text-align: center;">
+       			 <div class="page" style="width: 100%; text-align: center;">
 					<jsp:include page="/WEB-INF/views/paging.jsp">
 						<jsp:param value="M" name="map_category" />
 						<jsp:param value="${pDto.nowBlock}" name="nowBlock" />
@@ -173,7 +175,20 @@ function makeOutListener(infowindow) {
 }
 	
 	$('.minus').click(function(){
-		$("#menu_wrap").css('display','none');
+		$("#placesList").css('display','none');
+		$("#menu_wrap").width('20px');
+		$("#menu_wrap").height('20px');
+		$('.minus').css('display','none');
+		$('.page').css('display','none');
+		$('.plus').css('display','block');
+	});
+	$('.plus').click(function(){
+		$(".plus").css('display','none');
+		$("#placesList").css('display','block');
+		$("#menu_wrap").width('400px');
+		$("#menu_wrap").height('400px');
+		$('.minus').css('display','block');
+		$('.page').css('display','block');
 	});
 </script>
 <jsp:include page="footer.jsp"></jsp:include>
